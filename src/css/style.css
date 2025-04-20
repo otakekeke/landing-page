@@ -1285,3 +1285,83 @@ footer p {
         border-bottom: 1px solid var(--border-color);
     }
 }
+
+/* オーダーメイドアピールセクション */
+.order-made-appeal {
+    background: linear-gradient(135deg, var(--primary-color), #e0f2fe); /* Tailwind Blue 50 to Sky 100 gradient */
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem;
+    margin: 3rem auto 0; /* 上マージン追加 */
+    max-width: 800px; /* 最大幅設定 */
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1); /* Accent color shadow */
+    border: 1px solid rgba(59, 130, 246, 0.2); /* Accent color border */
+}
+
+.order-made-appeal i.appeal-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    display: block; /* 中央揃えのためにブロック要素に */
+}
+
+.order-made-appeal h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.order-made-appeal p {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.order-made-appeal .appeal-cta {
+    /* .primary-button スタイルを参考に */
+    display: inline-block; /* ボタンのように見せる */
+    background: var(--accent-color);
+    color: white !important; /* Importantで上書き */
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none; /* リンクの下線削除 */
+    font-weight: 500;
+    transition: background-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.order-made-appeal .appeal-cta:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    color: white !important;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .order-made-appeal {
+        padding: 2rem;
+        margin: 2rem 20px 0; /* 左右マージン追加 */
+        max-width: none; /* 最大幅解除 */
+    }
+    .order-made-appeal h3 {
+        font-size: 1.4rem;
+    }
+    .order-made-appeal p {
+        font-size: 1rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        .order-made-appeal {
+            background: linear-gradient(135deg, #1f2937, #111827); /* Dark gradient */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-color);
+        }
+    }
+}
