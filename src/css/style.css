@@ -1,0 +1,1018 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 基本設定 */
+:root {
+    /* 配色 */
+    --primary-color: #EFF6FF; /* Tailwind Blue 50 */
+    --accent-color: #3B82F6; /* Tailwind Blue 500 */
+    --accent-color-dark: #2563EB; /* Tailwind Blue 600 */
+    --text-color: #1F2937; /* Tailwind Gray 800 */
+    --text-color-light: #4B5563; /* Tailwind Gray 600 */
+    --bg-color: #FFFFFF;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --border-color: #E5E7EB; /* Tailwind Gray 200 */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+
+    /* タイポグラフィ */
+    --font-sans: 'Noto Sans JP', sans-serif;
+    --header-height: 70px;
+
+    /* その他 */
+    --border-radius: 12px; /* 少し小さめに */
+    --border-radius-lg: 16px;
+    --transition-medium: 0.2s ease-in-out;
+    --transition-fast: 0.15s ease-in-out;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + 20px);
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-color);
+    background: var(--bg-color);
+    line-height: 1.7;
+    overflow-x: hidden;
+    font-weight: 400; /* 標準の太さ */
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Three.jsキャンバス */
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* ローディングオーバーレイ */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#loading-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 127, 255, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--accent-color);
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-overlay p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ヘッダーとナビゲーション */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px var(--shadow-color);
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.main-header.hide {
+    transform: translateY(-100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 600; /* 少し太く */
+    color: var(--accent-color);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-color-light);
+    transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links a::after {
+    background: var(--accent-color);
+    height: 2px;
+}
+
+.nav-cta {
+    background: var(--accent-color);
+    color: white !important;
+    padding: 0.6rem 1.3rem !important;
+    border-radius: 8px; /* 角丸調整 */
+    font-weight: 500;
+    transition: background-color var(--transition-medium), transform var(--transition-medium);
+}
+
+.nav-cta:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-1px);
+    box-shadow: none; /* ホバーシャドウ削除 */
+}
+
+.nav-cta::after {
+    display: none !important;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bar {
+    width: 100%;
+    height: 3px;
+    background: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* コンテンツエリア */
+.content {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+
+/* セクション共通 */
+.section {
+    padding: 6rem 2rem; /* パディング調整 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* スクロールガイド */
+.scroll-guide {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: opacity var(--transition-medium);
+    opacity: 0.7;
+}
+
+.scroll-guide:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.scroll-icon {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* トップに戻るボタン */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 127, 255, 0.3);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+    z-index: 99;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    background: #0060c0;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 96, 192, 0.4);
+}
+
+#back-to-top i {
+    font-size: 1.2rem;
+}
+
+/* タイポグラフィ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600; /* 見出しは少し太く */
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 3rem; /* 少し小さく */
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    background: none; /* グラデーション削除 */
+    color: var(--text-color); /* 通常の色に */
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+.accent-text {
+    color: var(--accent-color);
+}
+
+h2 {
+    font-size: 2.25rem; /* 少し小さく */
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+h2::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+h3 {
+    font-size: 1.375rem; /* 少し小さく */
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem; /* 標準サイズに */
+    color: var(--text-color-light);
+    line-height: 1.7;
+}
+
+/* ボタン */
+.primary-button {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    padding: 0.8rem 2rem; /* パディング調整 */
+    font-size: 1rem;
+    border-radius: 8px; /* 角丸調整 */
+    cursor: pointer;
+    transition: background-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+    font-weight: 500;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind Shadow */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative;
+    overflow: visible; /* ::after削除のため */
+    z-index: 1;
+}
+
+.primary-button::after { /* ::after エフェクト削除 */
+    display: none;
+}
+
+.primary-button:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind Shadow Hover */
+    color: white;
+}
+
+.primary-button i {
+    margin-right: 0.5rem;
+}
+
+/* ヒーローセクション */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    position: relative;
+    padding-top: var(--header-height);
+    background-color: transparent;
+    z-index: 2;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    background: rgba(255, 255, 255, 0.1); /* 背景をさらに薄く */
+}
+
+.hero-subtitle {
+    font-size: 1.125rem; /* 少し調整 */
+    margin-bottom: 2.5rem;
+}
+
+/* サービスカード */
+.service-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 4rem 0;
+}
+
+.card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg); /* 角丸を大きく */
+    padding: 2rem; /* パディング調整 */
+    height: 100%;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 12px var(--shadow-color); /* 影を柔らかく */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.card:hover .card-inner {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+    margin: 0 auto 1.5rem;
+    transition: transform var(--transition-medium);
+}
+
+.card:hover .card-icon {
+    transform: scale(1.05);
+}
+
+/* メッセージエリア */
+.message {
+    text-align: center;
+    margin: 6rem 0;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+blockquote {
+    font-size: 1.8rem;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    line-height: 1.5;
+}
+
+.message-author {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-color-light);
+}
+
+/* 強みエリア */
+.strengths {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+    margin: 4rem 0;
+}
+
+.strength-item {
+    flex: 1;
+    min-width: 300px;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.strength-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.strength-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+    margin: 0 auto 1.5rem;
+    transition: transform var(--transition-medium);
+}
+
+.strength-item:hover .strength-icon {
+    transform: scale(1.05);
+}
+
+/* 課題と解決策 */
+.challenges {
+    margin: 4rem 0;
+}
+
+.challenge-item {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.challenge-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.challenge-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.challenge-number {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-right: 1rem;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+}
+
+.challenge-header p {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.toggle-icon {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    transition: transform var(--transition-medium);
+}
+
+.challenge-item.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.solution {
+    height: 0;
+    opacity: 0;
+    transition: all var(--transition-medium);
+    overflow: hidden;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.solution p {
+    color: var(--accent-color);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.solution p i {
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.challenge-item.active .solution {
+    height: auto;
+    opacity: 1;
+}
+
+.challenge-item.active {
+    background: var(--accent-color);
+}
+
+/* 実装例 */
+.example-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 4rem 0;
+}
+
+.example-card {
+    flex: 1;
+    min-width: 300px;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.example-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.example-card h3 {
+    color: var(--accent-color);
+}
+
+.example-card:hover h3 {
+    color: var(--text-color);
+}
+
+.example-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+    margin: 0 auto 1.5rem;
+    transition: transform var(--transition-medium);
+}
+
+.example-card:hover .example-icon {
+    transform: scale(1.05);
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* フォームエリア */
+#contact {
+    background: transparent; /* 背景削除 */
+}
+
+#trial-form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2.5rem; /* パディング調整 */
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.875rem; /* 少し小さく */
+    color: var(--text-color-light);
+    margin-bottom: 0.5rem;
+}
+
+label i {
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+}
+
+input, textarea {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Focus Ring */
+}
+
+input::placeholder, textarea::placeholder {
+    color: #9CA3AF; /* Tailwind Gray 400 */
+}
+
+/* フッター */
+footer {
+    padding: 2.5rem 1rem;
+    background: #F9FAFB; /* Tailwind Gray 50 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo {
+    font-family: var(--font-sans);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: white;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: all var(--transition-medium);
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 127, 255, 0.3);
+    background: var(--accent-color-dark);
+}
+
+.footer-links ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    font-size: 0.875rem;
+    color: var(--text-color-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+footer p {
+    color: var(--text-color-light);
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+/* レスポンシブ設定 */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+    
+    :root {
+        --header-height: 65px;
+    }
+
+    .section {
+        padding: 4rem 1rem;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    .service-cards, .strengths, .example-cards {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .card, .strength-item, .example-card {
+        min-width: 100%;
+    }
+
+    #trial-form {
+        padding: 1.5rem;
+    }
+    
+    .hero-content {
+        padding: 1.5rem;
+    }
+    
+    blockquote {
+        font-size: 1.5rem;
+    }
+    
+    .challenge-header {
+        flex-wrap: wrap;
+    }
+    
+    .challenge-number {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-content {
+        gap: 1rem;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        padding: 1rem 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: -1;
+        gap: 0;
+    }
+    
+    .main-nav.active .nav-links {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .nav-links li {
+        width: 100%;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 1rem 2rem;
+        width: 100%;
+    }
+    
+    .nav-links a::after {
+        display: none;
+    }
+    
+    .nav-cta {
+        margin: 1rem 2rem;
+        text-align: center;
+        padding: 0.8rem !important;
+    }
+    
+    .main-nav.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    
+    .main-nav.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .main-nav.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .scroll-guide {
+        bottom: 20px;
+    }
+    
+    #back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .footer-links ul {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent-color: #60A5FA; /* Tailwind Blue 400 */
+        --accent-color-dark: #3B82F6; /* Tailwind Blue 500 */
+        --text-color: #F3F4F6; /* Tailwind Gray 100 */
+        --text-color-light: #9CA3AF; /* Tailwind Gray 400 */
+        --bg-color: #111827; /* Tailwind Gray 900 */
+        --card-bg: rgba(31, 41, 55, 0.7); /* Tailwind Gray 800 at 70% */
+        --border-color: #374151; /* Tailwind Gray 700 */
+        --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-header {
+        background: rgba(17, 24, 39, 0.8); /* Tailwind Gray 900 */
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+    
+    .bar {
+        background: var(--text-color);
+    }
+    
+    .nav-links {
+        background: rgba(31, 41, 55, 0.95); /* Tailwind Gray 800 */
+    }
+    
+    #loading-overlay {
+        background: var(--bg-color);
+    }
+    
+    .primary-button {
+        color: #f8f8f8;
+    }
+    
+    input, textarea {
+        background: #1F2937; /* Tailwind Gray 800 */
+        border-color: var(--border-color);
+        color: var(--text-color);
+    }
+    
+    input::placeholder, textarea::placeholder {
+        color: #6B7280; /* Tailwind Gray 500 */
+    }
+    
+    input:focus, textarea:focus {
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4); /* Focus Ring */
+    }
+    
+    footer {
+        background: #1F2937; /* Tailwind Gray 800 */
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .card-icon, .strength-icon, .example-icon, .challenge-number {
+        background: rgba(96, 165, 250, 0.15);
+    }
+    
+    .pricing-header {
+        background: linear-gradient(135deg, rgba(55, 65, 81, 0.8), rgba(31, 41, 55, 0.8)); /* Dark Gradient */
+        border-bottom: 1px solid var(--border-color);
+    }
+}

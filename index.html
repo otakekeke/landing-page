@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嶽ノ子 - FastAIでサクッと最新AI技術を導入</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fontsの読み込み - より多様なウェイトとフォントを追加 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- インポートマップの設定 -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/"
+      }
+    }
+    </script>
+    <style>
+        /* ソリューションセクションのスタイル - 不要なので削除 */
+        
+        /* 料金プランスタイル */
+        #pricing {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-card.recommended {
+            transform: scale(1.05);
+            border: 2px solid #4e73df;
+        }
+        
+        .pricing-card.recommended:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .recommended-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #4e73df;
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f9 100%);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-header h3 {
+            margin: 0 0 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4e73df;
+            margin-bottom: 5px;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+        
+        .trial {
+            font-size: 0.9rem;
+            color: #28a745;
+            margin: 0;
+        }
+        
+        .pricing-features {
+            padding: 30px 20px;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features i {
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        
+        .pricing-features .fa-check {
+            color: #28a745;
+        }
+        
+        .pricing-features .fa-times {
+            color: #dc3545;
+        }
+        
+        .pricing-features .not-included {
+            color: #888;
+        }
+        
+        .pricing-footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #4e73df;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #2e59d9;
+        }
+        
+        .pricing-notes {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* レスポンシブデザイン - 料金プラン */
+        @media (max-width: 992px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-card {
+                width: 100%;
+                max-width: 350px;
+                margin-bottom: 30px;
+            }
+            
+            .pricing-card.recommended {
+                transform: scale(1);
+                order: -1;
+            }
+            
+            .pricing-card.recommended:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* プロセスタイムラインのスタイル強化 */
+        #process {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        #process .section-header {
+            margin-bottom: 60px;
+        }
+
+        #process .section-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #007bff;
+            border-radius: 10px;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            clear: both;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-icon {
+            background: #007bff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin: 0 20px;
+        }
+
+        .timeline-item:hover .timeline-icon {
+            background: #0056b3;
+            box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: calc(50% - 80px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-item:hover .timeline-content {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-content h3 {
+            margin-top: 0;
+            color: #007bff;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .timeline-content p {
+            margin: 15px 0;
+            color: #495057;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #e9ecef;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .process-cta {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .process-cta p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        .process-cta .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .process-cta .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            background-color: #0056b3;
+        }
+
+        /* 実装例セクションのスタイル改善 */
+        #examples {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .example-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .example-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-icon {
+            background-color: #007bff;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .example-card h3 {
+            color: #333;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .example-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* コンタクトフォームの改善 */
+        #contact {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        #trial-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .primary-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+
+        .primary-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        /* フッターの改善 */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        footer .logo {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* レスポンシブデザイン - 全体統一 */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+            
+            .timeline-icon {
+                margin: 0;
+                margin-right: 20px;
+            }
+            
+            .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                margin-right: 0;
+            }
+            
+            .example-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .example-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            #process, #pricing, #examples, #contact {
+                padding: 50px 0;
+            }
+            
+            .timeline-content,
+            #trial-form {
+                padding: 15px;
+            }
+            
+            .timeline-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .timeline-content h3 {
+                font-size: 1.1rem;
+            }
+            
+            .timeline-content p,
+            .example-card p {
+                font-size: 0.95rem;
+            }
+            
+            .process-cta,
+            .pricing-notes {
+                padding: 20px;
+            }
+            
+            .process-cta p {
+                font-size: 1.1rem;
+            }
+            
+            .process-cta .btn,
+            .primary-button {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            
+            .footer-links ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* サービス内容エリア */
+        #service {
+            /* ... existing code ... */
+        }
+
+        .service-cards {
+            display: flex;
+            justify-content: center; /* 中央揃えに変更 */
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap; /* 折り返しを許可 */
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            flex: 1 1 300px; /* 基本幅300pxで伸縮可能に */
+            max-width: 400px; /* 最大幅を設定 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* flexコンテナとして設定 */
+            flex-direction: column; /* 子要素を縦に配置 */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
+
+        .card-inner {
+            padding: 30px;
+            text-align: center;
+            flex-grow: 1; /* 高さを揃えるために伸長 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 内容を均等配置 */
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin: 0 0 15px 0;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0; /* 下マージン削除 */
+        }
+
+        .message {
+            text-align: center;
+            margin: 60px auto;
+            max-width: 700px;
+            padding: 25px;
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .message blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #495057;
+            margin: 0 0 15px 0;
+            border: none;
+            padding: 0;
+        }
+
+        .message-author {
+            font-size: 1rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .strengths {
+            display: flex;
+            justify-content: space-around; /* 均等配置に変更 */
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap; /* 折り返しを許可 */
+        }
+
+        .strength-item {
+            text-align: center;
+            flex: 1 1 300px; /* 基本幅300pxで伸縮可能に */
+            max-width: 45%; /* 最大幅を調整 */
+        }
+
+        .strength-icon {
+            font-size: 3rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .strength-item h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .strength-item p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .service-cards,
+            .strengths {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card,
+            .strength-item {
+                width: 100%;
+                max-width: 350px; /* モバイルでの最大幅 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ローディングオーバーレイ -->
+    <div id="loading-overlay">
+        <div class="loader"></div>
+        <p>やさしい光を準備中...</p>
+    </div>
+
+    <!-- メインキャンバス -->
+    <canvas id="webgl-canvas"></canvas>
+    
+    <!-- ヘッダーナビゲーション -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo-container">
+                <a href="#" class="logo">嶽ノ子</a>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="メニュー">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#service">サービス</a></li>
+                    <li><a href="#examples">実装例</a></li>
+                    <li><a href="#process">導入の流れ</a></li>
+                    <li><a href="#pricing">料金</a></li>
+                    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- コンテンツエリア -->
+    <main class="content">
+        <!-- ファーストビュー -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1><span class="accent-text">FastAI</span></h1>
+                <p class="hero-subtitle">サクッと最新AI技術を導入できる<br>初期費用0円・月額30,000円から</p>
+                <button id="cta-button" class="primary-button"><i class="fas fa-handshake"></i> 無料導入相談はこちら</button>
+            </div>
+            <div class="scroll-guide">
+                <span class="scroll-text">スクロールして詳細を見る</span>
+                <i class="fas fa-chevron-down scroll-icon"></i>
+            </div>
+        </section>
+
+        <!-- サービス内容エリア -->
+        <section id="service" class="section">
+            <div class="section-content">
+                <h2>導入費用と機能一覧</h2>
+                
+                <div class="service-cards">
+                    <div class="card large-card">
+                        <div class="card-inner">
+                            <div class="card-icon"><i class="fas fa-yen-sign"></i></div>
+                            <h3>初期費用：0円</h3>
+                            <p>通常数十万円以上かかる初期開発・導入サポート・設定代行・スタッフ教育がすべて無料</p>
+                        </div>
+                    </div>
+                    <div class="card large-card">
+                        <div class="card-inner">
+                            <div class="card-icon"><i class="fas fa-tag"></i></div>
+                            <h3>月額：30,000円</h3>
+                            <p>全機能利用可能・追加料金なし・最低利用期間なし</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message">
+                    <blockquote>
+                        スタッフの皆様が事務作業を減らし、<br>ご利用者様と向き合う時間を増やせるように
+                    </blockquote>
+                    <p class="message-author">開発チームより</p>
+                </div>
+
+                <div class="strengths">
+                    <div class="strength-item">
+                        <div class="strength-icon"><i class="fas fa-heart"></i></div>
+                        <h3>簡単操作で即日導入可能</h3>
+                        <p>スマホ操作ができるスタッフなら5分で操作マスター</p>
+                    </div>
+                    <div class="strength-item">
+                        <div class="strength-icon"><i class="fas fa-robot"></i></div>
+                        <h3>AI・RPA搭載で事務作業50%削減</h3>
+                        <p>記録作業・シフト管理・送迎計画が自動化されます</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実装例セクション -->
+        <section id="examples" class="section">
+            <div class="section-content">
+                <h2>実装例</h2>
+                
+                <div class="example-cards">
+                    <div class="example-card">
+                        <div class="example-icon"><i class="fas fa-route"></i></div>
+                        <h3>送迎ルート作成の自動化</h3>
+                        <p>AIが最適な送迎ルートを自動計算。急な変更にも柔軟対応。</p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-icon"><i class="fas fa-microphone"></i></div>
+                        <h3>音声記録システム</h3>
+                        <p>話しかけるだけで記録が完了。文字入力の手間を大幅削減。</p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-icon"><i class="fas fa-comments"></i></div>
+                        <h3>おしゃべりAI</h3>
+                        <p>利用者様との会話をサポート。コミュニケーション促進と見守りを実現。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 導入の流れ -->
+        <section id="process" class="py-5">
+            <div class="container">
+                <div class="section-header">
+                    <h2>導入の流れ</h2>
+                    <p class="section-subtitle">お問い合わせからわずか14日で導入完了！AIテクノロジーをサクッと実装</p>
+                </div>
+                
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <!-- 1日目: お問い合わせ -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>お問い合わせ</h3>
+                                <p>当サービスへの興味をお持ちいただき、お問い合わせフォームからご連絡ください。</p>
+                                <span class="timeline-date">1日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 2-3日目: 要件定義 -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-clipboard-list"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>要件定義</h3>
+                                <p>お客様の施設の状況やニーズをヒアリングし、最適なシステム構成を提案します。</p>
+                                <span class="timeline-date">2〜3日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 4-7日目: 開発 -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>開発</h3>
+                                <p>お客様の要件に合わせたシステムの開発・カスタマイズを行います。</p>
+                                <span class="timeline-date">4〜7日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 8-9日目: 試用 -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>試用</h3>
+                                <p>開発したシステムを実際に試用していただき、操作感やフィードバックを収集します。</p>
+                                <span class="timeline-date">8〜9日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 10-12日目: 無料カスタマイズ -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>無料カスタマイズ</h3>
+                                <p>試用期間中のフィードバックに基づき、必要な調整・カスタマイズを無料で実施します。</p>
+                                <span class="timeline-date">10〜12日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 13-14日目: 納品 -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>納品</h3>
+                                <p>最終的な調整を行い、本番環境への導入・納品を完了します。</p>
+                                <span class="timeline-date">13〜14日目</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 毎月: 月額利用 -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>月額利用</h3>
+                                <p>安定したサービスを継続的にご利用いただけます。定期的なアップデートやサポートも含まれています。</p>
+                                <span class="timeline-date">継続</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 必要に応じて: 有料カスタマイズ -->
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h3>有料カスタマイズ</h3>
+                                <p>導入後も必要に応じて追加機能やカスタマイズの対応が可能です（10,000円/回）。</p>
+                                <span class="timeline-date">必要時</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-cta">
+                    <p>最短2週間でAIケア記録システムを導入できます</p>
+                    <a href="#contact" class="btn btn-primary">今すぐ無料相談する</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 料金プラン -->
+        <section id="pricing" class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>料金プラン</h2>
+                    <p>シンプルな料金体系で導入しやすく、事業所ごとに一つのアプリでサービスを提供します</p>
+                </div>
+                
+                <div class="pricing-container">
+                    <!-- スタンダードプラン（唯一のプラン） -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>スタンダードプラン</h3>
+                            <div class="price">30,000<span>円/月</span></div>
+                            <p class="trial" style="color: #6c757d; font-size: 0.9rem; margin-top: 5px;">初期開発費用 0円</p>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> 事業所ごとに一つのアプリでサービス提供</li>
+                                <li><i class="fas fa-check"></i> 利用者情報管理（最大100名）</li>
+                                <li><i class="fas fa-check"></i> 高度な介護記録機能</li>
+                                <li><i class="fas fa-check"></i> 詳細なシフト管理・調整</li>
+                                <li><i class="fas fa-check"></i> モバイルアプリ対応</li>
+                                <li><i class="fas fa-check"></i> リアルタイムモニタリング</li>
+                                <li><i class="fas fa-check"></i> 投薬管理システム</li>
+                                <li><i class="fas fa-check"></i> AIアシスト機能</li>
+                                <li><i class="fas fa-check"></i> 標準サポート（営業時間内）</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#contact" class="cta-button">導入相談をする</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pricing-notes">
+                    <p>※ 初回のカスタマイズは無料、2回目以降は一律10,000円となります。</p>
+                    <p>※ 各事業所に最適化されたアプリを提供します。複数の事業所をお持ちの場合は、事業所ごとにアプリをご契約いただけます。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- フォームエリア -->
+        <section id="contact" class="section">
+            <div class="section-content">
+                <h2>お問い合わせ</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">お問い合わせはこちらまで: <a href="mailto:otake10401@gmail.com">otake10401@gmail.com</a></p>
+                
+                <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST">
+                    <div class="form-group">
+                        <label for="company"><i class="fas fa-building"></i> 事業所名</label>
+                        <input type="text" id="company" name="company" placeholder="例：嶽ノ子株式会社" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> ご担当者名</label>
+                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> メールアドレス</label>
+                        <input type="email" id="email" name="email" placeholder="例：info@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> 電話番号</label>
+                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirement-q1"><i class="fas fa-tasks"></i> 現在の業務での主な課題</label>
+                        <textarea id="requirement-q1" name="requirement-q1" rows="3" placeholder="例：記録作業に時間がかかる、スタッフ間の情報共有が難しいなど"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirement-q2"><i class="fas fa-lightbulb"></i> 導入したい機能や期待すること</label>
+                        <textarea id="requirement-q2" name="requirement-q2" rows="3" placeholder="例：音声入力での記録、シフト自動作成、利用者様とのコミュニケーション支援など"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment"></i> その他のご質問・ご要望</label>
+                        <textarea id="message" name="message" rows="4" placeholder="ご不明点やご要望がございましたらお気軽にご記入ください"></textarea>
+                    </div>
+                    <!-- 面談希望日時 -->
+                    <div class="form-group">
+                        <label for="interview-date-1"><i class="fas fa-calendar-alt"></i> ご希望の面談日時 (第1希望)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="date" id="interview-date-1" name="interview-date-1" style="flex: 1;">
+                            <input type="time" id="interview-time-1" name="interview-time-1" style="flex: 1;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interview-date-2"><i class="fas fa-calendar-alt"></i> ご希望の面談日時 (第2希望)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="date" id="interview-date-2" name="interview-date-2" style="flex: 1;">
+                            <input type="time" id="interview-time-2" name="interview-time-2" style="flex: 1;">
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px;">※ 面談時間は1時間程度を予定しております。</p>
+
+                    <button type="submit" class="primary-button"><i class="fas fa-paper-plane"></i> 要件を送信して相談を予約</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- フッター -->
+        <footer>
+            <div class="footer-content">
+                <div class="logo">嶽ノ子</div>
+                
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="company.html">会社概要</a></li>
+                        <li><a href="privacy.html">プライバシーポリシー</a></li>
+                        <li><a href="terms.html">利用規約</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <p>&copy; 2025 嶽ノ子. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- ページトップに戻るボタン -->
+    <button id="back-to-top" aria-label="ページトップに戻る">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- GSAP アニメーションライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollToPlugin.min.js"></script>
+    
+    <!-- カスタムスクリプト（モジュール形式） -->
+    <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
