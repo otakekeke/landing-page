@@ -964,6 +964,10 @@ footer p {
         padding: 0 20px;
     }
 
+    body { /* 行間を少し広げる */
+        line-height: 1.7;
+    }
+
     .section {
         padding: 60px 0; /* セクションの上下パディング縮小 */
     }
@@ -976,6 +980,8 @@ footer p {
     }
     .hero-subtitle {
         font-size: 1rem;
+        color: var(--text-color); /* 文字色を濃くする */
+        line-height: 1.7; /* 行間調整 */
     }
     #cta-button, .primary-button {
         padding: 12px 25px; /* ボタンサイズ調整 */
@@ -987,6 +993,7 @@ footer p {
     }
     .section-header p {
         font-size: 1rem;
+        color: var(--text-color); /* 文字色を濃くする */
     }
 
     #process, #pricing, #examples, #contact {
@@ -1011,11 +1018,23 @@ footer p {
     }
     .timeline-content p {
         font-size: 0.95rem;
+        color: var(--text-color); /* 文字色を濃くする */
+        line-height: 1.6; /* 行間調整 */
     }
 
     /* 料金プラン */
     .pricing-card {
          max-width: 350px; /* 再調整 */
+    }
+    .pricing-card p, .pricing-features li { /* プラン詳細の文字色と行間 */
+        color: var(--text-color-light); /* 薄い色は維持しつつ行間で調整 */
+        line-height: 1.7;
+    }
+    .pricing-features li .fa-times {
+        color: #dc3545; /* 調整が必要なら */
+    }
+     .pricing-features li .fa-check {
+        color: #28a745; /* 調整が必要なら */
     }
 
     /* 実装例 */
@@ -1033,6 +1052,8 @@ footer p {
     }
     .example-card p {
          font-size: 0.95rem;
+         color: var(--text-color); /* 文字色を濃くする */
+         line-height: 1.7; /* 行間調整 */
     }
 
     /* サービス内容 */
@@ -1050,9 +1071,28 @@ footer p {
     }
     .card p, .strength-item p {
          font-size: 0.95rem;
+         color: var(--text-color); /* 文字色を濃くする */
+         line-height: 1.7; /* 行間調整 */
     }
     .message blockquote {
         font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    /* 課題と解決策 */
+    .challenge-item .challenge-header p {
+        color: var(--text-color); /* ヘッダーの文字色 */
+        line-height: 1.5;
+    }
+    .challenge-item .solution p {
+        color: var(--text-color); /* 解決策の文字色 */
+        line-height: 1.6;
+    }
+    .challenge-item.active .solution p {
+         color: var(--text-color); /* アクティブ時も文字色を維持 */
+    }
+    .challenge-item.active .challenge-header p {
+         color: #ffffff; /* アクティブ時のヘッダー文字色 */
     }
 
     /* フォーム */
@@ -1061,6 +1101,7 @@ footer p {
     }
     .form-group label {
         font-size: 0.95rem;
+        color: var(--text-color); /* ラベル文字色を濃くする */
     }
     .form-group input,
     .form-group textarea {
@@ -1083,6 +1124,9 @@ footer p {
         flex-direction: column; /* 縦並び */
         gap: 10px;
     }
+    footer p { /* コピーライトの文字色 */
+        color: var(--text-color);
+    }
 }
 
 @media (max-width: 480px) {
@@ -1097,6 +1141,7 @@ footer p {
     }
     .hero-subtitle {
         font-size: 0.9rem;
+        line-height: 1.6; /* 行間調整 */
     }
 
     .section-header h2 {
@@ -1104,6 +1149,7 @@ footer p {
     }
     .section-header p {
         font-size: 0.9rem;
+        line-height: 1.6;
     }
 
     #process, #pricing, #examples, #contact {
@@ -1122,6 +1168,37 @@ footer p {
      .timeline-content {
         padding: 15px;
     }
+     .timeline-content p {
+        font-size: 0.9rem; /* 文字サイズ微調整 */
+        line-height: 1.6;
+     }
+
+    .pricing-card {
+         max-width: 90%; /* 幅を画面に合わせる */
+         padding: 20px;
+    }
+     .pricing-card p, .pricing-features li {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+     .example-card {
+        max-width: 90%;
+        padding: 20px;
+     }
+     .example-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+     }
+
+     .card, .strength-item {
+        max-width: 90%;
+        padding: 20px;
+     }
+      .card p, .strength-item p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+     }
 
     #trial-form {
         padding: 20px;
