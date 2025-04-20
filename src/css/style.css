@@ -1288,69 +1288,140 @@ footer p {
 
 /* オーダーメイドアピールセクション */
 .order-made-appeal {
-    background: linear-gradient(135deg, var(--primary-color), #e0f2fe); /* Tailwind Blue 50 to Sky 100 gradient */
+    background: linear-gradient(135deg, var(--primary-color), #e0f2fe, #dbeafe); /* 少し深みのある複合グラデーション */
     border-radius: var(--border-radius-lg);
-    padding: 2.5rem;
-    margin: 3rem auto 0; /* 上マージン追加 */
-    max-width: 800px; /* 最大幅設定 */
+    padding: 3.5rem; /* パディングを増やす */
+    margin: 4rem auto 0;
+    max-width: 850px; /* 少し幅を広げる */
     text-align: center;
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1); /* Accent color shadow */
-    border: 1px solid rgba(59, 130, 246, 0.2); /* Accent color border */
+    box-shadow: 
+        0 10px 30px rgba(59, 130, 246, 0.15), /* 深い影 */
+        0 0 0 1px rgba(59, 130, 246, 0.1); /* 薄いボーダー */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+/* 背景装飾要素（疑似要素） */
+.order-made-appeal::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.order-made-appeal:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 40px rgba(59, 130, 246, 0.2),
+        0 0 0 1px rgba(59, 130, 246, 0.2);
 }
 
 .order-made-appeal i.appeal-icon {
-    font-size: 2.5rem;
+    font-size: 3rem; /* アイコンを大きく */
     color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    display: block; /* 中央揃えのためにブロック要素に */
+    margin-bottom: 1.8rem;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite; /* ゆっくり浮遊するアニメーション */
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .order-made-appeal h3 {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 2rem; /* タイトルを大きく */
+    font-weight: 700; /* 太字に */
     color: var(--text-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, #2563EB, #3B82F6); /* テキストグラデーション用 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
 }
 
 .order-made-appeal p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
     color: var(--text-color-light);
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .order-made-appeal .appeal-cta {
-    /* .primary-button スタイルを参考に */
-    display: inline-block; /* ボタンのように見せる */
+    display: inline-block;
     background: var(--accent-color);
-    color: white !important; /* Importantで上書き */
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    text-decoration: none; /* リンクの下線削除 */
-    font-weight: 500;
-    transition: background-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    color: white !important;
+    padding: 1rem 2.5rem; /* ボタンサイズを大きく */
+    font-size: 1.1rem;
+    border-radius: 50px; /* より丸みを帯びたボタン */
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    letter-spacing: 0.5px; /* 文字間隔を少し広く */
+}
+
+.order-made-appeal .appeal-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-dark));
+    border-radius: 50px;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    opacity: 0;
 }
 
 .order-made-appeal .appeal-cta:hover {
-    background: var(--accent-color-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(59, 130, 246, 0.4);
+}
+
+.order-made-appeal .appeal-cta:hover::before {
+    opacity: 1;
+}
+
+.order-made-appeal .appeal-cta i {
+    margin-right: 8px;
 }
 
 /* レスポンシブ調整 */
 @media (max-width: 768px) {
     .order-made-appeal {
-        padding: 2rem;
-        margin: 2rem 20px 0; /* 左右マージン追加 */
-        max-width: none; /* 最大幅解除 */
+        padding: 2.5rem 2rem;
+        margin: 2.5rem 20px 0;
+        max-width: none;
     }
     .order-made-appeal h3 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
     .order-made-appeal p {
+        font-size: 1.05rem;
+        max-width: 100%;
+    }
+    .order-made-appeal .appeal-cta {
+        padding: 0.9rem 2rem;
         font-size: 1rem;
     }
 }
@@ -1358,10 +1429,25 @@ footer p {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        .order-made-appeal {
-            background: linear-gradient(135deg, #1f2937, #111827); /* Dark gradient */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--border-color);
-        }
+        /* ... existing code ... */
+    }
+    .order-made-appeal {
+        background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.8));
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    .order-made-appeal::before {
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+    }
+    .order-made-appeal h3 {
+        background: linear-gradient(90deg, #60A5FA, #93C5FD);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    .order-made-appeal:hover {
+        box-shadow: 
+            0 15px 40px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(255, 255, 255, 0.15);
     }
 }
