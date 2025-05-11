@@ -107,10 +107,10 @@ body {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(17, 24, 39, 0.8); /* Tailwind Gray 900 */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 1px 3px var(--shadow-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
     z-index: 100;
     transition: transform 0.3s ease;
 }
@@ -405,19 +405,20 @@ p {
     z-index: 2;
 }
 
-.hero-content {
+#hero .hero-content {
     max-width: 900px;
     margin: 0 auto;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 2.5rem;
     border-radius: var(--border-radius-lg);
-    background: rgba(255, 255, 255, 0.1); /* 背景をさらに薄く */
+    background: rgba(17, 24, 39, 0.75); /* Darker, less transparent background for hero content */
 }
 
-.hero-subtitle {
+#hero .hero-subtitle {
     font-size: 1.125rem; /* 少し調整 */
     margin-bottom: 2.5rem;
+    color: var(--text-color); /* Ensure subtitle is readable */
 }
 
 /* サービスカード */
@@ -887,6 +888,10 @@ footer p {
 
     #hero h1 {
         font-size: 2.8rem; /* 文字サイズ調整 */
+        color: var(--text-color);
+    }
+    #hero h1 .accent-text {
+        color: var(--accent-color);
     }
     .hero-subtitle {
         font-size: 1.1rem;
@@ -977,6 +982,10 @@ footer p {
     }
     #hero h1 {
         font-size: 2.5rem;
+        color: var(--text-color);
+    }
+    #hero h1 .accent-text {
+        color: var(--accent-color);
     }
     .hero-subtitle {
         font-size: 1rem;
@@ -1226,21 +1235,79 @@ footer p {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --accent-color: #60A5FA; /* Tailwind Blue 400 */
-        --accent-color-dark: #3B82F6; /* Tailwind Blue 500 */
-        --text-color: #F3F4F6; /* Tailwind Gray 100 */
-        --text-color-light: #9CA3AF; /* Tailwind Gray 400 */
-        --bg-color: #111827; /* Tailwind Gray 900 */
-        --card-bg: rgba(31, 41, 55, 0.7); /* Tailwind Gray 800 at 70% */
-        --border-color: #374151; /* Tailwind Gray 700 */
-        --shadow-color: rgba(0, 0, 0, 0.3);
+        --primary-color: #1F2937; 
+        --accent-color: #60A5FA; 
+        --accent-color-dark: #3B82F6; 
+        --text-color: #E5E7EB; 
+        --text-color-light: #9CA3AF; 
+        --bg-color: #0B111E; 
+        --card-bg: #1F2937; 
+        --border-color: #4B5563; 
+        --shadow-color: rgba(0, 0, 0, 0.4); 
     }
     
+    /* General body colors for dark mode */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+
     .main-header {
-        background: rgba(17, 24, 39, 0.8); /* Tailwind Gray 900 */
+        background: rgba(17, 24, 39, 0.8); 
         box-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
-    
+
+    #hero .hero-content {
+        background: rgba(17, 24, 39, 0.75); 
+    }
+
+    #hero .hero-subtitle {
+        color: var(--text-color); 
+    }
+
+    #hero h1 {
+        color: var(--text-color);
+    }
+    #hero h1 .accent-text {
+        color: var(--accent-color);
+    }    
+
+    .timeline-content {
+        background: var(--card-bg); 
+    }
+
+    .timeline-content h3 {
+        color: var(--accent-color);
+    }
+
+    .timeline-content p {
+        color: var(--text-color);
+    }
+
+    .timeline-date {
+        background: rgba(229, 231, 235, 0.1); 
+        color: var(--text-color-light); 
+        border: 1px solid var(--border-color);
+    }
+
+    .timeline-icon {
+        color: var(--bg-color);
+        box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px rgba(59, 130, 246, 0.5); 
+    }
+    .timeline-item:hover .timeline-icon {
+       box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px rgba(96, 165, 250, 0.6); 
+    }
+
+    .card h3, .strength-item h3, .example-card h3 {
+        color: var(--text-color);
+    }
+    .card p, .strength-item p {
+        color: var(--text-color-light);
+    }
+    #examples .example-card p {
+        color: var(--text-color);
+    }
+
     .bar {
         background: var(--text-color);
     }
@@ -1283,6 +1350,135 @@ footer p {
     .pricing-header {
         background: linear-gradient(135deg, rgba(55, 65, 81, 0.8), rgba(31, 41, 55, 0.8)); /* Dark Gradient */
         border-bottom: 1px solid var(--border-color);
+    }
+
+    #hero .hero-content {
+        background: rgba(17, 24, 39, 0.75); /* Darker, less transparent background for hero content */
+    }
+
+    #hero .hero-subtitle {
+        color: var(--text-color); /* Ensure subtitle is readable */
+    }
+
+    #hero h1 {
+        color: var(--text-color);
+    }
+    #hero h1 .accent-text {
+        color: var(--accent-color);
+    }    
+
+    .timeline-content {
+        background: var(--card-bg); 
+    }
+
+    .timeline-content h3 {
+        color: var(--accent-color);
+    }
+
+    .timeline-content p {
+        color: var(--text-color);
+    }
+
+    .timeline-date {
+        background: rgba(229, 231, 235, 0.1); /* Using RGB for #E5E7EB (var(--text-color)) with alpha */
+        color: var(--text-color-light); 
+        border: 1px solid var(--border-color);
+    }
+
+    .timeline-icon {
+        color: var(--bg-color);
+    }
+    /* Ensuring shadows use dark mode variables, if not overridden from base */
+    .timeline-icon {
+       box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px rgba(59, 130, 246, 0.5); /* Using RGB for #3B82F6 (var(--accent-color-dark)) with alpha */
+    }
+    .timeline-item:hover .timeline-icon {
+       box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px rgba(96, 165, 250, 0.6); /* Using RGB for #60A5FA (var(--accent-color)) with alpha */
+    }
+
+    .bar {
+        background: var(--text-color);
+    }
+
+    /* Pricing Card Text Colors for Dark Mode (Appended) */
+    .pricing-header h3 {
+        color: var(--text-color);
+    }
+    .price span { 
+        color: var(--text-color-light);
+    }
+    .pricing-features li {
+        color: var(--text-color-light);
+    }
+    .pricing-features .not-included {
+        color: var(--text-color-light);
+        opacity: 0.6;
+    }
+    .trial {
+        color: #34D399; /* Tailwind Green 400 */
+    }
+    .pricing-notes {
+        color: var(--text-color-light);
+    }
+
+    /* Form Element Text Colors for Dark Mode (Appended) */
+    #trial-form label {
+        color: var(--text-color-light);
+    }
+    /* General input placeholder color for dark mode */
+    input::placeholder, 
+    textarea::placeholder {
+        color: rgba(156, 163, 175, 0.7); /* --text-color-light (Tailwind Gray 400) with alpha */
+    }
+
+    /* Ensure button text has good contrast in dark mode */
+    .nav-cta, 
+    .cta-button, 
+    .order-made-appeal .appeal-cta {
+        color: #FFFFFF; /* White text for dark accent backgrounds */
+    }
+    .primary-button {
+        color: #f8f8f8; /* Already set, but ensure consistency if overridden elsewhere */
+    }
+
+    /* Footer elements in Dark Mode */
+    footer .logo {
+        color: var(--accent-color); /* Keep accent color for logo if it's readable */
+    }
+    .social-icon:hover {
+        background: var(--accent-color-dark);
+    }
+    .footer-links a {
+        color: var(--text-color-light);
+    }
+    .footer-links a:hover {
+        color: var(--accent-color);
+    }
+    footer p {
+        color: var(--text-color-light);
+    }
+
+    /* Mobile Menu in Dark Mode (styles for when menu is active) */
+    @media (max-width: 992px) { /* Ensure these only apply on mobile */
+        .nav-links.active { /* Assuming .active class shows the menu */
+            background-color: var(--card-bg); /* Darker background for the dropdown */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Slightly stronger shadow */
+        }
+        .nav-links a {
+            color: var(--text-color);
+            border-bottom-color: var(--border-color); /* Darker border */
+        }
+        .nav-links a:hover {
+            background-color: var(--bg-color); /* Slightly lighter than card-bg for hover */
+        }
+        .nav-links .nav-cta {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .nav-links .nav-cta:hover {
+            background-color: var(--accent-color);
+            color: #FFFFFF; /* White text on accent bg */
+        }
     }
 }
 
