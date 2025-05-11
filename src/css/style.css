@@ -1477,6 +1477,691 @@ footer p {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     .service-name {
-        color: var(--accent-color-dark);
+        color: var(--text-color);
     }
 }
+
+/* Pricing Section Styles */
+#pricing {
+    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
+    padding: 80px 0;
+}
+
+/* .section-header is already defined, so we might need to adjust or merge */
+/* We will assume for now that existing .section-header is sufficient or will be reviewed later */
+
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.pricing-card {
+    background: var(--card-bg); /* #fff -> var(--card-bg) or var(--bg-color) depending on context */
+    border-radius: var(--border-radius); /* 10px -> var(--border-radius) */
+    box-shadow: 0 5px 15px var(--shadow-color); /* rgba(0, 0, 0, 0.1) -> var(--shadow-color) */
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px var(--shadow-color); /* rgba(0, 0, 0, 0.15) - needs adjustment if var(--shadow-color) is too light */
+}
+
+.pricing-card.recommended {
+    transform: scale(1.05);
+    border: 2px solid var(--accent-color); /* #4e73df -> var(--accent-color) */
+}
+
+.pricing-card.recommended:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.recommended-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--accent-color); /* #4e73df -> var(--accent-color) */
+    color: white; /* This can remain white or use a variable if defined for text on accent bg */
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    border-bottom-left-radius: var(--border-radius); /* 10px -> var(--border-radius) */
+}
+
+.pricing-header {
+    text-align: center;
+    padding: 30px 20px;
+    /* background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f9 100%); */ /* Consider replacing with var(--primary-color) or a light gradient using CSS vars */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-color) 100%); /* Example replacement */
+    border-bottom: 1px solid var(--border-color); /* #eee -> var(--border-color) */
+}
+
+.pricing-header h3 {
+    margin: 0 0 15px;
+    font-size: 1.5rem;
+    color: var(--text-color); /* #333 -> var(--text-color) */
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color); /* #4e73df -> var(--accent-color) */
+    margin-bottom: 5px;
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
+}
+
+.trial { /* This class seems specific to pricing, check if it's used elsewhere */
+    font-size: 0.9rem;
+    color: #28a745; /* Keep green for trial or use a variable if available e.g. var(--success-color) */
+    margin: 0;
+}
+
+.pricing-features {
+    padding: 30px 20px;
+}
+
+.pricing-features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pricing-features li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: var(--text-color-light); /* Default text color for features */
+}
+
+.pricing-features i {
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+.pricing-features .fa-check {
+    color: #28a745; /* Keep green or use var(--success-color) */
+}
+
+.pricing-features .fa-times {
+    color: #dc3545; /* Keep red or use var(--danger-color) */
+}
+
+.pricing-features .not-included {
+    color: var(--text-color-light); /* #888, adjust if needed */
+    opacity: 0.7; /* Example to make it look more subdued */
+}
+
+.pricing-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border-color); /* #eee -> var(--border-color) */
+}
+
+/* .cta-button might conflict with existing .primary-button or other button styles. */
+/* For now, we will add it and then review conflicts. */
+.cta-button { /* This is used in pricing cards, distinct from .primary-button used in forms etc. */
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: var(--accent-color); /* #4e73df -> var(--accent-color) */
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color var(--transition-medium);
+}
+
+.cta-button:hover {
+    background-color: var(--accent-color-dark); /* #2e59d9 -> var(--accent-color-dark) */
+}
+
+.pricing-notes {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
+}
+
+/* Process Timeline Styles */
+#process {
+    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
+    padding: 80px 0;
+}
+
+#process .section-header { /* Assuming .section-header is generic */
+    margin-bottom: 60px;
+}
+
+#process .section-subtitle {
+    color: var(--text-color-light); /* #6c757d -> var(--text-color-light) */
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px auto; /* Added bottom margin */
+    text-align: center;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-color); /* #007bff -> var(--accent-color) */
+    border-radius: 10px;
+    transform: translateX(-50%);
+    z-index: 1; /* Ensure it's behind icons */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px; /* Increased margin */
+    display: flex;
+    /* flex-direction: row; default, will be overridden by :nth-child(even) */
+    align-items: flex-start; /* Align icon and content to the top */
+    clear: both; /* Ensure proper layout flow */
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-icon {
+    background: var(--accent-color); /* #007bff -> var(--accent-color) */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 2; /* Above the timeline bar */
+    box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px var(--accent-color-dark); /* rgba(0, 123, 255, 0.2) -> themed shadow */
+    transition: all var(--transition-medium);
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    margin: 0 30px; /* Increased margin for better spacing */
+}
+.timeline-item:nth-child(odd) .timeline-icon{
+    /*Ensures icon is on the left for odd items*/
+}
+.timeline-item:nth-child(even) .timeline-icon{
+    /*Ensures icon is on the right for even items*/
+}
+
+
+.timeline-item:hover .timeline-icon {
+    background: var(--accent-color-dark); /* #0056b3 -> var(--accent-color-dark) */
+    box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px var(--accent-color);
+    transform: scale(1.1);
+}
+
+.timeline-content {
+    background: var(--card-bg); /* white -> var(--card-bg) */
+    border-radius: var(--border-radius); /* 10px -> var(--border-radius) */
+    padding: 25px 30px; /* Adjusted padding */
+    box-shadow: 0 5px 15px var(--shadow-color); /* rgba(0,0,0,0.08) -> var(--shadow-color) */
+    width: calc(50% - 90px); /* Adjusted width based on icon margin (60 icon + 30 margin) */
+    transition: all var(--transition-medium);
+    position: relative; /* For potential pseudo-elements like arrows */
+}
+/* Arrow for timeline content pointing to the line */
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 20px; /* Align with icon center */
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+.timeline-item:nth-child(odd) .timeline-content::before {
+    right: 100%;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent var(--card-bg) transparent transparent;
+}
+.timeline-item:nth-child(even) .timeline-content::before {
+    left: 100%;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent var(--card-bg);
+}
+
+
+.timeline-item:hover .timeline-content {
+    box-shadow: 0 10px 25px var(--shadow-color); /* rgba(0,0,0,0.15) */
+    transform: translateY(-5px);
+}
+
+
+.timeline-content h3 {
+    margin-top: 0;
+    color: var(--accent-color); /* #007bff -> var(--accent-color) */
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px; /* Added margin */
+}
+
+.timeline-content p {
+    margin: 0 0 15px 0; /* Adjusted margin */
+    color: var(--text-color-light); /* #495057 -> var(--text-color-light) */
+    font-size: 1rem;
+    line-height: 1.6;
+}
+.timeline-content p:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-date {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--primary-color); /* #e9ecef -> var(--primary-color) */
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-color-light); /* #495057 -> var(--text-color-light) */
+    font-weight: 500;
+    margin-bottom: 15px; /* Added margin */
+}
+
+/* Process CTA - Assuming this is specific to the process section */
+.process-cta {
+    text-align: center;
+    margin-top: 60px;
+    padding: 30px;
+    background: var(--card-bg); /* white -> var(--card-bg) */
+    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) */
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.process-cta p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--text-color); /* #343a40 -> var(--text-color) */
+}
+
+/* Assuming .btn is a generic button, might need a more specific class or merge with .primary-button */
+.process-cta .btn, .process-cta .primary-button { /* Using .primary-button as a base if similar */
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    /* Styles below are similar to .primary-button, so can be inherited if .primary-button is used */
+    /* background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 30px;
+    transition: all var(--transition-medium); */
+}
+/*
+.process-cta .btn:hover, .process-cta .primary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    background-color: var(--accent-color-dark);
+}
+*/
+
+/* Examples Section Styles */
+#examples {
+    padding: 80px 0;
+    background-color: var(--bg-color); /* #fff -> var(--bg-color) */
+}
+
+/* .example-cards is similar to .pricing-container or .service-cards */
+/* .example-card is similar to .pricing-card or .card */
+/* These styles will be added and then reviewed for consolidation with existing card styles */
+
+/* Contact Form Styles */
+#contact {
+    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
+    padding: 80px 0;
+}
+
+#trial-form { /* This should be distinct from other forms if it has unique styling */
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--card-bg); /* white -> var(--card-bg) */
+    padding: 40px;
+    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) */
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+/* .form-group, label, input, textarea styles are likely already defined or should be generic */
+/* .primary-button is likely already defined. */
+
+
+/* Footer styles were also in the index.html style tag, */
+/* but there's a high chance they are already in style.css. */
+/* We will assume the existing footer styles in style.css are to be used. */
+
+/* Responsive adjustments from index.html <style> tag */
+/* These will be MERGED with existing media queries in style.css */
+
+/* @media (max-width: 992px) for Pricing & Timeline */
+@media (max-width: 992px) {
+    .pricing-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pricing-card {
+        width: 100%; /* Use 100% for mobile, but with max-width */
+        max-width: 380px; /* Slightly larger for better readability */
+        margin-bottom: 30px;
+    }
+    .pricing-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .pricing-card.recommended {
+        transform: scale(1); /* Reset desktop scaling */
+        order: -1; /* Keep recommended first */
+    }
+
+    .pricing-card.recommended:hover {
+        transform: translateY(-10px); /* Keep hover effect */
+    }
+
+    .timeline::before {
+        left: 30px; /* Adjust for mobile */
+        transform: translateX(0); /* Reset transform */
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        flex-direction: row; /* All items flow left to right */
+        padding-left: 50px; /* Space for the icon and line */
+    }
+    .timeline-item:nth-child(even) .timeline-content::before, /* Hide arrows on mobile for simpler layout */
+    .timeline-item:nth-child(odd) .timeline-content::before {
+        display: none;
+    }
+
+
+    .timeline-icon {
+        margin: 0; /* Reset margin */
+        position: absolute; /* Position icon relative to the item */
+        left: 0px; /* Align with the new timeline bar position */
+        top: 0; /* Align icon to the top of the content */
+    }
+
+    .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content, /* Ensure full width for content */
+    .timeline-item:nth-child(even) .timeline-content {
+        width: 100%;
+        margin-left: 0; /* Reset desktop margins */
+        margin-right: 0;
+    }
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-top: 0; /* Remove any top margin from even items if previously added */
+    }
+     .timeline-item .timeline-content {
+        margin-left: 0px; /* Space from icon */
+    }
+
+
+    /* .example-cards and .example-card responsive rules will be merged with their main definitions */
+}
+
+/* @media (max-width: 768px) specific adjustments for timeline and forms if not already covered */
+@media (max-width: 768px) {
+    #process, #pricing, #examples, #contact {
+        padding: 60px 0; /* Slightly reduced padding */
+    }
+    .timeline-item {
+        padding-left: 0; /* Remove padding, icon will be inside */
+        margin-bottom: 30px;
+    }
+    .timeline::before {
+        left: 20px; /* Further adjust line position */
+    }
+    .timeline-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        left: 0; /* Align with the line */
+        margin-right: 15px; /* Space between icon and content */
+        position: relative; /* Make it part of the flow for easier alignment with text */
+        top: auto; /* Reset absolute positioning */
+        box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 6px var(--accent-color-dark);
+    }
+     .timeline-item {
+        flex-direction: column; /* Stack icon and content vertically */
+    }
+    .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+         width: 100%;
+         margin-left: 0; /* Icon is now part of the column flow */
+         padding: 20px;
+    }
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+    .timeline-content p {
+        font-size: 0.95rem;
+    }
+
+    #trial-form {
+        padding: 25px; /* Reduced padding */
+    }
+    /* .section-header h2 size is already handled by existing 768px media query */
+    /* .process-cta and .pricing-notes padding can be reviewed */
+    /* .process-cta .btn and .primary-button sizes are likely handled by existing rules */
+    /* .footer-links ul flex-direction is already handled */
+}
+
+
+/* @media (max-width: 576px) specific adjustments from index.html <style> tag */
+/* Most of these seem to be covered or can be fine-tuned within the 768px breakpoint or existing 480px. */
+/* For example, .section-header h2 font-size reduction */
+@media (max-width: 576px) {
+    #process, #pricing, #examples, #contact {
+        padding: 40px 0;
+    }
+    .timeline-content, #trial-form {
+        padding: 20px;
+    }
+    /* Further timeline icon and content adjustments if necessary */
+    .timeline-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+     .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+    .timeline-content p, .example-card p { /* Assuming .example-card is similar to .card */
+        font-size: 0.9rem;
+    }
+    .pricing-card {
+        max-width: 300px; /* Further reduce max-width for very small screens */
+    }
+
+}
+
+/* Styles for #service, .service-cards, .card, .message, .strengths from index.html <style> */
+/* These were also in the <style> tag but seem to be refining existing or adding new sections */
+/* They need to be carefully integrated and CSS variables used. */
+
+/* Service Section (from index.html <style>, likely refinement of existing) */
+/* #service might be an ID for a section that already has some styling */
+
+.service-cards { /* This was present in index.html styles, assuming it's for #service section */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px; /* Check if this is needed or conflicts */
+    flex-wrap: wrap;
+}
+
+/* .card styles from index.html were quite detailed. */
+/* There is an existing .card style in style.css (lines 432-453) */
+/* We need to MERGE these carefully. The one from index.html is more specific. */
+/* For now, let's assume the one from index.html is preferred or adds to existing. */
+/* This .card definition is from the <style> tag and seems more fleshed out for general use */
+.card { /* This is a general card, might conflict with .pricing-card if not specific enough */
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) for a bit more pronounced rounding */
+    box-shadow: var(--shadow-color); /* Simplified, check var(--shadow-color) definition */
+    overflow: hidden;
+    flex: 1 1 300px;
+    max-width: 360px; /* Slightly increased max-width */
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color); /* Added subtle border */
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px var(--shadow-color); /* Needs adjustment if var(--shadow-color) is too light */
+}
+
+.card-inner { /* For content within .card */
+    padding: 25px 30px; /* Adjusted padding */
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.card-icon { /* Icon within .card */
+    font-size: 2.8rem; /* Increased size */
+    color: var(--accent-color); /* #007bff -> var(--accent-color) */
+    margin-bottom: 20px;
+    line-height: 1; /* Ensure icon is centered if it's a font icon */
+}
+
+.card h3 { /* Title within .card */
+    font-size: 1.3rem; /* Adjusted size */
+    color: var(--text-color); /* #333 -> var(--text-color) */
+    margin: 0 0 15px 0;
+    font-weight: 600; /* Ensure consistent weight */
+}
+
+.card p { /* Paragraph within .card */
+    font-size: 0.95rem; /* Adjusted size */
+    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
+    line-height: 1.6;
+    margin-bottom: 0;
+    flex-grow: 1; /* Allow paragraph to take available space */
+}
+.card .cta-button { /* If cards have CTAs */
+    margin-top: auto; /* Push button to the bottom */
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+
+/* Message/Quote Section */
+.message {
+    text-align: center;
+    margin: 60px auto;
+    max-width: 700px;
+    padding: 30px 35px; /* Adjusted padding */
+    background-color: var(--primary-color); /* #e9ecef -> var(--primary-color) */
+    border-left: 5px solid var(--accent-color); /* #007bff -> var(--accent-color) */
+    border-radius: var(--border-radius); /* 5px -> var(--border-radius) */
+    box-shadow: var(--shadow-color);
+}
+
+.message blockquote {
+    font-size: 1.2rem; /* Adjusted size */
+    font-style: italic;
+    color: var(--text-color); /* #495057 -> var(--text-color) */
+    margin: 0 0 15px 0;
+    border: none;
+    padding: 0;
+}
+
+.message-author {
+    font-size: 1rem;
+    color: var(--text-color-light); /* #6c757d -> var(--text-color-light) */
+    font-weight: 500;
+}
+.message-author::before {
+    content: "— ";
+}
+
+/* Strengths Section */
+.strengths { /* Similar to .service-cards */
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.strength-item { /* Similar to .card or .example-card */
+    text-align: center;
+    flex: 1 1 300px;
+    max-width: 45%; /* This might make items too wide on some screens before wrapping */
+    padding: 20px; /* Added some padding for spacing */
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-color);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+.strength-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+
+.strength-icon { /* Similar to .card-icon */
+    font-size: 2.8rem; /* #3rem -> 2.8rem */
+    color: #28a745; /* Kept green, or use var(--success-color) */
+    margin-bottom: 20px;
+}
+
+.strength-item h3 { /* Similar to .card h3 */
+    font-size: 1.2rem; /* 1.3rem -> 1.2rem */
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.strength-item p { /* Similar to .card p */
+    font-size: 0.95rem; /* 1rem -> 0.95rem */
+    color: var(--text-color-light);
+    line-height: 1.6;
+}
+
+/* Responsive for .service-cards, .card, .strengths (from index.html <style>) */
+@media (max-width: 768px) {
+    .service-cards,
+    .strengths {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card, /* General card */
+    .strength-item { /* This was max-width: 350px, now uses general .card sizing */
+        width: 100%; /* Ensure full width on mobile */
+        max-width: 380px; /* Consistent max-width for cards on mobile */
+        margin-bottom: 25px; /* Add margin for stacked cards */
+    }
+    .card:last-child, .strength-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .strength-item { /* Specific adjustment if needed beyond .card */
+        max-width: 380px; /* Ensure consistency */
+    }
+}
+/* End of styles moved from index.html */
