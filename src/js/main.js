@@ -18,14 +18,29 @@ let windowHeight = window.innerHeight;
 let particles = [];
 let particleSystem;
 
+// モバイル判定
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isTablet = /iPad|Android(?=.*\b(tablet|pad)\b)/i.test(navigator.userAgent);
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// デバイス判定とパフォーマンス設定
+let devicePixelRatio = Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2);
+let particleCount = isMobile ? 50 : 100;
+let enableComplexAnimations = !isMobile || window.innerWidth > 768;
+
 // DOM要素が読み込まれた後に実行
 document.addEventListener('DOMContentLoaded', () => {
     try {
         // ローディングアニメーションの表示
         showLoadingScreen();
         
+        // デバイス固有の初期化
+        setupDeviceOptimizations();
+        
         // Three.jsの初期化
-        initThree();
+        if (enableComplexAnimations) {
+            initThree();
+        }
         
         // イベントリスナーの設定
         setupEventListeners();
@@ -42,11 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // スクロールガイドの設定
         setupScrollGuide();
         
+        // フォームの設定
+        setupFormValidation();
+        
+        // アクセシビリティの設定
+        setupAccessibility();
+        
         // ローディング完了後の処理
         window.addEventListener('load', () => {
             setTimeout(() => {
                 hideLoadingScreen();
-            }, 1000); // 1秒遅延でローディング画面を非表示
+            }, isMobile ? 500 : 1000);
         });
     } catch (e) {
         console.error('初期化エラー:', e);
@@ -54,6 +75,169 @@ document.addEventListener('DOMContentLoaded', () => {
         hideLoadingScreen();
     }
 });
+
+// デバイス最適化の設定
+function setupDeviceOptimizations() {
+    // モバイルでのビューポート設定
+    if (isMobile) {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes';
+        }
+        
+        // モバイル用CSS変数の設定
+        document.documentElement.style.setProperty('--is-mobile', '1');
+        
+        // プリロードの最適化
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'style';
+        link.href = 'src/css/style.css';
+        document.head.appendChild(link);
+        
+        // モバイル専用の最適化スタイル
+        const mobileStyle = document.createElement('style');
+        mobileStyle.textContent = `
+            /* モバイル向けスムーズスクロール最適化 */
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* タッチデバイス向けのインタラクション改善 */
+            .touch-device * {
+                -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            .touch-device input, 
+            .touch-device textarea {
+                -webkit-user-select: text;
+                user-select: text;
+            }
+            
+            /* ダブルタップズーム防止 */
+            .touch-device .primary-button,
+            .touch-device .cta-button,
+            .touch-device .appeal-cta,
+            .touch-device .nav-links a {
+                touch-action: manipulation;
+            }
+            
+            /* モバイルでのホバー効果無効化 */
+            @media (hover: none) and (pointer: coarse) {
+                .card:hover,
+                .example-card:hover,
+                .strength-item:hover,
+                .primary-button:hover,
+                .cta-button:hover,
+                .appeal-cta:hover {
+                    transform: none;
+                }
+            }
+        `;
+        document.head.appendChild(mobileStyle);
+    }
+    
+    // 高DPIディスプレイ対応
+    if (window.devicePixelRatio > 1) {
+        document.documentElement.classList.add('high-dpi');
+    }
+    
+    // タッチデバイス対応
+    if (isTouchDevice) {
+        document.documentElement.classList.add('touch-device');
+        
+        // タッチイベントの最適化
+        setupTouchOptimizations();
+    }
+    
+    // iOS Safari対応の追加最適化
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('ios-device');
+        
+        // iOS Safariでの100vh問題対応
+        const setVH = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setVH, 100);
+        });
+    }
+    
+    // Android Chrome対応
+    if (/Android.*Chrome/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('android-chrome');
+    }
+}
+
+// タッチ操作の最適化
+function setupTouchOptimizations() {
+    // タッチスクロールの改善
+    let isScrolling = false;
+    let scrollTimeout = null;
+    
+    const handleTouchStart = () => {
+        isScrolling = true;
+        document.body.classList.add('is-scrolling');
+    };
+    
+    const handleTouchEnd = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+            document.body.classList.remove('is-scrolling');
+        }, 150);
+    };
+    
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    // スワイプジェスチャーでナビゲーション閉じる
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    const navLinks = document.querySelector('.nav-links');
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (navLinks && menuToggle) {
+        navLinks.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+        
+        navLinks.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            // 左方向のスワイプでメニューを閉じる
+            if (Math.abs(deltaX) > Math.abs(deltaY) && deltaX < -100) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        }, { passive: true });
+    }
+    
+    // ピンチズーム防止（ダブルタップズームは許可）
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, { passive: false });
+}
 
 // ローディング画面の表示
 function showLoadingScreen() {
@@ -68,34 +252,100 @@ function hideLoadingScreen() {
     const loader = document.getElementById('loading-overlay');
     if (loader) {
         loader.classList.add('fade-out');
+        
+        // ローディング完了後にメインコンテンツをフェードイン
+        setTimeout(() => {
+            const content = document.querySelector('.content');
+            if (content) {
+                content.style.opacity = '1';
+            }
+        }, 300);
     }
 }
 
-// ナビゲーションメニューの設定
+// ナビゲーションメニューの設定（改善版）
 function setupNavigation() {
     try {
         const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
         const nav = document.querySelector('.main-nav');
+        const header = document.querySelector('.main-header');
         
-        if (menuToggle && nav) {
-            // モバイルメニュートグルボタンのクリックイベント
-            menuToggle.addEventListener('click', () => {
-                nav.classList.toggle('active');
+        if (menuToggle && navLinks) {
+            // ハンバーガーメニューの開閉
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                
+                // aria-expanded属性を更新
+                const isExpanded = navLinks.classList.contains('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                
+                // ボディのスクロールを制御（モバイルメニュー開閉時）
+                if (isExpanded) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             });
             
             // ナビゲーションリンクのクリックでメニューを閉じる
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('active');
+            const navItems = navLinks.querySelectorAll('a');
+            navItems.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // スムーズスクロールの処理
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            navLinks.classList.remove('active');
+                            menuToggle.classList.remove('active');
+                            document.body.style.overflow = '';
+                            
+                            // スムーズスクロール
+                            const headerHeight = header ? header.offsetHeight : 70;
+                            const targetPosition = target.offsetTop - headerHeight;
+                            
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else {
+                        navLinks.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                 });
             });
             
-            // スクロール時のヘッダー表示/非表示の制御
-            let lastScrollTop = 0;
-            const header = document.querySelector('.main-header');
+            // 外部クリックでメニューを閉じる
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
             
-            window.addEventListener('scroll', () => {
+            // ESCキーでメニューを閉じる
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
+        // スクロール時のヘッダー表示/非表示の制御（改善版）
+        if (header) {
+            let lastScrollTop = 0;
+            let ticking = false;
+            
+            function updateHeader() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
                 // スクロール方向を検出
@@ -107,38 +357,75 @@ function setupNavigation() {
                     header.classList.remove('hide');
                 }
                 
-                lastScrollTop = scrollTop;
-            });
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateHeader);
+                    ticking = true;
+                }
+            }, { passive: true });
         }
     } catch (e) {
         console.error('ナビゲーション設定エラー:', e);
     }
 }
 
-// トップに戻るボタンの設定
+// トップに戻るボタンの設定（改善版）
 function setupBackToTopButton() {
     try {
         const backToTopButton = document.getElementById('back-to-top');
         
         if (backToTopButton) {
-            // スクロール位置に応じてボタン表示/非表示
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
+            let ticking = false;
+            
+            function updateBackToTopButton() {
+                const scrollPosition = window.pageYOffset;
+                const threshold = window.innerHeight * 0.5;
+                
+                if (scrollPosition > threshold) {
                     backToTopButton.classList.add('visible');
                 } else {
                     backToTopButton.classList.remove('visible');
                 }
-            });
+                ticking = false;
+            }
+            
+            // パフォーマンス最適化されたスクロールイベント
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateBackToTopButton);
+                    ticking = true;
+                }
+            }, { passive: true });
             
             // クリック時にページトップにスクロール
-            backToTopButton.addEventListener('click', () => {
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {
-                        y: 0
-                    },
-                    ease: "power3.inOut"
-                });
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // GSAP利用可能時はアニメーション、そうでなければブラウザデフォルト
+                if (typeof gsap !== 'undefined' && gsap.to) {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: 0 },
+                        ease: "power3.inOut"
+                    });
+                } else {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            
+            // キーボードサポート
+            backToTopButton.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    backToTopButton.click();
+                }
             });
         }
     } catch (e) {
@@ -146,7 +433,7 @@ function setupBackToTopButton() {
     }
 }
 
-// スクロールガイドの設定
+// スクロールガイドの設定（改善版）
 function setupScrollGuide() {
     try {
         const scrollGuide = document.querySelector('.scroll-guide');
@@ -154,108 +441,297 @@ function setupScrollGuide() {
         
         if (scrollGuide && serviceSection) {
             // クリック時にサービスセクションまでスクロール
-            scrollGuide.addEventListener('click', () => {
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {
-                        y: serviceSection,
-                        offsetY: 50
-                    },
-                    ease: "power3.inOut"
-                });
+            scrollGuide.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const headerHeight = document.querySelector('.main-header')?.offsetHeight || 70;
+                const targetPosition = serviceSection.offsetTop - headerHeight;
+                
+                if (typeof gsap !== 'undefined' && gsap.to) {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: targetPosition },
+                        ease: "power3.inOut"
+                    });
+                } else {
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             });
             
             // スクロール位置に応じてフェードアウト
-            window.addEventListener('scroll', () => {
+            let ticking = false;
+            
+            function updateScrollGuide() {
                 const scrollPosition = window.pageYOffset;
                 const threshold = window.innerHeight * 0.3;
                 
                 if (scrollPosition > threshold) {
-                    gsap.to(scrollGuide, {
-                        opacity: 0,
-                        duration: 0.3
-                    });
+                    scrollGuide.style.opacity = '0';
+                    scrollGuide.style.pointerEvents = 'none';
                 } else {
-                    gsap.to(scrollGuide, {
-                        opacity: 0.7,
-                        duration: 0.3
-                    });
+                    scrollGuide.style.opacity = '0.7';
+                    scrollGuide.style.pointerEvents = 'auto';
                 }
-            });
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollGuide);
+                    ticking = true;
+                }
+            }, { passive: true });
         }
     } catch (e) {
         console.error('スクロールガイド設定エラー:', e);
     }
 }
 
+// フォームバリデーションの設定
+function setupFormValidation() {
+    try {
+        const form = document.getElementById('trial-form');
+        
+        if (form) {
+            const inputs = form.querySelectorAll('input[required], textarea[required]');
+            
+            // リアルタイムバリデーション
+            inputs.forEach(input => {
+                input.addEventListener('blur', validateField);
+                input.addEventListener('input', debounce(validateField, 300));
+            });
+            
+            // フォーム送信時のバリデーション
+            form.addEventListener('submit', (e) => {
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (!validateField.call(input)) {
+                        isValid = false;
+                    }
+                });
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    
+                    // 最初のエラーフィールドにフォーカス
+                    const firstError = form.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstError.focus();
+                    }
+                }
+            });
+        }
+    } catch (e) {
+        console.error('フォームバリデーション設定エラー:', e);
+    }
+}
+
+// フィールドバリデーション関数
+function validateField() {
+    const field = this;
+    const value = field.value.trim();
+    let isValid = true;
+    let message = '';
+    
+    // 既存のエラーメッセージを削除
+    const existingError = field.parentNode.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    field.classList.remove('error');
+    
+    // 必須フィールドチェック
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        message = 'この項目は必須です';
+    }
+    
+    // メールアドレスの形式チェック
+    if (field.type === 'email' && value) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(value)) {
+            isValid = false;
+            message = '正しいメールアドレスを入力してください';
+        }
+    }
+    
+    // 電話番号の形式チェック
+    if (field.type === 'tel' && value) {
+        const phonePattern = /^[\d\-\(\)\+\s]+$/;
+        if (!phonePattern.test(value) || value.length < 10) {
+            isValid = false;
+            message = '正しい電話番号を入力してください';
+        }
+    }
+    
+    // エラー表示
+    if (!isValid) {
+        field.classList.add('error');
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        errorDiv.style.color = '#dc3545';
+        errorDiv.style.fontSize = '0.8rem';
+        errorDiv.style.marginTop = '0.25rem';
+        field.parentNode.appendChild(errorDiv);
+    }
+    
+    return isValid;
+}
+
+// アクセシビリティの設定
+function setupAccessibility() {
+    try {
+        // キーボードナビゲーション改善
+        const focusableElements = document.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        // フォーカストラップ（モーダル用）
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) {
+            navLinks.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab' && navLinks.classList.contains('active')) {
+                    const focusableInModal = navLinks.querySelectorAll('a, button');
+                    const firstElement = focusableInModal[0];
+                    const lastElement = focusableInModal[focusableInModal.length - 1];
+                    
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
+        }
+        
+        // スキップリンクの追加
+        const skipLink = document.createElement('a');
+        skipLink.href = '#main-content';
+        skipLink.textContent = 'メインコンテンツにスキップ';
+        skipLink.className = 'skip-link';
+        skipLink.style.cssText = `
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+            transition: top 0.2s;
+        `;
+        
+        skipLink.addEventListener('focus', () => {
+            skipLink.style.top = '6px';
+        });
+        
+        skipLink.addEventListener('blur', () => {
+            skipLink.style.top = '-40px';
+        });
+        
+        document.body.insertBefore(skipLink, document.body.firstChild);
+        
+        // メインコンテンツにIDを追加
+        const mainContent = document.querySelector('main, .content');
+        if (mainContent && !mainContent.id) {
+            mainContent.id = 'main-content';
+        }
+        
+        // 動きを好まないユーザーへの配慮
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.setProperty('--transition-medium', '0s');
+            document.documentElement.style.setProperty('--transition-fast', '0s');
+        }
+    } catch (e) {
+        console.error('アクセシビリティ設定エラー:', e);
+    }
+}
+
+// デバウンス関数
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func.apply(this, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Three.jsの初期化
 function initThree() {
     console.log('Three.jsの初期化を開始します');
     
-    // シーンの作成
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff); // 背景色を設定
-    
-    // カメラの作成
-    camera = new THREE.PerspectiveCamera(50, windowWidth / windowHeight, 0.1, 1000); // FOVを少し狭める
-    camera.position.set(0, 1, 6); // カメラ位置を調整
-    
-    // WebGLの対応を確認
-    if (!checkWebGLSupport()) {
-        showWebGLError();
-        return;
-    }
-    
-    // レンダラーの作成
     try {
-        renderer = new THREE.WebGLRenderer({
-            canvas: document.getElementById('webgl-canvas'),
-            antialias: true,
-            alpha: true // alpha: false にして背景色を有効にする場合はCSS側で透明度を調整
-        });
-        renderer.setSize(windowWidth, windowHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        // renderer.setClearColor(0xffffff, 1); // シーンの背景色で管理するためコメントアウト
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping; // よりリアルなトーンマッピング
-        renderer.toneMappingExposure = 1.0;
-    } catch (e) {
-        console.error('レンダラーの作成エラー:', e);
-        return;
-    }
-    
-    // OrbitControlsの設定
-    try {
-        controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05; // ダンピングを少し強く
-        controls.enableZoom = true; // ズームを有効に
-        controls.minDistance = 3; // 最小ズーム距離
-        controls.maxDistance = 10; // 最大ズーム距離
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.2; // 自動回転を遅く
+        // WebGLサポートチェック
+        if (!checkWebGLSupport()) {
+            console.warn('WebGLがサポートされていません');
+            return;
+        }
         
-        // 視点制限を調整
-        controls.minPolarAngle = Math.PI / 4;    // 上からの視点を少し緩和
-        controls.maxPolarAngle = Math.PI / 1.5;  // 下からの視点を少し緩和
-    } catch (e) {
-        console.error('OrbitControlsの設定エラー:', e);
+        // シーンの作成
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
+        
+        // カメラの作成（モバイル対応）
+        const fov = isMobile ? 60 : 50;
+        camera = new THREE.PerspectiveCamera(fov, windowWidth / windowHeight, 0.1, 1000);
+        camera.position.set(0, 0, isMobile ? 8 : 6);
+        
+        // レンダラーの作成（パフォーマンス最適化）
+        const canvas = document.getElementById('webgl-canvas');
+        renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: !isMobile,
+            alpha: true,
+            powerPreference: isMobile ? 'low-power' : 'high-performance'
+        });
+        
+        renderer.setSize(windowWidth, windowHeight);
+        renderer.setPixelRatio(devicePixelRatio);
+        renderer.shadowMap.enabled = !isMobile;
+        renderer.shadowMap.type = isMobile ? THREE.BasicShadowMap : THREE.PCFSoftShadowMap;
+        
+        // コントロールの設定（タッチデバイス対応）
+        if (!isMobile) {
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.enableZoom = false;
+            controls.enablePan = false;
+            controls.maxPolarAngle = Math.PI / 2;
+            controls.minPolarAngle = Math.PI / 2;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+        }
+        
+        // ライトの設定
+        setupLights();
+        
+        // オブジェクトの作成
+        createCrystal();
+        
+        // パーティクルシステムの作成
+        createParticleSystem();
+        
+        // アニメーション開始
+        animate();
+        
+        console.log('Three.jsの初期化が完了しました');
+    } catch (error) {
+        console.error('Three.js初期化エラー:', error);
     }
-    
-    // ライトの設定
-    setupLights();
-    
-    // クリスタルオブジェクトの作成
-    createCrystal();
-    
-    // パーティクルシステムの作成（無効化）
-    // createParticleSystem();
-    
-    // アニメーションの開始
-    animate();
-    
-    console.log('Three.jsの初期化が完了しました');
 }
 
 // WebGL対応確認
@@ -372,7 +848,7 @@ function createCrystal() {
     }
 }
 
-// パーティクルシステムの作成 - 無効化
+// パーティクルシステムの作成
 function createParticleSystem() {
     // パーティクルシステムを作成しない
     console.log('パーティクルシステムは無効化されています');

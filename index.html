@@ -2,7 +2,42 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="フルオーダーメイドのAIケア記録システム「FastAI」。貴施設だけの完全カスタム開発。初期費用0円、月額3万円から。介護現場の効率化と記録業務の自動化を実現。">
+    <meta name="keywords" content="AI,介護,ケア記録,オーダーメイド,FastAI,嶽ノ子,自動化,RPA,カスタム開発">
+    <meta name="author" content="嶽ノ子">
+    <meta name="robots" content="index, follow">
+    
+    <!-- モバイル最適化メタタグ -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="嶽ノ子 FastAI">
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="msapplication-TileColor" content="#3B82F6">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://takenoko-ai.com/">
+    <meta property="og:title" content="嶽ノ子 - フルオーダーメイドAIケア記録システム">
+    <meta property="og:description" content="貴施設だけの完全カスタムAIケア記録システム。初期費用0円、月額3万円から。">
+    <meta property="og:image" content="https://takenoko-ai.com/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://takenoko-ai.com/">
+    <meta property="twitter:title" content="嶽ノ子 - フルオーダーメイドAIケア記録システム">
+    <meta property="twitter:description" content="貴施設だけの完全カスタムAIケア記録システム。初期費用0円、月額3万円から。">
+    <meta property="twitter:image" content="https://takenoko-ai.com/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <title>嶽ノ子 - FastAIでサクッと最新AI技術を導入</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -30,150 +65,185 @@
       }
     }
     </script>
+    
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "FastAI - AIケア記録システム",
+      "description": "フルオーダーメイドのAIケア記録システム",
+      "url": "https://takenoko-ai.com",
+      "author": {
+        "@type": "Organization",
+        "name": "嶽ノ子",
+        "email": "takenoko.ai.care@gmail.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "30000",
+        "priceCurrency": "JPY",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "30000",
+          "priceCurrency": "JPY",
+          "billingDuration": "P1M"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <!-- ローディングオーバーレイ -->
-    <div id="loading-overlay">
-        <div class="loader"></div>
+    <div id="loading-overlay" role="status" aria-label="ページを読み込んでいます">
+        <div class="loader" aria-hidden="true"></div>
         <p>やさしい光を準備中...</p>
     </div>
 
     <!-- メインキャンバス -->
-    <canvas id="webgl-canvas"></canvas>
+    <canvas id="webgl-canvas" aria-hidden="true"></canvas>
     
     <!-- ヘッダーナビゲーション -->
-    <header class="main-header">
+    <header class="main-header" role="banner">
         <div class="container">
             <div class="logo-container">
-                <a href="#" class="logo">嶽ノ子</a>
+                <a href="#" class="logo" aria-label="嶽ノ子 - ホームページ">嶽ノ子</a>
             </div>
-            <nav class="main-nav">
-                <button class="mobile-menu-toggle" aria-label="メニュー">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+            <nav class="main-nav" role="navigation" aria-label="メインナビゲーション">
+                <button class="mobile-menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="#service">サービス</a></li>
-                    <li><a href="#examples">実装例</a></li>
-                    <li><a href="#process">導入の流れ</a></li>
-                    <li><a href="#pricing">料金</a></li>
-                    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+                <ul class="nav-links" id="nav-links" role="menubar">
+                    <li role="none"><a href="#service" role="menuitem">サービス</a></li>
+                    <li role="none"><a href="#examples" role="menuitem">実装例</a></li>
+                    <li role="none"><a href="#process" role="menuitem">導入の流れ</a></li>
+                    <li role="none"><a href="#pricing" role="menuitem">料金</a></li>
+                    <li role="none"><a href="#contact" class="nav-cta" role="menuitem">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- コンテンツエリア -->
-    <main class="content">
+    <main class="content" id="main-content">
         <!-- ファーストビュー -->
-        <section id="hero">
+        <section id="hero" aria-labelledby="hero-title">
             <div class="hero-content">
-                <h1 class="animate__animated animate__fadeInDown"><span class="accent-text">フルオーダーメイド</span>で<br>介護の未来を創る</h1>
+                <h1 id="hero-title" class="animate__animated animate__fadeInDown">
+                    <span class="accent-text">フルオーダーメイド</span>で<br>介護の未来を創る
+                </h1>
                 <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
                     <span class="service-name">FastAI</span> - 貴施設だけの完全カスタムAIケア記録システム。<br>
                     運用フローに合わせた設計で、記録・情報共有を効率化。<br>
                     初期費用０円、月額3万円から。
                 </p>
-                <a href="#contact" id="cta-button" class="primary-button animate__animated animate__pulse animate__delay-2s animate__infinite">
-                    <i class="fas fa-paper-plane"></i> 無料カスタム相談をする
+                <a href="#contact" id="cta-button" class="primary-button animate__animated animate__pulse animate__delay-2s animate__infinite" aria-describedby="cta-description">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i> 無料カスタム相談をする
                 </a>
+                <span id="cta-description" class="sr-only">お問い合わせフォームに移動します</span>
             </div>
-            <div class="scroll-guide">
+            <div class="scroll-guide" role="button" tabindex="0" aria-label="下にスクロールしてサービス詳細を見る">
                 <span class="scroll-text">スクロールして詳細を見る</span>
-                <i class="fas fa-chevron-down scroll-icon"></i>
+                <i class="fas fa-chevron-down scroll-icon" aria-hidden="true"></i>
             </div>
         </section>
 
         <!-- サービス内容エリア -->
-        <section id="service" class="section">
+        <section id="service" class="section" aria-labelledby="service-title">
             <div class="section-content">
-                <h2>フルオーダーメイド開発</h2>
-                <p>
-                    嶽ノ子のAIケア記録システムは、お客様の施設だけのために完全オーダーメイドで開発されます。<br>
-                    既存の運用フローやルールを尊重しながら、AIとRPAの力で効率化を実現。<br>
-                    テンプレートではなく、完全に<strong>お客様専用設計</strong>のシステムをご提供します。
-                </p>
+                <header class="section-header">
+                    <h2 id="service-title">フルオーダーメイド開発</h2>
+                    <p>
+                        嶽ノ子のAIケア記録システムは、お客様の施設だけのために完全オーダーメイドで開発されます。<br>
+                        既存の運用フローやルールを尊重しながら、AIとRPAの力で効率化を実現。<br>
+                        テンプレートではなく、完全に<strong>お客様専用設計</strong>のシステムをご提供します。
+                    </p>
+                </header>
+                
                 <div class="service-cards">
-                    <div class="card large-card">
+                    <article class="card large-card">
                         <div class="card-inner">
-                            <div class="card-icon"><i class="fas fa-yen-sign"></i></div>
+                            <div class="card-icon" aria-hidden="true"><i class="fas fa-yen-sign"></i></div>
                             <h3>初期費用：0円</h3>
                             <p>フルオーダーメイドにもかかわらず初期開発費用は0円。導入サポート・設定代行・スタッフ教育もすべて無料</p>
                         </div>
-                    </div>
-                    <div class="card large-card">
+                    </article>
+                    <article class="card large-card">
                         <div class="card-inner">
-                            <div class="card-icon"><i class="fas fa-tag"></i></div>
+                            <div class="card-icon" aria-hidden="true"><i class="fas fa-tag"></i></div>
                             <h3>月額：30,000円</h3>
                             <p>カスタム機能も含め全機能利用可能・追加料金なし・最低利用期間なし</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
 
-                <div class="message">
+                <aside class="message">
                     <blockquote>
                         一点ものの特注システムで、<br>スタッフと利用者様のための時間を取り戻す
                     </blockquote>
                     <p class="message-author">開発チームより</p>
-                </div>
+                </aside>
 
                 <div class="strengths">
-                    <div class="strength-item">
-                        <div class="strength-icon"><i class="fas fa-handshake"></i></div>
+                    <article class="strength-item">
+                        <div class="strength-icon" aria-hidden="true"><i class="fas fa-handshake"></i></div>
                         <h3>ヒアリングから作り上げる</h3>
                         <p>現場の課題とニーズを丁寧にヒアリング。貴施設専用のシステムを設計します</p>
-                    </div>
-                    <div class="strength-item">
-                        <div class="strength-icon"><i class="fas fa-robot"></i></div>
+                    </article>
+                    <article class="strength-item">
+                        <div class="strength-icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
                         <h3>AI・RPA搭載で事務作業50%削減</h3>
                         <p>オーダーメイドだからこそ、本当に必要な自動化を実現します</p>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
         <!-- 実装例セクション -->
-        <section id="examples" class="section">
+        <section id="examples" class="section" aria-labelledby="examples-title">
             <div class="section-content">
-                <h2>オーダーメイド事例</h2>
-                <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem;">
-                    お客様のご要望に合わせて開発した実際のカスタムシステム例をご紹介します
-                </p>
+                <header class="section-header">
+                    <h2 id="examples-title">オーダーメイド事例</h2>
+                    <p class="section-subtitle">
+                        お客様のご要望に合わせて開発した実際のカスタムシステム例をご紹介します
+                    </p>
+                </header>
                 
                 <div class="example-cards">
-                    <div class="example-card">
-                        <div class="example-icon"><i class="fas fa-route"></i></div>
+                    <article class="example-card">
+                        <div class="example-icon" aria-hidden="true"><i class="fas fa-route"></i></div>
                         <h3>特注送迎管理システム</h3>
                         <p>介護施設向けに利用者の位置情報とスケジュールを連動させた完全オーダーメイドの送迎最適化システム。</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="example-icon"><i class="fas fa-microphone"></i></div>
+                    </article>
+                    <article class="example-card">
+                        <div class="example-icon" aria-hidden="true"><i class="fas fa-microphone"></i></div>
                         <h3>方言対応音声記録</h3>
                         <p>地域の方言に特化した音声認識エンジンを搭載。スタッフの話し言葉をそのまま記録できるカスタム開発。</p>
-                    </div>
-                    <div class="example-card">
-                        <div class="example-icon"><i class="fas fa-file-medical"></i></div>
+                    </article>
+                    <article class="example-card">
+                        <div class="example-icon" aria-hidden="true"><i class="fas fa-file-medical"></i></div>
                         <h3>オリジナル記録様式</h3>
                         <p>施設独自の記録フォーマットをそのままデジタル化。使い慣れた書式のまま、AIによる入力支援を実現。</p>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
         <!-- 導入の流れ -->
-        <section id="process" class="py-5">
+        <section id="process" class="py-5" aria-labelledby="process-title">
             <div class="container">
-                <div class="section-header">
-                    <h2>導入の流れ</h2>
+                <header class="section-header">
+                    <h2 id="process-title">導入の流れ</h2>
                     <p class="section-subtitle">お問い合わせからわずか14日で導入完了！AIテクノロジーをサクッと実装</p>
-                </div>
+                </header>
                 
                 <div class="timeline-container">
-                    <div class="timeline">
+                    <ol class="timeline" role="list">
                         <!-- 1日目: お問い合わせ -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-comment-dots"></i>
                             </div>
                             <div class="timeline-content">
@@ -181,11 +251,11 @@
                                 <p>当サービスへの興味をお持ちいただき、お問い合わせフォームからご連絡ください。</p>
                                 <span class="timeline-date">1日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 2-3日目: 要件定義 -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-clipboard-list"></i>
                             </div>
                             <div class="timeline-content">
@@ -193,11 +263,11 @@
                                 <p>お客様の施設の状況やニーズをヒアリングし、最適なシステム構成を提案します。</p>
                                 <span class="timeline-date">2〜3日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 4-7日目: 開発 -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-code"></i>
                             </div>
                             <div class="timeline-content">
@@ -205,11 +275,11 @@
                                 <p>お客様の要件に合わせたシステムの開発・カスタマイズを行います。</p>
                                 <span class="timeline-date">4〜7日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 8-9日目: 試用 -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div class="timeline-content">
@@ -217,11 +287,11 @@
                                 <p>開発したシステムを実際に試用していただき、操作感やフィードバックを収集します。</p>
                                 <span class="timeline-date">8〜9日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 10-12日目: 無料カスタマイズ -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-sliders-h"></i>
                             </div>
                             <div class="timeline-content">
@@ -229,11 +299,11 @@
                                 <p>試用期間中のフィードバックに基づき、必要な調整・カスタマイズを無料で実施します。</p>
                                 <span class="timeline-date">10〜12日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 13-14日目: 納品 -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-truck"></i>
                             </div>
                             <div class="timeline-content">
@@ -241,11 +311,11 @@
                                 <p>最終的な調整を行い、本番環境への導入・納品を完了します。</p>
                                 <span class="timeline-date">13〜14日目</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 毎月: 月額利用 -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
                             <div class="timeline-content">
@@ -253,11 +323,11 @@
                                 <p>安定したサービスを継続的にご利用いただけます。定期的なアップデートやサポートも含まれています。</p>
                                 <span class="timeline-date">継続</span>
                             </div>
-                        </div>
+                        </li>
                         
                         <!-- 必要に応じて: 有料カスタマイズ -->
-                        <div class="timeline-item">
-                            <div class="timeline-icon">
+                        <li class="timeline-item" role="listitem">
+                            <div class="timeline-icon" aria-hidden="true">
                                 <i class="fas fa-tools"></i>
                             </div>
                             <div class="timeline-content">
@@ -265,8 +335,8 @@
                                 <p>導入後も必要に応じて追加機能やカスタマイズの対応が可能です（10,000円/回）。</p>
                                 <span class="timeline-date">必要時</span>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ol>
                 </div>
                 
                 <div class="process-cta">
@@ -277,41 +347,41 @@
         </section>
 
         <!-- 料金プラン -->
-        <section id="pricing" class="section">
+        <section id="pricing" class="section" aria-labelledby="pricing-title">
             <div class="section-content">
-                <div class="section-header">
-                    <h2>シンプルな料金プラン</h2>
+                <header class="section-header">
+                    <h2 id="pricing-title">シンプルな料金プラン</h2>
                     <p>フルオーダーメイドでありながら、わかりやすい料金体系でご提供。初期費用は一切かかりません。</p>
-                </div>
+                </header>
                 <div class="pricing-container">
                     <!-- スタンダードプラン（唯一のプラン） -->
-                    <div class="pricing-card">
-                        <div class="pricing-header">
+                    <article class="pricing-card">
+                        <header class="pricing-header">
                             <h3>オーダーメイドプラン</h3>
-                            <div class="price">30,000<span>円/月</span></div>
-                            <p class="trial" style="color: #6c757d; font-size: 0.9rem; margin-top: 5px;">初期開発費用 0円</p>
-                        </div>
+                            <div class="price" aria-label="月額30,000円">30,000<span>円/月</span></div>
+                            <p class="trial">初期開発費用 0円</p>
+                        </header>
                         <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check"></i> お客様専用設計のアプリケーション</li>
-                                <li><i class="fas fa-check"></i> 既存業務フローに合わせたUI/UX設計</li>
-                                <li><i class="fas fa-check"></i> 利用者情報管理（最大100名）</li>
-                                <li><i class="fas fa-check"></i> カスタム介護記録フォーム</li>
-                                <li><i class="fas fa-check"></i> オーダーメイドシフト管理システム</li>
-                                <li><i class="fas fa-check"></i> モバイルアプリ対応</li>
-                                <li><i class="fas fa-check"></i> リアルタイムデータ同期</li>
-                                <li><i class="fas fa-check"></i> AIアシスト機能</li>
-                                <li><i class="fas fa-check"></i> 導入後の無料調整（1回）</li>
+                            <ul role="list">
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> お客様専用設計のアプリケーション</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> 既存業務フローに合わせたUI/UX設計</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> 利用者情報管理（最大100名）</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> カスタム介護記録フォーム</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> オーダーメイドシフト管理システム</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> モバイルアプリ対応</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> リアルタイムデータ同期</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> AIアシスト機能</li>
+                                <li role="listitem"><i class="fas fa-check" aria-hidden="true"></i> 導入後の無料調整（1回）</li>
                             </ul>
                         </div>
-                        <div class="pricing-footer">
+                        <footer class="pricing-footer">
                             <a href="#contact" class="cta-button">カスタム相談をする</a>
-                        </div>
-                    </div>
+                        </footer>
+                    </article>
                 </div>
                 <!-- オーダーメイド アピール -->
-                <div class="order-made-appeal">
-                    <i class="fas fa-wand-magic-sparkles appeal-icon"></i>
+                <aside class="order-made-appeal">
+                    <i class="fas fa-wand-magic-sparkles appeal-icon" aria-hidden="true"></i>
                     <h3>世界に一つだけのシステム</h3>
                     <p>
                         既製品では解決できない特有の課題をお持ちではありませんか？<br>
@@ -320,93 +390,98 @@
                         理想の記録・情報共有システムを一緒に作り上げましょう。
                     </p>
                     <a href="#contact" class="appeal-cta">
-                        <i class="fas fa-pencil-ruler"></i> 特注システムを相談する
+                        <i class="fas fa-pencil-ruler" aria-hidden="true"></i> 特注システムを相談する
                     </a>
-                </div>
+                </aside>
             </div>
         </section>
 
         <!-- フォームエリア -->
-        <section id="contact" class="section">
+        <section id="contact" class="section" aria-labelledby="contact-title">
             <div class="section-content">
-                <h2>オーダーメイド相談</h2>
-                <p style="text-align: center; margin-bottom: 2rem;">
-                    貴施設の課題や要望をお聞かせください。完全オーダーメイドのシステムをご提案いたします。<br>
-                    お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
-                </p>
+                <header class="section-header">
+                    <h2 id="contact-title">オーダーメイド相談</h2>
+                    <p>
+                        貴施設の課題や要望をお聞かせください。完全オーダーメイドのシステムをご提案いたします。<br>
+                        お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
+                    </p>
+                </header>
                 
-                <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST">
+                <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST" novalidate>
                     <div class="form-group">
-                        <label for="company"><i class="fas fa-building"></i> 事業所名</label>
-                        <input type="text" id="company" name="company" placeholder="例：嶽ノ子株式会社" required>
+                        <label for="company"><i class="fas fa-building" aria-hidden="true"></i> 事業所名 <span aria-label="必須項目">*</span></label>
+                        <input type="text" id="company" name="company" placeholder="例：嶽ノ子株式会社" required aria-describedby="company-error">
                     </div>
                     <div class="form-group">
-                        <label for="name"><i class="fas fa-user"></i> ご担当者名</label>
-                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
+                        <label for="name"><i class="fas fa-user" aria-hidden="true"></i> ご担当者名 <span aria-label="必須項目">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required aria-describedby="name-error">
                     </div>
                     <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope"></i> メールアドレス</label>
-                        <input type="email" id="email" name="email" placeholder="例：info@example.com" required>
+                        <label for="email"><i class="fas fa-envelope" aria-hidden="true"></i> メールアドレス <span aria-label="必須項目">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="例：info@example.com" required aria-describedby="email-error">
                     </div>
                     <div class="form-group">
-                        <label for="phone"><i class="fas fa-phone"></i> 電話番号</label>
-                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" required>
+                        <label for="phone"><i class="fas fa-phone" aria-hidden="true"></i> 電話番号 <span aria-label="必須項目">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" required aria-describedby="phone-error">
                     </div>
                     <div class="form-group">
-                        <label for="requirement-q1"><i class="fas fa-tasks"></i> 現在の業務での主な課題</label>
+                        <label for="requirement-q1"><i class="fas fa-tasks" aria-hidden="true"></i> 現在の業務での主な課題</label>
                         <textarea id="requirement-q1" name="requirement-q1" rows="3" placeholder="例：記録作業に時間がかかる、スタッフ間の情報共有が難しいなど"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="requirement-q2"><i class="fas fa-lightbulb"></i> 導入したい機能や期待すること</label>
+                        <label for="requirement-q2"><i class="fas fa-lightbulb" aria-hidden="true"></i> 導入したい機能や期待すること</label>
                         <textarea id="requirement-q2" name="requirement-q2" rows="3" placeholder="例：音声入力での記録、シフト自動作成、利用者様とのコミュニケーション支援など"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="message"><i class="fas fa-comment"></i> その他のご質問・ご要望</label>
+                        <label for="message"><i class="fas fa-comment" aria-hidden="true"></i> その他のご質問・ご要望</label>
                         <textarea id="message" name="message" rows="4" placeholder="ご不明点やご要望がございましたらお気軽にご記入ください"></textarea>
                     </div>
                     <!-- 面談希望日時 -->
-                    <div class="form-group">
-                        <label for="interview-date-1"><i class="fas fa-calendar-alt"></i> ご希望の面談日時 (第1希望)</label>
+                    <fieldset class="form-group">
+                        <legend><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望の面談日時 (第1希望)</legend>
                         <div style="display: flex; gap: 10px;">
-                            <input type="date" id="interview-date-1" name="interview-date-1" style="flex: 1;">
-                            <input type="time" id="interview-time-1" name="interview-time-1" style="flex: 1;">
+                            <input type="date" id="interview-date-1" name="interview-date-1" style="flex: 1;" aria-label="第1希望日">
+                            <input type="time" id="interview-time-1" name="interview-time-1" style="flex: 1;" aria-label="第1希望時間">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="interview-date-2"><i class="fas fa-calendar-alt"></i> ご希望の面談日時 (第2希望)</label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <legend><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望の面談日時 (第2希望)</legend>
                         <div style="display: flex; gap: 10px;">
-                            <input type="date" id="interview-date-2" name="interview-date-2" style="flex: 1;">
-                            <input type="time" id="interview-time-2" name="interview-time-2" style="flex: 1;">
+                            <input type="date" id="interview-date-2" name="interview-date-2" style="flex: 1;" aria-label="第2希望日">
+                            <input type="time" id="interview-time-2" name="interview-time-2" style="flex: 1;" aria-label="第2希望時間">
                         </div>
-                    </div>
+                    </fieldset>
                     <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px;">※ 面談時間は1時間程度を予定しております。</p>
 
-                    <button type="submit" class="primary-button"><i class="fas fa-wand-magic-sparkles"></i> オーダーメイド相談を予約する</button>
+                    <button type="submit" class="primary-button">
+                        <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> 
+                        オーダーメイド相談を予約する
+                    </button>
                 </form>
             </div>
         </section>
 
         <!-- フッター -->
-        <footer>
+        <footer role="contentinfo">
             <div class="footer-content">
                 <div class="logo">嶽ノ子</div>
                 
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="company.html">会社概要</a></li>
-                        <li><a href="privacy.html">プライバシーポリシー</a></li>
-                        <li><a href="terms.html">利用規約</a></li>
-                        <li><a href="#contact">お問い合わせ</a></li>
+                <nav class="footer-links" aria-label="フッターナビゲーション">
+                    <ul role="list">
+                        <li role="listitem"><a href="company.html">会社概要</a></li>
+                        <li role="listitem"><a href="privacy.html">プライバシーポリシー</a></li>
+                        <li role="listitem"><a href="terms.html">利用規約</a></li>
+                        <li role="listitem"><a href="#contact">お問い合わせ</a></li>
                     </ul>
-                </div>
+                </nav>
                 <p>&copy; 2025 嶽ノ子. All rights reserved.</p>
             </div>
         </footer>
     </main>
 
     <!-- ページトップに戻るボタン -->
-    <button id="back-to-top" aria-label="ページトップに戻る">
-        <i class="fas fa-arrow-up"></i>
+    <button id="back-to-top" aria-label="ページトップに戻る" tabindex="0">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
     <!-- GSAP アニメーションライブラリ -->

@@ -18,21 +18,43 @@
     --border-color: #E5E7EB; /* Tailwind Gray 200 */
     --shadow-color: rgba(0, 0, 0, 0.08);
 
-    /* タイポグラフィ */
+    /* タイポグラフィ - より流動的なスケーリング */
     --font-sans: 'Noto Sans JP', sans-serif;
     --header-height: 70px;
+    
+    /* レスポンシブフォントサイズ */
+    --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
+    --font-size-base: clamp(1rem, 3vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 4vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 5vw, 2rem);
+    --font-size-3xl: clamp(2rem, 6vw, 3rem);
 
     /* その他 */
-    --border-radius: 12px; /* 少し小さめに */
+    --border-radius: 12px;
     --border-radius-lg: 16px;
     --transition-medium: 0.2s ease-in-out;
     --transition-fast: 0.15s ease-in-out;
+    
+    /* スペーシング */
+    --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+    --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+    --spacing-md: clamp(1rem, 3vw, 1.5rem);
+    --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+    --spacing-xl: clamp(2rem, 5vw, 3rem);
+    
+    /* タッチターゲットサイズ */
+    --touch-target-min: 48px;
 }
 
 html {
     font-size: 16px;
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-height) + 20px);
+    /* iOS のズームを防止しつつ、アクセシビリティを保持 */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -41,11 +63,23 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #fff;
-    overflow-x: hidden; /* 横スクロール防止 */
-    font-weight: 400; /* 標準の太さ */
+    overflow-x: hidden;
+    font-weight: 400;
     letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-width: 320px; /* 最小幅を設定 */
+    /* モバイルでのタップハイライトを無効化 */
+    -webkit-tap-highlight-color: transparent;
+    /* モバイルでのスクロールのバウンス効果を制御 */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* モバイル固有のタッチ操作最適化 */
+@supports (touch-action: manipulation) {
+    body {
+        touch-action: manipulation;
+    }
 }
 
 /* Three.jsキャンバス */
@@ -98,6 +132,8 @@ body {
     color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 500;
+    text-align: center;
+    padding: 0 1rem;
 }
 
 /* ヘッダーとナビゲーション */
@@ -107,7 +143,7 @@ body {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background: rgba(17, 24, 39, 0.8); /* Tailwind Gray 900 */
+    background: rgba(17, 24, 39, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
@@ -122,7 +158,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     height: 100%;
     display: flex;
     align-items: center;
@@ -135,9 +171,11 @@ body {
 }
 
 .logo {
-    font-size: 1.6rem;
-    font-weight: 600; /* 少し太く */
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    font-weight: 600;
     color: var(--accent-color);
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .main-nav {
@@ -148,41 +186,45 @@ body {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-links a {
     font-weight: 500;
-    color: var(--text-color-light);
+    color: #ffffff;
     transition: color var(--transition-fast);
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    padding: var(--spacing-sm);
+    border-radius: 6px;
+    /* タッチターゲットサイズを確保 */
+    min-height: var(--touch-target-min);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-links a:hover {
     color: var(--accent-color);
-}
-
-.nav-links a::after {
-    background: var(--accent-color);
-    height: 2px;
+    background: rgba(59, 130, 246, 0.1);
 }
 
 .nav-cta {
-    background: var(--accent-color);
+    background: var(--accent-color) !important;
     color: white !important;
     padding: 0.6rem 1.3rem !important;
-    border-radius: 8px; /* 角丸調整 */
+    border-radius: 8px;
     font-weight: 500;
     transition: background-color var(--transition-medium), transform var(--transition-medium);
+    /* より良いタッチターゲット */
+    min-height: var(--touch-target-min) !important;
 }
 
 .nav-cta:hover {
-    background: var(--accent-color-dark);
+    background: var(--accent-color-dark) !important;
     transform: translateY(-1px);
-    box-shadow: none; /* ホバーシャドウ削除 */
-}
-
-.nav-cta::after {
-    display: none !important;
 }
 
 .mobile-menu-toggle {
@@ -195,14 +237,29 @@ body {
     border: none;
     cursor: pointer;
     padding: 0;
+    z-index: 110;
 }
 
 .bar {
     width: 100%;
     height: 3px;
-    background: var(--text-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
+    background: white;
+    border-radius: 2px;
+    transition: all var(--transition-medium);
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
 }
 
 /* コンテンツエリア */
@@ -214,8 +271,8 @@ body {
 
 /* セクション共通 */
 .section {
-    padding: 6rem 2rem; /* パディング調整 */
-    min-height: 100vh;
+    padding: 4rem 1rem;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,6 +283,23 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    margin-top: 1rem;
+    line-height: 1.7;
 }
 
 /* スクロールガイド */
@@ -241,6 +315,7 @@ body {
     cursor: pointer;
     transition: opacity var(--transition-medium);
     opacity: 0.7;
+    z-index: 2;
 }
 
 .scroll-guide:hover {
@@ -251,6 +326,7 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-color);
+    text-align: center;
 }
 
 .scroll-icon {
@@ -288,6 +364,9 @@ body {
     visibility: hidden;
     transition: all var(--transition-medium);
     z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #back-to-top.visible {
@@ -307,21 +386,22 @@ body {
 
 /* タイポグラフィ */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
-    font-weight: 600; /* 見出しは少し太く */
-    line-height: 1.4;
-    margin-bottom: 1.5rem;
+    font-family: 'M+ PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
     color: var(--text-color);
+    line-height: 1.3;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    /* より読みやすいテキストレンダリング */
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
 }
 
 h1 {
-    font-size: 3rem; /* 少し小さく */
-    letter-spacing: -0.02em;
+    font-size: var(--font-size-3xl);
     font-weight: 700;
-    background: none; /* グラデーション削除 */
-    color: var(--text-color); /* 通常の色に */
-    -webkit-background-clip: initial;
-    background-clip: initial;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
 }
 
 .accent-text {
@@ -329,66 +409,76 @@ h1 {
 }
 
 h2 {
-    font-size: 2.25rem; /* 少し小さく */
-    margin-bottom: 3rem;
-    font-weight: 600;
+    font-size: var(--font-size-2xl);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
 }
 
 h2::after {
-    content: "";
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
+    content: '';
+    display: block;
     width: 60px;
     height: 3px;
     background: var(--accent-color);
-    border-radius: 3px;
+    margin: var(--spacing-sm) auto 0;
+    border-radius: 2px;
 }
 
 h3 {
-    font-size: 1.375rem; /* 少し小さく */
-    font-weight: 600;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
 }
 
 p {
-    font-size: 1rem; /* 標準サイズに */
     color: var(--text-color-light);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-base);
     line-height: 1.7;
+    /* より読みやすい文字間隔 */
+    letter-spacing: 0.02em;
 }
 
 /* ボタン */
 .primary-button {
-    background: var(--accent-color);
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
     color: white;
-    padding: 0.8rem 2rem; /* パディング調整 */
-    font-size: 1rem;
-    border-radius: 8px; /* 角丸調整 */
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    text-decoration: none;
+    transition: all var(--transition-medium);
     cursor: pointer;
-    transition: background-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
-    font-weight: 500;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind Shadow */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    position: relative;
-    overflow: visible; /* ::after削除のため */
-    z-index: 1;
-}
-
-.primary-button::after { /* ::after エフェクト削除 */
-    display: none;
+    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
+    /* タッチターゲットサイズの確保 */
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    /* タッチデバイスでの操作性向上 */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .primary-button:hover {
-    background: var(--accent-color-dark);
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind Shadow Hover */
-    color: white;
+    box-shadow: 0 8px 25px 0 rgba(59, 130, 246, 0.35);
+    background: linear-gradient(135deg, var(--accent-color-dark) 0%, #1E40AF 100%);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
 }
 
 .primary-button i {
-    margin-right: 0.5rem;
+    font-size: 1.1em;
+    margin-right: var(--spacing-xs);
 }
 
 /* ヒーローセクション */
@@ -397,412 +487,567 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 0 2rem;
     position: relative;
-    padding-top: var(--header-height);
-    background-color: transparent;
-    z-index: 2;
+    padding: 2rem 1rem;
+    text-align: center;
 }
 
 #hero .hero-content {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 2.5rem;
-    border-radius: var(--border-radius-lg);
-    background: rgba(17, 24, 39, 0.75); /* Darker, less transparent background for hero content */
+    text-align: center;
+    z-index: 2;
+    position: relative;
 }
 
 #hero .hero-subtitle {
-    font-size: 1.125rem; /* 少し調整 */
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: var(--text-color-light);
     margin-bottom: 2.5rem;
-    color: var(--text-color); /* Ensure subtitle is readable */
+    line-height: 1.7;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* サービスカード */
+.service-name {
+    color: var(--accent-color);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+/* カード類の共通スタイル */
 .service-cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    margin: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .card {
-    flex: 1;
-    min-width: 250px;
-    max-width: 350px;
-    perspective: 1000px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all var(--transition-medium);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    /* より良いタッチターゲット */
+    min-height: var(--touch-target-min);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
 }
 
 .card-inner {
-    background: var(--card-bg);
-    border-radius: var(--border-radius-lg); /* 角丸を大きく */
-    padding: 2rem; /* パディング調整 */
-    height: 100%;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 12px var(--shadow-color); /* 影を柔らかく */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-align: center;
-}
-
-.card:hover .card-inner {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px var(--shadow-color);
+    position: relative;
+    z-index: 1;
 }
 
 .card-icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    height: 60px;
     width: 60px;
-    line-height: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
-    margin: 0 auto 1.5rem;
-    transition: transform var(--transition-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: all var(--transition-medium);
 }
 
 .card:hover .card-icon {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(5deg);
 }
 
-/* メッセージエリア */
+.card h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.card p {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+}
+
+/* メッセージセクション */
 .message {
+    background: linear-gradient(135deg, var(--primary-color) 0%, rgba(59, 130, 246, 0.1) 100%);
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius-lg);
     text-align: center;
-    margin: 6rem 0;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--border-radius);
-    box-shadow: 0 10px 30px var(--shadow-color);
+    margin: 3rem 0;
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-blockquote {
-    font-size: 1.8rem;
-    font-weight: 300;
+.message blockquote {
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    color: var(--text-color);
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1rem;
     font-style: italic;
-    margin-bottom: 1.5rem;
-    color: var(--accent-color);
-    line-height: 1.5;
 }
 
 .message-author {
-    font-size: 1.1rem;
-    font-weight: 500;
     color: var(--text-color-light);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
-/* 強みエリア */
+/* 強みセクション */
 .strengths {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3.5rem;
-    margin: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .strength-item {
-    flex: 1;
-    min-width: 300px;
-    padding: 2rem;
     background: var(--card-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 4px 12px var(--shadow-color);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
     text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border: 1px solid var(--border-color);
 }
 
 .strength-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px var(--shadow-color);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .strength-icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    color: white;
     transition: transform var(--transition-medium);
 }
 
 .strength-item:hover .strength-icon {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-/* 課題と解決策 */
-.challenges {
-    margin: 4rem 0;
-}
-
-.challenge-item {
-    background: var(--card-bg);
-    margin-bottom: 2.5rem;
-    padding: 2rem;
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 4px 12px var(--shadow-color);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.challenge-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px var(--shadow-color);
-}
-
-.challenge-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.challenge-number {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--accent-color);
-    margin-right: 1rem;
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
-}
-
-.challenge-header p {
-    font-weight: 500;
-    font-size: 1.2rem;
+.strength-item h3 {
     color: var(--text-color);
-    margin-bottom: 0;
-    flex-grow: 1;
+    margin-bottom: 1rem;
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
 }
 
-.toggle-icon {
-    margin-left: 1rem;
-    font-size: 1.2rem;
-    color: var(--accent-color);
-    transition: transform var(--transition-medium);
+.strength-item p {
+    color: var(--text-color-light);
+    line-height: 1.6;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
 }
 
-.challenge-item.active .toggle-icon {
-    transform: rotate(180deg);
-}
-
-.solution {
-    height: 0;
-    opacity: 0;
-    transition: all var(--transition-medium);
-    overflow: hidden;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.solution p {
-    color: var(--accent-color);
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-}
-
-.solution p i {
-    margin-right: 0.8rem;
-    font-size: 1.2rem;
-}
-
-.challenge-item.active .solution {
-    height: auto;
-    opacity: 1;
-}
-
-.challenge-item.active {
-    background: var(--accent-color);
-}
-
-/* 実装例 */
+/* 実装例セクション */
 .example-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    margin: 4rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .example-card {
-    flex: 1;
-    min-width: 300px;
     background: var(--card-bg);
-    padding: 2rem;
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 4px 12px var(--shadow-color);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--border-radius);
+    padding: 2rem;
     text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    border: 1px solid var(--border-color);
 }
 
 .example-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px var(--shadow-color);
-}
-
-.example-card h3 {
-    color: var(--accent-color);
-}
-
-.example-card:hover h3 {
-    color: var(--text-color);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .example-icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    height: 80px;
-    width: 80px;
-    line-height: 80px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1); /* Tailwind Blue 500 at 10% opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    color: white;
     transition: transform var(--transition-medium);
 }
 
 .example-card:hover .example-icon {
-    transform: scale(1.05);
-    color: var(--text-color);
-    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
-/* フォームエリア */
+.example-card h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
+}
+
+.example-card p {
+    color: var(--text-color-light);
+    line-height: 1.6;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+/* プロセス・タイムライン */
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--accent-color);
+    z-index: 0;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    margin: 0 2rem;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.timeline-content {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    flex: 1;
+    max-width: 300px;
+    position: relative;
+}
+
+.timeline-content h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+.timeline-content p {
+    color: var(--text-color-light);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+}
+
+.timeline-date {
+    position: absolute;
+    top: -0.5rem;
+    right: 1rem;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.process-cta {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+.process-cta p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+/* 料金プラン */
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.pricing-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-lg);
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 2px solid var(--accent-color);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-header h3 {
+    color: var(--text-color);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.price span {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 500;
+    color: var(--text-color-light);
+}
+
+.pricing-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.pricing-features li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: flex-start;
+    color: var(--text-color-light);
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    line-height: 1.5;
+}
+
+.pricing-features i {
+    color: var(--accent-color);
+    margin-right: 0.8rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.cta-button {
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 1.5rem;
+    transition: background-color var(--transition-medium), transform var(--transition-medium);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-button:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-2px);
+}
+
+/* オーダーメイドアピール */
+.order-made-appeal {
+    background: linear-gradient(135deg, var(--primary-color) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.order-made-appeal h3 {
+    color: var(--text-color);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.order-made-appeal p {
+    color: var(--text-color-light);
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.appeal-cta {
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-medium), transform var(--transition-medium);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    min-height: 48px;
+    gap: 0.5rem;
+}
+
+.appeal-cta:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-2px);
+}
+
+.appeal-icon {
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* フォーム */
 #contact {
-    background: transparent; /* 背景削除 */
+    background: rgba(239, 246, 255, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 #trial-form {
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 2.5rem; /* パディング調整 */
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-label {
-    font-weight: 500;
-    font-size: 0.875rem; /* 少し小さく */
-    color: var(--text-color-light);
+.form-group label {
+    display: block;
     margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
-label i {
+.form-group label i {
     margin-right: 0.5rem;
     color: var(--accent-color);
 }
 
 input, textarea {
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    color: var(--text-color);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-family: inherit;
+    transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+    background: white;
+    min-height: 48px;
 }
 
 input:focus, textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Focus Ring */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-input::placeholder, textarea::placeholder {
-    color: #9CA3AF; /* Tailwind Gray 400 */
+textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 /* フッター */
 footer {
-    padding: 2.5rem 1rem;
-    background: #F9FAFB; /* Tailwind Gray 50 */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-    border-top: 1px solid var(--border-color);
+    background: #1F2937;
+    color: white;
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
 }
 
-.logo {
-    font-family: var(--font-sans);
-    font-size: 1.8rem;
-    font-weight: 700;
+.footer-content .logo {
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    font-weight: 600;
     color: var(--accent-color);
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.social-icon {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    background: var(--accent-color);
-    color: white;
-    display: inline-block;
-    text-align: center;
-    font-size: 1.2rem;
-    transition: all var(--transition-medium);
-}
-
-.social-icon:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 127, 255, 0.3);
-    background: var(--accent-color-dark);
+    margin-bottom: 2rem;
+    display: block;
 }
 
 .footer-links ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
     list-style: none;
-    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 .footer-links a {
-    font-size: 0.875rem;
-    color: var(--text-color-light);
+    color: #D1D5DB;
     text-decoration: none;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     transition: color var(--transition-fast);
 }
 
@@ -811,1553 +1056,450 @@ footer {
 }
 
 footer p {
-    color: var(--text-color-light);
-    font-weight: 400;
-    margin-bottom: 0;
+    color: #9CA3AF;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    margin-top: 1rem;
 }
 
-/* レスポンシブ設定 */
-@media (max-width: 992px) {
+/* タブレット対応 (768px - 1024px) */
+@media (max-width: 1024px) {
     .container {
-        padding: 0 30px; /* コンテナ左右のパディング調整 */
+        padding: 0 1.5rem;
     }
-
-    .main-header .container {
-        flex-direction: row; /* ヘッダーは横並び維持 */
-        justify-content: space-between;
-        align-items: center;
+    
+    .section {
+        padding: 3rem 1.5rem;
     }
-
-    .main-nav {
-        position: relative;
+    
+    .timeline::before {
+        left: 30px;
     }
-
-    .mobile-menu-toggle {
-        display: flex; /* ハンバーガーメニュー表示 */
+    
+    .timeline-item {
+        flex-direction: row !important;
+        padding-left: 80px;
     }
-
-    .nav-links {
-        display: none; /* 通常時は非表示 */
+    
+    .timeline-item:nth-child(even) {
+        flex-direction: row !important;
+    }
+    
+    .timeline-icon {
         position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        width: 250px;
-        padding: 20px 0;
-        z-index: 1000;
-        flex-direction: column; /* 縦並び */
-        align-items: stretch;
-        text-align: center;
-    }
-
-    .nav-links.active {
-        display: flex; /* activeクラスで表示 */
-    }
-
-    .nav-links li {
+        left: 5px;
         margin: 0;
     }
+    
+    .timeline-content {
+        max-width: none;
+        flex: 1;
+    }
+}
 
-    .nav-links a {
-        padding: 12px 20px;
-        display: block;
-        color: #333; /* モバイルメニューの文字色 */
-        border-bottom: 1px solid #eee;
+/* スマートフォン対応 (481px - 768px) */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+        /* モバイル向けスペーシング調整 */
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
     }
-    .nav-links a:hover {
-        background-color: #f8f9fa;
+    
+    .container {
+        padding: 0 var(--spacing-md);
     }
-    .nav-links li:last-child a {
-        border-bottom: none;
+    
+    .main-header .container {
+        padding: 0 var(--spacing-md);
     }
-    .nav-links .nav-cta {
-        background-color: transparent;
-        color: #007bff;
-        font-weight: bold;
-        margin: 10px 20px 0;
-        padding: 10px 0;
-        border: 1px solid #007bff;
-        border-radius: 5px;
+    
+    .logo {
+        font-size: clamp(1.2rem, 4vw, 1.4rem);
     }
-    .nav-links .nav-cta:hover {
-        background-color: #007bff;
-        color: white;
-    }
-
-    #hero h1 {
-        font-size: 2.8rem; /* 文字サイズ調整 */
-        color: var(--text-color);
-    }
-    #hero h1 .accent-text {
-        color: var(--accent-color);
-    }
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    /* 料金プラン */
-    .pricing-container {
-        flex-direction: column;
+    
+    .mobile-menu-toggle {
+        display: flex;
+        /* より大きなタッチターゲット */
+        width: 44px;
+        height: 44px;
         align-items: center;
+        justify-content: center;
+        /* タッチフィードバック */
+        -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
     }
-    .pricing-card {
+    
+    .nav-links {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
         width: 100%;
-        max-width: 400px; /* 少し広げる */
-        margin-bottom: 30px;
+        height: calc(100vh - var(--header-height));
+        background: rgba(17, 24, 39, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-xl) var(--spacing-md);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 90;
+        /* スクロール可能にする */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
-    .pricing-card.recommended {
-        transform: scale(1); /* 推奨の拡大解除 */
-        order: -1; /* 推奨を一番上に */
-    }
-    .pricing-card.recommended:hover {
-        transform: translateY(-10px); /* ホバー効果は維持 */
-    }
-
-    /* 導入の流れ */
-    .timeline::before {
-        left: 30px; /* タイムラインの線を左に寄せる */
+    
+    .nav-links.active {
         transform: translateX(0);
     }
-    .timeline-item,
-    .timeline-item:nth-child(even) {
-        flex-direction: row; /* 全て同じ方向（アイコンが左） */
-        padding-left: 80px; /* アイコン分のスペース確保 */
-        margin-left: 0;
-    }
-    .timeline-icon {
-        position: absolute;
-        left: 0;
-        top: 0;
-        margin: 0;
-        transform: translateX(calc(30px - 50%)); /* 線の中央にアイコン */
-    }
-    .timeline-content,
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
-        width: 100%; /* コンテンツ幅を100%に */
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    /* 実装例 */
-    .example-cards {
-        flex-direction: column;
-        align-items: center;
-    }
-    .example-card {
+    
+    .nav-links li {
         width: 100%;
-        max-width: 400px; /* 少し広げる */
+        text-align: center;
     }
-
-    /* サービス内容 */
-    .service-cards,
-    .strengths {
-        flex-direction: column;
+    
+    .nav-links a {
+        font-size: var(--font-size-lg);
+        padding: var(--spacing-md);
+        display: flex;
         align-items: center;
-    }
-    .card,
-    .strength-item {
+        justify-content: center;
         width: 100%;
-        max-width: 400px; /* 少し広げる */
+        border-radius: var(--border-radius);
+        transition: all var(--transition-medium);
+        /* より良いタッチターゲット */
+        min-height: 56px;
     }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-
-    body { /* 行間を少し広げる */
-        line-height: 1.7;
-    }
-
-    .section {
-        padding: 60px 0; /* セクションの上下パディング縮小 */
-    }
-
-    #hero {
-        padding: 120px 0 60px; /* ヒーローセクションのパディング調整 */
-    }
-    #hero h1 {
-        font-size: 2.5rem;
-        color: var(--text-color);
-    }
-    #hero h1 .accent-text {
+    
+    .nav-links a:hover,
+    .nav-links a:focus {
+        background: rgba(59, 130, 246, 0.15);
         color: var(--accent-color);
     }
-    .hero-subtitle {
-        font-size: 1rem;
-        color: var(--text-color); /* 文字色を濃くする */
-        line-height: 1.7; /* 行間調整 */
+    
+    .nav-cta {
+        background: var(--accent-color) !important;
+        color: white !important;
+        margin: var(--spacing-md) 0 !important;
+        padding: var(--spacing-md) var(--spacing-xl) !important;
+        border-radius: var(--border-radius) !important;
+        width: auto !important;
+        font-size: var(--font-size-lg) !important;
+        font-weight: 600 !important;
     }
-    #cta-button, .primary-button {
-        padding: 12px 25px; /* ボタンサイズ調整 */
-        font-size: 1rem;
+    
+    .nav-cta:hover,
+    .nav-cta:focus {
+        background: var(--accent-color-dark) !important;
+        color: white !important;
     }
-
-    .section-header h2 {
-        font-size: 2rem;
+    
+    #hero {
+        height: auto;
+        min-height: 100vh;
+        padding: calc(var(--header-height) + var(--spacing-xl)) var(--spacing-md) var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
-    .section-header p {
-        font-size: 1rem;
-        color: var(--text-color); /* 文字色を濃くする */
+    
+    .section {
+        padding: var(--spacing-xl) var(--spacing-md);
+        min-height: auto;
     }
-
-    #process, #pricing, #examples, #contact {
-        padding: 60px 0;
+    
+    .scroll-guide {
+        bottom: var(--spacing-lg);
+        /* より大きなタッチターゲット */
+        padding: var(--spacing-md);
+        min-height: var(--touch-target-min);
+        min-width: var(--touch-target-min);
     }
-
-    /* 導入の流れ */
-    .timeline-item {
-        padding-left: 70px;
-    }
-    .timeline-icon {
+    
+    #back-to-top {
+        bottom: var(--spacing-lg);
+        right: var(--spacing-lg);
         width: 50px;
         height: 50px;
-        font-size: 1.2rem;
-        transform: translateX(calc(30px - 50%));
+        font-size: var(--font-size-lg);
+        /* より良いタッチターゲット */
+        min-height: var(--touch-target-min);
+        min-width: var(--touch-target-min);
     }
-    .timeline-content {
-        padding: 20px;
+    
+    /* カード類のレスポンシブ調整 */
+    .service-cards,
+    .example-cards,
+    .strengths {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
     }
-    .timeline-content h3 {
-        font-size: 1.1rem;
+    
+    .card,
+    .example-card,
+    .strength-item {
+        margin-bottom: var(--spacing-md);
     }
-    .timeline-content p {
-        font-size: 0.95rem;
-        color: var(--text-color); /* 文字色を濃くする */
-        line-height: 1.6; /* 行間調整 */
-    }
-
-    /* 料金プラン */
-    .pricing-card {
-         max-width: 350px; /* 再調整 */
-    }
-    .pricing-card p, .pricing-features li { /* プラン詳細の文字色と行間 */
-        color: var(--text-color-light); /* 薄い色は維持しつつ行間で調整 */
-        line-height: 1.7;
-    }
-    .pricing-features li .fa-times {
-        color: #dc3545; /* 調整が必要なら */
-    }
-     .pricing-features li .fa-check {
-        color: #28a745; /* 調整が必要なら */
-    }
-
-    /* 実装例 */
-    .example-card {
-        max-width: 350px; /* 再調整 */
-        padding: 25px;
-    }
-    .example-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    .example-card h3 {
-        font-size: 1.2rem;
-    }
-    .example-card p {
-         font-size: 0.95rem;
-         color: var(--text-color); /* 文字色を濃くする */
-         line-height: 1.7; /* 行間調整 */
-    }
-
-    /* サービス内容 */
-    .card, .strength-item {
-        max-width: 350px; /* 再調整 */
-    }
-    .card-inner {
-        padding: 25px;
-    }
-    .card-icon, .strength-icon {
-        font-size: 2rem;
-    }
-    .card h3, .strength-item h3 {
-        font-size: 1.2rem;
-    }
-    .card p, .strength-item p {
-         font-size: 0.95rem;
-         color: var(--text-color); /* 文字色を濃くする */
-         line-height: 1.7; /* 行間調整 */
-    }
-    .message blockquote {
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-
-    /* 課題と解決策 */
-    .challenge-item .challenge-header p {
-        color: var(--text-color); /* ヘッダーの文字色 */
-        line-height: 1.5;
-    }
-    .challenge-item .solution p {
-        color: var(--text-color); /* 解決策の文字色 */
-        line-height: 1.6;
-    }
-    .challenge-item.active .solution p {
-         color: var(--text-color); /* アクティブ時も文字色を維持 */
-    }
-    .challenge-item.active .challenge-header p {
-         color: #ffffff; /* アクティブ時のヘッダー文字色 */
-    }
-
-    /* フォーム */
-    #trial-form {
-        padding: 30px;
-    }
-    .form-group label {
-        font-size: 0.95rem;
-        color: var(--text-color); /* ラベル文字色を濃くする */
-    }
-    .form-group input,
-    .form-group textarea {
-        padding: 10px 12px;
-        font-size: 0.95rem;
-    }
-    #interview-date-1, #interview-time-1,
-    #interview-date-2, #interview-time-2 {
-        flex-basis: 48%; /* 日付と時間を横並びに近づける */
-    }
-
-    /* フッター */
-    .footer-content {
-        padding: 0 15px;
-    }
-    footer .logo {
-        font-size: 1.8rem;
-    }
-    .footer-links ul {
-        flex-direction: column; /* 縦並び */
-        gap: 10px;
-    }
-    footer p { /* コピーライトの文字色 */
-        color: var(--text-color);
+    
+    .card-inner,
+    .example-card,
+    .strength-item {
+        padding: var(--spacing-lg);
+        text-align: center;
     }
 }
 
+/* 超小型スマートフォン対応 (320px - 480px) */
 @media (max-width: 480px) {
+    :root {
+        /* さらに細かいスペーシング調整 */
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1rem;
+        --spacing-xl: 1.5rem;
+    }
+    
     .container {
-        padding: 0 15px;
+        padding: 0 var(--spacing-md);
     }
+    
+    .section {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
     #hero {
-        padding: 100px 0 50px;
-    }
-    #hero h1 {
-        font-size: 2.2rem;
-    }
-    .hero-subtitle {
-        font-size: 0.9rem;
-        line-height: 1.6; /* 行間調整 */
-    }
-
-    .section-header h2 {
-        font-size: 1.8rem;
-    }
-    .section-header p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-
-    #process, #pricing, #examples, #contact {
-        padding: 50px 0;
-    }
-
-    .timeline-item {
-        padding-left: 65px;
-    }
-    .timeline-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-        transform: translateX(calc(30px - 50%));
-    }
-     .timeline-content {
-        padding: 15px;
-    }
-     .timeline-content p {
-        font-size: 0.9rem; /* 文字サイズ微調整 */
-        line-height: 1.6;
-     }
-
-    .pricing-card {
-         max-width: 90%; /* 幅を画面に合わせる */
-         padding: 20px;
-    }
-     .pricing-card p, .pricing-features li {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-
-     .example-card {
-        max-width: 90%;
-        padding: 20px;
-     }
-     .example-card p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-     }
-
-     .card, .strength-item {
-        max-width: 90%;
-        padding: 20px;
-     }
-      .card p, .strength-item p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-     }
-
-    #trial-form {
-        padding: 20px;
-    }
-     .form-group label {
-        font-size: 0.9rem;
-    }
-    .form-group input,
-    .form-group textarea {
-        font-size: 0.9rem;
-    }
-    #interview-date-1, #interview-time-1,
-    #interview-date-2, #interview-time-2 {
-        flex-basis: 100%; /* 完全に縦積みに */
-    }
-    #trial-form div[style*="display: flex"] {
-        flex-direction: column; /* 日付と時間も縦積みに */
-    }
-
-    footer {
-        padding: 40px 0 20px;
-    }
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color: #1F2937; 
-        --accent-color: #60A5FA; 
-        --accent-color-dark: #3B82F6; 
-        --text-color: #E5E7EB; 
-        --text-color-light: #9CA3AF; 
-        --bg-color: #0B111E; 
-        --card-bg: #1F2937; 
-        --border-color: #4B5563; 
-        --shadow-color: rgba(0, 0, 0, 0.4); 
+        min-height: 100vh;
+        padding: calc(var(--header-height) + var(--spacing-md)) var(--spacing-md) var(--spacing-lg);
     }
     
-    /* General body colors for dark mode */
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-
-    .main-header {
-        background: rgba(17, 24, 39, 0.8); 
-        box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
-
-    #hero .hero-content {
-        background: rgba(17, 24, 39, 0.75); 
-    }
-
-    #hero .hero-subtitle {
-        color: var(--text-color); 
-    }
-
-    #hero h1 {
-        color: var(--text-color);
-    }
-    #hero h1 .accent-text {
-        color: var(--accent-color);
-    }    
-
-    .timeline-content {
-        background: var(--card-bg); 
-    }
-
-    .timeline-content h3 {
-        color: var(--accent-color);
-    }
-
-    .timeline-content p {
-        color: var(--text-color);
-    }
-
-    .timeline-date {
-        background: rgba(229, 231, 235, 0.1); 
-        color: var(--text-color-light); 
-        border: 1px solid var(--border-color);
-    }
-
-    .timeline-icon {
-        color: var(--bg-color);
-        box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px rgba(59, 130, 246, 0.5); 
-    }
-    .timeline-item:hover .timeline-icon {
-       box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px rgba(96, 165, 250, 0.6); 
-    }
-
-    .card h3, .strength-item h3, .example-card h3 {
-        color: var(--text-color);
-    }
-    .card p, .strength-item p {
-        color: var(--text-color-light);
-    }
-    #examples .example-card p {
-        color: var(--text-color);
-    }
-
-    .bar {
-        background: var(--text-color);
+    .logo {
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
     }
     
-    .nav-links {
-        background: rgba(31, 41, 55, 0.95); /* Tailwind Gray 800 */
+    h1 {
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
+        line-height: 1.2;
+        margin-bottom: var(--spacing-md);
     }
     
-    #loading-overlay {
-        background: var(--bg-color);
+    h2 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: var(--spacing-lg);
     }
     
-    .primary-button {
-        color: #f8f8f8;
-    }
-    
-    input, textarea {
-        background: #1F2937; /* Tailwind Gray 800 */
-        border-color: var(--border-color);
-        color: var(--text-color);
-    }
-    
-    input::placeholder, textarea::placeholder {
-        color: #6B7280; /* Tailwind Gray 500 */
-    }
-    
-    input:focus, textarea:focus {
-        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.4); /* Focus Ring */
-    }
-    
-    footer {
-        background: #1F2937; /* Tailwind Gray 800 */
-        border-top: 1px solid var(--border-color);
-    }
-    
-    .card-icon, .strength-icon, .example-icon, .challenge-number {
-        background: rgba(96, 165, 250, 0.15);
-    }
-    
-    .pricing-header {
-        background: linear-gradient(135deg, rgba(55, 65, 81, 0.8), rgba(31, 41, 55, 0.8)); /* Dark Gradient */
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    #hero .hero-content {
-        background: rgba(17, 24, 39, 0.75); /* Darker, less transparent background for hero content */
-    }
-
-    #hero .hero-subtitle {
-        color: var(--text-color); /* Ensure subtitle is readable */
-    }
-
-    #hero h1 {
-        color: var(--text-color);
-    }
-    #hero h1 .accent-text {
-        color: var(--accent-color);
-    }    
-
-    .timeline-content {
-        background: var(--card-bg); 
-    }
-
-    .timeline-content h3 {
-        color: var(--accent-color);
-    }
-
-    .timeline-content p {
-        color: var(--text-color);
-    }
-
-    .timeline-date {
-        background: rgba(229, 231, 235, 0.1); /* Using RGB for #E5E7EB (var(--text-color)) with alpha */
-        color: var(--text-color-light); 
-        border: 1px solid var(--border-color);
-    }
-
-    .timeline-icon {
-        color: var(--bg-color);
-    }
-    /* Ensuring shadows use dark mode variables, if not overridden from base */
-    .timeline-icon {
-       box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px rgba(59, 130, 246, 0.5); /* Using RGB for #3B82F6 (var(--accent-color-dark)) with alpha */
-    }
-    .timeline-item:hover .timeline-icon {
-       box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px rgba(96, 165, 250, 0.6); /* Using RGB for #60A5FA (var(--accent-color)) with alpha */
-    }
-
-    .bar {
-        background: var(--text-color);
-    }
-
-    /* Pricing Card Text Colors for Dark Mode (Appended) */
-    .pricing-header h3 {
-        color: var(--text-color);
-    }
-    .price span { 
-        color: var(--text-color-light);
-    }
-    .pricing-features li {
-        color: var(--text-color-light);
-    }
-    .pricing-features .not-included {
-        color: var(--text-color-light);
-        opacity: 0.6;
-    }
-    .trial {
-        color: #34D399; /* Tailwind Green 400 */
-    }
-    .pricing-notes {
-        color: var(--text-color-light);
-    }
-
-    /* Form Element Text Colors for Dark Mode (Appended) */
-    #trial-form label {
-        color: var(--text-color-light);
-    }
-    /* General input placeholder color for dark mode */
-    input::placeholder, 
-    textarea::placeholder {
-        color: rgba(156, 163, 175, 0.7); /* --text-color-light (Tailwind Gray 400) with alpha */
-    }
-
-    /* Ensure button text has good contrast in dark mode */
-    .nav-cta, 
-    .cta-button, 
-    .order-made-appeal .appeal-cta {
-        color: #FFFFFF; /* White text for dark accent backgrounds */
-    }
-    .primary-button {
-        color: #f8f8f8; /* Already set, but ensure consistency if overridden elsewhere */
-    }
-
-    /* Footer elements in Dark Mode */
-    footer .logo {
-        color: var(--accent-color); /* Keep accent color for logo if it's readable */
-    }
-    .social-icon:hover {
-        background: var(--accent-color-dark);
-    }
-    .footer-links a {
-        color: var(--text-color-light);
-    }
-    .footer-links a:hover {
-        color: var(--accent-color);
-    }
-    footer p {
-        color: var(--text-color-light);
-    }
-
-    /* Mobile Menu in Dark Mode (styles for when menu is active) */
-    @media (max-width: 992px) { /* Ensure these only apply on mobile */
-        .nav-links.active { /* Assuming .active class shows the menu */
-            background-color: var(--card-bg); /* Darker background for the dropdown */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.25); /* Slightly stronger shadow */
-        }
-        .nav-links a {
-            color: var(--text-color);
-            border-bottom-color: var(--border-color); /* Darker border */
-        }
-        .nav-links a:hover {
-            background-color: var(--bg-color); /* Slightly lighter than card-bg for hover */
-        }
-        .nav-links .nav-cta {
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-        .nav-links .nav-cta:hover {
-            background-color: var(--accent-color);
-            color: #FFFFFF; /* White text on accent bg */
-        }
-    }
-}
-
-/* オーダーメイドアピールセクション */
-.order-made-appeal {
-    background: linear-gradient(135deg, var(--primary-color), #e0f2fe, #dbeafe); /* 少し深みのある複合グラデーション */
-    border-radius: var(--border-radius-lg);
-    padding: 3.5rem; /* パディングを増やす */
-    margin: 4rem auto 0;
-    max-width: 850px; /* 少し幅を広げる */
-    text-align: center;
-    box-shadow: 
-        0 10px 30px rgba(59, 130, 246, 0.15), /* 深い影 */
-        0 0 0 1px rgba(59, 130, 246, 0.1); /* 薄いボーダー */
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-}
-
-/* 背景装飾要素（疑似要素） */
-.order-made-appeal::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 60%);
-    z-index: 0;
-    pointer-events: none;
-}
-
-.order-made-appeal:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 15px 40px rgba(59, 130, 246, 0.2),
-        0 0 0 1px rgba(59, 130, 246, 0.2);
-}
-
-.order-made-appeal i.appeal-icon {
-    font-size: 3rem; /* アイコンを大きく */
-    color: var(--accent-color);
-    margin-bottom: 1.8rem;
-    display: inline-block;
-    position: relative;
-    z-index: 1;
-    animation: float 6s ease-in-out infinite; /* ゆっくり浮遊するアニメーション */
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.order-made-appeal h3 {
-    font-size: 2rem; /* タイトルを大きく */
-    font-weight: 700; /* 太字に */
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(90deg, #2563EB, #3B82F6); /* テキストグラデーション用 */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-}
-
-.order-made-appeal p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: var(--text-color-light);
-    margin-bottom: 2.5rem;
-    position: relative;
-    z-index: 1;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.order-made-appeal .appeal-cta {
-    display: inline-block;
-    background: var(--accent-color);
-    color: white !important;
-    padding: 1rem 2.5rem; /* ボタンサイズを大きく */
-    font-size: 1.1rem;
-    border-radius: 50px; /* より丸みを帯びたボタン */
-    text-decoration: none;
-    font-weight: 600;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    letter-spacing: 0.5px; /* 文字間隔を少し広く */
-}
-
-.order-made-appeal .appeal-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-dark));
-    border-radius: 50px;
-    z-index: -1;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-}
-
-.order-made-appeal .appeal-cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(59, 130, 246, 0.4);
-}
-
-.order-made-appeal .appeal-cta:hover::before {
-    opacity: 1;
-}
-
-.order-made-appeal .appeal-cta i {
-    margin-right: 8px;
-}
-
-/* レスポンシブ調整 */
-@media (max-width: 768px) {
-    .order-made-appeal {
-        padding: 2.5rem 2rem;
-        margin: 2.5rem 20px 0;
-        max-width: none;
-    }
-    .order-made-appeal h3 {
-        font-size: 1.6rem;
-    }
-    .order-made-appeal p {
-        font-size: 1.05rem;
-        max-width: 100%;
-    }
-    .order-made-appeal .appeal-cta {
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
-    }
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* ... existing code ... */
-    }
-    .order-made-appeal {
-        background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.8));
-        box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-    .order-made-appeal::before {
-        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
-    }
-    .order-made-appeal h3 {
-        background: linear-gradient(90deg, #60A5FA, #93C5FD);
-        -webkit-background-clip: text;
-        background-clip: text;
-    }
-    .order-made-appeal:hover {
-        box-shadow: 
-            0 15px 40px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.15);
-    }
-}
-
-/* サービス名のスタイル */
-.service-name {
-    font-weight: 700;
-    font-size: 1.2em;
-    color: var(--accent-color);
-    letter-spacing: 0.5px;
-    display: inline-block;
-    position: relative;
-    padding: 0 2px;
-}
-
-.service-name::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-color), transparent);
-    opacity: 0.7;
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .service-name {
-        color: var(--text-color);
-    }
-}
-
-/* Pricing Section Styles */
-#pricing {
-    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
-    padding: 80px 0;
-}
-
-/* .section-header is already defined, so we might need to adjust or merge */
-/* We will assume for now that existing .section-header is sufficient or will be reviewed later */
-
-.pricing-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.pricing-card {
-    background: var(--card-bg); /* #fff -> var(--card-bg) or var(--bg-color) depending on context */
-    border-radius: var(--border-radius); /* 10px -> var(--border-radius) */
-    box-shadow: 0 5px 15px var(--shadow-color); /* rgba(0, 0, 0, 0.1) -> var(--shadow-color) */
-    overflow: hidden;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-}
-
-.pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px var(--shadow-color); /* rgba(0, 0, 0, 0.15) - needs adjustment if var(--shadow-color) is too light */
-}
-
-.pricing-card.recommended {
-    transform: scale(1.05);
-    border: 2px solid var(--accent-color); /* #4e73df -> var(--accent-color) */
-}
-
-.pricing-card.recommended:hover {
-    transform: scale(1.05) translateY(-10px);
-}
-
-.recommended-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--accent-color); /* #4e73df -> var(--accent-color) */
-    color: white; /* This can remain white or use a variable if defined for text on accent bg */
-    padding: 5px 15px;
-    font-size: 0.8rem;
-    border-bottom-left-radius: var(--border-radius); /* 10px -> var(--border-radius) */
-}
-
-.pricing-header {
-    text-align: center;
-    padding: 30px 20px;
-    /* background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f9 100%); */ /* Consider replacing with var(--primary-color) or a light gradient using CSS vars */
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-color) 100%); /* Example replacement */
-    border-bottom: 1px solid var(--border-color); /* #eee -> var(--border-color) */
-}
-
-.pricing-header h3 {
-    margin: 0 0 15px;
-    font-size: 1.5rem;
-    color: var(--text-color); /* #333 -> var(--text-color) */
-}
-
-.price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent-color); /* #4e73df -> var(--accent-color) */
-    margin-bottom: 5px;
-}
-
-.price span {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
-}
-
-.trial { /* This class seems specific to pricing, check if it's used elsewhere */
-    font-size: 0.9rem;
-    color: #28a745; /* Keep green for trial or use a variable if available e.g. var(--success-color) */
-    margin: 0;
-}
-
-.pricing-features {
-    padding: 30px 20px;
-}
-
-.pricing-features ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.pricing-features li {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    color: var(--text-color-light); /* Default text color for features */
-}
-
-.pricing-features i {
-    margin-right: 10px;
-    font-size: 1rem;
-}
-
-.pricing-features .fa-check {
-    color: #28a745; /* Keep green or use var(--success-color) */
-}
-
-.pricing-features .fa-times {
-    color: #dc3545; /* Keep red or use var(--danger-color) */
-}
-
-.pricing-features .not-included {
-    color: var(--text-color-light); /* #888, adjust if needed */
-    opacity: 0.7; /* Example to make it look more subdued */
-}
-
-.pricing-footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid var(--border-color); /* #eee -> var(--border-color) */
-}
-
-/* .cta-button might conflict with existing .primary-button or other button styles. */
-/* For now, we will add it and then review conflicts. */
-.cta-button { /* This is used in pricing cards, distinct from .primary-button used in forms etc. */
-    display: inline-block;
-    padding: 10px 30px;
-    background-color: var(--accent-color); /* #4e73df -> var(--accent-color) */
-    color: white;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color var(--transition-medium);
-}
-
-.cta-button:hover {
-    background-color: var(--accent-color-dark); /* #2e59d9 -> var(--accent-color-dark) */
-}
-
-.pricing-notes {
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
-}
-
-/* Process Timeline Styles */
-#process {
-    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
-    padding: 80px 0;
-}
-
-#process .section-header { /* Assuming .section-header is generic */
-    margin-bottom: 60px;
-}
-
-#process .section-subtitle {
-    color: var(--text-color-light); /* #6c757d -> var(--text-color-light) */
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto 30px auto; /* Added bottom margin */
-    text-align: center;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 4px;
-    height: 100%;
-    background: var(--accent-color); /* #007bff -> var(--accent-color) */
-    border-radius: 10px;
-    transform: translateX(-50%);
-    z-index: 1; /* Ensure it's behind icons */
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 50px; /* Increased margin */
-    display: flex;
-    /* flex-direction: row; default, will be overridden by :nth-child(even) */
-    align-items: flex-start; /* Align icon and content to the top */
-    clear: both; /* Ensure proper layout flow */
-}
-
-.timeline-item:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-.timeline-icon {
-    background: var(--accent-color); /* #007bff -> var(--accent-color) */
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    z-index: 2; /* Above the timeline bar */
-    box-shadow: 0 0 0 4px var(--bg-color), 0 0 0 8px var(--accent-color-dark); /* rgba(0, 123, 255, 0.2) -> themed shadow */
-    transition: all var(--transition-medium);
-    flex-shrink: 0; /* Prevent icon from shrinking */
-    margin: 0 30px; /* Increased margin for better spacing */
-}
-.timeline-item:nth-child(odd) .timeline-icon{
-    /*Ensures icon is on the left for odd items*/
-}
-.timeline-item:nth-child(even) .timeline-icon{
-    /*Ensures icon is on the right for even items*/
-}
-
-
-.timeline-item:hover .timeline-icon {
-    background: var(--accent-color-dark); /* #0056b3 -> var(--accent-color-dark) */
-    box-shadow: 0 0 0 6px var(--bg-color), 0 0 0 10px var(--accent-color);
-    transform: scale(1.1);
-}
-
-.timeline-content {
-    background: var(--card-bg); /* white -> var(--card-bg) */
-    border-radius: var(--border-radius); /* 10px -> var(--border-radius) */
-    padding: 25px 30px; /* Adjusted padding */
-    box-shadow: 0 5px 15px var(--shadow-color); /* rgba(0,0,0,0.08) -> var(--shadow-color) */
-    width: calc(50% - 90px); /* Adjusted width based on icon margin (60 icon + 30 margin) */
-    transition: all var(--transition-medium);
-    position: relative; /* For potential pseudo-elements like arrows */
-}
-/* Arrow for timeline content pointing to the line */
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    top: 20px; /* Align with icon center */
-    width: 0;
-    height: 0;
-    border-style: solid;
-}
-.timeline-item:nth-child(odd) .timeline-content::before {
-    right: 100%;
-    border-width: 10px 15px 10px 0;
-    border-color: transparent var(--card-bg) transparent transparent;
-}
-.timeline-item:nth-child(even) .timeline-content::before {
-    left: 100%;
-    border-width: 10px 0 10px 15px;
-    border-color: transparent transparent transparent var(--card-bg);
-}
-
-
-.timeline-item:hover .timeline-content {
-    box-shadow: 0 10px 25px var(--shadow-color); /* rgba(0,0,0,0.15) */
-    transform: translateY(-5px);
-}
-
-
-.timeline-content h3 {
-    margin-top: 0;
-    color: var(--accent-color); /* #007bff -> var(--accent-color) */
-    font-weight: 600;
-    font-size: 1.3rem;
-    margin-bottom: 10px; /* Added margin */
-}
-
-.timeline-content p {
-    margin: 0 0 15px 0; /* Adjusted margin */
-    color: var(--text-color-light); /* #495057 -> var(--text-color-light) */
-    font-size: 1rem;
-    line-height: 1.6;
-}
-.timeline-content p:last-child {
-    margin-bottom: 0;
-}
-
-.timeline-date {
-    display: inline-block;
-    padding: 6px 12px;
-    background: var(--primary-color); /* #e9ecef -> var(--primary-color) */
-    border-radius: 20px;
-    font-size: 0.85rem;
-    color: var(--text-color-light); /* #495057 -> var(--text-color-light) */
-    font-weight: 500;
-    margin-bottom: 15px; /* Added margin */
-}
-
-/* Process CTA - Assuming this is specific to the process section */
-.process-cta {
-    text-align: center;
-    margin-top: 60px;
-    padding: 30px;
-    background: var(--card-bg); /* white -> var(--card-bg) */
-    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) */
-    box-shadow: 0 5px 15px var(--shadow-color);
-}
-
-.process-cta p {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 20px;
-    color: var(--text-color); /* #343a40 -> var(--text-color) */
-}
-
-/* Assuming .btn is a generic button, might need a more specific class or merge with .primary-button */
-.process-cta .btn, .process-cta .primary-button { /* Using .primary-button as a base if similar */
-    padding: 12px 30px;
-    font-size: 1.1rem;
-    /* Styles below are similar to .primary-button, so can be inherited if .primary-button is used */
-    /* background-color: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 30px;
-    transition: all var(--transition-medium); */
-}
-/*
-.process-cta .btn:hover, .process-cta .primary-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--shadow-color);
-    background-color: var(--accent-color-dark);
-}
-*/
-
-/* Examples Section Styles */
-#examples {
-    padding: 80px 0;
-    background-color: var(--bg-color); /* #fff -> var(--bg-color) */
-}
-
-/* .example-cards is similar to .pricing-container or .service-cards */
-/* .example-card is similar to .pricing-card or .card */
-/* These styles will be added and then reviewed for consolidation with existing card styles */
-
-/* Contact Form Styles */
-#contact {
-    background-color: var(--primary-color); /* #f8f9fa -> var(--primary-color) */
-    padding: 80px 0;
-}
-
-#trial-form { /* This should be distinct from other forms if it has unique styling */
-    max-width: 700px;
-    margin: 0 auto;
-    background: var(--card-bg); /* white -> var(--card-bg) */
-    padding: 40px;
-    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) */
-    box-shadow: 0 5px 15px var(--shadow-color);
-}
-
-/* .form-group, label, input, textarea styles are likely already defined or should be generic */
-/* .primary-button is likely already defined. */
-
-
-/* Footer styles were also in the index.html style tag, */
-/* but there's a high chance they are already in style.css. */
-/* We will assume the existing footer styles in style.css are to be used. */
-
-/* Responsive adjustments from index.html <style> tag */
-/* These will be MERGED with existing media queries in style.css */
-
-/* @media (max-width: 992px) for Pricing & Timeline */
-@media (max-width: 992px) {
-    .pricing-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .pricing-card {
-        width: 100%; /* Use 100% for mobile, but with max-width */
-        max-width: 380px; /* Slightly larger for better readability */
-        margin-bottom: 30px;
-    }
-    .pricing-card:last-child {
-        margin-bottom: 0;
-    }
-
-    .pricing-card.recommended {
-        transform: scale(1); /* Reset desktop scaling */
-        order: -1; /* Keep recommended first */
-    }
-
-    .pricing-card.recommended:hover {
-        transform: translateY(-10px); /* Keep hover effect */
-    }
-
-    .timeline::before {
-        left: 30px; /* Adjust for mobile */
-        transform: translateX(0); /* Reset transform */
-    }
-
-    .timeline-item,
-    .timeline-item:nth-child(even) {
-        flex-direction: row; /* All items flow left to right */
-        padding-left: 50px; /* Space for the icon and line */
-    }
-    .timeline-item:nth-child(even) .timeline-content::before, /* Hide arrows on mobile for simpler layout */
-    .timeline-item:nth-child(odd) .timeline-content::before {
-        display: none;
-    }
-
-
-    .timeline-icon {
-        margin: 0; /* Reset margin */
-        position: absolute; /* Position icon relative to the item */
-        left: 0px; /* Align with the new timeline bar position */
-        top: 0; /* Align icon to the top of the content */
-    }
-
-    .timeline-content,
-    .timeline-item:nth-child(odd) .timeline-content, /* Ensure full width for content */
-    .timeline-item:nth-child(even) .timeline-content {
+    .primary-button,
+    .cta-button,
+    .appeal-cta {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-base);
+        /* より良いタッチターゲット */
+        min-height: 50px;
         width: 100%;
-        margin-left: 0; /* Reset desktop margins */
-        margin-right: 0;
+        max-width: 280px;
+        margin: 0 auto;
+        display: flex;
     }
-    .timeline-item:nth-child(even) .timeline-content {
-        margin-top: 0; /* Remove any top margin from even items if previously added */
+    
+    /* カード類の最適化 */
+    .service-cards,
+    .example-cards,
+    .strengths {
+        gap: var(--spacing-md);
     }
-     .timeline-item .timeline-content {
-        margin-left: 0px; /* Space from icon */
+    
+    .card-inner,
+    .example-card,
+    .strength-item {
+        padding: var(--spacing-lg);
     }
-
-
-    /* .example-cards and .example-card responsive rules will be merged with their main definitions */
-}
-
-/* @media (max-width: 768px) specific adjustments for timeline and forms if not already covered */
-@media (max-width: 768px) {
-    #process, #pricing, #examples, #contact {
-        padding: 60px 0; /* Slightly reduced padding */
+    
+    .card-icon,
+    .example-icon,
+    .strength-icon {
+        width: 50px;
+        height: 50px;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-sm);
     }
+    
+    /* タイムライン調整 */
     .timeline-item {
-        padding-left: 0; /* Remove padding, icon will be inside */
-        margin-bottom: 30px;
+        padding-left: 50px;
+        margin-bottom: var(--spacing-lg);
     }
-    .timeline::before {
-        left: 20px; /* Further adjust line position */
-    }
-    .timeline-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-        left: 0; /* Align with the line */
-        margin-right: 15px; /* Space between icon and content */
-        position: relative; /* Make it part of the flow for easier alignment with text */
-        top: auto; /* Reset absolute positioning */
-        box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 6px var(--accent-color-dark);
-    }
-     .timeline-item {
-        flex-direction: column; /* Stack icon and content vertically */
-    }
-    .timeline-content,
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
-         width: 100%;
-         margin-left: 0; /* Icon is now part of the column flow */
-         padding: 20px;
-    }
-    .timeline-content h3 {
-        font-size: 1.2rem;
-    }
-    .timeline-content p {
-        font-size: 0.95rem;
-    }
-
-    #trial-form {
-        padding: 25px; /* Reduced padding */
-    }
-    /* .section-header h2 size is already handled by existing 768px media query */
-    /* .process-cta and .pricing-notes padding can be reviewed */
-    /* .process-cta .btn and .primary-button sizes are likely handled by existing rules */
-    /* .footer-links ul flex-direction is already handled */
-}
-
-
-/* @media (max-width: 576px) specific adjustments from index.html <style> tag */
-/* Most of these seem to be covered or can be fine-tuned within the 768px breakpoint or existing 480px. */
-/* For example, .section-header h2 font-size reduction */
-@media (max-width: 576px) {
-    #process, #pricing, #examples, #contact {
-        padding: 40px 0;
-    }
-    .timeline-content, #trial-form {
-        padding: 20px;
-    }
-    /* Further timeline icon and content adjustments if necessary */
+    
     .timeline-icon {
         width: 35px;
         height: 35px;
-        font-size: 1rem;
-        margin-right: 10px;
+        font-size: var(--font-size-sm);
+        left: 0;
     }
-     .timeline-content h3 {
-        font-size: 1.1rem;
+    
+    .timeline-content {
+        padding: var(--spacing-md);
     }
-    .timeline-content p, .example-card p { /* Assuming .example-card is similar to .card */
-        font-size: 0.9rem;
-    }
+    
+    /* プライシング調整 */
     .pricing-card {
-        max-width: 300px; /* Further reduce max-width for very small screens */
+        padding: var(--spacing-lg);
+        margin: 0;
     }
-
-}
-
-/* Styles for #service, .service-cards, .card, .message, .strengths from index.html <style> */
-/* These were also in the <style> tag but seem to be refining existing or adding new sections */
-/* They need to be carefully integrated and CSS variables used. */
-
-/* Service Section (from index.html <style>, likely refinement of existing) */
-/* #service might be an ID for a section that already has some styling */
-
-.service-cards { /* This was present in index.html styles, assuming it's for #service section */
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 40px; /* Check if this is needed or conflicts */
-    flex-wrap: wrap;
-}
-
-/* .card styles from index.html were quite detailed. */
-/* There is an existing .card style in style.css (lines 432-453) */
-/* We need to MERGE these carefully. The one from index.html is more specific. */
-/* For now, let's assume the one from index.html is preferred or adds to existing. */
-/* This .card definition is from the <style> tag and seems more fleshed out for general use */
-.card { /* This is a general card, might conflict with .pricing-card if not specific enough */
-    background: var(--card-bg);
-    border-radius: var(--border-radius-lg); /* 10px -> var(--border-radius-lg) for a bit more pronounced rounding */
-    box-shadow: var(--shadow-color); /* Simplified, check var(--shadow-color) definition */
-    overflow: hidden;
-    flex: 1 1 300px;
-    max-width: 360px; /* Slightly increased max-width */
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border-color); /* Added subtle border */
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px var(--shadow-color); /* Needs adjustment if var(--shadow-color) is too light */
-}
-
-.card-inner { /* For content within .card */
-    padding: 25px 30px; /* Adjusted padding */
-    text-align: center;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align items to the start */
-}
-
-.card-icon { /* Icon within .card */
-    font-size: 2.8rem; /* Increased size */
-    color: var(--accent-color); /* #007bff -> var(--accent-color) */
-    margin-bottom: 20px;
-    line-height: 1; /* Ensure icon is centered if it's a font icon */
-}
-
-.card h3 { /* Title within .card */
-    font-size: 1.3rem; /* Adjusted size */
-    color: var(--text-color); /* #333 -> var(--text-color) */
-    margin: 0 0 15px 0;
-    font-weight: 600; /* Ensure consistent weight */
-}
-
-.card p { /* Paragraph within .card */
-    font-size: 0.95rem; /* Adjusted size */
-    color: var(--text-color-light); /* #666 -> var(--text-color-light) */
-    line-height: 1.6;
-    margin-bottom: 0;
-    flex-grow: 1; /* Allow paragraph to take available space */
-}
-.card .cta-button { /* If cards have CTAs */
-    margin-top: auto; /* Push button to the bottom */
-    padding: 8px 20px;
-    font-size: 0.9rem;
-}
-
-
-/* Message/Quote Section */
-.message {
-    text-align: center;
-    margin: 60px auto;
-    max-width: 700px;
-    padding: 30px 35px; /* Adjusted padding */
-    background-color: var(--primary-color); /* #e9ecef -> var(--primary-color) */
-    border-left: 5px solid var(--accent-color); /* #007bff -> var(--accent-color) */
-    border-radius: var(--border-radius); /* 5px -> var(--border-radius) */
-    box-shadow: var(--shadow-color);
-}
-
-.message blockquote {
-    font-size: 1.2rem; /* Adjusted size */
-    font-style: italic;
-    color: var(--text-color); /* #495057 -> var(--text-color) */
-    margin: 0 0 15px 0;
-    border: none;
-    padding: 0;
-}
-
-.message-author {
-    font-size: 1rem;
-    color: var(--text-color-light); /* #6c757d -> var(--text-color-light) */
-    font-weight: 500;
-}
-.message-author::before {
-    content: "— ";
-}
-
-/* Strengths Section */
-.strengths { /* Similar to .service-cards */
-    display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.strength-item { /* Similar to .card or .example-card */
-    text-align: center;
-    flex: 1 1 300px;
-    max-width: 45%; /* This might make items too wide on some screens before wrapping */
-    padding: 20px; /* Added some padding for spacing */
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-color);
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-}
-.strength-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px var(--shadow-color);
-}
-
-
-.strength-icon { /* Similar to .card-icon */
-    font-size: 2.8rem; /* #3rem -> 2.8rem */
-    color: #28a745; /* Kept green, or use var(--success-color) */
-    margin-bottom: 20px;
-}
-
-.strength-item h3 { /* Similar to .card h3 */
-    font-size: 1.2rem; /* 1.3rem -> 1.2rem */
-    color: var(--text-color);
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.strength-item p { /* Similar to .card p */
-    font-size: 0.95rem; /* 1rem -> 0.95rem */
-    color: var(--text-color-light);
-    line-height: 1.6;
-}
-
-/* Responsive for .service-cards, .card, .strengths (from index.html <style>) */
-@media (max-width: 768px) {
-    .service-cards,
-    .strengths {
+    
+    /* フォーム調整 */
+    #trial-form {
+        padding: var(--spacing-lg);
+        margin: 0;
+        border-radius: var(--border-radius);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .form-group label {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xs);
+        display: block;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    
+    input, textarea {
+        width: 100%;
+        padding: var(--spacing-md);
+        font-size: var(--font-size-base);
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius);
+        transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+        background: var(--bg-color);
+        /* タッチデバイスでのズーム防止 */
+        font-size: 16px;
+        min-height: var(--touch-target-min);
+    }
+    
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    /* メッセージ調整 */
+    .message {
+        padding: var(--spacing-lg);
+        margin: var(--spacing-lg) 0;
+        border-radius: var(--border-radius);
+    }
+    
+    .order-made-appeal {
+        padding: var(--spacing-lg);
+        margin: var(--spacing-lg) 0;
+        text-align: center;
+    }
+    
+    .footer-content {
         flex-direction: column;
-        align-items: center;
+        text-align: center;
+        gap: var(--spacing-md);
     }
-
-    .card, /* General card */
-    .strength-item { /* This was max-width: 350px, now uses general .card sizing */
-        width: 100%; /* Ensure full width on mobile */
-        max-width: 380px; /* Consistent max-width for cards on mobile */
-        margin-bottom: 25px; /* Add margin for stacked cards */
+    
+    #back-to-top {
+        bottom: var(--spacing-md);
+        right: var(--spacing-md);
+        width: 48px;
+        height: 48px;
     }
-    .card:last-child, .strength-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .strength-item { /* Specific adjustment if needed beyond .card */
-        max-width: 380px; /* Ensure consistency */
+    
+    #back-to-top i {
+        font-size: var(--font-size-lg);
     }
 }
-/* End of styles moved from index.html */
+
+/* 極小デバイス対応 (320px以下) */
+@media (max-width: 320px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .primary-button,
+    .cta-button,
+    .appeal-cta {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+        min-height: 48px;
+    }
+    
+    .card-inner,
+    .example-card,
+    .strength-item {
+        padding: var(--spacing-md);
+    }
+    
+    .timeline-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .pricing-card {
+        padding: var(--spacing-md);
+    }
+    
+    #trial-form {
+        padding: var(--spacing-md);
+    }
+    
+    .message,
+    .order-made-appeal {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+}
+
+/* フォーカス状態の改善 */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    /* タッチデバイスでのハイライト */
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+/* セレクション色の改善 */
+::selection {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--text-color);
+}
+
+::-moz-selection {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--text-color);
+}
+
+/* スクロールバーの改善 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--border-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color-dark);
+}
