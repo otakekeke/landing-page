@@ -312,10 +312,9 @@
                 display: block;
             }
 
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
+            /* ヘッダー行を完全に非表示 */
+            thead {
+                display: none !important;
             }
 
             tr {
@@ -325,29 +324,33 @@
                 padding: var(--spacing-md);
                 background: var(--bg-color);
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                display: block;
             }
 
-            td {
-                border: none;
-                border-bottom: 1px solid var(--border-color);
-                position: relative;
-                padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 35%;
-                min-height: auto;
-            }
-
-            td:last-child {
-                border-bottom: none;
-            }
-
-            td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: var(--spacing-md);
-                top: var(--spacing-md);
-                width: 30%;
+            /* 最初のtd（項目名）のスタイル */
+            td:first-child {
                 font-weight: 600;
                 color: var(--accent-color);
+                background: var(--secondary-color);
+                padding: var(--spacing-sm) var(--spacing-md);
+                margin: calc(-1 * var(--spacing-md)) calc(-1 * var(--spacing-md)) var(--spacing-sm) calc(-1 * var(--spacing-md));
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
                 font-size: var(--font-size-sm);
+                border: none;
+                display: block;
+            }
+
+            /* 2番目のtd（内容）のスタイル */
+            td:last-child {
+                border: none;
+                padding: var(--spacing-sm) 0 0 0;
+                font-size: var(--font-size-base);
+                display: block;
+            }
+
+            /* data-label属性による疑似要素は非表示 */
+            td:before {
+                display: none !important;
             }
 
             .phone-link {
@@ -448,31 +451,31 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">事業形態</th>
-                        <td data-label="事業形態">個人事業主</td>
+                        <td data-label="項目">事業形態</td>
+                        <td data-label="内容">個人事業主</td>
                     </tr>
                     <tr>
-                        <th scope="row">屋号</th>
-                        <td data-label="屋号">嶽ノ子</td>
+                        <td data-label="項目">屋号</td>
+                        <td data-label="内容">嶽ノ子</td>
                     </tr>
                     <tr>
-                        <th scope="row">代表者</th>
-                        <td data-label="代表者">大嶽 耕太郎</td>
+                        <td data-label="項目">代表者</td>
+                        <td data-label="内容">大嶽 耕太郎</td>
                     </tr>
                     <tr>
-                        <th scope="row">設立</th>
-                        <td data-label="設立">2025年4月19日</td>
+                        <td data-label="項目">設立</td>
+                        <td data-label="内容">2025年4月19日</td>
                     </tr>
                     <tr>
-                        <th scope="row">所在地</th>
-                        <td data-label="所在地">
+                        <td data-label="項目">所在地</td>
+                        <td data-label="内容">
                             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                             神奈川県相模原市中央区千代田7-10-7
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">事業内容</th>
-                        <td data-label="事業内容">
+                        <td data-label="項目">事業内容</td>
+                        <td data-label="内容">
                             <ul>
                                 <li><i class="fas fa-robot" aria-hidden="true"></i> AI・RPA技術を活用した業務効率化ソリューションの開発・提供</li>
                                 <li><i class="fas fa-heart" aria-hidden="true"></i> 介護・福祉分野向け記録システム、シフト管理システム、コミュニケーション支援ツールの提供</li>
@@ -481,8 +484,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">連絡先</th>
-                        <td data-label="連絡先">
+                        <td data-label="項目">連絡先</td>
+                        <td data-label="内容">
                             <div style="margin-bottom: var(--spacing-sm);">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
                                 <strong>Email:</strong> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
