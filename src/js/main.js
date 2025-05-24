@@ -239,15 +239,70 @@ function setupTouchOptimizations() {
     }, { passive: false });
 }
 
-// ローディング画面の表示
+// ローディング画面の表示（改善版）
 function showLoadingScreen() {
     const loader = document.getElementById('loading-overlay');
     if (loader) {
-        loader.classList.remove('fade-out');
+        loader.style.display = 'flex';
+        
+        // ローディングメッセージの配列
+        const loadingMessages = [
+            {
+                main: "FastAI システムを準備中...",
+                sub: "あなたの施設に最適な介護支援環境を構築しています"
+            },
+            {
+                main: "データベースを初期化中...",
+                sub: "安全で信頼性の高いシステム環境を準備しています"
+            },
+            {
+                main: "AIエンジンを起動中...",
+                sub: "介護現場に特化したAI機能を読み込んでいます"
+            },
+            {
+                main: "UI コンポーネントを最適化中...",
+                sub: "使いやすいインターフェースを準備しています"
+            }
+        ];
+        
+        const loadingText = document.querySelector('.loading-text');
+        const loadingSubtitle = document.querySelector('.loading-subtitle');
+        
+        if (loadingText && loadingSubtitle) {
+            let messageIndex = 0;
+            
+            // 初期メッセージを設定
+            loadingText.textContent = loadingMessages[0].main;
+            loadingSubtitle.textContent = loadingMessages[0].sub;
+            
+            // 1.5秒ごとにメッセージを変更
+            const messageInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                
+                // フェードアウト
+                loadingText.style.opacity = '0';
+                loadingSubtitle.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // メッセージ変更
+                    loadingText.textContent = loadingMessages[messageIndex].main;
+                    loadingSubtitle.textContent = loadingMessages[messageIndex].sub;
+                    
+                    // フェードイン
+                    loadingText.style.opacity = '1';
+                    loadingSubtitle.style.opacity = '0.8';
+                }, 200);
+            }, 1500);
+            
+            // ローディング完了時にインターバルをクリア
+            setTimeout(() => {
+                clearInterval(messageInterval);
+            }, 2800);
+        }
     }
 }
 
-// ローディング画面の非表示
+// ローディング画面の非表示（改善版）
 function hideLoadingScreen() {
     const loader = document.getElementById('loading-overlay');
     if (loader) {
@@ -255,11 +310,12 @@ function hideLoadingScreen() {
         
         // ローディング完了後にメインコンテンツをフェードイン
         setTimeout(() => {
+            loader.style.display = 'none';
             const content = document.querySelector('.content');
             if (content) {
                 content.style.opacity = '1';
             }
-        }, 300);
+        }, 600);
     }
 }
 

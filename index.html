@@ -109,8 +109,14 @@
 <body>
     <!-- ローディングオーバーレイ -->
     <div id="loading-overlay" role="status" aria-label="ページを読み込んでいます">
-        <div class="loader" aria-hidden="true"></div>
-        <p>やさしい光を準備中...</p>
+        <div class="loader-container">
+            <div class="loader" aria-hidden="true"></div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <p class="loading-text">FastAI システムを準備中...</p>
+        <span class="loading-subtitle">あなたの施設に最適な介護支援環境を構築しています</span>
     </div>
 
     <!-- メインキャンバス -->
