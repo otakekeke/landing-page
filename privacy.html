@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="嶽ノ子のプライバシーポリシー - お客様の個人情報の取扱いについて詳しく説明しています。">
-    <meta name="keywords" content="嶽ノ子,プライバシーポリシー,個人情報,取扱い,AI介護システム">
+    <meta name="description" content="嶽ノ子のプライバシーポリシー。個人情報の取扱いについて詳しく説明しています。">
+    <meta name="keywords" content="嶽ノ子,プライバシーポリシー,個人情報保護,FastAI">
+    <meta name="author" content="嶽ノ子">
+    
+    <!-- モバイル最適化メタタグ -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="嶽ノ子 - プライバシーポリシー">
+    <meta name="theme-color" content="#3B82F6">
+    
     <title>プライバシーポリシー - 嶽ノ子</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYJ9C338F0"></script>
@@ -21,129 +34,521 @@
     
       gtag('config', 'G-DYJ9C338F0');
     </script>
-</head>
-<body class="sub-page">
-    <div class="sub-page-container">
-        <div class="sub-page-content">
-            <header class="sub-page-header">
-                <h1 class="sub-page-title">プライバシーポリシー</h1>
-                <p class="sub-page-text">お客様の大切な個人情報を適切に保護いたします</p>
-            </header>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #EFF6FF;
+            --accent-color: #3B82F6;
+            --accent-color-dark: #2563EB;
+            --text-color: #1F2937;
+            --text-color-light: #4B5563;
+            --bg-color: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.08);
             
-            <div class="date-info">
-                制定日: 2025年4月19日<br>最終改定日: 2025年4月19日
-            </div>
+            /* レスポンシブフォントサイズ */
+            --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+            --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --font-size-base: clamp(1rem, 3vw, 1.125rem);
+            --font-size-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --font-size-xl: clamp(1.25rem, 4vw, 1.5rem);
+            --font-size-2xl: clamp(1.5rem, 5vw, 2rem);
+            
+            /* スペーシング */
+            --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+            --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+            --spacing-md: clamp(1rem, 3vw, 1.5rem);
+            --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+            --spacing-xl: clamp(2rem, 5vw, 3rem);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --transition-medium: 0.2s ease-in-out;
+            --touch-target-min: 48px;
+        }
 
-            <p class="sub-page-text">嶽ノ子（以下、「当事業」といいます。）は、当事業が提供するウェブサイトおよびサービス（以下、「本サービス」といいます。）における、お客様（以下、「ユーザー」といいます。）の個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。</p>
+        /* リセットとベーススタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <h2 class="section-heading">第1条（個人情報）</h2>
-            <p class="sub-page-text">本ポリシーにおいて「個人情報」とは、個人情報の保護に関する法律（平成十五年法律第五十七号、以下「個人情報保護法」といいます。）第2条第1項に定める個人情報を指します。</p>
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
 
-            <h2 class="section-heading">第2条（個人情報の収集方法）</h2>
-            <p class="sub-page-text">当事業は、ユーザーが本サービスを利用する際に、以下の方法で個人情報を収集することがあります。</p>
-            <ul class="sub-page-list">
-                <li><strong>お問い合わせ・利用申込時:</strong> ユーザーがお問い合わせフォームや利用申込フォームを利用する際、事業所名、ご担当者名、メールアドレス、電話番号、現在の業務での主な課題、導入したい機能や期待すること、ご希望の面談日時、その他のお問い合わせ内容等、フォームに入力された情報。</li>
-                <li><strong>契約・取引に伴う収集:</strong> 本サービスの利用契約締結や取引に際して、契約者情報（氏名、住所、連絡先等）、支払情報（クレジットカード情報、銀行口座情報等、決済代行サービスを利用する場合はそのプライバシーポリシーもご確認ください）等。</li>
-                <li><strong>技術情報の自動収集:</strong> ユーザーが本サービスを利用する際に、Cookie（クッキー）、ウェブビーコン、アクセスログ等の技術を使用して、IPアドレス、ブラウザ種類、OS、参照元URL、アクセス日時、閲覧ページ、クリック履歴等の情報を自動的に収集することがあります。</li>
-                <li><strong>提携先からの収集:</strong> ユーザーが当事業の提携先サービスを経由して本サービスを利用する場合等、当該提携先からユーザーの同意に基づき適法に取得した情報。</li>
-            </ul>
+        body { 
+            font-family: 'Noto Sans JP', sans-serif; 
+            line-height: 1.7; 
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #f8fafc 100%);
+            min-height: 100vh;
+            padding: var(--spacing-md);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-width: 320px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
 
-            <h2 class="section-heading">第3条（個人情報を収集・利用する目的）</h2>
-            <p class="sub-page-text">当事業が個人情報を収集・利用する目的は、以下のとおりです。</p>
-            <ul class="sub-page-list">
-                <li>本サービスの提供・運営のため（契約履行、アカウント管理、料金請求、サポート提供を含む）</li>
-                <li>ユーザーからのお問い合わせ、ご相談、ご要望等に対応するため（本人確認を行うことを含む）</li>
-                <li>ユーザーに適した本サービスの情報（新機能、更新情報、キャンペーン等）や、当事業が提供する他の関連サービスの情報を提供するため（メールマガジン配信、DM送付等を含む）</li>
-                <li>本サービスの維持、保護、改善、新たなサービスの開発、利用状況の分析、マーケティング調査のため</li>
-                <li>メンテナンス情報、規約変更、重要なお知らせなど、必要に応じたご連絡のため</li>
-                <li>利用規約に違反したユーザーや、不正・不当な目的でサービスを利用しようとするユーザーの特定をし、ご利用をお断りするため</li>
-                <li>ユーザーにご自身の登録情報の閲覧や変更、削除、ご利用状況の閲覧を行っていただく機能を提供するため</li>
-                <li>上記の利用目的に付随する目的</li>
-            </ul>
+        .page-container { 
+            max-width: 900px; 
+            margin: var(--spacing-lg) auto; 
+            padding: var(--spacing-xl);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 25px -5px var(--shadow-color), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+        }
 
-            <h2 class="section-heading">第4条（利用目的の変更）</h2>
-            <ol class="sub-page-list">
-                <li>当事業は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更することがあります。</li>
-                <li>利用目的の変更を行った場合には、変更後の目的について、当事業所定の方法（本ウェブサイト上での公表、メールでの通知等）により、ユーザーに通知または公表するものとします。</li>
-            </ol>
+        h1 { 
+            text-align: center; 
+            margin-bottom: var(--spacing-xl); 
+            color: var(--text-color); 
+            border-bottom: 3px solid var(--accent-color); 
+            padding-bottom: var(--spacing-md); 
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            font-family: 'M+ PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+            position: relative;
+        }
 
-            <h2 class="section-heading">第5条（個人情報の第三者提供）</h2>
-            <p class="sub-page-text">当事業は、次に掲げる場合を除き、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。ただし、個人情報保護法その他の法令で認められる場合を除きます。</p>
-            <ul class="sub-page-list">
-                <li>法令に基づく場合</li>
-                <li>人の生命、身体または財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき</li>
-                <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、本人の同意を得ることが困難であるとき</li>
-                <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき</li>
-                <li>利用目的の達成に必要な範囲内において、個人情報の取扱いの全部または一部を委託する場合（例：決済代行会社、サーバー運用保守委託先、サポート業務委託先等。この場合、委託先に対し必要かつ適切な監督を行います。）</li>
-                <li>合併その他の事由による事業の承継に伴って個人情報が提供される場合</li>
-                <li>個人情報を特定の者との間で共同して利用する場合であって、その旨並びに共同して利用される個人情報の項目、共同して利用する者の範囲、利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について、あらかじめ本人に通知し、または本人が容易に知り得る状態に置いた場合</li>
-            </ul>
-            <p class="sub-page-text"><strong>外部サービスの利用について:</strong></p>
-            <ul class="sub-page-list">
-                <li><strong>Formspree:</strong> 当事業のお問い合わせフォームは、Formspree, Inc.が提供するサービスを利用しています。フォームに入力された情報は、Formspreeのサーバーを経由して当事業に送信されます。Formspreeにおける個人情報の取扱いについては、同社のプライバシーポリシーをご確認ください。</li>
-                <li><strong>Google Analytics:</strong> 当事業は、本サービスの利用状況等を把握するためにGoogle LLCが提供するGoogle Analyticsを利用しています。Google Analyticsは、Cookieを利用してユーザーの情報を収集しますが、個人を特定する情報は含まれません。収集される情報の種類や利用目的、オプトアウト（収集停止）の方法については、Google社のプライバシーポリシーおよびGoogle Analyticsのウェブサイトをご確認ください。</li>
-            </ul>
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+            border-radius: 2px;
+        }
 
-            <h2 class="section-heading">第6条（個人情報の開示）</h2>
-            <p class="sub-page-text">当事業は、本人から個人情報の開示を求められたときは、本人に対し、遅滞なくこれを開示します。ただし、開示することにより次のいずれかに該当する場合は、その全部または一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。</p>
-            <ul class="sub-page-list">
-                <li>本人または第三者の生命、身体、財産その他の権利利益を害するおそれがある場合</li>
-                <li>当事業の業務の適正な実施に著しい支障を及ぼすおそれがある場合</li>
-                <li>その他法令に違反することとなる場合</li>
-            </ul>
-            <p class="sub-page-text">前項の定めにかかわらず、履歴情報および特性情報などの個人情報以外の情報については、原則として開示いたしません。</p>
-            <p class="sub-page-text">個人情報の開示請求にあたっては、原則として手数料はいただきませんが、開示方法によっては実費（郵送料等）をご負担いただく場合があります。開示請求の手続きの詳細（請求方法、本人確認書類等）については、第12条のお問い合わせ窓口までご連絡ください。</p>
+        h2 { 
+            color: var(--accent-color); 
+            margin-top: var(--spacing-xl); 
+            margin-bottom: var(--spacing-lg); 
+            border-left: 5px solid var(--accent-color); 
+            padding-left: var(--spacing-md); 
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            scroll-margin-top: var(--spacing-lg);
+        }
 
-            <h2 class="section-heading">第7条（個人情報の訂正および削除）</h2>
-            <ol class="sub-page-list">
-                <li>ユーザーは、当事業の保有する自己の個人情報が誤った情報である場合には、当事業が定める手続きにより、当事業に対して個人情報の訂正、追加または削除（以下、「訂正等」といいます。）を請求することができます。</li>
-                <li>当事業は、ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の訂正等を行うものとします。</li>
-                <li>当事業は、前項の規定に基づき訂正等を行った場合、または訂正等を行わない旨の決定をしたときは遅滞なく、これをユーザーに通知します。</li>
-            </ol>
-            <p class="sub-page-text">訂正等の請求手続きの詳細については、第12条のお問い合わせ窓口までご連絡ください。</p>
+        p, ul, ol { 
+            color: var(--text-color-light); 
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-base);
+            line-height: 1.7;
+        }
 
-            <h2 class="section-heading">第8条（個人情報の利用停止等）</h2>
-            <p class="sub-page-text">当事業は、本人から、個人情報が、利用目的の範囲を超えて取り扱われているという理由、または不正の手段により取得されたものであるという理由により、その利用の停止または消去（以下、「利用停止等」といいます。）を求められた場合には、遅滞なく必要な調査を行います。調査結果に基づき、その請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の利用停止等を行います。利用停止等を行った場合、または行わない旨の決定をしたときは、遅滞なくこれをユーザーに通知します。</p>
-            <p class="sub-page-text">ただし、個人情報の利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって、ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は、この代替策を講じることがあります。</p>
-            <p class="sub-page-text">利用停止等の請求手続きの詳細については、第12条のお問い合わせ窓口までご連絡ください。</p>
+        ul, ol { 
+            padding-left: var(--spacing-xl); 
+        }
 
-            <h2 class="section-heading">第9条（Cookie（クッキー）その他の技術の利用）</h2>
-            <p class="sub-page-text">本サービスは、利便性の向上、利用状況の把握、広告配信等のためにCookie及びこれに類する技術を利用することがあります。ユーザーは、ウェブブラウザの設定を変更することによりCookieを無効化することができますが、Cookieを無効化すると、本サービスの一部の機能をご利用いただけなくなる場合があります。</p>
-            <p class="sub-page-text">当事業が利用する主なCookie関連技術とその無効化（オプトアウト）方法については、以下の通りです。</p>
-            <ul class="sub-page-list">
-                <li><strong>Google Analytics:</strong> 前述（第5条）の通り。オプトアウトは<a href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank" rel="noopener noreferrer">Google アナリティクス オプトアウト アドオン</a>のページをご参照ください。</li>
-            </ul>
+        li { 
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
 
-            <h2 class="section-heading">第10条（安全管理措置）</h2>
-            <p class="sub-page-text">当事業は、取り扱う個人情報の漏えい、滅失またはき損の防止その他の個人情報の安全管理のために必要かつ適切な措置（組織的、人的、物理的、技術的安全管理措置）を講じます。具体的には、個人情報へのアクセス管理、持ち出し制限、外部からの不正アクセス防止のための措置等を実施します。安全管理措置に関するご質問については、第12条のお問い合わせ窓口までご連絡ください。</p>
+        strong { 
+            font-weight: 600;
+            color: var(--text-color);
+        }
 
-            <h2 class="section-heading">第11条（プライバシーポリシーの変更）</h2>
-            <ol class="sub-page-list">
-                <li>本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく、変更することができるものとします。</li>
-                <li>当事業が別途定める場合を除いて、変更後のプライバシーポリシーは、本ウェブサイトに掲載したときから効力を生じるものとします。重要な変更を行う場合には、事前に本ウェブサイト上での告知やメールでの通知等、適切な方法でお知らせします。</li>
-            </ol>
+        .date-section { 
+            text-align: right; 
+            margin-bottom: var(--spacing-lg); 
+            font-size: var(--font-size-sm); 
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--primary-color), rgba(59, 130, 246, 0.1));
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
 
-            <h2 class="section-heading">第12条（お問い合わせ窓口）</h2>
-            <p class="sub-page-text">本ポリシーに関するお問い合わせ、苦情・相談、個人情報の開示・訂正・削除・利用停止等のご請求は、下記の窓口までお願いいたします。</p>
-            <div style="background: rgba(59, 130, 246, 0.05); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #3B82F6; margin: 1rem 0;">
-                <p class="sub-page-text"><strong>屋号:</strong> 嶽ノ子</p>
-                <p class="sub-page-text"><strong>所在地:</strong> 神奈川県相模原市中央区千代田7-10-7</p>
-                <p class="sub-page-text"><strong>担当者:</strong> 大嶽 耕太郎</p>
-                <p class="sub-page-text"><strong>Email:</strong> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a></p>
-                <p class="sub-page-text"><strong>電話番号:</strong> 070-1383-4420</p>
-                <p class="sub-page-text"><strong>受付時間:</strong> 平日 9:00～17:00 （土日祝日、年末年始を除く）</p>
-            </div>
+        /* リンクのスタイル */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-medium);
+        }
+
+        a:hover {
+            color: var(--accent-color-dark);
+            text-decoration: underline;
+        }
+
+        /* 外部リンクのスタイル */
+        a[target="_blank"]::after {
+            content: " \f35d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.8em;
+            margin-left: var(--spacing-xs);
+            opacity: 0.7;
+        }
+
+        /* 重要な情報のハイライト */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-color), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* フッター */
+        .footer-simple { 
+            text-align: center; 
+            margin-top: var(--spacing-xl); 
+            padding-top: var(--spacing-lg); 
+            border-top: 1px solid var(--border-color); 
+            font-size: var(--font-size-sm); 
+            color: var(--text-color-light);
+        }
+
+        .footer-simple a { 
+            color: var(--accent-color); 
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-sm);
+            border-radius: 6px;
+            transition: all var(--transition-medium);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: var(--touch-target-min);
+            gap: var(--spacing-xs);
+        }
+
+        .footer-simple a:hover { 
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* 目次スタイル（もしある場合） */
+        .toc {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .toc h3 {
+            color: var(--accent-color);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-lg);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .toc a {
+            display: block;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 6px;
+            transition: background-color var(--transition-medium);
+        }
+
+        .toc a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            text-decoration: none;
+        }
+
+        /* タブレット対応 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .page-container {
+                margin: var(--spacing-md) auto;
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* スマートフォン対応 (481px - 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 1rem;
+                --spacing-lg: 1.5rem;
+                --spacing-xl: 2rem;
+            }
+
+            body {
+                padding: var(--spacing-sm);
+            }
+
+            .page-container {
+                margin: var(--spacing-sm) auto;
+                padding: var(--spacing-lg);
+                border-radius: var(--border-radius);
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin-bottom: var(--spacing-lg);
+                padding-bottom: var(--spacing-sm);
+            }
+
+            h2 {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+                margin-top: var(--spacing-lg);
+                margin-bottom: var(--spacing-md);
+                padding-left: var(--spacing-sm);
+                border-left-width: 3px;
+            }
+
+            ul, ol {
+                padding-left: var(--spacing-lg);
+            }
+
+            .date-section {
+                text-align: center;
+                padding: var(--spacing-sm);
+            }
+
+            .highlight-box {
+                padding: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+
+            .toc {
+                padding: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+        }
+
+        /* 超小型スマートフォン対応 (320px - 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 0.75rem;
+                --spacing-lg: 1rem;
+                --spacing-xl: 1.5rem;
+            }
+
+            body {
+                padding: var(--spacing-xs);
+            }
+
+            .page-container {
+                margin: var(--spacing-xs) auto;
+                padding: var(--spacing-md);
+            }
+
+            h1 {
+                font-size: clamp(1.3rem, 6vw, 1.8rem);
+                margin-bottom: var(--spacing-md);
+            }
+
+            h2 {
+                font-size: clamp(1.1rem, 4vw, 1.3rem);
+                margin-top: var(--spacing-md);
+                margin-bottom: var(--spacing-sm);
+            }
+
+            p, ul, ol {
+                font-size: var(--font-size-sm);
+                margin-bottom: var(--spacing-sm);
+            }
+
+            ul, ol {
+                padding-left: var(--spacing-md);
+            }
+
+            li {
+                margin-bottom: var(--spacing-xs);
+                font-size: var(--font-size-sm);
+            }
+
+            .date-section {
+                padding: var(--spacing-sm);
+                font-size: var(--font-size-xs);
+            }
+
+            .highlight-box {
+                padding: var(--spacing-sm);
+                margin: var(--spacing-sm) 0;
+            }
+        }
+
+        /* フォーカス状態の改善 */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+            -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+        }
+
+        /* セレクション色の改善 */
+        ::selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        ::-moz-selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        /* スクロールバーの改善 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--border-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <h1><i class="fas fa-shield-alt" aria-hidden="true"></i> プライバシーポリシー</h1>
+        <div class="date-section">
+            <p><i class="fas fa-calendar-alt" aria-hidden="true"></i> 制定日: 2025年4月19日<br>最終改定日: 2025年4月19日</p>
         </div>
 
-        <footer class="sub-page-footer">
-            <nav class="footer-nav">
-                <a href="index.html" class="footer-home-link">
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                    トップページに戻る
-                </a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 嶽ノ子. All rights reserved.</p>
-        </footer>
+        <p>嶽ノ子（以下、「当事業」といいます。）は、当事業が提供するウェブサイトおよびサービス（以下、「本サービス」といいます。）における、お客様（以下、「ユーザー」といいます。）の個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。</p>
+
+        <h2>第1条（個人情報）</h2>
+        <p>本ポリシーにおいて「個人情報」とは、個人情報の保護に関する法律（平成十五年法律第五十七号、以下「個人情報保護法」といいます。）第2条第1項に定める個人情報を指します。</p>
+
+        <h2>第2条（個人情報の収集方法）</h2>
+        <p>当事業は、ユーザーが本サービスを利用する際に、以下の方法で個人情報を収集することがあります。</p>
+        <ul>
+            <li><strong>お問い合わせ・利用申込時:</strong> ユーザーがお問い合わせフォームや利用申込フォームを利用する際、事業所名、ご担当者名、メールアドレス、電話番号、現在の業務での主な課題、導入したい機能や期待すること、ご希望の面談日時、その他のお問い合わせ内容等、フォームに入力された情報。</li>
+            <li><strong>契約・取引に伴う収集:</strong> 本サービスの利用契約締結や取引に際して、契約者情報（氏名、住所、連絡先等）、支払情報（クレジットカード情報、銀行口座情報等、決済代行サービスを利用する場合はそのプライバシーポリシーもご確認ください）等。</li>
+            <li><strong>技術情報の自動収集:</strong> ユーザーが本サービスを利用する際に、Cookie（クッキー）、ウェブビーコン、アクセスログ等の技術を使用して、IPアドレス、ブラウザ種類、OS、参照元URL、アクセス日時、閲覧ページ、クリック履歴等の情報を自動的に収集することがあります。</li>
+            <li><strong>提携先からの収集:</strong> ユーザーが当事業の提携先サービスを経由して本サービスを利用する場合等、当該提携先からユーザーの同意に基づき適法に取得した情報。</li>
+        </ul>
+
+        <h2>第3条（個人情報を収集・利用する目的）</h2>
+        <p>当事業が個人情報を収集・利用する目的は、以下のとおりです。</p>
+        <ul>
+            <li>本サービスの提供・運営のため（契約履行、アカウント管理、料金請求、サポート提供を含む）</li>
+            <li>ユーザーからのお問い合わせ、ご相談、ご要望等に対応するため（本人確認を行うことを含む）</li>
+            <li>ユーザーに適した本サービスの情報（新機能、更新情報、キャンペーン等）や、当事業が提供する他の関連サービスの情報を提供するため（メールマガジン配信、DM送付等を含む）</li>
+            <li>本サービスの維持、保護、改善、新たなサービスの開発、利用状況の分析、マーケティング調査のため</li>
+            <li>メンテナンス情報、規約変更、重要なお知らせなど、必要に応じたご連絡のため</li>
+            <li>利用規約に違反したユーザーや、不正・不当な目的でサービスを利用しようとするユーザーの特定をし、ご利用をお断りするため</li>
+            <li>ユーザーにご自身の登録情報の閲覧や変更、削除、ご利用状況の閲覧を行っていただく機能を提供するため</li>
+            <li>上記の利用目的に付随する目的</li>
+        </ul>
+
+        <h2>第4条（利用目的の変更）</h2>
+        <ol>
+            <li>当事業は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更することがあります。</li>
+            <li>利用目的の変更を行った場合には、変更後の目的について、当事業所定の方法（本ウェブサイト上での公表、メールでの通知等）により、ユーザーに通知または公表するものとします。</li>
+        </ol>
+
+        <h2>第5条（個人情報の第三者提供）</h2>
+        <p>当事業は、次に掲げる場合を除き、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。ただし、個人情報保護法その他の法令で認められる場合を除きます。</p>
+        <ul>
+            <li>法令に基づく場合</li>
+            <li>人の生命、身体または財産の保護のために必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+            <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、本人の同意を得ることが困難であるとき</li>
+            <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき</li>
+            <li>利用目的の達成に必要な範囲内において、個人情報の取扱いの全部または一部を委託する場合（例：決済代行会社、サーバー運用保守委託先、サポート業務委託先等。この場合、委託先に対し必要かつ適切な監督を行います。）</li>
+            <li>合併その他の事由による事業の承継に伴って個人情報が提供される場合</li>
+            <li>個人情報を特定の者との間で共同して利用する場合であって、その旨並びに共同して利用される個人情報の項目、共同して利用する者の範囲、利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について、あらかじめ本人に通知し、または本人が容易に知り得る状態に置いた場合</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <p><strong><i class="fas fa-info-circle" aria-hidden="true"></i> 外部サービスの利用について:</strong></p>
+            <ul>
+                 <li><strong>Formspree:</strong> 当事業のお問い合わせフォームは、Formspree, Inc.が提供するサービスを利用しています。フォームに入力された情報は、Formspreeのサーバーを経由して当事業に送信されます。Formspreeにおける個人情報の取扱いについては、同社のプライバシーポリシーをご確認ください。</li>
+                 <li><strong>Google Analytics:</strong> 当事業は、本サービスの利用状況等を把握するためにGoogle LLCが提供するGoogle Analyticsを利用しています。Google Analyticsは、Cookieを利用してユーザーの情報を収集しますが、個人を特定する情報は含まれません。収集される情報の種類や利用目的、オプトアウト（収集停止）の方法については、Google社のプライバシーポリシーおよびGoogle Analyticsのウェブサイトをご確認ください。</li>
+            </ul>
+        </div>
+
+        <h2>第6条（個人情報の開示）</h2>
+        <p>当事業は、本人から個人情報の開示を求められたときは、本人に対し、遅滞なくこれを開示します。ただし、開示することにより次のいずれかに該当する場合は、その全部または一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。</p>
+        <ul>
+            <li>本人または第三者の生命、身体、財産その他の権利利益を害するおそれがある場合</li>
+            <li>当事業の業務の適正な実施に著しい支障を及ぼすおそれがある場合</li>
+            <li>その他法令に違反することとなる場合</li>
+        </ul>
+        <p>前項の定めにかかわらず、履歴情報および特性情報などの個人情報以外の情報については、原則として開示いたしません。</p>
+        <p>個人情報の開示請求にあたっては、原則として手数料はいただきませんが、開示方法によっては実費（郵送料等）をご負担いただく場合があります。開示請求の手続きの詳細（請求方法、本人確認書類等）については、第12条のお問い合わせ窓口までご連絡ください。</p>
+
+        <h2>第7条（個人情報の訂正および削除）</h2>
+        <ol>
+            <li>ユーザーは、当事業の保有する自己の個人情報が誤った情報である場合には、当事業が定める手続きにより、当事業に対して個人情報の訂正、追加または削除（以下、「訂正等」といいます。）を請求することができます。</li>
+            <li>当事業は、ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の訂正等を行うものとします。</li>
+            <li>当事業は、前項の規定に基づき訂正等を行った場合、または訂正等を行わない旨の決定をしたときは遅滞なく、これをユーザーに通知します。</li>
+        </ol>
+        <p>訂正等の請求手続きの詳細については、第12条のお問い合わせ窓口までご連絡ください。</p>
+
+        <h2>第8条（個人情報の利用停止等）</h2>
+        <p>当事業は、本人から、個人情報が、利用目的の範囲を超えて取り扱われているという理由、または不正の手段により取得されたものであるという理由により、その利用の停止または消去（以下、「利用停止等」といいます。）を求められた場合には、遅滞なく必要な調査を行います。調査結果に基づき、その請求に応じる必要があると判断した場合には、遅滞なく、当該個人情報の利用停止等を行います。利用停止等を行った場合、または行わない旨の決定をしたときは、遅滞なくこれをユーザーに通知します。</p>
+        <p>ただし、個人情報の利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって、ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は、この代替策を講じることがあります。</p>
+        <p>利用停止等の請求手続きの詳細については、第12条のお問い合わせ窓口までご連絡ください。</p>
+
+        <h2>第9条（Cookie（クッキー）その他の技術の利用）</h2>
+        <p>本サービスは、利便性の向上、利用状況の把握、広告配信等のためにCookie及びこれに類する技術を利用することがあります。ユーザーは、ウェブブラウザの設定を変更することによりCookieを無効化することができますが、Cookieを無効化すると、本サービスの一部の機能をご利用いただけなくなる場合があります。</p>
+        <p>当事業が利用する主なCookie関連技術とその無効化（オプトアウト）方法については、以下の通りです。</p>
+        <ul>
+            <li><strong>Google Analytics:</strong> 前述（第5条）の通り。オプトアウトは<a href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank" rel="noopener noreferrer">Google アナリティクス オプトアウト アドオン</a>のページをご参照ください。</li>
+        </ul>
+
+        <h2>第10条（安全管理措置）</h2>
+        <p>当事業は、取り扱う個人情報の漏えい、滅失またはき損の防止その他の個人情報の安全管理のために必要かつ適切な措置（組織的、人的、物理的、技術的安全管理措置）を講じます。具体的には、個人情報へのアクセス管理、持ち出し制限、外部からの不正アクセス防止のための措置等を実施します。安全管理措置に関するご質問については、第12条のお問い合わせ窓口までご連絡ください。</p>
+
+        <h2>第11条（プライバシーポリシーの変更）</h2>
+        <ol>
+            <li>本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく、変更することができるものとします。</li>
+            <li>当事業が別途定める場合を除いて、変更後のプライバシーポリシーは、本ウェブサイトに掲載したときから効力を生じるものとします。重要な変更を行う場合には、事前に本ウェブサイト上での告知やメールでの通知等、適切な方法でお知らせします。</li>
+        </ol>
+
+        <h2>第12条（お問い合わせ窓口）</h2>
+        <div class="highlight-box">
+            <p>本ポリシーに関するお問い合わせ、苦情・相談、個人情報の開示・訂正・削除・利用停止等のご請求は、下記の窓口までお願いいたします。</p>
+            <p><strong><i class="fas fa-building" aria-hidden="true"></i> 屋号:</strong> 嶽ノ子</p>
+            <p><strong><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 所在地:</strong> 神奈川県相模原市中央区千代田7-10-7</p>
+            <p><strong><i class="fas fa-user" aria-hidden="true"></i> 担当者:</strong> 大嶽 耕太郎</p>
+            <p><strong><i class="fas fa-envelope" aria-hidden="true"></i> Email:</strong> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a></p>
+            <p><strong><i class="fas fa-phone" aria-hidden="true"></i> 電話番号:</strong> <a href="tel:070-1383-4420">070-1383-4420</a></p>
+            <p><strong><i class="fas fa-clock" aria-hidden="true"></i> 受付時間:</strong> 平日 9:00～17:00 （土日祝日、年末年始を除く）</p>
+        </div>
     </div>
+
+    <footer class="footer-simple">
+        <p>
+            <a href="index.html" aria-label="トップページに戻る">
+                <i class="fas fa-home" aria-hidden="true"></i> トップページに戻る
+            </a>
+        </p>
+        <p>&copy; 2025 嶽ノ子. All rights reserved.</p>
+    </footer>
 </body>
 </html> 

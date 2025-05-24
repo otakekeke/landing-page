@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="嶽ノ子の会社概要 - AI・RPA技術を活用した介護・福祉分野向けソリューションを提供する個人事業主です。">
-    <meta name="keywords" content="嶽ノ子,会社概要,AI,RPA,介護システム,業務効率化">
+    <meta name="description" content="嶽ノ子の会社概要。AI・RPA技術を活用した介護・福祉分野向けソリューションの開発・提供を行う個人事業主です。">
+    <meta name="keywords" content="嶽ノ子,会社概要,AI介護,RPA,業務効率化,FastAI">
+    <meta name="author" content="嶽ノ子">
+    
+    <!-- モバイル最適化メタタグ -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="嶽ノ子 - 会社概要">
+    <meta name="theme-color" content="#3B82F6">
+    
     <title>会社概要 - 嶽ノ子</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYJ9C338F0"></script>
@@ -21,75 +34,483 @@
     
       gtag('config', 'G-DYJ9C338F0');
     </script>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #EFF6FF;
+            --accent-color: #3B82F6;
+            --accent-color-dark: #2563EB;
+            --text-color: #1F2937;
+            --text-color-light: #4B5563;
+            --bg-color: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            
+            /* レスポンシブフォントサイズ */
+            --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+            --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --font-size-base: clamp(1rem, 3vw, 1.125rem);
+            --font-size-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --font-size-xl: clamp(1.25rem, 4vw, 1.5rem);
+            --font-size-2xl: clamp(1.5rem, 5vw, 2rem);
+            
+            /* スペーシング */
+            --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+            --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+            --spacing-md: clamp(1rem, 3vw, 1.5rem);
+            --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+            --spacing-xl: clamp(2rem, 5vw, 3rem);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --transition-medium: 0.2s ease-in-out;
+            --touch-target-min: 48px;
+        }
+
+        /* リセットとベーススタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body { 
+            font-family: 'Noto Sans JP', sans-serif; 
+            line-height: 1.7; 
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #f8fafc 100%);
+            min-height: 100vh;
+            padding: var(--spacing-md);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-width: 320px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page-container { 
+            max-width: 900px; 
+            margin: var(--spacing-lg) auto; 
+            padding: var(--spacing-xl);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 25px -5px var(--shadow-color), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 { 
+            text-align: center; 
+            margin-bottom: var(--spacing-xl); 
+            color: var(--text-color); 
+            border-bottom: 3px solid var(--accent-color); 
+            padding-bottom: var(--spacing-md); 
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            font-family: 'M+ PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+            border-radius: 2px;
+        }
+
+        h2 { 
+            color: var(--accent-color); 
+            margin-top: var(--spacing-xl); 
+            margin-bottom: var(--spacing-lg); 
+            border-left: 5px solid var(--accent-color); 
+            padding-left: var(--spacing-md); 
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+        }
+
+        p { 
+            color: var(--text-color-light); 
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-base);
+            line-height: 1.7;
+        }
+
+        /* テーブルのレスポンシブ対応 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: var(--spacing-md);
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background: var(--bg-color);
+            font-size: var(--font-size-base);
+        }
+
+        th, td { 
+            border: 1px solid var(--border-color); 
+            padding: var(--spacing-md); 
+            text-align: left; 
+            vertical-align: top;
+            min-height: var(--touch-target-min);
+        }
+
+        th { 
+            background: linear-gradient(135deg, var(--primary-color), rgba(59, 130, 246, 0.1));
+            color: var(--text-color); 
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            width: 30%;
+        }
+
+        td {
+            color: var(--text-color-light);
+            font-size: var(--font-size-base);
+        }
+
+        td ul { 
+            margin: 0; 
+            padding-left: var(--spacing-lg); 
+        }
+
+        td li { 
+            margin-bottom: var(--spacing-xs);
+            line-height: 1.6;
+        }
+
+        td a { 
+            color: var(--accent-color); 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-medium);
+        }
+
+        td a:hover { 
+            color: var(--accent-color-dark);
+            text-decoration: underline;
+        }
+
+        /* 電話番号リンク */
+        .phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 6px;
+            transition: background-color var(--transition-medium);
+            min-height: var(--touch-target-min);
+        }
+
+        .phone-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .phone-link i {
+            font-size: var(--font-size-sm);
+        }
+
+        /* フッター */
+        .footer-simple { 
+            text-align: center; 
+            margin-top: var(--spacing-xl); 
+            padding-top: var(--spacing-lg); 
+            border-top: 1px solid var(--border-color); 
+            font-size: var(--font-size-sm); 
+            color: var(--text-color-light);
+        }
+
+        .footer-simple a { 
+            color: var(--accent-color); 
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-sm);
+            border-radius: 6px;
+            transition: all var(--transition-medium);
+            display: inline-block;
+            min-height: var(--touch-target-min);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-simple a:hover { 
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* タブレット対応 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .page-container {
+                margin: var(--spacing-md) auto;
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* スマートフォン対応 (481px - 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 1rem;
+                --spacing-lg: 1.5rem;
+                --spacing-xl: 2rem;
+            }
+
+            body {
+                padding: var(--spacing-sm);
+            }
+
+            .page-container {
+                margin: var(--spacing-sm) auto;
+                padding: var(--spacing-lg);
+                border-radius: var(--border-radius);
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin-bottom: var(--spacing-lg);
+                padding-bottom: var(--spacing-sm);
+            }
+
+            h2 {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+                margin-top: var(--spacing-lg);
+                margin-bottom: var(--spacing-md);
+                padding-left: var(--spacing-sm);
+                border-left-width: 3px;
+            }
+
+            /* モバイル向けテーブル表示 */
+            .table-container {
+                border-radius: var(--border-radius);
+                overflow: visible;
+            }
+
+            table {
+                border: none;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid var(--border-color);
+                border-radius: var(--border-radius);
+                margin-bottom: var(--spacing-md);
+                padding: var(--spacing-md);
+                background: var(--bg-color);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 35%;
+                min-height: auto;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: var(--spacing-md);
+                top: var(--spacing-md);
+                width: 30%;
+                font-weight: 600;
+                color: var(--accent-color);
+                font-size: var(--font-size-sm);
+            }
+
+            .phone-link {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: var(--spacing-xs);
+            }
+        }
+
+        /* 超小型スマートフォン対応 (320px - 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 0.75rem;
+                --spacing-lg: 1rem;
+                --spacing-xl: 1.5rem;
+            }
+
+            body {
+                padding: var(--spacing-xs);
+            }
+
+            .page-container {
+                margin: var(--spacing-xs) auto;
+                padding: var(--spacing-md);
+            }
+
+            h1 {
+                font-size: clamp(1.3rem, 6vw, 1.8rem);
+                margin-bottom: var(--spacing-md);
+            }
+
+            h2 {
+                font-size: clamp(1.1rem, 4vw, 1.3rem);
+                margin-top: var(--spacing-md);
+                margin-bottom: var(--spacing-sm);
+            }
+
+            td {
+                padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 40%;
+                font-size: var(--font-size-sm);
+            }
+
+            td:before {
+                left: var(--spacing-sm);
+                top: var(--spacing-sm);
+                width: 35%;
+                font-size: var(--font-size-xs);
+            }
+
+            tr {
+                margin-bottom: var(--spacing-sm);
+                padding: var(--spacing-sm);
+            }
+
+            td ul {
+                padding-left: var(--spacing-md);
+            }
+
+            td li {
+                font-size: var(--font-size-sm);
+                margin-bottom: var(--spacing-xs);
+            }
+        }
+
+        /* フォーカス状態の改善 */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+            -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+        }
+
+        /* セレクション色の改善 */
+        ::selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        ::-moz-selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+    </style>
 </head>
-<body class="sub-page">
-    <div class="sub-page-container">
-        <div class="sub-page-content">
-            <header class="sub-page-header">
-                <h1 class="sub-page-title">会社概要</h1>
-                <p class="sub-page-text">AI技術で介護現場の未来を創造する</p>
-            </header>
+<body>
+    <div class="page-container">
+        <h1><i class="fas fa-building" aria-hidden="true"></i> 会社概要</h1>
 
-            <table class="company-table">
-                <tr>
-                    <th><i class="fas fa-building" aria-hidden="true"></i> 事業形態</th>
-                    <td>個人事業主</td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-tag" aria-hidden="true"></i> 屋号</th>
-                    <td>嶽ノ子</td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-user-tie" aria-hidden="true"></i> 代表者</th>
-                    <td>大嶽 耕太郎</td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-calendar-alt" aria-hidden="true"></i> 設立</th>
-                    <td>2025年4月19日</td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 所在地</th>
-                    <td>神奈川県相模原市中央区千代田7-10-7</td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-briefcase" aria-hidden="true"></i> 事業内容</th>
-                    <td>
-                        <ul>
-                            <li>AI・RPA技術を活用した業務効率化ソリューションの開発・提供</li>
-                            <li>介護・福祉分野向け記録システム、シフト管理システム、コミュニケーション支援ツールの提供</li>
-                            <li>上記システムに関する導入コンサルティング、カスタマイズ、運用サポート</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="fas fa-envelope" aria-hidden="true"></i> 連絡先</th>
-                    <td>
-                        <p><strong>Email:</strong> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a></p>
-                        <p><strong>電話:</strong> 070-1383-4420</p>
-                        <p><strong>受付時間:</strong> 平日 9:00～17:00</p>
-                    </td>
-                </tr>
+        <div class="table-container">
+            <table role="table" aria-label="会社概要情報">
+                <thead>
+                    <tr>
+                        <th scope="col">項目</th>
+                        <th scope="col">内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">事業形態</th>
+                        <td data-label="事業形態">個人事業主</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">屋号</th>
+                        <td data-label="屋号">嶽ノ子</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">代表者</th>
+                        <td data-label="代表者">大嶽 耕太郎</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">設立</th>
+                        <td data-label="設立">2025年4月19日</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">所在地</th>
+                        <td data-label="所在地">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            神奈川県相模原市中央区千代田7-10-7
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">事業内容</th>
+                        <td data-label="事業内容">
+                            <ul>
+                                <li><i class="fas fa-robot" aria-hidden="true"></i> AI・RPA技術を活用した業務効率化ソリューションの開発・提供</li>
+                                <li><i class="fas fa-heart" aria-hidden="true"></i> 介護・福祉分野向け記録システム、シフト管理システム、コミュニケーション支援ツールの提供</li>
+                                <li><i class="fas fa-cogs" aria-hidden="true"></i> 上記システムに関する導入コンサルティング、カスタマイズ、運用サポート</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">連絡先</th>
+                        <td data-label="連絡先">
+                            <div style="margin-bottom: var(--spacing-sm);">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <strong>Email:</strong> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
+                            </div>
+                            <div style="margin-bottom: var(--spacing-sm);">
+                                <a href="tel:070-1383-4420" class="phone-link" aria-label="電話をかける: 070-1383-4420">
+                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                    <strong>電話:</strong> 070-1383-4420
+                                </a>
+                            </div>
+                            <div>
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <strong>受付時間:</strong> 平日 9:00～17:00
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-
-            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(59, 130, 246, 0.05); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
-                <h3 style="color: #3B82F6; margin-bottom: 1rem;">私たちの想い</h3>
-                <p style="color: #4B5563; line-height: 1.7;">
-                    AI技術を通じて、介護現場で働く皆様の負担を軽減し、<br>
-                    利用者様により質の高いケアを提供できる環境作りを支援いたします。<br>
-                    一つ一つの施設に寄り添った、オーダーメイドのソリューションをお届けします。
-                </p>
-            </div>
         </div>
-
-        <footer class="sub-page-footer">
-            <nav class="footer-nav">
-                <a href="index.html" class="footer-home-link">
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                    トップページに戻る
-                </a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 嶽ノ子. All rights reserved.</p>
-        </footer>
     </div>
+
+    <footer class="footer-simple">
+        <p>
+            <a href="index.html" aria-label="トップページに戻る">
+                <i class="fas fa-home" aria-hidden="true"></i> トップページに戻る
+            </a>
+        </p>
+        <p>&copy; 2025 嶽ノ子. All rights reserved.</p>
+    </footer>
 </body>
 </html> 

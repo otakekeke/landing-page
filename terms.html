@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="嶽ノ子の利用規約 - AI介護システムサービスの利用条件について詳しく説明しています。">
-    <meta name="keywords" content="嶽ノ子,利用規約,AI介護システム,サービス利用条件">
+    <meta name="description" content="嶽ノ子の利用規約。サービス利用の条件について詳しく説明しています。">
+    <meta name="keywords" content="嶽ノ子,利用規約,サービス利用条件,FastAI">
+    <meta name="author" content="嶽ノ子">
+    
+    <!-- モバイル最適化メタタグ -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="嶽ノ子 - 利用規約">
+    <meta name="theme-color" content="#3B82F6">
+    
     <title>利用規約 - 嶽ノ子</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYJ9C338F0"></script>
@@ -21,156 +34,540 @@
     
       gtag('config', 'G-DYJ9C338F0');
     </script>
-</head>
-<body class="sub-page">
-    <div class="sub-page-container">
-        <div class="sub-page-content">
-            <header class="sub-page-header">
-                <h1 class="sub-page-title">利用規約</h1>
-                <p class="sub-page-text">安心してサービスをご利用いただくために</p>
-            </header>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #EFF6FF;
+            --accent-color: #3B82F6;
+            --accent-color-dark: #2563EB;
+            --text-color: #1F2937;
+            --text-color-light: #4B5563;
+            --bg-color: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.08);
             
-            <div class="date-info">
-                施行日: 2025年4月19日
-            </div>
+            /* レスポンシブフォントサイズ */
+            --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+            --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
+            --font-size-base: clamp(1rem, 3vw, 1.125rem);
+            --font-size-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+            --font-size-xl: clamp(1.25rem, 4vw, 1.5rem);
+            --font-size-2xl: clamp(1.5rem, 5vw, 2rem);
+            
+            /* スペーシング */
+            --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+            --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+            --spacing-md: clamp(1rem, 3vw, 1.5rem);
+            --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+            --spacing-xl: clamp(2rem, 5vw, 3rem);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --transition-medium: 0.2s ease-in-out;
+            --touch-target-min: 48px;
+        }
 
-            <p class="sub-page-text">この利用規約（以下、「本規約」といいます。）は、嶽ノ子（以下、「当事業」といいます。）が提供するウェブサイトおよび関連サービス（AIケア記録システム等、以下総称して「本サービス」といいます。）の利用条件を定めるものです。本サービスを利用されるお客様（以下、「ユーザー」といいます。）は、本規約の内容を十分に理解し、同意の上で本サービスをご利用いただくものとします。</p>
+        /* リセットとベーススタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <h2 class="section-heading">第1条（適用）</h2>
-            <p class="sub-page-text">本規約は、ユーザーと当事業との間の本サービスの利用に関わる一切の関係に適用されるものとします。当事業が本ウェブサイト上で掲載する本サービス利用に関するルールや諸規定（料金プラン、サポートポリシー等を含む）は、本規約の一部を構成するものとします。本規約の内容と、これらのルールや諸規定、その他の本規約外における本サービスの説明等が異なる場合は、本規約の規定が優先して適用されるものとします。</p>
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
 
-            <h2 class="section-heading">第2条（利用申込と契約の成立）</h2>
-            <ol class="sub-page-list">
-                <li>本サービスの利用を希望するユーザーは、本規約に同意の上、当事業所定の方法（お問い合わせフォームからの申し込み、申込書の提出等）によって利用の申込みを行うものとします。</li>
-                <li>当事業は、ユーザーからの申込みに対し、審査の上、承諾する場合にはその旨を通知し、またはサービスの提供を開始することをもって承諾の意思表示とします。この時点で、ユーザーと当事業との間に本サービスの利用契約（以下、「本契約」といいます。）が成立するものとします。</li>
-                <li>当事業は、利用申込者に以下の事由があると判断した場合、利用申込みを承認しないことがあり、その理由については一切の開示義務を負わないものとします。
-                    <ul class="sub-page-list">
-                        <li>利用申込みに際して虚偽の事項を届け出た場合</li>
-                        <li>本規約に違反したことがある者からの申込みである場合</li>
-                        <li>反社会的勢力等（暴力団、暴力団員、右翼団体、反社会的勢力、その他これに準ずる者を意味します。以下同じ。）である、または資金提供その他を通じて反社会的勢力等の維持、運営もしくは経営に協力もしくは関与する等反社会的勢力等との何らかの交流もしくは関与を行っていると当事業が判断した場合</li>
-                        <li>その他、当事業が利用申込みを相当でないと判断した場合</li>
-                    </ul>
-                </li>
-            </ol>
+        body { 
+            font-family: 'Noto Sans JP', sans-serif; 
+            line-height: 1.7; 
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #f8fafc 100%);
+            min-height: 100vh;
+            padding: var(--spacing-md);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-width: 320px;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
 
-            <h2 class="section-heading">第3条（利用料金および支払方法）</h2>
-            <ol class="sub-page-list">
-                <li>ユーザーは、本サービスの有料部分の対価として、当事業が別途定める料金プランに基づき、本ウェブサイトに表示または別途通知する利用料金（月額利用料、カスタマイズ費用等）を、当事業が指定する方法（銀行振込、クレジットカード決済等）により、指定された期日までに支払うものとします。詳細な料金については、本ウェブサイトの料金プランページをご確認ください。</li>
-                <li>ユーザーが利用料金の支払を遅滞した場合には、ユーザーは年14.6％の割合による遅延損害金を、支払期日の翌日から支払済みに至るまで支払うものとします。</li>
-                <li>利用料金の支払いに必要な手数料（振込手数料、決済手数料等）は、ユーザーの負担とします。</li>
-                <li>一旦支払われた利用料金は、当事業の責めに帰すべき事由がある場合を除き、理由の如何を問わず返金しないものとします。</li>
-            </ol>
+        .page-container { 
+            max-width: 900px; 
+            margin: var(--spacing-lg) auto; 
+            padding: var(--spacing-xl);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 25px -5px var(--shadow-color), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+        }
 
-            <h2 class="section-heading">第4条（禁止事項）</h2>
-            <p class="sub-page-text">ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
-            <ul class="sub-page-list">
-                <li>法令または公序良俗に違反する行為、またはそのおそれのある行為</li>
-                <li>犯罪行為に関連する行為、またはこれを助長する行為</li>
-                <li>本サービスに含まれる著作権、商標権その他の一切の知的財産権を侵害する行為（リバースエンジニアリング、逆コンパイル、逆アセンブル等を含む）</li>
-                <li>当事業、他のユーザー、またはその他の第三者のサーバー、ネットワーク、システム等に過度な負荷をかける行為、またはその機能を破壊・妨害する行為</li>
-                <li>本サービスによって得られた情報を、当事業の事前の書面による承諾なく、複製、販売、出版その他私的利用の範囲を超えて使用する行為</li>
-                <li>当事業のサービスの運営を妨害するおそれのある行為</li>
-                <li>不正アクセス行為、またはこれを試みる行為</li>
-                <li>他のユーザーのアカウント情報を不正に利用する行為</li>
-                <li>他のユーザーに関する個人情報等を不正に収集または蓄積、開示する行為</li>
-                <li>不正な目的を持って本サービスを利用する行為（詐欺、不正競争等）</li>
-                <li>本サービスの他のユーザーまたはその他の第三者に不利益、損害、不快感を与える行為</li>
-                <li>他のユーザーまたは第三者に成りすます行為</li>
-                <li>当事業が許諾しない本サービス上での宣伝、広告、勧誘、または営業行為</li>
-                <li>反社会的勢力に対して直接または間接に利益を供与する行為</li>
-                <li>その他、当事業が不適切と判断する行為</li>
-            </ul>
+        h1 { 
+            text-align: center; 
+            margin-bottom: var(--spacing-xl); 
+            color: var(--text-color); 
+            border-bottom: 3px solid var(--accent-color); 
+            padding-bottom: var(--spacing-md); 
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            font-family: 'M+ PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+            position: relative;
+        }
 
-            <h2 class="section-heading">第5条（本サービスの提供の停止等）</h2>
-            <ol class="sub-page-list">
-                <li>当事業は、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
-                    <ul class="sub-page-list">
-                        <li>本サービスにかかるコンピュータシステムの保守点検または更新作業を定期的または緊急に行う場合</li>
-                        <li>地震、落雷、火災、停電、天災地変などの不可抗力により、本サービスの提供が困難となった場合</li>
-                        <li>コンピュータまたは通信回線等が事故、障害、第三者からの攻撃等により停止した場合</li>
-                        <li>その他、当事業が運用上または技術上、本サービスの提供の停止または中断が必要と判断した場合</li>
-                    </ul>
-                </li>
-                <li>当事業は、本サービスの提供の停止または中断により、ユーザーまたは第三者が被ったいかなる不利益または損害についても、理由を問わず一切の責任を負わないものとします。</li>
-            </ol>
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+            border-radius: 2px;
+        }
 
-            <h2 class="section-heading">第6条（利用制限および契約解除）</h2>
-            <ol class="sub-page-list">
-                <li>当事業は、ユーザーが以下のいずれかに該当する場合には、事前の通知なく、ユーザーに対して本サービスの全部もしくは一部の利用を制限し、または本契約を解除することができるものとします。
-                    <ul class="sub-page-list">
-                        <li>本規約のいずれかの条項に違反した場合</li>
-                        <li>登録事項（申込情報を含む）に虚偽の事実があることが判明した場合</li>
-                        <li>利用料金等の支払債務の履行を遅滞し、または支払を拒否した場合</li>
-                        <li>支払停止もしくは支払不能となり、または破産手続開始、民事再生手続開始、会社更生手続開始、特別清算開始もしくはこれらに類する手続の開始申立てがあった場合</li>
-                        <li>当事業からの問い合わせその他の回答を求める連絡に対し、30日間以上応答がない場合</li>
-                        <li>第2条第3項各号に該当する場合</li>
-                        <li>その他、当事業がユーザーとの信頼関係が維持できないと判断した場合、または本サービスの利用を適当でないと判断した場合</li>
-                    </ul>
-                </li>
-                <li>前項に基づく措置によりユーザーに損害が生じたとしても、当事業は一切の責任を負いません。</li>
-            </ol>
+        h2 { 
+            color: var(--accent-color); 
+            margin-top: var(--spacing-xl); 
+            margin-bottom: var(--spacing-lg); 
+            border-left: 5px solid var(--accent-color); 
+            padding-left: var(--spacing-md); 
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            scroll-margin-top: var(--spacing-lg);
+        }
 
-            <h2 class="section-heading">第7条（知的財産権）</h2>
-            <p class="sub-page-text">本サービスおよび本サービスに関連する一切の素材（テキスト、画像、動画、ソフトウェア、プログラム、コード、デザイン、ノウハウ等）に関する著作権、特許権、商標権その他一切の知的財産権は、当事業または当事業にライセンスを許諾している正当な権利者に帰属します。ユーザーは、本契約に基づく本サービスの利用に必要な範囲を超えて、これらの知的財産権を使用、複製、改変、翻案、頒布、公衆送信等することはできません。</p>
+        p, ol, ul { 
+            color: var(--text-color-light); 
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-base);
+            line-height: 1.7;
+        }
 
-            <h2 class="section-heading">第8条（保証の否認および免責事項）</h2>
-            <ol class="sub-page-list">
-                <li>当事業は、本サービスがユーザーの特定の目的に適合すること、期待する機能・商品的価値・正確性・有用性を有すること、ユーザーによる本サービスの利用がユーザーに適用のある法令または業界団体の内部規則等に適合すること、継続的に利用できること、および不具合が生じないことについて、明示または黙示を問わず何ら保証するものではありません。</li>
-                <li>当事業は、本サービスに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを保証しておりません。</li>
-                <li>当事業は、本サービス（特にAI機能）が出力する情報や分析結果の正確性、完全性、信頼性、適法性について一切保証しません。ユーザーは自己の責任と判断において本サービスを利用するものとし、その利用結果について当事業は一切の責任を負いません。AI機能の利用により生じた損害についても同様とします。</li>
-                <li>当事業は、本サービスに起因してユーザーに生じたあらゆる損害について、当事業の故意または重過失による場合を除き、一切の責任を負いません。</li>
-                <li>本契約が消費者契約法に定める消費者契約となる場合、上記の免責規定は適用されません。ただし、この場合であっても、当事業は、当事業の過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに生じた損害のうち特別な事情から生じた損害（当事業またはユーザーが損害発生につき予見し、または予見し得た場合を含みます。）について一切の責任を負いません。</li>
-                <li>当事業の過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに損害が生じた場合、当事業がユーザーから当該損害が発生した直近1ヶ月間に受領した利用料金の額を上限として損害賠償責任を負うものとします。</li>
-                <li>当事業は、本サービスに関して、ユーザーと他のユーザーまたは第三者との間において生じた取引、連絡または紛争等について一切責任を負いません。これらの問題はユーザーが自己の責任において解決するものとします。</li>
-            </ol>
+        ol, ul { 
+            padding-left: var(--spacing-xl); 
+        }
 
-            <h2 class="section-heading">第9条（サービス内容の変更等）</h2>
-            <p class="sub-page-text">当事業は、当事業の都合により、ユーザーへの事前の告知をもって（ただし、緊急やむを得ない場合はこの限りではありません）、本サービスの内容を変更、中断、または終了することができるものとし、これによってユーザーに生じた損害について一切の責任を負いません。</p>
+        li { 
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
 
-            <h2 class="section-heading">第10条（利用規約の変更）</h2>
-            <ol class="sub-page-list">
-                <li>当事業は、法令の変更、社会情勢の変化、その他当事業が必要と認めた場合は、ユーザーの事前の承諾を得ることなく、本規約の内容を変更できるものとします。</li>
-                <li>変更後の利用規約は、当事業が別途定める場合を除き、本ウェブサイトに変更後の規約を掲示した時点から効力を生じるものとします。</li>
-                <li>ユーザーが本規約の変更後も本サービスの利用を継続する場合、当該ユーザーは変更後の規約に同意したものとみなします。規約の変更に同意いただけない場合は、本サービスの利用を中止してください。</li>
-            </ol>
+        /* ネストされたリストのスタイル */
+        ul ul, ol ol, ul ol, ol ul {
+            margin-top: var(--spacing-xs);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-lg);
+        }
 
-            <h2 class="section-heading">第11条（通知または連絡）</h2>
-            <p class="sub-page-text">ユーザーと当事業との間の通知または連絡は、当事業の定める方法（原則としてメール、または本ウェブサイト上への掲載）によって行うものとします。当事業は、ユーザーから、当事業が別途定める方式に従った変更届け出がない限り、現在登録されている連絡先（メールアドレス等）が有効なものとみなして当該連絡先へ通知または連絡を行い、これらは、通常到達すべき時にユーザーへ到達したものとみなします。</p>
+        strong { 
+            font-weight: 600;
+            color: var(--text-color);
+        }
 
-            <h2 class="section-heading">第12条（権利義務の譲渡の禁止）</h2>
-            <p class="sub-page-text">ユーザーは、当事業の書面による事前の承諾なく、本契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。</p>
+        .date-section { 
+            text-align: right; 
+            margin-bottom: var(--spacing-lg); 
+            font-size: var(--font-size-sm); 
+            color: var(--text-color-light);
+            background: linear-gradient(135deg, var(--primary-color), rgba(59, 130, 246, 0.1));
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
 
-            <h2 class="section-heading">第13条（分離可能性）</h2>
-            <p class="sub-page-text">本規約のいずれかの条項またはその一部が、消費者契約法その他の法令等により無効または執行不能と判断された場合であっても、本規約の残りの規定及び一部が無効または執行不能と判断された規定の残りの部分は、継続して完全に効力を有するものとします。</p>
+        /* リンクのスタイル */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-medium);
+        }
 
-            <h2 class="section-heading">第14条（準拠法・裁判管轄）</h2>
-            <ol class="sub-page-list">
-                <li>本規約の解釈、有効性、履行および各条項の解釈にあたっては、日本法を準拠法とします。</li>
-                <li>本契約または本サービスに関してユーザーと当事業との間で紛争が生じた場合には、訴額に応じて、横浜地方裁判所相模原支部または相模原簡易裁判所を第一審の専属的合意管轄裁判所とします。</li>
-            </ol>
+        a:hover {
+            color: var(--accent-color-dark);
+            text-decoration: underline;
+        }
 
-            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(59, 130, 246, 0.05); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2);">
-                <h3 style="color: #3B82F6; margin-bottom: 1rem;"><i class="fas fa-handshake" style="margin-right: 0.5rem;"></i>安心してご利用ください</h3>
-                <p style="color: #4B5563; line-height: 1.7;">
-                    ご不明な点がございましたら、いつでもお気軽にお問い合わせください。<br>
-                    私たちは透明性のあるサービス提供を心がけております。
-                </p>
-                <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #3B82F6; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 1rem; transition: all 0.2s ease;">
-                    <i class="fas fa-envelope"></i>
-                    お問い合わせはこちら
-                </a>
-            </div>
+        /* 重要な情報のハイライト */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-color), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 警告や注意事項のスタイル */
+        .warning-box {
+            background: linear-gradient(135deg, #FEF3C7, rgba(245, 158, 11, 0.1));
+            border: 1px solid #F59E0B;
+            border-left: 5px solid #F59E0B;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .warning-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 章番号のスタイリング */
+        h2 .chapter-number {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 6px;
+            font-size: var(--font-size-sm);
+            margin-right: var(--spacing-sm);
+            font-weight: 700;
+        }
+
+        /* フッター */
+        .footer-simple { 
+            text-align: center; 
+            margin-top: var(--spacing-xl); 
+            padding-top: var(--spacing-lg); 
+            border-top: 1px solid var(--border-color); 
+            font-size: var(--font-size-sm); 
+            color: var(--text-color-light);
+        }
+
+        .footer-simple a { 
+            color: var(--accent-color); 
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-sm);
+            border-radius: 6px;
+            transition: all var(--transition-medium);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: var(--touch-target-min);
+            gap: var(--spacing-xs);
+        }
+
+        .footer-simple a:hover { 
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* タブレット対応 (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .page-container {
+                margin: var(--spacing-md) auto;
+                padding: var(--spacing-lg);
+            }
+        }
+
+        /* スマートフォン対応 (481px - 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 1rem;
+                --spacing-lg: 1.5rem;
+                --spacing-xl: 2rem;
+            }
+
+            body {
+                padding: var(--spacing-sm);
+            }
+
+            .page-container {
+                margin: var(--spacing-sm) auto;
+                padding: var(--spacing-lg);
+                border-radius: var(--border-radius);
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 6vw, 2rem);
+                margin-bottom: var(--spacing-lg);
+                padding-bottom: var(--spacing-sm);
+            }
+
+            h2 {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+                margin-top: var(--spacing-lg);
+                margin-bottom: var(--spacing-md);
+                padding-left: var(--spacing-sm);
+                border-left-width: 3px;
+            }
+
+            ol, ul {
+                padding-left: var(--spacing-lg);
+            }
+
+            ul ul, ol ol, ul ol, ol ul {
+                padding-left: var(--spacing-md);
+            }
+
+            .date-section {
+                text-align: center;
+                padding: var(--spacing-sm);
+            }
+
+            .highlight-box,
+            .warning-box {
+                padding: var(--spacing-md);
+                margin: var(--spacing-md) 0;
+            }
+        }
+
+        /* 超小型スマートフォン対応 (320px - 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --spacing-xs: 0.25rem;
+                --spacing-sm: 0.5rem;
+                --spacing-md: 0.75rem;
+                --spacing-lg: 1rem;
+                --spacing-xl: 1.5rem;
+            }
+
+            body {
+                padding: var(--spacing-xs);
+            }
+
+            .page-container {
+                margin: var(--spacing-xs) auto;
+                padding: var(--spacing-md);
+            }
+
+            h1 {
+                font-size: clamp(1.3rem, 6vw, 1.8rem);
+                margin-bottom: var(--spacing-md);
+            }
+
+            h2 {
+                font-size: clamp(1.1rem, 4vw, 1.3rem);
+                margin-top: var(--spacing-md);
+                margin-bottom: var(--spacing-sm);
+            }
+
+            p, ol, ul {
+                font-size: var(--font-size-sm);
+                margin-bottom: var(--spacing-sm);
+            }
+
+            ol, ul {
+                padding-left: var(--spacing-md);
+            }
+
+            ul ul, ol ol, ul ol, ol ul {
+                padding-left: var(--spacing-sm);
+            }
+
+            li {
+                margin-bottom: var(--spacing-xs);
+                font-size: var(--font-size-sm);
+            }
+
+            .date-section {
+                padding: var(--spacing-sm);
+                font-size: var(--font-size-xs);
+            }
+
+            .highlight-box,
+            .warning-box {
+                padding: var(--spacing-sm);
+                margin: var(--spacing-sm) 0;
+            }
+
+            .chapter-number {
+                display: block;
+                margin-bottom: var(--spacing-xs);
+                margin-right: 0 !important;
+            }
+        }
+
+        /* フォーカス状態の改善 */
+        a:focus,
+        button:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+            -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+        }
+
+        /* セレクション色の改善 */
+        ::selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        ::-moz-selection {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        /* スクロールバーの改善 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--border-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <h1><i class="fas fa-file-contract" aria-hidden="true"></i> 利用規約</h1>
+        <div class="date-section">
+            <p><i class="fas fa-calendar-alt" aria-hidden="true"></i> 施行日: 2025年4月19日</p>
         </div>
 
-        <footer class="sub-page-footer">
-            <nav class="footer-nav">
-                <a href="index.html" class="footer-home-link">
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                    トップページに戻る
-                </a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 嶽ノ子. All rights reserved.</p>
-        </footer>
+        <div class="highlight-box">
+            <p>この利用規約（以下、「本規約」といいます。）は、嶽ノ子（以下、「当事業」といいます。）が提供するウェブサイトおよび関連サービス（AIケア記録システム等、以下総称して「本サービス」といいます。）の利用条件を定めるものです。本サービスを利用されるお客様（以下、「ユーザー」といいます。）は、本規約の内容を十分に理解し、同意の上で本サービスをご利用いただくものとします。</p>
+        </div>
+
+        <h2>第1条（適用）</h2>
+        <p>本規約は、ユーザーと当事業との間の本サービスの利用に関わる一切の関係に適用されるものとします。当事業が本ウェブサイト上で掲載する本サービス利用に関するルールや諸規定（料金プラン、サポートポリシー等を含む）は、本規約の一部を構成するものとします。本規約の内容と、これらのルールや諸規定、その他の本規約外における本サービスの説明等が異なる場合は、本規約の規定が優先して適用されるものとします。</p>
+
+        <h2>第2条（利用申込と契約の成立）</h2>
+        <ol>
+            <li>本サービスの利用を希望するユーザーは、本規約に同意の上、当事業所定の方法（お問い合わせフォームからの申し込み、申込書の提出等）によって利用の申込みを行うものとします。</li>
+            <li>当事業は、ユーザーからの申込みに対し、審査の上、承諾する場合にはその旨を通知し、またはサービスの提供を開始することをもって承諾の意思表示とします。この時点で、ユーザーと当事業との間に本サービスの利用契約（以下、「本契約」といいます。）が成立するものとします。</li>
+            <li>当事業は、利用申込者に以下の事由があると判断した場合、利用申込みを承認しないことがあり、その理由については一切の開示義務を負わないものとします。
+                <ul>
+                    <li>利用申込みに際して虚偽の事項を届け出た場合</li>
+                    <li>本規約に違反したことがある者からの申込みである場合</li>
+                    <li>反社会的勢力等（暴力団、暴力団員、右翼団体、反社会的勢力、その他これに準ずる者を意味します。以下同じ。）である、または資金提供その他を通じて反社会的勢力等の維持、運営もしくは経営に協力もしくは関与する等反社会的勢力等との何らかの交流もしくは関与を行っていると当事業が判断した場合</li>
+                    <li>その他、当事業が利用申込みを相当でないと判断した場合</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>第3条（利用料金および支払方法）</h2>
+        <ol>
+            <li>ユーザーは、本サービスの有料部分の対価として、当事業が別途定める料金プランに基づき、本ウェブサイトに表示または別途通知する利用料金（月額利用料、カスタマイズ費用等）を、当事業が指定する方法（銀行振込、クレジットカード決済等）により、指定された期日までに支払うものとします。詳細な料金については、本ウェブサイトの料金プランページをご確認ください。</li>
+            <li>ユーザーが利用料金の支払を遅滞した場合には、ユーザーは年14.6％の割合による遅延損害金を、支払期日の翌日から支払済みに至るまで支払うものとします。</li>
+            <li>利用料金の支払いに必要な手数料（振込手数料、決済手数料等）は、ユーザーの負担とします。</li>
+            <li>一旦支払われた利用料金は、当事業の責めに帰すべき事由がある場合を除き、理由の如何を問わず返金しないものとします。</li>
+        </ol>
+
+        <h2>第4条（禁止事項）</h2>
+        <div class="warning-box">
+            <p><strong><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 重要:</strong> ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
+        </div>
+        <ul>
+            <li>法令または公序良俗に違反する行為、またはそのおそれのある行為</li>
+            <li>犯罪行為に関連する行為、またはこれを助長する行為</li>
+            <li>本サービスに含まれる著作権、商標権その他の一切の知的財産権を侵害する行為（リバースエンジニアリング、逆コンパイル、逆アセンブル等を含む）</li>
+            <li>当事業、他のユーザー、またはその他の第三者のサーバー、ネットワーク、システム等に過度な負荷をかける行為、またはその機能を破壊・妨害する行為</li>
+            <li>本サービスによって得られた情報を、当事業の事前の書面による承諾なく、複製、販売、出版その他私的利用の範囲を超えて使用する行為</li>
+            <li>当事業のサービスの運営を妨害するおそれのある行為</li>
+            <li>不正アクセス行為、またはこれを試みる行為</li>
+            <li>他のユーザーのアカウント情報を不正に利用する行為</li>
+            <li>他のユーザーに関する個人情報等を不正に収集または蓄積、開示する行為</li>
+            <li>不正な目的を持って本サービスを利用する行為（詐欺、不正競争等）</li>
+            <li>本サービスの他のユーザーまたはその他の第三者に不利益、損害、不快感を与える行為</li>
+            <li>他のユーザーまたは第三者に成りすます行為</li>
+            <li>当事業が許諾しない本サービス上での宣伝、広告、勧誘、または営業行為</li>
+            <li>反社会的勢力に対して直接または間接に利益を供与する行為</li>
+            <li>その他、当事業が不適切と判断する行為</li>
+        </ul>
+
+        <h2>第5条（本サービスの提供の停止等）</h2>
+        <ol>
+            <li>当事業は、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
+                <ul>
+                    <li>本サービスにかかるコンピュータシステムの保守点検または更新作業を定期的または緊急に行う場合</li>
+                    <li>地震、落雷、火災、停電、天災地変などの不可抗力により、本サービスの提供が困難となった場合</li>
+                    <li>コンピュータまたは通信回線等が事故、障害、第三者からの攻撃等により停止した場合</li>
+                    <li>その他、当事業が運用上または技術上、本サービスの提供の停止または中断が必要と判断した場合</li>
+                </ul>
+            </li>
+            <li>当事業は、本サービスの提供の停止または中断により、ユーザーまたは第三者が被ったいかなる不利益または損害についても、理由を問わず一切の責任を負わないものとします。</li>
+        </ol>
+
+        <h2>第6条（利用制限および契約解除）</h2>
+        <ol>
+            <li>当事業は、ユーザーが以下のいずれかに該当する場合には、事前の通知なく、ユーザーに対して本サービスの全部もしくは一部の利用を制限し、または本契約を解除することができるものとします。
+                <ul>
+                    <li>本規約のいずれかの条項に違反した場合</li>
+                    <li>登録事項（申込情報を含む）に虚偽の事実があることが判明した場合</li>
+                    <li>利用料金等の支払債務の履行を遅滞し、または支払を拒否した場合</li>
+                    <li>支払停止もしくは支払不能となり、または破産手続開始、民事再生手続開始、会社更生手続開始、特別清算開始もしくはこれらに類する手続の開始申立てがあった場合</li>
+                    <li>当事業からの問い合わせその他の回答を求める連絡に対し、30日間以上応答がない場合</li>
+                     <li>第2条第3項各号に該当する場合</li>
+                    <li>その他、当事業がユーザーとの信頼関係が維持できないと判断した場合、または本サービスの利用を適当でないと判断した場合</li>
+                </ul>
+            </li>
+            <li>前項に基づく措置によりユーザーに損害が生じたとしても、当事業は一切の責任を負いません。</li>
+        </ol>
+
+         <h2>第7条（知的財産権）</h2>
+         <p>本サービスおよび本サービスに関連する一切の素材（テキスト、画像、動画、ソフトウェア、プログラム、コード、デザイン、ノウハウ等）に関する著作権、特許権、商標権その他一切の知的財産権は、当事業または当事業にライセンスを許諾している正当な権利者に帰属します。ユーザーは、本契約に基づく本サービスの利用に必要な範囲を超えて、これらの知的財産権を使用、複製、改変、翻案、頒布、公衆送信等することはできません。</p>
+
+        <h2>第8条（保証の否認および免責事項）</h2>
+        <div class="warning-box">
+            <p><strong><i class="fas fa-info-circle" aria-hidden="true"></i> 重要な免責事項:</strong> 以下の内容をよくお読みください。</p>
+        </div>
+        <ol>
+            <li>当事業は、本サービスがユーザーの特定の目的に適合すること、期待する機能・商品的価値・正確性・有用性を有すること、ユーザーによる本サービスの利用がユーザーに適用のある法令または業界団体の内部規則等に適合すること、継続的に利用できること、および不具合が生じないことについて、明示または黙示を問わず何ら保証するものではありません。</li>
+            <li>当事業は、本サービスに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを保証しておりません。</li>
+            <li>当事業は、本サービス（特にAI機能）が出力する情報や分析結果の正確性、完全性、信頼性、適法性について一切保証しません。ユーザーは自己の責任と判断において本サービスを利用するものとし、その利用結果について当事業は一切の責任を負いません。AI機能の利用により生じた損害についても同様とします。</li>
+            <li>当事業は、本サービスに起因してユーザーに生じたあらゆる損害について、当事業の故意または重過失による場合を除き、一切の責任を負いません。</li>
+            <li>本契約が消費者契約法に定める消費者契約となる場合、上記の免責規定は適用されません。ただし、この場合であっても、当事業は、当事業の過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに生じた損害のうち特別な事情から生じた損害（当事業またはユーザーが損害発生につき予見し、または予見し得た場合を含みます。）について一切の責任を負いません。</li>
+            <li>当事業の過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに損害が生じた場合、当事業がユーザーから当該損害が発生した直近1ヶ月間に受領した利用料金の額を上限として損害賠償責任を負うものとします。</li>
+            <li>当事業は、本サービスに関して、ユーザーと他のユーザーまたは第三者との間において生じた取引、連絡または紛争等について一切責任を負いません。これらの問題はユーザーが自己の責任において解決するものとします。</li>
+        </ol>
+
+        <h2>第9条（サービス内容の変更等）</h2>
+        <p>当事業は、当事業の都合により、ユーザーへの事前の告知をもって（ただし、緊急やむを得ない場合はこの限りではありません）、本サービスの内容を変更、中断、または終了することができるものとし、これによってユーザーに生じた損害について一切の責任を負いません。</p>
+
+        <h2>第10条（利用規約の変更）</h2>
+        <ol>
+            <li>当事業は、法令の変更、社会情勢の変化、その他当事業が必要と認めた場合は、ユーザーの事前の承諾を得ることなく、本規約の内容を変更できるものとします。</li>
+            <li>変更後の利用規約は、当事業が別途定める場合を除き、本ウェブサイトに変更後の規約を掲示した時点から効力を生じるものとします。</li>
+            <li>ユーザーが本規約の変更後も本サービスの利用を継続する場合、当該ユーザーは変更後の規約に同意したものとみなします。規約の変更に同意いただけない場合は、本サービスの利用を中止してください。</li>
+        </ol>
+
+        <h2>第11条（通知または連絡）</h2>
+        <p>ユーザーと当事業との間の通知または連絡は、当事業の定める方法（原則としてメール、または本ウェブサイト上への掲載）によって行うものとします。当事業は、ユーザーから、当事業が別途定める方式に従った変更届け出がない限り、現在登録されている連絡先（メールアドレス等）が有効なものとみなして当該連絡先へ通知または連絡を行い、これらは、通常到達すべき時にユーザーへ到達したものとみなします。</p>
+
+        <h2>第12条（権利義務の譲渡の禁止）</h2>
+        <p>ユーザーは、当事業の書面による事前の承諾なく、本契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。</p>
+
+        <h2>第13条（分離可能性）</h2>
+        <p>本規約のいずれかの条項またはその一部が、消費者契約法その他の法令等により無効または執行不能と判断された場合であっても、本規約の残りの規定及び一部が無効または執行不能と判断された規定の残りの部分は、継続して完全に効力を有するものとします。</p>
+
+        <h2>第14条（準拠法・裁判管轄）</h2>
+        <div class="highlight-box">
+            <ol>
+                <li><strong>準拠法:</strong> 本規約の解釈、有効性、履行および各条項の解釈にあたっては、日本法を準拠法とします。</li>
+                <li><strong>裁判管轄:</strong> 本契約または本サービスに関してユーザーと当事業との間で紛争が生じた場合には、訴額に応じて、横浜地方裁判所相模原支部または相模原簡易裁判所を第一審の専属的合意管轄裁判所とします。</li>
+            </ol>
+        </div>
     </div>
+
+    <footer class="footer-simple">
+        <p>
+            <a href="index.html" aria-label="トップページに戻る">
+                <i class="fas fa-home" aria-hidden="true"></i> トップページに戻る
+            </a>
+        </p>
+        <p>&copy; 2025 嶽ノ子. All rights reserved.</p>
+    </footer>
 </body>
 </html> 
