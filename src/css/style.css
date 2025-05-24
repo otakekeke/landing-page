@@ -1252,6 +1252,48 @@ footer p {
         padding: var(--spacing-lg);
         text-align: center;
     }
+    
+    /* タイムライン調整 - 完全縦並び */
+    .timeline::before {
+        left: 25px; /* 左端に移動 */
+        width: 2px;
+    }
+    
+    .timeline-item {
+        flex-direction: row !important; /* 全て右向きに統一 */
+        align-items: flex-start;
+        padding-left: 70px; /* アイコン分のスペース */
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .timeline-item:nth-child(even) {
+        flex-direction: row !important; /* evenも同じ方向 */
+    }
+    
+    .timeline-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        font-size: var(--font-size-lg);
+    }
+    
+    .timeline-content {
+        max-width: none;
+        flex: 1;
+        margin: 0;
+        padding: var(--spacing-lg);
+    }
+    
+    .timeline-date {
+        position: static;
+        display: inline-block;
+        margin-top: var(--spacing-sm);
+        font-size: var(--font-size-xs);
+        margin-bottom: 0;
+    }
 }
 
 /* 超小型スマートフォン対応 (320px - 480px) */
@@ -1329,20 +1371,39 @@ footer p {
     }
     
     /* タイムライン調整 */
+    .timeline::before {
+        left: 20px;
+    }
+    
     .timeline-item {
-        padding-left: 50px;
+        padding-left: 55px;
         margin-bottom: var(--spacing-lg);
     }
     
     .timeline-icon {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         font-size: var(--font-size-sm);
         left: 0;
     }
     
     .timeline-content {
         padding: var(--spacing-md);
+    }
+    
+    .timeline-content h3 {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .timeline-content p {
+        font-size: var(--font-size-sm);
+        line-height: 1.5;
+    }
+    
+    .timeline-date {
+        font-size: var(--font-size-xs);
+        padding: 0.2rem 0.5rem;
     }
     
     /* プライシング調整 */
