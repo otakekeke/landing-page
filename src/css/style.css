@@ -816,7 +816,16 @@ p {
     border-left-color: var(--success-color);
 }
 
-.problem h4, .solution h4, .roi h4 {
+/* 料金概算セクション */
+.pricing-estimate {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-left: 4px solid;
+    background: rgba(251, 191, 36, 0.05);
+    border-left-color: #F59E0B;
+}
+
+.problem h4, .solution h4, .roi h4, .pricing-estimate h4 {
     font-size: var(--font-size-base);
     margin-bottom: var(--spacing-xs);
     display: flex;
@@ -837,10 +846,20 @@ p {
     color: var(--success-color);
 }
 
-.problem p, .solution p {
+.pricing-estimate h4 {
+    color: #D97706;
+}
+
+.problem p, .solution p, .pricing-estimate p {
     margin-bottom: 0;
     font-size: var(--font-size-sm);
     line-height: 1.6;
+}
+
+.pricing-estimate p strong {
+    color: #D97706;
+    font-weight: 600;
+    font-size: var(--font-size-base);
 }
 
 .roi ul {
@@ -943,7 +962,7 @@ p {
         gap: var(--spacing-sm);
     }
     
-    .problem, .solution, .roi {
+    .problem, .solution, .roi, .pricing-estimate {
         padding: var(--spacing-sm);
     }
     
