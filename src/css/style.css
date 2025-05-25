@@ -804,6 +804,193 @@ p {
     font-size: clamp(0.85rem, 2.5vw, 0.95rem);
 }
 
+/* 追加事例の折り畳み */
+.additional-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    grid-column: 1 / -1; /* 全幅を使用 */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.additional-examples.expanded {
+    max-height: 10000px; /* 十分に大きな値 */
+    opacity: 1;
+    margin-top: 2rem;
+}
+
+/* 展開/折り畳みボタンコンテナ */
+.examples-toggle-container {
+    grid-column: 1 / -1; /* 全幅を使用 */
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+/* 展開/折り畳みボタン */
+.examples-toggle-btn {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+    color: white;
+    border: none;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin: 0 auto var(--spacing-md) auto;
+    min-height: var(--touch-target-min);
+    position: relative;
+    overflow: hidden;
+}
+
+.examples-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px 0 rgba(59, 130, 246, 0.35);
+    background: linear-gradient(135deg, var(--accent-color-dark) 0%, #1E40AF 100%);
+}
+
+.examples-toggle-btn:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.examples-toggle-btn:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+/* ボタンのアイコンアニメーション */
+.toggle-icon {
+    font-size: var(--font-size-base);
+    transition: transform var(--transition-medium);
+}
+
+.examples-toggle-btn[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* ボタンの説明テキスト */
+.toggle-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-color-light);
+    margin: 0;
+    font-style: italic;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ローディング状態のアニメーション */
+.examples-toggle-btn.loading {
+    pointer-events: none;
+}
+
+.examples-toggle-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.examples-toggle-btn.loading .toggle-text,
+.examples-toggle-btn.loading .toggle-icon {
+    opacity: 0;
+}
+
+/* スムーズな展開アニメーション用のヘルパークラス */
+.additional-examples.expanding {
+    opacity: 1;
+}
+
+.additional-examples.collapsing {
+    opacity: 0;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .examples-toggle-btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-base);
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .toggle-description {
+        font-size: var(--font-size-xs);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .examples-toggle-container {
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .additional-examples.expanded {
+        margin-top: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .examples-toggle-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+        gap: var(--spacing-xs);
+    }
+    
+    .toggle-description {
+        font-size: var(--font-size-xs);
+        line-height: 1.4;
+    }
+    
+    .examples-toggle-container {
+        margin-top: var(--spacing-md);
+        padding: var(--spacing-md) 0;
+    }
+}
+
+/* タッチデバイス対応 */
+@media (hover: none) and (pointer: coarse) {
+    .examples-toggle-btn:hover {
+        transform: none;
+        box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
+    }
+}
+
+/* アクセシビリティ: 動きを減らす設定 */
+@media (prefers-reduced-motion: reduce) {
+    .additional-examples {
+        transition: opacity 0.2s ease;
+    }
+    
+    .toggle-icon {
+        transition: transform 0.2s ease;
+    }
+    
+    .examples-toggle-btn {
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .examples-toggle-btn:hover {
+        transform: none;
+    }
+}
+
 /* 詳細カードスタイル */
 .detailed-card {
     text-align: left;

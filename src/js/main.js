@@ -28,52 +28,43 @@ let devicePixelRatio = Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2);
 let particleCount = isMobile ? 50 : 100;
 let enableComplexAnimations = !isMobile || window.innerWidth > 768;
 
-// DOM要素が読み込まれた後に実行
-document.addEventListener('DOMContentLoaded', () => {
-    try {
-        // ローディングアニメーションの表示
-        showLoadingScreen();
+// DOMが読み込まれた後に実行
+document.addEventListener('DOMContentLoaded', function() {
+    // ローディングオーバーレイの処理
+    const loadingOverlay = document.getElementById('loading-overlay');
+    
+    // 最小表示時間を設定（UX向上のため）
+    const minLoadingTime = 1500; // 1.5秒
+    const startTime = Date.now();
+    
+    // ページの読み込み完了を待つ
+    window.addEventListener('load', function() {
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
         
-        // デバイス固有の初期化
-        setupDeviceOptimizations();
-        
-        // Three.jsの初期化
-        if (enableComplexAnimations) {
-        initThree();
-        }
-        
-        // イベントリスナーの設定
-        setupEventListeners();
-        
-        // GSAPアニメーションの設定
-        setupGSAPAnimations();
-        
-        // ナビゲーションメニューの設定
-        setupNavigation();
-        
-        // トップに戻るボタンの設定
-        setupBackToTopButton();
-        
-        // スクロールガイドの設定
-        setupScrollGuide();
-        
-        // フォームの設定
-        setupFormValidation();
-        
-        // アクセシビリティの設定
-        setupAccessibility();
-        
-        // ローディング完了後の処理
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                hideLoadingScreen();
-            }, isMobile ? 500 : 1000);
-        });
-    } catch (e) {
-        console.error('初期化エラー:', e);
-        // エラー時もローディング画面を非表示
-        hideLoadingScreen();
-    }
+        setTimeout(() => {
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('fade-out');
+                
+                // フェードアウト完了後に要素を削除
+                setTimeout(() => {
+                    loadingOverlay.remove();
+                }, 600);
+            }
+        }, remainingTime);
+    });
+    
+    // ナビゲーション関連の初期化
+    initMobileMenu();
+    initSmoothScrolling();
+    initScrollEffects();
+    initBackToTop();
+    
+    // 実装例の折り畳み機能を初期化
+    initExamplesToggle();
+    
+    // フォーム送信の処理
+    initFormSubmission();
 });
 
 // デバイス最適化の設定
@@ -1249,3 +1240,71 @@ window.addEventListener('error', function(event) {
 //     console.log('ScrollTrigger:', typeof ScrollTrigger);
 //     console.log('ScrollToPlugin:', typeof ScrollToPlugin);
 // });
+
+// 実装例の折り畳み機能
+function initExamplesToggle() {
+    const toggleBtn = document.getElementById('examples-toggle-btn');
+    const additionalExamples = document.getElementById('additional-examples');
+    const toggleText = toggleBtn.querySelector('.toggle-text');
+    const toggleIcon = toggleBtn.querySelector('.toggle-icon');
+    
+    if (!toggleBtn || !additionalExamples) return;
+    
+    let isExpanded = false;
+    
+    toggleBtn.addEventListener('click', function() {
+        // ローディング状態を表示
+        toggleBtn.classList.add('loading');
+        toggleBtn.disabled = true;
+        
+        // 少し遅延を入れてスムーズなアニメーションを実現
+        setTimeout(() => {
+            if (!isExpanded) {
+                // 展開
+                additionalExamples.classList.add('expanding');
+                additionalExamples.classList.add('expanded');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                toggleText.textContent = '事例を折り畳む';
+                
+                // スクロール位置を調整（オプション）
+                setTimeout(() => {
+                    const rect = toggleBtn.getBoundingClientRect();
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetPosition = scrollTop + rect.top - 100; // 少し上にマージンを取る
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+                
+            } else {
+                // 折り畳み
+                additionalExamples.classList.add('collapsing');
+                additionalExamples.classList.remove('expanded');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                toggleText.textContent = 'さらに6つの事例を見る';
+            }
+            
+            isExpanded = !isExpanded;
+            
+            // ローディング状態を解除
+            toggleBtn.classList.remove('loading');
+            toggleBtn.disabled = false;
+            
+            // アニメーション完了後にヘルパークラスを削除
+            setTimeout(() => {
+                additionalExamples.classList.remove('expanding', 'collapsing');
+            }, 600);
+            
+        }, 200); // 200ms の遅延
+    });
+    
+    // キーボードアクセシビリティ
+    toggleBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleBtn.click();
+        }
+    });
+}
