@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Three.jsの初期化
         if (enableComplexAnimations) {
-            initThree();
+        initThree();
         }
         
         // イベントリスナーの設定
@@ -463,11 +463,11 @@ function setupBackToTopButton() {
                 
                 // GSAP利用可能時はアニメーション、そうでなければブラウザデフォルト
                 if (typeof gsap !== 'undefined' && gsap.to) {
-                    gsap.to(window, {
-                        duration: 1,
+                gsap.to(window, {
+                    duration: 1,
                         scrollTo: { y: 0 },
-                        ease: "power3.inOut"
-                    });
+                    ease: "power3.inOut"
+                });
                 } else {
                     window.scrollTo({
                         top: 0,
@@ -504,11 +504,11 @@ function setupScrollGuide() {
                 const targetPosition = serviceSection.offsetTop - headerHeight;
                 
                 if (typeof gsap !== 'undefined' && gsap.to) {
-                    gsap.to(window, {
-                        duration: 1,
+                gsap.to(window, {
+                    duration: 1,
                         scrollTo: { y: targetPosition },
-                        ease: "power3.inOut"
-                    });
+                    ease: "power3.inOut"
+                });
                 } else {
                     window.scrollTo({
                         top: targetPosition,
@@ -731,11 +731,11 @@ function initThree() {
     
     try {
         // WebGLサポートチェック
-        if (!checkWebGLSupport()) {
+    if (!checkWebGLSupport()) {
             console.warn('WebGLがサポートされていません');
-            return;
-        }
-        
+        return;
+    }
+    
         // シーンの作成
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0xffffff);
@@ -761,30 +761,30 @@ function initThree() {
         
         // コントロールの設定（タッチデバイス対応）
         if (!isMobile) {
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
             controls.dampingFactor = 0.05;
             controls.enableZoom = false;
             controls.enablePan = false;
             controls.maxPolarAngle = Math.PI / 2;
             controls.minPolarAngle = Math.PI / 2;
-            controls.autoRotate = true;
+        controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
-        }
-        
-        // ライトの設定
-        setupLights();
-        
+    }
+    
+    // ライトの設定
+    setupLights();
+    
         // オブジェクトの作成
-        createCrystal();
-        
+    createCrystal();
+    
         // パーティクルシステムの作成
         createParticleSystem();
-        
+    
         // アニメーション開始
-        animate();
-        
-        console.log('Three.jsの初期化が完了しました');
+    animate();
+    
+    console.log('Three.jsの初期化が完了しました');
     } catch (error) {
         console.error('Three.js初期化エラー:', error);
     }

@@ -722,7 +722,7 @@ p {
 /* 実装例セクション */
 .example-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -773,6 +773,205 @@ p {
     font-size: clamp(0.85rem, 2.5vw, 0.95rem);
 }
 
+/* 詳細カードスタイル */
+.detailed-card {
+    text-align: left;
+    padding: var(--spacing-lg);
+}
+
+.detailed-card .example-icon {
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.detailed-card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.problem-solution {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.problem, .solution, .roi {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-left: 4px solid;
+}
+
+.problem {
+    background: rgba(239, 68, 68, 0.05);
+    border-left-color: #EF4444;
+}
+
+.solution {
+    background: rgba(59, 130, 246, 0.05);
+    border-left-color: var(--accent-color);
+}
+
+.roi {
+    background: rgba(16, 185, 129, 0.05);
+    border-left-color: var(--success-color);
+}
+
+.problem h4, .solution h4, .roi h4 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: 600;
+}
+
+.problem h4 {
+    color: #DC2626;
+}
+
+.solution h4 {
+    color: var(--accent-color);
+}
+
+.roi h4 {
+    color: var(--success-color);
+}
+
+.problem p, .solution p {
+    margin-bottom: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+.roi ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.roi li {
+    padding: var(--spacing-xs) 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.roi li:last-child {
+    border-bottom: none;
+}
+
+.roi li strong {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* 総合効果まとめセクション */
+.total-roi-summary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.total-roi-summary h3 {
+    font-size: var(--font-size-xl);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.roi-item {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-medium);
+}
+
+.roi-item:hover {
+    transform: translateY(-3px);
+}
+
+.roi-number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--accent-color);
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+}
+
+.roi-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-color-light);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.roi-note {
+    font-size: var(--font-size-xs);
+    color: var(--text-color-light);
+    font-style: italic;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .example-cards {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .detailed-card {
+        padding: var(--spacing-md);
+    }
+    
+    .problem-solution {
+        gap: var(--spacing-sm);
+    }
+    
+    .problem, .solution, .roi {
+        padding: var(--spacing-sm);
+    }
+    
+    .roi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .total-roi-summary {
+        padding: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .roi-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .roi-item {
+        padding: var(--spacing-md);
+    }
+    
+    .roi-number {
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+}
+
 /* プロセス・タイムライン */
 .timeline-container {
         position: relative;
@@ -797,7 +996,7 @@ p {
     position: relative;
     margin-bottom: 3rem;
     display: flex;
-        align-items: center;
+    align-items: center;
         width: 100%;
 }
 
@@ -818,7 +1017,7 @@ p {
     align-items: center;
     justify-content: center;
     color: white;
-        font-size: 1.2rem;
+    font-size: 1.2rem;
     position: relative;
     z-index: 2;
     flex-shrink: 0;
@@ -864,7 +1063,7 @@ p {
 }
 
 .process-cta {
-    text-align: center;
+        text-align: center;
     margin-top: 3rem;
     padding: 2rem;
 }
@@ -874,16 +1073,16 @@ p {
         color: var(--text-color);
     margin-bottom: 1.5rem;
     font-weight: 500;
-}
+    }
 
-/* 料金プラン */
-.pricing-container {
+    /* 料金プラン */
+    .pricing-container {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
-}
+    }
 
-.pricing-card {
+    .pricing-card {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border-radius: var(--border-radius-lg);
@@ -892,7 +1091,7 @@ p {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border: 2px solid var(--accent-color);
     max-width: 400px;
-    width: 100%;
+        width: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -934,7 +1133,7 @@ p {
 }
 
 .pricing-features i {
-    color: var(--accent-color);
+        color: var(--accent-color);
     margin-right: 0.8rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
@@ -1023,9 +1222,9 @@ p {
 #contact {
     background: rgba(239, 246, 255, 0.5);
     backdrop-filter: blur(10px);
-}
+     }
 
-#trial-form {
+    #trial-form {
     max-width: 600px;
     margin: 0 auto;
     background: var(--card-bg);
@@ -1102,14 +1301,14 @@ footer[role="contentinfo"] {
 
 .footer-logo .tagline {
     font-size: var(--font-size-sm);
-    color: var(--text-color-light);
+        color: var(--text-color-light); 
     margin-bottom: var(--spacing-md);
     font-style: italic;
-}
+    }
 
 .footer-contact-info h4 {
     font-size: var(--font-size-lg);
-    color: var(--bg-color);
+        color: var(--bg-color);
     margin-bottom: var(--spacing-md);
     font-weight: 600;
 }
@@ -1677,7 +1876,7 @@ footer[role="contentinfo"] {
     .pricing-card {
         padding: var(--spacing-md);
     }
-    
+
     #trial-form {
         padding: var(--spacing-md);
     }
