@@ -395,16 +395,8 @@
                         </div>
                     </article>
 
-                    <!-- 折り畳み表示切り替えボタン -->
-                    <div class="examples-toggle-container">
-                        <button id="examples-toggle-btn" class="examples-toggle-btn" aria-expanded="false" aria-controls="additional-examples">
-                            <span class="toggle-text">さらに6つの事例を見る</span>
-                            <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                        </button>
-                    </div>
-
-                    <!-- 追加の事例（初期状態では非表示） -->
-                    <div id="additional-examples" class="additional-examples" aria-hidden="true">
+                    <!-- 折り畳み可能な追加事例 -->
+                    <div class="additional-examples" id="additional-examples">
                         <!-- 事例4: 音声記録システム -->
                         <article class="example-card detailed-card">
                             <div class="example-icon" aria-hidden="true"><i class="fas fa-microphone"></i></div>
@@ -723,6 +715,42 @@
                             </div>
                         </article>
                     </div>
+
+                    <!-- 展開/折り畳みボタン -->
+                    <div class="examples-toggle-container">
+                        <button id="examples-toggle-btn" class="examples-toggle-btn" aria-expanded="false" aria-controls="additional-examples">
+                            <span class="toggle-text">さらに6つの事例を見る</span>
+                            <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
+                        </button>
+                        <p class="toggle-description">音声記録、家族連携、健康予測、栄養管理、対話支援、請求自動化の事例</p>
+                    </div>
+                </div>
+
+                <!-- 総合効果のまとめ -->
+                <div class="total-roi-summary">
+                    <h3><i class="fas fa-chart-line"></i> 全事例導入時の総合効果</h3>
+                    <div class="roi-grid">
+                        <div class="roi-item">
+                            <div class="roi-number">9</div>
+                            <div class="roi-label">システム導入数</div>
+                        </div>
+                        <div class="roi-item">
+                            <div class="roi-number">月35万円</div>
+                            <div class="roi-label">削減効果合計</div>
+                        </div>
+                        <div class="roi-item">
+                            <div class="roi-number">月18万円</div>
+                            <div class="roi-label">システム利用料合計</div>
+                        </div>
+                        <div class="roi-item">
+                            <div class="roi-number">月17万円</div>
+                            <div class="roi-label">実質プラス効果</div>
+                        </div>
+                    </div>
+                    <p class="roi-note">
+                        ※ 上記は全システムを導入した場合の概算です。実際の効果は施設規模・運用方法により変動します。<br>
+                        ※ 段階的導入により、リスクを最小化しながら効果を実感いただけます。
+                    </p>
                 </div>
             </div>
         </section>
@@ -942,6 +970,48 @@
                         </footer>
                     </article>
                 </div>
+
+                <!-- 料金保証セクション -->
+                <div class="pricing-guarantee">
+                    <h3><i class="fas fa-shield-alt"></i> 料金に関するお約束</h3>
+                    <div class="guarantee-grid">
+                        <div class="guarantee-item">
+                            <div class="guarantee-icon"><i class="fas fa-handshake"></i></div>
+                            <h4>事前見積もり必須</h4>
+                            <p>必ず詳細な見積書を提示し、ご納得いただいてから開発を開始いたします。</p>
+                        </div>
+                        <div class="guarantee-item">
+                            <div class="guarantee-icon"><i class="fas fa-ban"></i></div>
+                            <h4>隠れた費用なし</h4>
+                            <p>追加料金は事前にご相談・ご承認いただいた場合のみ。予期しない請求は一切ありません。</p>
+                        </div>
+                        <div class="guarantee-item">
+                            <div class="guarantee-icon"><i class="fas fa-undo"></i></div>
+                            <h4>効果保証</h4>
+                            <p>導入後3ヶ月で効果が実感できない場合、無償で改善・調整いたします。</p>
+                        </div>
+                        <div class="guarantee-item">
+                            <div class="guarantee-icon"><i class="fas fa-calculator"></i></div>
+                            <h4>ROI明示</h4>
+                            <p>投資対効果を数値で明示し、導入価値を明確にお示しいたします。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI活用アピール -->
+                <aside class="order-made-appeal">
+                    <i class="fas fa-robot appeal-icon" aria-hidden="true"></i>
+                    <h3>AIがもたらす介護現場の革新</h3>
+                    <p>
+                        単なる記録システムを超えて、AI技術であらゆる介護現場の課題を解決できる。<br>
+                        スタッフの負担軽減、利用者様の満足度向上、業務効率化、安全性確保など、<br>
+                        AIの力で理想の介護現場を実現します。貴施設だけの特別なAIシステムを<br>
+                        一緒に作り上げ、介護の未来を切り開きましょう。
+                    </p>
+                    <a href="#contact" class="appeal-cta">
+                        <i class="fas fa-magic" aria-hidden="true"></i> AI活用の可能性を相談する
+                    </a>
+                </aside>
             </div>
         </section>
 
