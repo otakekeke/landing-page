@@ -138,13 +138,13 @@ body {
 }
 
 .loader {
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(79, 70, 229, 0.1);
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(59, 130, 246, 0.1);
+    border-top: 4px solid var(--accent-color);
     border-radius: 50%;
-    border-top: 3px solid var(--accent-color);
-    animation: spin 1.2s linear infinite;
-    margin-bottom: var(--spacing-md);
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
 }
 
 @keyframes spin {
@@ -155,30 +155,24 @@ body {
 .loading-progress {
     width: 200px;
     height: 4px;
-    background: rgba(79, 70, 229, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     border-radius: 2px;
+    margin: 20px auto;
     overflow: hidden;
-    position: relative;
 }
 
 .progress-bar {
     height: 100%;
     background: linear-gradient(90deg, var(--accent-color), var(--accent-color-dark));
     border-radius: 2px;
-    animation: progress 2.5s ease-in-out infinite;
-    transform-origin: left;
+    animation: progress 2s ease-in-out infinite;
+    transform: translateX(-100%);
 }
 
 @keyframes progress {
-    0% {
-        transform: scaleX(0);
-    }
-    50% {
-        transform: scaleX(0.7);
-    }
-    100% {
-        transform: scaleX(1);
-    }
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
 }
 
 .loading-text {
@@ -3318,5 +3312,140 @@ fieldset legend i {
     .pricing-calculation-table th,
     .pricing-calculation-table td {
         padding: 0.4rem;
+    }
+}
+
+/* Compact Process Grid */
+.compact-process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.process-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.process-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.process-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color-dark));
+}
+
+.process-1::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.process-2::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+.process-3::before { background: linear-gradient(90deg, #eab308, #ca8a04); }
+.process-4::before { background: linear-gradient(90deg, #22c55e, #16a34a); }
+.process-5::before { background: linear-gradient(90deg, #06b6d4, #0891b2); }
+.process-6::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.process-7::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+.process-8::before { background: linear-gradient(90deg, #ec4899, #db2777); }
+
+.process-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.process-1 .process-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.process-2 .process-icon { background: linear-gradient(135deg, #f97316, #ea580c); }
+.process-3 .process-icon { background: linear-gradient(135deg, #eab308, #ca8a04); }
+.process-4 .process-icon { background: linear-gradient(135deg, #22c55e, #16a34a); }
+.process-5 .process-icon { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.process-6 .process-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.process-7 .process-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.process-8 .process-icon { background: linear-gradient(135deg, #ec4899, #db2777); }
+
+.process-card:hover .process-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.process-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color-heading);
+    margin-bottom: 1rem;
+}
+
+.process-card p {
+    color: var(--text-color-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.process-day {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .compact-process-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+    
+    .process-card {
+        padding: 1.5rem;
+    }
+    
+    .process-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .process-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .process-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .compact-process-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .process-card {
+        padding: 1.25rem;
     }
 }

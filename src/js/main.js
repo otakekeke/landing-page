@@ -245,83 +245,62 @@ function setupTouchOptimizations() {
     }, { passive: false });
 }
 
-// ローディング画面の表示（改善版）
+// ローディング画面の表示
 function showLoadingScreen() {
-    const loader = document.getElementById('loading-overlay');
-    if (loader) {
-        loader.style.display = 'flex';
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'flex';
+        loadingOverlay.style.opacity = '1';
+        loadingOverlay.classList.remove('fade-out');
         
-        // ローディングメッセージの配列
-        const loadingMessages = [
-            {
-                main: "FastAI システムを準備中...",
-                sub: "あなたの施設に最適な介護支援環境を構築しています"
-            },
-            {
-                main: "データベースを初期化中...",
-                sub: "安全で信頼性の高いシステム環境を準備しています"
-            },
-            {
-                main: "AIエンジンを起動中...",
-                sub: "介護現場に特化したAI機能を読み込んでいます"
-            },
-            {
-                main: "UI コンポーネントを最適化中...",
-                sub: "使いやすいインターフェースを準備しています"
-            }
-        ];
-        
-        const loadingText = document.querySelector('.loading-text');
-        const loadingSubtitle = document.querySelector('.loading-subtitle');
-        
-        if (loadingText && loadingSubtitle) {
-            let messageIndex = 0;
-            
-            // 初期メッセージを設定
-            loadingText.textContent = loadingMessages[0].main;
-            loadingSubtitle.textContent = loadingMessages[0].sub;
-            
-            // 1.5秒ごとにメッセージを変更
-            const messageInterval = setInterval(() => {
-                messageIndex = (messageIndex + 1) % loadingMessages.length;
-                
-                // フェードアウト
-                loadingText.style.opacity = '0';
-                loadingSubtitle.style.opacity = '0';
-                
-                setTimeout(() => {
-                    // メッセージ変更
-                    loadingText.textContent = loadingMessages[messageIndex].main;
-                    loadingSubtitle.textContent = loadingMessages[messageIndex].sub;
-                    
-                    // フェードイン
-                    loadingText.style.opacity = '1';
-                    loadingSubtitle.style.opacity = '0.8';
-                }, 200);
-            }, 1500);
-            
-            // ローディング完了時にインターバルをクリア
-            setTimeout(() => {
-                clearInterval(messageInterval);
-            }, 2800);
+        // プログレスバーアニメーションを確実に開始
+        const progressBar = loadingOverlay.querySelector('.progress-bar');
+        if (progressBar) {
+            progressBar.style.animation = 'progress 2s ease-in-out infinite';
         }
+        
+        // ローダーアニメーションを確実に開始
+        const loader = loadingOverlay.querySelector('.loader');
+        if (loader) {
+            loader.style.animation = 'spin 1s linear infinite';
+        }
+        
+        // 文字のフェードイン・アウトアニメーション
+        const loadingText = loadingOverlay.querySelector('.loading-text');
+        const loadingSubtitle = loadingOverlay.querySelector('.loading-subtitle');
+        if (loadingText) {
+            loadingText.style.animation = 'fadeInOut 3s ease-in-out infinite';
+        }
+        if (loadingSubtitle) {
+            loadingSubtitle.style.animation = 'fadeInOut 3s ease-in-out infinite 0.5s';
+        }
+        
+        console.log('ローディング画面を表示しました');
     }
 }
 
-// ローディング画面の非表示（改善版）
+// ローディング画面の非表示
 function hideLoadingScreen() {
-    const loader = document.getElementById('loading-overlay');
-    if (loader) {
-        loader.classList.add('fade-out');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        console.log('ローディング画面を非表示にします');
         
-        // ローディング完了後にメインコンテンツをフェードイン
+        // フェードアウトアニメーションを開始
+        loadingOverlay.classList.add('fade-out');
+        
+        // アニメーション完了後に非表示
         setTimeout(() => {
-            loader.style.display = 'none';
-            const content = document.querySelector('.content');
-            if (content) {
-                content.style.opacity = '1';
+            loadingOverlay.style.display = 'none';
+            
+            // メインコンテンツを表示
+            const mainContent = document.getElementById('main-content');
+            if (mainContent) {
+                mainContent.style.opacity = '1';
+                mainContent.style.visibility = 'visible';
             }
-        }, 600);
+            
+            console.log('ローディング完了');
+        }, 500);
     }
 }
 
