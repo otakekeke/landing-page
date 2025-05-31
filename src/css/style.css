@@ -21,15 +21,16 @@
 /* 基本設定 */
 :root {
     /* 配色 */
-    --primary-color: #EFF6FF; /* 元の淡いブルー系に戻す */
-    --secondary-color: #DBEAFE; /* より淡いブルー */
-    --accent-color: #007AFF; /* 元の青色に戻す */
+    --primary-color: #EFF6FF; /* 背景用の淡いブルー系 */
+    --secondary-color: #DBEAFE; /* 背景用のより淡いブルー */
+    --accent-color: #007AFF; /* アクセント用の青色 */
     --accent-color-dark: #0060C0; /* 少し濃い青 */
-    --text-color: #1F2937; /* 元のダークグレー */
-    --text-color-light: #6B7280; /* 元のミディアムグレー */
+    --text-color: #1F2937; /* メインテキスト色（濃いグレー） */
+    --text-color-light: #6B7280; /* サブテキスト色（ミディアムグレー） */
+    --text-color-heading: #0F172A; /* 見出し用の最も濃い色 */
     --bg-color: #FFFFFF; /* 白背景 */
     --card-bg: rgba(255, 255, 255, 0.95); /* カード背景 */
-    --border-color: #E5E7EB; /* 元のボーダー色 */
+    --border-color: #E5E7EB; /* ボーダー色 */
     --shadow-color: rgba(0, 0, 0, 0.08);
     --shadow-color-hover: rgba(0, 0, 0, 0.12);
     --success-color: #10B981; /* Emerald 500 */
@@ -2758,7 +2759,7 @@ fieldset legend i {
 .pricing-logic-section {
     margin-bottom: clamp(3rem, 5vw, 4rem);
     padding: clamp(1.5rem, 3vw, 2.5rem);
-    background: linear-gradient(135deg, var(--card-background) 0%, rgba(59, 130, 246, 0.03) 100%);
+    background: linear-gradient(135deg, var(--bg-color) 0%, rgba(59, 130, 246, 0.03) 100%);
     border-radius: var(--border-radius-lg);
     border: 1px solid rgba(59, 130, 246, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -2769,7 +2770,7 @@ fieldset legend i {
     align-items: center;
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--text-color-heading); /* 最も濃い色に変更 */
     margin-bottom: clamp(1.5rem, 3vw, 2rem);
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 1rem;
@@ -2781,7 +2782,7 @@ fieldset legend i {
     justify-content: center;
     width: clamp(2.5rem, 4vw, 3rem);
     height: clamp(2.5rem, 4vw, 3rem);
-    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
     color: white;
     border-radius: 50%;
     font-weight: 700;
@@ -2828,7 +2829,7 @@ fieldset legend i {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--text-color);
+    color: var(--text-color-heading); /* 濃い色に変更 */
 }
 
 .benefit-card p {
@@ -2872,7 +2873,7 @@ fieldset legend i {
 }
 
 .pricing-calculation-table th {
-    background: var(--primary-color);
+    background: var(--accent-color); /* 背景色を青に変更 */
     color: white;
     padding: clamp(0.75rem, 2vw, 1rem);
     text-align: left;
@@ -2884,6 +2885,7 @@ fieldset legend i {
     padding: clamp(0.75rem, 2vw, 1rem);
     border-bottom: 1px solid #e5e7eb;
     vertical-align: top;
+    color: var(--text-color); /* 明確な文字色指定 */
 }
 
 .pricing-calculation-table tr:hover {
@@ -2905,7 +2907,7 @@ fieldset legend i {
 
 .formula-name {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--text-color-heading); /* 濃い色に変更 */
 }
 
 /* Pricing Note */
@@ -2982,11 +2984,13 @@ fieldset legend i {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 600;
     margin-bottom: 1rem;
+    color: white; /* 白色を明示 */
 }
 
 .process-step p {
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     line-height: 1.5;
+    color: white; /* 白色を明示 */
     opacity: 0.95;
 }
 
@@ -3006,6 +3010,7 @@ fieldset legend i {
     padding: 1rem;
     border-radius: var(--border-radius);
     text-align: center;
+    color: white; /* 白色を明示 */
 }
 
 .example-1 {
@@ -3014,16 +3019,28 @@ fieldset legend i {
     color: #15803d;
 }
 
+.example-1 .example-title {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
 .example-2 {
     border-color: #3b82f6;
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
     color: #1d4ed8;
 }
 
+.example-2 .example-title {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
 .example-3 {
     border-color: #8b5cf6;
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
     color: #7c3aed;
+}
+
+.example-3 .example-title {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 }
 
 .calculation-example {
@@ -3055,7 +3072,7 @@ fieldset legend i {
 .example-data-table th,
 .example-calculation-table th,
 .example-single-table th {
-    background: var(--primary-color);
+    background: var(--accent-color);
     color: white;
     padding: 0.75rem;
     text-align: left;
@@ -3067,6 +3084,7 @@ fieldset legend i {
 .example-single-table td {
     padding: 0.75rem;
     border-bottom: 1px solid #e5e7eb;
+    color: var(--text-color); /* 明確な文字色指定 */
 }
 
 .highlight-row {
@@ -3084,7 +3102,7 @@ fieldset legend i {
     text-align: center;
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--text-color-heading); /* 濃い色に変更 */
     padding: 1rem;
     background: rgba(59, 130, 246, 0.1);
     border-radius: var(--border-radius);
@@ -3120,7 +3138,7 @@ fieldset legend i {
     margin: 0;
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 600;
-    color: var(--primary-color);
+    color: var(--text-color-heading); /* 濃い色に変更 */
 }
 
 .qa-answer {
@@ -3130,7 +3148,7 @@ fieldset legend i {
 
 .qa-answer p {
     margin: 0;
-    color: var(--text-color-light);
+    color: var(--text-color); /* 濃い色に変更 */
     line-height: 1.6;
 }
 
@@ -3204,10 +3222,12 @@ fieldset legend i {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: white; /* 白色を明示 */
 }
 
 .summary-benefit p {
     font-size: 0.9rem;
+    color: white; /* 白色を明示 */
     opacity: 0.9;
     margin: 0;
 }
@@ -3222,7 +3242,7 @@ fieldset legend i {
     gap: 0.5rem;
     padding: 1rem 2rem;
     background: white;
-    color: var(--primary-color);
+    color: var(--accent-color); /* アクセント色に変更 */
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 600;
@@ -3235,6 +3255,7 @@ fieldset legend i {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     background: #f8fafc;
+    color: var(--accent-color-dark); /* ホバー時により濃い色 */
 }
 
 /* レスポンシブ対応 */
