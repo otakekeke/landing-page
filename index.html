@@ -60,6 +60,18 @@
       gtag('config', 'G-DYJ9C338F0');
     </script>
     
+    <!-- MathJax for mathematical formula rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+    
     <!-- インポートマップの設定 -->
     <script type="importmap">
     {
@@ -258,34 +270,6 @@
                                     <li><strong>人件費削減：月32,000円相当</strong></li>
                                 </ul>
                             </div>
-                            <div class="pricing-estimate">
-                                <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                <div class="pricing-breakdown">
-                                    <div class="price-range">
-                                        <span class="price-main">月額 18,000円〜25,000円</span>
-                                        <span class="price-note">（施設規模・車両台数により変動）</span>
-                                    </div>
-                                    <div class="pricing-factors">
-                                        <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                        <ul class="factor-list">
-                                            <li><span class="factor-label">基本システム利用料:</span> <span class="factor-price">12,000円</span></li>
-                                            <li><span class="factor-label">車両台数（1台あたり）:</span> <span class="factor-price">2,000円</span></li>
-                                            <li><span class="factor-label">リアルタイム交通情報API:</span> <span class="factor-price">4,000円</span></li>
-                                            <li><span class="factor-label">カスタマイズ・保守:</span> <span class="factor-price">0〜7,000円</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="roi-comparison">
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">削減効果</span>
-                                            <span class="roi-value-positive">月32,000円</span>
-                                        </div>
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">実質効果</span>
-                                            <span class="roi-value-positive">月+7,000円〜+14,000円</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </article>
 
@@ -311,34 +295,6 @@
                                     <li><strong>人件費削減：月60,000円相当</strong></li>
                                 </ul>
                             </div>
-                            <div class="pricing-estimate">
-                                <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                <div class="pricing-breakdown">
-                                    <div class="price-range">
-                                        <span class="price-main">月額 22,000円〜35,000円</span>
-                                        <span class="price-note">（利用者数・記録項目数により変動）</span>
-                                    </div>
-                                    <div class="pricing-factors">
-                                        <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                        <ul class="factor-list">
-                                            <li><span class="factor-label">基本記録システム:</span> <span class="factor-price">15,000円</span></li>
-                                            <li><span class="factor-label">利用者数（50名まで）:</span> <span class="factor-price">5,000円</span></li>
-                                            <li><span class="factor-label">タブレット・クラウド利用料:</span> <span class="factor-price">2,000円</span></li>
-                                            <li><span class="factor-label">カスタムフォーム作成:</span> <span class="factor-price">0〜13,000円</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="roi-comparison">
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">削減効果</span>
-                                            <span class="roi-value-positive">月60,000円</span>
-                                        </div>
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">実質効果</span>
-                                            <span class="roi-value-positive">月+25,000円〜+38,000円</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </article>
 
@@ -363,34 +319,6 @@
                                     <li><strong>スタッフ満足度：15%向上</strong></li>
                                     <li><strong>人件費削減：月44,000円相当</strong></li>
                                 </ul>
-                            </div>
-                            <div class="pricing-estimate">
-                                <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                <div class="pricing-breakdown">
-                                    <div class="price-range">
-                                        <span class="price-main">月額 15,000円〜28,000円</span>
-                                        <span class="price-note">（スタッフ数・シフトパターン複雑度により変動）</span>
-                                    </div>
-                                    <div class="pricing-factors">
-                                        <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                        <ul class="factor-list">
-                                            <li><span class="factor-label">基本シフト管理システム:</span> <span class="factor-price">10,000円</span></li>
-                                            <li><span class="factor-label">スタッフ数（30名まで）:</span> <span class="factor-price">3,000円</span></li>
-                                            <li><span class="factor-label">AI最適化エンジン:</span> <span class="factor-price">2,000円</span></li>
-                                            <li><span class="factor-label">複雑シフトパターン対応:</span> <span class="factor-price">0〜13,000円</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="roi-comparison">
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">削減効果</span>
-                                            <span class="roi-value-positive">月44,000円</span>
-                                        </div>
-                                        <div class="roi-item-small">
-                                            <span class="roi-label-small">実質効果</span>
-                                            <span class="roi-value-positive">月+16,000円〜+29,000円</span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </article>
@@ -427,34 +355,6 @@
                                         <li><strong>人件費削減：月112,000円相当</strong></li>
                                     </ul>
                                 </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 25,000円〜45,000円</span>
-                                            <span class="price-note">（音声認識精度・記録件数により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">AI音声認識エンジン:</span> <span class="factor-price">18,000円</span></li>
-                                                <li><span class="factor-label">方言・専門用語学習:</span> <span class="factor-price">5,000円</span></li>
-                                                <li><span class="factor-label">感情分析機能:</span> <span class="factor-price">2,000円</span></li>
-                                                <li><span class="factor-label">高精度カスタマイズ:</span> <span class="factor-price">0〜20,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">削減効果</span>
-                                                <span class="roi-value-positive">月112,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-positive">月+67,000円〜+87,000円</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </article>
 
@@ -479,34 +379,6 @@
                                         <li><strong>情報伝達ミス：0件</strong></li>
                                         <li><strong>人件費削減：月56,000円相当</strong></li>
                                     </ul>
-                                </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 12,000円〜25,000円</span>
-                                            <span class="price-note">（利用者数・家族数により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">基本連携システム:</span> <span class="factor-price">8,000円</span></li>
-                                                <li><span class="factor-label">AI自動レポート生成:</span> <span class="factor-price">3,000円</span></li>
-                                                <li><span class="factor-label">写真・動画管理:</span> <span class="factor-price">1,000円</span></li>
-                                                <li><span class="factor-label">多家族対応・カスタマイズ:</span> <span class="factor-price">0〜13,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">削減効果</span>
-                                                <span class="roi-value-positive">月56,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-positive">月+31,000円〜+44,000円</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -533,34 +405,6 @@
                                         <li><strong>家族・利用者様の安心感向上</strong></li>
                                     </ul>
                                 </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 30,000円〜55,000円</span>
-                                            <span class="price-note">（利用者数・センサー数により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">AI予測分析エンジン:</span> <span class="factor-price">20,000円</span></li>
-                                                <li><span class="factor-label">バイタルセンサー連携:</span> <span class="factor-price">8,000円</span></li>
-                                                <li><span class="factor-label">24時間監視システム:</span> <span class="factor-price">2,000円</span></li>
-                                                <li><span class="factor-label">高度予測・多センサー対応:</span> <span class="factor-price">0〜25,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">医療費削減</span>
-                                                <span class="roi-value-positive">月300,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-positive">月+245,000円〜+270,000円</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </article>
 
@@ -585,34 +429,6 @@
                                         <li><strong>食材廃棄コスト：月4万円削減</strong></li>
                                         <li><strong>人件費削減：月36,000円相当</strong></li>
                                     </ul>
-                                </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 18,000円〜32,000円</span>
-                                            <span class="price-note">（利用者数・メニュー複雑度により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">基本栄養管理システム:</span> <span class="factor-price">12,000円</span></li>
-                                                <li><span class="factor-label">AI メニュー生成:</span> <span class="factor-price">4,000円</span></li>
-                                                <li><span class="factor-label">食べ残し予測機能:</span> <span class="factor-price">2,000円</span></li>
-                                                <li><span class="factor-label">複雑制限・アレルギー対応:</span> <span class="factor-price">0〜14,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">削減効果</span>
-                                                <span class="roi-value-positive">月76,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-positive">月+44,000円〜+58,000円</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -639,34 +455,6 @@
                                         <li><strong>教育コスト削減：月20,000円相当</strong></li>
                                     </ul>
                                 </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 15,000円〜28,000円</span>
-                                            <span class="price-note">（利用者数・学習データ量により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">基本対話支援システム:</span> <span class="factor-price">10,000円</span></li>
-                                                <li><span class="factor-label">AI学習・分析エンジン:</span> <span class="factor-price">3,000円</span></li>
-                                                <li><span class="factor-label">リアルタイム提案機能:</span> <span class="factor-price">2,000円</span></li>
-                                                <li><span class="factor-label">高度学習・多利用者対応:</span> <span class="factor-price">0〜13,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">削減効果</span>
-                                                <span class="roi-value-positive">月20,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-mixed">投資回収期間12ヶ月</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </article>
 
@@ -691,34 +479,6 @@
                                         <li><strong>請求精度：99.8%達成</strong></li>
                                         <li><strong>収益改善：月15万円相当</strong></li>
                                     </ul>
-                                </div>
-                                <div class="pricing-estimate">
-                                    <h4><i class="fas fa-yen-sign"></i> 月額利用料概算</h4>
-                                    <div class="pricing-breakdown">
-                                        <div class="price-range">
-                                            <span class="price-main">月額 25,000円〜42,000円</span>
-                                            <span class="price-note">（利用者数・請求項目数により変動）</span>
-                                        </div>
-                                        <div class="pricing-factors">
-                                            <h5><i class="fas fa-calculator"></i> 算出根拠</h5>
-                                            <ul class="factor-list">
-                                                <li><span class="factor-label">基本レセプトシステム:</span> <span class="factor-price">18,000円</span></li>
-                                                <li><span class="factor-label">AI自動生成・チェック:</span> <span class="factor-price">5,000円</span></li>
-                                                <li><span class="factor-label">制度変更自動対応:</span> <span class="factor-price">2,000円</span></li>
-                                                <li><span class="factor-label">複雑請求・多事業所対応:</span> <span class="factor-price">0〜17,000円</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="roi-comparison">
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">収益改善</span>
-                                                <span class="roi-value-positive">月150,000円</span>
-                                            </div>
-                                            <div class="roi-item-small">
-                                                <span class="roi-label-small">実質効果</span>
-                                                <span class="roi-value-positive">月+108,000円〜+125,000円</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </article>
@@ -846,101 +606,339 @@
         <section id="pricing" class="section" aria-labelledby="pricing-title">
             <div class="section-content">
                 <header class="section-header">
-                    <h2 id="pricing-title">シンプルな料金プラン</h2>
-                    <p>AI機能・記録・管理・業務効率化すべて込みでフルオーダーメイド。完全受注生産のため個別見積もりで、お客様のご予算に合わせてご提案いたします。</p>
+                    <h2 id="pricing-title">AI活用業務効率化システム - 月額料金算定ロジック</h2>
+                    <p>透明性・公平性・柔軟性を重視した科学的な料金設定システムをご説明いたします</p>
                 </header>
 
-                <!-- 料金透明性セクション -->
-                <div class="pricing-transparency">
-                    <h3><i class="fas fa-eye"></i> 料金算出の透明性</h3>
-                    <p class="transparency-intro">
-                        すべての料金は明確な根拠に基づいて算出されます。隠れた費用は一切ありません。<br>
-                        お客様が安心してご利用いただけるよう、料金の内訳を詳しくご説明いたします。
-                    </p>
-                    
-                    <div class="pricing-structure">
-                        <div class="structure-item">
-                            <div class="structure-icon"><i class="fas fa-cogs"></i></div>
-                            <h4>基本システム料金</h4>
-                            <p>各機能の基本的なシステム利用料。開発・保守・サーバー費用を含みます。</p>
-                            <span class="price-range-small">8,000円〜20,000円</span>
+                <!-- セクション1: なぜ時間×人件費をベースにするのか -->
+                <div class="pricing-logic-section">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">1</span>
+                        なぜ "時間 × 人件費" をベースにするのか？
+                    </h3>
+                    <div class="pricing-benefits-grid">
+                        <div class="benefit-card roi-benefit">
+                            <h4>ROI が一目で分かる</h4>
+                            <p>「○時間の作業が減り、時給 ¥△△ だから <strong>月に ¥□□ のコスト削減</strong>」という計算は、稟議を通す際の説得材料になります。</p>
                         </div>
-                        
-                        <div class="structure-item">
-                            <div class="structure-icon"><i class="fas fa-users"></i></div>
-                            <h4>利用規模料金</h4>
-                            <p>利用者数・スタッフ数・車両台数など、施設規模に応じた従量課金。</p>
-                            <span class="price-range-small">1,000円〜8,000円</span>
+                        <div class="benefit-card flexibility-benefit">
+                            <h4>業務ごとに応用しやすい</h4>
+                            <p>手入力・巡回・ダブルチェック…― 介護現場の多様なタスクを <strong>同じ物差し</strong>（=時間）で比べられます。</p>
                         </div>
-                        
-                        <div class="structure-item">
-                            <div class="structure-icon"><i class="fas fa-robot"></i></div>
-                            <h4>AI機能料金</h4>
-                            <p>音声認識・予測分析・画像認識など、AI技術の利用料。精度向上費用を含みます。</p>
-                            <span class="price-range-small">2,000円〜20,000円</span>
-                        </div>
-                        
-                        <div class="structure-item">
-                            <div class="structure-icon"><i class="fas fa-wrench"></i></div>
-                            <h4>カスタマイズ料金</h4>
-                            <p>お客様固有の要件に応じた追加開発・設定変更費用。複雑度により変動。</p>
-                            <span class="price-range-small">0円〜25,000円</span>
-                        </div>
-                    </div>
-                    
-                    <div class="cost-comparison">
-                        <h4><i class="fas fa-balance-scale"></i> 人件費との比較</h4>
-                        <div class="comparison-grid">
-                            <div class="comparison-item">
-                                <div class="comparison-label">従来の人的作業</div>
-                                <div class="comparison-value traditional">月平均 120,000円〜300,000円</div>
-                                <div class="comparison-note">人件費・残業代・教育コスト含む</div>
-                            </div>
-                            <div class="comparison-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                            <div class="comparison-item">
-                                <div class="comparison-label">AIシステム導入後</div>
-                                <div class="comparison-value ai-system">月平均 15,000円〜55,000円</div>
-                                <div class="comparison-note">システム利用料のみ</div>
-                            </div>
-                        </div>
-                        <div class="savings-highlight">
-                            <i class="fas fa-piggy-bank"></i>
-                            <span>平均 65,000円〜245,000円/月 の削減効果</span>
+                        <div class="benefit-card logic-benefit">
+                            <h4>値上げ・値下げがロジカル</h4>
+                            <p>利用状況が変われば "削減時間" も変わるため、<strong>同じ式のまま自動で料金を見直し</strong>できます。</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="pricing-container">
-                    <!-- オールインワンプラン（唯一のプラン） -->
-                    <article class="pricing-card">
-                        <header class="pricing-header">
-                            <h3>フルオーダーメイドプラン</h3>
-                            <div class="price" aria-label="料金応談">
-                                <span style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 600; color: var(--accent-color);">料金応談</span>
+                <!-- セクション2: 月額料金の計算式 -->
+                <div class="pricing-logic-section">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">2</span>
+                        月額料金の計算式
+                    </h3>
+                    
+                    <!-- 計算式 -->
+                    <div class="formula-container">
+                        <div class="formula-box">
+                            \[
+                            \Large
+                            \textbf{月額料金}
+                            =
+                            \underbrace{\bigl(① + ②\bigr) \times  \alpha}_{\text{= 正味価値の 1/3}}
+                            \;+\;
+                            ③
+                            \;+\;
+                            ④
+                            \]
                         </div>
-                            <p style="color: var(--text-color-light); font-size: var(--font-size-sm); margin-top: var(--spacing-sm);">
-                                <i class="fas fa-info-circle" style="margin-right: 0.5rem; color: var(--accent-color);"></i>
-                                目安：人件費の約3分の1
-                            </p>
-                        </header>
-                        <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>完全カスタム開発</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>AI機能フル搭載</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>管理システム統合</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>業務効率化ツール</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>コミュニケーション支援</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>導入・教育サポート</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>継続的アップデート</li>
-                                <li><i class="fas fa-check" aria-hidden="true"></i>24時間技術サポート</li>
-                            </ul>
+                    </div>
+
+                    <!-- 計算式の説明表 -->
+                    <div class="pricing-table-container">
+                        <table class="pricing-calculation-table">
+                            <thead>
+                                <tr>
+                                    <th>記号</th>
+                                    <th>名称</th>
+                                    <th>内容</th>
+                                    <th>入力タイミング</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="symbol labor-symbol">①</td>
+                                    <td class="formula-name">労務削減価値</td>
+                                    <td>[(導入前の作業時間 − 導入後の作業時間 − 新タスク時間) × 実人件費単価]</td>
+                                    <td>導入前後で毎月測定</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol value-symbol">②</td>
+                                    <td class="formula-name">付加価値・リスク削減</td>
+                                    <td>監査対応・誤薬訴訟・加算逸失などの期待損失回避額</td>
+                                    <td>導入設計時に算定</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol running-symbol">③</td>
+                                    <td class="formula-name">ランニング実費</td>
+                                    <td>AI API・クラウド・機器リース・（※運用代行の場合はその費用）</td>
+                                    <td>毎月変動</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol support-symbol">④</td>
+                                    <td class="formula-name">サポート料</td>
+                                    <td>障害対応・機能改善ヒアリング等の窓口費用</td>
+                                    <td>固定 (例：¥25,000)</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol coefficient-symbol">α</td>
+                                    <td class="formula-name">係数</td>
+                                    <td>"価値の 1/3 を料金に" → <strong>0.33</strong> が標準<br>複雑度・リスクで <strong>0.25〜0.40</strong> まで可変</td>
+                                    <td>案件初期に設定</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pricing-note">
+                        <h4>📌 ポイント</h4>
+                        <ul>
+                            <li><strong>新タスク時間</strong> が発生する場合は ① から控除し、"正味（ネット）削減時間" で計算します。</li>
+                            <li>当社が <strong>運用代行</strong> を行う場合は、その費用を ③ に合算し、顧客側の新タスク時間は <strong>0</strong> として計算します。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- セクション3: 計算プロセス -->
+                <div class="pricing-logic-section">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">3</span>
+                        計算プロセス（4ステップ）
+                    </h3>
+                    
+                    <div class="process-steps-grid">
+                        <div class="process-step step-1">
+                            <div class="step-number">1</div>
+                            <h4>作業棚卸し</h4>
+                            <p>職種別・業務別に「導入前作業」「導入後作業」「新タスク」を Excel / Google シートに列挙</p>
                         </div>
-                        <footer class="pricing-footer">
-                            <a href="#contact" class="cta-button">AI活用相談をする</a>
-                        </footer>
-                    </article>
+                        <div class="process-step step-2">
+                            <div class="step-number">2</div>
+                            <h4>時間と単価を入力</h4>
+                            <p>現場のヒアリングで <strong>月間工数 (h)</strong>、給与表から <strong>実コスト (円/h)</strong> を入力</p>
+                        </div>
+                        <div class="process-step step-3">
+                            <div class="step-number">3</div>
+                            <h4>自動計算シートで料金試算</h4>
+                            <p>①②③④ と α を入れると <strong>月額料金が即算出</strong></p>
+                        </div>
+                        <div class="process-step step-4">
+                            <div class="step-number">4</div>
+                            <h4>月次で実測値を更新</h4>
+                            <p>削減時間や API 料金を実績値に置き換え、<strong>透明性の高い料金改定</strong> を実現</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- セクション4: 具体例 -->
+                <div class="pricing-logic-section">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">4</span>
+                        具体的な計算例
+                    </h3>
+
+                    <!-- 例1 -->
+                    <div class="calculation-example">
+                        <h4 class="example-title example-1">例 1｜記録業務の音声入力＋AI要約</h4>
+                        <div class="example-tables">
+                            <div class="example-data-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>項目</th>
+                                            <th>数値</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>導入前作業</td><td>12分 × 600件 = <strong>120h</strong></td></tr>
+                                        <tr><td>導入後作業</td><td>3分 × 600件 = <strong>30h</strong></td></tr>
+                                        <tr><td>新タスク</td><td>要約確認 1分 × 600件 = <strong>10h</strong></td></tr>
+                                        <tr class="highlight-row"><td>正味削減時間</td><td>120 − 30 − 10 = <strong>80h</strong></td></tr>
+                                        <tr><td>人件費単価</td><td>¥2,200／h</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="example-calculation-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>計算要素</th>
+                                            <th>金額</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>① 労務削減価値</td><td>80h × ¥2,200 = <strong>¥176,000</strong></td></tr>
+                                        <tr><td>② リスク削減価値</td><td><strong>¥20,000</strong></td></tr>
+                                        <tr><td>③ ランニング実費</td><td><strong>¥18,000</strong></td></tr>
+                                        <tr><td>④ サポート料</td><td><strong>¥25,000</strong></td></tr>
+                                        <tr><td>α</td><td><strong>0.33</strong></td></tr>
+                                        <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥108,000</strong></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="calculation-formula">
+                            計算式: (176,000＋20,000)×0.33＋18,000＋25,000 = <strong>¥108,000</strong>
+                        </div>
+                    </div>
+
+                    <!-- 例2 -->
+                    <div class="calculation-example">
+                        <h4 class="example-title example-2">例 2｜シフト最適化</h4>
+                        <div class="example-single-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>項目</th>
+                                        <th>数値</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>導入前</td><td>35h</td></tr>
+                                    <tr><td>導入後</td><td>5h</td></tr>
+                                    <tr><td>新タスク</td><td>4h</td></tr>
+                                    <tr class="highlight-row"><td>正味削減時間</td><td>35 − 5 − 4 = <strong>26h</strong></td></tr>
+                                    <tr><td>単価</td><td>¥3,000</td></tr>
+                                    <tr><td>①</td><td>26×3,000 = <strong>¥78,000</strong></td></tr>
+                                    <tr><td>②</td><td><strong>¥15,000</strong></td></tr>
+                                    <tr><td>③</td><td><strong>¥12,000</strong></td></tr>
+                                    <tr><td>④</td><td><strong>¥20,000</strong></td></tr>
+                                    <tr><td>α</td><td><strong>0.40</strong></td></tr>
+                                    <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥80,000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="calculation-formula">
+                            計算式: (78,000＋15,000)×0.40＋12,000＋20,000 = <strong>¥80,000</strong>
+                        </div>
+                    </div>
+
+                    <!-- 例3 -->
+                    <div class="calculation-example">
+                        <h4 class="example-title example-3">例 3｜服薬誤薬検知</h4>
+                        <div class="example-single-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>項目</th>
+                                        <th>数値</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>導入前</td><td>150h</td></tr>
+                                    <tr><td>導入後</td><td>30h</td></tr>
+                                    <tr><td>新タスク</td><td>30h</td></tr>
+                                    <tr class="highlight-row"><td>正味削減</td><td>150 − 30 − 30 = <strong>90h</strong></td></tr>
+                                    <tr><td>単価</td><td>¥1,900</td></tr>
+                                    <tr><td>①</td><td>90×1,900 = <strong>¥171,000</strong></td></tr>
+                                    <tr><td>②</td><td><strong>¥40,000</strong></td></tr>
+                                    <tr><td>③</td><td><strong>¥25,000</strong></td></tr>
+                                    <tr><td>④</td><td><strong>¥30,000</strong></td></tr>
+                                    <tr><td>α</td><td><strong>0.40</strong></td></tr>
+                                    <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥155,000</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="calculation-formula">
+                            計算式: (171,000＋40,000)×0.40＋25,000＋30,000 = <strong>¥155,000</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- セクション5: Q&A -->
+                <div class="pricing-logic-section">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">5</span>
+                        よくあるQ&A
+                    </h3>
+                    
+                    <div class="qa-container">
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <h4>Q: α は誰が決めるの？</h4>
+                            </div>
+                            <div class="qa-answer">
+                                <p>初回契約時に <strong>難易度・リスク・初期投資額</strong> を踏まえて協議。標準 0.33、生成AI / 解析系は 0.40。</p>
+                            </div>
+                        </div>
+
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <h4>Q: クラウド料金が高騰したら？</h4>
+                            </div>
+                            <div class="qa-answer">
+                                <p>③ ランニング実費は <strong>実費連動</strong>。ベンダー値上げ時は翌月以降スライド改定します。</p>
+                            </div>
+                        </div>
+
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <h4>Q: 新機能を追加したい場合の料金は？</h4>
+                            </div>
+                            <div class="qa-answer">
+                                <p>"追加による削減時間 or 付加価値" を再計算し、同じ式で月額を見直します。初期開発費用が発生する場合は別途お見積り。</p>
+                            </div>
+                        </div>
+
+                        <div class="qa-item">
+                            <div class="qa-question">
+                                <h4>Q: 最低利用期間は？</h4>
+                            </div>
+                            <div class="qa-answer">
+                                <p>サービス安定運用のため <strong>12か月</strong> をお願いしています。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- セクション6: まとめ -->
+                <div class="pricing-logic-section pricing-summary">
+                    <h3 class="pricing-section-title">
+                        <span class="section-number">6</span>
+                        まとめ
+                    </h3>
+                    
+                    <div class="summary-highlight">
+                        <p class="summary-main-text">「削減できた価値の 1/3 を月額に」</p>
+                        <p class="summary-sub-text">分かりやすく、フェアで、アップデートにも強い料金モデルです。</p>
+                        <p class="summary-detail">導入前後の実測値をもとに <strong>毎月のコストメリットを可視化</strong> しながら、安心してご利用いただけます。</p>
+                    </div>
+
+                    <div class="summary-benefits">
+                        <div class="summary-benefit">
+                            <div class="benefit-icon">📊</div>
+                            <h4>透明性</h4>
+                            <p>すべての計算根拠を明示</p>
+                        </div>
+                        <div class="summary-benefit">
+                            <div class="benefit-icon">⚖️</div>
+                            <h4>公平性</h4>
+                            <p>価値に応じた適正料金</p>
+                        </div>
+                        <div class="summary-benefit">
+                            <div class="benefit-icon">🔄</div>
+                            <h4>柔軟性</h4>
+                            <p>利用状況に応じて自動調整</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-cta">
+                        <a href="#contact" class="btn btn-primary pricing-cta-button">
+                            <i class="fas fa-calculator" aria-hidden="true"></i> 
+                            あなたの施設の料金を算定してみる
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
