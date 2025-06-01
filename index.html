@@ -60,6 +60,9 @@
       gtag('config', 'G-DYJ9C338F0');
     </script>
     
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <!-- MathJax for mathematical formula rendering -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -1156,17 +1159,32 @@
         <section id="contact" class="section" aria-labelledby="contact-title">
             <div class="section-content">
                 <header class="section-header">
-                    <h2 id="contact-title">AI活用・オーダーメイド相談</h2>
+                    <h2 id="contact-title">お問い合わせ・詳細相談</h2>
                     <p>
-                        記録業務から管理・効率化・コミュニケーション支援まで、貴施設の全ニーズにAI技術で対応いたします。<br>
-                    お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
-                </p>
+                        AI導入についてのご相談やお見積りのご依頼は、下記フォームからお気軽にお問い合わせください。<br>
+                        お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
+                    </p>
                 </header>
                 
+                <!-- 計算結果表示エリア -->
+                <div id="calculation-summary-area" class="calculation-summary-area" style="display: none;">
+                    <h3><i class="fas fa-calculator"></i> 料金シミュレーション結果</h3>
+                    <div class="summary-content" id="calculation-summary-content">
+                        <!-- JavaScript で動的に生成 -->
+                    </div>
+                    <p class="summary-note">
+                        <i class="fas fa-info-circle"></i>
+                        上記のシミュレーション結果を元に詳細なご提案をいたします
+                    </p>
+                </div>
+                
                 <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST" novalidate>
+                    <!-- 計算結果のhidden field -->
+                    <input type="hidden" id="simulation-data" name="simulation-data" value="">
+                    
                     <div class="form-group">
                         <label for="company"><i class="fas fa-building" aria-hidden="true"></i> 事業所名 <span aria-label="必須項目">*</span></label>
-                        <input type="text" id="company" name="company" placeholder="例：嶽ノ子株式会社" required aria-describedby="company-error">
+                        <input type="text" id="company" name="company" placeholder="例：株式会社○○○" required aria-describedby="company-error">
                     </div>
                     <div class="form-group">
                         <label for="name"><i class="fas fa-user" aria-hidden="true"></i> ご担当者名 <span aria-label="必須項目">*</span></label>
@@ -1174,44 +1192,58 @@
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope" aria-hidden="true"></i> メールアドレス <span aria-label="必須項目">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="例：info@example.com" required aria-describedby="email-error">
+                        <input type="email" id="email" name="email" placeholder="例：yamada@example.com" required aria-describedby="email-error">
                     </div>
                     <div class="form-group">
-                        <label for="phone"><i class="fas fa-phone" aria-hidden="true"></i> 電話番号 <span aria-label="必須項目">*</span></label>
-                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" required aria-describedby="phone-error">
+                        <label for="phone"><i class="fas fa-phone" aria-hidden="true"></i> 電話番号</label>
+                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" aria-describedby="phone-error">
                     </div>
                     <div class="form-group">
-                        <label for="requirement-q1"><i class="fas fa-tasks" aria-hidden="true"></i> 現在の業務での主な課題</label>
-                        <textarea id="requirement-q1" name="requirement-q1" rows="3" placeholder="例：記録作業に時間がかかる、シフト作成が大変、利用者様との会話がうまくいかない、家族への報告が手間など"></textarea>
+                        <label for="message"><i class="fas fa-comment" aria-hidden="true"></i> ご質問・ご要望</label>
+                        <textarea id="message" name="message" rows="4" placeholder="AI導入についてのご質問や、具体的なご要望などをお聞かせください（任意）"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="requirement-q2"><i class="fas fa-lightbulb" aria-hidden="true"></i> AI活用で実現したいこと</label>
-                        <textarea id="requirement-q2" name="requirement-q2" rows="3" placeholder="例：音声での記録自動化、AIによるシフト最適化、利用者様の体調変化予測、コミュニケーション支援、家族への自動報告など"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="message"><i class="fas fa-comment" aria-hidden="true"></i> その他のご質問・ご要望</label>
-                        <textarea id="message" name="message" rows="4" placeholder="AIについての疑問や具体的なご要望など、何でもお気軽にご記入ください"></textarea>
-                    </div>
-                    <!-- 面談希望日時 -->
-                    <fieldset class="form-group">
-                        <legend><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望の面談日時 (第1希望)</legend>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="date" id="interview-date-1" name="interview-date-1" style="flex: 1;" aria-label="第1希望日">
-                            <input type="time" id="interview-time-1" name="interview-time-1" style="flex: 1;" aria-label="第1希望時間">
+                    
+                    <!-- 面談希望 -->
+                    <div class="form-group meeting-preference">
+                        <label><i class="fas fa-calendar-check" aria-hidden="true"></i> 面談希望</label>
+                        <div class="meeting-options">
+                            <label class="meeting-option">
+                                <input type="radio" name="meeting-type" value="online" checked>
+                                <span class="radio-custom"></span>
+                                <div class="option-details">
+                                    <strong>オンライン面談</strong>
+                                    <span>Zoom等でのリモート面談（推奨）</span>
+                                </div>
+                            </label>
+                            <label class="meeting-option">
+                                <input type="radio" name="meeting-type" value="visit">
+                                <span class="radio-custom"></span>
+                                <div class="option-details">
+                                    <strong>訪問面談</strong>
+                                    <span>貴施設への訪問（関東圏内）</span>
+                                </div>
+                            </label>
+                            <label class="meeting-option">
+                                <input type="radio" name="meeting-type" value="phone">
+                                <span class="radio-custom"></span>
+                                <div class="option-details">
+                                    <strong>電話相談</strong>
+                                    <span>お電話での簡単なご相談</span>
+                                </div>
+                            </label>
                         </div>
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <legend><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望の面談日時 (第2希望)</legend>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="date" id="interview-date-2" name="interview-date-2" style="flex: 1;" aria-label="第2希望日">
-                            <input type="time" id="interview-time-2" name="interview-time-2" style="flex: 1;" aria-label="第2希望時間">
-                        </div>
-                    </fieldset>
-                    <p style="font-size: 0.9rem; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px;">※ 面談時間は1時間程度を予定しております。</p>
+                    </div>
+                    
+                    <!-- 希望日時 -->
+                    <div class="form-group">
+                        <label for="preferred-date"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望日時</label>
+                        <input type="datetime-local" id="preferred-date" name="preferred-date">
+                        <small>ご都合の良い日時をお選びください（平日9:00-17:00推奨）</small>
+                    </div>
 
                     <button type="submit" class="primary-button">
-                        <i class="fas fa-robot" aria-hidden="true"></i> 
-                        AI活用・オーダーメイド相談を予約する
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> 
+                        お問い合わせを送信する
                     </button>
                 </form>
             </div>
