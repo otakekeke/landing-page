@@ -75,6 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // フォーム送信の処理
         initFormSubmission();
+
+        // 費用概算計算ツールの初期化
+        initCostCalculator();
     } catch (e) {
         console.error('初期化エラー:', e);
         // エラー時もローディング画面を非表示
@@ -1265,4 +1268,410 @@ function initExamplesToggle() {
 // フォーム送信の処理
 function initFormSubmission() {
     // フォーム送信の処理を実装するコードをここに追加
+}
+
+// 費用概算計算ツール
+function initCostCalculator() {
+    const form = document.getElementById('cost-calculator-form');
+    const steps = document.querySelectorAll('.calculator-step');
+    const nextButtons = document.querySelectorAll('.next-step-btn');
+    const prevButtons = document.querySelectorAll('.prev-step-btn');
+    const calculateButton = document.querySelector('.calculate-btn');
+    const recalculateButton = document.getElementById('recalculate-btn');
+    const aiOptionCards = document.querySelectorAll('.ai-option-card');
+    
+    let currentStep = 1;
+    let calculationData = {};
+
+    // AI機能効率化率の設定
+    const aiEfficiencyRates = {
+        'voice-record': { type: 'record-time', rate: 0.85, riskReduction: 15000 },
+        'shift-optimize': { type: 'schedule-time', rate: 0.90, riskReduction: 10000 },
+        'family-report': { type: 'communication-time', rate: 0.80, riskReduction: 5000 },
+        'billing-auto': { type: 'billing-time', rate: 0.92, riskReduction: 8000 },
+        'health-predict': { type: 'other', rate: 0, riskReduction: 40000 },
+        'route-optimize': { type: 'other-time', rate: 0.75, riskReduction: 5000 }
+    };
+
+    // ステップナビゲーション
+    function showStep(stepNumber) {
+        steps.forEach((step, index) => {
+            if (index + 1 === stepNumber) {
+                step.style.display = 'block';
+                step.style.animation = 'fadeInUp 0.6s ease-out';
+            } else {
+                step.style.display = 'none';
+            }
+        });
+        currentStep = stepNumber;
+    }
+
+    // 次のステップへ
+    nextButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const nextStep = parseInt(button.dataset.next);
+            
+            // バリデーション
+            if (validateCurrentStep()) {
+                showStep(nextStep);
+            }
+        });
+    });
+
+    // 前のステップへ
+    prevButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const prevStep = parseInt(button.dataset.prev);
+            showStep(prevStep);
+        });
+    });
+
+    // 現在のステップのバリデーション
+    function validateCurrentStep() {
+        const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+        const requiredFields = currentStepElement.querySelectorAll('input[required], select[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = '#ef4444';
+                isValid = false;
+                
+                // エラーメッセージを表示
+                showFieldError(field, '必須項目です');
+            } else {
+                field.style.borderColor = '#e5e7eb';
+                clearFieldError(field);
+            }
+        });
+
+        if (!isValid) {
+            showNotification('必須項目を入力してください', 'error');
+        }
+
+        return isValid;
+    }
+
+    // フィールドエラー表示
+    function showFieldError(field, message) {
+        clearFieldError(field);
+        const errorElement = document.createElement('div');
+        errorElement.className = 'field-error';
+        errorElement.textContent = message;
+        errorElement.style.color = '#ef4444';
+        errorElement.style.fontSize = '0.875rem';
+        errorElement.style.marginTop = '0.25rem';
+        field.parentNode.appendChild(errorElement);
+    }
+
+    // フィールドエラー削除
+    function clearFieldError(field) {
+        const existingError = field.parentNode.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+
+    // AI機能カードの選択処理
+    aiOptionCards.forEach(card => {
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        const toggleSwitch = card.querySelector('.toggle-switch');
+        
+        // カード全体をクリック可能に
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.toggle-switch')) return;
+            
+            checkbox.checked = !checkbox.checked;
+            updateCardAppearance(card, checkbox.checked);
+        });
+
+        // トグルスイッチの処理
+        checkbox.addEventListener('change', (e) => {
+            updateCardAppearance(card, e.target.checked);
+        });
+    });
+
+    // カードの見た目更新
+    function updateCardAppearance(card, isSelected) {
+        if (isSelected) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    }
+
+    // 計算実行
+    calculateButton.addEventListener('click', () => {
+        if (validateCurrentStep()) {
+            collectFormData();
+            performCalculation();
+            showResults();
+        }
+    });
+
+    // 再計算
+    recalculateButton?.addEventListener('click', () => {
+        showStep(1);
+        hideResults();
+    });
+
+    // フォームデータ収集
+    function collectFormData() {
+        const formData = new FormData(form);
+        calculationData = {};
+
+        // 基本情報
+        calculationData.facilityType = formData.get('facility-type');
+        calculationData.staffCount = parseInt(formData.get('staff-count')) || 0;
+        calculationData.userCount = parseInt(formData.get('user-count')) || 0;
+        calculationData.avgHourlyWage = parseInt(formData.get('avg-hourly-wage')) || 0;
+
+        // 業務時間
+        calculationData.recordTime = parseFloat(formData.get('record-time')) || 0;
+        calculationData.scheduleTime = parseFloat(formData.get('schedule-time')) || 0;
+        calculationData.communicationTime = parseFloat(formData.get('communication-time')) || 0;
+        calculationData.billingTime = parseFloat(formData.get('billing-time')) || 0;
+        calculationData.otherTime = parseFloat(formData.get('other-time')) || 0;
+
+        // AI機能
+        calculationData.selectedFeatures = [];
+        formData.getAll('ai-features').forEach(feature => {
+            calculationData.selectedFeatures.push(feature);
+        });
+    }
+
+    // 計算実行
+    function performCalculation() {
+        let totalLaborSavings = 0;
+        let totalRiskReduction = 0;
+        let timeSavingsDetails = [];
+
+        // 各AI機能による削減効果計算
+        calculationData.selectedFeatures.forEach(feature => {
+            const config = aiEfficiencyRates[feature];
+            if (!config) return;
+
+            let timeSaved = 0;
+            let taskName = '';
+
+            // 時間削減計算
+            switch (config.type) {
+                case 'record-time':
+                    timeSaved = calculationData.recordTime * config.rate;
+                    taskName = 'ケア記録作成';
+                    break;
+                case 'schedule-time':
+                    timeSaved = calculationData.scheduleTime * config.rate;
+                    taskName = 'シフト・スケジュール作成';
+                    break;
+                case 'communication-time':
+                    timeSaved = calculationData.communicationTime * config.rate;
+                    taskName = '家族・関係機関連絡';
+                    break;
+                case 'billing-time':
+                    timeSaved = calculationData.billingTime * config.rate;
+                    taskName = 'レセプト・請求業務';
+                    break;
+                case 'other-time':
+                    timeSaved = calculationData.otherTime * config.rate;
+                    taskName = '送迎・その他管理業務';
+                    break;
+            }
+
+            if (timeSaved > 0) {
+                timeSavingsDetails.push({
+                    name: taskName,
+                    timeSaved: timeSaved,
+                    costSaved: timeSaved * calculationData.avgHourlyWage
+                });
+                totalLaborSavings += timeSaved * calculationData.avgHourlyWage;
+            }
+
+            // リスク削減効果
+            totalRiskReduction += config.riskReduction;
+        });
+
+        // 月額料金計算（料金計算式に基づく）
+        const alpha = 0.33; // 標準係数
+        const runningSost = Math.max(15000, calculationData.selectedFeatures.length * 3000); // 基本料金 + 機能数に応じて増加
+        const supportCost = 25000;
+
+        const totalValue = totalLaborSavings + totalRiskReduction;
+        const valueBasedCost = totalValue * alpha;
+        const monthlyCost = Math.round(valueBasedCost + runningSost + supportCost);
+
+        // 計算結果を保存
+        calculationData.results = {
+            laborValue: Math.round(totalLaborSavings),
+            riskValue: Math.round(totalRiskReduction),
+            runningCost: runningSost,
+            supportCost: supportCost,
+            monthlyCost: monthlyCost,
+            monthlySavings: Math.round(totalValue),
+            annualSavings: Math.round(totalValue * 12),
+            roiPercentage: totalValue > 0 ? Math.round((totalValue / monthlyCost) * 100) : 0,
+            timeSavingsDetails: timeSavingsDetails
+        };
+    }
+
+    // 結果表示
+    function showResults() {
+        const results = calculationData.results;
+        const resultsContainer = document.getElementById('calculation-results');
+        const placeholder = document.getElementById('calculation-placeholder');
+
+        // 数値更新
+        document.getElementById('monthly-cost').textContent = results.monthlyCost.toLocaleString();
+        document.getElementById('monthly-savings').textContent = `¥${results.monthlySavings.toLocaleString()}`;
+        document.getElementById('annual-savings').textContent = results.annualSavings.toLocaleString();
+        document.getElementById('roi-percentage').textContent = `${results.roiPercentage}%`;
+
+        // 内訳更新
+        document.getElementById('labor-value').textContent = `¥${results.laborValue.toLocaleString()}`;
+        document.getElementById('risk-value').textContent = `¥${results.riskValue.toLocaleString()}`;
+        document.getElementById('running-cost').textContent = `¥${results.runningCost.toLocaleString()}`;
+        document.getElementById('total-cost').textContent = `¥${results.monthlyCost.toLocaleString()}`;
+
+        // 時間削減詳細
+        const timeBreakdown = document.getElementById('time-breakdown');
+        timeBreakdown.innerHTML = '';
+        
+        results.timeSavingsDetails.forEach(detail => {
+            const item = document.createElement('div');
+            item.className = 'time-breakdown-item';
+            item.innerHTML = `
+                <span class="task-name">${detail.name}</span>
+                <span class="time-saved">${detail.timeSaved.toFixed(1)}時間削減 (¥${detail.costSaved.toLocaleString()})</span>
+            `;
+            timeBreakdown.appendChild(item);
+        });
+
+        // 結果表示のアニメーション
+        placeholder.style.display = 'none';
+        resultsContainer.style.display = 'block';
+        
+        // カウントアップアニメーション
+        animateCountUp(document.getElementById('monthly-cost'), results.monthlyCost);
+        animateCountUp(document.getElementById('annual-savings'), results.annualSavings);
+    }
+
+    // 結果非表示
+    function hideResults() {
+        const resultsContainer = document.getElementById('calculation-results');
+        const placeholder = document.getElementById('calculation-placeholder');
+        
+        resultsContainer.style.display = 'none';
+        placeholder.style.display = 'flex';
+    }
+
+    // カウントアップアニメーション
+    function animateCountUp(element, targetValue) {
+        const startValue = 0;
+        const duration = 1500;
+        const startTime = Date.now();
+
+        function updateCounter() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // イージング関数（ease-out）
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
+            
+            element.textContent = currentValue.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    // 通知表示
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideInRight 0.3s ease-out;
+        `;
+        
+        if (type === 'error') {
+            notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+        } else {
+            notification.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+        }
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease-out';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    // PDFダウンロード機能
+    document.getElementById('download-results')?.addEventListener('click', () => {
+        generatePDFReport();
+    });
+
+    function generatePDFReport() {
+        // 簡易PDF生成（実際の実装では専用ライブラリを使用）
+        const results = calculationData.results;
+        const reportContent = `
+嶽ノ子 AI介護システム 費用概算レポート
+
+施設種別: ${calculationData.facilityType}
+スタッフ数: ${calculationData.staffCount}名
+利用者数: ${calculationData.userCount}名
+平均時給: ¥${calculationData.avgHourlyWage.toLocaleString()}
+
+=== 計算結果 ===
+月額料金: ¥${results.monthlyCost.toLocaleString()}
+月間削減効果: ¥${results.monthlySavings.toLocaleString()}
+年間削減効果: ¥${results.annualSavings.toLocaleString()}
+投資回収率: ${results.roiPercentage}%
+
+=== 料金内訳 ===
+労務削減価値: ¥${results.laborValue.toLocaleString()}
+リスク削減価値: ¥${results.riskValue.toLocaleString()}
+ランニング実費: ¥${results.runningCost.toLocaleString()}
+サポート料: ¥${results.supportCost.toLocaleString()}
+
+=== 時間削減詳細 ===
+${results.timeSavingsDetails.map(detail => 
+    `${detail.name}: ${detail.timeSaved.toFixed(1)}時間削減 (¥${detail.costSaved.toLocaleString()})`
+).join('\n')}
+
+※ この概算は入力いただいた情報に基づく試算です。
+※ 詳細な見積もりについては、お問い合わせください。
+
+生成日時: ${new Date().toLocaleString('ja-JP')}
+        `;
+
+        // テキストファイルとしてダウンロード
+        const blob = new Blob([reportContent], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `嶽ノ子_AI介護システム_費用概算_${new Date().toISOString().slice(0, 10)}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showNotification('レポートをダウンロードしました', 'info');
+    }
+
+    // 初期化
+    showStep(1);
 }

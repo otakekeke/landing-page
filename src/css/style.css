@@ -3449,3 +3449,742 @@ fieldset legend i {
         padding: 1.25rem;
     }
 }
+
+/* 費用概算計算ツール */
+#cost-calculator {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#cost-calculator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* フォームセクション */
+.calculator-form-section {
+    background: white;
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.calculator-step {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.step-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* フォームグリッド */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-form-section .form-group {
+    margin-bottom: 0;
+}
+
+.calculator-form-section .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #6b7280;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    cursor: help;
+    margin-left: 0.25rem;
+}
+
+.help-icon:hover {
+    background: #3b82f6;
+}
+
+.calculator-form-section input,
+.calculator-form-section select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.calculator-form-section input:focus,
+.calculator-form-section select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* タスク入力グリッド */
+.task-input-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.task-category {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.task-category h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.task-category h4 i {
+    color: #3b82f6;
+}
+
+.task-category small {
+    display: block;
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* AI オプショングリッド */
+.ai-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ai-option-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.ai-option-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.ai-option-card.selected {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.option-header i {
+    font-size: 1.5rem;
+    color: #3b82f6;
+    margin-right: 0.75rem;
+}
+
+.option-header h4 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* トグルスイッチ */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #3b82f6;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.efficiency-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: #f0f9ff;
+    border-radius: 6px;
+    border-left: 3px solid #3b82f6;
+}
+
+.efficiency-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.efficiency-value {
+    font-size: 0.9rem;
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+/* ステップナビゲーション */
+.step-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.next-step-btn,
+.prev-step-btn,
+.calculate-btn {
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.next-step-btn,
+.calculate-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    margin-left: auto;
+}
+
+.next-step-btn:hover,
+.calculate-btn:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.prev-step-btn {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.prev-step-btn:hover {
+    background: #e5e7eb;
+}
+
+/* 結果セクション */
+.calculator-results-section {
+    background: white;
+    border-radius: 16px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.results-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.results-title i {
+    color: #3b82f6;
+}
+
+/* 結果サマリー */
+.results-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.summary-card.main-result {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #93c5fd;
+}
+
+.summary-card.savings-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #86efac;
+}
+
+.summary-card h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.price-display,
+.savings-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.currency {
+    font-size: 1.25rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.amount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.period {
+    font-size: 1rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.roi-summary,
+.savings-note {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* 詳細内訳 */
+.results-breakdown {
+    margin-bottom: 2rem;
+}
+
+.results-breakdown h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.breakdown-table-container {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.breakdown-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.95rem;
+}
+
+.breakdown-table td:first-child {
+    color: #374151;
+    font-weight: 500;
+}
+
+.breakdown-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.breakdown-table .total-row td {
+    background: #f8fafc;
+    border-bottom: none;
+    font-size: 1rem;
+}
+
+.breakdown-table td i {
+    color: #3b82f6;
+    margin-right: 0.5rem;
+    width: 16px;
+}
+
+/* 時間削減詳細 */
+.time-savings-details {
+    margin-bottom: 2rem;
+}
+
+.time-savings-details h4 {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.time-breakdown-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.time-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+    border-left: 3px solid #3b82f6;
+}
+
+.time-breakdown-item .task-name {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.time-breakdown-item .time-saved {
+    font-weight: 600;
+    color: #059669;
+}
+
+/* アクションボタン */
+.results-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.download-btn,
+.consultation-btn,
+.recalculate-btn {
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.consultation-btn {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+}
+
+.consultation-btn:hover {
+    background: linear-gradient(135deg, #047857, #065f46);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+}
+
+.recalculate-btn {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.recalculate-btn:hover {
+    background: #e5e7eb;
+}
+
+/* 計算待機画面 */
+.calculation-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.placeholder-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.placeholder-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.calculation-placeholder h3 {
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+    font-size: 1.5rem;
+}
+
+.calculation-placeholder p {
+    color: #6b7280;
+    margin-bottom: 2rem;
+    max-width: 300px;
+}
+
+.placeholder-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.feature-item i {
+    color: #3b82f6;
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .calculator-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .calculator-results-section {
+        position: static;
+        max-height: none;
+    }
+    
+    .results-summary {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .calculator-container {
+        gap: 1.5rem;
+    }
+    
+    .calculator-form-section,
+    .calculator-results-section {
+        padding: 1.5rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .ai-options-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .step-navigation {
+        flex-direction: column;
+    }
+    
+    .prev-step-btn {
+        order: 2;
+    }
+    
+    .next-step-btn,
+    .calculate-btn {
+        order: 1;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-form-section,
+    .calculator-results-section {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .step-title {
+        font-size: 1.25rem;
+        gap: 0.75rem;
+    }
+    
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .results-actions {
+        gap: 0.5rem;
+    }
+    
+    .download-btn,
+    .consultation-btn,
+    .recalculate-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
