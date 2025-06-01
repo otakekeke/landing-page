@@ -908,9 +908,9 @@
         <section id="cost-calculator" class="section" aria-labelledby="calculator-title">
             <div class="section-content">
                 <header class="section-header">
-                    <h2 id="calculator-title">費用概算計算ツール</h2>
+                    <h2 id="calculator-title">簡単料金シミュレーター</h2>
                     <p class="section-subtitle">
-                        あなたの施設の具体的な業務内容を入力して、AI導入による削減効果と月額料金を簡単に計算できます
+                        たった2つの情報を入力するだけで、AI導入による削減効果と月額料金の概算を計算できます
                     </p>
                 </header>
                 
@@ -922,218 +922,137 @@
                             <div class="calculator-step" data-step="1">
                                 <h3 class="step-title">
                                     <span class="step-number">1</span>
-                                    施設の基本情報
+                                    基本情報を入力
                                 </h3>
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label for="facility-type">
-                                            <i class="fas fa-building" aria-hidden="true"></i>
-                                            施設種別
-                                        </label>
-                                        <select id="facility-type" name="facility-type" required>
-                                            <option value="">選択してください</option>
-                                            <option value="daycare">通所介護（デイサービス）</option>
-                                            <option value="nursing-home">特別養護老人ホーム</option>
-                                            <option value="group-home">グループホーム</option>
-                                            <option value="home-care">訪問介護</option>
-                                            <option value="other">その他</option>
-                                        </select>
-                                    </div>
+                                <div class="simple-form-grid">
                                     <div class="form-group">
                                         <label for="staff-count">
                                             <i class="fas fa-users" aria-hidden="true"></i>
-                                            スタッフ数（常勤換算）
+                                            スタッフ数
                                         </label>
-                                        <input type="number" id="staff-count" name="staff-count" min="1" max="200" placeholder="例：15" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="user-count">
-                                            <i class="fas fa-wheelchair" aria-hidden="true"></i>
-                                            利用者数
-                                        </label>
-                                        <input type="number" id="user-count" name="user-count" min="1" max="500" placeholder="例：50" required>
+                                        <input type="number" id="staff-count" name="staff-count" min="1" max="200" placeholder="例：20" required>
+                                        <small>常勤・非常勤を含む総スタッフ数</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="avg-hourly-wage">
                                             <i class="fas fa-yen-sign" aria-hidden="true"></i>
                                             平均時給（円）
-                                            <span class="help-icon" title="社会保険料込みの実質コストを入力してください">?</span>
                                         </label>
-                                        <input type="number" id="avg-hourly-wage" name="avg-hourly-wage" min="1000" max="5000" placeholder="例：2200" required>
+                                        <input type="number" id="avg-hourly-wage" name="avg-hourly-wage" min="1000" max="5000" placeholder="例：2000" required>
+                                        <small>社会保険料等を含む実質コスト</small>
                                     </div>
                                 </div>
                                 <button type="button" class="next-step-btn" data-next="2">
-                                    次のステップへ <i class="fas fa-arrow-right"></i>
+                                    次へ <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
 
-                            <!-- ステップ2: 業務時間入力 -->
+                            <!-- ステップ2: 課題と希望 -->
                             <div class="calculator-step" data-step="2" style="display: none;">
                                 <h3 class="step-title">
                                     <span class="step-number">2</span>
-                                    現在の業務時間（月間）
+                                    主な課題とAI活用希望
                                 </h3>
-                                <div class="task-input-grid">
-                                    <div class="task-category">
-                                        <h4><i class="fas fa-file-alt"></i> 記録・文書作成</h4>
-                                        <div class="form-group">
-                                            <label for="record-time">ケア記録作成時間（時間/月）</label>
-                                            <input type="number" id="record-time" name="record-time" min="0" max="1000" placeholder="例：120" step="0.5">
-                                            <small>1回あたりの記録時間 × 記録件数で計算</small>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="task-category">
-                                        <h4><i class="fas fa-calendar-alt"></i> スケジュール管理</h4>
-                                        <div class="form-group">
-                                            <label for="schedule-time">シフト・スケジュール作成時間（時間/月）</label>
-                                            <input type="number" id="schedule-time" name="schedule-time" min="0" max="200" placeholder="例：35" step="0.5">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="task-category">
-                                        <h4><i class="fas fa-phone"></i> 連絡・報告業務</h4>
-                                        <div class="form-group">
-                                            <label for="communication-time">家族・関係機関への連絡時間（時間/月）</label>
-                                            <input type="number" id="communication-time" name="communication-time" min="0" max="200" placeholder="例：60" step="0.5">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="task-category">
-                                        <h4><i class="fas fa-calculator"></i> 請求・事務業務</h4>
-                                        <div class="form-group">
-                                            <label for="billing-time">レセプト・請求業務時間（時間/月）</label>
-                                            <input type="number" id="billing-time" name="billing-time" min="0" max="200" placeholder="例：24" step="0.5">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="task-category">
-                                        <h4><i class="fas fa-route"></i> その他の管理業務</h4>
-                                        <div class="form-group">
-                                            <label for="other-time">送迎管理・その他の管理業務（時間/月）</label>
-                                            <input type="number" id="other-time" name="other-time" min="0" max="200" placeholder="例：40" step="0.5">
-                                        </div>
+                                
+                                <!-- 現在の主な課題 -->
+                                <div class="issue-selection">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> 現在の主な課題（複数選択可）</h4>
+                                    <div class="issue-options">
+                                        <label class="issue-option">
+                                            <input type="checkbox" name="current-issues" value="documentation">
+                                            <span class="checkmark"></span>
+                                            <div class="option-content">
+                                                <strong>記録・文書作成</strong>
+                                                <span>手書き記録、転記作業、報告書作成に時間がかかる</span>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="issue-option">
+                                            <input type="checkbox" name="current-issues" value="management">
+                                            <span class="checkmark"></span>
+                                            <div class="option-content">
+                                                <strong>スケジュール・管理業務</strong>
+                                                <span>シフト作成、送迎管理、業務調整が複雑</span>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="issue-option">
+                                            <input type="checkbox" name="current-issues" value="communication">
+                                            <span class="checkmark"></span>
+                                            <div class="option-content">
+                                                <strong>連絡・報告業務</strong>
+                                                <span>家族連絡、関係機関との調整に手間がかかる</span>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="issue-option">
+                                            <input type="checkbox" name="current-issues" value="quality">
+                                            <span class="checkmark"></span>
+                                            <div class="option-content">
+                                                <strong>サービス品質向上</strong>
+                                                <span>利用者様の状態把握、個別対応の充実を図りたい</span>
+                                            </div>
+                                        </label>
                                     </div>
                                 </div>
+
+                                <!-- AIパッケージ選択 -->
+                                <div class="package-selection">
+                                    <h4><i class="fas fa-robot"></i> AI活用レベル</h4>
+                                    <div class="package-options">
+                                        <label class="package-option">
+                                            <input type="radio" name="ai-package" value="basic" required>
+                                            <div class="package-card">
+                                                <div class="package-header">
+                                                    <h5>ベーシック</h5>
+                                                    <span class="package-badge">初心者向け</span>
+                                                </div>
+                                                <p>音声記録、基本的な業務効率化</p>
+                                                <div class="package-benefits">
+                                                    <span>• 記録作業 70%削減</span>
+                                                    <span>• 簡単操作で導入</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="package-option">
+                                            <input type="radio" name="ai-package" value="standard" required>
+                                            <div class="package-card">
+                                                <div class="package-header">
+                                                    <h5>スタンダード</h5>
+                                                    <span class="package-badge popular">人気</span>
+                                                </div>
+                                                <p>記録＋管理業務の自動化</p>
+                                                <div class="package-benefits">
+                                                    <span>• 総業務時間 60%削減</span>
+                                                    <span>• 管理機能も充実</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        
+                                        <label class="package-option">
+                                            <input type="radio" name="ai-package" value="premium" required>
+                                            <div class="package-card">
+                                                <div class="package-header">
+                                                    <h5>プレミアム</h5>
+                                                    <span class="package-badge">高機能</span>
+                                                </div>
+                                                <p>全業務AI化＋予測・分析機能</p>
+                                                <div class="package-benefits">
+                                                    <span>• 総業務時間 80%削減</span>
+                                                    <span>• 予測機能でリスク軽減</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
                                 <div class="step-navigation">
                                     <button type="button" class="prev-step-btn" data-prev="1">
-                                        <i class="fas fa-arrow-left"></i> 前のステップ
-                                    </button>
-                                    <button type="button" class="next-step-btn" data-next="3">
-                                        次のステップへ <i class="fas fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- ステップ3: AI活用オプション -->
-                            <div class="calculator-step" data-step="3" style="display: none;">
-                                <h3 class="step-title">
-                                    <span class="step-number">3</span>
-                                    導入希望のAI機能
-                                </h3>
-                                <div class="ai-options-grid">
-                                    <div class="ai-option-card" data-feature="voice-record">
-                                        <div class="option-header">
-                                            <i class="fas fa-microphone"></i>
-                                            <h4>AI音声記録</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="voice-record">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>話すだけで記録を自動作成</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">効率化:</span>
-                                            <span class="efficiency-value">85%削減</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ai-option-card" data-feature="shift-optimize">
-                                        <div class="option-header">
-                                            <i class="fas fa-calendar-check"></i>
-                                            <h4>AIシフト最適化</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="shift-optimize">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>スキル・希望を考慮した最適シフト</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">効率化:</span>
-                                            <span class="efficiency-value">90%削減</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ai-option-card" data-feature="family-report">
-                                        <div class="option-header">
-                                            <i class="fas fa-users"></i>
-                                            <h4>AI家族連携</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="family-report">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>自動レポート生成・通知</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">効率化:</span>
-                                            <span class="efficiency-value">80%削減</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ai-option-card" data-feature="billing-auto">
-                                        <div class="option-header">
-                                            <i class="fas fa-file-invoice"></i>
-                                            <h4>AI請求業務</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="billing-auto">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>レセプト自動作成・チェック</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">効率化:</span>
-                                            <span class="efficiency-value">92%削減</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ai-option-card" data-feature="health-predict">
-                                        <div class="option-header">
-                                            <i class="fas fa-heartbeat"></i>
-                                            <h4>AI健康予測</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="health-predict">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>体調変化の早期発見・予測</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">リスク軽減:</span>
-                                            <span class="efficiency-value">¥40,000/月</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="ai-option-card" data-feature="route-optimize">
-                                        <div class="option-header">
-                                            <i class="fas fa-route"></i>
-                                            <h4>AI送迎最適化</h4>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" name="ai-features" value="route-optimize">
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                        <p>最適ルート自動計算</p>
-                                        <div class="efficiency-indicator">
-                                            <span class="efficiency-label">効率化:</span>
-                                            <span class="efficiency-value">75%削減</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="step-navigation">
-                                    <button type="button" class="prev-step-btn" data-prev="2">
-                                        <i class="fas fa-arrow-left"></i> 前のステップ
+                                        <i class="fas fa-arrow-left"></i> 戻る
                                     </button>
                                     <button type="button" class="calculate-btn">
-                                        <i class="fas fa-calculator"></i> 費用を計算する
+                                        <i class="fas fa-calculator"></i> 料金を計算する
                                     </button>
                                 </div>
                             </div>
@@ -1145,7 +1064,7 @@
                         <div class="results-container" id="calculation-results" style="display: none;">
                             <h3 class="results-title">
                                 <i class="fas fa-chart-line"></i>
-                                計算結果
+                                料金シミュレーション結果
                             </h3>
                             
                             <!-- サマリーカード -->
@@ -1164,67 +1083,44 @@
                                 </div>
                                 
                                 <div class="summary-card savings-card">
-                                    <h4>年間コスト削減効果</h4>
+                                    <h4>年間効果</h4>
                                     <div class="savings-display">
                                         <span class="currency">¥</span>
                                         <span class="amount" id="annual-savings">0</span>
                                         <span class="period">/年</span>
                                     </div>
                                     <p class="savings-note">
-                                        従来方式との比較
+                                        コスト削減効果
                                     </p>
                                 </div>
                             </div>
 
-                            <!-- 詳細内訳 -->
-                            <div class="results-breakdown">
-                                <h4>料金内訳</h4>
-                                <div class="breakdown-table-container">
-                                    <table class="breakdown-table">
-                                        <tbody>
-                                            <tr>
-                                                <td><i class="fas fa-clock"></i> 労務削減価値</td>
-                                                <td><span id="labor-value">¥0</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-shield-alt"></i> リスク削減価値</td>
-                                                <td><span id="risk-value">¥0</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-cloud"></i> ランニング実費</td>
-                                                <td><span id="running-cost">¥0</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><i class="fas fa-headset"></i> サポート料</td>
-                                                <td><span id="support-cost">¥25,000</span></td>
-                                            </tr>
-                                            <tr class="total-row">
-                                                <td><strong>月額料金合計</strong></td>
-                                                <td><strong><span id="total-cost">¥0</span></strong></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <!-- 選択されたパッケージ情報 -->
+                            <div class="selected-package-info">
+                                <h4>選択されたプラン</h4>
+                                <div class="package-summary" id="package-summary">
+                                    <!-- JavaScriptで動的に生成 -->
                                 </div>
                             </div>
 
-                            <!-- 削減時間の詳細 -->
-                            <div class="time-savings-details">
-                                <h4>業務時間削減の詳細</h4>
-                                <div class="time-breakdown-grid" id="time-breakdown">
-                                    <!-- JavaScript で動的に生成 -->
+                            <!-- 削減効果の詳細 -->
+                            <div class="efficiency-details">
+                                <h4>期待される効果</h4>
+                                <div class="efficiency-grid" id="efficiency-breakdown">
+                                    <!-- JavaScriptで動的に生成 -->
                                 </div>
                             </div>
 
                             <!-- アクションボタン -->
                             <div class="results-actions">
-                                <button class="primary-button download-btn" id="download-results">
-                                    <i class="fas fa-download"></i> 結果をPDFでダウンロード
+                                <button class="primary-button consultation-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                                    <i class="fas fa-comments"></i> 詳細相談・お見積り依頼
                                 </button>
-                                <button class="secondary-button consultation-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-                                    <i class="fas fa-comments"></i> 詳細相談を申し込む
+                                <button class="secondary-button download-btn" id="download-results">
+                                    <i class="fas fa-download"></i> 結果をダウンロード
                                 </button>
                                 <button class="tertiary-button recalculate-btn" id="recalculate-btn">
-                                    <i class="fas fa-redo"></i> 再計算する
+                                    <i class="fas fa-redo"></i> 条件を変更する
                                 </button>
                             </div>
                         </div>
@@ -1234,20 +1130,20 @@
                             <div class="placeholder-icon">
                                 <i class="fas fa-calculator"></i>
                             </div>
-                            <h3>費用概算計算ツール</h3>
-                            <p>左の項目を入力すると、リアルタイムで料金を計算できます。</p>
+                            <h3>簡単料金シミュレーター</h3>
+                            <p>わずか2ステップで、AI導入効果を簡単に確認できます。</p>
                             <div class="placeholder-features">
                                 <div class="feature-item">
                                     <i class="fas fa-check-circle"></i>
-                                    <span>透明性のある料金設定</span>
+                                    <span>2分で概算完了</span>
                                 </div>
                                 <div class="feature-item">
                                     <i class="fas fa-check-circle"></i>
-                                    <span>削減効果の可視化</span>
+                                    <span>透明性のある料金計算</span>
                                 </div>
                                 <div class="feature-item">
                                     <i class="fas fa-check-circle"></i>
-                                    <span>投資回収率の計算</span>
+                                    <span>投資回収率も表示</span>
                                 </div>
                             </div>
                         </div>
