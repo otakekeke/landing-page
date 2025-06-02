@@ -4832,3 +4832,326 @@ input[type="datetime-local"]:focus {
         padding: 1rem;
     }
 }
+
+/* AIレベル選択スタイル */
+.ai-level-options {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.ai-level-option {
+    cursor: pointer;
+    display: block;
+}
+
+.ai-level-option input[type="radio"] {
+    display: none;
+}
+
+.level-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.level-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.ai-level-option:hover .level-card {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.ai-level-option input[type="radio"]:checked + .level-card {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+}
+
+.ai-level-option input[type="radio"]:checked + .level-card::before {
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
+
+.level-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.level-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.level-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    flex: 1;
+}
+
+.level-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.level-badge.starter {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.level-badge.popular {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+}
+
+.level-badge.premium {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+}
+
+.level-description p {
+    margin: 0 0 1rem 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.level-effects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.effect-item {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.effect-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.effect-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+/* 時間比較表示 */
+.time-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.time-before, .time-after {
+    text-align: center;
+    flex: 1;
+}
+
+.time-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.time-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.time-unit {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.time-arrow {
+    margin: 0 1rem;
+    color: #3b82f6;
+    font-size: 1.5rem;
+}
+
+.time-savings-note {
+    text-align: center;
+    margin: 0.5rem 0 0 0;
+    color: #059669;
+    font-weight: 600;
+}
+
+.time-savings-note strong {
+    color: #047857;
+}
+
+/* 詳細効果カード */
+.detailed-effects {
+    margin-top: 2rem;
+}
+
+.detailed-effects h4 {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.effects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.effect-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.effect-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.effect-card .effect-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem auto;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.effect-card h5 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.effect-card .effect-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin-bottom: 0.5rem;
+}
+
+.effect-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .ai-level-options {
+        gap: 1rem;
+    }
+    
+    .level-card {
+        padding: 1rem;
+    }
+    
+    .level-header {
+        gap: 0.75rem;
+    }
+    
+    .level-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .level-header h4 {
+        font-size: 1rem;
+    }
+    
+    .level-effects {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-comparison {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .time-arrow {
+        margin: 0;
+        transform: rotate(90deg);
+    }
+    
+    .effects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .effect-card {
+        padding: 1rem;
+    }
+    
+    .effect-card .effect-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .level-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .time-value {
+        font-size: 1.5rem;
+    }
+}
