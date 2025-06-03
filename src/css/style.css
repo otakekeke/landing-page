@@ -1242,7 +1242,7 @@ p {
     position: relative;
     margin-bottom: 3rem;
     display: flex;
-        align-items: center;
+    align-items: center;
         width: 100%;
 }
 
@@ -1263,7 +1263,7 @@ p {
     align-items: center;
     justify-content: center;
     color: white;
-        font-size: 1.2rem;
+    font-size: 1.2rem;
     position: relative;
     z-index: 2;
     flex-shrink: 0;
@@ -1326,7 +1326,7 @@ p {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
-    }
+}
 
     .pricing-card {
     background: var(--card-bg);
@@ -1351,7 +1351,7 @@ p {
 .price {
     font-size: clamp(2.5rem, 6vw, 3.5rem);
     font-weight: 700;
-        color: var(--accent-color);
+    color: var(--accent-color);
     margin-bottom: 0.5rem;
     line-height: 1;
 }
@@ -1379,7 +1379,7 @@ p {
 }
 
 .pricing-features i {
-        color: var(--accent-color);
+    color: var(--accent-color);
     margin-right: 0.8rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
@@ -1420,7 +1420,7 @@ p {
 }
 
 .order-made-appeal h3 {
-        color: var(--text-color);
+    color: var(--text-color);
     font-size: clamp(1.3rem, 4vw, 1.8rem);
     margin-bottom: 1.5rem;
     font-weight: 600;
@@ -1468,9 +1468,9 @@ p {
 #contact {
     background: rgba(239, 246, 255, 0.5);
     backdrop-filter: blur(10px);
-     }
+}
 
-    #trial-form {
+#trial-form {
     max-width: 600px;
     margin: 0 auto;
         background: var(--card-bg); 
@@ -1479,7 +1479,7 @@ p {
     border-radius: var(--border-radius-lg);
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-color);
-    }
+}
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -1495,7 +1495,7 @@ p {
 
 .form-group label i {
     margin-right: 0.5rem;
-        color: var(--accent-color);
+    color: var(--accent-color);
     }
 
 /* 必須項目のアスタリスク */
@@ -1615,7 +1615,7 @@ footer[role="contentinfo"] {
 }
 
 .footer-links li a:hover {
-        color: var(--accent-color);
+    color: var(--accent-color);
     padding-left: var(--spacing-xs);
 }
 
@@ -1752,7 +1752,7 @@ footer[role="contentinfo"] {
         position: fixed;
         top: var(--header-height);
     left: 0;
-    width: 100%;
+        width: 100%;
         height: calc(100vh - var(--header-height));
         background: rgba(17, 24, 39, 0.98);
         backdrop-filter: blur(20px);
@@ -1927,11 +1927,11 @@ footer[role="contentinfo"] {
     .container {
         padding: 0 var(--spacing-md);
     }
-    
+
     .section {
         padding: var(--spacing-xl) var(--spacing-md);
     }
-    
+
     #hero {
         min-height: 100vh;
         padding: calc(var(--header-height) + var(--spacing-md)) var(--spacing-md) var(--spacing-lg);
@@ -1992,28 +1992,28 @@ footer[role="contentinfo"] {
         left: 20px;
 }
 
-.timeline-item {
+    .timeline-item {
         padding-left: 55px;
         margin-bottom: var(--spacing-lg);
-}
+    }
 
-.timeline-icon {
+    .timeline-icon {
         width: 40px;
         height: 40px;
         font-size: var(--font-size-sm);
         left: 0;
 }
 
-.timeline-content {
+    .timeline-content {
         padding: var(--spacing-md);
     }
 
-.timeline-content h3 {
+    .timeline-content h3 {
         font-size: var(--font-size-lg);
         margin-bottom: var(--spacing-xs);
-}
+    }
 
-.timeline-content p {
+    .timeline-content p {
         font-size: var(--font-size-sm);
         line-height: 1.5;
 }
@@ -2155,13 +2155,13 @@ select:focus {
 
 /* セレクション色の改善 */
 ::selection {
-    background: rgba(59, 130, 246, 0.2);
-    color: var(--text-color);
+    background: var(--primary-color);
+    color: white;
 }
 
 ::-moz-selection {
-    background: rgba(59, 130, 246, 0.2);
-    color: var(--text-color);
+    background: var(--primary-color);
+    color: white;
 }
 
 /* スクロールバーの改善 */
@@ -2375,7 +2375,7 @@ select:focus {
 
 .structure-item h4 {
     font-size: var(--font-size-lg);
-    color: var(--text-color);
+        color: var(--text-color);
     margin-bottom: var(--spacing-sm);
     font-weight: 600;
 }
@@ -2406,7 +2406,7 @@ select:focus {
 
 .cost-comparison h4 {
     font-size: var(--font-size-lg);
-    color: var(--text-color);
+        color: var(--text-color);
     margin-bottom: var(--spacing-lg);
     text-align: center;
     display: flex;
@@ -2442,7 +2442,7 @@ select:focus {
 
 .comparison-label {
     font-size: var(--font-size-sm);
-    color: var(--text-color-light);
+        color: var(--text-color-light); 
     margin-bottom: var(--spacing-xs);
     font-weight: 500;
 }
@@ -2463,7 +2463,7 @@ select:focus {
 
 .comparison-note {
     font-size: var(--font-size-xs);
-    color: var(--text-color-light);
+        color: var(--text-color-light);
     font-style: italic;
 }
 
@@ -2514,7 +2514,7 @@ select:focus {
 }
 
 .guarantee-item {
-    background: var(--bg-color);
+        background: var(--bg-color);
     border-radius: var(--border-radius);
     padding: var(--spacing-lg);
     text-align: center;
@@ -2543,7 +2543,7 @@ select:focus {
 
 .guarantee-item h4 {
     font-size: var(--font-size-lg);
-    color: var(--text-color);
+        color: var(--text-color);
     margin-bottom: var(--spacing-sm);
     font-weight: 600;
 }
@@ -2631,7 +2631,7 @@ fieldset {
 }
 
 fieldset legend {
-    color: var(--text-color);
+        color: var(--text-color);
     font-weight: 600;
     font-size: var(--font-size-base);
     padding: 0 var(--spacing-sm);
@@ -2641,8 +2641,8 @@ fieldset legend {
 }
 
 fieldset legend i {
-    color: var(--accent-color);
-}
+        color: var(--accent-color);
+    }    
 
 /* 高コントラストモード対応 */
 @media (prefers-contrast: high) {
@@ -2668,29 +2668,855 @@ fieldset legend i {
 /* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color: #1F2937;
-        --secondary-color: #374151;
-        --bg-color: #111827;
-        --card-bg: rgba(31, 41, 55, 0.95);
-        --text-color: #F9FAFB;
-        --text-color-light: #D1D5DB;
-        --border-color: #4B5563;
-        --shadow-color: rgba(0, 0, 0, 0.3);
-        --shadow-color-hover: rgba(0, 0, 0, 0.4);
+        --primary-color: #60a5fa;
+        --primary-dark: #3b82f6;
+        --accent-color: #fbbf24;
+        --text-dark: #f9fafb;
+        --text-light: #d1d5db;
+        --text-muted: #9ca3af;
+        --background-primary: #111827;
+        --background-secondary: #1f2937;
+        --background-tertiary: #374151;
+        --border-color: #4b5563;
+        --card-background: #1f2937;
+        --success-color: #34d399;
+        --warning-color: #fbbf24;
+        --error-color: #f87171;
     }
     
+    body {
+        background: var(--background-primary);
+        color: var(--text-dark);
+    }
+
+    /* ヘッダー */
     .main-header {
-        background: rgba(31, 41, 55, 0.95);
+        background: rgba(17, 24, 39, 0.95);
+        border-bottom: 1px solid var(--border-color);
     }
-    
-    input, textarea {
-        background: var(--card-bg);
-        color: var(--text-color);
+
+    .logo {
+        color: var(--primary-color);
+    }
+
+    .nav-links a {
+        color: var(--text-light);
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-color);
+    }
+
+    .nav-cta {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+    }
+
+    /* モバイルメニュー */
+    .nav-links {
+        background: var(--background-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    /* セクション */
+    .section {
+        background: var(--background-primary);
+    }
+
+    .section:nth-child(even) {
+        background: var(--background-secondary);
+    }
+
+    /* テキスト */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-dark);
+    }
+
+    p {
+        color: var(--text-light);
+    }
+
+    .section-subtitle {
+        color: var(--text-muted);
+    }
+
+    /* カード */
+    .card,
+    .example-card,
+    .process-card,
+    .level-card,
+    .effect-card {
+        background: var(--card-background);
+        border-color: var(--border-color);
+        color: var(--text-dark);
+    }
+
+    .card:hover,
+    .example-card:hover,
+    .process-card:hover,
+    .effect-card:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+    }
+
+    .card h3,
+    .example-card h3,
+    .process-card h3,
+    .effect-card h5 {
+        color: var(--text-dark);
+    }
+
+    .card p,
+    .example-card p,
+    .process-card p,
+    .effect-card p {
+        color: var(--text-light);
+    }
+
+    /* フォーム要素 */
+    input, 
+    textarea, 
+    select {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+        color: var(--text-dark);
+    }
+
+    input:focus, 
+    textarea:focus, 
+    select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: var(--text-muted);
+    }
+
+    .form-group label {
+        color: var(--text-dark);
+    }
+
+    .form-group small {
+        color: var(--text-muted);
+    }
+
+    /* ボタン */
+    .primary-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+        border: none;
+    }
+
+    .primary-button:hover {
+        background: linear-gradient(135deg, var(--primary-dark), #1d4ed8);
+    }
+
+    .secondary-button {
+        background: var(--background-tertiary);
+        color: var(--text-dark);
+        border: 1px solid var(--border-color);
+    }
+
+    .secondary-button:hover {
+        background: var(--border-color);
+        border-color: var(--primary-color);
+    }
+
+    .tertiary-button {
+        background: transparent;
+        color: var(--text-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .tertiary-button:hover {
+        background: var(--background-tertiary);
+        color: var(--text-dark);
+    }
+
+    /* 計算ツール関連 */
+    .calculator-container {
+        background: var(--background-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .calculation-placeholder,
+    .results-container {
+        background: var(--card-background);
+    }
+
+    .summary-card {
+        background: var(--background-tertiary);
         border-color: var(--border-color);
     }
-    
-    input:focus, textarea:focus {
-        background: var(--bg-color);
+
+    .summary-card.main-result {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: var(--primary-color);
+    }
+
+    .summary-item {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+    }
+
+    .summary-item.highlight {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.15));
+        border-color: var(--primary-color);
+    }
+
+    .summary-item .label {
+        color: var(--text-muted);
+    }
+
+    .summary-item .value {
+        color: var(--text-dark);
+    }
+
+    .summary-item.highlight .value {
+        color: var(--primary-color);
+    }
+
+    /* 時間比較 */
+    .time-comparison {
+        background: var(--background-tertiary);
+    }
+
+    .time-label {
+        color: var(--text-muted);
+    }
+
+    .time-value {
+        color: var(--text-dark);
+    }
+
+    .time-unit {
+        color: var(--text-muted);
+    }
+
+    .time-arrow {
+        color: var(--primary-color);
+    }
+
+    .time-savings-note {
+        color: var(--success-color);
+    }
+
+    .time-savings-note strong {
+        color: var(--success-color);
+    }
+
+    /* AIレベル選択 */
+    .ai-level-option input[type="radio"]:checked + .level-card {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: var(--primary-color);
+    }
+
+    .level-description p {
+        color: var(--text-muted);
+    }
+
+    .effect-item {
+        background: rgba(96, 165, 250, 0.1);
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .effect-label {
+        color: var(--text-muted);
+    }
+
+    .effect-value {
+        color: var(--primary-color);
+    }
+
+    /* 面談オプション */
+    .meeting-option {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .meeting-option:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 2px 8px rgba(96, 165, 250, 0.2);
+    }
+
+    .meeting-option.checked {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: var(--primary-color);
+    }
+
+    .radio-custom {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+    }
+
+    .meeting-option input[type="radio"]:checked + .radio-custom {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .option-details strong {
+        color: var(--text-dark);
+    }
+
+    .option-details span {
+        color: var(--text-muted);
+    }
+
+    /* 計算結果表示エリア */
+    .calculation-summary-area {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: var(--primary-color);
+    }
+
+    .calculation-summary-area h3 {
+        color: var(--text-dark);
+    }
+
+    .summary-content {
+        background: var(--card-background);
+        border: 1px solid var(--border-color);
+    }
+
+    .summary-package {
+        background: var(--background-tertiary);
+    }
+
+    .summary-package .package-details h4 {
+        color: var(--text-dark);
+    }
+
+    .summary-package .package-details p {
+        color: var(--text-muted);
+    }
+
+    .summary-note {
+        color: var(--primary-color);
+    }
+
+    /* 料金説明セクション */
+    .pricing-logic-section {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .pricing-section-title {
+        color: var(--text-dark);
+    }
+
+    .section-number {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .benefit-card {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+    }
+
+    .benefit-card h4 {
+        color: var(--text-dark);
+    }
+
+    .benefit-card p {
+        color: var(--text-light);
+    }
+
+    .formula-box {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+        color: var(--text-dark);
+    }
+
+    .pricing-calculation-table {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .pricing-calculation-table th {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--border-color);
+    }
+
+    .pricing-calculation-table td {
+        color: var(--text-light);
+        border-color: var(--border-color);
+    }
+
+    .pricing-calculation-table tr:hover {
+        background: var(--background-tertiary);
+    }
+
+    .formula-name {
+        color: var(--text-dark);
+    }
+
+    .pricing-note {
+        background: rgba(96, 165, 250, 0.1);
+        border-color: var(--primary-color);
+    }
+
+    .pricing-note h4 {
+        color: var(--primary-color);
+    }
+
+    .pricing-note li {
+        color: var(--text-light);
+    }
+
+    /* プロセスステップ */
+    .process-step h4 {
+        color: white;
+    }
+
+    .process-step p {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .process-day {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 計算例 */
+    .calculation-example {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .example-title {
+        color: var(--text-dark);
+    }
+
+    .example-data-table table,
+    .example-calculation-table table {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+    }
+
+    .example-data-table th,
+    .example-data-table td,
+    .example-calculation-table th,
+    .example-calculation-table td {
+        color: var(--text-light);
+        border-color: var(--border-color);
+    }
+
+    .highlight-row {
+        background: rgba(96, 165, 250, 0.2);
+    }
+
+    .result-row {
+        background: rgba(34, 197, 94, 0.2);
+    }
+
+    .calculation-formula {
+        background: var(--background-tertiary);
+        color: var(--text-dark);
+    }
+
+    /* Q&A */
+    .qa-item {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .qa-item:hover {
+        border-color: var(--primary-color);
+    }
+
+    .qa-question h4 {
+        color: var(--text-dark);
+    }
+
+    .qa-answer p {
+        color: var(--text-light);
+    }
+
+    /* サマリーセクション */
+    .pricing-summary {
+        background: var(--background-secondary);
+    }
+
+    .summary-highlight {
+        background: var(--card-background);
+        border-color: var(--primary-color);
+    }
+
+    .summary-main-text {
+        color: var(--text-dark);
+    }
+
+    .summary-sub-text {
+        color: var(--primary-color);
+    }
+
+    .summary-detail {
+        color: var(--text-light);
+    }
+
+    .summary-benefit {
+        background: var(--background-tertiary);
+    }
+
+    .summary-benefit h4 {
+        color: var(--text-dark);
+    }
+
+    .summary-benefit p {
+        color: var(--text-light);
+    }
+
+    /* 開発者セクション */
+    .developer-profile {
+        background: var(--card-background);
+    }
+
+    .developer-placeholder-image {
+        background: var(--background-tertiary);
+        color: var(--text-muted);
+    }
+
+    .developer-info h3 {
+        color: var(--text-dark);
+    }
+
+    .developer-role {
+        color: var(--primary-color);
+    }
+
+    .developer-info p {
+        color: var(--text-light);
+    }
+
+    .developer-info p strong {
+        color: var(--text-dark);
+    }
+
+    /* フッター */
+    footer[role="contentinfo"] {
+        background: var(--background-secondary);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .footer-logo .logo {
+        color: var(--primary-color);
+    }
+
+    .footer-logo .tagline {
+        color: var(--text-muted);
+    }
+
+    .footer-contact-info h4 {
+        color: var(--text-dark);
+    }
+
+    .footer-contact-info p {
+        color: var(--text-light);
+    }
+
+    .footer-contact-info a {
+        color: var(--primary-color);
+    }
+
+    .footer-contact-info a:hover {
+        color: var(--primary-dark);
+    }
+
+    .personal-touch-message {
+        color: var(--text-muted);
+    }
+
+    .footer-links li a {
+        color: var(--text-light);
+    }
+
+    .footer-links li a:hover {
+        color: var(--primary-color);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid var(--border-color);
+        color: var(--text-muted);
+    }
+
+    /* バックトゥトップボタン */
+    #back-to-top {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    #back-to-top:hover {
+        background: var(--primary-dark);
+    }
+
+    /* スクロールガイド */
+    .scroll-guide {
+        color: var(--text-light);
+    }
+
+    .scroll-text {
+        color: var(--text-muted);
+    }
+
+    .scroll-icon {
+        color: var(--primary-color);
+    }
+
+    /* 実装例の詳細 */
+    .problem {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .solution {
+        background: rgba(34, 197, 94, 0.1);
+        border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .roi {
+        background: rgba(96, 165, 250, 0.1);
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .problem h4 {
+        color: #fca5a5;
+    }
+
+    .solution h4 {
+        color: #86efac;
+    }
+
+    .roi h4 {
+        color: var(--primary-color);
+    }
+
+    .problem p, .solution p, .roi p {
+        color: var(--text-light);
+    }
+
+    .roi ul {
+        color: var(--text-light);
+    }
+
+    .roi li strong {
+        color: var(--text-dark);
+    }
+
+    /* エラー・成功メッセージ */
+    .field-error {
+        color: var(--error-color) !important;
+    }
+
+    .notification-success {
+        background: var(--success-color) !important;
+    }
+
+    .notification-warning {
+        background: var(--warning-color) !important;
+    }
+
+    .notification-info {
+        background: var(--primary-color) !important;
+    }
+
+    /* チェックボックス・ラジオボタン */
+    .checkmark {
+        background: var(--background-tertiary);
+        border-color: var(--border-color);
+    }
+
+    .issue-option input[type="checkbox"]:checked + .checkmark {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .issue-option.checked {
+        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: var(--primary-color);
+    }
+
+    .option-content strong {
+        color: var(--text-dark);
+    }
+
+    .option-content span {
+        color: var(--text-muted);
+    }
+
+    /* ローディング画面 */
+    #loading-overlay {
+        background: var(--background-primary);
+    }
+
+    .loading-text {
+        color: var(--text-dark);
+    }
+
+    .loading-subtitle {
+        color: var(--text-muted);
+    }
+
+    .loader {
+        border-color: var(--border-color);
+        border-top-color: var(--primary-color);
+    }
+
+    .progress-bar {
+        background: var(--primary-color);
+    }
+
+    /* ヒーローセクション */
+    #hero {
+        background: var(--background-primary);
+    }
+
+    #hero h1 {
+        color: var(--text-dark);
+    }
+
+    .service-name {
+        color: var(--primary-color);
+    }
+
+    .hero-subtitle {
+        color: var(--text-light);
+    }
+
+    .hero-subtitle strong {
+        color: var(--text-dark);
+    }
+
+    /* アクセント要素 */
+    .accent-text {
+        color: var(--primary-color);
+    }
+
+    /* WebGLキャンバス - ダークモードでは少し暗く */
+    #webgl-canvas {
+        opacity: 0.7;
+    }
+
+    /* メッセージボックス */
+    .message {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .message blockquote {
+        color: var(--text-light);
+        border-left-color: var(--primary-color);
+    }
+
+    .message-author {
+        color: var(--text-muted);
+    }
+
+    /* 強み・特徴 */
+    .strength-item {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .strength-item:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.2);
+    }
+
+    .strength-item h3 {
+        color: var(--text-dark);
+    }
+
+    .strength-item p {
+        color: var(--text-light);
+    }
+
+    /* コントラスト強化のための追加調整 */
+    a {
+        color: var(--primary-color);
+    }
+
+    a:hover {
+        color: var(--primary-dark);
+    }
+
+    /* より高いコントラストが必要な要素 */
+    .pricing-header h3,
+    .cta-button,
+    .appeal-cta {
+        color: white !important;
+    }
+
+    /* アイコンの色調整 */
+    .card-icon,
+    .example-icon,
+    .process-icon {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+    }
+
+    /* プレースホルダーアイコン */
+    .placeholder-icon {
+        color: var(--text-muted);
+    }
+
+    .placeholder-features {
+        color: var(--text-light);
+    }
+
+    .feature-item i {
+        color: var(--success-color);
+    }
+
+    /* その他のスタイル調整 */
+    .timeline-content {
+        background: var(--card-background);
+        border-color: var(--border-color);
+    }
+
+    .timeline-content h3 {
+        color: var(--text-dark);
+    }
+
+    .timeline-content p {
+        color: var(--text-light);
+    }
+
+    .timeline-date {
+        color: var(--text-muted);
+    }
+
+    /* 価格表示 */
+    .price {
+        color: var(--text-dark);
+    }
+
+    .price span {
+        color: var(--text-muted);
+    }
+
+    /* CTA関連 */
+    .cta-hero-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+    }
+
+    .cta-hero-button:hover {
+        background: linear-gradient(135deg, var(--primary-dark), #1d4ed8);
+    }
+
+    /* レスポンシブ調整でも文字が見えるように */
+    @media (max-width: 768px) {
+        .section-header h2,
+        .step-title,
+        .results-title {
+            color: var(--text-dark) !important;
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted) !important;
+        }
     }
 }
 
@@ -2827,7 +3653,7 @@ fieldset legend i {
 }
 
 .benefit-card p {
-    color: var(--text-color-light);
+        color: var(--text-color-light);
     line-height: 1.6;
 }
 
@@ -4174,7 +5000,7 @@ input:checked + .slider:before {
     .step-number {
         width: 35px;
         height: 35px;
-        font-size: 1rem;
+    font-size: 1rem;
     }
     
     .results-actions {
@@ -4637,15 +5463,15 @@ input:checked + .slider:before {
 }
 
 .summary-package .package-icon {
-    width: 40px;
-    height: 40px;
+        width: 40px;
+        height: 40px;
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.2rem;
+        font-size: 1.2rem;
 }
 
 .summary-package .package-details h4 {
@@ -4758,7 +5584,7 @@ input:checked + .slider:before {
 
 .option-details strong {
     display: block;
-    font-size: 1rem;
+        font-size: 1rem;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 0.25rem;
@@ -5153,5 +5979,288 @@ input[type="datetime-local"]:focus {
     
     .time-value {
         font-size: 1.5rem;
+    }
+}
+
+/* その他のスタイル調整 - 既存の末尾に追加 */
+.timeline-content {
+    background: var(--card-background);
+    border-color: var(--border-color);
+}
+
+.timeline-content h3 {
+    color: var(--text-dark);
+}
+
+.timeline-content p {
+    color: var(--text-light);
+}
+
+.timeline-date {
+    color: var(--text-muted);
+}
+
+/* 価格表示 */
+.price {
+    color: var(--text-dark);
+}
+
+.price span {
+    color: var(--text-muted);
+}
+
+/* CTA関連 */
+.cta-hero-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+}
+
+.cta-hero-button:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #1d4ed8);
+}
+
+/* レスポンシブ調整でも文字が見えるように */
+@media (max-width: 768px) {
+    .section-header h2,
+    .step-title,
+    .results-title {
+        color: var(--text-dark) !important;
+    }
+    
+    .section-subtitle {
+        color: var(--text-muted) !important;
+    }
+}
+
+/* 追加のダークモード対応 */
+.examples-toggle-btn {
+    background: var(--card-background);
+    color: var(--text-dark);
+    border-color: var(--border-color);
+}
+
+.examples-toggle-btn:hover {
+    background: var(--background-tertiary);
+    border-color: var(--primary-color);
+}
+
+.mobile-menu-toggle .bar {
+    background: var(--text-light);
+}
+
+/* バッジ類 */
+.level-badge.starter {
+    background: var(--primary-color);
+    color: white;
+}
+
+.level-badge.popular {
+    background: var(--accent-color);
+    color: var(--background-primary);
+}
+
+.level-badge.premium {
+    background: linear-gradient(135deg, #9333ea, #7c3aed);
+    color: white;
+}
+
+/* 計算結果のテーブル */
+.breakdown-table {
+    background: var(--card-background);
+    border-color: var(--border-color);
+}
+
+.breakdown-table td {
+    color: var(--text-light);
+    border-color: var(--border-color);
+}
+
+.breakdown-table .total-row td {
+    background: var(--background-tertiary);
+    color: var(--text-dark);
+}
+
+/* アニメーション効果中も見えるように */
+.animate__animated {
+    color: inherit;
+}
+
+/* 日時入力フィールド */
+input[type="datetime-local"] {
+    background: var(--background-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-dark);
+}
+
+/* スクロールバーもダークに */
+::-webkit-scrollbar {
+    background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--background-tertiary);
+    border-color: var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-color);
+}
+
+/* タイムライン要素 */
+.timeline-icon {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* プロセスカードの日付表示 */
+.process-day {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 必須マーク */
+.form-group label span[aria-label="必須項目"] {
+    color: var(--error-color);
+}
+
+/* 選択状態のインジケーター */
+.ai-level-option input[type="radio"]:checked + .level-card::before {
+    background: var(--primary-color);
+}
+
+/* ヘルプアイコン */
+.help-icon {
+    color: var(--text-muted);
+}
+
+.help-icon:hover {
+    color: var(--primary-color);
+}
+
+/* パッケージ選択 */
+.package-badge:not(.popular) {
+    background: var(--background-tertiary);
+    color: var(--text-light);
+}
+
+/* 効率インジケーター */
+.efficiency-indicator {
+    background: var(--background-tertiary);
+}
+
+.efficiency-label {
+    color: var(--text-muted);
+}
+
+.efficiency-value {
+    color: var(--success-color);
+}
+
+/* ローディング画面の調整 */
+.loader-container {
+    background: transparent;
+}
+
+/* セレクション状態 */
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* WebGLキャンバスをダークモードで少し控えめに */
+#webgl-canvas {
+    opacity: 0.6;
+    filter: brightness(0.8);
+}
+
+/* より高いコントラストが必要な重要な要素 */
+.primary-button,
+.nav-cta,
+.cta-hero-button {
+    color: white !important;
+    text-shadow: none;
+}
+
+/* アイコンとテキストの組み合わせ */
+.card-icon i,
+.example-icon i,
+.process-icon i {
+    color: white;
+}
+
+/* サービス名の強調 */
+.service-name {
+    color: var(--primary-color) !important;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+/* 強み項目の調整 */
+.strength-icon {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* スマホでの視認性を最優先 */
+@media (max-width: 768px) {
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--text-dark) !important;
+    }
+
+    p, span, li {
+        color: var(--text-light) !important;
+    }
+
+    .section-subtitle,
+    .hero-subtitle {
+        color: var(--text-muted) !important;
+    }
+
+    /* ナビゲーションメニュー */
+    .nav-links a {
+        color: var(--text-light) !important;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-color) !important;
+    }
+
+    /* フォーム要素 */
+    input, textarea, select {
+        background: var(--background-tertiary) !important;
+        color: var(--text-dark) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: var(--text-muted) !important;
+    }
+
+    /* ボタン類の視認性確保 */
+    .primary-button,
+    .secondary-button,
+    .tertiary-button {
+        color: white !important;
+    }
+}
+
+/* 320px以下の極小画面での追加調整 */
+@media (max-width: 320px) {
+    .section-header h2 {
+        color: var(--text-dark) !important;
+        font-weight: 600;
+    }
+
+    .primary-button {
+        background: var(--primary-color) !important;
+        color: white !important;
     }
 }
