@@ -1041,19 +1041,75 @@ function setupEventListeners() {
             ctaButton.addEventListener('click', (e) => {
                 e.preventDefault(); // デフォルトのアンカー動作を抑制
                 const contactSection = document.getElementById('contact');
-                if (contactSection && typeof gsap !== 'undefined') {
-                    // スムーズスクロールをGSAPで実装
-                    gsap.to(window, {
-                        duration: 1.2, // 少しゆっくりに
-                        scrollTo: {
-                            y: contactSection,
-                            offsetY: 80 // ヘッダーの高さを考慮
-                        },
-                        ease: "power3.inOut"
-                    });
+                if (contactSection) {
+                    // ヘッダーの高さを取得
+                    const headerHeight = document.querySelector('.main-header')?.offsetHeight || 70;
+                    const targetPosition = contactSection.offsetTop - headerHeight;
+                    
+                    // GSAPが利用可能で、ScrollToプラグインが使える場合
+                    if (typeof gsap !== 'undefined' && gsap.to && window.ScrollToPlugin) {
+                        gsap.to(window, {
+                            duration: 1.2,
+                            scrollTo: {
+                                y: targetPosition,
+                                autoKill: true
+                            },
+                            ease: "power3.inOut"
+                        });
+                    } else {
+                        // フォールバック：ブラウザのネイティブスクロール
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         }
+        
+        // その他の問い合わせリンクも同様に処理
+        const contactLinks = document.querySelectorAll('a[href="#contact"]');
+        contactLinks.forEach(link => {
+            if (link !== ctaButton) { // CTAボタンは既に処理済み
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                        const headerHeight = document.querySelector('.main-header')?.offsetHeight || 70;
+                        const targetPosition = contactSection.offsetTop - headerHeight;
+                        
+                        // モバイルメニューが開いている場合は閉じる
+                        const navLinks = document.querySelector('.nav-links');
+                        const menuToggle = document.querySelector('.mobile-menu-toggle');
+                        if (navLinks && menuToggle) {
+                            navLinks.classList.remove('active');
+                            menuToggle.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            document.body.style.overflow = '';
+                        }
+                        
+                        // スクロール実行
+                        setTimeout(() => {
+                            if (typeof gsap !== 'undefined' && gsap.to && window.ScrollToPlugin) {
+                                gsap.to(window, {
+                                    duration: 1.2,
+                                    scrollTo: {
+                                        y: targetPosition,
+                                        autoKill: true
+                                    },
+                                    ease: "power3.inOut"
+                                });
+                            } else {
+                                window.scrollTo({
+                                    top: targetPosition,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }, 100); // メニューを閉じる時間を考慮
+                    }
+                });
+            }
+        });
 
         // フォームフィールドのアニメーション (存在する場合のみ設定)
         const formFields = document.querySelectorAll('input, textarea');
