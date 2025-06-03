@@ -62,6 +62,8 @@
     
     <!-- jsPDF for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- jsPDF日本語フォントサポート -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/polyfills.umd.js"></script>
     
     <!-- MathJax for mathematical formula rendering -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -1258,7 +1260,7 @@
                     <div class="form-group">
                         <label for="preferred-date"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望日時</label>
                         <input type="datetime-local" id="preferred-date" name="preferred-date">
-                        <small>ご都合の良い日時をお選びください（平日9:00-17:00推奨）</small>
+                        <small>ご都合の良い日時をお選びください（平日・土曜日9:00-18:00推奨）</small>
                     </div>
 
                     <button type="submit" class="primary-button">
@@ -1307,7 +1309,7 @@
                 <div class="footer-contact-info">
                     <h4>お問い合わせ</h4>
                     <p><i class="fas fa-envelope"></i> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> <a href="tel:070-1383-4420">070-1383-4420</a> (平日9時～17時)</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:070-1383-4420">070-1383-4420</a> (平日・土曜日9時～18時)</p>
                     <p class="personal-touch-message"><i class="fas fa-user-tie"></i> 代表 大嶽が直接ご対応いたします。</p>
                 </div>
                 <nav class="footer-links" aria-label="フッターナビゲーション">
