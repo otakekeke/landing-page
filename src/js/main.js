@@ -1041,75 +1041,19 @@ function setupEventListeners() {
             ctaButton.addEventListener('click', (e) => {
                 e.preventDefault(); // デフォルトのアンカー動作を抑制
                 const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                    // ヘッダーの高さを取得
-                    const headerHeight = document.querySelector('.main-header')?.offsetHeight || 70;
-                    const targetPosition = contactSection.offsetTop - headerHeight;
-                    
-                    // GSAPが利用可能で、ScrollToプラグインが使える場合
-                    if (typeof gsap !== 'undefined' && gsap.to && window.ScrollToPlugin) {
-                        gsap.to(window, {
-                            duration: 1.2,
-                            scrollTo: {
-                                y: targetPosition,
-                                autoKill: true
-                            },
-                            ease: "power3.inOut"
-                        });
-                    } else {
-                        // フォールバック：ブラウザのネイティブスクロール
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
+                if (contactSection && typeof gsap !== 'undefined') {
+                    // スムーズスクロールをGSAPで実装
+                    gsap.to(window, {
+                        duration: 1.2, // 少しゆっくりに
+                        scrollTo: {
+                            y: contactSection,
+                            offsetY: 80 // ヘッダーの高さを考慮
+                        },
+                        ease: "power3.inOut"
+                    });
                 }
             });
         }
-        
-        // その他の問い合わせリンクも同様に処理
-        const contactLinks = document.querySelectorAll('a[href="#contact"]');
-        contactLinks.forEach(link => {
-            if (link !== ctaButton) { // CTAボタンは既に処理済み
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                        const headerHeight = document.querySelector('.main-header')?.offsetHeight || 70;
-                        const targetPosition = contactSection.offsetTop - headerHeight;
-                        
-                        // モバイルメニューが開いている場合は閉じる
-                        const navLinks = document.querySelector('.nav-links');
-                        const menuToggle = document.querySelector('.mobile-menu-toggle');
-                        if (navLinks && menuToggle) {
-                            navLinks.classList.remove('active');
-                            menuToggle.classList.remove('active');
-                            menuToggle.setAttribute('aria-expanded', 'false');
-                            document.body.style.overflow = '';
-                        }
-                        
-                        // スクロール実行
-                        setTimeout(() => {
-                            if (typeof gsap !== 'undefined' && gsap.to && window.ScrollToPlugin) {
-                                gsap.to(window, {
-                                    duration: 1.2,
-                                    scrollTo: {
-                                        y: targetPosition,
-                                        autoKill: true
-                                    },
-                                    ease: "power3.inOut"
-                                });
-                            } else {
-                                window.scrollTo({
-                                    top: targetPosition,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        }, 100); // メニューを閉じる時間を考慮
-                    }
-                });
-            }
-        });
 
         // フォームフィールドのアニメーション (存在する場合のみ設定)
         const formFields = document.querySelectorAll('input, textarea');
@@ -1366,7 +1310,6 @@ function initCostCalculator() {
     const calculator = document.getElementById('cost-calculator-form');
     const resultsSection = document.getElementById('calculation-results');
     const placeholderSection = document.getElementById('calculation-placeholder');
-    const stepNavButtons = document.querySelectorAll('.next-step-btn, .prev-step-btn');
     const recalculateBtn = document.getElementById('recalculate-btn');
     const downloadBtn = document.getElementById('download-results');
     
@@ -1418,12 +1361,12 @@ function initCostCalculator() {
     }
 
     function generateSummaryHTML(results) {
-        const levelInfo = getLevelInfo(results.selectedLevel);
+        const packageInfo = getPackageInfo(results.selectedPackage);
         
         return `
             <div class="summary-grid">
                 <div class="summary-item highlight">
-                    <div class="label">月額システム料金</div>
+                    <div class="label">月額料金</div>
                     <div class="value">¥${results.monthlyCost.toLocaleString()}</div>
                 </div>
                 <div class="summary-item">
@@ -1431,21 +1374,21 @@ function initCostCalculator() {
                     <div class="value">¥${results.monthlySavings.toLocaleString()}</div>
                 </div>
                 <div class="summary-item">
-                    <div class="label">時間削減率</div>
-                    <div class="value">${results.timeReductionPercentage}%</div>
+                    <div class="label">投資回収率</div>
+                    <div class="value">${results.roiPercentage}%</div>
                 </div>
                 <div class="summary-item">
-                    <div class="label">リスク軽減率</div>
-                    <div class="value">${results.riskReductionPercentage}%</div>
+                    <div class="label">年間削減効果</div>
+                    <div class="value">¥${results.annualSavings.toLocaleString()}</div>
                 </div>
             </div>
             <div class="summary-package">
                 <div class="package-icon">
-                    <i class="${levelInfo.icon}"></i>
+                    <i class="${packageInfo.icon}"></i>
                 </div>
                 <div class="package-details">
-                    <h4>${levelInfo.name}</h4>
-                    <p>${levelInfo.description}</p>
+                    <h4>${packageInfo.name}プラン</h4>
+                    <p>${packageInfo.description}</p>
                 </div>
             </div>
         `;
@@ -1466,55 +1409,6 @@ function initCostCalculator() {
         });
     });
 
-    // AIレベル選択の処理
-    document.addEventListener('change', (e) => {
-        if (e.target.name === 'ai-level') {
-            updateLevelOptionAppearance(e.target.closest('.ai-level-option'), e.target.checked);
-        }
-        
-        if (e.target.name === 'meeting-type') {
-            updateMeetingOptionAppearance(e.target.closest('.meeting-option'), e.target.checked);
-        }
-    });
-
-    // 計算ボタンの処理
-    const calculateButton = document.querySelector('.calculate-btn');
-    if (calculateButton) {
-        calculateButton.addEventListener('click', () => {
-            if (validateCurrentStep()) {
-                performCalculation();
-            }
-        });
-    }
-
-    function updateLevelOptionAppearance(option, isChecked) {
-        if (isChecked) {
-            // 他のオプションのチェック状態をリセット
-            document.querySelectorAll('.ai-level-option').forEach(opt => {
-                if (opt !== option) {
-                    opt.classList.remove('checked');
-                }
-            });
-            option.classList.add('checked');
-        } else {
-            option.classList.remove('checked');
-        }
-    }
-
-    function updateMeetingOptionAppearance(option, isChecked) {
-        if (isChecked) {
-            option.classList.add('checked');
-            // 他のオプションのチェック状態をリセット
-            document.querySelectorAll('.meeting-option').forEach(opt => {
-                if (opt !== option) {
-                    opt.classList.remove('checked');
-                }
-            });
-        } else {
-            option.classList.remove('checked');
-        }
-    }
-
     function showStep(stepNumber) {
         currentStep = stepNumber;
         document.querySelectorAll('.calculator-step').forEach(step => {
@@ -1530,28 +1424,33 @@ function initCostCalculator() {
 
     function validateCurrentStep() {
         if (currentStep === 1) {
-            const workHours = document.getElementById('current-work-hours').value;
-            const hourlyRate = document.getElementById('hourly-rate').value;
+            const staffCount = document.getElementById('staff-count').value;
+            const avgWage = document.getElementById('avg-hourly-wage').value;
             
-            if (!workHours || workHours < 1) {
-                showFieldError(document.getElementById('current-work-hours'), '月間作業時間を入力してください');
+            if (!staffCount || staffCount < 1) {
+                showFieldError(document.getElementById('staff-count'), 'スタッフ数を入力してください');
                 return false;
             }
-            if (!hourlyRate || hourlyRate < 1000) {
-                showFieldError(document.getElementById('hourly-rate'), '適切な時給を入力してください');
+            if (!avgWage || avgWage < 1000) {
+                showFieldError(document.getElementById('avg-hourly-wage'), '適切な時給を入力してください');
                 return false;
             }
             
-            clearFieldError(document.getElementById('current-work-hours'));
-            clearFieldError(document.getElementById('hourly-rate'));
+            clearFieldError(document.getElementById('staff-count'));
+            clearFieldError(document.getElementById('avg-hourly-wage'));
             return true;
         }
         
         if (currentStep === 2) {
-            const selectedLevel = document.querySelector('input[name="ai-level"]:checked');
+            const selectedIssues = document.querySelectorAll('input[name="current-issues"]:checked');
+            const selectedPackage = document.querySelector('input[name="ai-package"]:checked');
             
-            if (!selectedLevel) {
-                showNotification('AIレベルを選択してください', 'warning');
+            if (selectedIssues.length === 0) {
+                showNotification('少なくとも1つの課題を選択してください', 'warning');
+                return false;
+            }
+            if (!selectedPackage) {
+                showNotification('AI活用レベルを選択してください', 'warning');
                 return false;
             }
             
@@ -1562,83 +1461,76 @@ function initCostCalculator() {
     }
 
     function collectFormData() {
-        const workHours = parseInt(document.getElementById('current-work-hours').value);
-        const hourlyRate = parseInt(document.getElementById('hourly-rate').value);
-        const selectedLevel = document.querySelector('input[name="ai-level"]:checked')?.value;
+        const staffCount = parseInt(document.getElementById('staff-count').value);
+        const avgWage = parseInt(document.getElementById('avg-hourly-wage').value);
+        
+        const selectedIssues = Array.from(document.querySelectorAll('input[name="current-issues"]:checked'))
+            .map(input => input.value);
+        
+        const selectedPackage = document.querySelector('input[name="ai-package"]:checked')?.value;
         
         return {
-            workHours,
-            hourlyRate,
-            selectedLevel
+            staffCount,
+            avgWage,
+            selectedIssues,
+            selectedPackage
         };
     }
 
     function performCalculation() {
         const formData = collectFormData();
         
-        // AIレベル別の効率化設定
-        const levelConfigs = {
-            level1: {
-                name: 'レベル1 - ベーシック',
-                icon: 'fas fa-play',
-                description: '基本的なAI支援機能',
-                timeReduction: 0.30, // 30%削減
-                riskReduction: 0.20, // 20%軽減
-                basePrice: 35000     // 基本料金
-            },
-            level2: {
-                name: 'レベル2 - スタンダード',
-                icon: 'fas fa-star',
-                description: '高度なAI自動化機能',
-                timeReduction: 0.50, // 50%削減
-                riskReduction: 0.40, // 40%軽減
-                basePrice: 65000     // 基本料金
-            },
-            level3: {
-                name: 'レベル3 - プレミアム',
-                icon: 'fas fa-crown',
-                description: '最先端AI + 予測分析',
-                timeReduction: 0.70, // 70%削減
-                riskReduction: 0.60, // 60%軽減
-                basePrice: 110000    // 基本料金
-            }
+        // 課題別の基本削減時間（月間）
+        const issueEfficiencies = {
+            documentation: { baseHours: 40, description: '記録・文書作成業務' },
+            management: { baseHours: 25, description: 'スケジュール・管理業務' },
+            communication: { baseHours: 20, description: '連絡・報告業務' },
+            quality: { baseHours: 15, description: 'サービス品質向上' }
         };
         
-        const levelConfig = levelConfigs[formData.selectedLevel];
+        // パッケージ別の効率化率
+        const packageMultipliers = {
+            basic: { rate: 0.7, name: 'ベーシック', icon: 'fas fa-play', description: '音声記録、基本的な業務効率化' },
+            standard: { rate: 0.6, name: 'スタンダード', icon: 'fas fa-star', description: '記録＋管理業務の自動化' },
+            premium: { rate: 0.4, name: 'プレミアム', icon: 'fas fa-crown', description: '全業務AI化＋予測・分析機能' }
+        };
         
-        // 削減効果計算
-        const savedHours = formData.workHours * levelConfig.timeReduction;
-        const laborSavings = Math.round(savedHours * formData.hourlyRate);
+        const packageInfo = packageMultipliers[formData.selectedPackage];
         
-        // リスク削減価値（労務削減の30%として算定）
-        const riskSavings = Math.round(laborSavings * 0.3 * levelConfig.riskReduction);
+        // 総削減時間計算
+        let totalSavedHours = 0;
+        const efficiencyBreakdown = [];
         
-        // 総削減効果
-        const totalSavings = laborSavings + riskSavings;
+        formData.selectedIssues.forEach(issue => {
+            const baseHours = issueEfficiencies[issue].baseHours;
+            const scaledHours = baseHours * (formData.staffCount / 20); // 20人基準でスケール
+            const savedHours = scaledHours * (1 - packageInfo.rate);
+            
+            totalSavedHours += savedHours;
+            efficiencyBreakdown.push({
+                name: issueEfficiencies[issue].description,
+                savedHours: Math.round(savedHours),
+                savingsAmount: Math.round(savedHours * formData.avgWage)
+            });
+        });
         
-        // 月額料金（削減効果の33% + 基本料金）
-        const monthlyCost = Math.round(totalSavings * 0.33 + levelConfig.basePrice * 0.4);
+        // 削減効果金額
+        const monthlySavings = Math.round(totalSavedHours * formData.avgWage);
+        const annualSavings = monthlySavings * 12;
         
-        // 投資回収率
-        const roiPercentage = totalSavings > 0 ? Math.round(((totalSavings - monthlyCost) / monthlyCost) * 100) : 0;
-        
-        // 新しい作業時間
-        const newWorkHours = Math.round(formData.workHours * (1 - levelConfig.timeReduction));
+        // 料金計算（削減効果の33%）
+        const monthlyCost = Math.round(monthlySavings * 0.33);
+        const roiPercentage = Math.round(((monthlySavings - monthlyCost) / monthlyCost) * 100);
         
         const results = {
             formData,
-            selectedLevel: formData.selectedLevel,
-            currentWorkHours: formData.workHours,
-            newWorkHours: newWorkHours,
-            savedHours: Math.round(savedHours),
-            timeReductionPercentage: Math.round(levelConfig.timeReduction * 100),
-            riskReductionPercentage: Math.round(levelConfig.riskReduction * 100),
-            laborSavings,
-            riskSavings,
-            monthlySavings: totalSavings,
+            totalSavedHours: Math.round(totalSavedHours),
+            monthlySavings,
+            annualSavings,
             monthlyCost,
             roiPercentage,
-            annualSavings: totalSavings * 12,
+            selectedPackage: formData.selectedPackage,
+            efficiencyBreakdown,
             calculationDate: new Date().toLocaleDateString('ja-JP')
         };
         
@@ -1652,34 +1544,49 @@ function initCostCalculator() {
         placeholderSection.style.display = 'none';
         resultsSection.style.display = 'block';
         
-        // メイン結果の表示
+        // 結果の表示
         animateCountUp(document.getElementById('monthly-cost'), calculationResults.monthlyCost);
         animateCountUp(document.getElementById('monthly-savings'), calculationResults.monthlySavings);
+        animateCountUp(document.getElementById('annual-savings'), calculationResults.annualSavings);
         document.getElementById('roi-percentage').textContent = calculationResults.roiPercentage;
         
-        // 時間比較の表示
-        document.getElementById('time-before').textContent = calculationResults.currentWorkHours;
-        document.getElementById('time-after').textContent = calculationResults.newWorkHours;
-        document.getElementById('time-reduction').textContent = calculationResults.savedHours;
+        // パッケージ情報の表示
+        const packageInfo = getPackageInfo(calculationResults.selectedPackage);
+        document.getElementById('package-summary').innerHTML = `
+            <div class="package-summary">
+                <div class="package-icon">
+                    <i class="${packageInfo.icon}"></i>
+                </div>
+                <div class="package-details">
+                    <h5>${packageInfo.name}プラン</h5>
+                    <p>${packageInfo.description}</p>
+                </div>
+            </div>
+        `;
         
-        // 詳細効果の表示
-        document.getElementById('time-reduction-percentage').textContent = calculationResults.timeReductionPercentage;
-        document.getElementById('saved-hours').textContent = calculationResults.savedHours;
-        document.getElementById('risk-reduction-percentage').textContent = calculationResults.riskReductionPercentage;
-        document.getElementById('risk-savings').textContent = calculationResults.riskSavings.toLocaleString();
-        document.getElementById('annual-effect').textContent = calculationResults.annualSavings.toLocaleString();
+        // 効率化詳細の表示
+        const efficiencyGrid = document.getElementById('efficiency-breakdown');
+        efficiencyGrid.innerHTML = calculationResults.efficiencyBreakdown.map(item => `
+            <div class="efficiency-item">
+                <div class="effect-name">${item.name}</div>
+                <div class="effect-value">
+                    月${item.savedHours}時間削減<br>
+                    ¥${item.savingsAmount.toLocaleString()}/月
+                </div>
+            </div>
+        `).join('');
         
         // スムーズスクロール
         resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function getLevelInfo(levelKey) {
-        const levels = {
-            level1: { name: 'レベル1 - ベーシック', icon: 'fas fa-play', description: '基本的なAI支援機能' },
-            level2: { name: 'レベル2 - スタンダード', icon: 'fas fa-star', description: '高度なAI自動化機能' },
-            level3: { name: 'レベル3 - プレミアム', icon: 'fas fa-crown', description: '最先端AI + 予測分析' }
+    function getPackageInfo(packageKey) {
+        const packages = {
+            basic: { name: 'ベーシック', icon: 'fas fa-play', description: '音声記録、基本的な業務効率化' },
+            standard: { name: 'スタンダード', icon: 'fas fa-star', description: '記録＋管理業務の自動化' },
+            premium: { name: 'プレミアム', icon: 'fas fa-crown', description: '全業務AI化＋予測・分析機能' }
         };
-        return levels[levelKey] || levels.level1;
+        return packages[packageKey] || packages.basic;
     }
 
     function hideResults() {
@@ -1695,7 +1602,7 @@ function initCostCalculator() {
             
             // フォームをリセット
             calculator.reset();
-            document.querySelectorAll('.ai-level-option').forEach(option => {
+            document.querySelectorAll('.issue-option').forEach(option => {
                 option.classList.remove('checked');
             });
             
@@ -1713,188 +1620,150 @@ function initCostCalculator() {
 
     // PDF ダウンロード機能
     if (downloadBtn) {
-        downloadBtn.addEventListener('click', generateSimplePDF);
+        downloadBtn.addEventListener('click', generateProfessionalPDF);
     }
 
-    function generateSimplePDF() {
+    function generateProfessionalPDF() {
         if (!calculationResults) return;
         
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: 'a4'
-            });
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // 日本語フォント設定（ブラウザのデフォルトフォント使用）
+        doc.setFont("helvetica");
+        
+        // ヘッダー部分
+        doc.setFillColor(59, 130, 246);
+        doc.rect(0, 0, 210, 40, 'F');
+        
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(24);
+        doc.text('AI介護システム導入', 20, 18);
+        doc.text('費用対効果分析レポート', 20, 30);
+        
+        // 会社情報
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(10);
+        doc.text('嶽ノ子 - FastAI', 150, 18);
+        doc.text('takenoko.ai.care@gmail.com', 150, 24);
+        doc.text('070-1383-4420', 150, 30);
+        
+        // メインコンテンツ
+        doc.setTextColor(0, 0, 0);
+        let yPos = 60;
+        
+        // 計算日
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`Report Date: ${calculationResults.calculationDate}`, 20, yPos);
+        yPos += 15;
+        
+        // サマリーボックス
+        doc.setFillColor(240, 249, 255);
+        doc.rect(15, yPos, 180, 45, 'F');
+        doc.setDrawColor(59, 130, 246);
+        doc.rect(15, yPos, 180, 45, 'S');
+        
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(16);
+        doc.text('Executive Summary', 20, yPos + 10);
+        
+        doc.setFontSize(12);
+        doc.text(`Monthly Cost: ¥${calculationResults.monthlyCost.toLocaleString()}`, 20, yPos + 20);
+        doc.text(`Monthly Savings: ¥${calculationResults.monthlySavings.toLocaleString()}`, 20, yPos + 28);
+        doc.text(`ROI: ${calculationResults.roiPercentage}%`, 20, yPos + 36);
+        doc.text(`Annual Savings: ¥${calculationResults.annualSavings.toLocaleString()}`, 100, yPos + 20);
+        
+        const packageInfo = getPackageInfo(calculationResults.selectedPackage);
+        doc.text(`Package: ${packageInfo.name}`, 100, yPos + 28);
+        doc.text(`Staff Count: ${calculationResults.formData.staffCount}`, 100, yPos + 36);
+        
+        yPos += 60;
+        
+        // 詳細分析
+        doc.setFontSize(14);
+        doc.setTextColor(0, 0, 0);
+        doc.text('Detailed Analysis', 20, yPos);
+        yPos += 10;
+        
+        // テーブルヘッダー
+        doc.setFillColor(59, 130, 246);
+        doc.rect(15, yPos, 180, 10, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(10);
+        doc.text('Category', 20, yPos + 7);
+        doc.text('Hours Saved/Month', 80, yPos + 7);
+        doc.text('Cost Savings/Month', 140, yPos + 7);
+        yPos += 10;
+        
+        // 効率化詳細テーブル
+        doc.setTextColor(0, 0, 0);
+        calculationResults.efficiencyBreakdown.forEach((item, index) => {
+            if (index % 2 === 0) {
+                doc.setFillColor(248, 250, 252);
+                doc.rect(15, yPos, 180, 8, 'F');
+            }
             
-            // 日本語対応のため、テキストエンコーディングを設定
-            doc.setFont("helvetica");
-            doc.setLanguage("ja");
-            
-            // ヘッダー部分
-            doc.setFillColor(59, 130, 246);
-            doc.rect(0, 0, 210, 40, 'F');
-            
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(20);
-            // 日本語テキストのエスケープ処理
-            const title = decodeURIComponent(escape('AI効率化分析レポート'));
-            doc.text(title, 20, 18);
-            doc.setFontSize(14);
-            const subtitle = decodeURIComponent(escape('FastAI システム導入効果シミュレーション'));
-            doc.text(subtitle, 20, 30);
-            
-            // 会社情報
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(10);
-            const company = decodeURIComponent(escape('嶽ノ子 - AI介護システム開発'));
-            doc.text(company, 140, 18);
-            doc.text('takenoko.ai.care@gmail.com', 140, 24);
-            doc.text('070-1383-4420', 140, 30);
-            
-            // メインコンテンツ
-            doc.setTextColor(0, 0, 0);
-            let yPos = 60;
-            
-            // 計算日
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            const reportDate = decodeURIComponent(escape(`レポート作成日: ${calculationResults.calculationDate}`));
-            doc.text(reportDate, 20, yPos);
-            yPos += 20;
-            
-            // 入力情報
-            doc.setFontSize(14);
-            doc.setTextColor(0, 0, 0);
-            const inputInfo = decodeURIComponent(escape('入力情報'));
-            doc.text(inputInfo, 20, yPos);
-            yPos += 10;
-            
-            doc.setFontSize(11);
-            const workHours = decodeURIComponent(escape(`現在の月間作業時間: ${calculationResults.currentWorkHours}時間`));
-            doc.text(workHours, 20, yPos);
-            yPos += 6;
-            const hourlyRate = decodeURIComponent(escape(`時給: ${calculationResults.formData.hourlyRate.toLocaleString()}円`));
-            doc.text(hourlyRate, 20, yPos);
-            yPos += 6;
-            const levelInfo = getLevelInfo(calculationResults.selectedLevel);
-            const aiLevel = decodeURIComponent(escape(`AIレベル: ${levelInfo.name}`));
-            doc.text(aiLevel, 20, yPos);
-            yPos += 15;
-            
-            // 効果サマリー
-            doc.setFillColor(240, 249, 255);
-            doc.rect(15, yPos, 180, 55, 'F');
-            doc.setDrawColor(59, 130, 246);
-            doc.rect(15, yPos, 180, 55, 'S');
-            
-            doc.setFontSize(16);
-            doc.setTextColor(0, 0, 0);
-            const summaryTitle = decodeURIComponent(escape('導入効果サマリー'));
-            doc.text(summaryTitle, 20, yPos + 12);
-            
-            doc.setFontSize(12);
-            const monthlyCost = decodeURIComponent(escape(`月額システム料金: ${calculationResults.monthlyCost.toLocaleString()}円`));
-            doc.text(monthlyCost, 20, yPos + 22);
-            const monthlySavings = decodeURIComponent(escape(`月間削減効果: ${calculationResults.monthlySavings.toLocaleString()}円`));
-            doc.text(monthlySavings, 20, yPos + 30);
-            const roi = decodeURIComponent(escape(`投資回収率: ${calculationResults.roiPercentage}%`));
-            doc.text(roi, 20, yPos + 38);
-            const timeReduction = decodeURIComponent(escape(`時間削減率: ${calculationResults.timeReductionPercentage}%`));
-            doc.text(timeReduction, 110, yPos + 22);
-            const riskReduction = decodeURIComponent(escape(`リスク軽減率: ${calculationResults.riskReductionPercentage}%`));
-            doc.text(riskReduction, 110, yPos + 30);
-            const savedHours = decodeURIComponent(escape(`削減時間: ${calculationResults.savedHours}時間/月`));
-            doc.text(savedHours, 110, yPos + 38);
-            const annualSavings = decodeURIComponent(escape(`年間削減効果: ${calculationResults.annualSavings.toLocaleString()}円`));
-            doc.text(annualSavings, 20, yPos + 46);
-            
-            yPos += 70;
-            
-            // 詳細分析
-            doc.setFontSize(14);
-            const detailTitle = decodeURIComponent(escape('詳細分析'));
-            doc.text(detailTitle, 20, yPos);
-            yPos += 15;
-            
-            doc.setFontSize(11);
-            const detail1 = decodeURIComponent(escape(`• 月間作業時間が ${calculationResults.currentWorkHours}時間から ${calculationResults.newWorkHours}時間に短縮されます`));
-            doc.text(detail1, 20, yPos);
+            doc.text(item.name, 20, yPos + 6);
+            doc.text(`${item.savedHours}h`, 80, yPos + 6);
+            doc.text(`¥${item.savingsAmount.toLocaleString()}`, 140, yPos + 6);
             yPos += 8;
-            const detail2 = decodeURIComponent(escape(`• 人件費削減効果: ${calculationResults.laborSavings.toLocaleString()}円/月`));
-            doc.text(detail2, 20, yPos);
-            yPos += 8;
-            const detail3 = decodeURIComponent(escape(`• リスク軽減価値: ${calculationResults.riskSavings.toLocaleString()}円/月`));
-            doc.text(detail3, 20, yPos);
-            yPos += 8;
-            const detail4 = decodeURIComponent(escape(`• 年間総削減効果: ${calculationResults.annualSavings.toLocaleString()}円`));
-            doc.text(detail4, 20, yPos);
-            yPos += 8;
-            
-            const monthsToBreakeven = Math.ceil(calculationResults.monthlyCost / (calculationResults.monthlySavings - calculationResults.monthlyCost));
-            const detail5 = decodeURIComponent(escape(`• 投資回収期間: 約${monthsToBreakeven}か月`));
-            doc.text(detail5, 20, yPos);
-            yPos += 15;
-            
-            // 推奨事項
-            doc.setFontSize(14);
-            const recommendTitle = decodeURIComponent(escape('導入推奨事項'));
-            doc.text(recommendTitle, 20, yPos);
-            yPos += 10;
-            
-            doc.setFontSize(10);
-            const recommend1 = decodeURIComponent(escape('1. 段階的な導入により、スタッフの適応を促進することを推奨します'));
-            doc.text(recommend1, 20, yPos);
-            yPos += 6;
-            const recommend2 = decodeURIComponent(escape('2. AIの効果を最大化するため、スタッフ研修が重要です'));
-            doc.text(recommend2, 20, yPos);
-            yPos += 6;
-            const recommend3 = decodeURIComponent(escape('3. 効率化効果の定期的なモニタリングを行うことを推奨します'));
-            doc.text(recommend3, 20, yPos);
-            yPos += 6;
-            const recommend4 = decodeURIComponent(escape('4. 継続的な改善とカスタマイズにより、さらなる効果が期待できます'));
-            doc.text(recommend4, 20, yPos);
-            yPos += 15;
-            
-            // 次のステップ
-            doc.setFillColor(248, 250, 252);
-            doc.rect(15, yPos, 180, 25, 'F');
-            doc.setDrawColor(59, 130, 246);
-            doc.rect(15, yPos, 180, 25, 'S');
-            
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            const nextStepTitle = decodeURIComponent(escape('次のステップ'));
-            doc.text(nextStepTitle, 20, yPos + 8);
-            doc.setFontSize(10);
-            const nextStep1 = decodeURIComponent(escape('詳細なご相談やカスタマイズについては、お気軽にお問い合わせください。'));
-            doc.text(nextStep1, 20, yPos + 16);
-            const nextStep2 = decodeURIComponent(escape('無料でシステム設計・要件定義を承ります。'));
-            doc.text(nextStep2, 20, yPos + 21);
-            
-            // フッター
-            doc.setFillColor(248, 250, 252);
-            doc.rect(0, 270, 210, 27, 'F');
-            doc.setTextColor(100, 100, 100);
-            doc.setFontSize(8);
-            const footer1 = decodeURIComponent(escape('FastAI 効率化シミュレーターにより生成'));
-            doc.text(footer1, 20, 280);
-            const footer2 = decodeURIComponent(escape('お問い合わせ: takenoko.ai.care@gmail.com | 070-1383-4420'));
-            doc.text(footer2, 20, 286);
-            const footer3 = decodeURIComponent(escape('© 2024 嶽ノ子 (個人事業主: 大嶽耕太郎) - All rights reserved'));
-            doc.text(footer3, 20, 292);
-            
-            // PDF保存
-            const fileName = decodeURIComponent(escape(`AI効率化分析レポート_${new Date().toISOString().split('T')[0]}.pdf`));
-            doc.save(fileName);
-            
-            // ダウンロード完了通知
-            showNotification('AI効率化分析レポートをダウンロードしました', 'success');
-            
-        } catch (error) {
-            console.error('PDF生成エラー:', error);
-            showNotification('PDFの生成に失敗しました。再度お試しください。', 'error');
-        }
+        });
+        
+        yPos += 10;
+        
+        // 投資回収分析
+        doc.setFontSize(14);
+        doc.text('Investment Recovery Analysis', 20, yPos);
+        yPos += 15;
+        
+        doc.setFontSize(10);
+        const monthsToBreakeven = Math.ceil(calculationResults.monthlyCost / (calculationResults.monthlySavings - calculationResults.monthlyCost));
+        
+        doc.text(`- Break-even Period: ${monthsToBreakeven} months`, 20, yPos);
+        yPos += 8;
+        doc.text(`- 3-Year Total Savings: ¥${(calculationResults.annualSavings * 3 - calculationResults.monthlyCost * 36).toLocaleString()}`, 20, yPos);
+        yPos += 8;
+        doc.text(`- Efficiency Improvement: ${Math.round((1 - getPackageEfficiencyRate(calculationResults.selectedPackage)) * 100)}%`, 20, yPos);
+        yPos += 15;
+        
+        // 推奨事項
+        doc.setFontSize(14);
+        doc.text('Recommendations', 20, yPos);
+        yPos += 10;
+        
+        doc.setFontSize(10);
+        doc.text('1. Consider phased implementation to minimize disruption', 20, yPos);
+        yPos += 6;
+        doc.text('2. Staff training program recommended for optimal adoption', 20, yPos);
+        yPos += 6;
+        doc.text('3. Regular performance monitoring for continuous improvement', 20, yPos);
+        yPos += 6;
+        doc.text('4. Integration with existing systems for maximum efficiency', 20, yPos);
+        
+        // フッター
+        doc.setFillColor(248, 250, 252);
+        doc.rect(0, 270, 210, 27, 'F');
+        doc.setTextColor(100, 100, 100);
+        doc.setFontSize(8);
+        doc.text('This report is generated by FastAI Cost Calculator', 20, 280);
+        doc.text('For detailed consultation, please contact: takenoko.ai.care@gmail.com', 20, 286);
+        doc.text('© 2024 嶽ノ子 (Takenoko) - All rights reserved', 20, 292);
+        
+        // PDF保存
+        doc.save(`FastAI-Cost-Analysis-${new Date().toISOString().split('T')[0]}.pdf`);
+        
+        // ダウンロード完了通知
+        showNotification('PDFレポートをダウンロードしました', 'info');
+    }
+
+    function getPackageEfficiencyRate(packageKey) {
+        const rates = {
+            basic: 0.7,
+            standard: 0.6,
+            premium: 0.4
+        };
+        return rates[packageKey] || 0.7;
     }
 
     function animateCountUp(element, targetValue) {
