@@ -5838,3 +5838,489 @@ input[type="datetime-local"] {
         color: white !important;
     }
 }
+
+/* スマホ専用の可読性向上 - 通常モード */
+@media (max-width: 768px) {
+    /* 基本的なテキストコントラスト強化 */
+    body {
+        background: #ffffff !important;
+        color: #1f2937 !important;
+    }
+    
+    /* ヘッダーテキストの強化 */
+    h1, h2, h3, h4, h5, h6 {
+        color: #111827 !important;
+        text-shadow: none !important;
+        font-weight: 700 !important;
+    }
+    
+    /* 段落とスパンテキストの強化 */
+    p, span, li {
+        color: #374151 !important;
+        font-weight: 500 !important;
+        line-height: 1.7 !important;
+    }
+    
+    /* セクション見出しの特別対応 */
+    .section-header h2 {
+        color: #111827 !important;
+        font-size: 2.2rem !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+    }
+    
+    .section-subtitle,
+    .section-header p {
+        color: #1f2937 !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+    }
+    
+    /* ナビゲーションの強化 */
+    .nav-links a {
+        color: #111827 !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .nav-links a:hover {
+        color: #3b82f6 !important;
+        background: rgba(59, 130, 246, 0.1) !important;
+    }
+    
+    /* フォーム要素の強化 */
+    input, textarea, select {
+        color: #111827 !important;
+        background: #ffffff !important;
+        border: 2px solid #d1d5db !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+    }
+    
+    input::placeholder, textarea::placeholder {
+        color: #6b7280 !important;
+        opacity: 1 !important;
+    }
+    
+    .form-group label {
+        color: #111827 !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+    }
+    
+    /* ボタンテキストの強化 */
+    .primary-button,
+    .cta-button,
+    .appeal-cta {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
+        text-shadow: none !important;
+    }
+    
+    /* カード内テキストの強化 */
+    .card h3 {
+        color: #111827 !important;
+        font-weight: 700 !important;
+    }
+    
+    .card p {
+        color: #374151 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* 価格表示の強化 */
+    .price {
+        color: #111827 !important;
+        font-weight: 800 !important;
+    }
+    
+    /* フッターテキストの強化 */
+    footer {
+        background: #111827 !important;
+    }
+    
+    footer h4 {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+    
+    footer p, footer a {
+        color: #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* 透明背景の除去 */
+    .main-header {
+        background: #ffffff !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* グラデーション背景の調整 */
+    #hero {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    }
+    
+    .section {
+        background: #ffffff !important;
+    }
+    
+    /* 計算機セクションの特別対応 */
+    .calculator-container {
+        background: #ffffff !important;
+        color: #111827 !important;
+    }
+    
+    .ai-level-option .level-header h4 {
+        color: #111827 !important;
+        font-weight: 700 !important;
+    }
+    
+    .ai-level-option .level-description p {
+        color: #374151 !important;
+        font-weight: 500 !important;
+    }
+    
+    .effect-value {
+        color: #3b82f6 !important;
+        font-weight: 800 !important;
+    }
+    
+    .results-summary .price-display .amount {
+        color: #111827 !important;
+        font-weight: 800 !important;
+    }
+    
+    .roi-summary {
+        background: #ffffff !important;
+        color: #111827 !important;
+        border: 2px solid #e5e7eb !important;
+    }
+}
+
+/* スマホでのダークモード可読性強化 */
+@media (max-width: 768px) {
+    /* 基本的なテキストコントラスト大幅強化 */
+    body {
+        background: #0f172a !important;
+        color: #f8fafc !important;
+    }
+    
+    /* 全てのヘッダーテキストを最高レベルの明度に */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+        font-weight: 800 !important;
+    }
+    
+    /* 段落とスパンテキストの強化 */
+    p, span, li, div {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+        line-height: 1.8 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    }
+    
+    /* セクション見出しの特別強化 */
+    .section-header h2 {
+        color: #ffffff !important;
+        font-size: 2.4rem !important;
+        font-weight: 900 !important;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+    }
+    
+    .section-subtitle,
+    .section-header p {
+        color: #f8fafc !important;
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    /* ナビゲーションメニューの強化 */
+    .nav-links {
+        background: #0f172a !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .nav-links a {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 1.2rem !important;
+        text-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a:focus {
+        color: #60a5fa !important;
+        background: rgba(96, 165, 250, 0.2) !important;
+        font-weight: 800 !important;
+    }
+    
+    /* フォーム要素の大幅強化 */
+    .form-group label {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        color: #ffffff !important;
+        background: #1e293b !important;
+        border: 2px solid #475569 !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        background: #334155 !important;
+        border-color: #60a5fa !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3) !important;
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #94a3b8 !important;
+        opacity: 1 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* 計算機関連の強化 */
+    .calculator-container {
+        background: #0f172a !important;
+        border: 1px solid #334155 !important;
+    }
+    
+    .ai-level-option .level-header h4 {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    }
+    
+    .ai-level-option .level-description p {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    }
+    
+    .effect-value {
+        color: #60a5fa !important;
+        font-weight: 900 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    .results-summary .price-display .amount {
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    .roi-summary {
+        background: #1e293b !important;
+        color: #ffffff !important;
+        border: 2px solid #475569 !important;
+    }
+    
+    /* カード関連の強化 */
+    .card,
+    .strength-item,
+    .example-card {
+        background: #1e293b !important;
+        border: 1px solid #475569 !important;
+        color: #ffffff !important;
+    }
+    
+    .card h3,
+    .strength-item h3,
+    .example-card h3 {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+    }
+    
+    .card p,
+    .strength-item p,
+    .example-card p {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* ボタンの強化 */
+    .primary-button,
+    .cta-button,
+    .appeal-cta {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+    }
+    
+    /* アイコンの可視性強化 */
+    .card-icon i,
+    .strength-icon i,
+    .example-icon i {
+        color: #60a5fa !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    /* ヘッダーの背景強化 */
+    .main-header {
+        background: rgba(15, 23, 42, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid #475569 !important;
+    }
+    
+    /* セクション背景の調整 */
+    .section {
+        background: #0f172a !important;
+    }
+    
+    #hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+    }
+    
+    /* 計算結果サマリーの強化 */
+    .calculation-summary-area {
+        background: #1e293b !important;
+        border: 2px solid #475569 !important;
+        color: #ffffff !important;
+    }
+    
+    .calculation-summary-area h3 {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    .summary-note {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* 価格関連の強化 */
+    .price {
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+    }
+    
+    .price span {
+        color: #cbd5e1 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* フッターの強化 */
+    footer {
+        background: #0f172a !important;
+        border-top: 1px solid #334155 !important;
+    }
+    
+    footer h4 {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+    }
+    
+    footer p, footer a {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+    }
+    
+    footer a:hover {
+        color: #60a5fa !important;
+    }
+}
+
+/* 超小型スマホ（320px以下）での可読性強化 */
+@media (max-width: 320px) {
+    /* 通常モードでの強化 */
+    body {
+        background: #ffffff !important;
+        color: #111827 !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #111827 !important;
+        font-weight: 800 !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    p, span, li {
+        color: #374151 !important;
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+    }
+    
+    .primary-button {
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        padding: 14px 20px !important;
+    }
+    
+    /* ダークモード時の超小型スマホ対応 */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background: #0f172a !important;
+            color: #f8fafc !important;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff !important;
+            font-weight: 900 !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
+        }
+        
+        p, span, li, div {
+            color: #f1f5f9 !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
+        }
+        
+        .nav-links a {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+            font-size: 1.1rem !important;
+        }
+        
+        .form-group label {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            color: #ffffff !important;
+            background: #1e293b !important;
+            border: 2px solid #475569 !important;
+            font-weight: 700 !important;
+        }
+        
+        .card h3,
+        .strength-item h3 {
+            color: #ffffff !important;
+            font-weight: 900 !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
+        }
+        
+        .card p,
+        .strength-item p {
+            color: #f1f5f9 !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+        }
+    }
+}
