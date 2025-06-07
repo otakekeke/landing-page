@@ -1558,110 +1558,165 @@ function initCostCalculator() {
 
     function generateJapanesePDF() {
         if (!calculationResults) return;
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        doc.setFont("helvetica", "normal"); 
-
-        // Header
-        doc.setFillColor(59, 130, 246);
-        doc.rect(0, 0, 210, 35, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(18);
-        doc.text('AI介護システム導入効果 分析レポート', 20, 15);
-        doc.setFontSize(12);
-        doc.text('嶽ノ子 FastAI システム', 20, 25);
-        doc.setFontSize(9);
-        doc.text('Email: takenoko.ai.care@gmail.com', 140, 15);
-        doc.text('Tel: 070-1383-4420', 140, 22);
-        doc.text('対応時間: 平日・土曜 9:00-18:00', 140, 29);
-
-        doc.setTextColor(0, 0, 0);
-        let yPos = 50;
-        doc.setFontSize(9);
-        doc.setTextColor(100, 100, 100);
-        doc.text(`レポート作成日: ${calculationResults.calculationDate}`, 20, yPos); yPos += 15;
-
-        // Summary Box
-        doc.setFillColor(240, 249, 255);
-        doc.rect(15, yPos, 180, 50, 'F');
-        doc.setDrawColor(59, 130, 246);
-        doc.rect(15, yPos, 180, 50, 'S');
-        doc.setTextColor(0, 0, 0);
-        doc.setFontSize(14);
-        doc.text('導入効果 概要', 20, yPos + 12);
-        doc.setFontSize(11);
-        doc.text(`月額料金: ¥${calculationResults.monthlyCost.toLocaleString()}`, 20, yPos + 24);
-        doc.text(`月間削減効果: ¥${calculationResults.totalMonthlyValue.toLocaleString()}`, 20, yPos + 32);
-        doc.text(`投資回収率: ${calculationResults.roiPercentage}%`, 20, yPos + 40);
-        doc.text(`年間削減効果: ¥${calculationResults.annualSavings.toLocaleString()}`, 110, yPos + 24);
+        
+        showNotification('PDFを生成中です...', 'info');
+        
+        // Create a temporary HTML element with the report content
+        const reportContainer = document.createElement('div');
+        reportContainer.style.cssText = `
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 794px;
+            background: white;
+            font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #000;
+            padding: 40px;
+            box-sizing: border-box;
+        `;
+        
         const levelInfoPdf = getLevelInfo(calculationResults.selectedLevel);
-        doc.text(`選択AIレベル: レベル${calculationResults.selectedLevel} (${levelInfoPdf.name})`, 110, yPos + 32);
-        doc.text(`正味削減時間: ${calculationResults.netSavedHours}時間/月`, 110, yPos + 40);
-        yPos += 65;
-
-        // Detailed Analysis
-        doc.setFontSize(13);
-        doc.text('詳細分析', 20, yPos); yPos += 10;
-
-        doc.setFontSize(11);
-        doc.text('【入力条件】', 20, yPos); yPos += 8;
-        doc.setFontSize(10);
-        doc.text(`現在の作業時間: ${calculationResults.currentHours}時間/月`, 25, yPos); yPos += 6;
-        doc.text(`時間単価: ¥${calculationResults.hourlyCost.toLocaleString()}/時間`, 25, yPos); yPos += 6;
-        doc.text(`AIレベル: レベル${calculationResults.selectedLevel} (${levelInfoPdf.name})`, 25, yPos); yPos += 15;
-
-        doc.setFontSize(11);
-        doc.text('【効果詳細】', 20, yPos); yPos += 8;
-        doc.setFillColor(59, 130, 246);
-        doc.rect(15, yPos, 180, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(9);
-        doc.text('項目', 20, yPos + 6); doc.text('時間/月', 80, yPos + 6); doc.text('金額/月', 130, yPos + 6);
-        yPos += 8;
-        doc.setTextColor(0, 0, 0);
-        const tableData = [
-            ['作業時間削減(効果)', `${calculationResults.savedHours}時間`, `¥${calculationResults.monthlySavings.toLocaleString()}`], // monthlySavings is laborSavingsValue
-            ['新規作業時間(コスト)', `${calculationResults.newWorkHours}時間`, '-'],
-            ['正味作業時間削減', `${calculationResults.netSavedHours}時間`, `¥${(calculationResults.monthlySavings - (calculationResults.newWorkHours * calculationResults.hourlyCost)).toLocaleString()}`], // Net labor saving amount
-            ['リスク軽減効果', '-', `¥${calculationResults.riskReductionValue.toLocaleString()}`],
-            ['総月間経済効果', '-', `¥${calculationResults.totalMonthlyValue.toLocaleString()}`]
-        ];
-        tableData.forEach((row, index) => {
-            if (index % 2 === 0) { doc.setFillColor(248, 250, 252); doc.rect(15, yPos, 180, 6, 'F'); }
-            doc.text(row[0], 20, yPos + 4); doc.text(row[1], 80, yPos + 4); doc.text(row[2], 130, yPos + 4);
-            yPos += 6;
+        
+        reportContainer.innerHTML = `
+            <div style="background: #3b82f6; color: white; padding: 20px; margin: -40px -40px 30px -40px; position: relative;">
+                <h1 style="margin: 0; font-size: 18px; font-weight: bold;">AI介護システム導入効果 分析レポート</h1>
+                <p style="margin: 5px 0 0 0; font-size: 12px;">嶽ノ子 FastAI システム</p>
+                <div style="position: absolute; top: 20px; right: 20px; text-align: right; font-size: 9px;">
+                    <div>Email: takenoko.ai.care@gmail.com</div>
+                    <div>Tel: 070-1383-4420</div>
+                    <div>対応時間: 平日・土曜 9:00-18:00</div>
+                </div>
+            </div>
+            
+            <div style="color: #666; font-size: 9px; margin-bottom: 20px;">
+                レポート作成日: ${calculationResults.calculationDate}
+            </div>
+            
+            <div style="background: #f0f9ff; border: 2px solid #3b82f6; padding: 20px; margin-bottom: 30px;">
+                <h2 style="margin: 0 0 15px 0; font-size: 14px; color: #000;">導入効果 概要</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 11px;">
+                    <div>
+                        <div>月額料金: ¥${calculationResults.monthlyCost.toLocaleString()}</div>
+                        <div>月間削減効果: ¥${calculationResults.totalMonthlyValue.toLocaleString()}</div>
+                        <div>投資回収率: ${calculationResults.roiPercentage}%</div>
+                    </div>
+                    <div>
+                        <div>年間削減効果: ¥${calculationResults.annualSavings.toLocaleString()}</div>
+                        <div>選択AIレベル: レベル${calculationResults.selectedLevel} (${levelInfoPdf.name})</div>
+                        <div>正味削減時間: ${calculationResults.netSavedHours}時間/月</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="font-size: 13px; margin: 30px 0 10px 0; color: #000;">詳細分析</h2>
+            
+            <h3 style="font-size: 11px; margin: 20px 0 8px 0; color: #000;">【入力条件】</h3>
+            <div style="margin-left: 15px; font-size: 10px;">
+                <div style="margin-bottom: 6px;">現在の作業時間: ${calculationResults.currentHours}時間/月</div>
+                <div style="margin-bottom: 6px;">時間単価: ¥${calculationResults.hourlyCost.toLocaleString()}/時間</div>
+                <div style="margin-bottom: 15px;">AIレベル: レベル${calculationResults.selectedLevel} (${levelInfoPdf.name})</div>
+            </div>
+            
+            <h3 style="font-size: 11px; margin: 20px 0 8px 0; color: #000;">【効果詳細】</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px; margin-bottom: 20px;">
+                <thead>
+                    <tr style="background: #3b82f6; color: white;">
+                        <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">項目</th>
+                        <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">時間/月</th>
+                        <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">金額/月</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid #ddd;">作業時間削減(効果)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">${calculationResults.savedHours}時間</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">¥${calculationResults.monthlySavings.toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">新規作業時間(コスト)</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">${calculationResults.newWorkHours}時間</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">-</td>
+                    </tr>
+                    <tr style="background: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid #ddd;">正味作業時間削減</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">${calculationResults.netSavedHours}時間</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">¥${(calculationResults.monthlySavings - (calculationResults.newWorkHours * calculationResults.hourlyCost)).toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #ddd;">リスク軽減効果</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">-</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">¥${calculationResults.riskReductionValue.toLocaleString()}</td>
+                    </tr>
+                    <tr style="background: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid #ddd;">総月間経済効果</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">-</td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">¥${calculationResults.totalMonthlyValue.toLocaleString()}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 style="font-size: 11px; margin: 20px 0 8px 0; color: #000;">【投資回収分析】</h3>
+            <div style="margin-left: 15px; font-size: 10px;">
+                <div style="margin-bottom: 6px;">• 投資回収期間: ${(() => {
+                    const netMonthlyBenefit = calculationResults.totalMonthlyValue - calculationResults.monthlyCost;
+                    return netMonthlyBenefit > 0 ? Math.ceil(calculationResults.monthlyCost / netMonthlyBenefit) : 'N/A';
+                })()}ヶ月</div>
+                <div style="margin-bottom: 6px;">• 3年間累計純効果: ¥${((calculationResults.totalMonthlyValue * 36) - (calculationResults.monthlyCost * 36)).toLocaleString()}</div>
+                <div style="margin-bottom: 15px;">• AIによる品質向上とミス削減効果を含む</div>
+            </div>
+            
+            <h3 style="font-size: 11px; margin: 20px 0 8px 0; color: #000;">【注意事項】</h3>
+            <div style="margin-left: 15px; font-size: 9px;">
+                <div style="margin-bottom: 5px;">• この試算は入力された条件に基づく概算です</div>
+                <div style="margin-bottom: 5px;">• 実際の導入効果は業務内容や運用方法により変動します</div>
+                <div style="margin-bottom: 5px;">• 詳細な見積もりについては、お気軽にお問い合わせください</div>
+            </div>
+            
+            <div style="background: #f8fafc; margin-top: 40px; padding: 15px; font-size: 8px; color: #666; border-top: 1px solid #e5e7eb;">
+                <div>このレポートは FastAI 料金シミュレーターにより生成されました</div>
+                <div>詳細な相談をご希望の場合: takenoko.ai.care@gmail.com</div>
+                <div>© 2024 嶽ノ子 - All rights reserved</div>
+            </div>
+        `;
+        
+        document.body.appendChild(reportContainer);
+        
+        // Use html2canvas to render the HTML content with Japanese text
+        html2canvas(reportContainer, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            width: 794,
+            height: Math.max(1123, reportContainer.scrollHeight + 80)
+        }).then(canvas => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'px',
+                format: 'a4'
+            });
+            
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 595;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+            
+            const fileName = `FastAI導入効果分析_${new Date().toISOString().split('T')[0]}.pdf`;
+            doc.save(fileName);
+            
+            // Clean up
+            document.body.removeChild(reportContainer);
+            showNotification('分析レポートをダウンロードしました', 'success');
+            
+        }).catch(error => {
+            console.error('PDF generation failed:', error);
+            document.body.removeChild(reportContainer);
+            showNotification('PDF生成中にエラーが発生しました', 'warning');
         });
-        yPos += 10;
-
-        doc.setFontSize(11);
-        doc.text('【投資回収分析】', 20, yPos); yPos += 8;
-        doc.setFontSize(10);
-        const netMonthlyBenefit = calculationResults.totalMonthlyValue - calculationResults.monthlyCost;
-        const breakEvenMonths = netMonthlyBenefit > 0 ? Math.ceil(calculationResults.monthlyCost / netMonthlyBenefit) : 'N/A';
-        doc.text(`• 投資回収期間: ${breakEvenMonths}ヶ月`, 25, yPos); yPos += 6;
-        const threeYearBenefit = (calculationResults.totalMonthlyValue * 36) - (calculationResults.monthlyCost * 36);
-        doc.text(`• 3年間累計純効果: ¥${threeYearBenefit.toLocaleString()}`, 25, yPos); yPos += 6;
-        doc.text('• AIによる品質向上とミス削減効果を含む', 25, yPos); yPos += 15;
-
-        doc.setFontSize(11);
-        doc.text('【注意事項】', 20, yPos); yPos += 8;
-        doc.setFontSize(9);
-        doc.text('• この試算は入力された条件に基づく概算です', 25, yPos); yPos += 5;
-        doc.text('• 実際の導入効果は業務内容や運用方法により変動します', 25, yPos); yPos += 5;
-        doc.text('• 詳細な見積もりについては、お気軽にお問い合わせください', 25, yPos);
-
-        // Footer
-        doc.setFillColor(248, 250, 252);
-        doc.rect(0, 270, 210, 27, 'F');
-        doc.setTextColor(100, 100, 100);
-        doc.setFontSize(8);
-        doc.text('このレポートは FastAI 料金シミュレーターにより生成されました', 20, 280);
-        doc.text('詳細な相談をご希望の場合: takenoko.ai.care@gmail.com', 20, 286);
-        doc.text('© 2024 嶽ノ子 - All rights reserved', 20, 292);
-
-        const fileName = `FastAI導入効果分析_${new Date().toISOString().split('T')[0]}.pdf`;
-        doc.save(fileName);
-        showNotification('分析レポートをダウンロードしました', 'success');
     }
 
     function animateCountUp(element, targetValue) {
