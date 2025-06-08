@@ -585,8 +585,9 @@ p {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 2rem 1rem;
+    padding: calc(var(--header-height) + 2rem) 1rem 2rem;
     text-align: center;
+    box-sizing: border-box;
 }
 
 #hero .hero-content {
