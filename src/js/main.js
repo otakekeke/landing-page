@@ -451,16 +451,22 @@ function setupBackToTopButton() {
                 
                 // GSAP利用可能時はアニメーション、そうでなければブラウザデフォルト
                 if (typeof gsap !== 'undefined' && gsap.to) {
-                gsap.to(window, {
-                    duration: 1,
+                    gsap.to(window, {
+                        duration: 1,
                         scrollTo: { y: 0 },
-                    ease: "power3.inOut"
-                });
+                        ease: "power3.inOut"
+                    });
                 } else {
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
+                }
+                
+                // アクセシビリティ：フォーカスをページトップの要素に移動
+                const skipLink = document.querySelector('#main-content') || document.querySelector('h1');
+                if (skipLink) {
+                    skipLink.focus();
                 }
             });
             
@@ -1035,25 +1041,33 @@ function setupEventListeners() {
             });
         }
 
-        // CTAボタンクリックでコンタクトセクションにスクロール
-        const ctaButton = document.getElementById('cta-button');
-        if (ctaButton) {
-            ctaButton.addEventListener('click', (e) => {
+        // CTAボタン・お問い合わせボタンの処理
+        const ctaButtons = document.querySelectorAll('[href="#contact"], .cta-hero-button, #cta-button, .footer-contact-btn');
+        ctaButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
                 e.preventDefault(); // デフォルトのアンカー動作を抑制
                 const contactSection = document.getElementById('contact');
-                if (contactSection && typeof gsap !== 'undefined') {
-                    // スムーズスクロールをGSAPで実装
-                    gsap.to(window, {
-                        duration: 1.2, // 少しゆっくりに
-                        scrollTo: {
-                            y: contactSection,
-                            offsetY: 80 // ヘッダーの高さを考慮
-                        },
-                        ease: "power3.inOut"
-                    });
+                if (contactSection) {
+                    const headerHeight = document.querySelector('.main-header')?.offsetHeight || 80;
+                    const targetPosition = contactSection.offsetTop - headerHeight;
+                    
+                    // GSAPが利用可能な場合はアニメーション付きスクロール
+                    if (typeof gsap !== 'undefined' && gsap.to) {
+                        gsap.to(window, {
+                            duration: 1.2,
+                            scrollTo: { y: targetPosition },
+                            ease: "power3.inOut"
+                        });
+                    } else {
+                        // フォールバック：ブラウザデフォルトのスムーズスクロール
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
-        }
+        });
 
         // フォームフィールドのアニメーション (存在する場合のみ設定)
         const formFields = document.querySelectorAll('input, textarea');
@@ -1097,6 +1111,62 @@ function setupEventListeners() {
                 }
             });
         }
+        
+        // validateCurrentStep関数を定義
+        function validateCurrentStep() {
+            const form = document.getElementById('cost-calculator-form');
+            if (!form) return false;
+            
+            const currentHours = form.querySelector('#current-hours');
+            const hourlyCost = form.querySelector('#hourly-cost');
+            const aiLevel = form.querySelector('input[name="ai-level"]:checked');
+            
+            let isValid = true;
+            
+            // バリデーションとエラー表示
+            if (!currentHours || !currentHours.value || currentHours.value <= 0) {
+                showFormError(currentHours, '作業時間を入力してください');
+                isValid = false;
+            }
+            
+            if (!hourlyCost || !hourlyCost.value || hourlyCost.value <= 0) {
+                showFormError(hourlyCost, '時給を入力してください');
+                isValid = false;
+            }
+            
+            if (!aiLevel) {
+                const radioGroup = form.querySelector('.ai-level-options');
+                if (radioGroup) {
+                    showFormError(radioGroup, 'AIレベルを選択してください');
+                }
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        function showFormError(element, message) {
+            // 既存のエラーメッセージを削除
+            const existingError = element.parentNode.querySelector('.form-error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // 新しいエラーメッセージを表示
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-error-message';
+            errorDiv.style.color = '#dc2626';
+            errorDiv.style.fontSize = '0.875rem';
+            errorDiv.style.marginTop = '0.25rem';
+            errorDiv.textContent = message;
+            
+            element.parentNode.appendChild(errorDiv);
+            
+            // エラーフィールドのスタイル
+            if (element.tagName === 'INPUT') {
+                element.style.borderColor = '#dc2626';
+            }
+        }
 
         function updateMeetingOptionAppearance(option, isChecked) {
             if (isChecked) {
@@ -1121,13 +1191,18 @@ function setupEventListeners() {
 function setupGSAPAnimations() {
     try {
         // GSAPとプラグインが読み込まれているか確認
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof ScrollToPlugin === 'undefined') {
-            console.warn('GSAPまたは必要なプラグインが読み込まれていません');
+        if (typeof gsap === 'undefined') {
+            console.warn('GSAPが読み込まれていません');
             return;
         }
 
-        // ScrollTriggerとScrollToプラグインの初期化
-        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+        // ScrollTriggerとScrollToプラグインの初期化（存在する場合のみ）
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+        if (typeof ScrollToPlugin !== 'undefined') {
+            gsap.registerPlugin(ScrollToPlugin);
+        }
 
         // ヘッダーアニメーション
         gsap.from('.main-header', {
