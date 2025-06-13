@@ -20,52 +20,52 @@
 
 /* 基本設定 */
 :root {
-    /* 配色 */
-    --primary-color: #EFF6FF; /* 背景用の淡いブルー系 */
-    --secondary-color: #DBEAFE; /* 背景用のより淡いブルー */
-    --accent-color: #007AFF; /* アクセント用の青色 */
-    --accent-color-dark: #0060C0; /* 少し濃い青 */
-    --text-color: #1F2937; /* メインテキスト色（濃いグレー） */
-    --text-color-light: #6B7280; /* サブテキスト色（ミディアムグレー） */
-    --text-color-heading: #0F172A; /* 見出し用の最も濃い色 */
-    --bg-color: #FFFFFF; /* 白背景 */
-    --card-bg: rgba(255, 255, 255, 0.95); /* カード背景 */
-    --border-color: #E5E7EB; /* ボーダー色 */
-    --shadow-color: rgba(0, 0, 0, 0.08);
-    --shadow-color-hover: rgba(0, 0, 0, 0.12);
-    --success-color: #10B981; /* Emerald 500 */
-    --warning-color: #F59E0B; /* Amber 500 */
-    --danger-color: #EF4444; /* Red 500 */
+    /* スマホファーストの配色（明度を上げてコントラストを改善） */
+    --primary-color: #F8FAFF; /* より淡い背景色 */
+    --secondary-color: #EEF4FF; /* 少し濃いアクセント背景 */
+    --accent-color: #0066FF; /* より鮮やかな青 */
+    --accent-color-dark: #0052CC; /* ダーク青 */
+    --accent-color-light: #3385FF; /* ライト青 */
+    --text-color: #1A1A1A; /* より濃いテキスト */
+    --text-color-light: #4A5568; /* ミディアムグレー */
+    --text-color-heading: #000000; /* 見出し用の黒 */
+    --bg-color: #FFFFFF; /* 純白背景 */
+    --card-bg: rgba(255, 255, 255, 0.98); /* より不透明なカード背景 */
+    --border-color: #D1D5DB; /* より見やすいボーダー */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color-hover: rgba(0, 0, 0, 0.15);
+    --success-color: #059669; /* より濃い緑 */
+    --warning-color: #D97706; /* より濃いオレンジ */
+    --danger-color: #DC2626; /* より濃い赤 */
 
     /* タイポグラフィ */
-    --font-sans: 'Noto Sans JP', 'M PLUS Rounded 1c', sans-serif;
-    --font-serif: 'Georgia', serif; /* セリフ体をアクセントに */
-    --header-height: 70px;
+    --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --header-height: 60px; /* モバイルに最適化 */
     
-    /* レスポンシブフォントサイズ */
-    --font-size-xs: clamp(0.78rem, 1.8vw, 0.875rem);
-    --font-size-sm: clamp(0.9rem, 2.2vw, 1rem);
-    --font-size-base: clamp(1rem, 2.5vw, 1.125rem);
-    --font-size-lg: clamp(1.15rem, 3vw, 1.3rem);
-    --font-size-xl: clamp(1.3rem, 3.8vw, 1.6rem);
-    --font-size-2xl: clamp(1.6rem, 4.5vw, 2.2rem);
-    --font-size-3xl: clamp(2.2rem, 5.5vw, 3.3rem);
+    /* スマホ最適化フォントサイズ */
+    --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
+    --font-size-base: clamp(1rem, 3vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 3.5vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 4vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 5vw, 2rem);
+    --font-size-3xl: clamp(2rem, 6vw, 3rem);
 
     /* その他 */
-    --border-radius: 10px;
-    --border-radius-lg: 14px;
-    --transition-medium: 0.25s ease-in-out;
-    --transition-fast: 0.18s ease-in-out;
+    --border-radius: 12px;
+    --border-radius-lg: 16px;
+    --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* スペーシング */
-    --spacing-xs: clamp(0.3rem, 1vw, 0.6rem);
-    --spacing-sm: clamp(0.6rem, 1.8vw, 1.1rem);
-    --spacing-md: clamp(1.1rem, 2.8vw, 1.7rem);
-    --spacing-lg: clamp(1.7rem, 3.8vw, 2.3rem);
-    --spacing-xl: clamp(2.3rem, 4.8vw, 3.3rem);
+    /* スマホ最適化スペーシング */
+    --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+    --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+    --spacing-md: clamp(1rem, 3vw, 1.5rem);
+    --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+    --spacing-xl: clamp(2rem, 5vw, 3rem);
     
     /* タッチターゲットサイズ */
-    --touch-target-min: 48px;
+    --touch-target-min: 44px; /* Appleガイドライン準拠 */
 }
 
 html {
@@ -79,23 +79,84 @@ html {
 body {
     font-family: var(--font-sans);
     margin: 0;
-    line-height: 1.7; /* 行間を少し広げる */
+    line-height: 1.6; /* スマホでの読みやすさを優先 */
     color: var(--text-color);
-    background-color: var(--primary-color);
+    background: linear-gradient(180deg, var(--primary-color) 0%, #FFFFFF 100%);
     overflow-x: hidden;
     font-weight: 400;
-    letter-spacing: 0.02em; /* 文字間を微調整 */
+    letter-spacing: 0.01em; /* 文字間を調整 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-width: 320px;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 102, 255, 0.1);
     -webkit-overflow-scrolling: touch;
+    /* スマホでのスクロール性能向上 */
+    will-change: scroll-position;
+    /* フォントの表示改善 */
+    text-rendering: optimizeSpeed;
+    font-display: swap;
 }
 
 /* モバイル固有のタッチ操作最適化 */
 @supports (touch-action: manipulation) {
     body {
         touch-action: manipulation;
+    }
+}
+
+/* iOS Safari 100vh問題対応 */
+@supports (-webkit-touch-callout: none) {
+    #hero {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* モバイルでのスクロール性能向上 */
+@media (max-width: 768px) {
+    * {
+        /* GPU加速を有効化 */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        /* スクロール性能改善 */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    /* スムーズスクロールの最適化 */
+    html {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    /* 入力フィールドのズーム防止（iOS） */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 16px !important; /* iOSのズーム防止 */
+        -webkit-appearance: none;
+        appearance: none;
+    }
+    
+    /* モバイルでのタッチレスポンス改善 */
+    button,
+    a,
+    [role="button"] {
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 102, 255, 0.2);
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    /* フォーカス状態の改善 */
+    button:focus,
+    a:focus,
+    input:focus,
+    textarea:focus {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
     }
 }
 
@@ -210,12 +271,13 @@ body {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background: rgba(255, 255, 255, 0.95); /* 元の白背景に戻す */
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    box-shadow: 0 2px 10px var(--shadow-color);
+    background: rgba(255, 255, 255, 0.98); /* より不透明に */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
     z-index: 100;
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .main-header.fixed-header {
@@ -588,6 +650,15 @@ p {
     padding: calc(var(--header-height) + 2rem) 1rem 2rem;
     text-align: center;
     box-sizing: border-box;
+    /* モバイル向けの最小高さ確保 */
+    min-height: 600px;
+}
+
+/* iOS Safari 100vh問題の追加対応 */
+@supports (-webkit-touch-callout: none) {
+    #hero {
+        min-height: -webkit-fill-available;
+    }
 }
 
 #hero .hero-content {
@@ -1752,22 +1823,23 @@ footer[role="contentinfo"] {
     .nav-links {
         position: fixed;
         top: var(--header-height);
-    left: 0;
+        left: 0;
         width: 100%;
         height: calc(100vh - var(--header-height));
-        background: rgba(17, 24, 39, 0.98);
-        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.98); /* 白背景に変更 */
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
         padding: var(--spacing-xl) var(--spacing-md);
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 90;
-        /* スクロール可能にする */
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .nav-links.active {
@@ -1781,21 +1853,24 @@ footer[role="contentinfo"] {
     
     .nav-links a {
         font-size: var(--font-size-lg);
-        padding: var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-lg);
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         border-radius: var(--border-radius);
         transition: all var(--transition-medium);
-        /* より良いタッチターゲット */
         min-height: 56px;
+        color: var(--text-color); /* モバイルメニューでもダークテキスト */
+        font-weight: 500;
     }
     
     .nav-links a:hover,
     .nav-links a:focus {
-        background: rgba(59, 130, 246, 0.15);
-    color: var(--accent-color);
+        background: var(--primary-color);
+        color: var(--accent-color);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 102, 255, 0.1);
     }
     
     .nav-cta {
@@ -4853,10 +4928,11 @@ input[type="datetime-local"]:focus {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--primary-color) 100%);
     border-radius: 12px;
-    border: 1px solid #0ea5e9;
+    border: 2px solid var(--accent-color);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 102, 255, 0.1);
 }
 
 .hero-benefits .benefit-item:hover {
@@ -4865,7 +4941,7 @@ input[type="datetime-local"]:focus {
 }
 
 .hero-benefits .benefit-item i {
-    color: #0ea5e9;
+    color: var(--accent-color);
     font-size: 1.5rem;
     width: 24px;
     text-align: center;
@@ -4873,12 +4949,12 @@ input[type="datetime-local"]:focus {
 
 .hero-benefits .benefit-item span {
     font-size: 1.1rem;
-    color: #0c4a6e;
+    color: var(--text-color);
     font-weight: 500;
 }
 
 .hero-benefits .benefit-item strong {
-    color: #1d4ed8;
+    color: var(--accent-color-dark);
     font-weight: 700;
 }
 
@@ -5128,6 +5204,52 @@ input[type="datetime-local"]:focus {
         padding: 1rem;
         font-size: 1rem;
     }
+    
+    /* 価格表示の改善 */
+    .pricing-calculation-table {
+        font-size: 0.85rem;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+    
+    .pricing-calculation-table th,
+    .pricing-calculation-table td {
+        padding: 0.5rem;
+        min-width: 120px;
+    }
+    
+    /* フォーム要素の改善 */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        display: block;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px; /* iOS のズーム防止 */
+        min-height: 44px;
+    }
+    
+    /* セクション間隔の調整 */
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .section-header h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        line-height: 1.3;
+    }
+    
+    .section-subtitle {
+        font-size: clamp(1rem, 3vw, 1.125rem);
+    }
 }
 
 @media (max-width: 480px) {
@@ -5149,5 +5271,201 @@ input[type="datetime-local"]:focus {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
+    }
+    
+    /* さらに小さい画面向けの最適化 */
+    .pricing-calculation-table {
+        font-size: 0.75rem;
+    }
+    
+    .pricing-calculation-table th,
+    .pricing-calculation-table td {
+        padding: 0.375rem;
+        min-width: 100px;
+    }
+    
+    /* タッチターゲットの改善 */
+    .primary-button,
+    .secondary-button,
+    .tertiary-button {
+        min-height: 48px;
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    /* ナビゲーションの調整 */
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: 1rem;
+        min-height: 52px;
+    }
+    
+    /* 計算ツールの改善 */
+    .calculator-container {
+        padding: 0.75rem;
+    }
+    
+    .summary-card {
+        padding: 1rem;
+    }
+    
+    .amount {
+        font-size: 1.5rem;
+    }
+    
+    /* フッターの改善 */
+    .footer-content {
+        text-align: center;
+    }
+    
+    .footer-contact-info {
+        margin-bottom: 1.5rem;
+    }
+    
+    .footer-links ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+/* ========================
+   追加のモバイル最適化
+   ======================== */
+
+/* フォーム要素の統一的なモバイル対応 */
+@media (max-width: 768px) {
+    /* すべての入力フィールドに対するモバイル最適化 */
+    input, textarea, select, button {
+        border-radius: 8px !important;
+        font-size: 16px !important; /* iOSズーム防止 */
+    }
+    
+    /* テーブルの横スクロール改善 */
+    .pricing-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 1rem -1rem;
+        padding: 0 1rem;
+    }
+    
+    .pricing-calculation-table {
+        min-width: 600px;
+        font-size: 0.85rem;
+    }
+    
+    /* 画像の最適化 */
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+    }
+    
+    /* フレックスボックスの調整 */
+    .flex-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* グリッドレイアウトの調整 */
+    .grid-container {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    /* プログレスバーなどのUI要素 */
+    .progress-bar,
+    .loading-progress {
+        height: 6px;
+        border-radius: 3px;
+    }
+    
+    /* ツールチップの調整 */
+    .tooltip {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+        max-width: 250px;
+    }
+}
+
+/* 超小型デバイス（iPhone SE など）の追加対応 */
+@media (max-width: 375px) {
+    :root {
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.75rem;
+        
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1rem;
+        --spacing-xl: 1.25rem;
+    }
+    
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    /* フォントサイズの微調整 */
+    h1 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+    
+    h2 {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+    }
+    
+    /* ボタンの調整 */
+    .primary-button,
+    .secondary-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+}
+
+/* 横向きモバイル（ランドスケープ）対応 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    #hero {
+        height: auto;
+        min-height: 500px;
+        padding: calc(var(--header-height) + 1rem) 1rem 1rem;
+    }
+    
+    .section {
+        padding: 2rem 1rem;
+    }
+    
+    .main-header {
+        --header-height: 50px;
+    }
+}
+
+/* プリント時の最適化 */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+    
+    .main-header,
+    .mobile-menu-toggle,
+    .scroll-guide,
+    #back-to-top,
+    .no-print {
+        display: none !important;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+        padding: 1rem 0;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
     }
 }
