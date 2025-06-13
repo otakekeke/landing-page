@@ -2742,33 +2742,7 @@ fieldset legend i {
 }
 
 /* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color: #1F2937;
-        --secondary-color: #374151;
-        --bg-color: #111827;
-        --card-bg: rgba(31, 41, 55, 0.95);
-        --text-color: #F9FAFB;
-        --text-color-light: #D1D5DB;
-        --border-color: #4B5563;
-        --shadow-color: rgba(0, 0, 0, 0.3);
-        --shadow-color-hover: rgba(0, 0, 0, 0.4);
-    }
-    
-    .main-header {
-        background: rgba(31, 41, 55, 0.95);
-    }
-    
-    input, textarea {
-        background: var(--card-bg);
-        color: var(--text-color);
-        border-color: var(--border-color);
-    }
-    
-    input:focus, textarea:focus {
-        background: var(--bg-color);
-    }
-}
+
 
 /* 印刷用スタイル */
 @media print {
