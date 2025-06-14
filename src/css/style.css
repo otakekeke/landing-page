@@ -1810,7 +1810,7 @@ footer[role="contentinfo"] {
     }
     
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
         /* より大きなタッチターゲット */
         width: 44px;
         height: 44px;
@@ -1840,6 +1840,7 @@ footer[role="contentinfo"] {
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         border-right: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex !important; /* モバイルでも表示 */
     }
     
     .nav-links.active {
