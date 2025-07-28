@@ -1,1306 +1,537 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="フルオーダーメイドのAI介護システム「FastAI」。記録・管理・業務効率化・コミュニケーション支援など、貴施設の全ニーズに対応。AIを活用した完全カスタム開発。完全受注生産につき料金応談（目安：人件費の3分の1）。">
-    <meta name="keywords" content="AI, 介護, システム, オーダーメイド, 記録, 管理, 業務効率化, FastAI, 嶽ノ子, カスタム開発">
-    <meta name="author" content="嶽ノ子">
-    <meta name="robots" content="index, follow">
-    
-    <!-- モバイル最適化メタタグ -->
-    <meta name="format-detection" content="telephone=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="嶽ノ子 FastAI">
-    <meta name="theme-color" content="#3B82F6">
-    <meta name="msapplication-TileColor" content="#3B82F6">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://takenoko-ai.com/">
-    <meta property="og:title" content="嶽ノ子 - フルオーダーメイドAI介護システム「FastAI」">
-    <meta property="og:description" content="記録・管理・業務効率化など、貴施設の全ニーズにAIで対応する完全カスタムシステム。完全受注生産につき料金応談（目安：人件費の3分の1）。">
-    <meta property="og:image" content="https://takenoko-ai.com/images/og-image.jpg">
-    <meta property="og:site_name" content="嶽ノ子">
-    <meta property="og:locale" content="ja_JP">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://takenoko-ai.com/">
-    <meta property="twitter:title" content="嶽ノ子 - フルオーダーメイドAI介護システム「FastAI」">
-    <meta property="twitter:description" content="記録・管理・業務効率化など、貴施設の全ニーズにAIで対応する完全カスタムシステム。完全受注生産につき料金応談（目安：人件費の3分の1）。">
-    <meta property="twitter:image" content="https://takenoko-ai.com/images/twitter-image.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3B82F6"> 
-
-    <title>嶽ノ子 - FastAIで介護現場のあらゆる課題をAIで解決できる</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- Google Fontsの読み込み - より多様なウェイトとフォントを追加 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYJ9C338F0"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-DYJ9C338F0');
-    </script>
-    
-    <!-- jsPDF for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- html2canvas for rendering HTML to canvas before PDF conversion -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-    <!-- MathJax for mathematical formula rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['\\(', '\\)']],
-                displayMath: [['\\[', '\\]']]
-            }
-        };
-    </script>
-    
-    <!-- インポートマップの設定 -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/"
-      }
-    }
-    </script>
-    
-    <!-- 構造化データ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "FastAI - AI活用介護システム",
-      "description": "記録・管理・業務効率化・コミュニケーション支援など、AI技術で介護現場のあらゆる課題を解決できるフルオーダーメイドシステム",
-      "url": "https://takenoko-ai.com",
-      "applicationCategory": "AIソフトウェア, 介護管理システム",
-      "operatingSystem": "Web Browser, iOS, Android",
-      "features": [
-        "AI音声認識・記録自動化",
-        "AIシフト最適化",
-        "AI予測分析・健康状態監視",
-        "AI対話支援",
-        "業務管理システム",
-        "送迎・スケジュール最適化",
-        "家族連携・情報共有"
-      ],
-      "author": {
-        "@type": "Organization",
-        "name": "嶽ノ子",
-        "email": "takenoko.ai.care@gmail.com"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "30000",
-        "priceCurrency": "JPY",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "30000",
-          "priceCurrency": "JPY",
-          "billingDuration": "P1M"
-        },
-        "description": "AI機能・記録・管理・業務効率化すべて込みのオールインワンプラン"
-      }
-    }
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>介護事業者向け・オーダーメイド業務効率化アプリサービスご説明資料</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
+  </style>
 </head>
-<body>
-    <!-- ローディングオーバーレイ -->
-    <div id="loading-overlay" role="status" aria-label="ページを読み込んでいます">
-        <div class="loader-container">
-            <div class="loader" aria-hidden="true"></div>
-            <div class="loading-progress">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-        <p class="loading-text">FastAI システムを準備中...</p>
-        <span class="loading-subtitle">あなたの施設に最適な介護支援環境を構築しています</span>
+<body class="bg-slate-50 text-slate-800">
+  <!-- ================= HEADER ================= -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+        介護事業者向け<br class="sm:hidden" />オーダーメイド業務効率化アプリ
+      </h1>
+      <nav class="hidden md:flex gap-6 text-sm font-medium">
+        <a href="#summary" class="hover:text-indigo-600">概要</a>
+        <a href="#price" class="hover:text-indigo-600">料金</a>
+        <a href="#flow" class="hover:text-indigo-600">導入フロー</a>
+        <a href="#sla" class="hover:text-indigo-600">SLA / 対応速度</a>
+        <a href="#measurement" class="hover:text-indigo-600">効果測定</a>
+        <a href="#security" class="hover:text-indigo-600">セキュリティ</a>
+        <a href="#examples" class="hover:text-indigo-600">提供例</a>
+        <a href="#faq" class="hover:text-indigo-600">FAQ</a>
+        <a href="#contact" class="hover:text-indigo-600">お問い合わせ</a>
+        <a href="#cta" class="hover:text-indigo-600">次の一歩</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- メインキャンバス -->
-    <canvas id="webgl-canvas" aria-hidden="true"></canvas>
-    
-    <!-- ヘッダーナビゲーション -->
-    <header class="main-header fixed-header" role="banner">
-        <div class="container">
-            <div class="logo-container">
-                <a href="#" class="logo" aria-label="嶽ノ子 - ホームページ">嶽ノ子</a>
-            </div>
-            <nav class="main-nav" role="navigation" aria-label="メインナビゲーション">
-                <button class="mobile-menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
-                    <span class="bar" aria-hidden="true"></span>
-                    <span class="bar" aria-hidden="true"></span>
-                    <span class="bar" aria-hidden="true"></span>
-                </button>
-                <ul class="nav-links" id="nav-links" role="menubar">
-                    <li role="none"><a href="#service" role="menuitem">サービス</a></li>
-                    <li role="none"><a href="#examples" role="menuitem">実装例</a></li>
-                    <li role="none"><a href="#process" role="menuitem">導入の流れ</a></li>
-                    <li role="none"><a href="#pricing" role="menuitem">料金</a></li>
-                    <li role="none"><a href="#cost-calculator" role="menuitem">費用計算</a></li>
-                    <li role="none"><a href="#contact" class="nav-cta" role="menuitem">お問い合わせ</a></li>
-                </ul>
-            </nav>
+  <!-- ================= HERO ================= -->
+  <section class="bg-indigo-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+        「削減できた時間 × 時給 × <span class="underline decoration-yellow-300">1/3</span>」だけお支払い。<br class="hidden sm:block" />
+        初月無料、削減ゼロならずっと無料。
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed">
+        介護現場の"本当に困っている業務"をヒアリングし、生成AIを組み合わせて<br class="hidden sm:block" />
+        完全オーダーメイドでアプリ化します。クラウドでも、ローカルでも。
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+        <a href="#flow" class="px-6 py-3 rounded bg-white text-indigo-700 font-semibold text-center shadow hover:bg-slate-100">
+          まずは導入フローを見る
+        </a>
+        <a href="#price" class="px-6 py-3 rounded bg-yellow-300 text-slate-900 font-semibold text-center shadow hover:bg-yellow-400">
+          料金の決まり方を確認する
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-indigo-100">
+        初年度導入目標：10施設（※枠が埋まり次第、翌年度扱いとなります）
+      </p>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- ================= SUMMARY ================= -->
+    <section id="summary" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">1. サービス概要（ここだけ読めば全体像がわかります）</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">対象</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>介護事業者（通所・入所・訪問問わず）</li>
+            <li>中小規模の現場で「今すぐ役立つもの」を小回り良く作りたい方</li>
+            <li>まずは個人情報を扱わない簡易な改善から始めたい方も歓迎</li>
+          </ul>
         </div>
-    </header>
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">提供内容</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>業務効率化・エンタメ要素を含むアプリを<strong>完全オーダーメイド</strong>で開発</li>
+            <li>生成AI APIを単体/複数連携・オーケストレーション可能</li>
+            <li>クラウド提供が基本、必要に応じてローカルアプリも用意</li>
+            <li>最終的な許諾（本番反映）は人間（私）が行います</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">料金</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>削減できた時間 × 御社申告の時給 × 1/3</strong> を月額として請求</li>
+            <li>初期費用 0円／削減時間が 0 の場合は利用料も 0円</li>
+            <li>API利用料は月額に含まれます</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">計測・改定</h3>
+          <ul class="list-disc list-inside space-y-1">
+          <li>ベースライン（導入前の業務時間）は初月無料期間中に<strong>自己申告</strong>で取得</li>
+          <li>通常運用時の削減時間は<strong>簡易ログ機能</strong>で大まかに計測</li>
+          <li>カスタマイズや仕様変更があったときのみ、お客様の自己申告を追加で取得</li>
+          <li>契約更新時（毎月）に再計測して料金を更新</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <!-- コンテンツエリア -->
-    <main class="content" id="main-content">
-        <!-- ファーストビュー -->
-        <section id="hero" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <h1 id="hero-title" class="animate__animated animate__fadeInDown">
-                    <span class="simple-title">AI</span>で<br>
-                    <span class="simple-title">介護のお仕事</span>を<br>
-                    <span class="accent-text service-name">かんたん</span>にします
-                </h1>
-                <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
-                    <strong>手書きの記録</strong>や<strong>難しい管理</strong>を、<br>
-                    AIが自動でやってくれます。<br>
-                    あなたの施設だけの<strong>特別なシステム</strong>を作ります！
-                </p>
-                <div class="hero-benefits">
-                    <div class="benefit-item">
-                        <i class="fas fa-clock"></i>
-                        <span>作業時間が<strong>半分</strong>に！</span>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-yen-sign"></i>
-                        <span>人件費を<strong>大幅節約</strong>！</span>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-heart"></i>
-                        <span>利用者様との時間が<strong>増える</strong>！</span>
-                    </div>
-                </div>
-                <a href="#contact" id="cta-button" class="primary-button cta-hero-button animate__animated animate__pulse animate__delay-2s animate__infinite" aria-describedby="cta-description">
-                    <i class="fas fa-paper-plane" aria-hidden="true"></i> まずは無料で相談してみる
-                </a>
-                <span id="cta-description" class="sr-only">お問い合わせフォームに移動します</span>
+    <!-- ================= PRICE ================= -->
+    <section id="price" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">2. 料金の決まり方（例を使って完全にイメージできます）</h2>
+
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <h3 class="text-lg font-semibold">基本式</h3>
+        <p class="text-xl font-mono">
+          月額料金 ＝ 削減時間（h/月） × 御社申告の平均時給（円） × <span class="underline decoration-yellow-300 font-bold">1/3</span>
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border rounded-lg p-4">
+            <h4 class="font-semibold mb-2">ケース A（小規模 / まずは1業務）</h4>
+            <ul class="space-y-1 text-sm">
+              <li>・削減時間：<strong>20時間/月</strong></li>
+              <li>・平均時給（自己申告）：<strong>1,200円</strong></li>
+              <li>・計算：20h × 1,200円 × 1/3 = <strong>8,000円/月</strong></li>
+            </ul>
+          </div>
+          <div class="border rounded-lg p-4">
+            <h4 class="font-semibold mb-2">ケース B（中規模 / 複数業務をまとめて効率化）</h4>
+            <ul class="space-y-1 text-sm">
+              <li>・削減時間：<strong>120時間/月</strong></li>
+              <li>・平均時給（自己申告）：<strong>1,400円</strong></li>
+              <li>・計算：120h × 1,400円 × 1/3 = <strong>56,000円/月</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 rounded p-4 text-sm leading-relaxed">
+          <p class="font-semibold mb-2">ポイント</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>初月は無料です。ここでベースラインを自己申告いただき、翌月以降の課金額を算定します</li>
+            <li>削減時間が 0 の場合は、翌月以降も月額 0 円です（=効果が出ない限り課金しません）</li>
+            <li>API利用料（例：大規模言語モデル等）は当社負担。上記の月額に全て含みます</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FLOW ================= -->
+    <section id="flow" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">3. 導入〜運用までの全フェーズ（不明点が残らないように具体化）</h2>
+
+      <ol class="space-y-6">
+        <li class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">1</span>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">事前ヒアリング（60〜90分）</h3>
+              <ul class="list-disc list-inside space-y-1 text-sm">
+                <li>対象業務の棚卸し（例：在庫発注、レク企画、シフト調整 等）</li>
+                <li>「個人情報を扱わない範囲」or「扱う範囲」の切り分け</li>
+                <li>クラウド or ローカルの希望確認（理由・制約も明確化）</li>
+              </ul>
             </div>
-            <div class="scroll-guide" role="button" tabindex="0" aria-label="下にスクロールしてサービス詳細を見る">
-                <span class="scroll-text">下にスクロールして詳細を見る</span>
-                <i class="fas fa-chevron-down scroll-icon" aria-hidden="true"></i>
+          </div>
+        </li>
+
+        <li class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">2</span>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">初月無料トライアル & ベースライン取得</h3>
+              <ul class="list-disc list-inside space-y-1 text-sm">
+                <li>現状の作業時間（ベースライン）を<strong>自己申告</strong>で記録</li>
+                <li>当社が試作版（PoC）を短期間で提示し、方向性を擦り合わせ</li>
+                <li>この期間中の費用は<strong>一切発生しません</strong></li>
+              </ul>
             </div>
-        </section>
+          </div>
+        </li>
 
-        <!-- サービス内容エリア -->
-        <section id="service" class="section" aria-labelledby="service-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="service-title">AI活用・フルオーダーメイド開発</h2>
-                    <p>
-                        嶽ノ子のAI介護システムは、記録業務だけでなく、管理・効率化・コミュニケーション支援など、<br>
-                        貴施設のあらゆる課題とニーズに対してAI技術で解決策を提供できます。<br>
-                        既存の業務フローを尊重しながら、<strong>AIの力で理想の介護現場</strong>を実現いたします。
-                    </p>
-                </header>
-                        </div>
-        </section>
-
-        <!-- 実装例セクション -->
-        <section id="examples" class="section" aria-labelledby="examples-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="examples-title">現場の課題をAIで解決できる実装事例</h2>
-                    <p class="section-subtitle">
-                        介護現場の「見えない課題」をAI技術で可視化・自動化。<br>
-                        具体的な業務改善効果とROI（投資対効果）をご紹介します
-                    </p>
-                </header>
-                
-                <div class="example-cards">
-                    <!-- 事例1: 送迎ルート最適化 -->
-                    <article class="example-card detailed-card">
-                        <div class="example-icon" aria-hidden="true"><i class="fas fa-route"></i></div>
-                        <h3>送迎ルート表作成の自動化</h3>
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                <p>ベテランスタッフが手作業で作成する送迎ルート表。交通状況や利用者様の体調変化を考慮した複雑な調整に<strong>3日ごとに2時間</strong>を要していた。</p>
-                    </div>
-                            <div class="solution">
-                                <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                <p>リアルタイム交通情報、利用者様の身体状況、過去の送迎データをAIが分析し、最適ルートを自動生成。</p>
-                        </div>
-                            <div class="roi">
-                                <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                <ul>
-                                    <li><strong>作業時間：2時間 → 15分</strong>（87%削減）</li>
-                                    <li><strong>燃料費：月15%削減</strong></li>
-                                    <li><strong>人件費削減：月32,000円相当</strong></li>
-                                </ul>
-                    </div>
-                </div>
-                    </article>
-
-                    <!-- 事例2: 紙ベース記録のデジタル化 -->
-                    <article class="example-card detailed-card">
-                        <div class="example-icon" aria-hidden="true"><i class="fas fa-file-alt"></i></div>
-                        <h3>紙ベース記録の完全デジタル化</h3>
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                <p>すべて紙ベースの記録で、実績への転記作業が<strong>3回発生</strong>。転記ミスや記録漏れが頻発し、月末集計に膨大な時間を要していた。</p>
-                </div>
-                            <div class="solution">
-                                <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                <p>既存の紙フォーマットをそのままデジタル化。タブレット入力で自動集計・実績反映。学習コスト0で導入。</p>
-                            </div>
-                            <div class="roi">
-                                <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                <ul>
-                                    <li><strong>転記作業：3回 → 0回</strong>（100%削減）</li>
-                                    <li><strong>月末集計時間：16時間 → 1時間</strong></li>
-                                    <li><strong>記録ミス：月12件 → 0件</strong></li>
-                                    <li><strong>人件費削減：月60,000円相当</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- 事例3: シフト作成の自動化 -->
-                    <article class="example-card detailed-card">
-                        <div class="example-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></div>
-                        <h3>AIシフト最適化システム</h3>
-                        <div class="problem-solution">
-                            <div class="problem">
-                                <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                <p>スタッフ30名のシフト作成に管理者が<strong>週6時間</strong>を費やし、急な欠勤時の代替調整で深夜まで電話対応が発生。</p>
-                    </div>
-                            <div class="solution">
-                                <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                <p>スタッフのスキル・希望・利用者様のケアニーズをAIが分析。最適シフトを自動生成し、急な変更にも瞬時に対応。</p>
-                    </div>
-                            <div class="roi">
-                                <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                <ul>
-                                    <li><strong>シフト作成時間：6時間 → 30分</strong>（92%削減）</li>
-                                    <li><strong>急な調整時間：2時間 → 5分</strong></li>
-                                    <li><strong>スタッフ満足度：15%向上</strong></li>
-                                    <li><strong>人件費削減：月44,000円相当</strong></li>
-                                </ul>
-                </div>
+        <li class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">3</span>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">本開発（オーダーメイド）</h3>
+              <ul class="list-disc list-inside space-y-1 text-sm">
+                <li>生成AIを活用した高速開発（※最終承認は人間）</li>
+                <li>クラウド or ローカルの実装方針に基づく環境構築（AWS利用、暗号化）</li>
+                <li>UI/UX調整、ログ計測機能の組み込み</li>
+              </ul>
             </div>
-                    </article>
+          </div>
+        </li>
 
-                    <!-- 折り畳み表示切り替えボタン -->
-                    <div class="examples-toggle-container">
-                        <button id="examples-toggle-btn" class="examples-toggle-btn" aria-expanded="false" aria-controls="additional-examples">
-                            <span class="toggle-text">さらに6つの事例を見る</span>
-                            <i class="fas fa-chevron-down toggle-icon" aria-hidden="true"></i>
-                        </button>
-                    </div>
-
-                    <!-- 追加の事例（初期状態では非表示） -->
-                    <div id="additional-examples" class="additional-examples" aria-hidden="true">
-                        <!-- 事例4: 音声記録システム -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-microphone"></i></div>
-                            <h3>AI音声記録・自動文字起こし</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>ケア記録の手書き作業で1件あたり<strong>5分</strong>を要し、1日50件の記録で4時間以上。方言や専門用語で記録品質にバラつき。</p>
-                    </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>方言対応AI音声認識で、話すだけで自動記録。感情分析機能で利用者様の状態変化も自動検出・アラート。</p>
-                    </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>記録時間：5分 → 30秒</strong>（90%削減）</li>
-                                        <li><strong>1日の記録時間：4時間 → 25分</strong></li>
-                                        <li><strong>記録品質：標準化達成</strong></li>
-                                        <li><strong>人件費削減：月112,000円相当</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- 事例5: 家族連携システム -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
-                            <h3>AI家族連携・自動報告システム</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>家族への状況報告で、スタッフが<strong>1日2時間</strong>を電話・メール対応に費やし、情報の伝達漏れも発生。</p>
-                                </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>AIが日々の記録から自動で家族向けレポートを生成。写真・動画付きで分かりやすく、緊急時は即座に通知。</p>
-                                </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>連絡業務時間：2時間 → 10分</strong>（92%削減）</li>
-                                        <li><strong>家族満足度：25%向上</strong></li>
-                                        <li><strong>情報伝達ミス：0件</strong></li>
-                                        <li><strong>人件費削減：月56,000円相当</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- 事例6: バイタル予測システム -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-heartbeat"></i></div>
-                            <h3>AI健康状態予測・早期発見システム</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>体調変化の発見が遅れ、<strong>月2件の緊急搬送</strong>が発生。バイタルデータの蓄積はあるが活用できていない状況。</p>
-                                </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>過去のバイタルデータと行動パターンをAIが学習。体調変化を24時間前に予測し、早期対応をアラート通知。</p>
-                                </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>緊急搬送：月2件 → 0.2件</strong>（90%削減）</li>
-                                        <li><strong>早期発見率：95%向上</strong></li>
-                                        <li><strong>医療費削減：月平均30万円</strong></li>
-                                        <li><strong>家族・利用者様の安心感向上</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- 事例7: 食事管理システム -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-utensils"></i></div>
-                            <h3>AI栄養管理・食事最適化システム</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>利用者様50名の個別食事制限管理で、栄養士が<strong>週10時間</strong>をメニュー作成に費やし、食べ残しも多い状況。</p>
-                                </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>個人の健康状態・嗜好・食事制限をAIが分析し、最適な栄養バランスのメニューを自動生成。食べ残し予測も実装。</p>
-                                </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>メニュー作成時間：10時間 → 1時間</strong>（90%削減）</li>
-                                        <li><strong>食べ残し：30% → 8%削減</strong></li>
-                                        <li><strong>食材廃棄コスト：月4万円削減</strong></li>
-                                        <li><strong>人件費削減：月36,000円相当</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- 事例8: 会話支援システム -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
-                            <h3>AI対話支援・コミュニケーション促進</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>認知症の利用者様との会話が困難で、新人スタッフは<strong>1日3回以上</strong>コミュニケーションに悩み、ベテランに相談が必要。</p>
-                                </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>利用者様の過去の会話内容・趣味・家族情報をAIが学習。最適な話題提案とコミュニケーションガイドをリアルタイム表示。</p>
-                                </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>新人の相談回数：3回 → 0.5回</strong>（83%削減）</li>
-                                        <li><strong>利用者様の笑顔回数：40%増加</strong></li>
-                                        <li><strong>スタッフのストレス軽減</strong></li>
-                                        <li><strong>教育コスト削減：月20,000円相当</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- 事例9: 請求業務自動化 -->
-                        <article class="example-card detailed-card">
-                            <div class="example-icon" aria-hidden="true"><i class="fas fa-calculator"></i></div>
-                            <h3>AI請求業務・レセプト自動化システム</h3>
-                            <div class="problem-solution">
-                                <div class="problem">
-                                    <h4><i class="fas fa-exclamation-triangle"></i> 課題</h4>
-                                    <p>月末のレセプト作成で事務スタッフが<strong>3日間残業</strong>。計算ミスや請求漏れで返戻が月5件発生し、収益に影響。</p>
-                                </div>
-                                <div class="solution">
-                                    <h4><i class="fas fa-lightbulb"></i> AI解決策</h4>
-                                    <p>日々のサービス記録から自動でレセプト生成。AIが制度変更にも自動対応し、請求漏れ・計算ミスを事前チェック。</p>
-                                </div>
-                                <div class="roi">
-                                    <h4><i class="fas fa-chart-line"></i> 効果・ROI</h4>
-                                    <ul>
-                                        <li><strong>レセプト作成時間：24時間 → 2時間</strong>（92%削減）</li>
-                                        <li><strong>返戻件数：月5件 → 0件</strong></li>
-                                        <li><strong>請求精度：99.8%達成</strong></li>
-                                        <li><strong>収益改善：月15万円相当</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+        <li class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">4</span>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">運用開始 & 月額課金スタート</h3>
+              <ul class="list-disc list-inside space-y-1 text-sm">
+                <li>簡易ログ機能で削減時間を大まかに計測し、料金へ反映</li>
+                <li>仕様変更やカスタマイズ時のみ、追加で自己申告の削減時間を反映</li>
+                <li>毎月、再計測と料金更新（=常に最新の効果に応じた公平な金額）</li>
+              </ul>
             </div>
-        </section>
+          </div>
+        </li>
 
-        <!-- 導入の流れ -->
-        <section id="process" class="section" aria-labelledby="process-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="process-title">導入の流れ</h2>
-                    <p class="section-subtitle">お問い合わせからわずか14日でAI機能込みの理想システムを導入完了！</p>
-                </header>
-                
-                <div class="compact-process-grid">
-                    <div class="process-card process-1">
-                        <div class="process-icon">
-                                <i class="fas fa-comment-dots"></i>
-                            </div>
-                                <h3>お問い合わせ</h3>
-                        <p>現場の課題とAI活用のご希望をヒアリング</p>
-                        <span class="process-day">1日目</span>
-                        </div>
-                        
-                    <div class="process-card process-2">
-                        <div class="process-icon">
-                                <i class="fas fa-clipboard-list"></i>
-                            </div>
-                                <h3>要件定義</h3>
-                        <p>課題分析と最適なAIソリューションをご提案</p>
-                        <span class="process-day">2〜3日目</span>
-                        </div>
-                        
-                    <div class="process-card process-3">
-                        <div class="process-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                        <h3>AI開発</h3>
-                        <p>カスタムAI機能とシステムの開発・構築</p>
-                        <span class="process-day">4〜7日目</span>
-                        </div>
-                        
-                    <div class="process-card process-4">
-                        <div class="process-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                        <h3>試用期間</h3>
-                        <p>実環境でのテスト運用と効果検証</p>
-                        <span class="process-day">8〜9日目</span>
-                        </div>
-                        
-                    <div class="process-card process-5">
-                        <div class="process-icon">
-                                <i class="fas fa-sliders-h"></i>
-                            </div>
-                        <h3>調整</h3>
-                        <p>フィードバックに基づく無料カスタマイズ</p>
-                        <span class="process-day">10〜12日目</span>
-                        </div>
-                        
-                    <div class="process-card process-6">
-                        <div class="process-icon">
-                                <i class="fas fa-truck"></i>
-                            </div>
-                        <h3>本格導入</h3>
-                        <p>最終調整と本番環境への導入完了</p>
-                        <span class="process-day">13〜14日目</span>
-                        </div>
-                        
-                    <div class="process-card process-7">
-                        <div class="process-icon">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                        <h3>継続サポート</h3>
-                        <p>AI学習とシステム安定稼働の支援</p>
-                        <span class="process-day">継続</span>
-                        </div>
-                        
-                    <div class="process-card process-8">
-                        <div class="process-icon">
-                                <i class="fas fa-tools"></i>
-                            </div>
-                        <h3>機能拡張</h3>
-                        <p>新ニーズに応じた追加開発対応</p>
-                        <span class="process-day">必要時</span>
-                            </div>
-                </div>
+        <li class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-start gap-4">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">5</span>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">サポート体制（年次で明確に変更します）</h3>
+              <div class="text-sm space-y-2">
+                <p class="font-semibold">初年度：人力で全面支援</p>
+                <ul class="list-disc list-inside pl-4">
+                  <li>ヒアリング、設定変更、カスタマイズを手動で即時対応（SLAは下記参照）</li>
+                </ul>
+                <p class="font-semibold">2年目以降：自動化された開発フローへ移行</p>
+                <ul class="list-disc list-inside pl-4">
+                  <li>LINEボットで要件受付 → GitHub Actions/Claude Codeで自動PR生成 → 私が承認 → 自動反映（リリースノート付き通知）</li>
+                </ul>
+              </div>
             </div>
-        </section>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-        <!-- 料金プラン -->
-        <section id="pricing" class="section" aria-labelledby="pricing-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="pricing-title">AI活用業務効率化システム - 月額料金算定ロジック</h2>
-                    <p>透明性・公平性・柔軟性を重視した科学的な料金設定システムをご説明いたします</p>
-                </header>
+    <!-- ================= SLA ================= -->
+    <section id="sla" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">4. 対応優先度 / SLA（明確な数値で定義しています）</h2>
 
-                <!-- セクション1: なぜ時間×人件費をベースにするのか -->
-                <div class="pricing-logic-section">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">1</span>
-                        なぜ "時間 × 人件費" をベースにするのか？
-                    </h3>
-                    <div class="pricing-benefits-grid">
-                        <div class="benefit-card roi-benefit">
-                            <h4>ROI が一目で分かる</h4>
-                            <p>「○時間の作業が減り、時給 ¥△△ だから <strong>月に ¥□□ のコスト削減</strong>」という計算は、稟議を通す際の説得材料になります。</p>
-                        </div>
-                        <div class="benefit-card flexibility-benefit">
-                            <h4>業務ごとに応用しやすい</h4>
-                            <p>手入力・巡回・ダブルチェック…― 介護現場の多様なタスクを <strong>同じ物差し</strong>（=時間）で比べられます。</p>
-                        </div>
-                        <div class="benefit-card logic-benefit">
-                            <h4>値上げ・値下げがロジカル</h4>
-                            <p>利用状況が変われば "削減時間" も変わるため、<strong>同じ式のまま自動で料金を見直し</strong>できます。</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- セクション2: 月額料金の計算式 -->
-                <div class="pricing-logic-section">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">2</span>
-                        月額料金の計算式
-                    </h3>
-                    
-                    <!-- 計算式 -->
-                    <div class="formula-container">
-                        <div class="formula-box">
-                            \[
-                            \Large
-                            \textbf{月額料金}
-                            =
-                            \underbrace{\bigl(① + ②\bigr) \times  \alpha}_{\text{= 正味価値の 1/3}}
-                            \;+\;
-                            ③
-                            \;+\;
-                            ④
-                            \]
-                        </div>
-                    </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-4">標準キュー（追加費用なし）</h3>
+          <ul class="list-disc list-inside space-y-2 text-sm">
+            <li><strong>受付から初回回答：</strong>5営業日以内</li>
+            <li><strong>実装・反映：</strong>受付から最大21営業日以内</li>
+            <li><strong>配分比率：</strong>全体工数の60％</li>
+            <li><strong>対象：</strong>すべてのご契約者（先着順）</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border border-yellow-300">
+          <h3 class="text-lg font-semibold mb-4">優先キュー（<span class="underline decoration-yellow-300">+10万円/月</span>）</h3>
+          <ul class="list-disc list-inside space-y-2 text-sm">
+            <li><strong>受付から初回回答：</strong>48時間以内</li>
+            <li><strong>実装・反映：</strong>受付から最大5営業日以内</li>
+            <li><strong>配分比率：</strong>全体工数の40％</li>
+            <li><strong>対象：</strong>優先権を購入されたご契約者</li>
+          </ul>
+        </div>
+      </div>
 
-                    <!-- 計算式の説明表 -->
-                    <div class="pricing-table-container">
-                        <table class="pricing-calculation-table">
-                            <thead>
-                                <tr>
-                                    <th>記号</th>
-                                    <th>名称</th>
-                                    <th>内容</th>
-                                    <th>入力タイミング</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="symbol labor-symbol">①</td>
-                                    <td class="formula-name">労務削減価値</td>
-                                    <td>[(導入前の作業時間 − 導入後の作業時間 − 新タスク時間) × 実人件費単価]</td>
-                                    <td>導入前後で毎月測定</td>
-                                </tr>
-                                <tr>
-                                    <td class="symbol value-symbol">②</td>
-                                    <td class="formula-name">付加価値・リスク削減</td>
-                                    <td>監査対応・誤薬訴訟・加算逸失などの期待損失回避額</td>
-                                    <td>導入設計時に算定</td>
-                                </tr>
-                                <tr>
-                                    <td class="symbol running-symbol">③</td>
-                                    <td class="formula-name">ランニング実費</td>
-                                    <td>AI API・クラウド・機器リース・（※運用代行の場合はその費用）</td>
-                                    <td>毎月変動</td>
-                                </tr>
-                                <tr>
-                                    <td class="symbol support-symbol">④</td>
-                                    <td class="formula-name">サポート料</td>
-                                    <td>障害対応・機能改善ヒアリング等の窓口費用</td>
-                                    <td>固定 (例：¥25,000)</td>
-                                </tr>
-                                <tr>
-                                    <td class="symbol coefficient-symbol">α</td>
-                                    <td class="formula-name">係数</td>
-                                    <td>"価値の 1/3 を料金に" → <strong>0.33</strong> が標準<br>複雑度・リスクで <strong>0.25〜0.40</strong> まで可変</td>
-                                    <td>案件初期に設定</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+      <p class="mt-6 text-sm text-slate-600">
+        ※「全体工数」は開発者1名（私）＋生成AIの稼働時間を指します。繁忙状況は管理画面/メールで毎月開示します。<br/>
+        ※SLAを超過する見込みがある場合は、見込み段階でご連絡し、スケジュールの再提示を行います。
+      </p>
+    </section>
 
-                    <div class="pricing-note">
-                        <h4>📌 ポイント</h4>
-                        <ul>
-                            <li><strong>新タスク時間</strong> が発生する場合は ① から控除し、"正味（ネット）削減時間" で計算します。</li>
-                            <li>当社が <strong>運用代行</strong> を行う場合は、その費用を ③ に合算し、顧客側の新タスク時間は <strong>0</strong> として計算します。</li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- ================= MEASUREMENT ================= -->
+    <section id="measurement" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">5. 削減時間の計測方法（請求の透明性を担保します）</h2>
 
-                <!-- セクション3: 計算プロセス -->
-                <div class="pricing-logic-section">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">3</span>
-                        計算プロセス（4ステップ）
-                    </h3>
-                    
-                    <div class="process-steps-grid">
-                        <div class="process-step step-1">
-                            <div class="step-number">1</div>
-                            <h4>作業棚卸し</h4>
-                            <p>職種別・業務別に「導入前作業」「導入後作業」「新タスク」を Excel / Google シートに列挙</p>
-                        </div>
-                        <div class="process-step step-2">
-                            <div class="step-number">2</div>
-                            <h4>時間と単価を入力</h4>
-                            <p>現場のヒアリングで <strong>月間工数 (h)</strong>、給与表から <strong>実コスト (円/h)</strong> を入力</p>
-                        </div>
-                        <div class="process-step step-3">
-                            <div class="step-number">3</div>
-                            <h4>自動計算シートで料金試算</h4>
-                            <p>①②③④ と α を入れると <strong>月額料金が即算出</strong></p>
-                        </div>
-                        <div class="process-step step-4">
-                            <div class="step-number">4</div>
-                            <h4>月次で実測値を更新</h4>
-                            <p>削減時間や API 料金を実績値に置き換え、<strong>透明性の高い料金改定</strong> を実現</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <h3 class="text-lg font-semibold">ルール（確定済み）</h3>
+        <ul class="list-disc list-inside space-y-2 text-sm">
+          <li>ベースライン（導入前の業務時間）は、<strong>初月無料期間中に自己申告</strong>いただきます</li>
+          <li>通常運用では、<strong>簡易ログ機能</strong>により削減時間を「大まかに」計測します</li>
+          <li>カスタマイズや仕様変更を行った場合のみ、<strong>お客様の自己申告値</strong>を計測データに反映します</li>
+          <li>毎月の契約更新時に、ログと自己申告をもとに<strong>料金を再計算・再設定</strong>します</li>
+        </ul>
 
-                <!-- セクション4: 具体例 -->
-                <div class="pricing-logic-section">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">4</span>
-                        具体的な計算例
-                    </h3>
+        <h3 class="text-lg font-semibold">簡易ログで取るデータ例</h3>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>操作回数（案件登録・完了ボタン押下回数など）</li>
+          <li>処理単位あたりの平均所要時間（導入前申告との比較）</li>
+          <li>バッチ処理・自動実行の回数と実行時間</li>
+        </ul>
 
-                    <!-- 例1 -->
-                    <div class="calculation-example">
-                        <h4 class="example-title example-1">例 1｜記録業務の音声入力＋AI要約</h4>
-                        <div class="example-tables">
-                            <div class="example-data-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>項目</th>
-                                            <th>数値</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>導入前作業</td><td>12分 × 600件 = <strong>120h</strong></td></tr>
-                                        <tr><td>導入後作業</td><td>3分 × 600件 = <strong>30h</strong></td></tr>
-                                        <tr><td>新タスク</td><td>要約確認 1分 × 600件 = <strong>10h</strong></td></tr>
-                                        <tr class="highlight-row"><td>正味削減時間</td><td>120 − 30 − 10 = <strong>80h</strong></td></tr>
-                                        <tr><td>人件費単価</td><td>¥2,200／h</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="example-calculation-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>計算要素</th>
-                                            <th>金額</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>① 労務削減価値</td><td>80h × ¥2,200 = <strong>¥176,000</strong></td></tr>
-                                        <tr><td>② リスク削減価値</td><td><strong>¥20,000</strong></td></tr>
-                                        <tr><td>③ ランニング実費</td><td><strong>¥18,000</strong></td></tr>
-                                        <tr><td>④ サポート料</td><td><strong>¥25,000</strong></td></tr>
-                                        <tr><td>α</td><td><strong>0.33</strong></td></tr>
-                                        <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥108,000</strong></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="calculation-formula">
-                            計算式: (176,000＋20,000)×0.33＋18,000＋25,000 = <strong>¥108,000</strong>
-                        </div>
-                    </div>
+        <div class="bg-yellow-50 text-yellow-900 border border-yellow-200 rounded p-4 text-sm">
+          <p class="font-semibold">公正性の担保</p>
+          <ul class="list-disc list-inside">
+            <li>ログは改ざん防止対策（署名付きタイムスタンプ等）を施します（クラウド実行時）</li>
+            <li>「嘘はやめてください」の精神論ではなく、契約条項に「明らかな乖離がある場合は再計測」を明記します</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-                    <!-- 例2 -->
-                    <div class="calculation-example">
-                        <h4 class="example-title example-2">例 2｜シフト最適化</h4>
-                        <div class="example-tables">
-                            <div class="example-data-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>項目</th>
-                                            <th>数値</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>導入前作業</td><td>シフト作成 <strong>35h</strong></td></tr>
-                                        <tr><td>導入後作業</td><td>AI確認・調整 <strong>5h</strong></td></tr>
-                                        <tr><td>新タスク</td><td>システム入力 <strong>4h</strong></td></tr>
-                                        <tr class="highlight-row"><td>正味削減時間</td><td>35 − 5 − 4 = <strong>26h</strong></td></tr>
-                                        <tr><td>人件費単価</td><td>¥3,000／h（管理者単価）</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="example-calculation-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>計算要素</th>
-                                            <th>金額</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>① 労務削減価値</td><td>26h × ¥3,000 = <strong>¥78,000</strong></td></tr>
-                                        <tr><td>② リスク削減価値</td><td>スタッフ満足度向上 <strong>¥15,000</strong></td></tr>
-                                        <tr><td>③ ランニング実費</td><td>AI API・クラウド <strong>¥12,000</strong></td></tr>
-                                        <tr><td>④ サポート料</td><td><strong>¥20,000</strong></td></tr>
-                                        <tr><td>α</td><td><strong>0.40</strong>（複雑度高）</td></tr>
-                                        <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥80,000</strong></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="calculation-formula">
-                            計算式: (78,000＋15,000)×0.40＋12,000＋20,000 = <strong>¥80,000</strong>
-                        </div>
-                    </div>
+    <!-- ================= SECURITY ================= -->
+    <section id="security" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">6. セキュリティ / データ管理（クラウド・ローカル両対応）</h2>
 
-                    <!-- 例3 -->
-                    <div class="calculation-example">
-                        <h4 class="example-title example-3">例 3｜服薬誤薬検知</h4>
-                        <div class="example-tables">
-                            <div class="example-data-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>項目</th>
-                                            <th>数値</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>導入前作業</td><td>ダブルチェック <strong>150h</strong></td></tr>
-                                        <tr><td>導入後作業</td><td>AI確認作業 <strong>30h</strong></td></tr>
-                                        <tr><td>新タスク</td><td>アラート対応 <strong>30h</strong></td></tr>
-                                        <tr class="highlight-row"><td>正味削減時間</td><td>150 − 30 − 30 = <strong>90h</strong></td></tr>
-                                        <tr><td>人件費単価</td><td>¥1,900／h（看護師単価）</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="example-calculation-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>計算要素</th>
-                                            <th>金額</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>① 労務削減価値</td><td>90h × ¥1,900 = <strong>¥171,000</strong></td></tr>
-                                        <tr><td>② リスク削減価値</td><td>誤薬リスク回避 <strong>¥40,000</strong></td></tr>
-                                        <tr><td>③ ランニング実費</td><td>画像認識AI・機器 <strong>¥25,000</strong></td></tr>
-                                        <tr><td>④ サポート料</td><td><strong>¥30,000</strong></td></tr>
-                                        <tr><td>α</td><td><strong>0.40</strong>（高リスク対応）</td></tr>
-                                        <tr class="result-row"><td><strong>月額料金</strong></td><td><strong>¥155,000</strong></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="calculation-formula">
-                            計算式: (171,000＋40,000)×0.40＋25,000＋30,000 = <strong>¥155,000</strong>
-                        </div>
-                    </div>
-                </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">クラウド（AWS運用）</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>全データをAWSで管理（保存時・送信時は暗号化）</li>
+            <li>アクセス権は最小権限（IAM）で運用</li>
+            <li>監査ログ（アクセス/変更）を保存</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-lg font-semibold mb-2">ローカルアプリ</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>施設内PCにデータ保存（暗号化）</li>
+            <li>鍵管理・バックアップの責任分担を事前に合意</li>
+            <li>クラウド連携なしでも動作可（オフライン運用）</li>
+          </ul>
+        </div>
+      </div>
 
-                <!-- セクション5: Q&A -->
-                <div class="pricing-logic-section">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">5</span>
-                        よくあるQ&A
-                    </h3>
-                    
-                    <div class="qa-container">
-                        <div class="qa-item">
-                            <div class="qa-question">
-                                <h4>Q: α は誰が決めるの？</h4>
-                            </div>
-                            <div class="qa-answer">
-                                <p>初回契約時に <strong>難易度・リスク・初期投資額</strong> を踏まえて協議。標準 0.33、生成AI / 解析系は 0.40。</p>
-                            </div>
-                        </div>
+      <div class="bg-slate-100 rounded p-4 mt-6 text-sm">
+        <p class="font-semibold">まずは「個人情報を扱わない」案件から始めることを推奨</p>
+        <p>➡ 現場に負担をかけずに成果を出し、信頼関係構築後に個人情報を含む高度化アプリへ段階的に拡張します。</p>
+      </div>
+    </section>
 
-                        <div class="qa-item">
-                            <div class="qa-question">
-                                <h4>Q: クラウド料金が高騰したら？</h4>
-                            </div>
-                            <div class="qa-answer">
-                                <p>③ ランニング実費は <strong>実費連動</strong>。ベンダー値上げ時は翌月以降スライド改定します。</p>
-                            </div>
-                        </div>
+    <!-- ================= EXAMPLES ================= -->
+    <section id="examples" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">7. 提供可能なアプリ例（最初は「個人情報なし」から）</h2>
 
-                        <div class="qa-item">
-                            <div class="qa-question">
-                                <h4>Q: 新機能を追加したい場合の料金は？</h4>
-                            </div>
-                            <div class="qa-answer">
-                                <p>"追加による削減時間 or 付加価値" を再計算し、同じ式で月額を見直します。初期開発費用が発生する場合は別途お見積り。</p>
-                                <a href="#contact" class="inline-contact-link">詳しく相談する</a>
-                            </div>
-                        </div>
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <h3 class="text-lg font-semibold">まずは個人情報を扱わないもの（例）</h3>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>消耗品在庫カウンター（在庫数のみ記録）</li>
+          <li>レクリエーション企画ジェネレーター（人数・所要時間のみ）</li>
+          <li>職員シフト希望収集ボット（社員IDのみ）</li>
+          <li>設備点検チェックリスト（点検結果のみ）</li>
+          <li>介護ニュース3行サマリー配信（RSS要約） …等</li>
+        </ul>
 
-                        <div class="qa-item">
-                            <div class="qa-question">
-                                <h4>Q: 導入までの期間はどのくらい？</h4>
-                            </div>
-                            <div class="qa-answer">
-                                <p>ヒアリングから本格稼働まで <strong>約2週間</strong>。お急ぎの場合はご相談ください。</p>
-                                <a href="#contact" class="inline-contact-link">お急ぎ相談はこちら</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <details class="bg-slate-50 rounded p-4">
+          <summary class="cursor-pointer font-semibold">個人情報を扱う高度アプリ例も将来的に対応可能（クリックで開く）</summary>
+          <div class="mt-4 text-sm space-y-1">
+            <ul class="list-disc list-inside">
+              <li>ケアプラン自動下書き生成（要介護度・ADLなど使用）</li>
+              <li>服薬管理・誤薬防止（処方・本人確認）</li>
+              <li>夜間離床センサー連携（個人IDと紐付け）</li>
+              <li>認知症BPSD早期検知（行動ログ・睡眠データ） …等</li>
+            </ul>
+            <p class="mt-2 text-slate-600">
+              ※この段階に進む際は、個人情報保護法・各種ガイドラインに沿った同意取得やアクセス制御を事前に設計します。
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
 
-                <!-- セクション6: まとめ -->
-                <div class="pricing-logic-section pricing-summary">
-                    <h3 class="pricing-section-title">
-                        <span class="section-number">6</span>
-                        まとめ
-                    </h3>
-                    
-                    <div class="summary-highlight">
-                        <p class="summary-main-text">「削減できた価値の 1/3 を月額に」</p>
-                        <p class="summary-sub-text">分かりやすく、フェアで、アップデートにも強い料金モデルです。</p>
-                        <p class="summary-detail">導入前後の実測値をもとに <strong>毎月のコストメリットを可視化</strong> しながら、安心してご利用いただけます。</p>
-                    </div>
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">8. よくある質問（FAQ）</h2>
+      <div class="space-y-4">
+        <details class="bg-white rounded-lg shadow p-4">
+          <summary class="font-semibold cursor-pointer">Q. 初月無料って、どこまでやってもらえるんですか？</summary>
+          <p class="mt-2 text-sm leading-relaxed">
+            ベースラインの取得、PoC（試作）による方向性確認、概算の削減時間見積りまでを無料で行います。<br />
+            ここで「続ける価値がある」とご判断いただいた場合のみ、本契約に進みます。
+          </p>
+        </details>
 
-                    <div class="summary-benefits">
-                        <div class="summary-benefit">
-                            <div class="benefit-icon">📊</div>
-                            <h4>透明性</h4>
-                            <p>すべての計算根拠を明示</p>
-                        </div>
-                        <div class="summary-benefit">
-                            <div class="benefit-icon">⚖️</div>
-                            <h4>公平性</h4>
-                            <p>価値に応じた適正料金</p>
-                        </div>
-                        <div class="summary-benefit">
-                            <div class="benefit-icon">🔄</div>
-                            <h4>柔軟性</h4>
-                            <p>利用状況に応じて自動調整</p>
-                        </div>
-                    </div>
+        <details class="bg-white rounded-lg shadow p-4">
+          <summary class="font-semibold cursor-pointer">Q. 削減時間の算出が"自己申告"だと不公平では？</summary>
+          <p class="mt-2 text-sm leading-relaxed">
+            通常時は簡易ログを使い、客観的に傾向を捉えます。カスタマイズ時のみ、業務の変化をお客様から申告いただき、ログと突き合わせて毎月再計算します。契約条項に「明らかな乖離がある場合の再計測」を明記し、公平性を担保します。
+          </p>
+        </details>
 
-                    <div class="pricing-cta">
-                        <a href="#contact" class="btn btn-primary pricing-cta-button">
-                            <i class="fas fa-calculator" aria-hidden="true"></i> 
-                            あなたの施設の料金を算定してみる
-                        </a>
-                    </div>
-                </div>
+        <details class="bg-white rounded-lg shadow p-4">
+          <summary class="font-semibold cursor-pointer">Q. APIコストが膨らんだら請求が跳ね上がりませんか？</summary>
+          <p class="mt-2 text-sm leading-relaxed">
+            API利用料は当社負担で、月額に含めています。お客様に追加課金することはありません。
+          </p>
+        </details>
+
+        <details class="bg-white rounded-lg shadow p-4">
+          <summary class="font-semibold cursor-pointer">Q. 個人情報を扱う場合、セキュリティ・法令は大丈夫？</summary>
+          <p class="mt-2 text-sm leading-relaxed">
+            AWSでの暗号化・アクセス権限の最小化・監査ログ管理を前提に、必要に応じてローカル保存での運用も可能です。実装前に、収集データ・保管期間・権限管理を文書化し、同意取得フローを整えます。
+          </p>
+        </details>
+
+        <details class="bg-white rounded-lg shadow p-4">
+          <summary class="font-semibold cursor-pointer">Q. 優先対応（10万円/月）はいつからいつまで有効ですか？</summary>
+          <p class="mt-2 text-sm leading-relaxed">
+            月額で付与され、当月の開発工数の40%を確保します。翌月以降は自動更新しませんので、必要な月のみお申し込みください。
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT FORM ================= -->
+    <section id="contact" class="py-16">
+      <h2 class="text-2xl font-bold mb-6">お問い合わせ・詳細相談</h2>
+      
+      <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <p class="text-slate-600 mb-4">
+          AI導入についてのご相談やお見積りのご依頼は、下記フォームからお気軽にお問い合わせください。<br>
+          お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com" class="text-indigo-600 hover:text-indigo-800">takenoko.ai.care@gmail.com</a>
+        </p>
+        
+        <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="company" class="block text-sm font-medium text-slate-700 mb-2">
+                事業所名 <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="company" name="company" placeholder="例：株式会社○○○" required
+                     class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-        </section>
-
-        <!-- 費用概算計算ツール -->
-        <section id="cost-calculator" class="section" aria-labelledby="calculator-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="calculator-title">簡単料金シミュレーター</h2>
-                    <p class="section-subtitle">
-                        たった2つの情報を入力するだけで、AI導入による削減効果と月額料金の概算を計算できます
-                    </p>
-                </header>
-                
-                <div class="calculator-container">
-                    <!-- 計算フォーム -->
-                    <div class="calculator-form-section">
-                        <form id="cost-calculator-form">
-                            <!-- シンプル入力フォーム -->
-                            <div class="calculator-step" data-step="1">
-                                <h3 class="step-title">
-                                    <span class="step-number">1</span>
-                                    現在の作業について教えてください
-                                </h3>
-                                <div class="ultra-simple-form">
-                                    <div class="form-group">
-                                        <label for="current-hours">
-                                            <i class="fas fa-clock" aria-hidden="true"></i>
-                                            月に何時間、その作業をしていますか？
-                                        </label>
-                                        <input type="number" id="current-hours" name="current-hours" min="1" max="1000" placeholder="例：80" required>
-                                        <small>記録や管理など、AIに任せたい作業の合計時間</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="hourly-cost">
-                                            <i class="fas fa-yen-sign" aria-hidden="true"></i>
-                                            その作業をする人の時給はいくらですか？
-                                        </label>
-                                        <input type="number" id="hourly-cost" name="hourly-cost" min="1000" max="5000" placeholder="例：2000" required>
-                                        <small>社会保険料なども含めた実際のコスト</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            <i class="fas fa-robot" aria-hidden="true"></i>
-                                            どのくらいAIにお任せしたいですか？
-                                        </label>
-                                        <div class="ai-level-options">
-                                            <label class="ai-level-option">
-                                                <input type="radio" name="ai-level" value="1" required>
-                                                <div class="level-card">
-                                                    <div class="level-header">
-                                                        <span class="level-number">レベル1</span>
-                                                        <span class="level-badge basic">基本</span>
-                                                    </div>
-                                                    <h4>少しだけお任せ</h4>
-                                                    <p>記録の一部をAIが手伝います</p>
-                                                    <div class="level-stats">
-                                                        <span class="stat">作業時間 <strong>30%削減</strong></span>
-                                                        <span class="stat">新しい作業 <strong>少し</strong></span>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                            
-                                            <label class="ai-level-option">
-                                                <input type="radio" name="ai-level" value="2" required>
-                                                <div class="level-card">
-                                                    <div class="level-header">
-                                                        <span class="level-number">レベル2</span>
-                                                        <span class="level-badge standard">おすすめ</span>
-                                                    </div>
-                                                    <h4>半分くらいお任せ</h4>
-                                                    <p>記録と管理をAIが自動化</p>
-                                                    <div class="level-stats">
-                                                        <span class="stat">作業時間 <strong>50%削減</strong></span>
-                                                        <span class="stat">新しい作業 <strong>普通</strong></span>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                            
-                                            <label class="ai-level-option">
-                                                <input type="radio" name="ai-level" value="3" required>
-                                                <div class="level-card">
-                                                    <div class="level-header">
-                                                        <span class="level-number">レベル3</span>
-                                                        <span class="level-badge premium">最上級</span>
-                                                    </div>
-                                                    <h4>ほぼ全部お任せ</h4>
-                                                    <p>全ての作業をAIが自動実行</p>
-                                                    <div class="level-stats">
-                                                        <span class="stat">作業時間 <strong>80%削減</strong></span>
-                                                        <span class="stat">新しい作業 <strong>ほぼなし</strong></span>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="calculate-btn">
-                                    <i class="fas fa-calculator"></i> 料金を計算する
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- 計算結果表示 -->
-                    <div class="calculator-results-section">
-                        <div class="results-container" id="calculation-results" style="display: none;">
-                            <h3 class="results-title">
-                                <i class="fas fa-chart-line"></i>
-                                料金シミュレーション結果
-                            </h3>
-                            
-                            <!-- サマリーカード -->
-                            <div class="results-summary">
-                                <div class="summary-card main-result">
-                                    <h4>月額料金</h4>
-                                    <div class="price-display">
-                                        <span class="currency">¥</span>
-                                        <span class="amount" id="monthly-cost">0</span>
-                                        <span class="period">/月</span>
-                                    </div>
-                                    <p class="roi-summary">
-                                        月間削減効果: <span id="monthly-savings">¥0</span><br>
-                                        投資回収率: <span id="roi-percentage">0%</span>
-                                    </p>
-                                </div>
-                                
-                                <div class="summary-card savings-card">
-                                    <h4>年間効果</h4>
-                                    <div class="savings-display">
-                                        <span class="currency">¥</span>
-                                        <span class="amount" id="annual-savings">0</span>
-                                        <span class="period">/年</span>
-                                    </div>
-                                    <p class="savings-note">
-                                        コスト削減効果
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 選択されたパッケージ情報 -->
-                            <div class="selected-package-info">
-                                <h4>選択されたプラン</h4>
-                                <div class="package-summary" id="package-summary">
-                                    <!-- JavaScriptで動的に生成 -->
-                                </div>
-                            </div>
-
-                            <!-- 削減効果の詳細 -->
-                            <div class="efficiency-details">
-                                <h4>期待される効果</h4>
-                                <div class="efficiency-grid" id="efficiency-breakdown">
-                                    <!-- JavaScriptで動的に生成 -->
-                                </div>
-                            </div>
-
-                            <!-- アクションボタン -->
-                            <div class="results-actions">
-                                <button class="primary-button consultation-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-                                    <i class="fas fa-comments"></i> 詳細相談・お見積り依頼
-                                </button>
-                                <button class="secondary-button download-btn" id="download-results">
-                                    <i class="fas fa-download"></i> 結果をダウンロード
-                                </button>
-                                <button class="tertiary-button recalculate-btn" id="recalculate-btn">
-                                    <i class="fas fa-redo"></i> 条件を変更する
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- 計算待機画面 -->
-                        <div class="calculation-placeholder" id="calculation-placeholder">
-                            <div class="placeholder-icon">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <h3>簡単料金シミュレーター</h3>
-                            <p>わずか2ステップで、AI導入効果を簡単に確認できます。</p>
-                            <div class="placeholder-features">
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>2分で概算完了</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>透明性のある料金計算</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>投資回収率も表示</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div>
+              <label for="name" class="block text-sm font-medium text-slate-700 mb-2">
+                ご担当者名 <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="name" name="name" placeholder="例：山田 太郎" required
+                     class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-        </section>
-
-        <!-- フォームエリア -->
-        <section id="contact" class="section" aria-labelledby="contact-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="contact-title">お問い合わせ・詳細相談</h2>
-                    <p>
-                        AI導入についてのご相談やお見積りのご依頼は、下記フォームからお気軽にお問い合わせください。<br>
-                    お問い合わせ: <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a>
-                </p>
-                </header>
-                
-                <!-- 計算結果表示エリア -->
-                <div id="calculation-summary-area" class="calculation-summary-area" style="display: none;">
-                    <h3><i class="fas fa-calculator"></i> 料金シミュレーション結果</h3>
-                    <div class="summary-content" id="calculation-summary-content">
-                        <!-- JavaScript で動的に生成 -->
-                    </div>
-                    <p class="summary-note">
-                        <i class="fas fa-info-circle"></i>
-                        上記のシミュレーション結果を元に詳細なご提案をいたします
-                    </p>
-                    </div>
-                
-                <form id="trial-form" action="https://formspree.io/f/xzzelkjj" method="POST" novalidate>
-                    <!-- 計算結果のhidden field -->
-                    <input type="hidden" id="simulation-data" name="simulation-data" value="">
-                    
-                    <div class="form-group">
-                        <label for="company"><i class="fas fa-building" aria-hidden="true"></i> 事業所名 <span aria-label="必須項目">*</span></label>
-                        <input type="text" id="company" name="company" placeholder="例：株式会社○○○" required aria-describedby="company-error">
-                    </div>
-                    <div class="form-group">
-                        <label for="name"><i class="fas fa-user" aria-hidden="true"></i> ご担当者名 <span aria-label="必須項目">*</span></label>
-                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required aria-describedby="name-error">
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope" aria-hidden="true"></i> メールアドレス <span aria-label="必須項目">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="例：yamada@example.com" required aria-describedby="email-error">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone"><i class="fas fa-phone" aria-hidden="true"></i> 電話番号</label>
-                        <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678" aria-describedby="phone-error">
-                    </div>
-                    <div class="form-group">
-                        <label for="message"><i class="fas fa-comment" aria-hidden="true"></i> ご質問・ご要望</label>
-                        <textarea id="message" name="message" rows="4" placeholder="AI導入についてのご質問や、具体的なご要望などをお聞かせください（任意）"></textarea>
-                    </div>
-                    
-                    <!-- 面談希望 -->
-                    <div class="form-group meeting-preference">
-                        <label><i class="fas fa-calendar-check" aria-hidden="true"></i> 面談希望</label>
-                        <div class="meeting-options">
-                            <label class="meeting-option">
-                                <input type="radio" name="meeting-type" value="online" checked>
-                                <span class="radio-custom"></span>
-                                <div class="option-details">
-                                    <strong>オンライン面談</strong>
-                                    <span>Zoom等でのリモート面談（推奨）</span>
-                        </div>
-                            </label>
-                            <label class="meeting-option">
-                                <input type="radio" name="meeting-type" value="visit">
-                                <span class="radio-custom"></span>
-                                <div class="option-details">
-                                    <strong>訪問面談</strong>
-                                    <span>貴施設への訪問（関東圏内）</span>
-                    </div>
-                            </label>
-                            <label class="meeting-option">
-                                <input type="radio" name="meeting-type" value="phone">
-                                <span class="radio-custom"></span>
-                                <div class="option-details">
-                                    <strong>電話相談</strong>
-                                    <span>お電話での簡単なご相談</span>
-                        </div>
-                            </label>
-                    </div>
-                    </div>
-                    
-                    <!-- 希望日時 -->
-                    <div class="form-group">
-                        <label for="preferred-date"><i class="fas fa-calendar-alt" aria-hidden="true"></i> ご希望日時</label>
-                        <input type="datetime-local" id="preferred-date" name="preferred-date">
-                        <small>ご都合の良い日時をお選びください（平日・土曜 9:00-18:00対応）</small>
-                    </div>
-
-                    <button type="submit" class="primary-button">
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i> 
-                        お問い合わせを送信する
-                    </button>
-                </form>
-                
-                <!-- 追加の問い合わせ案内 -->
-                <div class="additional-contact-info">
-                    <p class="contact-note">
-                        <i class="fas fa-info-circle"></i>
-                        お急ぎの方は直接お電話ください：
-                        <a href="tel:070-1383-4420" class="phone-link">070-1383-4420</a>
-                        （平日・土曜 9:00-18:00）
-                    </p>
-                    <p class="contact-note">
-                        <i class="fas fa-envelope"></i>
-                        メールでのお問い合わせ：
-                        <a href="mailto:takenoko.ai.care@gmail.com" class="email-link">takenoko.ai.care@gmail.com</a>
-                    </p>
-                </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-700 mb-2">
+                メールアドレス <span class="text-red-500">*</span>
+              </label>
+              <input type="email" id="email" name="email" placeholder="例：yamada@example.com" required
+                     class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-        </section>
-
-        <!-- 開発者紹介セクション (新設) -->
-        <section id="developer" class="section" aria-labelledby="developer-title">
-            <div class="section-content">
-                <header class="section-header">
-                    <h2 id="developer-title">開発者について</h2>
-                    <p class="section-subtitle">
-                        AI介護システム「FastAI」は、介護現場の情熱と最新技術を組み合わせた個人開発プロジェクトです。
-                    </p>
-                </header>
-                <div class="developer-profile">
-                    <div class="developer-image-container">
-                        <!-- あとで画像を追加 <img src="src/img/developer-profile.jpg" alt="開発者 大嶽耕太郎"> -->
-                        <div class="developer-placeholder-image" aria-hidden="true"><i class="fas fa-user"></i></div> 
-                    </div>
-                    <div class="developer-info">
-                        <h3>大嶽 耕太郎 (Kotaro Otake)</h3>
-                        <p class="developer-role">AIシステム開発者 / 嶽ノ子 代表</p>
-                        <p>介護士としての現場経験と、AI・RPAシステム開発の専門知識を融合させ、介護現場の真のニーズに応えるソリューションを提供します。一つ一つの施設様に寄り添い、丁寧なヒアリングとオーダーメイド開発で、働く方々と利用者様の双方にとって、より良い環境づくりをサポートします。</p>
-                        <p><strong>「テクノロジーの力で、介護の未来を優しく、あたたかく。」</strong></p>
-                        <div class="developer-links">
-                            <a href="#contact" class="primary-button small-button"><i class="fas fa-envelope"></i> 開発者に相談する</a>
-                            <a href="company.html" class="secondary-button small-button"><i class="fas fa-building"></i> 事業概要</a>
-                        </div>
-                    </div>
-                </div>
+            
+            <div>
+              <label for="phone" class="block text-sm font-medium text-slate-700 mb-2">
+                電話番号
+              </label>
+              <input type="tel" id="phone" name="phone" placeholder="例：03-1234-5678"
+                     class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-        </section>
-
-        <!-- フッター -->
-        <footer role="contentinfo">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="#" class="logo">嶽ノ子</a>
-                    <p class="tagline">AIで介護の未来をデザインする</p>
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-medium text-slate-700 mb-2">
+              ご質問・ご要望
+            </label>
+            <textarea id="message" name="message" rows="4" 
+                      placeholder="AI導入についてのご質問や、具体的なご要望などをお聞かせください（任意）"
+                      class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-2">面談希望</label>
+            <div class="space-y-2">
+              <label class="flex items-start space-x-3">
+                <input type="radio" name="meeting-type" value="online" checked
+                       class="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                <div>
+                  <div class="font-medium text-slate-900">オンライン面談</div>
+                  <div class="text-sm text-slate-600">Zoom等でのリモート面談（推奨）</div>
                 </div>
-                <div class="footer-contact-info">
-                    <h4>お問い合わせ</h4>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:takenoko.ai.care@gmail.com">takenoko.ai.care@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> <a href="tel:070-1383-4420">070-1383-4420</a> （平日・土曜 9時～18時）</p>
-                    <p class="personal-touch-message"><i class="fas fa-user-tie"></i> 代表 大嶽が直接ご対応いたします。</p>
-                    <a href="#contact" class="footer-contact-btn">
-                        <i class="fas fa-paper-plane"></i> 今すぐ相談する
-                    </a>
+              </label>
+              
+              <label class="flex items-start space-x-3">
+                <input type="radio" name="meeting-type" value="visit"
+                       class="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                <div>
+                  <div class="font-medium text-slate-900">訪問面談</div>
+                  <div class="text-sm text-slate-600">貴施設への訪問（関東圏内）</div>
                 </div>
-                <nav class="footer-links" aria-label="フッターナビゲーション">
-                    <ul>
-                        <li><a href="#service">サービス</a></li>
-                        <li><a href="#examples">実装例</a></li>
-                        <li><a href="#process">導入の流れ</a></li>
-                        <li><a href="#pricing">料金</a></li>
-                        <li><a href="company.html">会社概要</a></li>
-                        <li><a href="privacy.html">プライバシーポリシー</a></li>
-                        <li><a href="terms.html">利用規約</a></li>
-                        <li><a href="#contact">お問い合わせ</a></li>
-                    </ul>
-                </nav>
+              </label>
+              
+              <label class="flex items-start space-x-3">
+                <input type="radio" name="meeting-type" value="phone"
+                       class="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
+                <div>
+                  <div class="font-medium text-slate-900">電話相談</div>
+                  <div class="text-sm text-slate-600">お電話での簡単なご相談</div>
                 </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.</p>
+              </label>
             </div>
-        </footer>
-    </main>
+          </div>
+          
+          <div>
+            <label for="preferred-date" class="block text-sm font-medium text-slate-700 mb-2">
+              ご希望日時
+            </label>
+            <input type="datetime-local" id="preferred-date" name="preferred-date"
+                   class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <p class="text-sm text-slate-600 mt-1">ご都合の良い日時をお選びください（平日・土曜 9:00-18:00対応）</p>
+          </div>
+          
+          <button type="submit" 
+                  class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200">
+            お問い合わせを送信する
+          </button>
+        </form>
+        
+        <div class="mt-6 pt-6 border-t border-slate-200 space-y-2 text-sm text-slate-600">
+          <p>
+            <strong>お急ぎの方は直接お電話ください：</strong>
+            <a href="tel:070-1383-4420" class="text-indigo-600 hover:text-indigo-800">070-1383-4420</a>
+            （平日・土曜 9:00-18:00）
+          </p>
+          <p>
+            <strong>メールでのお問い合わせ：</strong>
+            <a href="mailto:takenoko.ai.care@gmail.com" class="text-indigo-600 hover:text-indigo-800">takenoko.ai.care@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <!-- ページトップに戻るボタン -->
-    <button id="back-to-top" title="トップに戻る" aria-label="トップに戻る">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
-    </button>
+    <!-- ================= CTA ================= -->
+    <section id="cta" class="py-16">
+      <div class="bg-indigo-700 text-white rounded-lg p-8 md:p-12 shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">9. 次の一歩（面談当日〜導入開始まで）</h2>
+        <ol class="list-decimal list-inside space-y-2 text-slate-100">
+          <li>面談で業務の棚卸し・優先順位決め（60〜90分）</li>
+          <li>初月無料期間中にベースライン（自己申告）を取得</li>
+          <li>PoC（試作）を短期間でお見せし、継続判断</li>
+          <li>本契約締結 → 本開発 → 運用開始（月額課金スタート）</li>
+          <li>毎月ログ/申告で削減時間を再計算し、料金を更新</li>
+        </ol>
 
-    <!-- GSAP アニメーションライブラリ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    
-    <!-- カスタムスクリプト（モジュール形式） -->
-    <script type="module" src="src/js/main.js"></script>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="#flow" class="px-6 py-3 rounded bg-white text-indigo-700 font-semibold text-center shadow hover:bg-slate-100">
+            詳しい導入フローを再確認する
+          </a>
+          <a href="#contact" class="px-6 py-3 rounded bg-yellow-300 text-slate-900 font-semibold text-center shadow hover:bg-yellow-400">
+            導入の相談を申し込む（初月無料）
+          </a>
+        </div>
+
+        <p class="mt-6 text-sm text-indigo-200">
+          ※本資料は、現時点で確定している運用方針をまとめたものです。改善に応じて常時アップデートされます。
+        </p>
+      </div>
+    </section>
+
+    <footer class="py-12 text-center text-xs text-slate-500">
+      © 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
+    </footer>
+  </main>
 </body>
 </html>
