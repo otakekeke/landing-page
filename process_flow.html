@@ -1,712 +1,479 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>面談から導入までの流れ - 嶽ノ子 FastAI</title>
-    <meta name="description" content="AI介護システム「FastAI」の面談から導入までの詳細な流れをご説明いたします。スムーズな導入をサポートします。">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(229, 231, 235, 0.3);
-        }
-        .step-number-circle {
-            background: linear-gradient(135deg, #3B82F6, #2563EB);
-        }
-        .step-timeline::before {
-            content: '';
-            position: absolute;
-            left: 25px;
-            top: 70px;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #3B82F6, #E5E7EB);
-        }
-        .step-timeline:last-child::before {
-            display: none;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
-            border-left: 4px solid #3B82F6;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>面談から導入までの流れ - 嶽ノ子 | 介護事業者向けオーダーメイド業務効率化アプリ</title>
+  <meta name="description" content="AI介護システムの面談から導入までの詳細な流れをご説明いたします。スムーズな導入をサポートします。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-<body class="gradient-bg min-h-screen">
-    <!-- Header -->
-    <header class="glass-card shadow-lg mb-8">
-        <div class="max-w-4xl mx-auto px-4 py-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="text-2xl font-bold text-blue-600">嶽ノ子</div>
-                    <span class="text-gray-500">|</span>
-                    <h1 class="text-xl font-semibold text-gray-800">面談から導入までの流れ</h1>
-                </div>
-                <a href="index.html" class="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
-                    <i class="fas fa-home"></i>
-                    <span>トップページ</span>
-                </a>
-            </div>
-        </div>
-    </header>
+<body class="bg-slate-50 text-slate-800">
+  <!-- ================= HEADER ================= -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+        <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
+      </h1>
+      <nav class="hidden md:flex gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-indigo-600">ホーム</a>
+        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+        <a href="privacy.html" class="hover:text-indigo-600">プライバシーポリシー</a>
+        <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
+        <a href="process_flow.html" class="text-indigo-600 font-semibold">導入の流れ</a>
+        <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
+      </nav>
+      <!-- モバイルメニューボタン -->
+      <button class="md:hidden" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+      <div class="px-4 py-2 space-y-2">
+        <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
+        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+        <a href="privacy.html" class="block py-2 hover:text-indigo-600">プライバシーポリシー</a>
+        <a href="terms.html" class="block py-2 hover:text-indigo-600">利用規約</a>
+        <a href="process_flow.html" class="block py-2 text-indigo-600 font-semibold">導入の流れ</a>
+        <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 pb-12">
-        <!-- Introduction -->
-        <section class="glass-card rounded-xl shadow-lg p-8 mb-12 fade-in-up">
-            <div class="text-center mb-8">
-                <i class="fas fa-route text-4xl text-blue-600 mb-4"></i>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">AI導入の道のり</h2>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    お客様の施設に最適なAI介護システムを導入するまでの、<br>
-                    透明性のある9つのステップをご紹介します。
-                </p>
+  <!-- ================= HERO ================= -->
+  <section class="bg-indigo-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+        面談から導入までの流れ
+      </h2>
+      <p class="mt-4 text-lg">
+        透明性のある9つのステップで安心の導入プロセス
+      </p>
+    </div>
+  </section>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- ================= 導入概要 ================= -->
+    <section class="mb-16">
+      <div class="bg-white rounded-lg shadow p-8 text-center">
+        <div class="mb-8">
+          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"></path>
+          </svg>
+          <h2 class="text-3xl font-bold text-slate-900 mb-4">AI導入の道のり</h2>
+          <p class="text-lg text-slate-600 leading-relaxed">
+            お客様の施設に最適なAI介護システムを導入するまでの、<br>
+            透明性のある9つのステップをご紹介します。
+          </p>
+        </div>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-400 p-6 text-left">
+          <div class="flex items-start space-x-4">
+            <svg class="w-6 h-6 text-indigo-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+              <h3 class="font-semibold text-slate-800 mb-2">導入期間の目安</h3>
+              <p class="text-slate-600">初回面談から本格稼働まで：<strong class="text-indigo-600">約2〜3週間</strong></p>
+              <p class="text-sm text-slate-500 mt-1">お急ぎの場合は最短10日での対応も可能です</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 導入ステップ ================= -->
+    <section class="space-y-8">
+      <!-- Step 1: 初回面談・ヒアリング -->
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="flex items-start space-x-6">
+          <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+            1
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 mb-4">
+              <h3 class="text-2xl font-bold text-slate-800">初回面談・ヒアリング</h3>
+              <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">30分</span>
             </div>
             
-            <div class="highlight-box rounded-lg p-6 mt-8">
-                <div class="flex items-start space-x-4">
-                    <i class="fas fa-clock text-blue-600 text-xl mt-1"></i>
-                    <div>
-                        <h3 class="font-semibold text-gray-800 mb-2">導入期間の目安</h3>
-                        <p class="text-gray-600">初回面談から本格稼働まで：<strong class="text-blue-600">約2〜3週間</strong></p>
-                        <p class="text-sm text-gray-500 mt-1">お急ぎの場合は最短10日での対応も可能です</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Process Steps -->
-        <section class="space-y-12">
-            <!-- Step 1: 初回面談・ヒアリング -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            1
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">初回面談・ヒアリング</h3>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">30分</span>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-comments text-blue-600 mr-2"></i>
-                                        面談内容
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check text-green-500 mt-1 text-sm"></i>
-                                            <span>現在の業務フローの確認</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check text-green-500 mt-1 text-sm"></i>
-                                            <span>課題・改善したいポイントの洗い出し</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check text-green-500 mt-1 text-sm"></i>
-                                            <span>AI導入による期待効果の整理</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check text-green-500 mt-1 text-sm"></i>
-                                            <span>利用者様数・スタッフ数の確認</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-clipboard-list text-blue-600 mr-2"></i>
-                                        準備いただくもの
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-file-alt text-orange-500 mt-1 text-sm"></i>
-                                            <span>現在使用中の記録用紙・フォーマット</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-calendar text-orange-500 mt-1 text-sm"></i>
-                                            <span>1日の業務スケジュール例</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-clock text-orange-500 mt-1 text-sm"></i>
-                                            <span>業務時間・人件費の概算</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="mt-6 bg-blue-50 rounded-lg p-4">
-                                <div class="flex items-start space-x-3">
-                                    <i class="fas fa-lightbulb text-yellow-500 text-lg mt-1"></i>
-                                    <div>
-                                        <h5 class="font-semibold text-gray-800 mb-1">面談方法</h5>
-                                        <p class="text-gray-600 text-sm">オンライン（Zoom等）または訪問面談（関東圏内）からお選びいただけます</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                  面談内容
+                </h4>
+                <ul class="space-y-2 text-slate-600">
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>現在の業務フローの確認</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>課題・改善したいポイントの洗い出し</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>AI導入による期待効果の整理</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>利用者様数・スタッフ数の確認</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                  </svg>
+                  準備いただくもの
+                </h4>
+                <ul class="space-y-2 text-slate-600">
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-orange-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <span>現在使用中の記録用紙・フォーマット</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-orange-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V5a2 2 0 012-2h2a2 2 0 012 2v2m-6 0h6"></path>
+                    </svg>
+                    <span>1日の業務スケジュール例</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-orange-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>業務時間・人件費の概算</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            <!-- Step 2: 要件定義・ROI概算見積 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            2
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">要件定義・ROI概算見積</h3>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">1-2日</span>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-cogs text-blue-600 mr-2"></i>
-                                        要件定義内容
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-arrow-right text-blue-500 mt-1 text-sm"></i>
-                                            <span>システム機能の詳細仕様</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-arrow-right text-blue-500 mt-1 text-sm"></i>
-                                            <span>AI機能の実装方式</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-arrow-right text-blue-500 mt-1 text-sm"></i>
-                                            <span>業務フローの最適化案</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-arrow-right text-blue-500 mt-1 text-sm"></i>
-                                            <span>画面設計・操作フロー</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-calculator text-blue-600 mr-2"></i>
-                                        ROI概算見積
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-chart-line text-green-500 mt-1 text-sm"></i>
-                                            <span>期待削減時間の算出</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-yen-sign text-green-500 mt-1 text-sm"></i>
-                                            <span>コスト削減効果の試算</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-percentage text-green-500 mt-1 text-sm"></i>
-                                            <span>ROI（投資対効果）分析</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-clock text-green-500 mt-1 text-sm"></i>
-                                            <span>投資回収期間の算定</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="mt-6 bg-indigo-50 rounded-lg p-4">
+              <div class="flex items-start space-x-3">
+                <svg class="w-5 h-5 text-yellow-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <div>
+                  <h5 class="font-semibold text-slate-800 mb-1">面談方法</h5>
+                  <p class="text-slate-600 text-sm">オンライン（Zoom等）または訪問面談（関東圏内）からお選びいただけます</p>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Step 3: ROIベース月額料金計算・提案 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            3
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">ROIベース月額料金計算・提案</h3>
-                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">半日</span>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-formula text-blue-600 mr-2"></i>
-                                        料金算定方式
-                                    </h4>
-                                    <p class="text-gray-600 text-sm mb-3">削減効果の1/3を月額料金として算定する透明性の高い料金体系</p>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li>• 労務削減価値 × 0.33 + ランニング実費 + サポート料</li>
-                                        <li>• 投資回収期間とROI率の明示</li>
-                                        <li>• ランニングコストの詳細内訳</li>
-                                    </ul>
-                                </div>
-
-                                <div class="bg-blue-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-handshake text-blue-600 mr-2"></i>
-                                        条件調整・合意
-                                    </h4>
-                                    <p class="text-gray-600 text-sm mb-3">お客様のご予算・ご要望に合わせた柔軟な調整を実施</p>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li>• 機能の追加・削除による料金調整</li>
-                                        <li>• 段階的導入によるリスク軽減</li>
-                                        <li>• サポート内容のカスタマイズ</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 4: システム開発・カスタマイズ -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            4
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">システム開発・カスタマイズ</h3>
-                                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">5-7日</span>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-indigo-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-code text-blue-600 mr-2"></i>
-                                        開発プロセス
-                                    </h4>
-                                    <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
-                                        <div>
-                                            <p class="font-medium mb-2">フロントエンド開発</p>
-                                            <ul class="space-y-1">
-                                                <li>• 貴施設専用の操作画面作成</li>
-                                                <li>• レスポンシブデザイン対応</li>
-                                                <li>• 直感的なUI/UX設計</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium mb-2">バックエンド・AI実装</p>
-                                            <ul class="space-y-1">
-                                                <li>• 貴施設用データベース構築</li>
-                                                <li>• AI機能の実装・調整</li>
-                                                <li>• セキュリティ対策の実装</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bg-green-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-sync-alt text-blue-600 mr-2"></i>
-                                        進捗管理
-                                    </h4>
-                                    <p class="text-gray-600 text-sm">開発進捗を毎日メールでご報告。お客様の実業務に合わせた調整も随時実施します。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 5: 試用期間・動作検証 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            5
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">試用期間・動作検証</h3>
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">1週間</span>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-vial text-blue-600 mr-2"></i>
-                                        試用内容
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
-                                            <span>実際の業務での動作確認</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
-                                            <span>AI機能の精度検証</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
-                                            <span>スタッフの操作性確認</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 text-sm"></i>
-                                            <span>削減効果の実測</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-users-cog text-blue-600 mr-2"></i>
-                                        サポート内容
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-headset text-blue-500 mt-1 text-sm"></i>
-                                            <span>操作説明・研修の実施</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-wrench text-blue-500 mt-1 text-sm"></i>
-                                            <span>細かな仕様調整・改善</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-phone text-blue-500 mt-1 text-sm"></i>
-                                            <span>リアルタイムサポート</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 6: 使用実績動画撮影 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            6
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">使用実績動画撮影</h3>
-                                <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">半日</span>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-orange-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-video text-blue-600 mr-2"></i>
-                                        撮影内容
-                                    </h4>
-                                    <div class="text-sm text-gray-600 space-y-2">
-                                        <p>• システム使用中の実際の業務風景</p>
-                                        <p>• AI機能の動作デモンストレーション</p>
-                                        <p>• スタッフ様の使用感インタビュー</p>
-                                        <p>• 削減効果の具体的な数値確認</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-blue-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-shield-alt text-blue-600 mr-2"></i>
-                                        プライバシー配慮
-                                    </h4>
-                                    <p class="text-sm text-gray-600 mb-2">個人情報保護に十分配慮した撮影を実施します。</p>
-                                    <div class="text-sm text-gray-600 space-y-1">
-                                        <p>✓ 利用者様のお顔・個人情報は写りません</p>
-                                        <p>✓ 施設名の公開可否もお選びいただけます</p>
-                                        <p>✓ 撮影前に詳細な説明・同意確認を実施</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 7: 最終ROI計算・月額料金確定 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            7
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">最終ROI計算・月額料金確定</h3>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">1日</span>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-calculator text-blue-600 mr-2"></i>
-                                        実績ベース計算
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-chart-bar text-green-500 mt-1 text-sm"></i>
-                                            <span>実際の削減時間の測定結果</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-yen-sign text-green-500 mt-1 text-sm"></i>
-                                            <span>正確なコスト削減効果の算出</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-percentage text-green-500 mt-1 text-sm"></i>
-                                            <span>実績ROIの最終計算</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-file-invoice text-blue-600 mr-2"></i>
-                                        月額料金確定
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-check text-blue-500 mt-1 text-sm"></i>
-                                            <span>実績値に基づく正式料金算定</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-handshake text-blue-500 mt-1 text-sm"></i>
-                                            <span>お客様との最終合意</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-pen text-blue-500 mt-1 text-sm"></i>
-                                            <span>正式契約書の締結</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 8: 請求書発行・決済 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            8
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">請求書発行・決済</h3>
-                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">即日</span>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-file-invoice-dollar text-blue-600 mr-2"></i>
-                                        請求書発行
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-calendar-alt text-blue-500 mt-1 text-sm"></i>
-                                            <span>月末締め・翌月初請求書発行</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-file-pdf text-blue-500 mt-1 text-sm"></i>
-                                            <span>PDF請求書のメール送付</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-receipt text-blue-500 mt-1 text-sm"></i>
-                                            <span>詳細内訳・効果レポート添付</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                        <i class="fas fa-credit-card text-blue-600 mr-2"></i>
-                                        お支払い方法
-                                    </h4>
-                                    <ul class="space-y-2 text-gray-600">
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-university text-green-500 mt-1 text-sm"></i>
-                                            <span>銀行振込（翌月末お支払い）</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-mobile-alt text-green-500 mt-1 text-sm"></i>
-                                            <span>Stripe決済（即時決済可能）</span>
-                                        </li>
-                                        <li class="flex items-start space-x-2">
-                                            <i class="fas fa-shield-check text-green-500 mt-1 text-sm"></i>
-                                            <span>セキュアな決済処理</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Step 9: 本格使用開始 -->
-            <div class="step-timeline relative fade-in-up">
-                <div class="glass-card rounded-xl shadow-lg p-8">
-                    <div class="flex items-start space-x-6">
-                        <div class="step-number-circle rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                            9
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-3 mb-4">
-                                <h3 class="text-2xl font-bold text-gray-800">本格使用開始</h3>
-                                <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium">継続</span>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-emerald-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-rocket text-blue-600 mr-2"></i>
-                                        運用サポート
-                                    </h4>
-                                    <div class="text-sm text-gray-600 space-y-2">
-                                        <p>• システムの継続的な監視・メンテナンス</p>
-                                        <p>• 月次効果測定レポートの提供</p>
-                                        <p>• 機能改善・追加開発のご提案</p>
-                                        <p>• 24時間技術サポート対応</p>
-                                    </div>
-                                </div>
-
-                                <div class="bg-blue-50 rounded-lg p-4">
-                                    <h4 class="font-semibold text-gray-700 mb-2 flex items-center">
-                                        <i class="fas fa-sync-alt text-blue-600 mr-2"></i>
-                                        継続的改善
-                                    </h4>
-                                    <p class="text-sm text-gray-600 mb-2">お客様の業務変化に合わせたシステムの継続的な改善を実施します。</p>
-                                    <div class="text-sm text-gray-600 space-y-1">
-                                        <p>✓ 新機能の追加・既存機能の改善</p>
-                                        <p>✓ AI精度の継続的な向上</p>
-                                        <p>✓ ユーザビリティの最適化</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- After Implementation Support -->
-        <section class="glass-card rounded-xl shadow-lg p-8 mt-16 fade-in-up">
-            <div class="text-center mb-8">
-                <i class="fas fa-hands-helping text-4xl text-blue-600 mb-4"></i>
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">導入後のサポート体制</h2>
+      <!-- Step 2: 要件定義・ROI概算見積 -->
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="flex items-start space-x-6">
+          <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+            2
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 mb-4">
+              <h3 class="text-2xl font-bold text-slate-800">要件定義・ROI概算見積</h3>
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">1-2日</span>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-headset text-2xl text-blue-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-2">技術サポート</h3>
-                    <p class="text-sm text-gray-600">平日9:00-17:00の電話・メールサポート。緊急時は24時間対応。</p>
-                </div>
-                <div class="text-center">
-                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-line text-2xl text-green-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-2">効果測定</h3>
-                    <p class="text-sm text-gray-600">月次でシステム利用状況と業務効率化効果をレポートにてご報告。</p>
-                </div>
-                <div class="text-center">
-                    <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-sync-alt text-2xl text-purple-600"></i>
-                    </div>
-                    <h3 class="font-semibold text-gray-800 mb-2">機能改善</h3>
-                    <p class="text-sm text-gray-600">ご要望に応じた機能追加・改善を継続的に実施。</p>
-                </div>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  要件定義内容
+                </h4>
+                <ul class="space-y-2 text-slate-600">
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                    <span>システム機能の詳細仕様</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                    <span>AI機能の実装方式</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                    <span>業務フローの最適化案</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-indigo-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                    <span>画面設計・操作フロー</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-slate-700 mb-3 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                  </svg>
+                  ROI概算見積
+                </h4>
+                <ul class="space-y-2 text-slate-600">
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <span>期待削減時間の算出</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>コスト削減効果の試算</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                    <span>ROI（投資対効果）分析</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>投資回収期間の算定</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="text-center mt-12">
-            <div class="glass-card rounded-xl shadow-lg p-8 fade-in-up">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">まずはお気軽にご相談ください</h2>
-                <p class="text-gray-600 mb-6">
-                    AI導入に関するご質問や、詳細な導入プロセスについて、<br>
-                    お電話またはメールでお気軽にお問い合わせください。
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="tel:070-1383-4420" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
-                        <i class="fas fa-phone"></i>
-                        <span>070-1383-4420</span>
-                    </a>
-                    <a href="mailto:takenoko.ai.care@gmail.com" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
-                        <i class="fas fa-envelope"></i>
-                        <span>メールで相談</span>
-                    </a>
-                    <a href="index.html#contact" class="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>面談予約</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="glass-card mt-12">
-        <div class="max-w-4xl mx-auto px-4 py-6">
-            <div class="text-center text-gray-600">
-                <div class="flex items-center justify-center space-x-4 mb-4">
-                    <div class="text-xl font-bold text-blue-600">嶽ノ子</div>
-                    <span class="text-gray-400">|</span>
-                    <span>AI介護システム「FastAI」</span>
-                </div>
-                <p class="text-sm">&copy; 2024 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.</p>
-            </div>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <script>
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      <!-- Step 3: ROIベース月額料金計算・提案 -->
+      <div class="bg-white rounded-lg shadow p-8">
+        <div class="flex items-start space-x-6">
+          <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+            3
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center space-x-3 mb-4">
+              <h3 class="text-2xl font-bold text-slate-800">ROIベース月額料金計算・提案</h3>
+              <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">半日</span>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="bg-slate-50 rounded-lg p-4">
+                <h4 class="font-semibold text-slate-700 mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                  </svg>
+                  料金算定方式
+                </h4>
+                <p class="text-slate-600 text-sm mb-3">削減効果の1/3を月額料金として算定する透明性の高い料金体系</p>
+                <ul class="text-sm text-slate-600 space-y-1">
+                  <li>• 労務削減価値 × 0.33 + ランニング実費 + サポート料</li>
+                  <li>• 投資回収期間とROI率の明示</li>
+                  <li>• ランニングコストの詳細内訳</li>
+                </ul>
+              </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0.2s';
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
+              <div class="bg-indigo-50 rounded-lg p-4">
+                <h4 class="font-semibold text-slate-700 mb-2 flex items-center">
+                  <svg class="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                  </svg>
+                  条件調整・合意
+                </h4>
+                <p class="text-slate-600 text-sm mb-3">お客様のご予算・ご要望に合わせた柔軟な調整を実施</p>
+                <ul class="text-sm text-slate-600 space-y-1">
+                  <li>• 機能の追加・削除による料金調整</li>
+                  <li>• 段階的導入によるリスク軽減</li>
+                  <li>• サポート内容のカスタマイズ</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        document.querySelectorAll('.step-timeline, section').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+      <!-- Remaining Steps (4-9) -->
+      <div class="bg-white rounded-lg shadow p-8">
+        <h3 class="text-2xl font-bold text-slate-800 mb-6">ステップ4-9：開発・導入・運用開始</h3>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg mx-auto mb-4">
+              4-5
+            </div>
+            <h4 class="font-semibold text-slate-700 mb-2">開発・検証</h4>
+            <p class="text-sm text-slate-600">システム開発（5-7日）と試用期間での動作検証（1週間）を実施</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg mx-auto mb-4">
+              6-7
+            </div>
+            <h4 class="font-semibold text-slate-700 mb-2">実績測定・料金確定</h4>
+            <p class="text-sm text-slate-600">使用実績動画撮影と最終ROI計算による正式料金の確定</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full w-12 h-12 flex items-center justify-center text-white font-bold text-lg shadow-lg mx-auto mb-4">
+              8-9
+            </div>
+            <h4 class="font-semibold text-slate-700 mb-2">決済・運用開始</h4>
+            <p class="text-sm text-slate-600">請求書発行・決済後、本格運用開始と継続サポート</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= サポート体制 ================= -->
+    <section class="mt-16">
+      <div class="bg-white rounded-lg shadow p-8 text-center">
+        <div class="mb-8">
+          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">導入後のサポート体制</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="bg-indigo-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">技術サポート</h3>
+            <p class="text-sm text-slate-600">平日9:00-18:00の電話・メールサポート。緊急時は24時間対応。</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">効果測定</h3>
+            <p class="text-sm text-slate-600">月次でシステム利用状況と業務効率化効果をレポートにてご報告。</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-slate-800 mb-2">機能改善</h3>
+            <p class="text-sm text-slate-600">ご要望に応じた機能追加・改善を継続的に実施。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= お問い合わせ ================= -->
+    <section class="mt-16">
+      <div class="bg-indigo-700 text-white rounded-lg p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4">まずはお気軽にご相談ください</h2>
+        <p class="text-indigo-100 mb-6">
+          AI導入に関するご質問や、詳細な導入プロセスについて、<br>
+          お電話またはメールでお気軽にお問い合わせください。
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="tel:070-1383-4420" class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition duration-200 flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+            </svg>
+            <span>070-1383-4420</span>
+          </a>
+          <a href="mailto:takenoko.ai.care@gmail.com" class="bg-yellow-300 text-slate-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition duration-200 flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <span>メールで相談</span>
+          </a>
+          <a href="index.html#contact" class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-700 transition duration-200 flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V5a2 2 0 012-2h2a2 2 0 012 2v2m-6 0h6"></path>
+            </svg>
+            <span>面談予約</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-800 text-white py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
+          <p class="text-slate-300 text-sm">
+            AIで介護の未来をデザインする
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">リンク</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="text-slate-300 hover:text-white">ホーム</a></li>
+            <li><a href="company.html" class="text-slate-300 hover:text-white">会社概要</a></li>
+            <li><a href="privacy.html" class="text-slate-300 hover:text-white">プライバシーポリシー</a></li>
+            <li><a href="terms.html" class="text-slate-300 hover:text-white">利用規約</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">お問い合わせ</h4>
+          <div class="space-y-2 text-sm">
+            <p class="text-slate-300">
+              <a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">
+                takenoko.ai.care@gmail.com
+              </a>
+            </p>
+            <p class="text-slate-300">
+              <a href="tel:070-1383-4420" class="hover:text-white">
+                070-1383-4420
+              </a>
+            </p>
+            <p class="text-slate-300">平日・土曜 9:00-18:00</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
+        © 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>

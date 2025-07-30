@@ -20,15 +20,34 @@
       <nav class="hidden md:flex gap-6 text-sm font-medium">
         <a href="#summary" class="hover:text-indigo-600">概要</a>
         <a href="#price" class="hover:text-indigo-600">料金</a>
-        <a href="#flow" class="hover:text-indigo-600">導入フロー</a>
-        <a href="#sla" class="hover:text-indigo-600">SLA / 対応速度</a>
-        <a href="#measurement" class="hover:text-indigo-600">効果測定</a>
-        <a href="#security" class="hover:text-indigo-600">セキュリティ</a>
-        <a href="#examples" class="hover:text-indigo-600">提供例</a>
+        <a href="process_flow.html" class="hover:text-indigo-600">導入フロー</a>
+        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+        <a href="sales_material.html" class="hover:text-indigo-600">営業資料</a>
         <a href="#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="#contact" class="hover:text-indigo-600">お問い合わせ</a>
-        <a href="#cta" class="hover:text-indigo-600">次の一歩</a>
+        <a href="privacy.html" class="hover:text-indigo-600">プライバシー</a>
+        <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
       </nav>
+      <!-- モバイルメニューボタン -->
+      <button class="md:hidden" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+      <div class="px-4 py-2 space-y-2">
+        <a href="#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="process_flow.html" class="block py-2 hover:text-indigo-600">導入フロー</a>
+        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+        <a href="sales_material.html" class="block py-2 hover:text-indigo-600">営業資料</a>
+        <a href="#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
+        <a href="#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+        <a href="privacy.html" class="block py-2 hover:text-indigo-600">プライバシー</a>
+        <a href="terms.html" class="block py-2 hover:text-indigo-600">利用規約</a>
+      </div>
     </div>
   </header>
 
@@ -533,5 +552,12 @@
       © 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
     </footer>
   </main>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>

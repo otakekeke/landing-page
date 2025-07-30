@@ -1,300 +1,305 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>嶽ノ子 FastAI | AI介護システム営業資料</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body { font-family: 'Noto Sans JP', sans-serif; }
-        @page { size: A4; margin: 10mm; }
-        @media print {
-            body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-            .no-print { display: none; }
-        }
-        .gradient-bg { background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%); }
-        .gradient-text { background: linear-gradient(135deg, #3B82F6, #1E40AF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .compact { line-height: 1.3; }
-        .text-xs { font-size: 0.7rem; }
-        .text-sm { font-size: 0.8rem; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>営業資料 - 嶽ノ子 | 介護事業者向けオーダーメイド業務効率化アプリ</title>
+  <meta name="description" content="AI介護システムの営業説明資料。フルオーダーメイドの業務効率化ソリューションをご提案します。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    @page { size: A4; margin: 10mm; }
+    @media print {
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .no-print { display: none; }
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800 leading-relaxed">
-
-    <!-- A4一枚営業資料 -->
-    <div class="max-w-full">
-        <!-- ヘッダー -->
-        <header class="gradient-bg text-white p-4 mb-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold mb-1">嶽ノ子 FastAI</h1>
-                    <p class="text-blue-100 text-sm">フルオーダーメイド AI介護システム</p>
-                </div>
-                <div class="text-right text-xs opacity-90">
-                    <p>営業説明資料</p>
-                    <p class="mt-1">株式会社・施設法人様向け</p>
-                </div>
-            </div>
-        </header>
-
-        <!-- メインコンテンツ -->
-        <main class="px-4 pb-4 compact">
-            <!-- 上部コンテンツ（2列レイアウト） -->
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <!-- 左列：サービス概要 -->
-                <div>
-                    <h2 class="text-lg font-bold text-gray-800 mb-2 flex items-center">
-                        <i class="fas fa-robot text-blue-500 mr-2"></i>
-                        サービス概要
-                    </h2>
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-3 rounded-lg border-l-4 border-blue-500 mb-3">
-                        <p class="text-sm font-semibold text-gray-800 mb-1">
-                            <span class="gradient-text">あなたの施設だけの</span>専用AIシステムを開発
-                        </p>
-                        <p class="text-xs text-gray-700">
-                            記録・管理・業務効率化・コミュニケーション支援など、貴施設の<strong>全ニーズ</strong>にAI技術で対応する<strong>完全カスタムシステム</strong>。
-                        </p>
-                    </div>
-                    
-                    <!-- 3つの特徴 -->
-                    <h3 class="text-sm font-bold text-gray-800 mb-2">FastAIの3つの特徴</h3>
-                    <div class="grid grid-cols-1 gap-2">
-                        <div class="bg-white border border-gray-200 rounded p-2">
-                            <div class="flex items-center">
-                                <i class="fas fa-cogs text-blue-500 mr-2"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xs text-gray-800">完全オーダーメイド</h4>
-                                    <p class="text-xs text-gray-600">施設の業務フローに合わせた専用AI開発</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-gray-200 rounded p-2">
-                            <div class="flex items-center">
-                                <i class="fas fa-yen-sign text-green-500 mr-2"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xs text-gray-800">透明な料金設定</h4>
-                                    <p class="text-xs text-gray-600">削減できた価値の1/3を月額料金に設定</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-gray-200 rounded p-2">
-                            <div class="flex items-center">
-                                <i class="fas fa-clock text-orange-500 mr-2"></i>
-                                <div>
-                                    <h4 class="font-semibold text-xs text-gray-800">短期導入</h4>
-                                    <p class="text-xs text-gray-600">ヒアリングから本格稼働まで約2週間</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 右列：導入効果と料金例 -->
-                <div>
-                    <h2 class="text-lg font-bold text-gray-800 mb-2">導入効果（実績例）</h2>
-                    <div class="grid grid-cols-1 gap-2 mb-3">
-                        <div class="bg-red-50 border border-red-200 rounded p-3">
-                            <h3 class="font-semibold text-red-800 mb-1 flex items-center text-sm">
-                                <i class="fas fa-chart-line mr-1"></i>作業時間削減
-                            </h3>
-                            <ul class="text-xs text-red-700 space-y-0.5">
-                                <li>• 記録業務: <strong>4時間 → 25分</strong> (94%削減)</li>
-                                <li>• シフト作成: <strong>6時間 → 30分</strong> (92%削減)</li>
-                                <li>• 送迎ルート: <strong>2時間 → 15分</strong> (87%削減)</li>
-                            </ul>
-                        </div>
-                        <div class="bg-green-50 border border-green-200 rounded p-3">
-                            <h3 class="font-semibold text-green-800 mb-1 flex items-center text-sm">
-                                <i class="fas fa-yen-sign mr-1"></i>コスト削減効果
-                            </h3>
-                            <ul class="text-xs text-green-700 space-y-0.5">
-                                <li>• 人件費削減: <strong>月3〜11万円</strong></li>
-                                <li>• 記録ミス0件達成</li>
-                                <li>• 燃料費15%削減</li>
-                                <li>• 医療費月30万円削減</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- 料金計算例 -->
-                    <h3 class="text-sm font-bold text-gray-800 mb-2">料金計算例</h3>
-                    <div class="bg-gray-50 p-3 rounded-lg">
-                        <div class="text-xs space-y-1">
-                            <div class="flex justify-between">
-                                <span>月間作業時間削減:</span>
-                                <span class="font-semibold">90時間</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>時給単価:</span>
-                                <span class="font-semibold">¥1,900</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>削減価値:</span>
-                                <span class="font-semibold">¥171,000</span>
-                            </div>
-                            <hr class="my-1">
-                            <div class="flex justify-between text-sm">
-                                <span class="font-semibold">月額料金 (価値の1/3):</span>
-                                <span class="text-blue-600 font-bold">¥57,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 下部コンテンツ（3列レイアウト） -->
-            <div class="grid grid-cols-3 gap-4 mb-4">
-                <!-- 左列：主要実装事例 -->
-                <div>
-                    <h2 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
-                        <i class="fas fa-lightbulb text-yellow-500 mr-1"></i>
-                        主要実装事例
-                    </h2>
-                    <div class="space-y-2 text-xs">
-                        <div class="border border-gray-200 rounded p-2">
-                            <h3 class="font-semibold text-blue-600 mb-1">送迎ルート最適化</h3>
-                            <p class="text-gray-600 mb-1">AI自動ルート生成</p>
-                            <div class="text-xs text-green-600">
-                                <i class="fas fa-check-circle mr-1"></i>燃料費15%削減・作業時間87%削減
-                            </div>
-                        </div>
-                        <div class="border border-gray-200 rounded p-2">
-                            <h3 class="font-semibold text-blue-600 mb-1">紙記録デジタル化</h3>
-                            <p class="text-gray-600 mb-1">既存フォーマットでタブレット化</p>
-                            <div class="text-xs text-green-600">
-                                <i class="fas fa-check-circle mr-1"></i>転記作業100%削減・記録ミス0件
-                            </div>
-                        </div>
-                        <div class="border border-gray-200 rounded p-2">
-                            <h3 class="font-semibold text-blue-600 mb-1">AIシフト最適化</h3>
-                            <p class="text-gray-600 mb-1">スタッフスキル分析した自動作成</p>
-                            <div class="text-xs text-green-600">
-                                <i class="fas fa-check-circle mr-1"></i>作成時間92%削減・満足度15%向上
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 中央列：開発体制・導入の流れ -->
-                <div>
-                    <h2 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
-                        <i class="fas fa-user-tie text-blue-500 mr-1"></i>
-                        開発体制
-                    </h2>
-                    <div class="bg-blue-50 border border-blue-200 rounded p-2 mb-3">
-                        <div class="flex items-start space-x-2">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="font-bold text-gray-800 text-xs">大嶽 耕太郎</h3>
-                                <p class="text-blue-600 font-semibold text-xs mb-1">AIシステム開発者</p>
-                                <p class="text-gray-700 text-xs">
-                                    <strong>介護士経験</strong>と<strong>AI開発専門知識</strong>を融合した個人開発者
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
-                        <i class="fas fa-route text-green-500 mr-1"></i>
-                        導入の流れ
-                    </h3>
-                    <div class="grid grid-cols-2 gap-1 text-xs">
-                        <div class="text-center">
-                            <div class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-bold">1</div>
-                            <h4 class="font-semibold text-gray-800 text-xs">ヒアリング</h4>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-bold">2</div>
-                            <h4 class="font-semibold text-gray-800 text-xs">設計・開発</h4>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-bold">3</div>
-                            <h4 class="font-semibold text-gray-800 text-xs">導入・テスト</h4>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-1 text-xs font-bold">4</div>
-                            <h4 class="font-semibold text-gray-800 text-xs">本格稼働</h4>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-600 text-center mt-2">
-                        <i class="fas fa-clock text-orange-500 mr-1"></i>
-                        <strong>全体期間: 約2週間</strong>
-                    </p>
-                </div>
-
-                <!-- 右列：お問い合わせ -->
-                <div>
-                    <h2 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
-                        <i class="fas fa-phone text-green-500 mr-1"></i>
-                        お問い合わせ
-                    </h2>
-                    <div class="bg-green-50 border border-green-200 rounded p-2 mb-2">
-                        <h3 class="font-semibold text-green-800 mb-2 text-xs">直接ご相談</h3>
-                        <div class="space-y-1 text-xs">
-                            <p>
-                                <i class="fas fa-phone text-green-600 mr-1"></i>
-                                <span class="font-semibold">070-1383-4420</span>
-                            </p>
-                            <p>
-                                <i class="fas fa-envelope text-green-600 mr-1"></i>
-                                <span class="font-semibold">takenoko.ai.care@gmail.com</span>
-                            </p>
-                            <p class="text-green-700">
-                                <i class="fas fa-clock mr-1"></i>
-                                平日・土曜 9:00-18:00
-                            </p>
-                            <p class="text-green-700 font-semibold">
-                                <i class="fas fa-user-tie mr-1"></i>
-                                代表 大嶽が直接対応
-                            </p>
-                        </div>
-                    </div>
-                    <div class="bg-blue-50 border border-blue-200 rounded p-2 mb-2">
-                        <h3 class="font-semibold text-blue-800 mb-1 text-xs">面談方法</h3>
-                        <div class="text-xs space-y-1">
-                            <p>
-                                <i class="fas fa-video text-blue-600 mr-1"></i>
-                                <span class="font-semibold">オンライン面談</span>
-                            </p>
-                            <p>
-                                <i class="fas fa-map-marker-alt text-blue-600 mr-1"></i>
-                                <span class="font-semibold">訪問面談（関東圏内）</span>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center bg-yellow-50 border border-yellow-200 rounded p-2">
-                        <p class="text-yellow-800 font-semibold mb-1 text-xs">
-                            <i class="fas fa-gift mr-1"></i>
-                            初回相談・お見積り無料
-                        </p>
-                        <p class="text-xs text-yellow-700">
-                            まずはお気軽に現状の課題をお聞かせください。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- フッター -->
-        <footer class="text-center text-gray-500 text-xs p-2 border-t">
-            <p>嶽ノ子 FastAI - フルオーダーメイドAI介護システム | © 2024 嶽ノ子 (個人事業主: 大嶽 耕太郎)</p>
-        </footer>
+<body class="bg-slate-50 text-slate-800">
+  <!-- ================= HEADER ================= -->
+  <header class="bg-white shadow sticky top-0 z-50 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+        <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
+      </h1>
+      <nav class="hidden md:flex gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-indigo-600">ホーム</a>
+        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+        <a href="privacy.html" class="hover:text-indigo-600">プライバシーポリシー</a>
+        <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
+        <a href="process_flow.html" class="hover:text-indigo-600">導入の流れ</a>
+        <a href="sales_material.html" class="text-indigo-600 font-semibold">営業資料</a>
+        <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
+      </nav>
+      <!-- モバイルメニューボタン -->
+      <button class="md:hidden" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
     </div>
-
-    <!-- 印刷ボタン (画面表示用) -->
-    <div class="no-print fixed bottom-4 right-4">
-        <button onclick="window.print()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">
-            <i class="fas fa-print mr-2"></i>印刷する
-        </button>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+      <div class="px-4 py-2 space-y-2">
+        <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
+        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+        <a href="privacy.html" class="block py-2 hover:text-indigo-600">プライバシーポリシー</a>
+        <a href="terms.html" class="block py-2 hover:text-indigo-600">利用規約</a>
+        <a href="process_flow.html" class="block py-2 hover:text-indigo-600">導入の流れ</a>
+        <a href="sales_material.html" class="block py-2 text-indigo-600 font-semibold">営業資料</a>
+        <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+      </div>
     </div>
+  </header>
 
+  <!-- A4営業資料 -->
+  <div class="max-w-4xl mx-auto bg-white shadow-lg print:shadow-none print:max-w-none print:mx-0 mb-8">
+    <!-- 営業資料ヘッダー -->
+    <header class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-6 print:p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold mb-2 print:text-2xl">嶽ノ子</h1>
+          <p class="text-indigo-100 text-lg print:text-base">フルオーダーメイド AI介護システム</p>
+        </div>
+        <div class="text-right text-sm opacity-90">
+          <p class="font-semibold">営業説明資料</p>
+          <p class="mt-1">介護事業者様向け</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="p-6 print:p-4">
+      <!-- 上部コンテンツ（2列レイアウト） -->
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <!-- 左列：サービス概要 -->
+        <div>
+          <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+            <svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            サービス概要
+          </h2>
+          <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-4 rounded-lg border-l-4 border-indigo-500 mb-3">
+            <p class="text-sm font-semibold text-slate-800 mb-1">
+              <span class="text-indigo-600">あなたの施設だけの</span>専用AIシステムを開発
+            </p>
+            <p class="text-xs text-slate-600">記録業務からシフト管理まで、貴施設の業務フローに完全対応</p>
+          </div>
+          
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>記録作成時間を<strong class="text-indigo-600">80%削減</strong></span>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>シフト調整を<strong class="text-indigo-600">自動化</strong></span>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>情報共有を<strong class="text-indigo-600">リアルタイム</strong>に</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右列：導入効果 -->
+        <div>
+          <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+            <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+            導入効果実績
+          </h2>
+          
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="bg-green-50 p-3 rounded-lg text-center border border-green-200">
+              <div class="text-2xl font-bold text-green-600">80%</div>
+              <div class="text-xs text-slate-600">記録時間削減</div>
+            </div>
+            <div class="bg-blue-50 p-3 rounded-lg text-center border border-blue-200">
+              <div class="text-2xl font-bold text-blue-600">70%</div>
+              <div class="text-xs text-slate-600">シフト調整削減</div>
+            </div>
+            <div class="bg-purple-50 p-3 rounded-lg text-center border border-purple-200">
+              <div class="text-2xl font-bold text-purple-600">90%</div>
+              <div class="text-xs text-slate-600">情報共有改善</div>
+            </div>
+            <div class="bg-orange-50 p-3 rounded-lg text-center border border-orange-200">
+              <div class="text-2xl font-bold text-orange-600">60%</div>
+              <div class="text-xs text-slate-600">残業時間削減</div>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+            <p class="text-xs text-slate-700">
+              <strong class="text-yellow-700">月平均コスト削減効果：</strong><br>
+              100床規模で約<strong class="text-lg text-yellow-600">150万円</strong>の人件費削減
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 料金体系 -->
+      <div class="bg-slate-50 p-4 rounded-lg mb-6">
+        <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+          <svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          透明性の高い料金体系
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-white p-3 rounded-lg border">
+            <h3 class="font-semibold text-slate-700 mb-2">基本原則</h3>
+            <p class="text-xs text-slate-600">削減効果の1/3を月額料金として算定</p>
+            <div class="mt-2 text-xs text-indigo-600 font-mono">
+              削減価値 × 0.33 = 月額料金
+            </div>
+          </div>
+          
+          <div class="bg-white p-3 rounded-lg border">
+            <h3 class="font-semibold text-slate-700 mb-2">料金例（50床）</h3>
+            <div class="text-xs space-y-1">
+              <div>削減効果：月75万円</div>
+              <div class="text-indigo-600 font-semibold">→ 月額：25万円</div>
+              <div class="text-green-600">差額：50万円が利益</div>
+            </div>
+          </div>
+          
+          <div class="bg-white p-3 rounded-lg border">
+            <h3 class="font-semibold text-slate-700 mb-2">初期費用</h3>
+            <div class="text-xs space-y-1">
+              <div class="text-2xl font-bold text-green-600">0円</div>
+              <div>開発費用・導入費用なし</div>
+              <div class="text-slate-500">効果が出てからお支払い</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 導入フロー -->
+      <div class="mb-6">
+        <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center">
+          <svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"></path>
+          </svg>
+          導入までの流れ（2-3週間）
+        </h2>
+        
+        <div class="grid md:grid-cols-5 gap-2 text-xs">
+          <div class="bg-indigo-50 p-2 rounded text-center border border-indigo-200">
+            <div class="font-semibold text-indigo-600">1. 面談</div>
+            <div class="text-slate-600">現状ヒアリング</div>
+          </div>
+          <div class="bg-green-50 p-2 rounded text-center border border-green-200">
+            <div class="font-semibold text-green-600">2. 設計</div>
+            <div class="text-slate-600">要件定義・見積</div>
+          </div>
+          <div class="bg-purple-50 p-2 rounded text-center border border-purple-200">
+            <div class="font-semibold text-purple-600">3. 開発</div>
+            <div class="text-slate-600">システム構築</div>
+          </div>
+          <div class="bg-orange-50 p-2 rounded text-center border border-orange-200">
+            <div class="font-semibold text-orange-600">4. 検証</div>
+            <div class="text-slate-600">試用・調整</div>
+          </div>
+          <div class="bg-blue-50 p-2 rounded text-center border border-blue-200">
+            <div class="font-semibold text-blue-600">5. 運用</div>
+            <div class="text-slate-600">本格稼働</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- お問い合わせ -->
+      <div class="bg-indigo-600 text-white p-4 rounded-lg text-center">
+        <h2 class="text-lg font-bold mb-2">まずはお気軽にご相談ください</h2>
+        <p class="text-indigo-100 text-sm mb-3">初回面談は無料・オンライン対応可</p>
+        
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div class="bg-white bg-opacity-20 p-3 rounded">
+            <div class="font-semibold mb-1">お電話でのお問い合わせ</div>
+            <div class="text-lg font-bold">070-1383-4420</div>
+            <div class="text-xs text-indigo-200">平日・土曜 9:00-18:00</div>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 p-3 rounded">
+            <div class="font-semibold mb-1">メールでのお問い合わせ</div>
+            <div class="text-sm">takenoko.ai.care@gmail.com</div>
+            <div class="text-xs text-indigo-200">24時間受付</div>
+          </div>
+        </div>
+        
+        <div class="mt-3 text-xs text-indigo-200">
+          代表の大嶽が直接ご対応いたします
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- プリント用ボタン -->
+  <div class="text-center mb-8 no-print">
+    <button onclick="window.print()" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200">
+      この資料を印刷する
+    </button>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-800 text-white py-12 mt-16 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
+          <p class="text-slate-300 text-sm">
+            AIで介護の未来をデザインする
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">リンク</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="text-slate-300 hover:text-white">ホーム</a></li>
+            <li><a href="company.html" class="text-slate-300 hover:text-white">会社概要</a></li>
+            <li><a href="privacy.html" class="text-slate-300 hover:text-white">プライバシーポリシー</a></li>
+            <li><a href="terms.html" class="text-slate-300 hover:text-white">利用規約</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">お問い合わせ</h4>
+          <div class="space-y-2 text-sm">
+            <p class="text-slate-300">
+              <a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">
+                takenoko.ai.care@gmail.com
+              </a>
+            </p>
+            <p class="text-slate-300">
+              <a href="tel:070-1383-4420" class="hover:text-white">
+                070-1383-4420
+              </a>
+            </p>
+            <p class="text-slate-300">平日・土曜 9:00-18:00</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
+        © 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+  </script>
 </body>
-</html> 
+</html>
