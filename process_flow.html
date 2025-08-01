@@ -14,9 +14,9 @@
   <!-- ================= HEADER ================= -->
   <header class="bg-white shadow sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+      <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
-      </h1>
+      </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
         <a href="index.html" class="hover:text-indigo-600">ホーム</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -26,8 +26,8 @@
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
       </nav>
       <!-- モバイルメニューボタン -->
-      <button class="md:hidden" onclick="toggleMobileMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -48,9 +48,9 @@
   <!-- ================= HERO ================= -->
   <section class="bg-indigo-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
         面談から導入までの流れ
-      </h2>
+      </h1>
       <p class="mt-4 text-lg">
         透明性のある9つのステップで安心の導入プロセス
       </p>
@@ -63,7 +63,7 @@
     <section class="mb-16">
       <div class="bg-white rounded-lg shadow p-8 text-center">
         <div class="mb-8">
-          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="AI導入の道のり">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"></path>
           </svg>
           <h2 class="text-3xl font-bold text-slate-900 mb-4">AI導入の道のり</h2>
@@ -75,7 +75,7 @@
         
         <div class="bg-indigo-50 border-l-4 border-indigo-400 p-6 text-left">
           <div class="flex items-start space-x-4">
-            <svg class="w-6 h-6 text-indigo-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-indigo-600 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="導入期間">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <div>
@@ -352,7 +352,7 @@
     <section class="mt-16">
       <div class="bg-white rounded-lg shadow p-8 text-center">
         <div class="mb-8">
-          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-16 h-16 text-indigo-600 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="導入後のサポート体制">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
           </svg>
           <h2 class="text-2xl font-bold text-slate-900 mb-4">導入後のサポート体制</h2>
@@ -469,11 +469,6 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-  </script>
+  <script src="src/js/app.js"></script>
 </body>
 </html>

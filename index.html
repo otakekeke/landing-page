@@ -4,6 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>介護事業者向け・オーダーメイド業務効率化アプリサービスご説明資料</title>
+  <meta property="og:title" content="介護事業者向けオーダーメイド業務効率化アプリ - 嶽ノ子" />
+  <meta property="og:description" content="AI技術を活用した介護現場の業務効率化システム。削減できた時間×時給×1/3だけお支払い。初月無料、削減ゼロならずっと無料。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://takenoko-ai.care/assets/og-image.jpg" />
+  <meta property="og:url" content="https://takenoko-ai.care/" />
+  <meta property="og:site_name" content="嶽ノ子" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="介護事業者向けオーダーメイド業務効率化アプリ - 嶽ノ子" />
+  <meta name="twitter:description" content="AI技術を活用した介護現場の業務効率化システム。削減できた時間×時給×1/3だけお支払い。初月無料、削減ゼロならずっと無料。" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "嶽ノ子",
+    "alternateName": "たけのこ",
+    "url": "https://takenoko-ai.care",
+    "logo": "https://takenoko-ai.care/assets/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+81-70-1383-4420",
+      "contactType": "customer service",
+      "availableLanguage": "Japanese"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "大嶽 耕太郎",
+      "jobTitle": "代表"
+    },
+    "description": "AI技術を活用した介護事業者向け業務効率化システムの開発・提供",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "神奈川県",
+      "addressLocality": "相模原市中央区",
+      "streetAddress": "千代田7-10-7"
+    }
+  }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
@@ -14,9 +52,9 @@
   <!-- ================= HEADER ================= -->
   <header class="bg-white shadow sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+      <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
         介護事業者向け<br class="sm:hidden" />オーダーメイド業務効率化アプリ
-      </h1>
+      </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
         <a href="#summary" class="hover:text-indigo-600">概要</a>
         <a href="#price" class="hover:text-indigo-600">料金</a>
@@ -29,8 +67,8 @@
         <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
       </nav>
       <!-- モバイルメニューボタン -->
-      <button class="md:hidden" onclick="toggleMobileMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -54,10 +92,10 @@
   <!-- ================= HERO ================= -->
   <section class="bg-indigo-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
         「削減できた時間 × 時給 × <span class="underline decoration-yellow-300">1/3</span>」だけお支払い。<br class="hidden sm:block" />
         初月無料、削減ゼロならずっと無料。
-      </h2>
+      </h1>
       <p class="mt-6 text-lg leading-relaxed">
         介護現場の"本当に困っている業務"をヒアリングし、生成AIを組み合わせて<br class="hidden sm:block" />
         完全オーダーメイドでアプリ化します。クラウドでも、ローカルでも。
@@ -553,11 +591,6 @@
     </footer>
   </main>
 
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-  </script>
+  <script src="src/js/app.js"></script>
 </body>
 </html>

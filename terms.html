@@ -14,9 +14,9 @@
   <!-- ================= HEADER ================= -->
   <header class="bg-white shadow sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+      <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
-      </h1>
+      </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
         <a href="index.html" class="hover:text-indigo-600">ホーム</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -25,8 +25,8 @@
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
       </nav>
       <!-- モバイルメニューボタン -->
-      <button class="md:hidden" onclick="toggleMobileMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -46,9 +46,9 @@
   <!-- ================= HERO ================= -->
   <section class="bg-indigo-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
         利用規約
-      </h2>
+      </h1>
       <p class="mt-4 text-lg">
         サービス利用の条件について
       </p>
@@ -408,11 +408,6 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-  </script>
+  <script src="src/js/app.js"></script>
 </body>
 </html>
