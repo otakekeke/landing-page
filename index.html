@@ -58,7 +58,7 @@
       <nav class="hidden md:flex gap-6 text-sm font-medium">
         <a href="#summary" class="hover:text-indigo-600">概要</a>
         <a href="#price" class="hover:text-indigo-600">料金</a>
-        <a href="#flow" class="hover:text-indigo-600">導入の流れ</a>
+        <a href="first_meeting.html" class="hover:text-indigo-600">導入の流れ</a>
         <a href="first_meeting.html" class="hover:text-indigo-600">初回アポのご案内</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
         <a href="#faq" class="hover:text-indigo-600">FAQ</a>
@@ -78,7 +78,7 @@
       <div class="px-4 py-2 space-y-2">
         <a href="#summary" class="block py-2 hover:text-indigo-600">概要</a>
         <a href="#price" class="block py-2 hover:text-indigo-600">料金</a>
-        <a href="#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
+        <a href="first_meeting.html" class="block py-2 hover:text-indigo-600">導入の流れ</a>
         <a href="first_meeting.html" class="block py-2 hover:text-indigo-600">初回アポのご案内</a>
         <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
         <a href="#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
@@ -197,87 +197,7 @@
       </div>
     </section>
 
-    <!-- ================= FLOW ================= -->
-    <section id="flow" class="py-16">
-      <h2 class="text-2xl font-bold mb-6">3. 導入〜運用までの全フェーズ（不明点が残らないように具体化）</h2>
-
-      <ol class="space-y-6">
-        <li class="bg-white rounded-lg shadow p-6">
-          <div class="flex items-start gap-4">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">1</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-2">事前ヒアリング（60〜90分）</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>対象業務の棚卸し（例：在庫発注、レク企画、シフト調整 等）</li>
-                <li>「個人情報を扱わない範囲」or「扱う範囲」の切り分け</li>
-                <li>クラウド or ローカルの希望確認（理由・制約も明確化）</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="bg-white rounded-lg shadow p-6">
-          <div class="flex items-start gap-4">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">2</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-2">初月無料トライアル & ベースライン取得</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>現状の作業時間（ベースライン）を<strong>自己申告</strong>で記録</li>
-                <li>当社が試作版（PoC）を短期間で提示し、方向性を擦り合わせ</li>
-                <li>この期間中の費用は<strong>一切発生しません</strong></li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="bg-white rounded-lg shadow p-6">
-          <div class="flex items-start gap-4">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">3</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-2">本開発（オーダーメイド）</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>生成AIを活用した高速開発（※最終承認は人間）</li>
-                <li>クラウド or ローカルの実装方針に基づく環境構築（AWS利用、暗号化）</li>
-                <li>UI/UX調整、ログ計測機能の組み込み</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="bg-white rounded-lg shadow p-6">
-          <div class="flex items-start gap-4">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">4</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-2">運用開始 & 月額課金スタート</h3>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>簡易ログ機能で削減時間を大まかに計測し、料金へ反映</li>
-                <li>仕様変更やカスタマイズ時のみ、追加で自己申告の削減時間を反映</li>
-                <li>毎月、再計測と料金更新（=常に最新の効果に応じた公平な金額）</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-
-        <li class="bg-white rounded-lg shadow p-6">
-          <div class="flex items-start gap-4">
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white font-bold">5</span>
-            <div>
-              <h3 class="text-lg font-semibold mb-2">サポート体制（年次で明確に変更します）</h3>
-              <div class="text-sm space-y-2">
-                <p class="font-semibold">初年度：人力で全面支援</p>
-                <ul class="list-disc list-inside pl-4">
-                  <li>ヒアリング、設定変更、カスタマイズを手動で即時対応（SLAは下記参照）</li>
-                </ul>
-                <p class="font-semibold">2年目以降：自動化された開発フローへ移行</p>
-                <ul class="list-disc list-inside pl-4">
-                  <li>LINEボットで要件受付 → GitHub Actions/Claude Codeで自動PR生成 → 私が承認 → 自動反映（リリースノート付き通知）</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </section>
+    <!-- FLOW セクションは初回面談ページに集約のため削除 -->
 
     <!-- ================= SLA ================= -->
     <section id="sla" class="py-16">
@@ -572,7 +492,7 @@
         </ol>
 
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
-          <a href="#flow" class="px-6 py-3 rounded bg-white text-indigo-700 font-semibold text-center shadow hover:bg-slate-100">
+          <a href="first_meeting.html" class="px-6 py-3 rounded bg-white text-indigo-700 font-semibold text-center shadow hover:bg-slate-100">
             詳しい導入フローを再確認する
           </a>
           <a href="#contact" class="px-6 py-3 rounded bg-yellow-300 text-slate-900 font-semibold text-center shadow hover:bg-yellow-400">
