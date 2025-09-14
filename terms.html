@@ -20,11 +20,12 @@
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
       </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
-        <a href="privacy.html" class="hover:text-indigo-600">プライバシーポリシー</a>
-        <a href="terms.html" class="text-indigo-600 font-semibold">利用規約</a>
+        <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
       </nav>
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -34,11 +35,12 @@
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
-        <a href="privacy.html" class="block py-2 hover:text-indigo-600">プライバシーポリシー</a>
-        <a href="terms.html" class="block py-2 text-indigo-600 font-semibold">利用規約</a>
+        <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
       </div>
     </div>
   </header>
@@ -62,7 +64,7 @@
           <strong>甲：お客様（法人・個人事業主）</strong>が利用する際の条件を定めるものです。
         </p>
         <div class="p-4 bg-slate-50 rounded">
-          <p class="text-sm text-slate-600"><strong>最終更新日：</strong> 2025-09-14</p>
+          <p class="text-sm text-slate-600"><strong>最終更新日：</strong> 2025年09月14日</p>
         </div>
       </div>
     </section>
@@ -101,6 +103,7 @@
           <ul class="list-disc list-inside text-sm space-y-1">
             <li>月額料金：削減時間（時間/月）× 甲の申告時給 × 1/3。</li>
             <li>初月無料。削減時間が0の場合、翌月以降の料金も0円。</li>
+            <li>月額の見直しは<strong>初月および仕様変更（カスタマイズ）実施時のみ</strong>行います。通常運用中は当初決定額を継続します。</li>
             <li>生成AI／Google APIの実行費・API料金は月額に含む（特段の高額利用が想定される場合は事前に別紙で合意）。</li>
             <li>請求は月末締め翌月末払い（振込手数料は甲負担）。消費税は別途。</li>
           </ul>
@@ -288,7 +291,7 @@
         </div>
         <div>
           <h3 class="font-semibold">E. 料金計算・測定</h3>
-          <div class="text-sm">ベースライン：初月に甲申告＋簡易計測（操作回数・処理件数・バッチ回数等）。月次：ログ＋申告で削減時間を再計算→料金更新。乖離大のときはサンプリング再計測。</div>
+          <div class="text-sm">ベースライン：初月に甲申告＋簡易計測（操作回数・処理件数・バッチ回数等）。通常運用：ログは品質改善・傾向把握に活用。<strong>料金の見直しは初月および仕様変更（カスタマイズ）時のみ</strong>実施します。乖離が明らかな場合はサンプリング再計測。</div>
         </div>
         <div>
           <h3 class="font-semibold">F. サブプロセッサ一覧（初期）</h3>
@@ -354,7 +357,7 @@
           <h4 class="font-semibold mb-4">お問い合わせ</h4>
           <div class="space-y-2 text-sm">
             <p class="text-slate-300"><a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">takenoko.ai.care@gmail.com</a></p>
-            <p class="text-slate-300"><a href="tel:070-1383-4420" class="hover:text-white">070-1383-4420</a></p>
+            <p class="text-slate-300"><a href="tel:07013834420" class="hover:text-white">070-1383-4420</a></p>
             <p class="text-slate-300">平日・土曜 9:00-18:00</p>
           </div>
         </div>
@@ -366,6 +369,13 @@
   </footer>
 
   <script src="src/js/app.js"></script>
+  <!-- Sticky CTA (Mobile) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
+    <div class="max-w-7xl mx-auto px-2">
+      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+        初月無料で相談する
+      </a>
+    </div>
+  </div>
 </body>
 </html>
-

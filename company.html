@@ -18,11 +18,12 @@
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
       </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="text-indigo-600 font-semibold">会社概要</a>
-        <a href="privacy.html" class="hover:text-indigo-600">プライバシーポリシー</a>
-        <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
+        <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="text-indigo-600 font-semibold">会社概要</a>
       </nav>
       <!-- モバイルメニューボタン -->
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
@@ -34,11 +35,12 @@
     <!-- モバイルメニュー -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="block py-2 text-indigo-600 font-semibold">会社概要</a>
-        <a href="privacy.html" class="block py-2 hover:text-indigo-600">プライバシーポリシー</a>
-        <a href="terms.html" class="block py-2 hover:text-indigo-600">利用規約</a>
+        <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="block py-2 text-indigo-600 font-semibold">会社概要</a>
       </div>
     </div>
   </header>
@@ -73,7 +75,7 @@
             </div>
             <div>
               <h3 class="text-lg font-semibold text-slate-700 mb-2">設立日</h3>
-              <p class="text-slate-600">2025年4月19日</p>
+              <p class="text-slate-600">2025年04月19日</p>
             </div>
           </div>
           <div class="space-y-6">
@@ -184,7 +186,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-700">電話番号</h3>
-                <a href="tel:070-1383-4420" class="text-indigo-600 hover:text-indigo-800">
+                <a href="tel:07013834420" class="text-indigo-600 hover:text-indigo-800">
                   070-1383-4420
                 </a>
               </div>
@@ -281,5 +283,13 @@
   </footer>
 
   <script src="src/js/app.js"></script>
+  <!-- Sticky CTA (Mobile) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
+    <div class="max-w-7xl mx-auto px-2">
+      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+        初月無料で相談する
+      </a>
+    </div>
+  </div>
 </body>
 </html>

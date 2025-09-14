@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初回アポイントのご案内 - 嶽ノ子 FastAI</title>
+    <title>初回アポイントのご案内 - 嶽ノ子</title>
     <meta name="description" content="初回訪問から正式契約までの全体の流れを、わかりやすく丁寧にご案内します。実際の会話例や各打合せで決めることを明記。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -29,11 +29,14 @@
                 <span class="text-slate-400">|</span>
                 <h1 class="text-lg font-semibold text-slate-700">初回アポイントのご案内</h1>
             </div>
-            <div class="hidden sm:flex items-center gap-2">
-                <a href="tel:070-1383-4420" class="text-blue-600 hover:text-blue-700"><i class="fas fa-phone"></i> 070-1383-4420</a>
-                <span class="text-slate-300">/</span>
-                <a href="mailto:takenoko.ai.care@gmail.com" class="text-blue-600 hover:text-blue-700"><i class="fas fa-envelope"></i> メール</a>
-            </div>
+            <nav class="hidden sm:flex items-center gap-4 text-sm">
+                <a href="index.html#summary" class="hover:text-blue-700">概要</a>
+                <a href="index.html#price" class="hover:text-blue-700">料金</a>
+                <a href="index.html#flow" class="hover:text-blue-700">導入の流れ</a>
+                <a href="index.html#faq" class="hover:text-blue-700">FAQ</a>
+                <a href="index.html#contact" class="hover:text-blue-700">お問い合わせ</a>
+                <a href="company.html" class="hover:text-blue-700">会社概要</a>
+            </nav>
         </div>
     </header>
 
@@ -402,7 +405,7 @@
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3">
                     <a href="mailto:takenoko.ai.care@gmail.com" class="bg-white text-blue-700 hover:bg-blue-50 font-semibold px-5 py-3 rounded-lg shadow text-center"><i class="fas fa-envelope mr-2"></i>メールで連絡</a>
-                    <a href="tel:070-1383-4420" class="bg-white/10 hover:bg-white/20 font-semibold px-5 py-3 rounded-lg shadow text-center"><i class="fas fa-phone mr-2"></i>070-1383-4420</a>
+                    <a href="tel:07013834420" class="bg-white/10 hover:bg-white/20 font-semibold px-5 py-3 rounded-lg shadow text-center"><i class="fas fa-phone mr-2"></i>070-1383-4420</a>
                     <a href="index.html#contact" class="bg-white/10 hover:bg-white/20 font-semibold px-5 py-3 rounded-lg shadow text-center"><i class="fas fa-calendar-check mr-2"></i>問い合わせフォーム</a>
                 </div>
             </div>
@@ -413,12 +416,20 @@
     <footer class="border-t border-slate-200 bg-white/80">
         <div class="max-w-5xl mx-auto px-4 py-6 text-sm text-slate-600 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html" class="text-blue-700 hover:underline"><i class="fas fa-home"></i> トップページ</a>
+                <a href="index.html#contact" class="text-blue-700 hover:underline"><i class="fas fa-calendar-check"></i> 無料で相談</a>
                 <span class="text-slate-300">|</span>
-                <a href="first_meeting.html" class="text-blue-700 hover:underline"><i class="fas fa-route"></i> 導入の流れ</a>
+                <a href="index.html#flow" class="text-blue-700 hover:underline"><i class="fas fa-route"></i> 導入の流れ</a>
             </div>
             <div>&copy; 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎)</div>
         </div>
     </footer>
+    <!-- Sticky CTA (Mobile) -->
+    <div class="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
+        <div class="max-w-5xl mx-auto px-2">
+            <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+                初月無料で相談する
+            </a>
+        </div>
+    </div>
 </body>
 </html>

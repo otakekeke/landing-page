@@ -18,11 +18,12 @@
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
       </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
-        <a href="privacy.html" class="text-indigo-600 font-semibold">プライバシーポリシー</a>
-        <a href="terms.html" class="hover:text-indigo-600">利用規約</a>
+        <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
       </nav>
       <!-- モバイルメニューボタン -->
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
@@ -34,11 +35,12 @@
     <!-- モバイルメニュー -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
-        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
-        <a href="privacy.html" class="block py-2 text-indigo-600 font-semibold">プライバシーポリシー</a>
-        <a href="terms.html" class="block py-2 hover:text-indigo-600">利用規約</a>
+        <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
+        <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
+        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
       </div>
     </div>
   </header>
@@ -61,16 +63,30 @@
     <section class="mb-12">
       <div class="bg-white rounded-lg shadow p-6">
         <p class="text-slate-600 leading-relaxed">
-          嶽ノ子（以下「当事業者」）は、AI介護システム「FastAI」およびその他のサービス（以下「本サービス」）の提供にあたり、
+          嶽ノ子（以下「当事業者」）は、当事業者が提供するアプリケーション群（以下「本サービス」）の提供にあたり、
           お客様の個人情報を適切に保護することが社会的責務であると認識し、個人情報の保護に関する法律、
           その他関係法令等を遵守し、個人情報の適切な取扱いを行います。
         </p>
         <div class="mt-4 p-4 bg-slate-50 rounded-lg">
           <p class="text-sm text-slate-600">
-            <strong>制定日・改定日:</strong> 2025年4月19日<br>
+            <strong>制定日・改定日:</strong> 2025年04月19日<br>
             <strong>事業者:</strong> 嶽ノ子（代表: 大嶽 耕太郎）
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- アクセス解析（GA4） -->
+    <section class="mb-12">
+      <div class="bg-white rounded-lg shadow p-6 space-y-3">
+        <h2 class="text-xl font-bold mb-2 text-slate-900">アクセス解析（Google Analytics 4）</h2>
+        <p class="text-slate-600">本サービスでは、利用状況の把握と品質改善のためにGoogle Analytics 4（GA4）を利用する場合があります。収集される情報にはCookie等の識別子が含まれます。</p>
+        <ul class="list-disc list-inside text-sm text-slate-600 space-y-1">
+          <li>IPアドレスの匿名化（anonymize_ip）に対応します。</li>
+          <li>データはGoogle社のプライバシーポリシーに基づき管理されます。</li>
+          <li>ブラウザの設定でCookieを無効にすることで収集を拒否できます。</li>
+        </ul>
+        <p class="text-sm text-slate-600">オプトアウト: <a class="text-indigo-600 hover:text-indigo-800" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google アナリティクス オプトアウト アドオン</a></p>
       </div>
     </section>
 
@@ -293,9 +309,9 @@
                 </p>
                 <p>
                   <strong>電話:</strong> 
-                  <a href="tel:070-1383-4420" class="text-white hover:text-yellow-300">
-                    070-1383-4420
-                  </a>
+              <a href="tel:07013834420" class="text-white hover:text-yellow-300">
+                070-1383-4420
+              </a>
                 </p>
               </div>
             </div>
@@ -343,7 +359,7 @@
               </a>
             </p>
             <p class="text-slate-300">
-              <a href="tel:070-1383-4420" class="hover:text-white">
+              <a href="tel:07013834420" class="hover:text-white">
                 070-1383-4420
               </a>
             </p>
@@ -357,6 +373,15 @@
       </div>
     </div>
   </footer>
+
+  <!-- Sticky CTA (Mobile) -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
+    <div class="max-w-7xl mx-auto px-2">
+      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+        初月無料で相談する
+      </a>
+    </div>
+  </div>
 
   <script src="src/js/app.js"></script>
 </body>
