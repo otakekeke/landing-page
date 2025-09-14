@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>利用規約 - 嶽ノ子 | 介護事業者向けオーダーメイド業務効率化アプリ</title>
-  <meta name="description" content="嶽ノ子の利用規約。サービス利用の条件について詳しく説明しています。">
+  <title>利用規約（GAS版） - 嶽ノ子 | 介護事業者向けオーダーメイド業務効率化アプリ</title>
+  <meta name="description" content="Google Apps Script版の利用規約およびDPA（個人情報取扱い契約）。Google Workspace/GASを用いる業務効率化アプリの条件を明記。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
   </style>
+  <!-- 構造化データは必要に応じて index に準拠して追加 -->
+  <meta name="robots" content="noindex" />
 </head>
 <body class="bg-slate-50 text-slate-800">
   <!-- ================= HEADER ================= -->
@@ -24,14 +26,12 @@
         <a href="terms.html" class="text-indigo-600 font-semibold">利用規約</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
       </nav>
-      <!-- モバイルメニューボタン -->
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
-    <!-- モバイルメニュー -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
         <a href="index.html" class="block py-2 hover:text-indigo-600">ホーム</a>
@@ -46,384 +46,285 @@
   <!-- ================= HERO ================= -->
   <section class="bg-indigo-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-        利用規約
-      </h1>
-      <p class="mt-4 text-lg">
-        サービス利用の条件について
-      </p>
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">利用規約（ToS：Google Apps Script版）</h1>
+      <p class="mt-4 text-lg">GASベースのオーダーメイド業務効率化アプリに適用</p>
     </div>
   </section>
 
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-    <!-- ================= 前文 ================= -->
+    <!-- ================= 前文（GAS版） ================= -->
     <section class="mb-12">
-      <div class="bg-white rounded-lg shadow p-6">
-        <p class="text-slate-600 leading-relaxed">
-          この利用規約（以下「本規約」）は、嶽ノ子（以下「当事業者」）がこのウェブサイト上で提供するサービス
-          （以下「本サービス」）の利用条件を定めるものです。
-          登録ユーザーの皆さま（以下「ユーザー」）には、本規約に従って、本サービスをご利用いただきます。
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <p class="text-slate-700">
+          本規約は、乙：<strong>大嶽耕太郎（屋号：嶽ノ子）</strong>（以下「乙」）が提供する
+          <strong>GASベースの業務効率化アプリ</strong>（以下「本サービス」）を、
+          <strong>甲：お客様（法人・個人事業主）</strong>が利用する際の条件を定めるものです。
         </p>
-        <div class="mt-4 p-4 bg-slate-50 rounded-lg">
-          <p class="text-sm text-slate-600">
-            <strong>施行日:</strong> 2025年4月19日<br>
-            <strong>サービス提供者:</strong> 嶽ノ子（代表: 大嶽 耕太郎）
-          </p>
+        <div class="p-4 bg-slate-50 rounded">
+          <p class="text-sm text-slate-600"><strong>最終更新日：</strong> 2025-09-14</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= 各条項 ================= -->
+    <!-- ================= ToS 本体 ================= -->
     <div class="space-y-8">
-      
-      <!-- 第1条 -->
-      <section class="bg-white rounded-lg shadow p-6">
+      <section class="bg-white rounded-lg shadow p-6" id="tos-1">
         <h2 class="text-xl font-bold mb-4 text-slate-900">第1条（適用）</h2>
-        <div class="text-slate-600 space-y-3">
-          <p>本規約は、ユーザーと当事業者との間の本サービスの利用に関わる一切の関係に適用されるものとします。</p>
-          <p>当事業者は本サービスに関し、本規約のほか、ご利用にあたってのルール等、各種の定め（以下「個別規定」）をすることがあります。これら個別規定はその名称のいかんに関わらず、本規約の一部を構成するものとします。</p>
-          <p>本規約の規定が前項の個別規定の規定と矛盾する場合には、個別規定において特段の定めなき限り、個別規定の規定が優先されるものとします。</p>
+        <div class="text-slate-700 space-y-3">
+          <p>本規約は、甲による本サービスの利用に関し適用されます。</p>
+          <p>乙は、必要に応じて本規約を改定でき、改定後の規約は乙所定の方法で告知した時点から効力を生じます。</p>
         </div>
       </section>
 
-      <!-- 第2条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第2条（利用申込と契約の成立）</h2>
-        <div class="text-slate-600 space-y-4">
-          <p><strong>1. 申込み方法</strong></p>
-          <p class="pl-4">本サービスにおいて、利用申込みをしようとする者は、当事業者の定める方法によって、申込みを行うものとします。</p>
-          
-          <p><strong>2. 契約の成立</strong></p>
-          <p class="pl-4">利用申込みに対し当事業者が承諾をした時点で、利用契約が成立するものとします。</p>
-          
-          <div class="bg-red-50 border-l-4 border-red-400 p-4 mt-4">
-            <h4 class="font-semibold text-slate-700 mb-2">申込み拒否事由</h4>
-            <p class="text-sm mb-2">当事業者は、以下の場合には利用申込みを拒否することがあります：</p>
-            <ul class="text-sm space-y-1 pl-4">
-              <li>• 申込みに際し虚偽の事項を届け出た場合</li>
-              <li>• 過去に本規約に違反したことがある場合</li>
-              <li>• 反社会的勢力であることが判明した場合</li>
-              <li>• その他、当事業者が利用を適当でないと判断した場合</li>
-            </ul>
-          </div>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-2">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第2条（提供内容）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>乙は、甲の業務効率化を目的としたオーダーメイドのGASアプリ（Webアプリ／アドオン／コンテナバインド等）を設計・実装・運用します。</p>
+          <p>生成AI API等の外部サービスを組み合わせる場合があります。</p>
+          <p>提供形態は、（a）甲のGoogle Workspace環境内にデプロイ、または（b）乙管理のGoogleアカウント／GCPプロジェクトを介した実行のいずれかとします（詳細は付属文書「技術仕様」参照）。</p>
         </div>
       </section>
 
-      <!-- 第3条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条（利用料金および支払方法）</h2>
-        <div class="text-slate-600 space-y-4">
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="space-y-3">
-              <div class="p-3 bg-slate-50 rounded">
-                <h4 class="font-semibold text-slate-700">料金体系</h4>
-                <p class="text-sm">削減時間 × 時給 × 1/3 を基本とした月額料金</p>
-              </div>
-              <div class="p-3 bg-slate-50 rounded">
-                <h4 class="font-semibold text-slate-700">支払方法</h4>
-                <p class="text-sm">銀行振込、クレジットカード決済等</p>
-              </div>
-            </div>
-            <div class="space-y-3">
-              <div class="p-3 bg-yellow-50 rounded border border-yellow-200">
-                <h4 class="font-semibold text-slate-700">遅延損害金</h4>
-                <p class="text-sm">年14.6%の遅延損害金が発生します</p>
-              </div>
-              <div class="p-3 bg-slate-50 rounded">
-                <h4 class="font-semibold text-slate-700">返金について</h4>
-                <p class="text-sm">原則として返金は行いません</p>
-              </div>
-            </div>
-          </div>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-3">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条（アカウントと権限）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>甲は本サービス利用に必要なGoogleアカウントおよびGoogle Workspace管理設定（OAuthクライアント承認、スコープ許可、ドメイン全体の委任等）を整備します。</p>
+          <p>乙は<strong>最小権限（Least Privilege）</strong>原則に基づき、必要最小限のOAuthスコープのみを要求します。要求スコープは付属文書「スコープ一覧」に明記します。</p>
+          <p>スーパ管理者権限が必要となる操作は、可能な限り甲側で実行します。</p>
         </div>
       </section>
 
-      <!-- 第3条の2 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の2（個人情報・業務データの取扱い）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p><strong>定義:</strong>「個人情報」は個人情報保護法に定める個人情報等を、「業務データ」はユーザーが本サービスに入力・アップロード・連携する全データをいいます。</p>
-          <p><strong>役割分担:</strong> ユーザーは管理主体、当事業者は受託者として、ユーザーの指示および本規約・プライバシーポリシーに従い適切に取扱います。</p>
-          <p><strong>利用目的:</strong> 当事業者は、本サービスの提供・保守・問合せ/障害対応・品質改善・法令順守のために必要な範囲でのみ業務データを取扱います。個人情報をモデル学習等の二次利用には用いません（統計化・匿名化データは品質向上目的で利用する場合があります）。</p>
-          <p><strong>第三者提供・国外移転:</strong> 法令に基づく場合および事前同意を除き、第三者提供はしません。Formspree・Google Analytics 等の外部サービスを利用することがあり、提供者が国外に所在する場合があります。詳細はプライバシーポリシーをご参照ください。</p>
-          <p><strong>データ主体対応:</strong> 本人からの開示・訂正・利用停止等への一次対応はユーザーが行い、当事業者は合理的範囲で協力します。</p>
-          <p><strong>保存/削除:</strong> 契約期間中およびバックアップ保持期間中保存します。終了後はユーザーの指示に従い、合理的期間内に消去または返却します。</p>
-          <p><strong>プライバシーポリシー:</strong> 詳細は <a href="privacy.html" class="text-indigo-600 underline">プライバシーポリシー</a> に従います。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-4">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第4条（料金・支払）</h2>
+        <div class="text-slate-700 space-y-3">
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>月額料金：削減時間（時間/月）× 甲の申告時給 × 1/3。</li>
+            <li>初月無料。削減時間が0の場合、翌月以降の料金も0円。</li>
+            <li>生成AI／Google APIの実行費・API料金は月額に含む（特段の高額利用が想定される場合は事前に別紙で合意）。</li>
+            <li>請求は月末締め翌月末払い（振込手数料は甲負担）。消費税は別途。</li>
+          </ul>
         </div>
       </section>
 
-      <!-- 第3条の3 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の3（安全管理措置・情報セキュリティ）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>当事業者は、アクセス権限管理、ログ取得、脆弱性対応、通信の暗号化（TLS）等、組織的・人的・物理的・技術的安全管理措置を講じます。</p>
-          <p>重大インシデント（漏えい等）が判明した場合、速やかに（原則72時間以内を目安に）ユーザーへ通知し、影響特定、原因究明、再発防止に努めます。</p>
-          <p>バックアップは合理的範囲で実施しますが、全データの完全復旧を保証するものではありません。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-5">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第5条（SLA／サポート）</h2>
+        <div class="text-slate-700 space-y-3">
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>標準キュー：初回回答5営業日以内、実装・反映21営業日以内。</li>
+            <li>優先キュー（オプション+10万円/月）：初回回答48時間以内、実装・反映5営業日以内。</li>
+            <li>稼働時間・保守窓口：平日・土曜 9:00–18:00（日本時間）。緊急対応はDPAおよび付属文書「インシデント対応手順」に従う。</li>
+          </ul>
         </div>
       </section>
 
-      <!-- 第3条の4 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の4（再委託・第三者サービスの利用）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>当事業者は、必要な範囲で機密保持義務・個人情報保護義務を課した上で業務の一部を再委託することがあります。</p>
-          <p>再委託先・第三者サービスの重要な変更があった場合は合理的に通知します。異議がある場合は協議の上、解除等の対応をとることができます。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-6">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第6条（データ・保存先）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>本サービスはGASを用い、甲のGoogleドライブ／スプレッドシート／カレンダー／Gmail等（必要スコープに限る）を甲環境内で処理することを原則とします。</p>
+          <p>乙管理環境を用いる場合は、保存先（例：乙のGoogleドライブ、GCPのFirestore/Cloud Storage等）を<strong>付属文書「技術仕様」</strong>で明示します。</p>
+          <p>ログは操作・エラー・処理結果のメタデータ中心で記録し、個人情報を含むログは原則収集しません（必要時は最小化・マスキング）。</p>
         </div>
       </section>
 
-      <!-- 第3条の5 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の5（医療・介護に関する注意）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>本サービスは業務支援・記録効率化・意思決定補助を目的とするもので、診断・治療・処方等の医療行為を代替するものではありません。最終判断はユーザーの責任で行ってください。</p>
-          <p>AI機能が提供する推定・提案・予測は補助情報であり、その正確性・完全性を保証しません。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-7">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第7条（禁止事項）</h2>
+        <div class="text-slate-700">
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>法令違反、公序良俗に反する行為。</li>
+            <li>不正アクセス、API/サービスの利用規約に反する利用。</li>
+            <li>本サービスの逆コンパイル、第三者再販、競合調査目的の無断利用。</li>
+          </ul>
         </div>
       </section>
 
-      <!-- 第3条の6 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の6（契約終了時のデータ返還・削除）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>契約終了時、ユーザーは業務データの返還（CSV/JSON 等の一般形式）または削除を選択できます。手順・スケジュール・費用は協議の上定めます。</p>
-          <p>法令上の保存義務がある場合を除き、ユーザーの指示に従い、合理的期間内にデータを消去します。バックアップ残存分はローテーションで順次消去します。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-8">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第8条（知的財産権）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>本サービスおよびソースコードの著作権は原則として乙に帰属します。甲は契約期間中、合意した範囲で本サービスを利用できます。</p>
+          <p>別途合意により、コードの共有・譲渡・エスクローを実施可能（費用別途）。</p>
         </div>
       </section>
 
-      <!-- 第3条の7 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の7（秘密保持）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>双方は、本サービスに関連して知り得た相手方の非公開情報（業務データ、個人情報、契約条件、ノウハウ等）を、事前承諾なく第三者に開示・漏えいしません。</p>
-          <p>本条は本規約終了後も存続します。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-9">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第9条（秘密保持）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>甲乙は、相手方の業務上の秘密情報を第三者に開示・漏洩しません。本条は契約終了後も<strong>3年間</strong>存続します。</p>
         </div>
       </section>
 
-      <!-- 第3条の8 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条の8（データの権利帰属と利用許諾）</h2>
-        <div class="text-slate-600 space-y-3 text-sm leading-relaxed">
-          <p>業務データの権利はユーザー又は正当な権利者に帰属します。当事業者は、本サービス提供に必要な範囲での使用・複製・保守目的のバックアップ作成の権利を無償・非独占的に許諾されたものとします。</p>
-          <p>本サービスおよび関連ソフトウェア・ドキュメント・テンプレート等の権利は当事業者又はライセンサーに帰属します。ユーザーは契約期間中、利用目的の範囲内で非独占的・譲渡不可で使用できます。</p>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-10">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第10条（保証・責任制限）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>乙は本サービスについて、適法性・特定目的適合性を黙示的にも保証しません。</p>
+          <p>乙の責任は、故意または重過失を除き、<strong>当該月の月額料金を上限</strong>とします。間接損害・逸失利益について乙は責任を負いません。</p>
         </div>
       </section>
 
-      <!-- 第4条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第4条（禁止事項）</h2>
-        <div class="text-slate-600">
-          <p class="mb-4">ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません：</p>
-          <div class="grid md:grid-cols-2 gap-4">
-            <ul class="space-y-2">
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">法令または公序良俗に違反する行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">犯罪行為に関連する行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">知的財産権を侵害する行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">システムへの不正アクセス</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">個人情報の不正収集・利用</span>
-              </li>
-            </ul>
-            <ul class="space-y-2">
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">なりすまし行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">無許可の営業・宣伝行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">反社会的勢力への利益供与</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">システムに過度な負荷をかける行為</span>
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                <span class="text-sm">その他当事業者が不適切と判断する行為</span>
-              </li>
-            </ul>
-          </div>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-11">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第11条（契約期間・解約）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>契約は月単位で自動更新します。甲は毎月末までに翌月解約の意思表示をすることで解約できます。</p>
+          <p>重大な規約違反がある場合、乙は催告の上で解除できます。</p>
         </div>
       </section>
 
-      <!-- 第5条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第5条（本サービスの提供の停止等）</h2>
-        <div class="text-slate-600 space-y-4">
-          <p>当事業者は、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。</p>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="p-4 bg-slate-50 rounded">
-              <h4 class="font-semibold text-slate-700 mb-2">システム関連</h4>
-              <ul class="text-sm space-y-1">
-                <li>• システムの保守・更新</li>
-                <li>• システム障害・攻撃</li>
-                <li>• 技術上の必要性</li>
-              </ul>
-            </div>
-            <div class="p-4 bg-slate-50 rounded">
-              <h4 class="font-semibold text-slate-700 mb-2">不可抗力</h4>
-              <ul class="text-sm space-y-1">
-                <li>• 天災・事故</li>
-                <li>• 電気通信事業者のサービス停止</li>
-                <li>• その他不可抗力</li>
-              </ul>
-            </div>
-          </div>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-12">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第12条（外部サービスの遵守）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>本サービスがGoogle APIや生成AIを利用する場合、各提供者のポリシー（例：Google API Services User Data Policy 等）を遵守します。</p>
+          <p>甲は自身のGoogle Workspaceポリシーおよび社内規程を遵守します。</p>
         </div>
       </section>
 
-      <!-- 第6条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第6条（利用制限および契約解除）</h2>
-        <div class="text-slate-600 space-y-4">
-          <p>当事業者は、以下の場合には、事前の通知なく、ユーザーに対して本サービスの全部もしくは一部の利用を制限し、またはユーザーとしての登録を抹消することができるものとします。</p>
-          <div class="bg-orange-50 border-l-4 border-orange-400 p-4">
-            <h4 class="font-semibold text-slate-700 mb-2">制限・解除事由</h4>
-            <ul class="text-sm space-y-1 pl-4">
-              <li>• 本規約のいずれかの条項に違反した場合</li>
-              <li>• 登録事項に虚偽の事実があることが判明した場合</li>
-              <li>• 料金等の支払債務の不履行があった場合</li>
-              <li>• 破産手続開始・民事再生手続開始等の申立がなされた場合</li>
-              <li>• 30日間以上本サービスにアクセスがない場合</li>
-              <li>• 当事業者からの連絡に対し、30日間以上応答がない場合</li>
-              <li>• その他、当事業者が本サービスの利用を適当でないと判断した場合</li>
-            </ul>
-          </div>
+      <section class="bg-white rounded-lg shadow p-6" id="tos-13">
+        <h2 class="text-xl font-bold mb-4 text-slate-900">第13条（準拠法・合意管轄）</h2>
+        <div class="text-slate-700 space-y-3">
+          <p>本規約は日本法に準拠します。紛争は<strong>東京地方裁判所</strong>を第一審の専属的合意管轄裁判所とします。</p>
         </div>
       </section>
-
-      <!-- 第7条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第7条（知的財産権）</h2>
-        <div class="text-slate-600 space-y-4">
-          <p>
-            ユーザーは、自ら著作権等の必要な知的財産権を有するか、または必要な権利者の許諾を得た文章、画像や映像等の情報に関してのみ、本サービスを利用し、投稿・アップロードその他これらに類似する行為（以下「投稿行為」）を行うことができるものとします。
-          </p>
-          <div class="p-4 bg-blue-50 rounded border border-blue-200">
-            <p class="text-sm font-semibold text-blue-800">
-              本サービスによって提供される情報、文書、ソフトウェア、音声、画像、動画等に関する著作権その他の知的財産権は、当事業者または当該権利を正当に有する第三者に帰属します。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第8条（重要） -->
-      <section class="bg-white rounded-lg shadow p-6 border-2 border-yellow-300">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第8条（保証の否認および免責事項）</h2>
-        <div class="text-slate-600 space-y-4">
-          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-            <h4 class="font-semibold text-yellow-800 mb-2">重要：AI機能に関する免責</h4>
-            <p class="text-sm text-yellow-700">
-              <strong>当事業者は、AI機能により出力される情報の正確性、完全性、適法性、有用性等について一切保証いたしません。</strong>
-              ユーザーは、AI機能の出力情報を利用する際は、必ず人による確認を行い、自己の責任と判断において利用するものとします。
-            </p>
-          </div>
-          
-          <div class="space-y-3">
-            <p><strong>保証の否認</strong></p>
-            <ul class="pl-4 space-y-1 text-sm">
-              <li>• 本サービスが特定の目的に適合すること</li>
-              <li>• 本サービスが期待する機能・商品的価値を有すること</li>
-              <li>• 本サービスの継続的提供</li>
-              <li>• 本サービスに瑕疵がないこと</li>
-            </ul>
-            
-            <p><strong>損害賠償の制限</strong></p>
-            <p class="text-sm pl-4">
-              当事業者の責に帰すべき事由により生じた損害の賠償は、ユーザーが直近1ヶ月間に当事業者に支払った利用料金の額を上限とします。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第9条-第14条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第9条～第14条（その他の重要事項）</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="space-y-4">
-            <div>
-              <h4 class="font-semibold text-slate-700">第9条（サービス内容の変更等）</h4>
-              <p class="text-sm text-slate-600">事前告知によりサービス内容の変更・終了が可能</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-700">第10条（利用規約の変更）</h4>
-              <p class="text-sm text-slate-600">事前承諾なしに規約変更可能</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-700">第11条（通知または連絡）</h4>
-              <p class="text-sm text-slate-600">メールまたはウェブサイト掲載による通知</p>
-            </div>
-          </div>
-          <div class="space-y-4">
-            <div>
-              <h4 class="font-semibold text-slate-700">第12条（権利義務の譲渡の禁止）</h4>
-              <p class="text-sm text-slate-600">事業者の書面承諾なしに権利義務の譲渡禁止</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-slate-700">第13条（分離可能性）</h4>
-              <p class="text-sm text-slate-600">一部条項が無効でも他の規定は有効継続</p>
-            </div>
-            <div class="p-3 bg-indigo-50 rounded border border-indigo-200">
-              <h4 class="font-semibold text-indigo-700">第14条（準拠法・裁判管轄）</h4>
-              <p class="text-sm text-indigo-600">
-                <strong>準拠法:</strong> 日本法<br>
-                <strong>管轄裁判所:</strong> 横浜地方裁判所相模原支部
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
+
+    <!-- ================= DPA ================= -->
+    <section class="mt-16 bg-white rounded-lg shadow p-6" id="dpa">
+      <h2 class="text-2xl font-bold mb-4 text-slate-900">個人情報取扱い契約（DPA：Google Apps Script版）</h2>
+      <p class="text-slate-700 mb-4">本DPAは、甲が管理する個人情報（個人データ）を、本サービスが受託処理する場合の条件を定めます。ToSと矛盾する場合は本DPAが優先します。</p>
+      <div class="space-y-6 text-slate-700">
+        <div>
+          <h3 class="font-semibold">第1条（定義）</h3>
+          <p>「個人情報」「個人データ」「保有個人データ」は個人情報保護法の定義に従い、「処理」は取得/記録/編集/保存/利用/提供/削除等を含みます。「サブプロセッサ」とは乙が再委託する処理者（例：Google LLC）。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第2条（処理の目的・範囲）</h3>
+          <p>目的：甲の業務効率化のため、甲が指定する業務プロセスにおける個人情報処理。データ種類と主体：付属文書「データマッピング」に明記。処理場所：原則、甲のWorkspace内。乙環境での処理は保存先・期間・暗号化方式を明示。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第3条（法令遵守・適法性）</h3>
+          <p>乙は個人情報保護法、関連ガイドライン、Google各ポリシーを遵守。甲は適法性確保（利用目的特定・同意・通知・第三者提供制限等）を行い、乙に必要資料を提示。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第4条（安全管理措置）</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>組織的：権限管理、アクセス記録、定期的な権限棚卸し。</li>
+            <li>人的：守秘義務・教育、アカウント共有禁止、退職時の即時権限剥奪。</li>
+            <li>物理的：端末暗号化、持出し制限。</li>
+            <li>技術的：OAuthスコープ最小化、ドメイン制限、保存時/通信時暗号化、ログ最小化/マスキング、データ分離、入力検証/CSRF対策、承認済みURLのみからの実行、GAS制限監視とフォールバック。</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold">第5条（サブプロセッサ）</h3>
+          <p>乙はGoogle LLC（および関連会社）をサブプロセッサとして利用し得ます。その他の再委託は事前に甲へ通知し、同等の保護水準を契約で担保。サブプロセッサ一覧は付属文書で記載・更新。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第6条（第三国移転）</h3>
+          <p>Googleのインフラ仕様上、データが日本国外で処理される可能性があります。乙はGoogleの契約条件・セキュリティ基準に依拠し、甲はこれに同意します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第7条（データ主体の権利対応）</h3>
+          <p>開示・訂正・利用停止等の請求があった場合、乙は甲の指示に従い合理的期間内に対応します。法令要請を除き、乙は甲の事前承認なく本人へ直接回答しません。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第8条（インシデント対応）</h3>
+          <p>個人データの漏えい等が判明した場合、24時間以内に一次報告、72時間以内に詳細報告（判明範囲、影響、初動、再発防止策）。甲の公表・届出に必要な情報提供を行います。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第9条（監査）</h3>
+          <p>甲は年1回を上限に書面監査を実施できます。現地監査は日程・範囲を協議の上、実費を甲負担で実施。乙は是正要求に合理的期間で対応します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第10条（保存期間・削除）</h3>
+          <p>目的達成後、合意した保存期間経過で安全に削除/不可逆化。甲からの即時削除要求には可能な限り速やかに対応。バックアップ完全消去には時間を要する場合があり、そのスケジュールを明示します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第11条（機密保持・目的外利用禁止）</h3>
+          <p>乙は甲の事前承諾なく目的外利用・第三者提供を行いません。テスト・検証にはダミー／匿名化データを優先使用します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第12条（責任）</h3>
+          <p>乙の責任は、故意・重過失を除き、当該月の月額料金を上限とします。サブプロセッサ起因の損害について、乙は合理的な注意を尽くす限りで責を負いません。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第13条（終了時義務）</h3>
+          <p>契約終了時、乙は甲の指示に従い、保管中の個人データを削除または返却します。返却形式・媒体・コストは事前協議により決定します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold">第14条（準拠法・管轄）</h3>
+          <p>日本法に準拠し、東京地方裁判所を第一審の専属管轄とします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 付属文書（抜粋） ================= -->
+    <section class="mt-16 bg-white rounded-lg shadow p-6" id="appendix">
+      <h2 class="text-2xl font-bold mb-4 text-slate-900">付属文書（GAS特化の実務付け・要点）</h2>
+      <div class="space-y-6 text-slate-700">
+        <div>
+          <h3 class="font-semibold">A. 技術仕様（例）</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>デプロイ形式：GAS Webアプリ（doGet/doPost）、コンテナバインド（Sheets/Docs）、Workspace Add-on。</li>
+            <li>保存先：主は甲のDrive（フォルダID指定、共有はドメイン限定）／従は必要時のみGCP（Firestore/Cloud Storage、鍵はKMS）。</li>
+            <li>ログ：処理ID、タイムスタンプ、関数名、件数、エラー要約（個人情報は含めない）。</li>
+            <li>暗号化：Google標準（保存時/転送時）、外部保管はAES-256。</li>
+            <li>ネットワーク：承認済みURLのみ。WebhookはIP許可リスト or 署名検証（HMAC）。</li>
+            <li>リリース管理：バージョニング、ロールバック、甲代表者承認後に本番反映。</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold">B. スコープ一覧（必要最小の例）</h3>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>https://www.googleapis.com/auth/spreadsheets（読み書き最小）</li>
+            <li>https://www.googleapis.com/auth/drive.file（アプリ作成ファイルのみアクセス）</li>
+            <li>https://www.googleapis.com/auth/script.container.ui（必要に応じて）</li>
+            <li>メール送信は原則回避し、通知はWebhook/Chatへ代替。生成AIはUrlFetchAppで外部呼出し、機微は送信前マスキング。</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold">C. データマッピング（例）</h3>
+          <div class="text-sm">利用者氏名（記録紐付け｜Sheets(甲)｜保持2年｜本人同意/規程）／職員氏名（監査トレイル｜Sheets(甲)｜保持2年｜契約）。</div>
+        </div>
+        <div>
+          <h3 class="font-semibold">D. インシデント対応手順（要点）</h3>
+          <div class="text-sm">検知→隔離→初動（24h報告）→原因分析→暫定対策→恒久対策→72h詳細報告→クローズレビュー。連絡経路は甲責任者メール/電話、乙担当直通。監督機関・本人通知は甲主導、乙は資料提供。</div>
+        </div>
+        <div>
+          <h3 class="font-semibold">E. 料金計算・測定</h3>
+          <div class="text-sm">ベースライン：初月に甲申告＋簡易計測（操作回数・処理件数・バッチ回数等）。月次：ログ＋申告で削減時間を再計算→料金更新。乖離大のときはサンプリング再計測。</div>
+        </div>
+        <div>
+          <h3 class="font-semibold">F. サブプロセッサ一覧（初期）</h3>
+          <div class="text-sm">Google LLC（Workspace/Apps Script/Drive/Sheets 等の基盤提供者）。追加が生じる場合は本一覧を更新し通知。</div>
+        </div>
+        <div>
+          <h3 class="font-semibold">G. テンプレ同意文例（社内掲示・本人同意）</h3>
+          <div class="text-sm">利用目的、第三者提供なし、保存期間、問合せ窓口、撤回方法、ログ最小化、外部AI送信の有無（送信時はマスキング）を明記。</div>
+        </div>
+      </div>
+    </section>
 
     <!-- ================= お問い合わせ ================= -->
     <section class="mt-12">
       <div class="bg-indigo-700 text-white rounded-lg p-8">
         <h2 class="text-2xl font-bold mb-4">お問い合わせ</h2>
         <div class="space-y-4">
-          <p class="text-indigo-100">
-            本規約に関するお問い合わせは、下記までご連絡ください。
-          </p>
+          <p class="text-indigo-100">本ページ内容や契約条件に関するお問い合わせは、下記までご連絡ください。</p>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <h4 class="font-semibold mb-2">連絡先</h4>
               <div class="space-y-2 text-indigo-100">
                 <p>
-                  <strong>メール:</strong> 
-                  <a href="mailto:takenoko.ai.care@gmail.com" class="text-white hover:text-yellow-300">
-                    takenoko.ai.care@gmail.com
-                  </a>
+                  <strong>メール:</strong>
+                  <a href="mailto:takenoko.ai.care@gmail.com" class="text-white hover:text-yellow-300">takenoko.ai.care@gmail.com</a>
                 </p>
                 <p>
-                  <strong>電話:</strong> 
-                  <a href="tel:070-1383-4420" class="text-white hover:text-yellow-300">
-                    070-1383-4420
-                  </a>
+                  <strong>電話:</strong>
+                  <a href="tel:070-1383-4420" class="text-white hover:text-yellow-300">070-1383-4420</a>
                 </p>
               </div>
             </div>
             <div>
               <h4 class="font-semibold mb-2">受付時間</h4>
               <p class="text-indigo-100">平日・土曜 9:00-18:00</p>
-              <p class="text-sm text-indigo-200 mt-2">
-                代表の大嶽が直接ご対応いたします
-              </p>
+              <p class="text-sm text-indigo-200 mt-2">代表の大嶽が直接ご対応いたします</p>
             </div>
           </div>
         </div>
@@ -438,11 +339,8 @@
       <div class="grid md:grid-cols-3 gap-8">
         <div>
           <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
-          <p class="text-slate-300 text-sm">
-            AIで介護の未来をデザインする
-          </p>
+          <p class="text-slate-300 text-sm">AIで介護の未来をデザインする</p>
         </div>
-        
         <div>
           <h4 class="font-semibold mb-4">リンク</h4>
           <ul class="space-y-2 text-sm">
@@ -452,25 +350,15 @@
             <li><a href="terms.html" class="text-slate-300 hover:text-white">利用規約</a></li>
           </ul>
         </div>
-        
         <div>
           <h4 class="font-semibold mb-4">お問い合わせ</h4>
           <div class="space-y-2 text-sm">
-            <p class="text-slate-300">
-              <a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">
-                takenoko.ai.care@gmail.com
-              </a>
-            </p>
-            <p class="text-slate-300">
-              <a href="tel:070-1383-4420" class="hover:text-white">
-                070-1383-4420
-              </a>
-            </p>
+            <p class="text-slate-300"><a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">takenoko.ai.care@gmail.com</a></p>
+            <p class="text-slate-300"><a href="tel:070-1383-4420" class="hover:text-white">070-1383-4420</a></p>
             <p class="text-slate-300">平日・土曜 9:00-18:00</p>
           </div>
         </div>
       </div>
-      
       <div class="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
         © 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
       </div>
@@ -480,3 +368,4 @@
   <script src="src/js/app.js"></script>
 </body>
 </html>
+
