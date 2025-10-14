@@ -64,166 +64,158 @@
         </div>
     </section>
 
-    <!-- 導入スケジュール例（カレンダー形式） -->
+    <!-- 導入スケジュール（週次カレンダー） -->
     <section class="py-10">
         <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-xl font-bold text-slate-800 mb-2">導入スケジュール例（カレンダー形式）</h2>
-            <p class="text-slate-600 text-sm mb-4">例：開始を <span class="font-mono">4/1(月)</span> とした場合。実際の日時はご都合に合わせて調整します。</p>
+            <h2 class="text-xl font-bold text-slate-800 mb-2">導入スケジュール（週次カレンダー）</h2>
+            <p class="text-slate-600 text-sm mb-6">開始日例：<span class="font-mono">4/1(月)</span>。実際の日時はご都合に合わせて調整します。</p>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- 4月カレンダー -->
-                <div class="bg-white rounded-xl shadow p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-slate-800">4月（例）</h3>
-                        <div class="text-xs text-slate-500">月曜はじまり</div>
+            <div class="space-y-4">
+                <!-- 0週目 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-indigo-500">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">0週目</span>
+                            <h3 class="font-semibold text-slate-800">初回訪問</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">所要 30–45分</span>
                     </div>
-                    <div class="grid grid-cols-7 text-center text-xs font-semibold text-slate-500 mb-2">
-                        <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
-                    </div>
-                    <div class="grid grid-cols-7 gap-1 text-sm">
-                        <!-- 1週目（4/1を月曜として配置する簡易例） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">1</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-indigo-600 text-white">初回訪問</span></div>
+                    <div class="mt-3 grid md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>営業所に赴く・ご挨拶（自己紹介・訪問目的）</li>
+                                <li>サービスの説明（成果報酬・オーダーメイド・AI組込）</li>
+                                <li>具体例の提示（在庫/設備/シフト/ルート/転記/レク/自動おしゃべり等）</li>
+                                <li>具体的な課題抽出 → 課題に対する具体案提示</li>
+                                <li>具体案のプロトタイプを作成して持参する旨を説明</li>
+                                <li>実際に使っていただく前提で直近の打合せ予定を設定</li>
+                                <li>問い合わせフォームからメールを受領／使用者全員のメールアドレス取得</li>
+                            </ul>
                         </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">2</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">3</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">4</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">5</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">6</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">7</span></div>
-
-                        <!-- 2週目 -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">8</span>
-                            <div class="mt-1 space-y-1">
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-600 text-white">打合せ①</span>
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">試用開始（2週間）</span>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-0.5 rounded bg-blue-600 text-white">訪問・面談</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700">説明</span>
+                                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800">課題抽出</span>
+                                <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">次回調整</span>
                             </div>
                         </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">9</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">10</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">11</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">12</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">13</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">14</span></div>
-
-                        <!-- 3週目（試用中） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">15</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">試用（1/2）</span></div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">16</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">17</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">18</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">19</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">20</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">21</span></div>
-
-                        <!-- 4週目（試用終了→打合せ②→修正1週間） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">22</span>
-                            <div class="mt-1 space-y-1">
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">試用（2/2）</span>
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-600 text-white">打合せ②</span>
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800">修正期間（1週間）</span>
-                            </div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">23</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">24</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">25</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">26</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">27</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">28</span></div>
-
-                        <!-- 5週目（要望反映版→打合せ③→1か月無料） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">29</span>
-                            <div class="mt-1 space-y-1">
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-600 text-white">打合せ③</span>
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded bg-teal-100 text-teal-800">1か月無料運用 開始</span>
-                            </div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">30</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
                     </div>
                 </div>
 
-                <!-- 5月カレンダー（無料運用〜正式契約） -->
-                <div class="bg-white rounded-xl shadow p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-semibold text-slate-800">5月（例）</h3>
-                        <div class="text-xs text-slate-500">月曜はじまり</div>
+                <!-- 2週目（打合せ①） -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-600">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">2週目</span>
+                            <h3 class="font-semibold text-slate-800">打合せ①｜プロトタイプ披露・Before計測準備</h3>
+                        </div>
                     </div>
-                    <div class="grid grid-cols-7 text-center text-xs font-semibold text-slate-500 mb-2">
-                        <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
-                    </div>
-                    <div class="grid grid-cols-7 gap-1 text-sm">
-                        <!-- 1週目（無料運用継続） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">1</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-teal-100 text-teal-800">無料運用</span></div>
+                    <div class="mt-3 grid md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>プロトタイプを披露し、本番環境を共有</li>
+                                <li>アプリを環境変数で <strong>Before計測アプリモード</strong> に切替可能にする</li>
+                                <li>2週間後の打合せ予定を設定／修正版持参を明言</li>
+                                <li>Before計測アプリで2週間データを取得し、ここでBeforeを確定</li>
+                                <li>アプリ権限リストに <strong>使用者全員のGmail</strong> を保存し、Beforeモード使用を許可</li>
+                            </ul>
                         </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">2</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">3</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">4</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">5</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">6</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">7</span></div>
-
-                        <!-- 2〜4週目（無料運用） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">8</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-teal-100 text-teal-800">無料運用</span></div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">9</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">10</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">11</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">12</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">13</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">14</span></div>
-
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">15</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-teal-100 text-teal-800">無料運用</span></div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">16</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">17</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">18</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">19</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">20</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800">解約〆切（翌月停止）</span></div>
-                        </div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">21</span></div>
-
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">22</span>
-                            <div class="mt-1"><span class="inline-block text-[11px] px-2 py-0.5 rounded bg-teal-100 text-teal-800">無料運用</span></div>
-                        </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">23</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">24</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">25</span></div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">26</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">27</span></div>
-                        <div class="border rounded p-2 text-left bg-slate-50"><span class="text-xs text-slate-500">28</span></div>
-
-                        <!-- 最終週（打合せ④・正式契約） -->
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">29</span>
-                            <div class="mt-1 space-y-1">
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-600 text-white">打合せ④</span>
-                                <span class="inline-block text-[11px] px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">正式契約</span>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-0.5 rounded bg-blue-600 text-white">面談</span>
+                                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">計測準備</span>
+                                <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">権限設定</span>
                             </div>
                         </div>
-                        <div class="border rounded p-2 text-left"><span class="text-xs text-slate-500">30</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
-                        <div class="border rounded p-2 text-left opacity-50"><span class="text-xs text-slate-400">—</span></div>
+                    </div>
+                </div>
+
+                <!-- 4週目（打合せ②） -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">4週目</span>
+                            <h3 class="font-semibold text-slate-800">打合せ②｜修正版披露・運用1週間＋調整1週間</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>修正版プロトタイプの披露／使用方法を明確に指導</li>
+                                <li>ここから<strong>1週間使用</strong></li>
+                                <li>修正は<strong>1週間以内</strong>に反映を明言</li>
+                                <li>次の1週間は「使わない週」（使ってもOK）</li>
+                                <li>次の1週間後の打合せ予定を設定</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">運用</span>
+                                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800">修正</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5週目（打合せ③） -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-teal-500">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">5週目</span>
+                            <h3 class="font-semibold text-slate-800">打合せ③｜要望反映版説明・1か月無料運用</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>要望反映後の仕様を説明・指導</li>
+                                <li><strong>1か月無料</strong>で運用を開始</li>
+                                <li>終了時に<strong>削減時間の入力フォーム</strong>を記入いただく旨を明言</li>
+                                <li><strong>1か月後に正式契約</strong>の方針を明言し、打合せ予定を設定</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-0.5 rounded bg-teal-100 text-teal-800">無料運用</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700">計測</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9週目（打合せ④） -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-purple-500">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-700">9週目</span>
+                            <h3 class="font-semibold text-slate-800">打合せ④｜最終確認・契約</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-3 gap-6">
+                        <div class="md:col-span-2">
+                            <ul class="list-disc list-inside text-sm space-y-1">
+                                <li>感想と追加要望のヒアリング／カスタマイズ要件を明確化</li>
+                                <li>契約破棄は<strong>毎月20日までのメール連絡</strong>で翌月停止を明言</li>
+                                <li>オンライン契約書へ同意後、<strong>Stripeで契約</strong></li>
+                            </ul>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">契約</span>
+                                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800">解約ポリシー</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- 凡例 -->
-            <div class="mt-4 flex flex-wrap gap-3 text-xs">
-                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span>訪問・面談</span>
-                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span>試用・無料運用</span>
-                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-amber-100 inline-block border border-amber-300"></span>修正・解約〆切</span>
+            <div class="mt-6 flex flex-wrap gap-3 text-xs">
+                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-blue-600 inline-block"></span>訪問・面談</span>
+                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-emerald-300 inline-block"></span>計測・運用</span>
+                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-amber-300 inline-block"></span>修正・調整</span>
+                <span class="inline-flex items-center gap-2"><span class="w-3 h-3 rounded bg-purple-400 inline-block"></span>契約・手続き</span>
             </div>
         </div>
     </section>
