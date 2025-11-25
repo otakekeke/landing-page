@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>初回アポイントのご案内 - 嶽ノ子</title>
-    <meta name="description" content="介護事業所向けオーダーメイド業務アプリの、初回打合せから補助金申請・採択・本番導入までの流れをカレンダー例でわかりやすく説明します。">
+    <meta name="description" content="介護事業所向けオーダーメイド業務アプリの、初回打合せから導入までの流れをカレンダー型UIでわかりやすく説明します（補助金あり／なし両方）。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,8 @@
         body { font-family: 'Noto Sans JP', sans-serif; }
         .step-number { background: linear-gradient(135deg,#3B82F6,#2563EB); }
         .accent-gradient { background: linear-gradient(135deg, #EFF6FF 0%, #F8FAFC 100%); }
+        .tab-active { background-color: #ffffff; color: #1d4ed8; }
+        .tab-inactive { background-color: #e5e7eb; color: #4b5563; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -41,268 +43,831 @@
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-800 leading-snug">
-                        「いつ・何をするか」を<br class="hidden md:block">カレンダーで先に共有します。
+                        カレンダーを見ながら、<br class="hidden md:block">導入までの全体像を共有します。
                     </h2>
                     <p class="mt-3 text-slate-700 text-sm md:text-base">
-                        このページは、初回打合せからプロトタイプ作成、<br class="hidden md:block">
-                        補助金申請〜採択、本番導入までの流れを<br class="hidden md:block">
-                        <span class="font-semibold">カレンダーの例</span>を使ってご説明するためのものです。
+                        このページは、初回打合せからプロトタイプ作成、補助金申請〜採択、<br class="hidden md:block">
+                        そして本番導入までの流れを、<span class="font-semibold">カレンダー形式</span>でご説明するためのページです。
                     </p>
                     <p class="mt-2 text-slate-600 text-xs">
-                        ※このページは、実際にお会いした際に画面を見ながらご説明するための「打合せ用メモ」です。
+                        ※実際にお会いしたとき、この画面を一緒に見ながらご説明します。<br>
+                        ※本日その場でご契約いただくことはありません。
                     </p>
                 </div>
                 <div class="bg-white rounded-xl shadow p-5 text-sm">
                     <h3 class="font-semibold text-slate-800 mb-3 flex items-center">
-                        <i class="fas fa-flag-checkered text-blue-600 mr-2"></i>本日のゴール
+                        <i class="fas fa-diagram-project text-blue-600 mr-2"></i>本日の流れ
                     </h3>
                     <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                        <li>現場のお困りごと・やりたいことを共有する</li>
-                        <li>どんなアプリの形になりそうか、方向性を決める</li>
-                        <li>おおよそのスケジュールと料金レンジを共有する</li>
+                        <li>現場のお困りごと・やりたいことをヒアリング</li>
+                        <li>「補助金あり／なし」2つの進め方をご説明</li>
+                        <li>おおよそのスケジュールと料金レンジを共有</li>
                     </ul>
-                    <p class="mt-4 text-xs text-slate-500">
-                        本日その場でご契約いただくことはありません。<br>
-                        「まずは話を聞いてみる」という段階で大丈夫です。
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- カレンダーで見る全体イメージ -->
-    <section class="py-10">
+    <!-- Tabs -->
+    <section class="py-4">
         <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-xl font-bold text-slate-800 mb-2">カレンダーで見る全体イメージ（例）</h2>
-            <p class="text-slate-600 text-sm mb-6">
-                例えば、<span class="font-mono">4/1(月)</span>に初回打合せ（0回目）をした場合のイメージです。<br class="hidden md:block">
-                実際の日程は、施設さまのご予定と補助金のスケジュールに合わせて調整します。
-            </p>
+            <div class="inline-flex rounded-xl bg-slate-200 p-1 text-sm">
+                <button id="tab-subsidy"
+                        class="px-4 py-2 rounded-lg font-semibold tab-active shadow-sm flex items-center gap-2"
+                        onclick="switchMode('subsidy')">
+                    <i class="fas fa-coins"></i> 補助金を使って導入する場合
+                </button>
+                <button id="tab-nosubsidy"
+                        class="px-4 py-2 rounded-lg font-semibold tab-inactive flex items-center gap-2"
+                        onclick="switchMode('nosubsidy')">
+                    <i class="fas fa-bolt"></i> 補助金を使わず導入する場合
+                </button>
+            </div>
+        </div>
+    </section>
 
-            <div class="grid md:grid-cols-4 gap-4 text-sm">
-                <!-- 0〜1回目 -->
-                <div class="bg-white rounded-xl shadow p-4 border-l-4 border-indigo-500">
-                    <p class="text-xs text-slate-500 mb-1">例：4/1(月)〜4/14(日)</p>
-                    <h3 class="font-semibold text-slate-800 mb-2">
-                        0回目〜1回目（約2週間）
-                    </h3>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ 施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li>初回のヒアリング内容をもとに、<strong>「他にも困っていること」</strong>があれば考えてきていただく</li>
-                    </ul>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>ヒアリング内容を整理し、<strong>補助金が使えそうか</strong>を判断</li>
-                        <li>次回お見せするための<strong>プロトタイプ（たたき台）を作成</strong></li>
-                    </ul>
+    <!-- 補助金ありモード -->
+    <main id="mode-subsidy" class="block">
+        <!-- カレンダー（補助金あり） -->
+        <section class="py-6">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">
+                    補助金を使って導入する場合のカレンダー例
+                </h2>
+                <p class="text-slate-600 text-sm mb-4">
+                    例として、<span class="font-mono">4/1(月)</span>に初回打合せ（0回目）をした場合のイメージです。<br class="hidden md:block">
+                    実際の日付は、施設さまのご予定と補助金の公募スケジュールに合わせて調整します。
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- 4月 -->
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-slate-800">4月（例）</h3>
+                            <span class="text-xs text-slate-500">月曜はじまり</span>
+                        </div>
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                            <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-xs">
+                            <!-- 1週目 (4/1〜) -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    0回目 初回打合せ
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">2</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">3</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">4</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">5</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">6</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">7</span>
+                            </div>
+
+                            <!-- 2週目 (4/8〜) 〜 0→1回目の期間 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">8</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    課題の洗い出し
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">9</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">10</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">11</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">12</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">13</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">14</span>
+                            </div>
+
+                            <!-- 3週目 (4/15〜) 1回目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    1回目 プロトタイプ
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">16</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">17</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">18</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">19</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">20</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">21</span>
+                            </div>
+
+                            <!-- 4週目 (4/22〜) 2回目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">22</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    2回目 仕様＆補助金
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">23</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">24</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">25</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">26</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">27</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">28</span>
+                            </div>
+
+                            <!-- 5週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">29</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    申請内容の最終確認
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">30</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5月 -->
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-slate-800">5月（例）</h3>
+                            <span class="text-xs text-slate-500">申請〜採択待ち</span>
+                        </div>
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                            <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-xs">
+                            <!-- 1週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                                    申請書作成
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">2</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">3</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">4</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">5</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">6</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">7</span>
+                            </div>
+
+                            <!-- 2週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">8</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                                    申請提出目安
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">9</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">10</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">11</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">12</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">13</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">14</span>
+                            </div>
+
+                            <!-- 以降は「プロトタイプ利用＋待ち」 -->
+                            <!-- 3週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    プロトタイプ利用
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">16</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">17</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">18</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">19</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">20</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">21</span>
+                            </div>
+
+                            <!-- 4週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">22</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    フィードバック
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">23</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">24</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">25</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">26</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">27</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">28</span>
+                            </div>
+
+                            <!-- 5週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">29</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">30</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">31</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6月 -->
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-slate-800">6月（例）</h3>
+                            <span class="text-xs text-slate-500">採択〜本番構築</span>
+                        </div>
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                            <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-xs">
+                            <!-- 1週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">1</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">2</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50">
+                                <span class="text-[10px] text-slate-500 block">3</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
+                                    採択のお知らせ
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">4</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">5</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">6</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">7</span>
+                            </div>
+
+                            <!-- 2週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">8</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">9</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">10</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">11</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">12</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    契約・Stripe登録
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">13</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">14</span>
+                            </div>
+
+                            <!-- 3週目以降：本番構築 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                    本番構築開始
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">16</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">17</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">18</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">19</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">20</span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="text-[10px] text-slate-500 block">21</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 1〜2回目 -->
-                <div class="bg-white rounded-xl shadow p-4 border-l-4 border-blue-500">
-                    <p class="text-xs text-slate-500 mb-1">例：4/15(月)〜4/21(日)</p>
-                    <h3 class="font-semibold text-slate-800 mb-2">
-                        1回目〜2回目（約1週間）
-                    </h3>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ 施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li><strong>補助金補助アプリ（ヒアリングフォーム）</strong>に回答していただく</li>
-                        <li>プロトタイプを見て、気になった点・直したい点をお伝えいただく</li>
-                    </ul>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>プロトタイプの<strong>指摘点を修正</strong></li>
-                        <li>補助金補助アプリの回答をもとに、<strong>どの補助金が合いそうか整理</strong></li>
-                    </ul>
+                <!-- 凡例 -->
+                <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-blue-600 inline-block"></span> 打合せ（0〜2回目）
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-amber-200 inline-block border border-amber-300"></span> 補助金の準備・申請
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> プロトタイプ利用・フィードバック
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-purple-600 inline-block"></span> 採択
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-indigo-100 inline-block border border-indigo-300"></span> 本番構築
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interval details (補助金あり) -->
+        <section class="py-6">
+            <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
+                <!-- 0〜1 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-indigo-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">0→1</div>
+                            <h3 class="font-semibold text-slate-800">0回目〜1回目（約2週間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">初回打合せ〜プロトタイプ作成</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>初回打合せの内容を踏まえて、<strong>「他にも困っていること」</strong>があれば考えておいていただく</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>ヒアリング内容を整理し、<strong>補助金が使えそうか判断</strong></li>
+                                <li>次回お見せするための<strong>プロトタイプを作成</strong></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>ここまでは費用は一切かかりません。</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 2回目〜採択まで -->
-                <div class="bg-white rounded-xl shadow p-4 border-l-4 border-amber-500">
-                    <p class="text-xs text-slate-500 mb-1">例：4/22(月)〜採択まで</p>
-                    <h3 class="font-semibold text-slate-800 mb-2">
-                        2回目〜n回目（申請〜採択まで）
-                    </h3>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ 施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li><strong>プロトタイプを実際に触って</strong>いただき、現場の声を教えていただく</li>
-                        <li>必要に応じて、補助金申請に必要な書類をご準備いただく</li>
-                    </ul>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>プロトタイプの<strong>細かい修正・改善</strong></li>
-                        <li>提携している専門家と連携しながら、<strong>補助金申請の内容をブラッシュアップ</strong></li>
-                    </ul>
+                <!-- 1〜2 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
+                            <h3 class="font-semibold text-slate-800">1回目〜2回目（約1週間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">プロトタイプ確認＆補助金ヒアリング</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li><strong>補助金補助アプリ（ヒアリングフォーム）</strong>への回答</li>
+                                <li>プロトタイプを見て感じたこと・直してほしいことのメモ</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>プロトタイプの<strong>指摘点を修正</strong></li>
+                                <li>補助金補助アプリの内容をもとに、どの補助金が合うか<strong>候補を絞り込み</strong></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2〜n -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→n</div>
+                            <h3 class="font-semibold text-slate-800">2回目〜採択まで（補助金採択から実行までの間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">プロトタイプ運用＆申請のブラッシュアップ</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>プロトタイプを実際に触っていただき、<strong>現場の感覚でフィードバック</strong></li>
+                                <li>補助金申請に必要な書類・情報をご準備いただく</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>フィードバックを元に、プロトタイプの<strong>修正・改善</strong></li>
+                                <li>専門家と連携しながら、<strong>補助金申請書の作成・ブラッシュアップ</strong></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>申請の関わり方や開発の進め方によって、ここから費用が発生する場合があります。事前に必ずご説明のうえ進めます。</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 採択後 -->
-                <div class="bg-white rounded-xl shadow p-4 border-l-4 border-emerald-500">
-                    <p class="text-xs text-slate-500 mb-1">採択後〜本番導入</p>
-                    <h3 class="font-semibold text-slate-800 mb-2">
-                        採択後の流れ
-                    </h3>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ 施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li><strong>Stripe</strong>にて支払い情報をご登録</li>
-                        <li><strong>オンライン契約書</strong>にご署名（電子契約）</li>
-                    </ul>
-                    <p class="text-[11px] font-semibold text-slate-500 mb-2">▼ こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>決定した仕様に基づき、<strong>本番環境を構築</strong></li>
-                        <li>データ移行・最終テストを行い、<strong>本番稼働として納品</strong></li>
-                        <li>導入後のフォロー・改善提案</li>
-                    </ul>
-                </div>
-            </div>
-
-            <p class="mt-4 text-xs text-slate-500">
-                ※補助金の種類や公募スケジュールによって、「2回目〜n回目」の期間は変動します。<br>
-                実際のカレンダーを一緒に見ながら、無理のないスケジュールで組み立てます。
-            </p>
-        </div>
-    </section>
-
-    <!-- ステップごとの詳しい説明 -->
-    <!-- 0回目 -->
-    <section class="py-8">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded-full step-number text-white flex items-center justify-center font-bold">0</div>
-                <h2 class="text-xl font-bold text-slate-800">0回目｜初回打合せ（ヒアリング）</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-white rounded-xl shadow p-5 md:col-span-2">
-                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                        <li>送迎、記録、おやすみ情報、予定表、バイタル、請求まわりなど、<strong>今のやり方</strong>を教えていただきます。</li>
-                        <li>「ここさえ何とかしたい」という<strong>一番の課題</strong>を一緒に整理します。</li>
-                        <li>その場で、考えられる<strong>アプリの方向性</strong>をいくつかご提案します。</li>
-                        <li>次回（1回目）までのあいだに、<strong>他に気づいた課題があれば考えておいてください</strong>とお願いをします。</li>
-                    </ul>
-                </div>
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                    <h3 class="font-semibold text-slate-800 mb-2 flex items-center">
-                        <i class="fas fa-clipboard-list text-blue-600 mr-2"></i>0〜1回目の間に…
-                    </h3>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li>「他にもこういうところが大変」という点があれば、メモしておいていただく</li>
-                    </ul>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>補助金が使えそうかどうかの目星をつける</li>
-                        <li>次回お見せするためのプロトタイプを作成</li>
-                    </ul>
-                    <div class="mt-4 p-3 bg-white rounded border border-blue-100 text-xs text-slate-700">
-                        <p><strong>費用：</strong>ここまではすべて無料です。</p>
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">採択後</div>
+                            <h3 class="font-semibold text-slate-800">採択後｜契約・本番環境構築・納品</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">本番構築フェーズ</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li><strong>オンライン契約書</strong>への署名</li>
+                                <li><strong>Stripe</strong>への支払い情報登録</li>
+                                <li>本番導入のタイミング・対象職種の確認</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>決定した仕様に基づく<strong>本番環境の構築</strong></li>
+                                <li>必要なデータのセットアップ・テスト</li>
+                                <li>本番稼働後のフォロー・改善提案</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>料金：</strong>初期費用（10〜300万円）と月額料金（2.3万 / 5.5万 / 50万円）の組み合わせは、申請前に合意した内容どおりで進めます。</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- 1回目 -->
-    <section class="py-6">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded-full step-number text-white flex items-center justify-center font-bold">1</div>
-                <h2 class="text-xl font-bold text-slate-800">1回目｜プロトタイプ披露・補助金の方向性確認</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-white rounded-xl shadow p-5 md:col-span-2">
-                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                        <li>こちらで作成した<strong>簡易プロトタイプ</strong>をお見せし、実際に触っていただきます。</li>
-                        <li>「ここは良い」「ここは違う」など<strong>率直な感想</strong>を伺います。</li>
-                        <li>同時に、<strong>どの補助金が使えそうか</strong>、ざっくり方向性を共有します。</li>
-                        <li>次回（2回目）までに、<strong>補助金補助アプリ（ヒアリングフォーム）</strong>に回答していただくことをお願いし、URLをご案内します。</li>
-                    </ul>
+    <!-- 補助金なしモード -->
+    <main id="mode-nosubsidy" class="hidden">
+        <!-- カレンダー（補助金なし） -->
+        <section class="py-6">
+            <div class="max-w-5xl mx-auto px-4">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">
+                    補助金を使わず導入する場合のカレンダー例
+                </h2>
+                <p class="text-slate-600 text-sm mb-4">
+                    例として、<span class="font-mono">4/1(月)</span>に初回打合せ（0回目）をした場合、<br class="hidden md:block">
+                    1〜2か月程度で本番稼働まで進めるイメージです。
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- 4月 -->
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-slate-800">4月（例）</h3>
+                            <span class="text-xs text-slate-500">月曜はじまり</span>
+                        </div>
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                            <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-xs">
+                            <!-- 1週目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    0回目 初回打合せ
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">2</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">3</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">4</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">5</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">6</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">7</span></div>
+
+                            <!-- 2週目：0→1 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">8</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    課題の洗い出し
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">9</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">10</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">11</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">12</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">13</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">14</span></div>
+
+                            <!-- 3週目：1回目 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    1回目 プロトタイプ
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">16</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">17</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">18</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">19</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">20</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">21</span></div>
+
+                            <!-- 4週目：2回目（仕様・料金確定） -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">22</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-blue-600 text-white">
+                                    2回目 仕様・料金
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">23</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">24</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">25</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">26</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">27</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">28</span></div>
+
+                            <!-- 5週目：3回目 契約 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">29</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
+                                    3回目 契約・Stripe
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">30</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 5月 -->
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold text-slate-800">5月（例）</h3>
+                            <span class="text-xs text-slate-500">本番構築〜導入</span>
+                        </div>
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                            <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 text-xs">
+                            <!-- 1週目：本番構築開始 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                    本番構築開始
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">2</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">3</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">4</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">5</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">6</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">7</span></div>
+
+                            <!-- 以降：構築＋テスト〜本番稼働 -->
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">8</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    テスト・データ移行
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">9</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">10</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">11</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">12</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">13</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">14</span></div>
+
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-slate-500">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500 text-white">
+                                    本番稼働スタート
+                                </span>
+                            </div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">16</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">17</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">18</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">19</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">20</span></div>
+                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">21</span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                    <h3 class="font-semibold text-slate-800 mb-2 flex items-center">
-                        <i class="fas fa-calendar-check text-blue-600 mr-2"></i>1〜2回目の間に…
-                    </h3>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li>補助金補助アプリ（ヒアリングフォーム）への回答</li>
-                        <li>プロトタイプを見て気づいた点をメモしておく</li>
-                    </ul>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>プロトタイプの指摘点を修正</li>
-                        <li>ヒアリング結果をもとに、補助金の種類と申請の方向性を整理</li>
-                    </ul>
-                    <div class="mt-4 p-3 bg-white rounded border border-blue-100 text-xs text-slate-700">
-                        <p><strong>費用：</strong>ここまでも費用は発生しません。</p>
+
+                <!-- 凡例 -->
+                <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-blue-600 inline-block"></span> 打合せ（0〜3回目）
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> 課題整理・テスト
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-indigo-100 inline-block border border-indigo-300"></span> 本番構築
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> 本番稼働開始
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interval details（補助金なし） -->
+        <section class="py-6">
+            <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
+                <!-- 0〜1 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-indigo-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">0→1</div>
+                            <h3 class="font-semibold text-slate-800">0回目〜1回目（約1〜2週間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">初回打合せ〜プロトタイプ作成</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>初回打合せの内容をもとに、<strong>他の課題・理想の形</strong>を考えておいていただく</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>ヒアリング内容の整理</li>
+                                <li>次回お見せする<strong>プロトタイプの作成</strong></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>ここまでは費用はかかりません。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1〜2 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
+                            <h3 class="font-semibold text-slate-800">1回目〜2回目（約1週間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">プロトタイプ確認〜仕様・料金の方向性決定</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>プロトタイプを触っていただき、<strong>良い点／気になる点</strong>を教えていただく</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>プロトタイプの修正・改善</li>
+                                <li>どの範囲をシステム化するか、<strong>仕様のたたき台</strong>を作成</li>
+                                <li>初期費用・月額の<strong>大まかなレンジ</strong>を整理</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2〜3 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→3</div>
+                            <h3 class="font-semibold text-slate-800">2回目〜3回目（約1週間）</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">最終仕様・見積確定〜ご契約</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>提示した仕様・料金をご検討いただき、<strong>やる／やらない</strong>のご判断</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>ご要望を反映した<strong>最終仕様書・お見積書</strong>の作成</li>
+                                <li>オンライン契約書・Stripe決済ページのご用意</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>費用：</strong>ご契約前に、初期費用と月額（例：10〜300万円＋2.3万 / 5.5万 / 50万円）の組み合わせを明示します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 契約後 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">契約後</div>
+                            <h3 class="font-semibold text-slate-800">契約後｜本番構築・テスト・導入</h3>
+                        </div>
+                        <span class="text-xs text-slate-500">1〜2か月で本番稼働を目指します</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>オンライン契約書への署名</li>
+                                <li>Stripeでの支払い情報登録</li>
+                                <li>導入する事業所・職種・開始日の確定</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                                <li>本番環境の構築・帳票レイアウトの設定</li>
+                                <li>テスト用データでの動作確認</li>
+                                <li>本番稼働日以降のフォロー（使い方レクチャー・改善提案）</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                            <p><strong>料金：</strong>初期費用は構築期間中に、月額は本番稼働月からの発生となるイメージです。</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- 2回目以降 -->
-    <section class="py-6">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded-full step-number text-white flex items-center justify-center font-bold">2</div>
-                <h2 class="text-xl font-bold text-slate-800">2回目以降｜申請内容の確定・採択までの伴走</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-white rounded-xl shadow p-5 md:col-span-2">
-                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                        <li>修正版プロトタイプをお見せし、<strong>実際にどう使うか具体的なイメージ</strong>を一緒に固めていきます。</li>
-                        <li>補助金補助アプリの回答内容を確認しながら、<strong>申請に載せる事業内容</strong>を整理します。</li>
-                        <li>その後は、補助金の申請〜採択までの間、<strong>プロトタイプを触っていただきながら微修正</strong>を重ねていきます。</li>
-                    </ul>
-                </div>
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                    <h3 class="font-semibold text-slate-800 mb-2"><i class="fas fa-hourglass-half text-blue-600 mr-2"></i>申請〜採択まで</h3>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">施設さまでお願いしたいこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li>プロトタイプを実際の業務のイメージで触ってみていただく</li>
-                        <li>使いにくいところ・もっとこうしたいところをフィードバック</li>
-                    </ul>
-                    <p class="text-slate-700 text-xs mb-2 font-semibold">こちらで行うこと</p>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs">
-                        <li>プロトタイプの修正・改善</li>
-                        <li>専門家と連携し、補助金申請書のブラッシュアップ</li>
-                    </ul>
-                    <div class="mt-4 p-3 bg-white rounded border border-blue-100 text-xs text-slate-700">
-                        <p><strong>費用：</strong>補助金の種類・ご相談内容によって、ここから費用が発生するケースもあります。事前に必ずご説明します。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 採択後 -->
-    <section class="py-6">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded-full step-number text-white flex items-center justify-center font-bold">3</div>
-                <h2 class="text-xl font-bold text-slate-800">採択後｜契約・本番環境構築・納品</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6 text-sm">
-                <div class="bg-white rounded-xl shadow p-5 md:col-span-2">
-                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                        <li>補助金が<strong>採択</strong>されたら、正式なスケジュールと最終仕様を確認します。</li>
-                        <li>オンライン契約書をご確認いただき、<strong>電子署名</strong>をいただきます。</li>
-                        <li>決済システム（<strong>Stripe</strong>）で、支払い情報をご登録いただきます。</li>
-                        <li>その後、こちらで本番環境を構築し、<strong>データ移行・テストを行ったうえで本番稼働</strong>となります。</li>
-                    </ul>
-                </div>
-                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
-                    <h3 class="font-semibold text-slate-800 mb-2"><i class="fas fa-file-signature text-emerald-600 mr-2"></i>採択後にお願いしたいこと</h3>
-                    <ul class="list-disc pl-5 space-y-1 text-slate-700 text-xs mb-3">
-                        <li>オンライン契約書へのご署名</li>
-                        <li>Stripeでの支払い情報のご登録</li>
-                        <li>本番導入スケジュールのご相談</li>
-                    </ul>
-                    <div class="mt-4 p-3 bg-white rounded border border-emerald-100 text-xs text-slate-700">
-                        <p><strong>料金：</strong>初期費用（10〜300万円）と月額料金（2.3万 / 5.5万 / 50万円）の組み合わせは、申請内容と仕様に応じて事前に確定させます。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / CTA はお好みでそのままでもOK -->
+    <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white/80 mt-6">
         <div class="max-w-5xl mx-auto px-4 py-6 text-sm text-slate-600 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
@@ -317,5 +882,30 @@
             <div>&copy; 2025 嶽ノ子 (個人事業主: 大嶽 耕太郎)</div>
         </div>
     </footer>
+
+    <script>
+        function switchMode(mode) {
+            const subsidy = document.getElementById('mode-subsidy');
+            const nosubsidy = document.getElementById('mode-nosubsidy');
+            const tabSub = document.getElementById('tab-subsidy');
+            const tabNo = document.getElementById('tab-nosubsidy');
+
+            if (mode === 'subsidy') {
+                subsidy.classList.remove('hidden');
+                nosubsidy.classList.add('hidden');
+                tabSub.classList.add('tab-active');
+                tabSub.classList.remove('tab-inactive');
+                tabNo.classList.add('tab-inactive');
+                tabNo.classList.remove('tab-active');
+            } else {
+                subsidy.classList.add('hidden');
+                nosubsidy.classList.remove('hidden');
+                tabSub.classList.add('tab-inactive');
+                tabSub.classList.remove('tab-active');
+                tabNo.classList.add('tab-active');
+                tabNo.classList.remove('tab-inactive');
+            }
+        }
+    </script>
 </body>
 </html>
