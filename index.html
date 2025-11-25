@@ -43,7 +43,6 @@
   }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
     code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
@@ -420,7 +419,7 @@
             <p class="font-semibold text-purple-900 mb-2">Proプランに含まれるもの</p>
             <ul class="text-sm text-purple-800 space-y-1">
               <li>• 専任の担当者がつく（オンライン定例＋チャット相談）</li>
-              <li>• 月◯時間までの改善・新機能追加を込み</li>
+              <li>• 月20時間までの改善・新機能追加を込み</li>
               <li>• 四半期ごとに「業務削減レポート」や「改善提案レポート」を提出</li>
             </ul>
           </div>
@@ -470,324 +469,128 @@
       <!-- プラン比較表 -->
       <section class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-end justify-between gap-4 mb-4">
-            <div>
-              <h3 class="text-2xl font-bold text-slate-900">プラン比較（何をしてくれて／何をしないか）</h3>
-              <p class="text-sm text-slate-600 mt-1">「含まれる」＝追加費用なしで対応範囲。「対象外」＝別見積り or 上位プラン。</p>
-            </div>
-            <a href="#contact" class="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 hover:text-indigo-900">
-              <i class="fa-solid fa-comment-dots"></i> 迷ったら無料相談
-            </a>
-          </div>
+          <h3 class="text-2xl font-bold text-slate-900">プラン比較（シンプル）</h3>
+          <p class="text-sm text-slate-600 mt-1">外部連携は基本しません（Google Workspace内で完結）。</p>
 
-          <div class="bg-white rounded-2xl shadow overflow-hidden border border-slate-200">
+          <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow">
             <!-- header -->
             <div class="grid grid-cols-1 md:grid-cols-4">
-              <div class="p-4 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200">
-                <p class="text-xs font-semibold text-slate-500">比較項目</p>
+              <div class="p-4 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 text-xs font-semibold text-slate-500">
+                比較項目
               </div>
 
               <div class="p-4 border-b md:border-b-0 md:border-r border-slate-200">
-                <div class="flex items-center justify-between">
+                <div class="flex items-end justify-between gap-2">
                   <span class="inline-flex items-center gap-2">
                     <span class="px-2.5 py-1 rounded-full bg-blue-600 text-white text-xs font-bold">Lite</span>
                     <span class="text-lg font-extrabold">2.3万円/月</span>
                   </span>
                 </div>
-                <p class="text-xs text-slate-500 mt-1">1事業所・1業務をミニアプリ化</p>
+                <p class="text-xs text-slate-500 mt-1">まずは1つ、面倒を消す</p>
               </div>
 
               <div class="p-4 border-b md:border-b-0 md:border-r border-slate-200 bg-indigo-50/40">
-                <div class="flex items-center justify-between">
+                <div class="flex items-end justify-between gap-2">
                   <span class="inline-flex items-center gap-2">
                     <span class="px-2.5 py-1 rounded-full bg-indigo-600 text-white text-xs font-bold">Standard</span>
                     <span class="text-lg font-extrabold">5.5万円/月</span>
                   </span>
                 </div>
-                <p class="text-xs text-slate-500 mt-1">1事業所の「仕組み」を整える</p>
+                <p class="text-xs text-slate-500 mt-1">現場の仕組みを整える</p>
               </div>
 
-              <div class="p-4 border-b md:border-b-0 bg-purple-50/40">
-                <div class="flex items-center justify-between">
+              <div class="p-4 bg-purple-50/40">
+                <div class="flex items-end justify-between gap-2">
                   <span class="inline-flex items-center gap-2">
                     <span class="px-2.5 py-1 rounded-full bg-purple-600 text-white text-xs font-bold">Pro</span>
                     <span class="text-lg font-extrabold">50万円/月</span>
                   </span>
                 </div>
-                <p class="text-xs text-slate-500 mt-1">法人・複数拠点のDXプロジェクト</p>
+                <p class="text-xs text-slate-500 mt-1">専任で改善を回す（20h/月込み）</p>
               </div>
             </div>
 
-            <!-- body rows -->
-            <div class="divide-y divide-slate-200">
+            <div class="divide-y divide-slate-200 text-sm">
               <!-- 対象範囲 -->
               <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">対象範囲</p>
-                  <p class="text-xs text-slate-500 mt-1">どこまでを対象にするか</p>
+                <div class="p-4 bg-slate-50 md:border-r border-slate-200 font-semibold text-slate-800">
+                  対象範囲
                 </div>
                 <div class="p-4 md:border-r border-slate-200">
-                  <div class="text-sm space-y-1">
-                    <p class="font-semibold">含まれる</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>1事業所</li>
-                      <li>1業務テーマ</li>
-                    </ul>
-                    <p class="font-semibold mt-3">対象外</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>複数業務の同時整理</li>
-                      <li>複数拠点展開</li>
-                    </ul>
-                  </div>
+                  <ul class="list-disc pl-5 text-slate-700 space-y-1">
+                    <li>1事業所</li>
+                    <li>1業務（アプリ1本）</li>
+                  </ul>
                 </div>
                 <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40">
-                  <div class="text-sm space-y-1">
-                    <p class="font-semibold">含まれる</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>1事業所</li>
-                      <li>1テーマ＋周辺業務まで</li>
-                    </ul>
-                    <p class="font-semibold mt-3">対象外</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>法人全体の統一ルール設計</li>
-                      <li>5拠点以上の横断運用</li>
-                    </ul>
-                  </div>
+                  <ul class="list-disc pl-5 text-slate-700 space-y-1">
+                    <li>1事業所</li>
+                    <li>業務1テーマ＋周辺まで</li>
+                  </ul>
                 </div>
                 <div class="p-4 bg-purple-50/40">
-                  <div class="text-sm space-y-1">
-                    <p class="font-semibold">含まれる</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>複数拠点（例：〜10拠点）</li>
-                      <li>本部〜現場の横断設計</li>
-                    </ul>
-                    <p class="font-semibold mt-3">対象外</p>
-                    <ul class="text-slate-700 list-disc pl-5">
-                      <li>無制限拠点（要別途）</li>
-                      <li>24/365運用監視（要別途）</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 画面/帳票の規模 -->
-              <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">画面・帳票の規模</p>
-                  <p class="text-xs text-slate-500 mt-1">機能ボリュームの目安</p>
-                </div>
-                <div class="p-4 md:border-r border-slate-200 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>画面：〜3</li>
-                    <li>帳票：〜3</li>
-                    <li>集計：簡易（件数/一覧）</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>ダッシュボード（多軸）</li>
-                    <li>複雑な権限管理</li>
-                  </ul>
-                </div>
-                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>画面：〜8</li>
-                    <li>帳票：〜10</li>
-                    <li>集計：委員会資料レベル</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>法人横断の経営KPI設計</li>
-                    <li>システム間の複数連携</li>
-                  </ul>
-                </div>
-                <div class="p-4 bg-purple-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>画面/帳票：合意範囲内で柔軟</li>
-                    <li>本部・拠点の多権限設計</li>
-                    <li>経営資料の自動出力</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>巨大基幹刷新（別PJ）</li>
+                  <ul class="list-disc pl-5 text-slate-700 space-y-1">
+                    <li>複数業務を優先順位で順次</li>
+                    <li>法人/複数拠点も可</li>
                   </ul>
                 </div>
               </div>
 
-              <!-- 連携 -->
+              <!-- 料金に含まれる改善 -->
               <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">データ連携</p>
-                  <p class="text-xs text-slate-500 mt-1">外部システム・通知など</p>
+                <div class="p-4 bg-slate-50 md:border-r border-slate-200 font-semibold text-slate-800">
+                  月額に含まれる改善
                 </div>
-                <div class="p-4 md:border-r border-slate-200 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>Googleスプレッドシート/Drive</li>
-                    <li>CSV手動取込（簡易）</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>介護ソフトAPI連携</li>
-                    <li>多システムの自動連携</li>
-                  </ul>
+                <div class="p-4 md:border-r border-slate-200">
+                  <p class="text-slate-700">軽微修正 <span class="font-semibold">月1回まで</span></p>
+                  <p class="text-xs text-slate-500 mt-1">文言/表示順/印刷レイアウトなど</p>
                 </div>
-                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>外部連携：1系統まで（例：介護ソフトCSV）</li>
-                    <li>通知：1系統まで（メール等）</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>複数API連携（2つ以上）</li>
-                    <li>センサー連携</li>
-                  </ul>
+                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40">
+                  <p class="text-slate-700">改善・微機能追加 <span class="font-semibold">月3回まで</span></p>
+                  <p class="text-xs text-slate-500 mt-1">入力項目追加、集計条件追加など</p>
                 </div>
-                <div class="p-4 bg-purple-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>複数連携（2〜3系統）</li>
-                    <li>API連携/センサー検討</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>規格外の個別機器（要別途）</li>
-                  </ul>
+                <div class="p-4 bg-purple-50/40">
+                  <p class="text-slate-700">改善・新機能 <span class="font-semibold">月20時間まで込み</span></p>
+                  <p class="text-xs text-slate-500 mt-1">新しい画面追加や業務フロー改善も含む</p>
                 </div>
               </div>
 
-              <!-- 改善・修正 -->
+              <!-- 伴走 -->
               <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">改善・修正の込み範囲</p>
-                  <p class="text-xs text-slate-500 mt-1">月額に含む調整量</p>
+                <div class="p-4 bg-slate-50 md:border-r border-slate-200 font-semibold text-slate-800">
+                  伴走の深さ
                 </div>
-                <div class="p-4 md:border-r border-slate-200 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>軽微修正：月1回まで</li>
-                    <li>文言/色/表の微調整</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>新機能追加</li>
-                    <li>仕様変更（フロー変更多数）</li>
-                  </ul>
+                <div class="p-4 md:border-r border-slate-200">
+                  <p class="text-slate-700">チャット/メール中心</p>
+                  <p class="text-xs text-slate-500 mt-1">必要時のみ打合せ</p>
                 </div>
-                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>オンライン定例：月1回（30〜60分）</li>
-                    <li>改善/微機能追加：月3件まで</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>大規模機能追加（別見積）</li>
-                  </ul>
+                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40">
+                  <p class="text-slate-700">月1回の定例（30〜60分）</p>
+                  <p class="text-xs text-slate-500 mt-1">運用を見ながら改善を回す</p>
                 </div>
-                <div class="p-4 bg-purple-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>専任伴走（定例＋チャット）</li>
-                    <li>改善/新機能：月◯時間まで込み</li>
-                    <li>四半期の改善レポート</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>仕様スコープ外（別途合意）</li>
-                  </ul>
+                <div class="p-4 bg-purple-50/40">
+                  <p class="text-slate-700">定例＋随時（優先）</p>
+                  <p class="text-xs text-slate-500 mt-1">要望→改善→定着までを一緒に回す</p>
                 </div>
               </div>
 
-              <!-- SLA -->
+              <!-- しないこと（共通） -->
               <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">対応スピード（SLA目安）</p>
-                  <p class="text-xs text-slate-500 mt-1">障害/問い合わせの初回返信</p>
+                <div class="p-4 bg-slate-50 md:border-r border-slate-200 font-semibold text-slate-800">
+                  しないこと（共通）
                 </div>
-                <div class="p-4 md:border-r border-slate-200 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>初回回答：5営業日以内</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>即日/緊急SLA</li>
-                  </ul>
-                </div>
-                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>初回回答：2〜3営業日以内</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>48時間以内の優先対応</li>
-                  </ul>
-                </div>
-                <div class="p-4 bg-purple-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>初回回答：48時間以内（目安）</li>
-                    <li>緊急時は優先対応</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>24/365常時監視（要別途）</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- セキュリティ/権限 -->
-              <div class="grid grid-cols-1 md:grid-cols-4">
-                <div class="p-4 bg-slate-50 md:border-r border-slate-200">
-                  <p class="font-semibold text-slate-800">権限・セキュリティ設計</p>
-                  <p class="text-xs text-slate-500 mt-1">アクセス制御/監査の深さ</p>
-                </div>
-                <div class="p-4 md:border-r border-slate-200 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>Googleアカウント単位の権限</li>
-                    <li>基本のアクセス制御</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>多ロール（本部/拠点/委員会…）</li>
-                  </ul>
-                </div>
-                <div class="p-4 md:border-r border-slate-200 bg-indigo-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>役職別の簡易ロール設計</li>
-                    <li>監査ログ運用の相談</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>厳格な監査設計（制度対応）</li>
-                  </ul>
-                </div>
-                <div class="p-4 bg-purple-50/40 text-sm">
-                  <p class="font-semibold">含まれる</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>多ロール権限・統制設計</li>
-                    <li>運用ルール・監査の整備</li>
-                  </ul>
-                  <p class="font-semibold mt-3">対象外</p>
-                  <ul class="text-slate-700 list-disc pl-5">
-                    <li>ISMS/監査対応の代行（要別途）</li>
+                <div class="p-4 md:col-span-3">
+                  <ul class="list-disc pl-5 text-slate-700 space-y-1">
+                    <li>外部システムのAPI連携・個別連携（基本しません）</li>
+                    <li>24時間365日の運用監視・常駐対応</li>
+                    <li>制度の申請代行そのもの（やり方の案内は可）</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            <!-- footnote -->
             <div class="p-4 bg-slate-50 border-t border-slate-200 text-xs text-slate-600">
-              <p>
-                ※目安です。要件の難易度・個人情報の範囲・連携の有無で変わるため、着手前に「含まれる範囲」を合意してから進めます。
-              </p>
+              ※「月20時間」は改善・新機能・調整を含む上限です（超える場合は翌月に繰越 or 別途見積り）。
             </div>
           </div>
         </div>
