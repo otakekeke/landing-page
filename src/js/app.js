@@ -9,6 +9,7 @@
     initMobileMenu();
     initSmoothScroll();
     initFormHandling();
+    initMonthlyCalculator();
   });
 
   // モバイルメニューの初期化
@@ -138,5 +139,149 @@
   document.addEventListener('DOMContentLoaded', function() {
     initPrintButton();
   });
+
+  // 月額算出ツールの初期化
+  function initMonthlyCalculator() {
+    const container = document.getElementById('reduction-hours-container');
+    const addBtn = document.getElementById('add-reduction-hour-btn');
+    const calculateBtn = document.getElementById('calculate-btn');
+    
+    if (!container || !addBtn || !calculateBtn) {
+      return; // contract.html以外のページでは実行しない
+    }
+
+    let fieldCount = 0;
+
+    // 初期の削減時間入力欄を追加
+    addReductionHourField();
+
+    // 削減時間を追加ボタン
+    addBtn.addEventListener('click', function() {
+      addReductionHourField();
+    });
+
+    // 算出ボタン
+    calculateBtn.addEventListener('click', function() {
+      calculateMonthlyFee();
+    });
+
+    // 削減時間入力欄を追加する関数
+    function addReductionHourField() {
+      fieldCount++;
+      const fieldId = 'reduction-hour-' + fieldCount;
+      
+      const fieldWrapper = document.createElement('div');
+      fieldWrapper.className = 'flex items-center gap-3 reduction-hour-field';
+      fieldWrapper.dataset.fieldId = fieldId;
+      
+      fieldWrapper.innerHTML = `
+        <input 
+          type="number" 
+          id="${fieldId}" 
+          class="reduction-hour-input flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+          min="0" 
+          step="0.1"
+          placeholder="削減時間（時間/月）">
+        <button 
+          type="button" 
+          class="remove-field-btn px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors ${fieldCount === 1 ? 'hidden' : ''}"
+          aria-label="この削減時間を削除">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      `;
+      
+      container.appendChild(fieldWrapper);
+      
+      // 削除ボタンのイベント
+      const removeBtn = fieldWrapper.querySelector('.remove-field-btn');
+      if (removeBtn) {
+        removeBtn.addEventListener('click', function() {
+          fieldWrapper.remove();
+          updateRemoveButtons();
+        });
+      }
+      
+      updateRemoveButtons();
+    }
+
+    // 削除ボタンの表示/非表示を更新
+    function updateRemoveButtons() {
+      const fields = container.querySelectorAll('.reduction-hour-field');
+      fields.forEach(function(field, index) {
+        const removeBtn = field.querySelector('.remove-field-btn');
+        if (removeBtn) {
+          if (fields.length === 1) {
+            removeBtn.classList.add('hidden');
+          } else {
+            removeBtn.classList.remove('hidden');
+          }
+        }
+      });
+    }
+
+    // 月額料金を計算する関数
+    function calculateMonthlyFee() {
+      const hourlyWageInput = document.getElementById('hourly-wage');
+      const hourlyWage = parseFloat(hourlyWageInput.value) || 0;
+      
+      if (hourlyWage <= 0) {
+        alert('平均時給を入力してください。');
+        hourlyWageInput.focus();
+        return;
+      }
+
+      // すべての削減時間を取得
+      const reductionInputs = container.querySelectorAll('.reduction-hour-input');
+      let totalReductionHours = 0;
+      const reductionHours = [];
+
+      reductionInputs.forEach(function(input) {
+        const hours = parseFloat(input.value) || 0;
+        if (hours > 0) {
+          reductionHours.push(hours);
+          totalReductionHours += hours;
+        }
+      });
+
+      if (totalReductionHours <= 0) {
+        alert('削減時間を入力してください。');
+        return;
+      }
+
+      // 計算: 削減時間 × 時給 × 1/3
+      const monthlyFee = Math.round(totalReductionHours * hourlyWage * (1/3));
+
+      // 結果を表示
+      displayResult(totalReductionHours, hourlyWage, monthlyFee, reductionHours);
+    }
+
+    // 結果を表示する関数
+    function displayResult(totalHours, hourlyWage, monthlyFee, reductionHours) {
+      const resultDiv = document.getElementById('calculation-result');
+      const formulaDiv = document.getElementById('calculation-formula');
+      const monthlyFeeDiv = document.getElementById('monthly-fee');
+
+      // 計算式を表示
+      let formulaText = '';
+      if (reductionHours.length === 1) {
+        formulaText = `${totalHours}時間 × ${hourlyWage.toLocaleString()}円 × 1/3`;
+      } else {
+        const hoursText = reductionHours.map(h => h + '時間').join(' + ');
+        formulaText = `(${hoursText}) × ${hourlyWage.toLocaleString()}円 × 1/3 = ${totalHours}時間 × ${hourlyWage.toLocaleString()}円 × 1/3`;
+      }
+      formulaDiv.textContent = formulaText;
+
+      // 月額料金を表示
+      monthlyFeeDiv.textContent = monthlyFee.toLocaleString();
+
+      // 結果エリアを表示
+      resultDiv.classList.remove('hidden');
+      
+      // 結果エリアまでスクロール
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
 
 })();
