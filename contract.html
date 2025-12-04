@@ -6,6 +6,9 @@
   <title>ベータ版プラン契約のご説明 - 嶽ノ子 | 業務効率化アプリ サービス利用契約</title>
   <meta name="description" content="ベータ版プラン契約の内容を分かりやすくご説明します。料金、無料期間、解約、障害対応など重要なポイントを視覚的に解説。">
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PDF生成ライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
   <style>
     html { scroll-behavior: smooth; }
     code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
@@ -510,6 +513,30 @@
                     </button>
                   </div>
 
+                  <!-- 会社名入力 -->
+                  <div>
+                    <label for="company-name" class="block text-sm font-semibold text-slate-700 mb-2">
+                      お客様名（会社名） <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      id="company-name" 
+                      placeholder="例：株式会社○○○"
+                      class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+                  </div>
+
+                  <!-- 備考欄 -->
+                  <div>
+                    <label for="remarks" class="block text-sm font-semibold text-slate-700 mb-2">
+                      備考（特記事項等）
+                    </label>
+                    <textarea 
+                      id="remarks" 
+                      rows="3"
+                      placeholder="特記事項があればご記入ください"
+                      class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"></textarea>
+                  </div>
+
                   <!-- 平均時給入力 -->
                   <div>
                     <label for="hourly-wage" class="block text-sm font-semibold text-slate-700 mb-2">
@@ -534,7 +561,7 @@
 
                   <!-- 結果表示エリア -->
                   <div id="calculation-result" class="hidden">
-                    <div class="bg-emerald-50 border-2 border-emerald-300 rounded-lg p-6">
+                    <div class="bg-emerald-50 border-2 border-emerald-300 rounded-lg p-6 space-y-4">
                       <p class="text-sm text-slate-600 mb-2 text-center">月額保守費</p>
                       <div class="text-center mb-3">
                         <p id="calculation-formula" class="text-sm text-slate-600 mb-2"></p>
@@ -542,6 +569,17 @@
                       <div class="text-center">
                         <p id="monthly-fee" class="text-4xl font-bold text-emerald-600 mb-1"></p>
                         <p class="text-sm text-slate-600">円/月</p>
+                      </div>
+                      <div class="pt-4 border-t border-emerald-200">
+                        <button 
+                          type="button" 
+                          id="export-pdf-btn"
+                          class="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                          </svg>
+                          PDFでエクスポート
+                        </button>
                       </div>
                     </div>
                   </div>
