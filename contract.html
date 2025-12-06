@@ -6,67 +6,105 @@
   <title>ベータ版プラン契約のご説明 - 嶽ノ子 | 業務効率化アプリ サービス利用契約</title>
   <meta name="description" content="ベータ版プラン契約の内容を分かりやすくご説明します。料金、無料期間、解約、障害対応など重要なポイントを視覚的に解説。">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- PDF生成ライブラリ（複数のCDNを試行） -->
-  <script>
-    // html2pdf.jsを読み込む関数
-    function loadHtml2Pdf() {
-      return new Promise(function(resolve, reject) {
-        // 既に読み込まれているか確認
-        if (typeof html2pdf !== 'undefined' || typeof window.html2pdf !== 'undefined') {
-          resolve();
-          return;
-        }
-
-        // CDNリスト
-        const cdns = [
-          'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js',
-          'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
-          'https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'
-        ];
-
-        let currentIndex = 0;
-
-        function tryNextCDN() {
-          if (currentIndex >= cdns.length) {
-            reject(new Error('すべてのCDNからの読み込みに失敗しました。'));
-            return;
-          }
-
-          const script = document.createElement('script');
-          script.src = cdns[currentIndex];
-          script.onload = function() {
-            console.log('html2pdf.jsが正常に読み込まれました: ' + cdns[currentIndex]);
-            resolve();
-          };
-          script.onerror = function() {
-            console.warn('CDN読み込み失敗: ' + cdns[currentIndex]);
-            currentIndex++;
-            tryNextCDN();
-          };
-          document.head.appendChild(script);
-        }
-
-        tryNextCDN();
-      });
-    }
-
-    // ページ読み込み時にhtml2pdf.jsを読み込む
-    loadHtml2Pdf().catch(function(error) {
-      console.error('html2pdf.jsの読み込みに失敗:', error);
-    });
-  </script>
-  <!-- 日本語フォント -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
     code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
     @media (max-width: 768px) {
       body { padding-bottom: 72px; }
     }
-    body {
-      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    
+    /* 印刷用スタイル */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #estimate-print-area,
+      #estimate-print-area * {
+        visibility: visible;
+      }
+      #estimate-print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+      .print-page {
+        page-break-after: always;
+      }
+      .print-page:last-child {
+        page-break-after: auto;
+      }
+    }
+    
+    /* 見積書のスタイル */
+    #estimate-print-area {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, 'MS PGothic', sans-serif;
+      color: #000;
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+    .estimate-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .estimate-title {
+      font-size: 18pt;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .estimate-info {
+      font-size: 9pt;
+      margin-bottom: 15px;
+    }
+    .estimate-section {
+      margin-bottom: 15px;
+    }
+    .estimate-section-title {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 3px;
+    }
+    .estimate-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+      font-size: 9pt;
+    }
+    .estimate-table th,
+    .estimate-table td {
+      border: 1px solid #000;
+      padding: 5px;
+      text-align: left;
+    }
+    .estimate-table th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: center;
+    }
+    .estimate-table td {
+      text-align: center;
+    }
+    .estimate-table td:first-child {
+      text-align: left;
+    }
+    .estimate-total {
+      font-size: 16pt;
+      font-weight: bold;
+      color: #10b981;
+      text-align: center;
+      margin: 15px 0;
+    }
+    .estimate-footer {
+      margin-top: 30px;
+      font-size: 8pt;
+      border-top: 1px solid #000;
+      padding-top: 10px;
     }
   </style>
 </head>
@@ -996,6 +1034,9 @@
       </a>
     </div>
   </div>
+
+  <!-- 見積書印刷用エリア（非表示） -->
+  <div id="estimate-print-area" class="hidden"></div>
 
   <script src="src/js/app.js"></script>
 </body>
