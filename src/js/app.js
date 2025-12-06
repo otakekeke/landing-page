@@ -359,11 +359,65 @@
 
     // PDFエクスポート関数
     function exportToPDF() {
-      // html2pdf.jsが読み込まれているか確認
-      if (typeof html2pdf === 'undefined') {
-        alert('PDF生成ライブラリが読み込まれていません。ページを再読み込みしてください。');
+      // html2pdf関数を取得（複数の方法で確認）
+      function getHtml2PdfFn() {
+        if (typeof html2pdf !== 'undefined') {
+          return html2pdf;
+        }
+        if (typeof window.html2pdf !== 'undefined') {
+          return window.html2pdf;
+        }
+        // html2pdf.jsは通常、グローバルスコープにhtml2pdfとして定義される
+        if (window.html2pdf && typeof window.html2pdf === 'function') {
+          return window.html2pdf;
+        }
+        return null;
+      }
+      
+      let html2pdfFn = getHtml2PdfFn();
+      
+      // ライブラリが読み込まれていない場合、少し待ってから再試行
+      if (!html2pdfFn) {
+        // 最大5秒待つ
+        let attempts = 0;
+        const maxAttempts = 50; // 100ms × 50 = 5秒
+        
+        // ローディング表示
+        const exportBtn = document.getElementById('export-pdf-btn');
+        const originalText = exportBtn ? exportBtn.textContent : '';
+        if (exportBtn) {
+          exportBtn.disabled = true;
+          exportBtn.textContent = 'ライブラリ読み込み中...';
+        }
+        
+        const checkInterval = setInterval(function() {
+          attempts++;
+          html2pdfFn = getHtml2PdfFn();
+          
+          if (html2pdfFn) {
+            clearInterval(checkInterval);
+            if (exportBtn) {
+              exportBtn.disabled = false;
+              exportBtn.textContent = originalText;
+            }
+            executePDFExport(html2pdfFn);
+          } else if (attempts >= maxAttempts) {
+            clearInterval(checkInterval);
+            if (exportBtn) {
+              exportBtn.disabled = false;
+              exportBtn.textContent = originalText;
+            }
+            alert('PDF生成ライブラリが読み込まれていません。\n\n以下のいずれかを試してください：\n1. ページを再読み込みしてください（F5キー）\n2. 数秒待ってから再度お試しください\n3. ブラウザのコンソール（F12）でエラーを確認してください\n\nCDNへの接続に問題がある可能性があります。');
+          }
+        }, 100);
         return;
       }
+      
+      executePDFExport(html2pdfFn);
+    }
+    
+    // PDFエクスポート実行関数
+    function executePDFExport(html2pdfFn) {
       
       // データ取得
       const companyName = document.getElementById('company-name').value.trim();
@@ -596,7 +650,7 @@
         };
 
         // PDF生成
-        html2pdf().set(opt).from(element).save().then(function() {
+        html2pdfFn().set(opt).from(element).save().then(function() {
           // 一時要素を削除
           if (element.parentNode) {
             document.body.removeChild(element);

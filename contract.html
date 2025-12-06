@@ -6,8 +6,55 @@
   <title>ベータ版プラン契約のご説明 - 嶽ノ子 | 業務効率化アプリ サービス利用契約</title>
   <meta name="description" content="ベータ版プラン契約の内容を分かりやすくご説明します。料金、無料期間、解約、障害対応など重要なポイントを視覚的に解説。">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- PDF生成ライブラリ -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- PDF生成ライブラリ（複数のCDNを試行） -->
+  <script>
+    // html2pdf.jsを読み込む関数
+    function loadHtml2Pdf() {
+      return new Promise(function(resolve, reject) {
+        // 既に読み込まれているか確認
+        if (typeof html2pdf !== 'undefined' || typeof window.html2pdf !== 'undefined') {
+          resolve();
+          return;
+        }
+
+        // CDNリスト
+        const cdns = [
+          'https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js',
+          'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js',
+          'https://unpkg.com/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'
+        ];
+
+        let currentIndex = 0;
+
+        function tryNextCDN() {
+          if (currentIndex >= cdns.length) {
+            reject(new Error('すべてのCDNからの読み込みに失敗しました。'));
+            return;
+          }
+
+          const script = document.createElement('script');
+          script.src = cdns[currentIndex];
+          script.onload = function() {
+            console.log('html2pdf.jsが正常に読み込まれました: ' + cdns[currentIndex]);
+            resolve();
+          };
+          script.onerror = function() {
+            console.warn('CDN読み込み失敗: ' + cdns[currentIndex]);
+            currentIndex++;
+            tryNextCDN();
+          };
+          document.head.appendChild(script);
+        }
+
+        tryNextCDN();
+      });
+    }
+
+    // ページ読み込み時にhtml2pdf.jsを読み込む
+    loadHtml2Pdf().catch(function(error) {
+      console.error('html2pdf.jsの読み込みに失敗:', error);
+    });
+  </script>
   <!-- 日本語フォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
