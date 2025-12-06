@@ -359,14 +359,11 @@
 
     // PDFエクスポート関数
     function exportToPDF() {
-      // jsPDFが読み込まれているか確認
-      if (typeof window.jspdf === 'undefined') {
+      // html2pdf.jsが読み込まれているか確認
+      if (typeof html2pdf === 'undefined') {
         alert('PDF生成ライブラリが読み込まれていません。ページを再読み込みしてください。');
         return;
       }
-
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF('p', 'mm', 'a4');
       
       // データ取得
       const companyName = document.getElementById('company-name').value.trim();
@@ -426,190 +423,199 @@
       const validDay = String(validUntil.getDate()).padStart(2, '0');
       const validUntilStr = `${validYear}年${validMonth}月${validDay}日`;
 
-      let yPos = 20;
-
-      // ヘッダー
-      doc.setFontSize(16);
-      doc.setFont('helvetica', 'bold');
-      doc.text('業務効率化アプリ 月額料金見積書', 105, yPos, { align: 'center' });
-      yPos += 10;
-
-      // 作成日・サービス提供元
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text(`作成日：${dateStr}`, 20, yPos);
-      doc.text('サービス提供元：嶽ノ子', 150, yPos);
-      yPos += 8;
-
-      // お客様名
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text('お客様名', 20, yPos);
-      doc.setFont('helvetica', 'normal');
-      doc.text(companyName, 50, yPos);
-      yPos += 10;
-
-      // 見積有効期限
-      doc.setFontSize(10);
-      doc.text(`見積有効期限：${validUntilStr}`, 20, yPos);
-      yPos += 8;
-
-      // 区切り線
-      doc.setLineWidth(0.5);
-      doc.line(20, yPos, 190, yPos);
-      yPos += 8;
-
-      // 料金詳細テーブル
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.text('料金詳細', 20, yPos);
-      yPos += 6;
-
-      const tableData = functionDetails.map(function(detail) {
-        return [
-          detail.name,
-          `${detail.perTask}時間`,
-          `${detail.perMonth}回`,
-          `${detail.hours.toFixed(1)}時間`
-        ];
+      // テーブル行を生成
+      let tableRows = '';
+      functionDetails.forEach(function(detail) {
+        tableRows += `
+          <tr>
+            <td class="border px-3 py-2">${escapeHtml(detail.name)}</td>
+            <td class="border px-3 py-2 text-center">${detail.perTask}時間</td>
+            <td class="border px-3 py-2 text-center">${detail.perMonth}回</td>
+            <td class="border px-3 py-2 text-center">${detail.hours.toFixed(1)}時間</td>
+          </tr>
+        `;
       });
+      tableRows += `
+        <tr class="font-bold bg-slate-100">
+          <td class="border px-3 py-2">合計</td>
+          <td class="border px-3 py-2 text-center">-</td>
+          <td class="border px-3 py-2 text-center">-</td>
+          <td class="border px-3 py-2 text-center">${totalReductionHours.toFixed(1)}時間</td>
+        </tr>
+      `;
 
-      // 合計行を追加
-      tableData.push([
-        '合計',
-        '-',
-        '-',
-        `${totalReductionHours.toFixed(1)}時間`
-      ]);
+      // HTMLコンテンツを生成
+      const pdfContent = `
+        <div style="font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; padding: 20mm; max-width: 210mm; margin: 0 auto; color: #1e293b;">
+          <!-- ヘッダー -->
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h1 style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">業務効率化アプリ 月額料金見積書</h1>
+            <div style="font-size: 10px; display: flex; justify-content: space-between; margin-top: 10px;">
+              <span>作成日：${dateStr}</span>
+              <span>サービス提供元：嶽ノ子</span>
+            </div>
+          </div>
 
-      doc.autoTable({
-        startY: yPos,
-        head: [['機能名', '作業当たり削減時間', '月当たり回数', '削減時間合計（時間/月）']],
-        body: tableData,
-        theme: 'striped',
-        headStyles: { fillColor: [99, 102, 241], textColor: 255, fontStyle: 'bold' },
-        styles: { fontSize: 9, cellPadding: 3 },
-        columnStyles: {
-          0: { cellWidth: 60 },
-          1: { cellWidth: 40, halign: 'center' },
-          2: { cellWidth: 30, halign: 'center' },
-          3: { cellWidth: 40, halign: 'center' }
-        },
-        margin: { left: 20, right: 20 }
-      });
+          <!-- 基本情報 -->
+          <div style="margin-bottom: 15px;">
+            <div style="margin-bottom: 8px;">
+              <span style="font-weight: bold; font-size: 12px;">お客様名：</span>
+              <span style="font-size: 12px;">${escapeHtml(companyName)}</span>
+            </div>
+            <div style="font-size: 10px;">
+              <span>見積有効期限：${validUntilStr}</span>
+            </div>
+          </div>
 
-      yPos = doc.lastAutoTable.finalY + 10;
+          <hr style="border: none; border-top: 1px solid #cbd5e1; margin: 15px 0;">
 
-      // 計算式
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('平均時給：', 20, yPos);
-      doc.setFont('helvetica', 'bold');
-      doc.text(`${hourlyWage.toLocaleString()}円`, 50, yPos);
-      yPos += 6;
+          <!-- 料金詳細 -->
+          <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 11px; font-weight: bold; margin-bottom: 8px;">料金詳細</h2>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+              <thead>
+                <tr style="background-color: #6366f1; color: white;">
+                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">機能名</th>
+                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">作業当たり削減時間</th>
+                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">月当たり回数</th>
+                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">削減時間合計（時間/月）</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tableRows}
+              </tbody>
+            </table>
+          </div>
 
-      doc.setFont('helvetica', 'normal');
-      doc.text('計算式：', 20, yPos);
-      const formulaText = `${totalReductionHours.toFixed(1)}時間 × ${hourlyWage.toLocaleString()}円 × 1/3`;
-      doc.text(formulaText, 50, yPos);
-      yPos += 10;
+          <!-- 計算式 -->
+          <div style="margin-bottom: 15px; font-size: 10px;">
+            <div style="margin-bottom: 5px;">
+              <span style="font-weight: bold;">平均時給：</span>
+              <span style="font-weight: bold;">${hourlyWage.toLocaleString()}円</span>
+            </div>
+            <div>
+              <span style="font-weight: bold;">計算式：</span>
+              <span>${totalReductionHours.toFixed(1)}時間 × ${hourlyWage.toLocaleString()}円 × 1/3</span>
+            </div>
+          </div>
 
-      // 月額保守費
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'bold');
-      doc.text('月額保守費（税込）', 20, yPos);
-      yPos += 8;
+          <!-- 月額保守費 -->
+          <div style="margin-bottom: 20px; text-align: center; padding: 15px; background-color: #ecfdf5; border: 2px solid #10b981; border-radius: 8px;">
+            <div style="font-size: 11px; color: #64748b; margin-bottom: 5px;">月額保守費（税込）</div>
+            <div style="font-size: 24px; font-weight: bold; color: #10b981;">${monthlyFee.toLocaleString()}円/月</div>
+          </div>
 
-      doc.setFontSize(20);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(16, 185, 129);
-      doc.text(`${monthlyFee.toLocaleString()}円/月`, 20, yPos);
-      doc.setTextColor(0, 0, 0);
-      yPos += 15;
+          <hr style="border: none; border-top: 1px solid #cbd5e1; margin: 15px 0;">
 
-      // 区切り線
-      doc.setLineWidth(0.5);
-      doc.line(20, yPos, 190, yPos);
-      yPos += 8;
+          <!-- 契約条件 -->
+          <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 11px; font-weight: bold; margin-bottom: 8px;">契約条件</h2>
+            <ul style="font-size: 9px; padding-left: 20px; margin: 0; line-height: 1.8;">
+              <li>初期費用：無料（ベータ版プラン）</li>
+              <li>支払条件：月末締め翌月末日支払（Stripeによる自動決済）</li>
+              <li>契約期間：月単位の自動更新（解約は14日前までに通知）</li>
+              <li>解約条件：14日前までの通知により解約可能</li>
+              <li>その他：詳細は契約書をご確認ください</li>
+            </ul>
+          </div>
 
-      // 契約条件
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.text('契約条件', 20, yPos);
-      yPos += 6;
+          ${remarks ? `
+          <!-- 備考 -->
+          <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 11px; font-weight: bold; margin-bottom: 8px;">備考</h2>
+            <div style="font-size: 9px; padding: 8px; background-color: #f8fafc; border-radius: 4px; white-space: pre-wrap;">${escapeHtml(remarks)}</div>
+          </div>
+          ` : ''}
 
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'normal');
-      const conditions = [
-        '初期費用：無料（ベータ版プラン）',
-        '支払条件：月末締め翌月末日支払（Stripeによる自動決済）',
-        '契約期間：月単位の自動更新（解約は14日前までに通知）',
-        '解約条件：14日前までの通知により解約可能',
-        'その他：詳細は契約書をご確認ください'
-      ];
+          <hr style="border: none; border-top: 1px solid #cbd5e1; margin: 15px 0;">
 
-      conditions.forEach(function(condition) {
-        doc.text('・' + condition, 25, yPos);
-        yPos += 5;
-      });
+          <!-- フッター -->
+          <div style="font-size: 9px;">
+            <div style="font-weight: bold; margin-bottom: 5px;">サービス提供元</div>
+            <div style="line-height: 1.8;">
+              <div>屋号：嶽ノ子</div>
+              <div>代表者：大嶽 耕太郎</div>
+              <div>所在地：神奈川県相模原市中央区千代田7-10-7</div>
+              <div>メール：takenoko.ai.care@gmail.com</div>
+              <div>電話：070-1383-4420</div>
+              <div>受付時間：平日・土曜 9:00-18:00</div>
+            </div>
+          </div>
 
-      yPos += 5;
+          <!-- 注意事項 -->
+          <div style="margin-top: 15px; font-size: 8px; color: #64748b;">
+            <div>※本見積書は参考資料です。正式な契約条件は契約書に準じます。</div>
+            <div>※本見積書の有効期限は上記の通りです。</div>
+          </div>
+        </div>
+      `;
 
-      // 備考欄
-      if (remarks) {
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'bold');
-        doc.text('備考', 20, yPos);
-        yPos += 6;
+      // 一時的な要素を作成
+      const element = document.createElement('div');
+      element.innerHTML = pdfContent;
+      element.style.position = 'absolute';
+      element.style.left = '-9999px';
+      document.body.appendChild(element);
 
-        doc.setFontSize(9);
-        doc.setFont('helvetica', 'normal');
-        // 備考が長い場合は改行処理
-        const splitRemarks = doc.splitTextToSize(remarks, 170);
-        splitRemarks.forEach(function(line) {
-          doc.text(line, 25, yPos);
-          yPos += 5;
+      // フォント読み込みを待つ
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function() {
+          generatePDF();
         });
-        yPos += 3;
+      } else {
+        // フォント読み込みを待つ（フォールバック）
+        setTimeout(function() {
+          generatePDF();
+        }, 1000);
       }
 
-      // フッター
-      doc.setLineWidth(0.5);
-      doc.line(20, yPos, 190, yPos);
-      yPos += 8;
+      function generatePDF() {
+        // PDF生成オプション
+        const opt = {
+          margin: [10, 10, 10, 10],
+          filename: `月額料金見積書_${companyName}_${dateStr.replace(/[年月日]/g, '')}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            logging: false,
+            onclone: function(clonedDoc) {
+              // クローンされたドキュメントにもフォントを適用
+              const clonedElement = clonedDoc.querySelector('div');
+              if (clonedElement) {
+                clonedElement.style.fontFamily = "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif";
+              }
+            }
+          },
+          jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait' 
+          }
+        };
 
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.text('サービス提供元', 20, yPos);
-      yPos += 5;
+        // PDF生成
+        html2pdf().set(opt).from(element).save().then(function() {
+          // 一時要素を削除
+          if (element.parentNode) {
+            document.body.removeChild(element);
+          }
+        }).catch(function(error) {
+          console.error('PDF生成エラー:', error);
+          alert('PDF生成中にエラーが発生しました。ページを再読み込みして再度お試しください。');
+          if (element.parentNode) {
+            document.body.removeChild(element);
+          }
+        });
+      }
+    }
 
-      doc.setFont('helvetica', 'normal');
-      const providerInfo = [
-        '屋号：嶽ノ子',
-        '代表者：大嶽 耕太郎',
-        '所在地：神奈川県相模原市中央区千代田7-10-7',
-        'メール：takenoko.ai.care@gmail.com',
-        '電話：070-1383-4420',
-        '受付時間：平日・土曜 9:00-18:00'
-      ];
-
-      providerInfo.forEach(function(info) {
-        doc.text(info, 25, yPos);
-        yPos += 4.5;
-      });
-
-      yPos += 5;
-
-      // 注意事項
-      doc.setFontSize(8);
-      doc.setTextColor(100, 100, 100);
-      doc.text('※本見積書は参考資料です。正式な契約条件は契約書に準じます。', 20, yPos);
-      yPos += 4;
-      doc.text('※本見積書の有効期限は上記の通りです。', 20, yPos);
-
-      // PDFをダウンロード
-      const fileName = `月額料金見積書_${companyName}_${dateStr.replace(/\//g, '')}.pdf`;
-      doc.save(fileName);
+    // HTMLエスケープ関数
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
   }
 

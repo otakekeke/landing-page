@@ -7,13 +7,19 @@
   <meta name="description" content="ベータ版プラン契約の内容を分かりやすくご説明します。料金、無料期間、解約、障害対応など重要なポイントを視覚的に解説。">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- PDF生成ライブラリ -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- 日本語フォント -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
     code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
     @media (max-width: 768px) {
       body { padding-bottom: 72px; }
+    }
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     }
   </style>
 </head>
