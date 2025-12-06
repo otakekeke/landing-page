@@ -482,25 +482,25 @@
       functionDetails.forEach(function(detail) {
         tableRows += `
           <tr>
-            <td class="border px-3 py-2">${escapeHtml(detail.name)}</td>
-            <td class="border px-3 py-2 text-center">${detail.perTask}時間</td>
-            <td class="border px-3 py-2 text-center">${detail.perMonth}回</td>
-            <td class="border px-3 py-2 text-center">${detail.hours.toFixed(1)}時間</td>
+            <td style="border: 1px solid #cbd5e1; padding: 6px;">${escapeHtml(detail.name)}</td>
+            <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">${detail.perTask}時間</td>
+            <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">${detail.perMonth}回</td>
+            <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">${detail.hours.toFixed(1)}時間</td>
           </tr>
         `;
       });
       tableRows += `
-        <tr class="font-bold bg-slate-100">
-          <td class="border px-3 py-2">合計</td>
-          <td class="border px-3 py-2 text-center">-</td>
-          <td class="border px-3 py-2 text-center">-</td>
-          <td class="border px-3 py-2 text-center">${totalReductionHours.toFixed(1)}時間</td>
+        <tr style="font-weight: bold; background-color: #f1f5f9;">
+          <td style="border: 1px solid #cbd5e1; padding: 6px; font-weight: bold;">合計</td>
+          <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">-</td>
+          <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">-</td>
+          <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: center; font-weight: bold;">${totalReductionHours.toFixed(1)}時間</td>
         </tr>
       `;
 
       // HTMLコンテンツを生成
       const pdfContent = `
-        <div style="font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; padding: 20mm; max-width: 210mm; margin: 0 auto; color: #1e293b;">
+        <div id="pdf-content" style="font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; padding: 20mm; width: 210mm; max-width: 210mm; margin: 0; color: #1e293b; background-color: white; box-sizing: border-box; display: block; visibility: visible; opacity: 1;">
           <!-- ヘッダー -->
           <div style="text-align: center; margin-bottom: 20px;">
             <h1 style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">業務効率化アプリ 月額料金見積書</h1>
@@ -526,13 +526,13 @@
           <!-- 料金詳細 -->
           <div style="margin-bottom: 15px;">
             <h2 style="font-size: 11px; font-weight: bold; margin-bottom: 8px;">料金詳細</h2>
-            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px; border: 1px solid #cbd5e1;">
               <thead>
                 <tr style="background-color: #6366f1; color: white;">
-                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">機能名</th>
-                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">作業当たり削減時間</th>
-                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">月当たり回数</th>
-                  <th class="border px-3 py-2" style="border: 1px solid #cbd5e1; padding: 6px; text-align: center;">削減時間合計（時間/月）</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 6px; text-align: left; font-weight: bold;">機能名</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 6px; text-align: center; font-weight: bold;">作業当たり削減時間</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 6px; text-align: center; font-weight: bold;">月当たり回数</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 6px; text-align: center; font-weight: bold;">削減時間合計（時間/月）</th>
                 </tr>
               </thead>
               <tbody>
@@ -607,21 +607,36 @@
       // 一時的な要素を作成
       const element = document.createElement('div');
       element.innerHTML = pdfContent;
+      // 画面内に配置（html2canvasがキャプチャできるように）
       element.style.position = 'absolute';
-      element.style.left = '-9999px';
+      element.style.top = '0';
+      element.style.left = '0';
+      element.style.width = '794px'; // A4幅をピクセルに変換（210mm ≈ 794px at 96dpi）
+      element.style.maxWidth = '794px';
+      element.style.minHeight = '1123px'; // A4高さをピクセルに変換（297mm ≈ 1123px at 96dpi）
+      element.style.visibility = 'visible';
+      element.style.opacity = '1';
+      element.style.pointerEvents = 'none';
+      element.style.zIndex = '9999';
+      element.style.backgroundColor = 'white';
+      element.style.overflow = 'visible';
+      element.style.boxSizing = 'border-box';
       document.body.appendChild(element);
 
-      // フォント読み込みを待つ
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function() {
-          generatePDF();
+      // 要素が完全にレンダリングされるまで待つ
+      setTimeout(function() {
+        // フォント読み込みを待つ
+        const fontPromise = document.fonts && document.fonts.ready 
+          ? document.fonts.ready 
+          : Promise.resolve();
+        
+        fontPromise.then(function() {
+          // さらに少し待ってからPDF生成（レンダリング完了を確実にする）
+          setTimeout(function() {
+            generatePDF();
+          }, 200);
         });
-      } else {
-        // フォント読み込みを待つ（フォールバック）
-        setTimeout(function() {
-          generatePDF();
-        }, 1000);
-      }
+      }, 300);
 
       function generatePDF() {
         // PDF生成オプション
@@ -634,11 +649,32 @@
             useCORS: true,
             letterRendering: true,
             logging: false,
-            onclone: function(clonedDoc) {
-              // クローンされたドキュメントにもフォントを適用
-              const clonedElement = clonedDoc.querySelector('div');
+            allowTaint: false,
+            backgroundColor: '#ffffff',
+            width: element.scrollWidth || 794,
+            height: element.scrollHeight || 1123,
+            x: 0,
+            y: 0,
+            scrollX: 0,
+            scrollY: 0,
+            onclone: function(clonedDoc, clonedElement) {
+              // クローンされたドキュメントにもフォントとスタイルを適用
+              const pdfContentDiv = clonedDoc.querySelector('#pdf-content');
+              if (pdfContentDiv) {
+                pdfContentDiv.style.fontFamily = "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif";
+                pdfContentDiv.style.visibility = 'visible';
+                pdfContentDiv.style.opacity = '1';
+                pdfContentDiv.style.position = 'relative';
+                pdfContentDiv.style.width = '794px';
+                pdfContentDiv.style.maxWidth = '794px';
+                pdfContentDiv.style.backgroundColor = 'white';
+                pdfContentDiv.style.color = '#1e293b';
+              }
+              // 親要素のスタイルも確認
               if (clonedElement) {
-                clonedElement.style.fontFamily = "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif";
+                clonedElement.style.visibility = 'visible';
+                clonedElement.style.opacity = '1';
+                clonedElement.style.backgroundColor = 'white';
               }
             }
           },
@@ -651,16 +687,23 @@
 
         // PDF生成
         html2pdfFn().set(opt).from(element).save().then(function() {
-          // 一時要素を削除
-          if (element.parentNode) {
-            document.body.removeChild(element);
-          }
+          console.log('PDF生成成功');
+          // 一時要素を削除（少し遅延させて確実に削除）
+          setTimeout(function() {
+            if (element && element.parentNode) {
+              document.body.removeChild(element);
+            }
+          }, 500);
         }).catch(function(error) {
           console.error('PDF生成エラー:', error);
-          alert('PDF生成中にエラーが発生しました。ページを再読み込みして再度お試しください。');
-          if (element.parentNode) {
-            document.body.removeChild(element);
-          }
+          console.error('エラー詳細:', error.stack);
+          alert('PDF生成中にエラーが発生しました: ' + (error.message || '不明なエラー') + '\n\nブラウザのコンソール（F12）で詳細を確認してください。');
+          // 一時要素を削除
+          setTimeout(function() {
+            if (element && element.parentNode) {
+              document.body.removeChild(element);
+            }
+          }, 500);
         });
       }
     }
