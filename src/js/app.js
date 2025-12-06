@@ -606,7 +606,19 @@
 
       // 一時的な要素を作成
       const element = document.createElement('div');
+      if (!element) {
+        alert('PDF生成エラー: 要素の作成に失敗しました。');
+        return;
+      }
+      
       element.innerHTML = pdfContent;
+      
+      // HTMLコンテンツが正しく設定されたか確認
+      if (!element.innerHTML || element.innerHTML.trim() === '') {
+        alert('PDF生成エラー: HTMLコンテンツが正しく生成されませんでした。');
+        return;
+      }
+      
       // 画面内に配置（html2canvasがキャプチャできるように）
       element.style.position = 'absolute';
       element.style.top = '0';
@@ -621,46 +633,129 @@
       element.style.backgroundColor = 'white';
       element.style.overflow = 'visible';
       element.style.boxSizing = 'border-box';
-      document.body.appendChild(element);
+      
+      // 要素をDOMに追加
+      try {
+        document.body.appendChild(element);
+      } catch (error) {
+        console.error('要素の追加エラー:', error);
+        alert('PDF生成エラー: 要素をDOMに追加できませんでした。\n\nエラー: ' + error.message);
+        return;
+      }
+      
+      // 要素が正しく追加されたか確認
+      if (!element.parentNode) {
+        alert('PDF生成エラー: 要素がDOMに追加されませんでした。');
+        return;
+      }
 
       // 要素が完全にレンダリングされるまで待つ
+      function waitForRender() {
+        return new Promise(function(resolve) {
+          // requestAnimationFrameを使用してレンダリング完了を待つ
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              // 要素のレンダリング確認
+              const rect = element.getBoundingClientRect();
+              const hasContent = element.children.length > 0;
+              const hasSize = rect.width > 0 && rect.height > 0;
+              
+              console.log('レンダリング確認:', {
+                hasContent: hasContent,
+                hasSize: hasSize,
+                width: rect.width,
+                height: rect.height,
+                childrenCount: element.children.length
+              });
+              
+              if (hasContent && hasSize) {
+                resolve();
+              } else {
+                // まだレンダリングされていない場合は少し待つ
+                setTimeout(function() {
+                  resolve();
+                }, 200);
+              }
+            });
+          });
+        });
+      }
+      
+      // レンダリング待機とフォント読み込み
       setTimeout(function() {
         // フォント読み込みを待つ
         const fontPromise = document.fonts && document.fonts.ready 
           ? document.fonts.ready 
           : Promise.resolve();
         
-        fontPromise.then(function() {
+        Promise.all([fontPromise, waitForRender()]).then(function() {
           // さらに少し待ってからPDF生成（レンダリング完了を確実にする）
           setTimeout(function() {
             generatePDF();
-          }, 200);
+          }, 300);
         });
-      }, 300);
+      }, 500);
 
       function generatePDF() {
+        // 要素のサイズと位置を確認（デバッグ用）
+        const rect = element.getBoundingClientRect();
+        const scrollWidth = element.scrollWidth;
+        const scrollHeight = element.scrollHeight;
+        const offsetWidth = element.offsetWidth;
+        const offsetHeight = element.offsetHeight;
+        const children = element.children;
+        
+        console.log('=== PDF生成デバッグ情報 ===');
+        console.log('要素の存在:', element ? 'あり' : 'なし');
+        console.log('getBoundingClientRect:', {
+          width: rect.width,
+          height: rect.height,
+          top: rect.top,
+          left: rect.left,
+          right: rect.right,
+          bottom: rect.bottom
+        });
+        console.log('scrollWidth:', scrollWidth);
+        console.log('scrollHeight:', scrollHeight);
+        console.log('offsetWidth:', offsetWidth);
+        console.log('offsetHeight:', offsetHeight);
+        console.log('子要素の数:', children.length);
+        console.log('要素のスタイル:', {
+          position: element.style.position,
+          visibility: element.style.visibility,
+          opacity: element.style.opacity,
+          width: element.style.width,
+          height: element.style.height || 'auto'
+        });
+        
+        // 要素サイズが0の場合はエラー
+        if (scrollWidth === 0 || scrollHeight === 0) {
+          console.error('要素のサイズが0です。要素が正しくレンダリングされていません。');
+          alert('PDF生成エラー: 要素が正しくレンダリングされていません。\n\nページを再読み込みして再度お試しください。');
+          if (element && element.parentNode) {
+            document.body.removeChild(element);
+          }
+          return;
+        }
+        
         // PDF生成オプション
         const opt = {
           margin: [10, 10, 10, 10],
           filename: `月額料金見積書_${companyName}_${dateStr.replace(/[年月日]/g, '')}.pdf`,
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { 
-            scale: 2,
+            scale: 1.5,
             useCORS: true,
             letterRendering: true,
-            logging: false,
+            logging: true,
             allowTaint: false,
             backgroundColor: '#ffffff',
-            width: element.scrollWidth || 794,
-            height: element.scrollHeight || 1123,
-            x: 0,
-            y: 0,
-            scrollX: 0,
-            scrollY: 0,
             onclone: function(clonedDoc, clonedElement) {
+              console.log('onclone コールバック実行');
               // クローンされたドキュメントにもフォントとスタイルを適用
               const pdfContentDiv = clonedDoc.querySelector('#pdf-content');
               if (pdfContentDiv) {
+                console.log('pdf-content div が見つかりました');
                 pdfContentDiv.style.fontFamily = "'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif";
                 pdfContentDiv.style.visibility = 'visible';
                 pdfContentDiv.style.opacity = '1';
@@ -669,12 +764,17 @@
                 pdfContentDiv.style.maxWidth = '794px';
                 pdfContentDiv.style.backgroundColor = 'white';
                 pdfContentDiv.style.color = '#1e293b';
+              } else {
+                console.warn('pdf-content div が見つかりませんでした');
               }
               // 親要素のスタイルも確認
               if (clonedElement) {
+                console.log('clonedElement が見つかりました');
                 clonedElement.style.visibility = 'visible';
                 clonedElement.style.opacity = '1';
                 clonedElement.style.backgroundColor = 'white';
+              } else {
+                console.warn('clonedElement が見つかりませんでした');
               }
             }
           },
@@ -685,23 +785,48 @@
           }
         };
 
+        // 要素が存在するか再確認
+        if (!element || !element.parentNode) {
+          console.error('PDF生成エラー: 要素が存在しません');
+          alert('PDF生成エラー: 要素が存在しません。ページを再読み込みして再度お試しください。');
+          return;
+        }
+        
         // PDF生成
+        console.log('PDF生成を開始します...');
         html2pdfFn().set(opt).from(element).save().then(function() {
           console.log('PDF生成成功');
           // 一時要素を削除（少し遅延させて確実に削除）
           setTimeout(function() {
-            if (element && element.parentNode) {
-              document.body.removeChild(element);
+            try {
+              if (element && element.parentNode) {
+                document.body.removeChild(element);
+              }
+            } catch (error) {
+              console.warn('要素の削除エラー（無視可能）:', error);
             }
           }, 500);
         }).catch(function(error) {
           console.error('PDF生成エラー:', error);
           console.error('エラー詳細:', error.stack);
-          alert('PDF生成中にエラーが発生しました: ' + (error.message || '不明なエラー') + '\n\nブラウザのコンソール（F12）で詳細を確認してください。');
+          console.error('エラーオブジェクト:', error);
+          
+          let errorMessage = 'PDF生成中にエラーが発生しました。';
+          if (error.message) {
+            errorMessage += '\n\nエラー: ' + error.message;
+          }
+          errorMessage += '\n\nブラウザのコンソール（F12）で詳細を確認してください。';
+          
+          alert(errorMessage);
+          
           // 一時要素を削除
           setTimeout(function() {
-            if (element && element.parentNode) {
-              document.body.removeChild(element);
+            try {
+              if (element && element.parentNode) {
+                document.body.removeChild(element);
+              }
+            } catch (error) {
+              console.warn('要素の削除エラー（無視可能）:', error);
             }
           }, 500);
         });
