@@ -15,28 +15,42 @@
     
     /* 印刷用スタイル */
     @media print {
-      body * {
-        visibility: hidden;
+      /* 見積書エリア以外のすべての要素を非表示 */
+      body > *:not(#estimate-print-area) {
+        display: none !important;
       }
-      #estimate-print-area,
-      #estimate-print-area * {
-        visibility: visible;
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: auto;
+        overflow: visible;
       }
       #estimate-print-area {
-        position: absolute;
+        display: block !important;
+        position: relative;
         left: 0;
         top: 0;
         width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+      }
+      #estimate-print-area * {
+        page-break-inside: avoid;
       }
       @page {
         size: A4;
         margin: 15mm;
       }
-      .print-page {
-        page-break-after: always;
+      /* ページブレークを防ぐ */
+      .estimate-section {
+        page-break-inside: avoid;
       }
-      .print-page:last-child {
-        page-break-after: auto;
+      .estimate-table {
+        page-break-inside: avoid;
       }
     }
     
