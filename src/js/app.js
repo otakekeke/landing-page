@@ -611,6 +611,8 @@
         return;
       }
       
+      // 要素にIDを設定（html2canvasが確実に要素を特定できるように）
+      element.id = 'pdf-export-element';
       element.innerHTML = pdfContent;
       
       // HTMLコンテンツが正しく設定されたか確認
@@ -620,19 +622,26 @@
       }
       
       // 画面内に配置（html2canvasがキャプチャできるように）
-      element.style.position = 'absolute';
-      element.style.top = '0';
-      element.style.left = '0';
+      // position: fixedを使用してビューポート内に確実に配置
+      // スクロール位置を考慮して、確実に画面内に表示
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      element.style.position = 'fixed';
+      element.style.top = '0px';
+      element.style.left = '0px';
       element.style.width = '794px'; // A4幅をピクセルに変換（210mm ≈ 794px at 96dpi）
       element.style.maxWidth = '794px';
+      element.style.height = 'auto';
       element.style.minHeight = '1123px'; // A4高さをピクセルに変換（297mm ≈ 1123px at 96dpi）
+      // 要素を表示するが、見えないようにする（html2canvasがキャプチャできるように）
       element.style.visibility = 'visible';
-      element.style.opacity = '1';
+      element.style.opacity = '0.01'; // ほぼ透明だが、html2canvasはキャプチャできる
       element.style.pointerEvents = 'none';
       element.style.zIndex = '9999';
       element.style.backgroundColor = 'white';
       element.style.overflow = 'visible';
       element.style.boxSizing = 'border-box';
+      element.style.transform = 'translateZ(0)'; // GPU アクセラレーションを有効化
+      element.style.display = 'block'; // 確実にブロック要素として表示
       
       // 要素をDOMに追加
       try {
@@ -744,14 +753,53 @@
           filename: `月額料金見積書_${companyName}_${dateStr.replace(/[年月日]/g, '')}.pdf`,
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { 
-            scale: 1.5,
+            scale: 2,
             useCORS: true,
             letterRendering: true,
             logging: true,
             allowTaint: false,
             backgroundColor: '#ffffff',
+            foreignObjectRendering: false, // SVG foreignObjectは無効化（互換性のため）
+            removeContainer: false, // コンテナを削除しない
             onclone: function(clonedDoc, clonedElement) {
               console.log('onclone コールバック実行');
+              console.log('clonedDoc:', clonedDoc);
+              console.log('clonedElement:', clonedElement);
+              
+              // クローンされたドキュメントから要素を取得
+              // html2pdf.jsでは、clonedElementが渡されない場合があるため、clonedDocから直接取得
+              let targetElement = clonedElement;
+              if (!targetElement) {
+                // IDで要素を取得
+                targetElement = clonedDoc.getElementById('pdf-export-element');
+                if (targetElement) {
+                  console.log('IDで要素を取得しました:', targetElement);
+                } else {
+                  // bodyの最初の子要素を取得（通常は追加した要素）
+                  const body = clonedDoc.body;
+                  if (body && body.firstElementChild) {
+                    targetElement = body.firstElementChild;
+                    console.log('bodyの最初の子要素を取得しました:', targetElement);
+                  }
+                }
+              }
+              
+              // 親要素のスタイルを適用
+              if (targetElement) {
+                console.log('targetElement が見つかりました');
+                targetElement.style.visibility = 'visible';
+                targetElement.style.opacity = '1'; // クローンでは完全に表示
+                targetElement.style.backgroundColor = 'white';
+                targetElement.style.position = 'fixed';
+                targetElement.style.top = '0px';
+                targetElement.style.left = '0px';
+                targetElement.style.width = '794px';
+                targetElement.style.maxWidth = '794px';
+                targetElement.style.display = 'block';
+              } else {
+                console.warn('targetElement が見つかりませんでした');
+              }
+              
               // クローンされたドキュメントにもフォントとスタイルを適用
               const pdfContentDiv = clonedDoc.querySelector('#pdf-content');
               if (pdfContentDiv) {
@@ -766,15 +814,6 @@
                 pdfContentDiv.style.color = '#1e293b';
               } else {
                 console.warn('pdf-content div が見つかりませんでした');
-              }
-              // 親要素のスタイルも確認
-              if (clonedElement) {
-                console.log('clonedElement が見つかりました');
-                clonedElement.style.visibility = 'visible';
-                clonedElement.style.opacity = '1';
-                clonedElement.style.backgroundColor = 'white';
-              } else {
-                console.warn('clonedElement が見つかりませんでした');
               }
             }
           },
