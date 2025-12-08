@@ -204,14 +204,30 @@
         </div>
         <div class="grid md:grid-cols-2 gap-3">
           <div>
-            <label for="${fieldId}-per-task" class="block text-xs text-slate-600 mb-1">一つの作業当たりの削減時間（時間）</label>
-            <input 
-              type="number" 
-              id="${fieldId}-per-task" 
-              class="per-task-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
-              min="0" 
-              step="0.1"
-              placeholder="例：0.5">
+            <label for="${fieldId}-per-task" class="block text-xs text-slate-600 mb-1">一つの作業当たりの削減時間</label>
+            <div class="flex items-center gap-2">
+              <div class="flex-1">
+                <input 
+                  type="number" 
+                  id="${fieldId}-per-task-hours" 
+                  class="per-task-hours-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                  min="0" 
+                  step="1"
+                  placeholder="時間">
+                <label for="${fieldId}-per-task-hours" class="block text-xs text-slate-500 mt-1 text-center">時間</label>
+              </div>
+              <div class="flex-1">
+                <input 
+                  type="number" 
+                  id="${fieldId}-per-task-minutes" 
+                  class="per-task-minutes-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                  min="0" 
+                  max="59"
+                  step="1"
+                  placeholder="分">
+                <label for="${fieldId}-per-task-minutes" class="block text-xs text-slate-500 mt-1 text-center">分</label>
+              </div>
+            </div>
           </div>
           <div>
             <label for="${fieldId}-per-month" class="block text-xs text-slate-600 mb-1">月当たりの回数（回）</label>
@@ -226,7 +242,7 @@
         </div>
         <div class="mt-2 text-xs text-slate-500">
           <span class="calculated-hours-label">削減時間（時間/月）: </span>
-          <span class="calculated-hours-value font-semibold text-indigo-600">0</span>
+          <span class="calculated-hours-value font-semibold text-indigo-600">0時間0分</span>
         </div>
       `;
       
@@ -243,18 +259,47 @@
       }
       
       // 入力値変更時に自動計算
-      const perTaskInput = fieldWrapper.querySelector('.per-task-input');
+      const perTaskHoursInput = fieldWrapper.querySelector('.per-task-hours-input');
+      const perTaskMinutesInput = fieldWrapper.querySelector('.per-task-minutes-input');
       const perMonthInput = fieldWrapper.querySelector('.per-month-input');
       const calculatedValue = fieldWrapper.querySelector('.calculated-hours-value');
       
-      function updateCalculatedHours() {
-        const perTask = parseFloat(perTaskInput.value) || 0;
-        const perMonth = parseFloat(perMonthInput.value) || 0;
-        const calculated = (perTask * perMonth).toFixed(1);
-        calculatedValue.textContent = calculated;
+      // 分の入力値が60以上にならないように制限
+      if (perTaskMinutesInput) {
+        perTaskMinutesInput.addEventListener('input', function() {
+          const minutes = parseInt(this.value) || 0;
+          if (minutes >= 60) {
+            this.value = 59;
+          }
+        });
       }
       
-      perTaskInput.addEventListener('input', updateCalculatedHours);
+      function updateCalculatedHours() {
+        const hours = parseInt(perTaskHoursInput.value) || 0;
+        const minutes = parseInt(perTaskMinutesInput.value) || 0;
+        const perMonth = parseFloat(perMonthInput.value) || 0;
+        
+        // 時間単位に変換（時間 + 分/60）
+        const perTaskInHours = hours + (minutes / 60);
+        const totalHours = perTaskInHours * perMonth;
+        
+        // 時間と分に変換して表示
+        const totalHoursInt = Math.floor(totalHours);
+        const totalMinutesInt = Math.round((totalHours - totalHoursInt) * 60);
+        
+        if (totalHoursInt === 0 && totalMinutesInt === 0) {
+          calculatedValue.textContent = '0時間0分';
+        } else if (totalHoursInt === 0) {
+          calculatedValue.textContent = `${totalMinutesInt}分`;
+        } else if (totalMinutesInt === 0) {
+          calculatedValue.textContent = `${totalHoursInt}時間`;
+        } else {
+          calculatedValue.textContent = `${totalHoursInt}時間${totalMinutesInt}分`;
+        }
+      }
+      
+      perTaskHoursInput.addEventListener('input', updateCalculatedHours);
+      perTaskMinutesInput.addEventListener('input', updateCalculatedHours);
       perMonthInput.addEventListener('input', updateCalculatedHours);
       
       updateRemoveButtons();
@@ -293,23 +338,30 @@
       const functionDetails = [];
 
       fields.forEach(function(field, index) {
-        const perTaskInput = field.querySelector('.per-task-input');
+        const perTaskHoursInput = field.querySelector('.per-task-hours-input');
+        const perTaskMinutesInput = field.querySelector('.per-task-minutes-input');
         const perMonthInput = field.querySelector('.per-month-input');
         const functionNameInput = field.querySelector('.function-name-input');
         
-        const perTask = parseFloat(perTaskInput.value) || 0;
+        const hours = parseInt(perTaskHoursInput.value) || 0;
+        const minutes = parseInt(perTaskMinutesInput.value) || 0;
         const perMonth = parseFloat(perMonthInput.value) || 0;
         const functionName = functionNameInput ? functionNameInput.value.trim() : `機能${index + 1}`;
         
-        if (perTask > 0 && perMonth > 0) {
-          const hours = perTask * perMonth;
-          reductionHours.push(hours);
-          totalReductionHours += hours;
+        // 時間単位に変換（時間 + 分/60）
+        const perTaskInHours = hours + (minutes / 60);
+        
+        if (perTaskInHours > 0 && perMonth > 0) {
+          const totalHours = perTaskInHours * perMonth;
+          reductionHours.push(totalHours);
+          totalReductionHours += totalHours;
           functionDetails.push({
             name: functionName || `機能${index + 1}`,
-            perTask: perTask,
+            perTaskHours: hours,
+            perTaskMinutes: minutes,
+            perTaskInHours: perTaskInHours,
             perMonth: perMonth,
-            hours: hours,
+            hours: totalHours,
             index: index + 1
           });
         }
@@ -333,17 +385,36 @@
       const formulaDiv = document.getElementById('calculation-formula');
       const monthlyFeeDiv = document.getElementById('monthly-fee');
 
+      // 時間と分を文字列に変換する関数
+      function formatTime(hours) {
+        const hoursInt = Math.floor(hours);
+        const minutesInt = Math.round((hours - hoursInt) * 60);
+        if (hoursInt === 0 && minutesInt === 0) {
+          return '0時間0分';
+        } else if (hoursInt === 0) {
+          return `${minutesInt}分`;
+        } else if (minutesInt === 0) {
+          return `${hoursInt}時間`;
+        } else {
+          return `${hoursInt}時間${minutesInt}分`;
+        }
+      }
+      
       // 計算式を表示
       let formulaText = '';
       if (reductionHours.length === 1) {
         const detail = functionDetails[0];
-        formulaText = `${detail.perTask}時間 × ${detail.perMonth}回 = ${totalHours}時間 × ${hourlyWage.toLocaleString()}円 × 1/3`;
+        const perTaskText = formatTime(detail.perTaskInHours);
+        const totalHoursText = formatTime(totalHours);
+        formulaText = `${perTaskText} × ${detail.perMonth}回 = ${totalHoursText} × ${hourlyWage.toLocaleString()}円 × 1/3`;
       } else {
-        const detailsText = functionDetails.map(d => 
-          `${d.perTask}時間 × ${d.perMonth}回`
-        ).join(' + ');
-        const hoursText = reductionHours.map(h => h.toFixed(1) + '時間').join(' + ');
-        formulaText = `(${detailsText}) = (${hoursText}) = ${totalHours.toFixed(1)}時間 × ${hourlyWage.toLocaleString()}円 × 1/3`;
+        const detailsText = functionDetails.map(d => {
+          const perTaskText = formatTime(d.perTaskInHours);
+          return `${perTaskText} × ${d.perMonth}回`;
+        }).join(' + ');
+        const hoursText = reductionHours.map(h => formatTime(h)).join(' + ');
+        const totalHoursText = formatTime(totalHours);
+        formulaText = `(${detailsText}) = (${hoursText}) = ${totalHoursText} × ${hourlyWage.toLocaleString()}円 × 1/3`;
       }
       formulaDiv.textContent = formulaText;
 
@@ -375,22 +446,29 @@
       let totalReductionHours = 0;
 
       fields.forEach(function(field, index) {
-        const perTaskInput = field.querySelector('.per-task-input');
+        const perTaskHoursInput = field.querySelector('.per-task-hours-input');
+        const perTaskMinutesInput = field.querySelector('.per-task-minutes-input');
         const perMonthInput = field.querySelector('.per-month-input');
         const functionNameInput = field.querySelector('.function-name-input');
         
-        const perTask = parseFloat(perTaskInput.value) || 0;
+        const hours = parseInt(perTaskHoursInput.value) || 0;
+        const minutes = parseInt(perTaskMinutesInput.value) || 0;
         const perMonth = parseFloat(perMonthInput.value) || 0;
         const functionName = functionNameInput ? functionNameInput.value.trim() : `機能${index + 1}`;
         
-        if (perTask > 0 && perMonth > 0) {
-          const hours = perTask * perMonth;
-          totalReductionHours += hours;
+        // 時間単位に変換（時間 + 分/60）
+        const perTaskInHours = hours + (minutes / 60);
+        
+        if (perTaskInHours > 0 && perMonth > 0) {
+          const totalHours = perTaskInHours * perMonth;
+          totalReductionHours += totalHours;
           functionDetails.push({
             name: functionName || `機能${index + 1}`,
-            perTask: perTask,
+            perTaskHours: hours,
+            perTaskMinutes: minutes,
+            perTaskInHours: perTaskInHours,
             perMonth: perMonth,
-            hours: hours
+            hours: totalHours
           });
         }
       });
@@ -420,24 +498,42 @@
       // 見積書HTMLを生成
       const printArea = document.getElementById('estimate-print-area');
       
+      // 時間と分を文字列に変換する関数
+      function formatTimeForTable(hours) {
+        const hoursInt = Math.floor(hours);
+        const minutesInt = Math.round((hours - hoursInt) * 60);
+        if (hoursInt === 0 && minutesInt === 0) {
+          return '0時間0分';
+        } else if (hoursInt === 0) {
+          return `${minutesInt}分`;
+        } else if (minutesInt === 0) {
+          return `${hoursInt}時間`;
+        } else {
+          return `${hoursInt}時間${minutesInt}分`;
+        }
+      }
+      
       // テーブル行を生成
       let tableRows = '';
       functionDetails.forEach(function(detail) {
+        const perTaskText = formatTimeForTable(detail.perTaskInHours);
+        const totalHoursText = formatTimeForTable(detail.hours);
         tableRows += `
           <tr>
             <td>${escapeHtml(detail.name)}</td>
-            <td>${detail.perTask}時間</td>
+            <td>${perTaskText}</td>
             <td>${detail.perMonth}回</td>
-            <td>${detail.hours.toFixed(1)}時間</td>
+            <td>${totalHoursText}</td>
           </tr>
         `;
       });
+      const totalHoursText = formatTimeForTable(totalReductionHours);
       tableRows += `
         <tr>
           <td><strong>合計</strong></td>
           <td>-</td>
           <td>-</td>
-          <td><strong>${totalReductionHours.toFixed(1)}時間</strong></td>
+          <td><strong>${totalHoursText}</strong></td>
         </tr>
       `;
 
@@ -492,7 +588,7 @@
 
         <div class="estimate-section">
           <div><strong>平均時給：</strong>${hourlyWage.toLocaleString()}円</div>
-          <div><strong>計算式：</strong>${totalReductionHours.toFixed(1)}時間 × ${hourlyWage.toLocaleString()}円 × 1/3</div>
+          <div><strong>計算式：</strong>${formatTimeForTable(totalReductionHours)} × ${hourlyWage.toLocaleString()}円 × 1/3</div>
         </div>
 
         <div class="estimate-section">
