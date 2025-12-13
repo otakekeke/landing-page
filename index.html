@@ -123,40 +123,131 @@
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- ================= SUMMARY (こう変わる) ================= -->
+    <!-- ================= SUMMARY (試用期間について) ================= -->
     <section id="summary" class="py-16">
-      <h2 class="text-2xl font-bold mb-6">1. こう変わる（成果）</h2>
+      <h2 class="text-2xl font-bold mb-6">1. 試用期間について</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-lg font-semibold mb-2">書類・入力の反復が自動化</h3>
-          <p class="text-slate-600 text-sm">現場の「面倒」を小さな専用アプリに置き換えます。</p>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">無料で1つのプロトタイプアプリを作成</h3>
+          </div>
+          <p class="text-slate-600 text-sm">あなたの施設に合わせて、オーダーメイドで1つのプロトタイプアプリを無料で作成いたします。</p>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-lg font-semibold mb-2">月◯時間のムダ削減</h3>
-          <p class="text-slate-600 text-sm">導入例からの概算。削減時間×時給×1/3のみお支払い。</p>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">実際に使ってから判断できる</h3>
+          </div>
+          <p class="text-slate-600 text-sm">作成したプロトタイプを実際に使用していただき、効果を確認してから導入を判断できます。リスクなくお試しいただけます。</p>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-lg font-semibold mb-2">ケア本来の時間に再配分</h3>
-          <p class="text-slate-600 text-sm">スタッフの集中を妨げない運用を前提に設計。</p>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">試用期間終了まで完全無料</h3>
+          </div>
+          <p class="text-slate-600 text-sm">要件定義からプロトタイプ作成、試用期間、要望反映まで、試用期間終了まで一切の費用はかかりません。</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= FLOW ================= -->
+    <!-- ================= FLOW (試用期間の流れ) ================= -->
     <section id="flow" class="py-16">
-      <h2 class="text-2xl font-bold mb-6">2. 進め方（3ステップ）</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="font-semibold mb-2">1) 現場ヒアリング</h3>
-          <p class="text-sm text-slate-600">30–45分。困りごとを具体化します。</p>
+      <h2 class="text-2xl font-bold mb-8">2. 試用期間の流れ</h2>
+      
+      <!-- デスクトップ: 横並びタイムライン -->
+      <div class="hidden md:block relative">
+        <div class="flex items-start justify-between">
+          <!-- ステップ1: 要件定義 -->
+          <div class="flex-1 relative">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-indigo-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
+                <h3 class="text-lg font-semibold">要件定義</h3>
+              </div>
+              <p class="text-sm text-slate-600 mb-2">30-45分の現場ヒアリングで、困りごとを具体化します。</p>
+              <p class="text-xs text-slate-500">あなたの施設の課題を丁寧にお聞きし、解決策を一緒に考えます。</p>
+            </div>
+            <!-- 矢印 -->
+            <div class="absolute top-6 -right-4 z-10">
+              <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ステップ2: プロトタイプ無料作成 -->
+          <div class="flex-1 relative mx-4">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-emerald-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
+                <h3 class="text-lg font-semibold">プロトタイプ無料作成</h3>
+              </div>
+              <p class="text-sm text-slate-600 mb-2">オーダーメイドで1つのプロトタイプアプリを作成します。</p>
+              <p class="text-xs text-slate-500">あなたの施設専用にカスタマイズしたアプリを無料でお作りします。</p>
+            </div>
+            <!-- 矢印 -->
+            <div class="absolute top-6 -right-4 z-10">
+              <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- ステップ3: 一か月試用 -->
+          <div class="flex-1 relative">
+            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-green-200">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
+                <h3 class="text-lg font-semibold">一か月試用</h3>
+              </div>
+              <p class="text-sm text-slate-600 mb-2">作成したプロトタイプを実際に使用して効果を確認します。</p>
+              <p class="text-xs text-slate-500">一か月間、実際の業務で使用していただき、効果を実感していただけます。</p>
+            </div>
+          </div>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="font-semibold mb-2">2) 試作→現場試用</h3>
-          <p class="text-sm text-slate-600">短期PoC後、2週間の試用で方向性確認。</p>
+      </div>
+
+      <!-- モバイル: 縦並びタイムライン -->
+      <div class="md:hidden space-y-6">
+        <!-- ステップ1: 要件定義 -->
+        <div class="relative pl-8">
+          <div class="absolute left-0 top-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
+            <h3 class="text-lg font-semibold mb-2">要件定義</h3>
+            <p class="text-sm text-slate-600 mb-2">30-45分の現場ヒアリングで、困りごとを具体化します。</p>
+            <p class="text-xs text-slate-500">あなたの施設の課題を丁寧にお聞きし、解決策を一緒に考えます。</p>
+          </div>
+          <!-- 下向き矢印 -->
+          <div class="absolute left-3 top-8 w-0.5 h-6 bg-indigo-300"></div>
         </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="font-semibold mb-2">3) 本運用</h3>
-          <p class="text-sm text-slate-600">選択したプラン（Lite/Standard/Pro）で本格運用開始。</p>
+
+        <!-- ステップ2: プロトタイプ無料作成 -->
+        <div class="relative pl-8">
+          <div class="absolute left-0 top-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
+            <h3 class="text-lg font-semibold mb-2">プロトタイプ無料作成</h3>
+            <p class="text-sm text-slate-600 mb-2">オーダーメイドで1つのプロトタイプアプリを作成します。</p>
+            <p class="text-xs text-slate-500">あなたの施設専用にカスタマイズしたアプリを無料でお作りします。</p>
+          </div>
+          <!-- 下向き矢印 -->
+          <div class="absolute left-3 top-8 w-0.5 h-6 bg-emerald-300"></div>
+        </div>
+
+        <!-- ステップ3: 一か月試用 -->
+        <div class="relative pl-8">
+          <div class="absolute left-0 top-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+            <h3 class="text-lg font-semibold mb-2">一か月試用</h3>
+            <p class="text-sm text-slate-600 mb-2">作成したプロトタイプを実際に使用して効果を確認します。</p>
+            <p class="text-xs text-slate-500">一か月間、実際の業務で使用していただき、効果を実感していただけます。</p>
+          </div>
         </div>
       </div>
     </section>
