@@ -528,37 +528,280 @@
     <section id="faq" class="py-16">
       <h2 class="text-2xl font-bold mb-6">5. よくある質問（FAQ）</h2>
       <div class="space-y-4">
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">Q. 初期作成費用はどのくらいかかりますか？</summary>
-          <p class="mt-2 text-sm leading-relaxed">
-            初期作成費用は<strong>15〜30万円</strong>です（要件の複雑さで変動）。<br />
-            初回訪問から要件定義、プロトタイプ作成、試用期間、要望反映まで含まれます。<br />
-            正式契約後は、選択したプラン（Lite 2.3万円、Standard 5.5万円、Pro 50万円）の月額料金が発生します。
-          </p>
+        <!-- Q1: 初期作成費用 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Q. 初期作成費用はどのくらいかかりますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              初期作成費用は<strong class="text-indigo-600 text-lg">15万円から30万円</strong>です。業務の複雑さによって金額が決まります。
+            </p>
+            <div class="bg-indigo-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-indigo-900 mb-2">初期費用に含まれるもの：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>初回訪問とヒアリング</li>
+                <li>要件定義書の作成</li>
+                <li>プロトタイプアプリの作成（無料）</li>
+                <li>一か月の試用期間</li>
+                <li>試用期間中の要望反映</li>
+              </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed">
+              正式契約後は、選択したプランの月額料金が発生します（Lite 2.3万円、Standard 5.5万円、Pro 50万円）。
+            </p>
+          </div>
         </details>
 
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">Q. どのプランを選べばいいですか？</summary>
-          <p class="mt-2 text-sm leading-relaxed">
-            施設規模と改善したい業務の複雑さで選んでください。<br />
-            <strong>Lite（2.3万円）</strong>：職員15名程度の小規模施設で、シフトや在庫などシンプルな業務の自動化に最適。<br />
-            <strong>Standard（5.5万円）</strong>：職員60名程度の中〜大規模施設で、インシデント報告や委員会など複数人が関わる業務の仕組み化に最適。毎月の改善相談も込み。<br />
-            <strong>Pro（50万円）</strong>：複数拠点を持つ法人本部向け。グループ全体の月次報告や経営ダッシュボードなど、大規模な業務削減を狙う方向け。専任サポート付き。
-          </p>
+        <!-- Q2: プランの選び方 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+            </svg>
+            <span>Q. どのプランを選べばいいですか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-4">
+            <p class="text-slate-700 leading-relaxed">
+              施設規模と改善したい業務の複雑さで選んでください。
+            </p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-slate-50 rounded-lg p-4 border-2 border-slate-300">
+                <h4 class="font-bold text-lg mb-2 text-slate-900">Lite（2.3万円）</h4>
+                <p class="text-sm text-slate-700 mb-2">職員15名程度の小規模施設向け</p>
+                <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                  <li>シフト管理</li>
+                  <li>在庫管理</li>
+                  <li>シンプルな業務の自動化</li>
+                </ul>
+              </div>
+              <div class="bg-emerald-50 rounded-lg p-4 border-2 border-emerald-400">
+                <h4 class="font-bold text-lg mb-2 text-emerald-900">Standard（5.5万円）</h4>
+                <p class="text-sm text-slate-700 mb-2">職員60名程度の中〜大規模施設向け</p>
+                <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                  <li>インシデント報告</li>
+                  <li>委員会運営</li>
+                  <li>複数人が関わる業務の仕組み化</li>
+                  <li>毎月の改善相談込み</li>
+                </ul>
+              </div>
+              <div class="bg-indigo-50 rounded-lg p-4 border-2 border-indigo-500">
+                <h4 class="font-bold text-lg mb-2 text-indigo-900">Pro（50万円）</h4>
+                <p class="text-sm text-slate-700 mb-2">複数拠点を持つ法人本部向け</p>
+                <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                  <li>グループ全体の月次報告</li>
+                  <li>経営ダッシュボード</li>
+                  <li>大規模な業務削減</li>
+                  <li>専任サポート付き</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </details>
 
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">Q. APIコストが膨らんだら請求が跳ね上がりませんか？</summary>
-          <p class="mt-2 text-sm leading-relaxed">
-            API利用料は当社負担で、月額に含めています。お客様に追加課金することはありません。
-          </p>
+        <!-- Q3: 外部サービスの利用料 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            <span>Q. 外部サービスの利用料が増えたら請求が跳ね上がりませんか？</span>
+          </summary>
+          <div class="mt-4 pl-9">
+            <p class="text-slate-700 leading-relaxed">
+              <strong class="text-green-600">外部サービスの利用料は当社が負担し、月額料金に含まれています。</strong>お客様に追加で課金することは一切ありません。利用量が増えても、月額料金は変わりません。
+            </p>
+          </div>
         </details>
 
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">Q. 個人情報を扱う場合、セキュリティ・法令は大丈夫？</summary>
-          <p class="mt-2 text-sm leading-relaxed">
-            Google Workspace環境内での暗号化・アクセス権限の最小化・監査ログ管理を前提に、必要に応じてローカル保存での運用も可能です。実装前に、収集データ・保管期間・権限管理を文書化し、同意取得フローを整えます。
-          </p>
+        <!-- Q4: 個人情報・セキュリティ -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <span>Q. 個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              個人情報保護法などの法令を遵守し、適切に管理します。
+            </p>
+            <div class="bg-purple-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-purple-900 mb-2">セキュリティ対策：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>Google Workspace環境内での暗号化</li>
+                <li>アクセス権限の最小化（必要な人だけがアクセス可能）</li>
+                <li>監査ログの管理（誰がいつ何をしたか記録）</li>
+                <li>必要に応じてローカル保存での運用も可能</li>
+              </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              実装前に、収集するデータの種類、保管期間、権限管理を文書化し、同意取得の手順を整えます。
+            </p>
+          </div>
+        </details>
+
+        <!-- Q5: 試用期間 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Q. 試用期間について教えてください</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              <strong class="text-yellow-600">試用期間終了まで完全無料</strong>です。費用は一切かかりません。
+            </p>
+            <div class="bg-yellow-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-yellow-900 mb-2">試用期間の流れ：</p>
+              <ol class="text-sm text-slate-700 space-y-1 list-decimal list-inside ml-2">
+                <li>要件定義（ヒアリング）</li>
+                <li>プロトタイプアプリを無料で作成</li>
+                <li>一か月間、実際に使っていただく</li>
+                <li>要望を反映して調整</li>
+              </ol>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              試用期間中は無料です。実際に使ってから、正式契約するかどうかを判断していただけます。
+            </p>
+          </div>
+        </details>
+
+        <!-- Q6: 契約後の変更 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            <span>Q. 契約後に変更や追加はできますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              はい、可能です。変更の内容によって対応が異なります。
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                <h4 class="font-semibold text-green-900 mb-2">月額内で対応できる変更</h4>
+                <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                  <li>軽微な修正（入力項目の追加など）</li>
+                  <li>微改善（表示の調整など）</li>
+                  <li>選択したプランの改善枠内</li>
+                </ul>
+              </div>
+              <div class="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500">
+                <h4 class="font-semibold text-orange-900 mb-2">別途見積が必要な変更</h4>
+                <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                  <li>画面の追加</li>
+                  <li>構造の大幅な変更</li>
+                  <li>外部システムとの連携追加</li>
+                  <li>広範囲な改修</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Q7: 導入までの期間 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-pink-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-pink-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span>Q. 導入までどのくらいかかりますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <div class="bg-pink-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-pink-900 mb-2">導入までの流れ：</p>
+              <ol class="text-sm text-slate-700 space-y-2 list-decimal list-inside ml-2">
+                <li><strong>要件定義：</strong>1〜2週間（ヒアリングから要件定義書の確定まで）</li>
+                <li><strong>プロトタイプ作成：</strong>1〜2週間（無料で作成）</li>
+                <li><strong>試用期間：</strong>1か月（実際に使っていただく）</li>
+                <li><strong>本番構築：</strong>1〜2か月（正式契約後、規模によって変動）</li>
+              </ol>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              合計で約3〜4か月程度です。業務の規模や複雑さによって期間が変わります。
+            </p>
+          </div>
+        </details>
+
+        <!-- Q8: 複数のアプリ導入 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-teal-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+            <span>Q. 複数のアプリを導入できますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              はい、可能です。各アプリごとにプランを選択できます。
+            </p>
+            <div class="bg-teal-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-teal-900 mb-2">例：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>シフト管理アプリ：Liteプラン（2.3万円）</li>
+                <li>インシデント報告アプリ：Standardプラン（5.5万円）</li>
+                <li>月次報告アプリ：Standardプラン（5.5万円）</li>
+              </ul>
+              <p class="text-sm text-slate-700 mt-2">
+                この場合、月額合計は13.3万円になります。
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <!-- Q9: 解約について -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span>Q. 解約はできますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。
+            </p>
+            <div class="bg-red-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-red-900 mb-2">解約時の注意点：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>解約意思表示から14日経過後に解約が成立します</li>
+                <li>解約までに発生した月額料金は支払いが必要です</li>
+                <li>既に支払った費用の返金はありません</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <!-- Q10: サポート体制 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-cyan-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <span>Q. サポート体制について教えてください</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              公式LINEやメールでサポートを受けられます。
+            </p>
+            <div class="bg-cyan-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-cyan-900 mb-2">サポート内容：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>問い合わせ対応：月〜土 9:00〜18:00（日本時間）</li>
+                <li>不具合対応：優先度に応じて対応（詳細は「詳細情報」セクションをご覧ください）</li>
+                <li>軽微な修正：選択したプランの改善枠内で対応</li>
+              </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              緊急の重大な不具合については、営業時間外でも対応します。
+            </p>
+          </div>
         </details>
       </div>
     </section>
@@ -566,18 +809,259 @@
     <!-- ================= 詳細情報（折りたたみ） ================= -->
     <section id="details" class="py-16">
       <h2 class="text-2xl font-bold mb-6">6. 詳細情報（必要な方のみ）</h2>
-      <div class="space-y-4">
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">SLA（対応優先度）</summary>
-          <p class="mt-2 text-sm text-slate-600">標準：初回回答5営業日以内／反映最大21営業日。優先（+10万円/月）：初回48時間／反映最大5営業日。</p>
+      <div class="space-y-6">
+        <!-- SLA（対応優先度） -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>SLA（対応優先度）</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-4">
+            <p class="text-slate-700 leading-relaxed">
+              不具合や問い合わせへの対応時間を、優先度別に定めています。
+            </p>
+            
+            <!-- 標準と優先オプションの比較 -->
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-slate-50 rounded-lg p-4 border-2 border-slate-300">
+                <h4 class="font-bold text-lg mb-2 text-slate-900">標準</h4>
+                <ul class="text-sm text-slate-700 space-y-1">
+                  <li>• 初回回答：5営業日以内</li>
+                  <li>• 反映・修正：最大21営業日</li>
+                </ul>
+              </div>
+              <div class="bg-indigo-50 rounded-lg p-4 border-2 border-indigo-500">
+                <h4 class="font-bold text-lg mb-2 text-indigo-900">優先オプション</h4>
+                <p class="text-sm font-semibold text-indigo-700 mb-2">+10万円/月</p>
+                <ul class="text-sm text-slate-700 space-y-1">
+                  <li>• 初回回答：48時間以内</li>
+                  <li>• 反映・修正：最大5営業日</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 優先度別の対応表 -->
+            <div class="bg-white rounded-lg border-2 border-slate-200 p-4">
+              <h4 class="font-semibold text-slate-900 mb-4">優先度別の対応目安</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-slate-100">
+                      <th class="px-4 py-2 text-left font-semibold text-slate-900">優先度</th>
+                      <th class="px-4 py-2 text-left font-semibold text-slate-900">内容</th>
+                      <th class="px-4 py-2 text-left font-semibold text-slate-900">初回回答</th>
+                      <th class="px-4 py-2 text-left font-semibold text-slate-900">対応完了</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-200">
+                    <tr class="bg-red-50">
+                      <td class="px-4 py-3">
+                        <span class="px-2 py-1 bg-red-600 text-white rounded text-xs font-bold">P1（重大）</span>
+                      </td>
+                      <td class="px-4 py-3 text-slate-700 text-xs">全社的に利用不可、重要機能の全面停止</td>
+                      <td class="px-4 py-3 text-slate-700">12時間以内</td>
+                      <td class="px-4 py-3 text-slate-700">7日以内</td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                      <td class="px-4 py-3">
+                        <span class="px-2 py-1 bg-orange-600 text-white rounded text-xs font-bold">P2（高）</span>
+                      </td>
+                      <td class="px-4 py-3 text-slate-700 text-xs">主要部門で利用に大きな支障</td>
+                      <td class="px-4 py-3 text-slate-700">翌営業日</td>
+                      <td class="px-4 py-3 text-slate-700">14日以内</td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                      <td class="px-4 py-3">
+                        <span class="px-2 py-1 bg-yellow-600 text-white rounded text-xs font-bold">P3（中）</span>
+                      </td>
+                      <td class="px-4 py-3 text-slate-700 text-xs">限定的な影響、回避可能</td>
+                      <td class="px-4 py-3 text-slate-700">5営業日以内</td>
+                      <td class="px-4 py-3 text-slate-700">30日以内</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-slate-600 mt-3">
+                営業時間：月〜土 9:00〜18:00（日本時間）。P1相当の重大障害については営業時間外でも対応します。
+              </p>
+            </div>
+          </div>
         </details>
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">プランの変更・追加アプリについて</summary>
-          <p class="mt-2 text-sm text-slate-600">プランの変更はいつでも可能です。また、複数のアプリを導入する場合、各アプリごとにプランを選択できます。例えば、シフト管理はLite、インシデント報告はStandard、という組み合わせも可能です。</p>
+
+        <!-- プランの変更・追加アプリについて -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            <span>プランの変更・追加アプリについて</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              プランの変更はいつでも可能です。また、複数のアプリを導入する場合、各アプリごとにプランを選択できます。
+            </p>
+            <div class="bg-emerald-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-emerald-900 mb-2">具体例：</p>
+              <div class="space-y-2 text-sm text-slate-700">
+                <div class="flex items-start gap-2">
+                  <span class="font-semibold">• シフト管理アプリ：</span>
+                  <span>Liteプラン（2.3万円）</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="font-semibold">• インシデント報告アプリ：</span>
+                  <span>Standardプラン（5.5万円）</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="font-semibold">• 月次報告アプリ：</span>
+                  <span>Standardプラン（5.5万円）</span>
+                </div>
+                <div class="mt-2 pt-2 border-t border-emerald-200">
+                  <span class="font-semibold">月額合計：</span>
+                  <span class="text-lg font-bold text-emerald-700">13.3万円</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              各アプリは独立して管理され、個別にプランを変更することも可能です。
+            </p>
+          </div>
         </details>
-        <details class="bg-white rounded-lg shadow p-4">
-          <summary class="font-semibold cursor-pointer">セキュリティ方針</summary>
-          <p class="mt-2 text-slate-600">Google Workspace/GAS環境での暗号化・最小権限運用・監査ログ保存。Vercelでのホスティング。必要に応じローカル運用（オフライン可）。</p>
+
+        <!-- セキュリティ方針 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <span>セキュリティ方針</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-4">
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-900 mb-3">データの保存先</h4>
+              <p class="text-sm text-slate-700 mb-2">
+                原則として、お客様のGoogle Workspace環境内（Googleドライブ、スプレッドシートなど）でデータを保存・処理します。
+              </p>
+              <p class="text-sm text-slate-700">
+                当社が管理する環境を使用する場合は、事前に保存先を明示し、同意を得た上で使用します。
+              </p>
+            </div>
+
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-900 mb-3">セキュリティ対策</h4>
+              <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside ml-2">
+                <li><strong>暗号化：</strong>Google Workspace環境内での暗号化通信</li>
+                <li><strong>最小権限運用：</strong>必要な人だけがアクセス可能な権限設定</li>
+                <li><strong>監査ログ保存：</strong>誰がいつ何をしたかの記録を保存</li>
+                <li><strong>個人情報の最小化：</strong>必要最小限の情報のみを収集</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-900 mb-3">個人情報保護</h4>
+              <p class="text-sm text-slate-700 mb-2">
+                個人情報保護法などの法令を遵守し、適切に管理します。
+              </p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>収集するデータの種類を明示</li>
+                <li>保管期間を明確化</li>
+                <li>権限管理を文書化</li>
+                <li>同意取得の手順を整備</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-50 rounded-lg p-4">
+              <h4 class="font-semibold text-purple-900 mb-3">ホスティング環境</h4>
+              <p class="text-sm text-slate-700">
+                Google Workspace / Google Apps Script環境を使用します。必要に応じて、ローカル保存での運用（オフライン可）も可能です。
+              </p>
+            </div>
+          </div>
+        </details>
+
+        <!-- データの保存先について -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+            </svg>
+            <span>データの保存先について</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              原則として、お客様のGoogle Workspace環境内でデータを保存・処理します。
+            </p>
+            <div class="bg-blue-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-blue-900 mb-2">保存先の例：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>お客様のGoogleドライブ</li>
+                <li>お客様のGoogleスプレッドシート</li>
+                <li>お客様のGoogleカレンダー</li>
+                <li>お客様のGmail（必要に応じて）</li>
+              </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              当社が管理する環境を使用する場合は、事前に保存先を明示し、同意を得た上で使用します。
+            </p>
+          </div>
+        </details>
+
+        <!-- バックアップについて -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            <span>バックアップについて</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              Google Workspace環境を使用しているため、Googleのバックアップ機能を利用できます。
+            </p>
+            <div class="bg-green-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-green-900 mb-2">バックアップの方法：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>Googleドライブの自動バックアップ機能</li>
+                <li>Googleスプレッドシートのバージョン履歴機能</li>
+                <li>必要に応じて、手動でのエクスポートも可能</li>
+              </ul>
+            </div>
+            <p class="text-slate-700 leading-relaxed text-sm">
+              データの復旧が必要な場合は、お客様のGoogle Workspace環境から復旧できます。
+            </p>
+          </div>
+        </details>
+
+        <!-- 問い合わせ窓口について -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-cyan-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span>問い合わせ窓口について</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-3">
+            <p class="text-slate-700 leading-relaxed">
+              公式LINEやメールでお問い合わせいただけます。
+            </p>
+            <div class="bg-cyan-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-cyan-900 mb-2">問い合わせ方法：</p>
+              <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
+                <li>公式LINE（推奨）</li>
+                <li>メール</li>
+              </ul>
+            </div>
+            <div class="bg-cyan-50 rounded-lg p-4">
+              <p class="text-sm font-semibold text-cyan-900 mb-2">対応時間：</p>
+              <p class="text-sm text-slate-700">
+                月〜土 9:00〜18:00（日本時間）
+              </p>
+              <p class="text-sm text-slate-700 mt-1">
+                緊急の重大な不具合については、営業時間外でも対応します。
+              </p>
+            </div>
+          </div>
         </details>
       </div>
     </section>
