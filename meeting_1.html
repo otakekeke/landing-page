@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第1回面談：初回ヒアリング＋録音同意＋全体像｜嶽ノ子</title>
+  <meta property="og:title" content="第1回面談：初回ヒアリング＋録音同意＋全体像 - 嶽ノ子" />
+  <meta property="og:description" content="第1回面談の説明資料。困りごとを整理し、最初に作る「1業務＝1アプリ」を決め、録音同意のうえで要件定義書を作る前提を共有します。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <!-- ================= HEADER ================= -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between">
+        <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          嶽ノ子｜オーダーメイド業務効率化
+        </div>
+        <div class="text-sm text-slate-600">
+          <div>連絡先：公式LINE</div>
+          <div>最終更新日：2025年1月</div>
+          <div>ページ版数：v1.0</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- ================= 現在地表示 ================= -->
+    <section class="mb-8">
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 text-sm">
+          <a href="meeting_1.html" class="text-indigo-600 font-semibold">第1回</a>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-500">第2回</span>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-500">第3回</span>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-500">第4回（契約）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日のゴール ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日のゴール（到達条件）</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">困りごとを整理</h3>
+          </div>
+          <p class="text-slate-600 text-sm">困りごとを整理して、最初に作る「1業務＝1アプリ」を決めます。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">録音同意</h3>
+          </div>
+          <p class="text-slate-600 text-sm">録音同意のうえで、要件定義書（たたき台）を作る前提を共有します。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">プロトタイプ範囲の合意</h3>
+          </div>
+          <p class="text-slate-600 text-sm">第2回で見せるプロトタイプの範囲を合意します。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日の流れ ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日の流れ（タイムテーブル）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">事前準備は不要です（5分）</h3>
+              <p class="text-sm text-slate-600">本日は口頭ヒアリング中心で進めます。個人情報・利用者情報は見ない／話さない前提でOKです。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">録音同意（5分）</h3>
+              <p class="text-sm text-slate-600">録音の目的と扱いについて説明し、同意を取得します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">サービス定義の説明（10分）</h3>
+              <p class="text-sm text-slate-600">嶽ノ子のサービス定義と進め方について説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">料金の説明（10分）</h3>
+              <p class="text-sm text-slate-600">通常プランの料金体系について説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">ヒアリング（30-45分）</h3>
+              <p class="text-sm text-slate-600">困りごとを具体化するためのヒアリングを行います。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">6</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">合意事項の確認（10分）</h3>
+              <p class="text-sm text-slate-600">本日決めること、決めないことを確認します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">7</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">Q&A（5-10分）</h3>
+              <p class="text-sm text-slate-600">ご質問にお答えします。</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+          <p class="text-sm font-semibold text-indigo-900">所要時間の目安：約75-95分</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 事前準備は不要です ================= -->
+    <section class="mb-8">
+      <div class="bg-green-50 border-2 border-green-400 rounded-lg p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <svg class="w-8 h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="text-xl font-bold text-green-900">事前準備は不要です</h2>
+        </div>
+        <ul class="space-y-2 text-slate-700">
+          <li class="flex items-start gap-2">
+            <span class="text-green-600 mt-1">✓</span>
+            <span>本日は口頭ヒアリング中心で進めます</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-green-600 mt-1">✓</span>
+            <span>個人情報・利用者情報は見ない／話さない前提でOKです</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-green-600 mt-1">✓</span>
+            <span>資料の準備などは一切不要です</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 録音同意 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">録音同意（必須ブロック）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <div>
+          <h3 class="font-semibold mb-2">録音の目的</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>聞き漏れ防止</li>
+            <li>要件定義書を正確にするため</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">録音の扱い</h3>
+          <div class="bg-slate-50 rounded-lg p-4 space-y-2 text-sm">
+            <div>
+              <span class="font-semibold">保管：</span>あなたが管理（アクセスはあなたのみ）
+            </div>
+            <div>
+              <span class="font-semibold">共有：</span>原則共有しない（必要なら要点を文書で共有）
+            </div>
+            <div>
+              <span class="font-semibold">保管期間：</span>要件定義が固まり次第、整理・削除（運用方針として明記）
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">録音しない選択肢</h3>
+          <p class="text-slate-700">録音なしでも進められます（その場合は議事録中心）</p>
+        </div>
+        <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
+          <h3 class="font-semibold mb-3 text-yellow-900">同意取得の文言</h3>
+          <div class="space-y-2">
+            <p class="text-slate-800 font-medium">「本日の面談を録音して進めてよいですか」</p>
+            <div class="flex items-center gap-4 mt-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="recording-consent" value="yes" class="w-4 h-4 text-indigo-600">
+                <span class="text-slate-700">はい</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="recording-consent" value="no" class="w-4 h-4 text-indigo-600">
+                <span class="text-slate-700">いいえ</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 嶽ノ子のサービス定義 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">嶽ノ子のサービス定義（誤解防止の"短い"説明）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <div>
+          <h3 class="font-semibold mb-2 text-indigo-900">提供価値</h3>
+          <p class="text-slate-700">介護現場の課題に対して<strong>業務補助アプリをオーダーメイドで作成</strong>し、導入後も軽微修正を迅速に回します。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-indigo-900">技術/前提</h3>
+          <p class="text-slate-700">Google Workspace／Googleグループ／Google Apps Script 等を用いた構築（基本はGoogle環境内）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-indigo-900">単位</h3>
+          <p class="text-slate-700"><strong>1業務＝1アプリ</strong>（まずは1本から）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-red-900">しないこと（期待値調整）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>外部システムとの個別API連携は基本対象外（Google内完結が中心）</li>
+            <li>24/365監視・常駐運用はしない（サポート時間内の対応）</li>
+            <li>申請代行はしない（相談・助言は可）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 進め方（全体スケジュール） ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">進め方（全体スケジュール：面談中に指差し説明）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">第1回：ヒアリング＋録音同意（本日）</h3>
+              <p class="text-sm text-slate-600">困りごとを整理し、最初に作る「1業務＝1アプリ」を決めます。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">第2回：プロトタイプ提示＋要件定義書レビュー（v0.1→v0.5）</h3>
+              <p class="text-sm text-slate-600">作成したプロトタイプを見て、現場運用に合う形へ修正点を出し切ります。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">第3回：最終仕様（v1.0凍結）＋見積確定＋契約条件サマリー</h3>
+              <p class="text-sm text-slate-600">仕様と金額を決め切り、契約回を短時間で終わらせる準備をします。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">4</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">第4回：契約締結＋Stripe登録＋着手条件確認</h3>
+              <p class="text-sm text-slate-600">疑問をその場で解消し、署名と決済登録まで完了させます。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">5</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">契約後：本番構築→テスト→導入</h3>
+              <p class="text-sm text-slate-600">目安1〜2か月、規模で変動</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 料金（通常プラン） ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">料金（通常プラン：第1回で"安心材料として"必ず出す）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="bg-green-50 border-2 border-green-400 rounded-lg p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="font-semibold text-green-900">無料範囲</h3>
+          </div>
+          <p class="text-slate-700"><strong>試用期間終了まで無料</strong>（ヒアリング〜要件定義〜プロトタイプ〜試用・要望反映まで）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">初期作成費</h3>
+          <p class="text-slate-700"><strong>15〜30万円</strong>（複雑さで変動）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">月額（アプリ1つあたり）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>Lite：<strong>2.3万円</strong></li>
+            <li>Standard：<strong>5.5万円</strong></li>
+            <li>Pro：<strong>50万円</strong></li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4">
+          <p class="text-sm text-slate-700"><strong>ベータ版との差は料金のみ。進め方・契約運用は同じ</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ヒアリング項目 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">ヒアリング項目（ページに"質問として"載せる：録音→要件化の材料）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-6">
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">1. 対象業務候補</h3>
+          <p class="text-slate-700 mb-2">例：記録、申し送り、集計、帳票、在庫、委員会、インシデント等</p>
+          <p class="text-sm text-slate-600">どの業務を効率化したいですか？</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">2. 現状フロー（As-Is）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>誰が／いつ／どこで／何を見て／どこへ記録</li>
+            <li>転記・二重入力の有無</li>
+            <li>集計・提出の流れ</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">3. 課題（困りごと）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>何が起きているか／頻度／影響（残業・ミス・監査・属人化）</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">4. 成功条件（KPI）</h3>
+          <p class="text-slate-700">時間削減、ミス削減、検索性、証跡、教育工数など</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">5. 制約（非機能の種）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>端末（スマホ/タブレット/PC、共用/個人）</li>
+            <li>ネットワーク（Wi-Fi等）</li>
+            <li>アカウント管理（個人/共用）</li>
+            <li>クラウド可否・セキュリティ上の制約</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">6. 決裁</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>決裁者は誰か</li>
+            <li>必要資料は何か</li>
+            <li>いつまでに判断が必要か</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日決めること ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日決めること（合意ブロック）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">最初に作る対象：「1業務」を決定</h3>
+            <p class="text-sm text-slate-600">どの業務を最初に効率化するか決定します。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">第2回で見せるプロトタイプ範囲</h3>
+            <p class="text-sm text-slate-600">入力・一覧・帳票のどこまでを見せるか合意します。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">面談後に送る成果物を確認</h3>
+            <p class="text-sm text-slate-600">要件定義書 v0.1、未決事項リスト、次回アジェンダ＋日程を確認します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日決めないこと ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">今日は決めないこと</h2>
+      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+        <ul class="space-y-2 text-slate-700">
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>詳細な仕様（第2回でプロトタイプを見てから決めます）</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>料金の確定（第3回で見積を提示します）</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>プランの選択（第3回でご提案します）</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 面談後にお渡しする成果物 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">面談後にお渡しする成果物</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">要件定義書 v0.1</h3>
+            <p class="text-sm text-slate-600">録音を元に作成した要件定義書のたたき台です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">未決事項リスト</h3>
+            <p class="text-sm text-slate-600">本日の面談で出た論点を整理したリストです。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">次回アジェンダ＋日程</h3>
+            <p class="text-sm text-slate-600">第2回面談のアジェンダと日程調整のご案内です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 変更要望の扱い ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">変更要望の扱い（この回のルール）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-slate-700 mb-4">本日は要件定義のたたき台を作るためのヒアリングです。第2回でプロトタイプを見ていただき、その時点で修正点を出し切っていただきます。第3回で最終仕様を凍結し、見積を確定します。</p>
+        <div class="bg-blue-50 rounded-lg p-4">
+          <p class="text-sm text-slate-700"><strong>重要：</strong>第3回で仕様を凍結した後の変更は、月額内で吸収できる軽微な修正か、再見積が必要な変更かを判断します。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Q&A枠 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">Q&A枠（最後に5〜10分）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-slate-700 mb-4">ご質問がございましたら、お気軽にお聞かせください。</p>
+        <div class="bg-indigo-50 rounded-lg p-4">
+          <p class="text-sm text-indigo-900 font-semibold">よくある質問</p>
+          <ul class="mt-2 space-y-2 text-sm text-slate-700">
+            <li>• プロトタイプはどのくらいの期間で作成されますか？</li>
+            <li>• 試用期間はどのくらいですか？</li>
+            <li>• 複数の業務を効率化したい場合はどうなりますか？</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white border-t border-slate-200 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-sm text-slate-600">
+        <p class="mb-2">© 2025年 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.</p>
+        <p class="text-xs text-slate-500">免責：詳細は契約回（第4回）で説明いたします。</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+

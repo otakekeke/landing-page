@@ -217,11 +217,11 @@
                 <label for="${fieldId}-per-task-hours" class="block text-xs text-slate-500 mt-1 text-center">時間</label>
               </div>
               <div class="flex-1">
-                <input 
-                  type="number" 
+            <input 
+              type="number" 
                   id="${fieldId}-per-task-minutes" 
                   class="per-task-minutes-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
-                  min="0" 
+              min="0" 
                   max="59"
                   step="1"
                   placeholder="分">
@@ -399,7 +399,7 @@
           return `${hoursInt}時間${minutesInt}分`;
         }
       }
-      
+
       // 計算式を表示
       let formulaText = '';
       if (reductionHours.length === 1) {

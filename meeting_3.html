@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第3回面談：最終仕様 v1.0凍結＋見積確定＋契約条件サマリー｜嶽ノ子</title>
+  <meta property="og:title" content="第3回面談：最終仕様 v1.0凍結＋見積確定＋契約条件サマリー - 嶽ノ子" />
+  <meta property="og:description" content="第3回面談の説明資料。仕様と金額を決め切り、契約回を短時間で終わらせる準備をします。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    code { background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <!-- ================= HEADER ================= -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex items-center justify-between">
+        <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          嶽ノ子｜オーダーメイド業務効率化
+        </div>
+        <div class="text-sm text-slate-600">
+          <div>連絡先：公式LINE</div>
+          <div>最終更新日：2025年1月</div>
+          <div>ページ版数：v1.0</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- ================= 現在地表示 ================= -->
+    <section class="mb-8">
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="flex items-center gap-2 text-sm">
+          <a href="meeting_1.html" class="text-slate-500 hover:text-indigo-600">第1回</a>
+          <span class="text-slate-400">→</span>
+          <a href="meeting_2.html" class="text-slate-500 hover:text-indigo-600">第2回</a>
+          <span class="text-slate-400">→</span>
+          <a href="meeting_3.html" class="text-indigo-600 font-semibold">第3回</a>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-500">第4回（契約）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日のゴール ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日のゴール（到達条件）</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">要件凍結</h3>
+          </div>
+          <p class="text-slate-600 text-sm">要件定義書v1.0（凍結）の合意を取得します。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">見積確定</h3>
+          </div>
+          <p class="text-slate-600 text-sm">初期作成費（15〜30万円の範囲で確定）＋月額プラン確定します。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">契約条件合意</h3>
+          </div>
+          <p class="text-slate-600 text-sm">契約条件（支払い・サポート・障害対応・解約）を"要点だけ"合意します。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日の流れ ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日の流れ（タイムテーブル）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">今日提示するものの確認（5分）</h3>
+              <p class="text-sm text-slate-600">要件定義書 v1.0、見積、プラン比較、スケジュール等を確認します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">要件凍結と変更管理の説明（15分）</h3>
+              <p class="text-sm text-slate-600">v1.0凍結後の変更の扱いについて説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">見積の説明（20分）</h3>
+              <p class="text-sm text-slate-600">初期費用と月額の内訳を説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">プランの選び方（15分）</h3>
+              <p class="text-sm text-slate-600">Lite / Standard / Proの選び方を説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">サポート・障害対応の説明（15分）</h3>
+              <p class="text-sm text-slate-600">サポート体制と障害対応について説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">6</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">合意事項の確認（10分）</h3>
+              <p class="text-sm text-slate-600">本日決めること、決めないことを確認します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">7</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">Q&A（5-10分）</h3>
+              <p class="text-sm text-slate-600">ご質問にお答えします。</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+          <p class="text-sm font-semibold text-indigo-900">所要時間の目安：約85-100分</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 今日提示するもの ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">今日提示するもの（冒頭に一覧）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">要件定義書 v1.0（凍結案）</h3>
+            <p class="text-sm text-slate-600">最終仕様を確定した要件定義書です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">見積（初期＋月額）</h3>
+            <p class="text-sm text-slate-600">初期作成費と月額の見積書です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">プラン比較（Lite/Standard/Pro）</h3>
+            <p class="text-sm text-slate-600">3つのプランの違いを比較した資料です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">スケジュール（契約後〜導入）</h3>
+            <p class="text-sm text-slate-600">契約後の工程表です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">変更管理ルール（凍結後の扱い）</h3>
+            <p class="text-sm text-slate-600">v1.0凍結後の変更の扱いについて説明した資料です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">セキュリティ・個人情報取扱い概要</h3>
+            <p class="text-sm text-slate-600">セキュリティと個人情報の取扱いについて説明した資料です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">契約条件サマリー（1枚）</h3>
+            <p class="text-sm text-slate-600">契約条件の要点をまとめた1枚の資料です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 要件凍結と変更管理 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">要件凍結と変更管理（揉めどころを先に潰す）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div>
+          <h3 class="font-semibold mb-2 text-indigo-900">凍結の定義</h3>
+          <p class="text-slate-700">v1.0以降の追加は「変更」として扱います。</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-emerald-900">変更の扱い</h3>
+          <div class="space-y-3">
+            <div class="bg-green-50 border-l-4 border-green-500 p-4">
+              <h4 class="font-semibold text-green-900 mb-1">月額内で吸収：軽微修正／微改善（プラン上限内）</h4>
+              <p class="text-sm text-slate-700">選択したプランの改善枠内で対応可能な変更です。</p>
+            </div>
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+              <h4 class="font-semibold text-yellow-900 mb-1">再見積：画面追加、構造変更、連携追加、広範囲改修 など</h4>
+              <p class="text-sm text-slate-700">プランの改善枠を超える変更は、別途見積が必要です。</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2 text-blue-900">変更フロー</h3>
+          <div class="bg-blue-50 rounded-lg p-4">
+            <p class="text-sm text-slate-700">要望→影響確認→見積→合意→着手</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 見積の見せ方 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">見積の見せ方（内訳は"成果物単位"で）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div>
+          <h3 class="font-semibold mb-3 text-indigo-900">初期：成果物単位</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>画面（入力/一覧/検索）</li>
+            <li>帳票</li>
+            <li>権限</li>
+            <li>履歴</li>
+            <li>テスト</li>
+            <li>導入支援</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-emerald-900">月額：保守・改善枠</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>保守、問い合わせ対応</li>
+            <li>軽微改善、改善枠（プランにより差）</li>
+          </ul>
+        </div>
+        <div class="bg-indigo-50 rounded-lg p-4">
+          <h3 class="font-semibold mb-2 text-indigo-900">課金開始の考え方</h3>
+          <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 ml-4">
+            <li>初期は構築期間中</li>
+            <li>月額は本番稼働月から（運用ルールとして明記）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= プランの選び方 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">プランの選び方（迷わせない文章で）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="bg-slate-50 border-l-4 border-slate-500 p-4">
+          <h3 class="font-semibold mb-2">Lite：まず1業務を確実に回す（小さく速く）</h3>
+          <p class="text-sm text-slate-700">基本的な運用サポートと軽微な修正に対応します。まずは1つの業務を確実に効率化したい方向けです。</p>
+        </div>
+        <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4">
+          <h3 class="font-semibold mb-2">Standard：現場運用に合わせて改善を回す（改善頻度が増える）</h3>
+          <p class="text-sm text-slate-700">運用改善と微機能追加に対応します。現場の要望に応じて継続的に改善したい方向けです。</p>
+        </div>
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4">
+          <h3 class="font-semibold mb-2">Pro：複数業務や拠点で、優先順位をつけて継続改善（改善枠が大きい）</h3>
+          <p class="text-sm text-slate-700">継続的な改善と新機能追加に対応します。複数の業務や拠点で、優先順位をつけて継続的に改善したい方向けです。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= サポート・障害対応 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">サポート・障害対応（契約前に必ず出す）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div>
+          <h3 class="font-semibold mb-2">問い合わせ窓口</h3>
+          <p class="text-slate-700">公式LINE等／対応時間（例：月〜土9-18）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">障害の区分（P1/P2/P3）と対応目安</h3>
+          <div class="space-y-2 text-sm">
+            <div class="bg-red-50 p-3 rounded">
+              <p class="font-semibold text-red-900">P1（緊急）：一次回答・回避策・恒久対応の目安</p>
+            </div>
+            <div class="bg-yellow-50 p-3 rounded">
+              <p class="font-semibold text-yellow-900">P2（重要）：一次回答・回避策・恒久対応の目安</p>
+            </div>
+            <div class="bg-blue-50 p-3 rounded">
+              <p class="font-semibold text-blue-900">P3（通常）：一次回答・回避策・恒久対応の目安</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">外部サービス起因（Google側障害等）の扱い</h3>
+          <p class="text-slate-700">免責＋復帰支援（情報提供と復帰支援を行います）</p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">計画メンテの事前通知方針</h3>
+          <p class="text-slate-700">計画メンテナンスは事前に通知いたします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日決めること ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日決めること（合意ブロック）</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">要件定義書 v1.0（凍結）の合意</h3>
+            <p class="text-sm text-slate-600">最終仕様を確定し、凍結します。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">初期作成費＋月額プラン確定</h3>
+            <p class="text-sm text-slate-600">初期費用と月額プランを確定します。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">契約条件（要点だけ）の合意</h3>
+            <p class="text-sm text-slate-600">支払い・サポート・障害対応・解約の要点を合意します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 今日は決めないこと ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">今日は決めないこと</h2>
+      <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+        <ul class="space-y-2 text-slate-700">
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>契約書の詳細確認（第4回で行います）</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>Stripe登録（第4回で行います）</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-yellow-600 mt-1">⚠</span>
+            <span>キックオフ日程（第4回で確定します）</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 次回（契約回）でやること ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">次回（契約回）でやること（チェックリスト化）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="space-y-3">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <span class="text-slate-700">契約書確認→電子署名</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <span class="text-slate-700">Stripe支払い情報登録（自動決済）</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <span class="text-slate-700">キックオフ日程確定</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <span class="text-slate-700">着手条件の確認（窓口・連絡手段・導入範囲）</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 面談後にお渡しする成果物 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">面談後にお渡しする成果物</h2>
+      <div class="bg-white rounded-lg shadow p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">要件定義書 v1.0（凍結版）</h3>
+            <p class="text-sm text-slate-600">本日合意した最終仕様の要件定義書です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">見積書（確定版）</h3>
+            <p class="text-sm text-slate-600">初期費用と月額の確定見積書です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">契約条件サマリー</h3>
+            <p class="text-sm text-slate-600">契約条件の要点をまとめた資料です。</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold mb-1">第4回で提示するもの</h3>
+            <p class="text-sm text-slate-600">契約書、Stripe登録手順、キックオフ資料の案内です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 変更要望の扱い ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">変更要望の扱い（この回のルール）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-slate-700 mb-4">本日で要件定義書 v1.0を凍結します。凍結後の変更は、月額内で吸収できる軽微な修正か、再見積が必要な変更かを判断します。</p>
+        <div class="bg-red-50 border-2 border-red-400 rounded-lg p-4">
+          <p class="text-sm text-red-900 font-semibold">重要：v1.0凍結後の変更について</p>
+          <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2 ml-4">
+            <li>月額内：軽微修正、微改善（プラン上限内）</li>
+            <li>再見積：画面追加、構造変更、連携追加、広範囲改修 など</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Q&A枠 ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">Q&A枠（最後に5〜10分）</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-slate-700 mb-4">ご質問がございましたら、お気軽にお聞かせください。</p>
+        <div class="bg-indigo-50 rounded-lg p-4">
+          <p class="text-sm text-indigo-900 font-semibold">よくある質問</p>
+          <ul class="mt-2 space-y-2 text-sm text-slate-700">
+            <li>• 契約後のスケジュールはどのくらいですか？</li>
+            <li>• 変更はどのくらいの期間で反映されますか？</li>
+            <li>• プランの変更は可能ですか？</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white border-t border-slate-200 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-sm text-slate-600">
+        <p class="mb-2">© 2025年 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.</p>
+        <p class="text-xs text-slate-500">免責：詳細は契約回（第4回）で説明いたします。</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
