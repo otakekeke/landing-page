@@ -45,33 +45,139 @@
       </div>
     </section>
 
+    <!-- ================= 本日のゴール ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日のゴール</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">契約締結</h3>
+          </div>
+          <p class="text-slate-600 text-sm">契約書と別紙の合意を取得し、電子署名まで完了させます。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">支払い登録</h3>
+          </div>
+          <p class="text-slate-600 text-sm">Stripeに支払い方法を登録し、自動課金に同意していただきます。</p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div class="flex items-center gap-3 mb-3">
+            <svg class="w-8 h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+            <h3 class="text-lg font-semibold">着手準備</h3>
+          </div>
+          <p class="text-slate-600 text-sm">窓口担当や連絡手段を確定し、着手できる状態にします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 本日の流れ ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">本日の流れ</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">契約書の確認（10分）</h3>
+              <p class="text-sm text-slate-600">契約書と別紙の内容を確認し、疑問点を解消します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">契約条件の説明（15分）</h3>
+              <p class="text-sm text-slate-600">支払い、検収、解約、知財等の契約条件について説明します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">電子署名（10分）</h3>
+              <p class="text-sm text-slate-600">契約書に電子署名を完了させます。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">Stripe登録（15分）</h3>
+              <p class="text-sm text-slate-600">Stripeに支払い方法を登録し、自動課金に同意していただきます。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">着手条件チェック（10分）</h3>
+              <p class="text-sm text-slate-600">窓口担当、連絡手段、導入対象等を確認します。</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">6</div>
+            <div class="flex-1">
+              <h3 class="font-semibold mb-1">Q&A（5-10分）</h3>
+              <p class="text-sm text-slate-600">ご質問にお答えします。</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+          <p class="text-sm font-semibold text-indigo-900">所要時間の目安：約65-80分</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= 今日完了すること ================= -->
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">今日完了すること</h2>
       <div class="bg-white rounded-lg shadow p-6">
         <div class="space-y-3">
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">契約書の合意</span>
           </label>
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">別紙の合意</span>
           </label>
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">電子署名完了</span>
           </label>
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">Stripe登録完了</span>
           </label>
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">キックオフ日程確定</span>
           </label>
-          <label class="flex items-center gap-3 cursor-pointer p-3 hover:bg-slate-50 rounded">
+          <label class="flex items-center gap-3 cursor-pointer p-4 hover:bg-indigo-50 rounded-lg border-2 border-transparent hover:border-indigo-200 transition">
             <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
             <span class="text-slate-700 font-medium">窓口担当・連絡手段確定</span>
           </label>
         </div>
@@ -92,62 +198,102 @@
       </div>
     </section>
 
-    <!-- ================= 支払い（Stripe）ブロック ================= -->
+    <!-- ================= 支払い ================= -->
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">支払い</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div>
-          <h3 class="font-semibold mb-2">登録→自動課金の同意</h3>
+        <div class="border-l-4 border-blue-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+            <h3 class="font-semibold text-blue-900">登録→自動課金の同意</h3>
+          </div>
           <p class="text-slate-700 mb-2">Stripeに支払い方法を登録し、自動課金に同意していただきます。</p>
-          <div class="bg-blue-50 rounded-lg p-4 text-sm">
-            <p class="text-slate-700"><strong>手順：</strong></p>
-            <ol class="list-decimal list-inside space-y-1 text-slate-700 mt-2 ml-4">
+          <div class="bg-blue-50 rounded-lg p-4 text-sm mt-3">
+            <p class="text-slate-700 font-semibold mb-2">手順：</p>
+            <ol class="list-decimal list-inside space-y-1 text-slate-700 ml-2">
               <li>Stripeの登録画面にアクセス</li>
               <li>支払い方法を登録</li>
               <li>自動課金に同意</li>
             </ol>
           </div>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">領収/明細の扱い</h3>
+        <div class="border-l-4 border-green-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="font-semibold text-green-900">領収/明細の扱い</h3>
+          </div>
           <p class="text-slate-700">Stripeから自動的に領収書・明細が発行されます。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">請求サイクル</h3>
+        <div class="border-l-4 border-yellow-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <h3 class="font-semibold text-yellow-900">請求サイクル</h3>
+          </div>
           <p class="text-slate-700">月額は毎月自動的に請求されます。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">決済失敗時の扱い</h3>
+        <div class="border-l-4 border-red-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            <h3 class="font-semibold text-red-900">決済失敗時の扱い</h3>
+          </div>
           <p class="text-slate-700">決済に失敗した場合は、振込等の代替方法をご案内します。</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= 検収（受入条件）と月額開始 ================= -->
+    <!-- ================= 検収と月額開始 ================= -->
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">検収と月額開始</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div>
-          <h3 class="font-semibold mb-2 text-indigo-900">受入条件</h3>
+        <div class="border-l-4 border-indigo-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="font-semibold text-indigo-900">受入条件</h3>
+          </div>
           <p class="text-slate-700">要件定義書の受入条件に紐づきます。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2 text-indigo-900">受入期限、修正の扱い</h3>
-          <div class="space-y-2">
-            <div class="bg-green-50 border-l-4 border-green-500 p-3">
-              <p class="text-sm text-slate-700"><strong>軽微：</strong>月額内で対応</p>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            <h3 class="font-semibold text-purple-900">受入期限、修正の扱い</h3>
+          </div>
+          <div class="space-y-2 mt-3">
+            <div class="bg-green-50 border-l-4 border-green-500 p-3 rounded">
+              <p class="text-sm text-slate-700"><strong class="text-green-900">軽微：</strong>月額内で対応</p>
             </div>
-            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3">
-              <p class="text-sm text-slate-700"><strong>重大：</strong>別途見積が必要</p>
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded">
+              <p class="text-sm text-slate-700"><strong class="text-yellow-900">重大：</strong>別途見積が必要</p>
             </div>
           </div>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2 text-indigo-900">稼働開始の定義</h3>
+        <div class="border-l-4 border-blue-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <h3 class="font-semibold text-blue-900">稼働開始の定義</h3>
+          </div>
           <p class="text-slate-700">受入条件を満たし、本番環境で運用を開始した時点を本番稼働とします。</p>
         </div>
-        <div class="bg-indigo-50 rounded-lg p-4">
-          <h3 class="font-semibold mb-2 text-indigo-900">月額開始条件</h3>
+        <div class="bg-indigo-50 border-2 border-indigo-300 rounded-lg p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="font-semibold text-indigo-900">月額開始条件</h3>
+          </div>
           <p class="text-slate-700"><strong>本番稼働月から</strong>月額が開始されます。</p>
         </div>
       </div>
@@ -157,16 +303,31 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">解約・契約期間</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div>
-          <h3 class="font-semibold mb-2">契約は継続</h3>
+        <div class="border-l-4 border-blue-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <h3 class="font-semibold text-blue-900">契約は継続</h3>
+          </div>
           <p class="text-slate-700">契約は継続です。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">解約：14日前通知</h3>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-orange-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <h3 class="font-semibold text-orange-900">解約：14日前通知</h3>
+          </div>
           <p class="text-slate-700">14日前通知→14日経過後に効力が発生します。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">未決済分の扱い／返金なし</h3>
+        <div class="border-l-4 border-red-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="font-semibold text-red-900">未決済分の扱い／返金なし</h3>
+          </div>
           <p class="text-slate-700">未決済分は支払いが必要です。既に支払った費用の返金はありません。</p>
         </div>
       </div>
@@ -176,16 +337,31 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">知財・利用権・テンプレ再利用</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div>
-          <h3 class="font-semibold mb-2">知財帰属</h3>
+        <div class="border-l-4 border-indigo-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="font-semibold text-indigo-900">知財帰属</h3>
+          </div>
           <p class="text-slate-700">原則、知財は当社（提供者）に帰属します。</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">お客様は業務利用の範囲で利用</h3>
+        <div class="border-l-4 border-emerald-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <h3 class="font-semibold text-emerald-900">お客様は業務利用の範囲で利用</h3>
+          </div>
           <p class="text-slate-700">非独占・譲渡不可</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">テンプレや構成の再利用</h3>
+        <div class="border-l-4 border-green-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+            </svg>
+            <h3 class="font-semibold text-green-900">テンプレや構成の再利用</h3>
+          </div>
           <p class="text-slate-700">テンプレや構成の再利用があり得ます</p>
         </div>
       </div>
@@ -195,16 +371,22 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">免責・責任制限</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-3">
-        <div class="flex items-start gap-2">
-          <span class="text-red-600 mt-1">•</span>
+        <div class="flex items-start gap-3 border-l-4 border-red-500 pl-4">
+          <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
           <p class="text-slate-700">外部サービス障害・ネット障害は免責</p>
         </div>
-        <div class="flex items-start gap-2">
-          <span class="text-red-600 mt-1">•</span>
+        <div class="flex items-start gap-3 border-l-4 border-orange-500 pl-4">
+          <svg class="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
           <p class="text-slate-700">お客様側の操作/設定/バックアップ不備による損害の扱い</p>
         </div>
-        <div class="flex items-start gap-2">
-          <span class="text-red-600 mt-1">•</span>
+        <div class="flex items-start gap-3 border-l-4 border-yellow-500 pl-4">
+          <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
           <p class="text-slate-700">損害賠償の上限</p>
         </div>
       </div>
@@ -214,12 +396,22 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">秘密保持・個人情報</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div>
-          <h3 class="font-semibold mb-2">秘密保持</h3>
+        <div class="border-l-4 border-purple-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <h3 class="font-semibold text-purple-900">秘密保持</h3>
+          </div>
           <p class="text-slate-700">目的内利用のみ／契約終了後も存続</p>
         </div>
-        <div>
-          <h3 class="font-semibold mb-2">個人情報</h3>
+        <div class="border-l-4 border-pink-500 pl-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-pink-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <h3 class="font-semibold text-pink-900">個人情報</h3>
+          </div>
           <p class="text-slate-700">法令遵守、必要最小限、取り扱い範囲</p>
         </div>
       </div>
@@ -229,29 +421,59 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">着手条件チェック</h2>
       <div class="bg-white rounded-lg shadow p-6">
-        <div class="space-y-4">
-          <div>
-            <h3 class="font-semibold mb-2">窓口担当</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border-l-4 border-indigo-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              <h3 class="font-semibold text-indigo-900">窓口担当</h3>
+            </div>
             <p class="text-sm text-slate-600">プロジェクトの窓口となる担当者を確認します。</p>
           </div>
-          <div>
-            <h3 class="font-semibold mb-2">連絡手段</h3>
+          <div class="border-l-4 border-emerald-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="font-semibold text-emerald-900">連絡手段</h3>
+            </div>
             <p class="text-sm text-slate-600">日常的な連絡手段を確認します。</p>
           </div>
-          <div>
-            <h3 class="font-semibold mb-2">導入対象</h3>
+          <div class="border-l-4 border-green-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+              <h3 class="font-semibold text-green-900">導入対象</h3>
+            </div>
             <p class="text-sm text-slate-600">導入対象を明確にします。</p>
           </div>
-          <div>
-            <h3 class="font-semibold mb-2">テストデータの方針</h3>
+          <div class="border-l-4 border-yellow-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+              <h3 class="font-semibold text-yellow-900">テストデータの方針</h3>
+            </div>
             <p class="text-sm text-slate-600">テストデータの取り扱いを確認します。</p>
           </div>
-          <div>
-            <h3 class="font-semibold mb-2">権限方針</h3>
+          <div class="border-l-4 border-purple-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              <h3 class="font-semibold text-purple-900">権限方針</h3>
+            </div>
             <p class="text-sm text-slate-600">権限の設定方針を確認します。</p>
           </div>
-          <div>
-            <h3 class="font-semibold mb-2">定例の頻度</h3>
+          <div class="border-l-4 border-pink-500 pl-4">
+            <div class="flex items-center gap-3 mb-2">
+              <svg class="w-6 h-6 text-pink-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="font-semibold text-pink-900">定例の頻度</h3>
+            </div>
             <p class="text-sm text-slate-600">定例会議の頻度を確認します。</p>
           </div>
         </div>
@@ -262,39 +484,39 @@
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">面談後に送るもの</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div class="flex items-start gap-3">
+        <div class="flex items-start gap-3 border-l-4 border-indigo-500 pl-4">
           <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">締結済み契約書PDF</h3>
+            <h3 class="font-semibold mb-1 text-indigo-900">締結済み契約書PDF</h3>
             <p class="text-sm text-slate-600">電子署名が完了した契約書のPDFです。</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-start gap-3 border-l-4 border-emerald-500 pl-4">
+          <svg class="w-6 h-6 text-emerald-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">別紙</h3>
+            <h3 class="font-semibold mb-1 text-emerald-900">別紙</h3>
             <p class="text-sm text-slate-600">契約の詳細を記載した別紙です。</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-start gap-3 border-l-4 border-green-500 pl-4">
+          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">要件定義書 vFinal</h3>
+            <h3 class="font-semibold mb-1 text-green-900">要件定義書 vFinal</h3>
             <p class="text-sm text-slate-600">最終確定版の要件定義書です。</p>
           </div>
         </div>
-        <div class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-start gap-3 border-l-4 border-yellow-500 pl-4">
+          <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">キックオフ資料＋ロードマップ</h3>
+            <h3 class="font-semibold mb-1 text-yellow-900">キックオフ資料＋ロードマップ</h3>
             <p class="text-sm text-slate-600">プロジェクト開始に向けた資料です。</p>
           </div>
         </div>
@@ -329,4 +551,5 @@
   </footer>
 </body>
 </html>
+
 
