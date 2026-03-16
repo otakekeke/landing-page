@@ -98,7 +98,7 @@ function setupSmoothScroll() {
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
-                const headerHeight = document.querySelector('header').offsetHeight;
+                const headerHeight = document.querySelector('header')?.offsetHeight || 0;
                 const targetPosition = targetElement.offsetTop - headerHeight - 20;
                 
                 window.scrollTo({
@@ -244,29 +244,10 @@ function showErrorMessage(errorText) {
     }, 5000);
 }
 
-// ユーティリティ関数
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
 // ページ読み込み完了時の処理
 window.addEventListener('load', function() {
-    // フェードインアニメーションを適用
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         section.classList.add('animate-fade-in');
     });
 });
-
-// スクロール時の処理
-window.addEventListener('scroll', debounce(function() {
-    // 必要に応じてスクロール時の処理を追加
-}, 100));

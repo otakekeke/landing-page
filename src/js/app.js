@@ -4,12 +4,12 @@
 (function() {
   'use strict';
 
-  // DOM読み込み完了後に実行
   document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initSmoothScroll();
     initFormHandling();
     initMonthlyCalculator();
+    initPrintButton();
   });
 
   // モバイルメニューの初期化
@@ -65,7 +65,9 @@
             behavior: 'smooth'
           });
 
-          // フォーカスを移動（アクセシビリティ）
+          if (!targetElement.hasAttribute('tabindex')) {
+            targetElement.setAttribute('tabindex', '-1');
+          }
           targetElement.focus();
         }
       });
@@ -85,16 +87,20 @@
     });
   }
 
-  // フォームバリデーション
   function validateForm(form) {
-    const requiredFields = form.querySelectorAll('[required]');
-    let isValid = true;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var requiredFields = form.querySelectorAll('[required]');
+    var isValid = true;
     
     requiredFields.forEach(function(field) {
       if (!field.value.trim()) {
         isValid = false;
         field.classList.add('error');
         showFieldError(field, 'この項目は必須です');
+      } else if (field.type === 'email' && !emailRegex.test(field.value.trim())) {
+        isValid = false;
+        field.classList.add('error');
+        showFieldError(field, '有効なメールアドレスを入力してください');
       } else {
         field.classList.remove('error');
         hideFieldError(field);
@@ -134,11 +140,6 @@
       });
     }
   }
-
-  // 印刷ボタンの初期化を追加
-  document.addEventListener('DOMContentLoaded', function() {
-    initPrintButton();
-  });
 
   // 月額算出ツールの初期化
   function initMonthlyCalculator() {
