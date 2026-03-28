@@ -254,94 +254,50 @@
         <li>試用期間中のお手入れは、上記の範囲まで費用なし</li>
       </ul>
       
-      <!-- デスクトップ: 横並びタイムライン -->
-      <div class="hidden md:block relative">
-        <div class="flex items-start justify-between">
-          <!-- ステップ1: 要件定義 -->
-          <div class="flex-1 relative">
-            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-indigo-200">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
-                <h3 class="text-lg font-semibold">要件定義</h3>
-              </div>
-              <p class="text-sm text-slate-600 mb-2">30-45分の現場ヒアリングで、困りごとを具体化します。</p>
-              <p class="text-xs text-slate-500">あなたの施設の課題を丁寧にお聞きし、解決策を一緒に考えます。</p>
+      <!-- 3ステップ（マークアップは1系統・レスポンシブで横並び／縦並び） -->
+      <div class="flex flex-col md:flex-row md:items-stretch gap-4 md:gap-2">
+        <article class="flex-1 min-w-0 flex flex-col">
+          <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-indigo-200 h-full flex flex-col">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
+              <h3 class="text-lg font-semibold">要件定義</h3>
             </div>
-            <!-- 矢印 -->
-            <div class="absolute top-6 -right-4 z-10">
-              <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-              </svg>
-            </div>
-          </div>
-
-          <!-- ステップ2: プロトタイプ無料作成 -->
-          <div class="flex-1 relative mx-4">
-            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-emerald-200">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
-                <h3 class="text-lg font-semibold">プロトタイプ無料作成</h3>
-              </div>
-              <p class="text-sm text-slate-600 mb-2">オーダーメイドで1つのプロトタイプアプリを作成します。</p>
-              <p class="text-xs text-slate-500">あなたの施設専用にカスタマイズしたアプリを無料でお作りします。</p>
-            </div>
-            <!-- 矢印 -->
-            <div class="absolute top-6 -right-4 z-10">
-              <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-              </svg>
-            </div>
-          </div>
-
-          <!-- ステップ3: 一か月試用 -->
-          <div class="flex-1 relative">
-            <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-green-200">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
-                <h3 class="text-lg font-semibold">一か月試用</h3>
-              </div>
-              <p class="text-sm text-slate-600 mb-2">作成したプロトタイプを実際に使用して効果を確認します。</p>
-              <p class="text-xs text-slate-500">一か月間、実際の業務で使用していただき、効果を実感していただけます。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- モバイル: 縦並びタイムライン -->
-      <div class="md:hidden space-y-6">
-        <!-- ステップ1: 要件定義 -->
-        <div class="relative pl-8">
-          <div class="absolute left-0 top-0 w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
-          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-indigo-500">
-            <h3 class="text-lg font-semibold mb-2">要件定義</h3>
             <p class="text-sm text-slate-600 mb-2">30-45分の現場ヒアリングで、困りごとを具体化します。</p>
-            <p class="text-xs text-slate-500">あなたの施設の課題を丁寧にお聞きし、解決策を一緒に考えます。</p>
+            <p class="text-xs text-slate-500 mt-auto">あなたの施設の課題を丁寧にお聞きし、解決策を一緒に考えます。</p>
           </div>
-          <!-- 下向き矢印 -->
-          <div class="absolute left-3 top-8 w-0.5 h-6 bg-indigo-300"></div>
+        </article>
+        <div class="hidden md:flex items-center justify-center shrink-0 w-8 text-indigo-400" aria-hidden="true">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
         </div>
-
-        <!-- ステップ2: プロトタイプ無料作成 -->
-        <div class="relative pl-8">
-          <div class="absolute left-0 top-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
-          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-emerald-500">
-            <h3 class="text-lg font-semibold mb-2">プロトタイプ無料作成</h3>
+        <div class="flex md:hidden items-center justify-center text-slate-300 py-0" aria-hidden="true">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+        <article class="flex-1 min-w-0 flex flex-col">
+          <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-emerald-200 h-full flex flex-col">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
+              <h3 class="text-lg font-semibold">プロトタイプ無料作成</h3>
+            </div>
             <p class="text-sm text-slate-600 mb-2">オーダーメイドで1つのプロトタイプアプリを作成します。</p>
-            <p class="text-xs text-slate-500">あなたの施設専用にカスタマイズしたアプリを無料でお作りします。</p>
+            <p class="text-xs text-slate-500 mt-auto">あなたの施設専用にカスタマイズしたアプリを無料でお作りします。</p>
           </div>
-          <!-- 下向き矢印 -->
-          <div class="absolute left-3 top-8 w-0.5 h-6 bg-emerald-300"></div>
+        </article>
+        <div class="hidden md:flex items-center justify-center shrink-0 w-8 text-emerald-400" aria-hidden="true">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
         </div>
-
-        <!-- ステップ3: 一か月試用 -->
-        <div class="relative pl-8">
-          <div class="absolute left-0 top-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
-          <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
-            <h3 class="text-lg font-semibold mb-2">一か月試用</h3>
+        <div class="flex md:hidden items-center justify-center text-slate-300 py-0" aria-hidden="true">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+        <article class="flex-1 min-w-0 flex flex-col">
+          <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-green-200 h-full flex flex-col">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
+              <h3 class="text-lg font-semibold">一か月試用</h3>
+            </div>
             <p class="text-sm text-slate-600 mb-2">作成したプロトタイプを実際に使用して効果を確認します。</p>
-            <p class="text-xs text-slate-500">一か月間、実際の業務で使用していただき、効果を実感していただけます。</p>
+            <p class="text-xs text-slate-500 mt-auto">一か月間、実際の業務で使用していただき、効果を実感していただけます。</p>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
@@ -424,7 +380,7 @@
         </details>
       </div>
 
-      <!-- 1. 基本プラン A/B — 価格が主役 -->
+      <!-- 1. 基本プラン（2種類） -->
       <div id="price-base" class="mb-12 scroll-mt-28">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">1</span>
@@ -432,7 +388,7 @@
         </h3>
         <div class="grid lg:grid-cols-2 gap-6">
 
-          <!-- A 単一業務補助ツール -->
+          <!-- 単一業務補助ツール -->
           <div class="rounded-2xl border-2 border-slate-300 bg-white p-6 shadow-sm flex flex-col">
             <div class="flex items-center gap-2 mb-3">
               <h4 class="text-lg font-bold text-slate-900">1つの業務ツール</h4>
@@ -497,7 +453,7 @@
             </details>
           </div>
 
-          <!-- B 業務横断・運用管理アプリ -->
+          <!-- 業務横断・運用管理アプリ -->
           <div class="rounded-2xl border-2 border-indigo-400 bg-white p-6 shadow-md flex flex-col ring-1 ring-indigo-100">
             <div class="flex items-center gap-2 mb-3">
               <h4 class="text-lg font-bold text-indigo-950">複数業務をまとめて管理するアプリ</h4>
@@ -578,7 +534,7 @@
       <div id="price-which" class="mb-12 scroll-mt-28">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">2</span>
-          AとB、どちらになるか1分でわかります
+          どちらのプランになるか（目安）
         </h3>
         <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
           <table class="w-full text-sm min-w-[460px]">
@@ -586,12 +542,10 @@
               <tr class="border-b border-slate-200">
                 <th class="px-4 py-3 text-left text-slate-700 font-semibold bg-slate-50 w-1/2">あなたの状況は？</th>
                 <th class="px-4 py-3 text-center font-semibold bg-slate-50 border-l border-slate-200 w-1/4">
-                  <span class="block text-slate-500 text-xs">A</span>
-                  単一ツール
+                  1つの業務ツール
                 </th>
                 <th class="px-4 py-3 text-center font-semibold bg-indigo-50 border-l border-indigo-200 w-1/4">
-                  <span class="block text-indigo-500 text-xs">B</span>
-                  横断アプリ
+                  業務横断の<br class="hidden sm:block" />統合アプリ
                 </th>
               </tr>
             </thead>
@@ -642,8 +596,9 @@
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">例</span>
           実際の見積イメージ
         </h3>
-        <p class="text-xs text-slate-500 mb-5">ご参考までに、よくあるケースをまとめました。</p>
-        <div class="grid sm:grid-cols-2 gap-4">
+        <p class="text-sm text-slate-600 mb-2 max-w-2xl">まずは<strong class="text-slate-800">基本の2プラン</strong>の金額イメージだけをご覧ください。</p>
+        <p class="text-xs text-slate-500 mb-5">追加の機能や施設が重なるケースは、下の「開く」から読めます。</p>
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
 
           <!-- 例1 -->
           <div class="rounded-2xl border-2 border-slate-200 bg-white p-5 shadow-sm">
@@ -687,6 +642,17 @@
             </div>
           </div>
 
+        </div>
+
+        <details class="rounded-xl border border-slate-200 bg-slate-50/90 overflow-hidden">
+          <summary class="cursor-pointer px-4 py-3 text-sm font-semibold text-slate-800 list-none [&::-webkit-details-marker]:hidden flex items-center gap-2 hover:bg-slate-100">
+            <svg class="w-4 h-4 text-slate-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            条件が重なるときの例（機能追加・他施設）
+          </summary>
+          <div class="border-t border-slate-200 px-4 pb-4 pt-2">
+            <p class="text-xs text-slate-500 mb-4">統合アプリに機能を足す場合、複数施設に同じアプリを広げる場合のイメージです。</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+
           <!-- 例3 -->
           <div class="rounded-2xl border-2 border-amber-200 bg-amber-50/30 p-5 shadow-sm">
             <div class="flex items-center gap-2 mb-3">
@@ -719,8 +685,8 @@
             </div>
             <p class="font-bold text-teal-950 text-sm mb-3">同じアプリを2つ目の施設にも展開したい</p>
             <ul class="text-xs text-slate-600 space-y-1 mb-4 list-none">
-              <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold shrink-0">A</span>1つ目の施設：統合アプリを導入</li>
-              <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold shrink-0">B</span>2つ目の施設：同じ使い方でコピー展開</li>
+              <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold shrink-0">1</span>先に導入した施設：統合アプリ</li>
+              <li class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold shrink-0">2</span>あとから追加する施設：同じ使い方でコピー展開</li>
             </ul>
             <div class="border-t border-teal-100 pt-3 space-y-1">
               <div class="flex justify-between text-xs text-slate-500"><span>初期費用</span><span class="font-bold text-teal-900">800,000円 ＋ 150,000円 <span class="text-slate-400 font-normal">= 950,000円（税込）</span></span></div>
@@ -728,7 +694,9 @@
             </div>
           </div>
 
-        </div>
+            </div>
+          </div>
+        </details>
       </div>
 
 
@@ -742,10 +710,16 @@
           </div>
         </summary>
 
-        <div class="space-y-12">
+        <div class="space-y-6">
+        <p class="text-sm text-slate-600 -mt-2 mb-2">基本プランのあとに起きがちなパターン別の料金です。気になる項目だけ開いてください。</p>
 
       <!-- 3. 追加事業所 — カード4枚 -->
-      <div id="price-sites" class="scroll-mt-28">
+      <details id="price-sites" class="scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/pn">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/pn:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          他施設への展開（4パターン）
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2 space-y-4">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">3</span>
           同じアプリを他の施設にも展開したいとき
@@ -812,16 +786,22 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
       <!-- 4. カスタマイズ — 価格ラダー -->
-      <div id="price-custom" class="mb-12 scroll-mt-28">
+      <details id="price-custom" class="mb-6 scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/pc">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/pc:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          後から追加・変更・連携・データ移行
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">4</span>
           後から追加・変更したいとき
         </h3>
 
-        <!-- 4-1〜B 価格ラダー -->
+        <!-- カスタマイズ価格ラダー -->
         <p class="text-xs text-slate-500 mb-3">変更の大きさによって料金が変わります。小さなことなら月額内で対応します。</p>
         <div class="space-y-2 mb-6">
           <!-- 月額内 -->
@@ -830,7 +810,7 @@
             <div class="flex-1 min-w-0">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="font-bold text-green-900">月額のなかで対応</span>
-                <span class="text-xs text-green-700">小さな修正なら追加費用なし（A：月30分以内 / B：月2時間以内）</span>
+                <span class="text-xs text-green-700">小さな修正なら追加費用なし（単一ツールは月30分以内／統合アプリは月2時間以内）</span>
               </div>
               <p class="text-xs text-green-700 mt-0.5">文字の修正・項目名の変更・並び順の変更・帳票の細かい調整・通知文面の修正 など</p>
             </div>
@@ -943,10 +923,16 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
       <!-- 5. 多機能化 — モジュールカウンタ -->
-      <div id="price-bulk" class="mb-12 scroll-mt-28">
+      <details id="price-bulk" class="mb-6 scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/pb">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/pb:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          最初から多機能にしたいとき
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">5</span>
           最初からたくさんの機能を使いたいとき
@@ -1012,10 +998,16 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
       <!-- 6. 別業務 — フロー分岐 -->
-      <div id="price-biz" class="mb-12 scroll-mt-28">
+      <details id="price-biz" class="mb-6 scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/pbiz">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/pbiz:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          まったく別の業務を追加するとき
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">6</span>
           まったく別の業務も追加したいとき
@@ -1066,10 +1058,16 @@
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
       <!-- 7. アップグレード — Before/After -->
-      <div id="price-upgrade" class="mb-12 scroll-mt-28">
+      <details id="price-upgrade" class="mb-6 scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/pup">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/pup:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          小さく始めて、あとから統合アプリへ
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">7</span>
           最初は小さく始めて、後から大きくできます
@@ -1098,10 +1096,16 @@
           </div>
           <p class="text-xs text-slate-600 text-center mt-3">まずは1つの業務で試して、必要になったら広げていけます。</p>
         </div>
-      </div>
+        </div>
+      </details>
 
       <!-- 8. 優先対応オプション -->
-      <div id="price-spot" class="mb-10 scroll-mt-28">
+      <details id="price-spot" class="mb-6 scroll-mt-28 rounded-xl border border-slate-200 bg-white overflow-hidden group/ps">
+        <summary class="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-4 py-3 text-sm font-semibold text-slate-800 flex items-center gap-2 hover:bg-slate-50">
+          <svg class="w-4 h-4 text-slate-400 group-open/ps:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          優先対応オプション
+        </summary>
+        <div class="border-t border-slate-100 px-4 pb-4 pt-2">
         <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-800 text-white text-xs font-bold">8</span>
           優先対応オプション
@@ -1119,9 +1123,10 @@
             <p class="text-xs text-indigo-700 mt-1">通常よりも早く確認・修正を行います</p>
           </div>
         </div>
-      </div>
+        </div>
+      </details>
 
-        </div><!-- end space-y-12 -->
+        </div><!-- end price-details inner -->
       </details><!-- end price-details-block -->
 
 
@@ -1813,18 +1818,15 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             その他の連絡先・事業者情報
           </summary>
-          <div class="mt-3 space-y-3 text-sm text-slate-600">
-            <p class="text-xs text-slate-500 border-b border-slate-100 pb-3">
-              <strong class="text-slate-700">事業者：</strong>嶽ノ子（個人事業主：大嶽 耕太郎）／お問い合わせの窓口はこのフォームが主となります。
+          <div class="mt-3 space-y-2 text-xs text-slate-400">
+            <p class="leading-relaxed border-b border-slate-100 pb-2">
+              事業者：嶽ノ子（個人事業主：大嶽 耕太郎）。お問い合わせの窓口はこのフォームが主となります。
             </p>
-            <p>
-              <strong>電話：</strong>
-              <a href="tel:07013834420" class="text-indigo-600 hover:text-indigo-800">070-1383-4420</a>
-              （平日・土曜 9:00-18:00）
-            </p>
-            <p>
-              <strong>メール：</strong>
-              <a href="mailto:takenoko.ai.care@gmail.com" class="text-indigo-600 hover:text-indigo-800">takenoko.ai.care@gmail.com</a>
+            <p class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <a href="tel:07013834420" class="text-indigo-600/90 hover:text-indigo-700 underline underline-offset-2 decoration-slate-300">070-1383-4420</a>
+              <span>（平日・土曜 9:00-18:00）</span>
+              <span class="text-slate-300" aria-hidden="true">·</span>
+              <a href="mailto:takenoko.ai.care@gmail.com" class="text-indigo-600/90 hover:text-indigo-700 underline underline-offset-2 decoration-slate-300">takenoko.ai.care@gmail.com</a>
             </p>
           </div>
         </details>
@@ -1857,7 +1859,7 @@
     </section>
 
   <footer class="py-12 text-center text-xs text-slate-500">
-      © 2025年04月19日 嶽ノ子 (個人事業主: 大嶽 耕太郎). All rights reserved.
+      © 2025年04月19日 嶽ノ子（個人事業）. All rights reserved.
       <p class="mt-2 space-x-4">
         <a href="contract.html" class="text-slate-400 hover:text-slate-600 underline">ベータ版プラン契約のご説明</a>
         <a href="privacy.html" class="text-slate-400 hover:text-slate-600 underline">プライバシーポリシー</a>
