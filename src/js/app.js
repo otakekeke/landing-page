@@ -69,6 +69,13 @@
             targetElement.setAttribute('tabindex', '-1');
           }
           targetElement.focus();
+
+          const mobileMenu = document.getElementById('mobile-menu');
+          const mobileMenuButton = document.querySelector('[data-mobile-menu-button]');
+          if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            if (mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
+          }
         }
       });
     });
