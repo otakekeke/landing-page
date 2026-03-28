@@ -378,11 +378,18 @@
           <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div class="text-sm text-green-900 leading-relaxed space-y-1">
+          <div class="text-sm text-green-900 leading-relaxed space-y-2">
             <p>試用期間終了までは完全無料です。</p>
             <p>要件定義、プロトタイプ作成、試用期間、試用期間中の要望反映まで費用はかかりません。</p>
             <p>正式契約後は、1アプリごとに初期費用<strong>330,000円（税込）</strong>、月額<strong>88,000円（税込）</strong>でご利用いただきます。</p>
-            <p>月額には、アプリ利用料、保守（不具合修正含む）、チャット/メールでの運用サポート、月1回のオンライン打ち合わせ（60分）、月2時間以内の軽微な改修が含まれます。</p>
+            <p class="font-semibold text-green-900">月額に含まれる主な内容</p>
+            <ul class="list-disc pl-5 space-y-1 mt-1 text-green-900">
+              <li>アプリ利用（1事業所・1アプリ）</li>
+              <li>保守・不具合修正</li>
+              <li>チャット/メールでの運用サポート・操作確認・相談対応</li>
+              <li>月1回のオンライン打ち合わせ（60分）</li>
+              <li>月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -416,13 +423,34 @@
             <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800 flex items-center">対象</div>
             <div class="col-span-2 p-4 text-slate-700">1事業所・1業務・アプリ1本</div>
           </div>
-          <div class="grid grid-cols-3">
+          <div class="grid grid-cols-3 items-start">
             <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800">月額に含まれるもの</div>
-            <div class="col-span-2 p-4 text-slate-700 leading-relaxed">アプリ利用（1事業所・1アプリ）、保守・不具合修正、チャット/メールでの運用サポート・操作確認・相談対応、月1回のオンライン打ち合わせ（60分）、月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</div>
+            <div class="col-span-2 p-4 bg-indigo-50/50 border-l-4 border-indigo-400">
+              <ul class="space-y-2 text-sm text-slate-800">
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>アプリ利用（1事業所・1アプリ）</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>保守・不具合修正</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>チャット/メールでの運用サポート・操作確認・相談対応</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>月1回のオンライン打ち合わせ（60分）</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</span></li>
+              </ul>
+            </div>
           </div>
-          <div class="grid grid-cols-3">
+          <div class="grid grid-cols-3 items-start">
             <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800">含まれないもの</div>
-            <div class="col-span-2 p-4 text-slate-700 leading-relaxed">新規アプリ作成、新規画面追加、月2時間を超える改修、業務フロー自体が変わる大幅改修、外部システムとの個別連携、データ移行作業、現地訪問、24時間365日の監視・即時対応、複数事業所展開、別業務の追加開発</div>
+            <div class="col-span-2 p-4 text-slate-700">
+              <ul class="space-y-1.5 text-sm">
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>新規アプリ作成</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>新規画面追加</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>月2時間を超える改修</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>業務フロー自体が変わる大幅改修</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>外部システムとの個別連携</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>データ移行作業</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>現地訪問</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>24時間365日の監視・即時対応</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>複数事業所展開</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>別業務の追加開発</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -595,8 +623,18 @@
               </ul>
             </div>
             <p class="text-slate-700 leading-relaxed">
-              正式契約後は、月額<strong>88,000円（税込）</strong>が発生します。月額には対象アプリの利用料、保守・不具合修正、チャット/メールでの運用サポート、月1回のオンライン打ち合わせ（60分）、月2時間以内の軽微な改修が含まれます。
+              正式契約後は、月額<strong>88,000円（税込）</strong>が発生します。
             </p>
+            <div class="bg-emerald-50 rounded-lg p-4 border border-emerald-200">
+              <p class="text-sm font-semibold text-emerald-900 mb-2">月額に含まれるもの</p>
+              <ul class="text-sm text-slate-700 space-y-1.5 list-disc list-inside">
+                <li>対象アプリの利用料</li>
+                <li>保守・不具合修正</li>
+                <li>チャット/メールでの運用サポート</li>
+                <li>月1回のオンライン打ち合わせ（60分）</li>
+                <li>月2時間以内の軽微な改修</li>
+              </ul>
+            </div>
           </div>
         </details>
 
@@ -612,11 +650,26 @@
             <p class="text-slate-700 leading-relaxed">
               1アプリごとに、初期費用<strong>330,000円（税込）</strong>と月額<strong>88,000円（税込）</strong>が発生します。
             </p>
-            <div class="bg-emerald-50 rounded-lg p-4">
-              <p class="text-sm font-semibold text-emerald-900 mb-2">月額に含まれるもの：</p>
-              <p class="text-sm text-slate-700">対象アプリの利用料、保守・不具合修正、チャット/メールでの運用サポート、月1回のオンライン打ち合わせ（60分）、月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</p>
-              <p class="text-sm font-semibold text-slate-700 mt-3 mb-1">別見積になるもの：</p>
-              <p class="text-sm text-slate-600">新規画面追加、新機能追加、月2時間を超える改修、外部システム連携、大幅な仕様変更</p>
+            <div class="bg-emerald-50 rounded-lg p-4 space-y-4">
+              <div>
+                <p class="text-sm font-semibold text-emerald-900 mb-2">月額に含まれるもの</p>
+                <ul class="text-sm text-slate-700 space-y-1.5 list-disc list-inside">
+                  <li>対象アプリの利用料</li>
+                  <li>保守・不具合修正</li>
+                  <li>チャット/メールでの運用サポート</li>
+                  <li>月1回のオンライン打ち合わせ（60分）</li>
+                  <li>月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</li>
+                </ul>
+              </div>
+              <div class="border-t border-emerald-200 pt-3">
+                <p class="text-sm font-semibold text-slate-800 mb-2">別見積になるもの</p>
+                <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside">
+                  <li>新規画面追加、新機能追加</li>
+                  <li>月2時間を超える改修</li>
+                  <li>外部システム連携</li>
+                  <li>大幅な仕様変更</li>
+                </ul>
+              </div>
             </div>
             <p class="text-sm text-slate-600">試用期間中は費用はかかりません。正式契約後に初期費用と月額が発生します。</p>
           </div>
