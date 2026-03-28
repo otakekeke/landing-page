@@ -20,11 +20,13 @@
       <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 hover:text-indigo-600">
         嶽ノ子
       </a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
+      <nav class="hidden md:flex gap-6 text-sm font-medium flex-wrap justify-end">
+        <a href="index.html#challenges" class="hover:text-indigo-600">課題</a>
+        <a href="index.html#domains" class="hover:text-indigo-600">対応領域</a>
         <a href="index.html#price" class="hover:text-indigo-600">料金</a>
+        <a href="index.html#compare" class="hover:text-indigo-600">比較</a>
         <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="hover:text-indigo-600">プラン比較</a>
+        <a href="index.html#case-study" class="hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -37,10 +39,12 @@
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="index.html#challenges" class="block py-2 hover:text-indigo-600">課題</a>
+        <a href="index.html#domains" class="block py-2 hover:text-indigo-600">対応領域</a>
         <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="index.html#compare" class="block py-2 hover:text-indigo-600">比較</a>
         <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="block py-2 hover:text-indigo-600">プラン比較</a>
+        <a href="index.html#case-study" class="block py-2 hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
@@ -135,8 +139,8 @@
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">プラン比較の説明（10分）</h3>
-              <p class="text-sm text-slate-600">Lite / Standard / Proの違いを説明します。</p>
+              <h3 class="font-semibold mb-1">料金プランの説明（10分）</h3>
+              <p class="text-sm text-slate-600">トップページの比較表に沿って、5プランの違い（単発／継続、納期・修正枠）を説明します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
@@ -310,7 +314,7 @@
       <h2 class="text-2xl font-bold mb-4">優先度と線引き</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
         <div class="bg-red-50 border-l-4 border-red-500 p-4">
-          <h3 class="font-semibold text-red-900 mb-2">Must：最初に必ず必要</h3>
+          <h3 class="font-semibold text-red-900 mb-2">Must：最初に欠かせないもの</h3>
           <p class="text-sm text-slate-700">これがないと業務が回らない、または導入の目的が達成できない機能です。</p>
         </div>
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
@@ -328,33 +332,27 @@
       </div>
     </section>
 
-    <!-- ================= 通常プラン比較 ================= -->
+    <!-- ================= 料金プランの比較（固定・税込） ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">通常プラン比較</h2>
+      <h2 class="text-2xl font-bold mb-4">料金プランの比較</h2>
       <div class="bg-white rounded-lg shadow p-6">
-        <div class="grid md:grid-cols-3 gap-4 mb-6">
-          <div class="border-2 border-slate-300 rounded-lg p-4">
-            <h3 class="font-bold text-lg mb-2">Lite</h3>
-            <p class="text-sm text-slate-600 mb-3">軽微修正</p>
-            <p class="text-xs text-slate-500">基本的な運用サポートと軽微な修正に対応します。</p>
+        <p class="text-sm text-slate-600 mb-4">金額・比較表の正は <a href="index.html#compare" class="text-indigo-600 underline">トップページの料金比較</a> です。ここではイメージのみ示します。</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6 text-sm">
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="font-bold text-slate-900 mb-1">業務整理</h3>
+            <p class="text-slate-600">整理・優先順位のメモまで。実装は含みません。</p>
           </div>
-          <div class="border-2 border-emerald-400 rounded-lg p-4">
-            <h3 class="font-bold text-lg mb-2">Standard</h3>
-            <p class="text-sm text-slate-600 mb-3">改善・微機能追加</p>
-            <p class="text-xs text-slate-500">運用改善と微機能追加に対応します。</p>
+          <div class="border border-slate-200 rounded-lg p-4">
+            <h3 class="font-bold text-slate-900 mb-1">初期ライト／スタンダード</h3>
+            <p class="text-slate-600">単発で実装1件。規模・納期・軽微修正回数がプランで異なります。</p>
           </div>
-          <div class="border-2 border-indigo-500 rounded-lg p-4">
-            <h3 class="font-bold text-lg mb-2">Pro</h3>
-            <p class="text-sm text-slate-600 mb-3">改善・新機能</p>
-            <p class="text-xs text-slate-500">継続的な改善と新機能追加に対応します。</p>
+          <div class="border border-slate-200 rounded-lg p-4 md:col-span-2 lg:col-span-1">
+            <h3 class="font-bold text-slate-900 mb-1">継続サポート／パートナー</h3>
+            <p class="text-slate-600">月内の改善・定例・上限時間がプランで異なります（3か月更新）。</p>
           </div>
         </div>
-        <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
-          <p class="text-sm text-slate-700"><strong>「月額で吸収できる変更」と「再見積になる変更」の境界：</strong></p>
-          <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2 ml-4">
-            <li>月額内：軽微修正、微改善</li>
-            <li>再見積：画面追加、構造変更、連携追加、広範囲改修 など</li>
-          </ul>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <p class="text-sm text-slate-700"><strong>プランに含まれる軽微修正と、別契約となる追加要件の境界</strong>は、各プランの説明および契約時の合意内容に従います。仕様追加・大規模改修は事前見積で合意したうえで実施します。</p>
         </div>
       </div>
     </section>

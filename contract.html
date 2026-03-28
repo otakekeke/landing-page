@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ベータ版プラン契約のご説明｜嶽ノ子</title>
-  <meta name="description" content="ベータ版プラン契約の内容を分かりやすくご説明します。料金、無料期間、解約、障害対応など重要なポイントを視覚的に解説。">
+  <title>契約・料金のご説明｜嶽ノ子</title>
+  <meta name="description" content="固定料金のプラン、支払条件・キャンセル、見積の位置づけなど、契約前に知っておきたい要点を分かりやすくまとめています（詳細は個別条件に従います）。">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
@@ -130,11 +130,13 @@
       <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
         <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
       </div>
-      <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
+      <nav class="hidden md:flex gap-6 text-sm font-medium flex-wrap justify-end">
+        <a href="index.html#challenges" class="hover:text-indigo-600">課題</a>
+        <a href="index.html#domains" class="hover:text-indigo-600">対応領域</a>
         <a href="index.html#price" class="hover:text-indigo-600">料金</a>
+        <a href="index.html#compare" class="hover:text-indigo-600">比較</a>
         <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="hover:text-indigo-600">プラン比較</a>
+        <a href="index.html#case-study" class="hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -149,10 +151,12 @@
     <!-- モバイルメニュー -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
+        <a href="index.html#challenges" class="block py-2 hover:text-indigo-600">課題</a>
+        <a href="index.html#domains" class="block py-2 hover:text-indigo-600">対応領域</a>
         <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
+        <a href="index.html#compare" class="block py-2 hover:text-indigo-600">比較</a>
         <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="block py-2 hover:text-indigo-600">プラン比較</a>
+        <a href="index.html#case-study" class="block py-2 hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
@@ -164,10 +168,10 @@
   <section class="bg-indigo-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-        ベータ版プラン契約のご説明
+        契約・料金のご説明
       </h1>
       <p class="mt-4 text-lg text-indigo-100">
-        ベータ版プラン契約の要点を分かりやすくご説明します
+        固定料金プランと支払・解約の要点を分かりやすくまとめています（個別条件が優先される場合があります）
       </p>
     </div>
   </section>
@@ -183,7 +187,7 @@
             <a href="#article-1" class="block text-slate-600 hover:text-indigo-600">第1条 定義</a>
             <a href="#article-2" class="block text-slate-600 hover:text-indigo-600">第2条 契約当事者</a>
             <a href="#article-3" class="block text-slate-600 hover:text-indigo-600">第3条 本サービスの内容</a>
-            <a href="#article-4" class="block text-slate-600 hover:text-indigo-600">第4条 契約の成立・無料期間</a>
+            <a href="#article-4" class="block text-slate-600 hover:text-indigo-600">第4条 契約の成立・サービス開始</a>
             <a href="#article-5" class="block text-slate-600 hover:text-indigo-600">第5条 算出ツール・見積書</a>
             <a href="#article-6" class="block text-slate-600 hover:text-indigo-600">第6条 料金</a>
             <a href="#article-7" class="block text-slate-600 hover:text-indigo-600">第7条 大きなカスタマイズ等</a>
@@ -211,7 +215,7 @@
           </h2>
           
           <div class="grid md:grid-cols-2 gap-6 mb-8">
-            <!-- 料金体系 -->
+            <!-- 料金体系（固定プラン・税込） -->
             <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg shadow-lg p-6 border-2 border-indigo-300">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center">
@@ -221,23 +225,16 @@
                 </div>
                 <h3 class="text-xl font-bold text-indigo-900">料金体系</h3>
               </div>
-              <div class="space-y-3">
-                <div class="bg-white rounded p-3">
-                  <p class="text-sm text-slate-600 mb-1">初期費用</p>
-                  <p class="text-2xl font-bold text-indigo-600">0円（税込）</p>
-                </div>
-                <div class="bg-white rounded p-3">
-                  <p class="text-sm text-slate-600 mb-1">月額保守費</p>
-                  <p class="text-lg font-semibold text-indigo-700">確定月額（税込）</p>
-                  <p class="text-xs text-slate-600 mt-1">見積書に記載された月額</p>
-                </div>
-                <div class="bg-indigo-50 rounded p-2 text-xs text-indigo-800">
-                  <p><strong>算定方針：</strong>削減時間 × 時給 × 1/3</p>
-                </div>
+              <div class="space-y-2 text-sm text-slate-700">
+                <p>ホームページに掲載の<strong>税込固定料金</strong>（業務整理／初期ライト／スタンダード／継続サポート／継続パートナー）を基本とします。金額・範囲の正は <a href="index.html#price" class="text-indigo-700 underline font-medium">料金ページ</a> です。</p>
+                <ul class="list-disc list-inside space-y-1 text-xs text-slate-600">
+                  <li>単発：契約時50％・納品時50％</li>
+                  <li>月額：毎月月初請求、当月末支払い（詳細は個別条件）</li>
+                </ul>
               </div>
             </div>
 
-            <!-- 無料期間 -->
+            <!-- キャンセル・返金（概要） -->
             <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg shadow-lg p-6 border-2 border-emerald-300">
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
@@ -245,17 +242,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
-                <h3 class="text-xl font-bold text-emerald-900">無料期間</h3>
+                <h3 class="text-xl font-bold text-emerald-900">キャンセル・返金（概要）</h3>
               </div>
-              <div class="space-y-3">
-                <div class="bg-white rounded p-3">
-                  <p class="text-3xl font-bold text-emerald-600 mb-1">1か月間</p>
-                  <p class="text-sm text-slate-600">無料でお試しいただけます</p>
-                </div>
-                <p class="text-sm text-emerald-800">
-                  <strong>無料期間中は費用は一切かかりません。</strong><br>
-                  継続利用を希望される場合のみ、有償契約が開始されます。
-                </p>
+              <div class="space-y-2 text-sm text-emerald-900">
+                <p><strong>業務整理プラン：</strong>打ち合わせ前まで全額返金。打ち合わせ後は返金なし。</p>
+                <p><strong>単発（初期ライト・スタンダード）：</strong>着手後の返金なし。</p>
+                <p><strong>月額プラン：</strong>次回更新日の<strong>7日前まで</strong>の連絡で終了可能（詳細は第14条・個別条件）。</p>
               </div>
             </div>
 
@@ -271,8 +263,8 @@
               </div>
               <div class="space-y-3">
                 <div class="bg-white rounded p-3">
-                  <p class="text-sm text-slate-600 mb-1">解約通知</p>
-                  <p class="text-lg font-semibold text-amber-700">14日前まで</p>
+                  <p class="text-sm text-slate-600 mb-1">月額の終了連絡</p>
+                  <p class="text-lg font-semibold text-amber-700">次回更新の7日前まで</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 rounded p-3">
                   <p class="text-sm text-amber-800">
@@ -321,13 +313,13 @@
             </div>
             <div class="bg-white rounded p-4 space-y-2">
               <p class="text-sm text-slate-700">
-                <strong>算出ツール：</strong>ホームページ上で提供する、削減時間の見込・平均時給等を入力して月額保守費を算出し、見積書をPDF出力する機能です。
+                <strong>標準のご提案：</strong>ホームページの固定料金プラン（税込）に基づき、個別条件として範囲・納期・修正回数等を定めます。
               </p>
               <p class="text-sm text-slate-700">
-                <strong>見積書：</strong>個別条件として本契約の一部を構成します。見積書の条件が本契約の条項と抵触する場合、見積書が優先します。
+                <strong>算出ツール（参考）：</strong>第6条に掲載するツールは、別途合意した場合の参考見積として利用できます。標準の金額は固定プラン表を優先します。
               </p>
               <p class="text-sm text-slate-700">
-                <strong>確定月額：</strong>見積書に記載された月額保守費（税込）が、実際に支払う月額となります。
+                <strong>見積書：</strong>個別条件として本契約の一部を構成します。本契約の条項と抵触する場合、個別条件に関する事項は見積書等が優先します。
               </p>
             </div>
           </div>
@@ -364,7 +356,7 @@
             <div class="bg-slate-50 rounded-lg p-4 space-y-3 text-sm">
               <div>
                 <h4 class="font-semibold text-slate-700 mb-1">本サービス</h4>
-                <p class="text-slate-600">甲が Google Workspace、Google グループ、Google Apps Script 等を用いて構築・提供する、乙の業務効率化を目的としたオーダーメイドアプリケーション（ベータ版を含む。）およびその保守・サポートサービス</p>
+                <p class="text-slate-600">甲が Google Workspace、Google グループ、Google Apps Script 等を用いて構築・提供する、乙の業務効率化を目的としたオーダーメイドアプリケーションおよびその保守・サポートサービス</p>
               </div>
               <div>
                 <h4 class="font-semibold text-slate-700 mb-1">対象業務</h4>
@@ -376,7 +368,7 @@
               </div>
               <div>
                 <h4 class="font-semibold text-slate-700 mb-1">見積書</h4>
-                <p class="text-slate-600">算出ツールにより出力されるPDF（印刷・保存された電磁的記録を含む。）であって、乙に適用される料金、無料期間、有償利用開始日、対象サービス名、特記事項その他の条件が記載された書面（電磁的記録を含む。）</p>
+                <p class="text-slate-600">甲乙が合意した個別条件として交付される書面（電磁的記録を含む。）であって、乙に適用される料金、支払条件、対象範囲、納期、対象サービス名、特記事項その他の条件が記載されたもの</p>
               </div>
               <div>
                 <h4 class="font-semibold text-slate-700 mb-1">個別条件</h4>
@@ -448,102 +440,45 @@
             </div>
           </section>
 
-          <!-- 第4条 契約の成立および無料期間 -->
+          <!-- 第4条 契約の成立・サービス開始 -->
           <section id="article-4" class="bg-white rounded-lg shadow p-6 border-2 border-emerald-300">
             <div class="flex items-center gap-3 mb-4">
               <span class="px-3 py-1 bg-emerald-600 text-white rounded-full text-sm font-bold">第4条</span>
-              <h2 class="text-xl font-bold text-slate-900">契約の成立および無料期間</h2>
+              <h2 class="text-xl font-bold text-slate-900">契約の成立・サービス開始</h2>
               <span class="px-2 py-1 bg-emerald-100 text-emerald-800 rounded text-xs font-semibold">重要</span>
             </div>
             <div class="space-y-4">
               <div class="bg-emerald-50 rounded-lg p-4">
                 <h4 class="font-semibold text-emerald-900 mb-2">契約の成立</h4>
                 <p class="text-sm text-slate-700 mb-2">
-                  本契約は、乙が本契約に電子署名を行い、かつ、乙に適用される個別条件（見積書）に同意した時点で成立します。
+                  本契約は、乙が本契約に電子署名を行い、かつ、乙に適用される個別条件（見積書・合意書等）に同意した時点で成立します。
                 </p>
                 <p class="text-sm text-slate-700">
                   <strong>紙面による押印は不要</strong>です。GMOサインその他甲が指定する電子契約サービスを利用して締結できます。
                 </p>
               </div>
               <div class="bg-indigo-50 rounded-lg p-4 border-l-4 border-indigo-400">
-                <h4 class="font-semibold text-indigo-900 mb-2">個別条件（見積書）への同意方法</h4>
-                <p class="text-sm text-slate-700 mb-2">前項の「同意」は、次のいずれかの方法により行うものとし、甲が当該同意を確認できる記録が残ることを要します：</p>
+                <h4 class="font-semibold text-indigo-900 mb-2">個別条件への同意方法</h4>
+                <p class="text-sm text-slate-700 mb-2">「同意」は、次のいずれかの方法により行うものとし、甲が当該同意を確認できる記録が残ることを要します：</p>
                 <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 ml-4">
-                  <li>本契約と同一の電子署名手続内で見積書（または見積書番号等）を参照し承諾する方法</li>
-                  <li>甲が指定する方法（電子同意、メール、チャット、フォーム送信等）により、見積書の内容（または見積書番号等）を特定して承諾する方法</li>
+                  <li>本契約と同一の電子署名手続内で個別条件（または見積書番号等）を参照し承諾する方法</li>
+                  <li>甲が指定する方法（電子同意、メール、チャット、フォーム送信等）により、個別条件の内容を特定して承諾する方法</li>
                 </ul>
               </div>
               <div class="bg-blue-50 rounded-lg p-4">
-                <h4 class="font-semibold text-blue-900 mb-2">1か月間の無料利用（無料期間）</h4>
+                <h4 class="font-semibold text-blue-900 mb-2">サービス開始・着手</h4>
                 <p class="text-sm text-slate-700 mb-2">
-                  乙は、甲所定の申込みにより、本サービスの<strong class="text-blue-900">1か月間の無料利用（試験導入）</strong>（以下「無料期間」という。）を受けることができます。無料期間の開始日・終了日は個別条件（見積書）に定めます。
+                  標準のご提案では、ホームページに掲載する<strong>固定料金プラン（税込）</strong>のうち甲乙が選定したプランに基づき、個別条件で範囲・納期・修正回数等を定め、合意後に着手します。
                 </p>
-              </div>
-              <div class="bg-emerald-50 rounded-lg p-4 border-2 border-emerald-200">
-                <h4 class="font-semibold text-emerald-900 mb-2">有償利用の開始</h4>
-                <p class="text-sm text-slate-700 mb-2">
-                  無料期間終了後、乙が継続利用を希望し、本契約および個別条件に同意した場合、個別条件に定める有償利用開始日から有償利用が開始され、乙は第6条所定の支払義務を負います。
+                <p class="text-sm text-slate-700">
+                  単発プランの着手金（50％）の支払確認後、または個別条件で定める開始条件を満たした後に、甲は作業を開始します。
                 </p>
               </div>
               <div class="bg-slate-50 rounded-lg p-4">
-                <h4 class="font-semibold text-slate-900 mb-2">無料期間中の継続利用意思表示がない場合</h4>
+                <h4 class="font-semibold text-slate-900 mb-2">キャンセル・返金の目安</h4>
                 <p class="text-sm text-slate-700">
-                  無料期間中に乙が継続利用の意思表示を行わない場合、本サービスの提供は終了し、乙に費用は発生しません。
+                  業務整理プランにおける打ち合わせ前後の取扱い、単発・月額それぞれの終了・解約は、<a href="index.html#payment" class="text-indigo-600 underline">ホームページの支払条件・キャンセル</a>および第14条に従います。
                 </p>
-              </div>
-
-              <!-- 契約フローのタイムライン -->
-              <div class="bg-white rounded-lg border-2 border-slate-200 p-6">
-                <h4 class="font-semibold text-slate-900 mb-4 text-center">契約フロー</h4>
-                <div class="relative">
-                  <!-- タイムライン -->
-                  <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-indigo-200"></div>
-                  
-                  <!-- ステップ1 -->
-                  <div class="relative flex items-start gap-4 mb-6">
-                    <div class="relative z-10 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span class="text-white text-sm font-bold">1</span>
-                    </div>
-                    <div class="flex-1 bg-slate-50 rounded-lg p-4">
-                      <h5 class="font-semibold text-slate-900 mb-1">無料期間の開始</h5>
-                      <p class="text-sm text-slate-600">甲所定の申込みにより、1か月間の無料利用が開始されます</p>
-                    </div>
-                  </div>
-
-                  <!-- ステップ2 -->
-                  <div class="relative flex items-start gap-4 mb-6">
-                    <div class="relative z-10 w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span class="text-white text-sm font-bold">2</span>
-                    </div>
-                    <div class="flex-1 bg-slate-50 rounded-lg p-4">
-                      <h5 class="font-semibold text-slate-900 mb-1">無料期間中の利用</h5>
-                      <p class="text-sm text-slate-600">本サービスを無料でお試しいただけます（費用は一切かかりません）</p>
-                    </div>
-                  </div>
-
-                  <!-- ステップ3 -->
-                  <div class="relative flex items-start gap-4 mb-6">
-                    <div class="relative z-10 w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span class="text-white text-sm font-bold">3</span>
-                    </div>
-                    <div class="flex-1 bg-emerald-50 rounded-lg p-4 border-2 border-emerald-200">
-                      <h5 class="font-semibold text-emerald-900 mb-1">継続利用の意思表示</h5>
-                      <p class="text-sm text-emerald-800 mb-2">無料期間終了後、継続利用を希望される場合</p>
-                      <p class="text-sm text-emerald-800 font-semibold">→ 電子署名により有償利用契約が開始</p>
-                    </div>
-                  </div>
-
-                  <!-- ステップ4 -->
-                  <div class="relative flex items-start gap-4">
-                    <div class="relative z-10 w-8 h-8 bg-slate-400 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span class="text-white text-sm font-bold">4</span>
-                    </div>
-                    <div class="flex-1 bg-slate-50 rounded-lg p-4">
-                      <h5 class="font-semibold text-slate-900 mb-1">継続利用しない場合</h5>
-                      <p class="text-sm text-slate-600">無料期間中に継続利用の意思表示を行わない場合、サービス提供は終了し、費用は発生しません</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -571,7 +506,7 @@
               <div class="bg-emerald-50 rounded-lg p-4 border-2 border-emerald-200">
                 <h4 class="font-semibold text-emerald-900 mb-2">見積書の法的位置づけ</h4>
                 <p class="text-sm text-slate-700 mb-2">
-                  見積書は、個別条件として本契約の一部を構成します。見積書に記載の条件と本契約の条項が抵触する場合、料金、無料期間、有償利用開始日、特記事項その他個別条件に関する事項については<strong>見積書が優先</strong>します。
+                  見積書は、個別条件として本契約の一部を構成します。見積書に記載の条件と本契約の条項が抵触する場合、料金、支払条件、対象範囲、納期、特記事項その他個別条件に関する事項については<strong>見積書が優先</strong>します。
                 </p>
               </div>
               <div class="bg-slate-50 rounded-lg p-4">
@@ -592,20 +527,16 @@
             </div>
             <div class="space-y-6">
               <div class="bg-slate-50 rounded-lg p-4">
-                <p class="text-slate-700 mb-4">乙は、甲に対し、本サービスの対価として以下の料金を支払います：</p>
-              <div class="grid md:grid-cols-2 gap-4">
-                <!-- 初期費用 -->
+                <p class="text-slate-700 mb-4">乙は、甲に対し、個別条件に定めるとおり、本サービスの対価として以下を支払います：</p>
+              <div class="grid md:grid-cols-1 gap-4">
                 <div class="bg-indigo-50 rounded-lg p-4">
-                  <h4 class="font-semibold text-indigo-900 mb-2">初期費用</h4>
-                    <p class="text-3xl font-bold text-indigo-600 mb-1">0円（税込）</p>
-                  <p class="text-xs text-slate-600 mt-2">ベータ版プランでは初期費用はかかりません。</p>
+                  <h4 class="font-semibold text-indigo-900 mb-2">固定料金プラン（税込）を基本とする対価</h4>
+                  <p class="text-sm text-slate-700 mb-2">業務整理（55,000円）、初期導入ライト（330,000円）、初期導入スタンダード（550,000円）、継続改善サポート（月額88,000円）、継続改善パートナー（月額165,000円）のいずれか、またはこれらを組み合わせた内容を、個別条件で定めます。</p>
+                  <p class="text-xs text-slate-600">正本は <a href="index.html#price" class="text-indigo-700 underline">ホームページの料金</a> を参照してください。</p>
                 </div>
-
-                <!-- 月額保守費 -->
                 <div class="bg-emerald-50 rounded-lg p-4">
-                  <h4 class="font-semibold text-emerald-900 mb-2">月額保守費</h4>
-                    <p class="text-lg font-bold text-emerald-600 mb-2">確定月額（税込）</p>
-                    <p class="text-xs text-slate-600 mt-2">個別条件（見積書）に記載された月額保守費</p>
+                  <h4 class="font-semibold text-emerald-900 mb-2">支払のタイミング</h4>
+                  <p class="text-sm text-slate-700">単発プランは契約時50％・納品時50％。月額プランは毎月月初請求、当月末支払い（詳細は第8条・個別条件）。</p>
                     </div>
                   </div>
                 </div>
@@ -621,18 +552,22 @@
               </div>
 
               <div class="bg-indigo-50 rounded-lg p-4">
-                <h4 class="font-semibold text-indigo-900 mb-2">確定月額の算定方針</h4>
+                <h4 class="font-semibold text-indigo-900 mb-2">確定月額の算定方針（参考）</h4>
                 <p class="text-sm text-slate-700 mb-2">
-                  甲は、確定月額の算定方針として、原則として「削減時間（見込を含む。）×平均時給×1/3」を用います。
+                  別途、月額を個別に算定する合意をした場合、甲は算定方針として原則「削減時間（見込を含む。）×平均時給×1/3」を用いることがあります。
                 </p>
                 <p class="text-sm text-slate-700">
-                  ただし、乙が支払う月額は見積書記載の確定月額とし、内訳（削減時間・平均時給・回数等）の契約書への記載・開示は必須としません。
+                  乙が支払う金額は見積書記載の確定月額とし、内訳の契約書への記載・開示は必須としません。
                 </p>
               </div>
 
+              <p class="text-sm text-slate-600 bg-slate-100 rounded-lg p-3 border border-slate-200">
+                以下の図解・算出ツールは<strong>参考</strong>です。標準の新規ご提案は、ホームページの<strong>固定料金プラン（税込）</strong>を優先します。
+              </p>
+
               <!-- 料金計算の図解 -->
               <div class="bg-gradient-to-r from-indigo-50 to-emerald-50 rounded-lg p-6 border-2 border-indigo-200">
-                <h4 class="font-semibold text-slate-900 mb-4 text-center">料金計算のイメージ</h4>
+                <h4 class="font-semibold text-slate-900 mb-4 text-center">料金計算のイメージ（参考）</h4>
                 <div class="space-y-4">
                   <div class="flex items-center justify-between bg-white rounded-lg p-4 shadow-sm">
                     <div class="flex-1">
@@ -669,8 +604,9 @@
                   <svg class="w-5 h-5 inline-block mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                   </svg>
-                  月額料金算出ツール
+                  月額料金算出ツール（参考）
                 </h4>
+                <p class="text-xs text-slate-600 text-center mb-4">固定プラン表と異なる個別見積を行う場合の補助として利用できます。</p>
                 
                 <div class="bg-white rounded-lg p-6 space-y-6">
                   <!-- 削減時間入力エリア -->
@@ -820,6 +756,8 @@
                   Stripeによる自動決済
                 </h4>
                 <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
+                  <li>単発プラン（業務整理・初期導入ライト・スタンダード）の対価は、<strong>契約時50％・納品時50％</strong>の分割支払を原則とします（個別条件で異なる場合はそのとおり）。</li>
+                  <li>月額プラン（継続改善サポート・パートナー）の対価は、<strong>毎月月初請求、当月末支払い</strong>を原則とします（詳細は個別条件）。</li>
                   <li>乙は、甲が指定する Stripe その他の決済サービスを通じて、第6条に定める料金を支払うものとします</li>
                   <li>乙は、甲の指定に従い、決済サービス上でクレジットカード情報等を登録し、自動課金に同意します</li>
                   <li>請求・決済サイクルは原則として毎月末締め翌月末日決済（自動決済）とします。ただし、決済サービスの仕様に応じて、甲が別途合理的な支払日の変更を行うことができます</li>
@@ -1084,9 +1022,9 @@
               <div class="bg-amber-50 rounded-lg p-4 border-2 border-amber-200">
                 <h4 class="font-semibold text-amber-900 mb-2">解約について</h4>
                 <ul class="list-disc list-inside space-y-2 text-sm text-slate-700">
-                  <li>乙は、<strong>いつでも本契約の解約を申し入れることができます</strong></li>
-                  <li>解約の効力は、<strong>甲に対する14日前までの通知から14日経過後</strong>に発生します</li>
-                  <li>解約日までに発生した料金（未決済分を含む。）は支払われるものとし、既に支払われた料金は返金しません</li>
+                  <li>月額プランについて、乙は<strong>次回更新日の7日前まで</strong>に甲へ書面又は甲の指定する方法で終了の意思表示を行うことで、当該更新を受けずに終了することができます（詳細は個別条件およびホームページの案内に従います）。</li>
+                  <li>上記以外の契約形態・解約・返金については、個別条件および第4条・ホームページの「支払条件・キャンセル」のとおりとします。</li>
+                  <li>終了日までに発生した料金（未決済分を含む。）は支払われるものとし、既に支払われた料金の返金は、個別条件およびキャンセル規定のとおりとします。</li>
                 </ul>
               </div>
               <div class="bg-red-50 border-l-4 border-red-400 p-4">
@@ -1146,7 +1084,7 @@
         <div>
           <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
           <p class="text-slate-300 text-sm">
-            AIで介護の未来をデザインする
+            業務改善の実装パートナー
           </p>
         </div>
         
@@ -1188,7 +1126,7 @@
   <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
     <div class="max-w-7xl mx-auto px-2">
       <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
-        無料相談する
+        お問い合わせ
       </a>
     </div>
   </div>
