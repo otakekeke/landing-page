@@ -758,11 +758,32 @@
     return card;
   }
 
+  // 全ペルソナを一括表示（タブなし）
+  function generateAllPersonaCards() {
+    const container = document.getElementById('all-personas');
+    if (!container) return;
+
+    container.innerHTML = '';
+    ['lite', 'standard', 'pro'].forEach(function(plan) {
+      const planPersonas = personas[plan];
+      if (!planPersonas) return;
+      planPersonas.forEach(function(persona, index) {
+        const card = createPersonaCard(persona, plan, index);
+        container.appendChild(card);
+      });
+    });
+  }
+
   // 初期化
   document.addEventListener('DOMContentLoaded', function() {
-    initTabs();
-    // 初期表示（Liteプラン）
-    generatePersonaCards('lite');
+    // all-personas コンテナがある場合は全件表示（plans.html新版）
+    if (document.getElementById('all-personas')) {
+      generateAllPersonaCards();
+    } else {
+      // 旧版タブ表示（互換）
+      initTabs();
+      generatePersonaCards('lite');
+    }
   });
 })();
 

@@ -24,7 +24,7 @@
         <a href="index.html#summary" class="hover:text-indigo-600">概要</a>
         <a href="index.html#price" class="hover:text-indigo-600">料金</a>
         <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="hover:text-indigo-600">プラン比較</a>
+        <a href="plans.html" class="hover:text-indigo-600">導入例</a>
         <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -40,7 +40,7 @@
         <a href="index.html#summary" class="block py-2 hover:text-indigo-600">概要</a>
         <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
         <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
-        <a href="plans.html" class="block py-2 hover:text-indigo-600">プラン比較</a>
+        <a href="plans.html" class="block py-2 hover:text-indigo-600">導入例</a>
         <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
@@ -107,7 +107,7 @@
             <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
             <div class="flex-1">
               <h3 class="font-semibold mb-1">今日提示するものの確認（5分）</h3>
-              <p class="text-sm text-slate-600">要件定義書 v1.0、見積、プラン比較、スケジュール等を確認します。</p>
+              <p class="text-sm text-slate-600">要件定義書 v1.0、見積、料金体系、スケジュール等を確認します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
@@ -128,7 +128,7 @@
             <div class="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
             <div class="flex-1">
               <h3 class="font-semibold mb-1">プランの選び方（15分）</h3>
-              <p class="text-sm text-slate-600">Lite / Standard / Proの選び方を説明します。</p>
+              <p class="text-sm text-slate-600">初期費用・月額・月額に含まれる内容を確認します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
@@ -186,8 +186,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">プラン比較</h3>
-            <p class="text-sm text-slate-600">3つのプランの違いを比較した資料です。</p>
+            <h3 class="font-semibold mb-1">料金体系</h3>
+            <p class="text-sm text-slate-600">初期費用・月額・月額に含まれる内容の説明資料です。</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -291,21 +291,25 @@
       </div>
     </section>
 
-    <!-- ================= プランの選び方 ================= -->
+    <!-- ================= 料金体系 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">プランの選び方</h2>
+      <h2 class="text-2xl font-bold mb-4">料金体系</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div class="bg-slate-50 border-l-4 border-slate-500 p-4">
-          <h3 class="font-semibold mb-2">Lite：まず1業務を確実に回す</h3>
-          <p class="text-sm text-slate-700">基本的な運用サポートと軽微な修正に対応します。まずは1つの業務を確実に効率化したい方向けです。</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border-2 border-slate-200 rounded-lg p-4">
+            <h3 class="font-bold text-lg mb-1">初期費用</h3>
+            <p class="text-2xl font-extrabold text-slate-900">330,000円<span class="text-sm font-normal text-slate-500 ml-1">（税込）</span></p>
+            <p class="text-xs text-slate-500 mt-1">正式契約時に発生。1アプリごと。</p>
+          </div>
+          <div class="border-2 border-indigo-200 rounded-lg p-4">
+            <h3 class="font-bold text-lg mb-1">月額費用</h3>
+            <p class="text-2xl font-extrabold text-indigo-700">88,000円<span class="text-sm font-normal text-slate-500 ml-1">（税込）/ 月</span></p>
+            <p class="text-xs text-slate-500 mt-1">本番稼働月から発生。1アプリごと。</p>
+          </div>
         </div>
-        <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4">
-          <h3 class="font-semibold mb-2">Standard：現場運用に合わせて改善を回す</h3>
-          <p class="text-sm text-slate-700">運用改善と微機能追加に対応します。現場の要望に応じて継続的に改善したい方向けです。</p>
-        </div>
-        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4">
-          <h3 class="font-semibold mb-2">Pro：複数業務や拠点で、優先順位をつけて継続改善</h3>
-          <p class="text-sm text-slate-700">継続的な改善と新機能追加に対応します。複数の業務や拠点で、優先順位をつけて継続的に改善したい方向けです。</p>
+        <div class="bg-indigo-50 rounded-lg p-4">
+          <p class="text-sm font-semibold text-indigo-900 mb-2">月額に含まれるもの：</p>
+          <p class="text-sm text-slate-700">アプリ利用、保守、運用サポート、軽微修正、一定範囲の改修、チャット/メール相談、必要時の打ち合わせ</p>
         </div>
       </div>
     </section>
