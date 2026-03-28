@@ -93,12 +93,11 @@
     var isValid = true;
     
     requiredFields.forEach(function(field) {
-      var val = (field.value != null ? String(field.value) : '').trim();
-      if (!val) {
+      if (!field.value.trim()) {
         isValid = false;
         field.classList.add('error');
         showFieldError(field, 'この項目は必須です');
-      } else if (field.type === 'email' && !emailRegex.test(val)) {
+      } else if (field.type === 'email' && !emailRegex.test(field.value.trim())) {
         isValid = false;
         field.classList.add('error');
         showFieldError(field, '有効なメールアドレスを入力してください');

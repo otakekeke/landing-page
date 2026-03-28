@@ -20,13 +20,11 @@
       <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 hover:text-indigo-600">
         嶽ノ子
       </a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium flex-wrap justify-end">
-        <a href="index.html#challenges" class="hover:text-indigo-600">課題</a>
-        <a href="index.html#domains" class="hover:text-indigo-600">対応領域</a>
-        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
-        <a href="index.html#compare" class="hover:text-indigo-600">比較</a>
+      <nav class="hidden md:flex gap-6 text-sm font-medium">
+        <a href="index.html#problems" class="hover:text-indigo-600">課題</a>
+        <a href="index.html#pricing" class="hover:text-indigo-600">料金</a>
         <a href="index.html#flow" class="hover:text-indigo-600">導入の流れ</a>
-        <a href="index.html#case-study" class="hover:text-indigo-600">実績</a>
+        <a href="index.html#track-record" class="hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="hover:text-indigo-600">会社概要</a>
@@ -39,12 +37,10 @@
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#challenges" class="block py-2 hover:text-indigo-600">課題</a>
-        <a href="index.html#domains" class="block py-2 hover:text-indigo-600">対応領域</a>
-        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
-        <a href="index.html#compare" class="block py-2 hover:text-indigo-600">比較</a>
+        <a href="index.html#problems" class="block py-2 hover:text-indigo-600">課題</a>
+        <a href="index.html#pricing" class="block py-2 hover:text-indigo-600">料金</a>
         <a href="index.html#flow" class="block py-2 hover:text-indigo-600">導入の流れ</a>
-        <a href="index.html#case-study" class="block py-2 hover:text-indigo-600">実績</a>
+        <a href="index.html#track-record" class="block py-2 hover:text-indigo-600">実績</a>
         <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
         <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
         <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
@@ -308,21 +304,33 @@
       </div>
     </section>
 
-    <!-- ================= 料金（固定プラン・税込） ================= -->
+    <!-- ================= 料金（通常プラン） ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">料金（固定・税込）</h2>
+      <h2 class="text-2xl font-bold mb-4">料金</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <p class="text-slate-700 text-sm">詳細・比較表は <a href="index.html#compare" class="text-indigo-600 underline hover:text-indigo-800">トップページの料金・比較</a> を参照してください。</p>
-        <ul class="list-disc list-inside space-y-2 text-slate-700 ml-2">
-          <li>業務整理プラン：<strong>55,000円</strong></li>
-          <li>初期導入ライト：<strong>330,000円</strong></li>
-          <li>初期導入スタンダード：<strong>550,000円</strong></li>
-          <li>継続改善サポート：<strong>月額88,000円</strong>（3か月更新）</li>
-          <li>継続改善パートナー：<strong>月額165,000円</strong>（3か月更新）</li>
-        </ul>
-        <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700">
-          <p class="font-semibold text-slate-900 mb-1">支払の考え方</p>
-          <p>単発（業務整理・初期ライト・スタンダード）は<strong>契約時50％・納品時50％</strong>。月額プランは<strong>毎月月初請求、当月末支払い</strong>（詳細は契約時に明示）。キャンセル条件は <a href="index.html#payment" class="text-indigo-600 underline">支払条件・キャンセル</a> をご確認ください。</p>
+        <div class="bg-green-50 border-2 border-green-400 rounded-lg p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="font-semibold text-green-900">無料範囲</h3>
+          </div>
+          <p class="text-slate-700"><strong>試用期間終了まで無料</strong></p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">初期作成費</h3>
+          <p class="text-slate-700"><strong>15〜30万円</strong></p>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-2">月額（アプリ1つあたり）</h3>
+          <ul class="list-disc list-inside space-y-1 text-slate-700 ml-4">
+            <li>Lite：<strong>2.3万円</strong></li>
+            <li>Standard：<strong>5.5万円</strong></li>
+            <li>Pro：<strong>50万円</strong></li>
+          </ul>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4">
+          <p class="text-sm text-slate-700"><strong>ベータ版との差は料金のみ。進め方・契約運用は同じ</strong></p>
         </div>
       </div>
     </section>
@@ -483,7 +491,7 @@
           <p class="text-sm text-indigo-900 font-semibold">よくある質問</p>
           <ul class="mt-2 space-y-2 text-sm text-slate-700">
             <li>• プロトタイプはどのくらいの期間で作成されますか？</li>
-            <li>• プランに含まれる修正回数はどの程度ですか？</li>
+            <li>• 試用期間はどのくらいですか？</li>
             <li>• 複数の業務を効率化したい場合はどうなりますか？</li>
           </ul>
         </div>
