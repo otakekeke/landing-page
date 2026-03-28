@@ -370,32 +370,266 @@
 
     <!-- ================= PRICE ================= -->
     <section id="price" class="py-16">
-      <h2 class="text-2xl font-bold mb-6">5. 料金体系</h2>
+      <h2 class="text-2xl font-bold mb-2">5. 料金体系（料金ルール）</h2>
+      <p class="text-slate-600 text-sm mb-8">条件・範囲・料金を固定表で明示します。詳細は<a href="#faq" class="text-indigo-600 underline hover:text-indigo-800">FAQ</a>もご覧ください。</p>
 
-      <!-- 冒頭説明文 -->
-      <div class="bg-green-50 border-2 border-green-400 rounded-xl p-6 mb-8">
-        <div class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <div class="text-sm text-green-900 leading-relaxed space-y-2">
-            <p>試用期間終了までは完全無料です。</p>
-            <p>要件定義、プロトタイプ作成、試用期間、試用期間中の要望反映まで費用はかかりません。</p>
-            <p>正式契約後は、1アプリごとに初期費用<strong>330,000円（税込）</strong>、月額<strong>88,000円（税込）</strong>でご利用いただきます。</p>
-            <p class="font-semibold text-green-900">月額に含まれる主な内容</p>
-            <ul class="list-disc pl-5 space-y-1 mt-1 text-green-900">
-              <li>アプリ利用（1事業所・1アプリ）</li>
-              <li>保守・不具合修正</li>
-              <li>チャット/メールでの運用サポート・操作確認・相談対応</li>
-              <li>月1回のオンライン打ち合わせ（60分）</li>
-              <li>月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</li>
+      <!-- LP用 短い説明（セクション11） -->
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-sm font-bold text-indigo-900 mb-2">料金ルール</h3>
+          <p class="text-sm text-slate-700 leading-relaxed">料金は「1アプリ・1事業所・1業務」を基本単位としています。正式契約後は、1アプリごとに初期費用330,000円（税込）、月額88,000円（税込）が発生します。月額には、アプリ利用、保守、不具合修正、運用サポート、月1回の打ち合わせ、月2時間以内の軽微な改修が含まれます。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-sm font-bold text-indigo-900 mb-2">追加依頼</h3>
+          <p class="text-sm text-slate-700 leading-relaxed">追加依頼は、内容に応じて固定料金で対応します。軽微修正は月額内。追加カスタムS：88,000円（税込）、M：165,000円（税込）、L：330,000円（税込）。新規アプリは初期330,000円（税込）＋月額88,000円（税込）です。</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-sm font-bold text-indigo-900 mb-2">追加事業所</h3>
+          <p class="text-sm text-slate-700 leading-relaxed">同じアプリを同じ運用ルールで別事業所に展開する場合は、追加初期費用110,000円（税込）/事業所、追加月額33,000円（税込）/事業所です。事業所ごとに運用ルールが大きく異なる場合は、別アプリ扱いとなります。</p>
+        </div>
+      </div>
+
+      <!-- 1. 基本料金 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">1. 基本料金</h3>
+        <p class="text-sm text-slate-600 mb-4">1アプリ・1事業所・1業務を単位とします。</p>
+        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+          <div class="rounded-xl border-2 border-slate-200 bg-white p-5 shadow-sm">
+            <p class="text-sm font-semibold text-slate-500">初期費用</p>
+            <p class="text-2xl font-extrabold text-slate-900 mt-1">330,000円<span class="text-sm font-normal text-slate-500 ml-1">（税込）</span></p>
+          </div>
+          <div class="rounded-xl border-2 border-indigo-200 bg-indigo-50/40 p-5 shadow-sm">
+            <p class="text-sm font-semibold text-indigo-800">月額費用</p>
+            <p class="text-2xl font-extrabold text-indigo-700 mt-1">88,000円<span class="text-sm font-normal text-slate-500 ml-1">（税込）/ 月</span></p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-green-50 border-2 border-green-400 rounded-xl p-5">
+            <h4 class="font-bold text-green-900 mb-2">試用期間</h4>
+            <ul class="text-sm text-green-900 space-y-1 list-disc pl-5">
+              <li>試用期間終了まで完全無料</li>
+              <li>要件定義</li>
+              <li>プロトタイプ作成</li>
+              <li>1か月試用</li>
+              <li>試用中の要望反映</li>
+              <li>ここまでは費用不要</li>
+            </ul>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+            <h4 class="font-bold text-slate-900 mb-2">正式契約後に発生するもの</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>初期費用 330,000円（税込）</li>
+              <li>月額費用 88,000円（税込）</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- 料金表 -->
-      <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow mb-6">
+      <!-- 2. 月額に含まれるもの -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">2. 月額88,000円に含まれるもの</h3>
+        <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5 mb-6">
+          <li>対象アプリ1本の利用</li>
+          <li>保守・不具合修正</li>
+          <li>チャット/メールでの運用サポート</li>
+          <li>月1回のオンライン打ち合わせ（60分）</li>
+          <li>月2時間以内の軽微な改修</li>
+        </ul>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-emerald-200 bg-emerald-50/60 p-4">
+            <h4 class="text-sm font-bold text-emerald-900 mb-2">月額内で対応する軽微な改修の例</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>文言修正</li>
+              <li>項目名変更</li>
+              <li>表示順変更</li>
+              <li>既存画面内の小さな修正</li>
+              <li>印刷レイアウトの微調整</li>
+              <li>通知文面の修正</li>
+              <li>集計条件の小修正</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <h4 class="text-sm font-bold text-slate-800 mb-2">月額内では対応しないもの</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>新規画面追加</li>
+              <li>新機能追加</li>
+              <li>新しい業務フロー追加</li>
+              <li>外部システム連携</li>
+              <li>月2時間を超える改修</li>
+              <li>別業務の追加開発</li>
+              <li>別事業所向けの個別調整</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 見積単位 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">3. 見積単位の基本ルール</h3>
+        <div class="space-y-4">
+          <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+            <h4 class="font-semibold text-slate-900 mb-2">1アプリの定義（以下を満たすものを「1アプリ」とする）</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>1つの業務目的</li>
+              <li>1事業所で使う</li>
+              <li>1つの主な業務フロー</li>
+              <li>主担当者が明確</li>
+              <li>同じ運用ルールで回せる</li>
+            </ul>
+          </div>
+          <div class="bg-amber-50 rounded-xl border border-amber-200 p-5">
+            <h4 class="font-semibold text-amber-900 mb-2">別アプリ扱いにする条件（いずれかに該当）</h4>
+            <ul class="text-sm text-slate-800 space-y-1 list-disc pl-5">
+              <li>業務目的が別</li>
+              <li>利用部門が別</li>
+              <li>業務フローが別</li>
+              <li>事業所ごとに運用ルールが大きく違う</li>
+              <li>新しい管理画面・新しい台帳・新しい申請系統が必要</li>
+              <li>別の責任者・別の運用単位で回す必要がある</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 追加依頼 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">4. 追加依頼の料金体系</h3>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm mb-4">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="bg-slate-100 text-left">
+                <th class="p-3 font-semibold text-slate-800 border-b border-slate-200">区分</th>
+                <th class="p-3 font-semibold text-slate-800 border-b border-slate-200">料金（税込）</th>
+                <th class="p-3 font-semibold text-slate-800 border-b border-slate-200">内容</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="bg-green-50/50">
+                <td class="p-3 font-medium text-slate-900">A. 月額内対応</td>
+                <td class="p-3 font-bold text-green-800">0円（月額内）</td>
+                <td class="p-3 text-slate-700">条件：月2時間以内。軽微な修正のみ。</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium text-slate-900">B. 追加カスタム S</td>
+                <td class="p-3 font-bold text-indigo-700">88,000円</td>
+                <td class="p-3 text-slate-700">既存アプリの小さな追加・変更 1件。入力項目追加、既存帳票の1種類追加、集計条件の追加、通知条件の追加、CSV出力形式の変更、既存画面内の簡単な機能追加 など。<span class="block mt-1 text-xs text-slate-500">含めない：新規画面追加、新しい業務フロー追加、外部連携、権限設計の大幅変更</span></td>
+              </tr>
+              <tr class="bg-slate-50/80">
+                <td class="p-3 font-medium text-slate-900">C. 追加カスタム M</td>
+                <td class="p-3 font-bold text-indigo-700">165,000円</td>
+                <td class="p-3 text-slate-700">既存アプリ内の中規模追加 1件。新規画面1つ追加、新しい一覧/詳細画面の追加、承認ステップ追加、新しいレポート画面追加、中規模な機能拡張 など。<span class="block mt-1 text-xs text-slate-500">含めない：別業務レベルの新機能、外部システム連携、事業所ごとの個別分岐が大きいもの</span></td>
+              </tr>
+              <tr>
+                <td class="p-3 font-medium text-slate-900">D. 追加カスタム L</td>
+                <td class="p-3 font-bold text-indigo-700">330,000円</td>
+                <td class="p-3 text-slate-700">既存アプリ内の大きめの新機能追加 1件。新しい業務モジュール追加、画面複数枚を含む新機能、新しい申請/承認/集計のまとまった仕組み追加 など。<span class="block mt-1 text-xs text-slate-500">別アプリ扱い：目的業務が別、別責任者・別運用単位、実質的に別システム、事業所ごとに別運用が必要</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 5. 追加事業所 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">5. 追加事業所の料金体系</h3>
+        <p class="text-sm text-slate-700 mb-3">同じアプリを、同じ運用ルールで、別事業所に展開する場合</p>
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div class="rounded-lg border border-teal-200 bg-teal-50/50 p-4">
+            <p class="text-sm font-semibold text-teal-900">追加初期費用</p>
+            <p class="text-xl font-extrabold text-teal-800 mt-1">110,000円<span class="text-sm font-normal ml-1">（税込）/ 事業所</span></p>
+          </div>
+          <div class="rounded-lg border border-teal-200 bg-teal-50/50 p-4">
+            <p class="text-sm font-semibold text-teal-900">追加月額費用</p>
+            <p class="text-xl font-extrabold text-teal-800 mt-1">33,000円<span class="text-sm font-normal ml-1">（税込）/ 事業所</span></p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mb-4">
+          <div class="rounded-lg border border-slate-200 p-4">
+            <h4 class="text-sm font-bold text-slate-800 mb-2">追加事業所料金に含まれるもの</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>既存アプリの複製展開</li>
+              <li>事業所名・担当者・マスタ情報の設定変更</li>
+              <li>基本動作確認</li>
+              <li>初回の導入サポート</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-slate-200 p-4 bg-slate-50">
+            <h4 class="text-sm font-bold text-slate-800 mb-2">追加事業所料金に含まれないもの</h4>
+            <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5">
+              <li>事業所ごとの大きな仕様変更</li>
+              <li>別運用ルールへの作り替え</li>
+              <li>事業所ごとに別画面が必要な場合</li>
+              <li>事業所ごとの個別帳票追加</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-slate-800">
+          <p class="font-semibold text-amber-900 mb-1">別アプリ扱いにする条件（該当時は追加事業所ではなく新規アプリ）</p>
+          <p>事業所ごとに業務フローが大きく違う／使う画面や項目が大きく違う／承認ルールや管理方法が違う／実質的に別システムとして運用する、など。その場合の料金は初期330,000円（税込）・月額88,000円（税込）です。</p>
+        </div>
+      </div>
+
+      <!-- 6〜8 新機能・一括注文・追加アプリ -->
+      <div class="mb-10 space-y-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">6. 新しい機能を付ける場合のルール</h3>
+          <p class="text-sm text-slate-700 mb-2"><strong>判断基準：</strong>既存画面の小変更は月額内 or S、新規画面1つ追加はM、まとまった新機能追加はL、別業務になる場合は新規アプリ。</p>
+          <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700 border border-slate-100">
+            <p class="font-semibold text-slate-900 mb-1">顧客へのご案内の例</p>
+            <p>「追加できます。追加内容が小さな修正なのか、既存アプリ内の新機能なのか、別業務レベルの追加なのかで料金が変わります。月額内、追加カスタムS・M・L、新規アプリのいずれかで整理し、事前に固定金額でご案内します。」</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">7. いっぺんにたくさんの機能を注文したい場合</h3>
+          <ul class="text-sm text-slate-700 space-y-1 list-disc pl-5 mb-3">
+            <li>まとめて何でも1アプリにはしない</li>
+            <li>発注内容は業務単位・機能単位に分解して見積する</li>
+            <li>無制限の詰め込みは受けない</li>
+          </ul>
+          <p class="text-sm text-slate-700 mb-2"><strong>分解の仕方：</strong>業務が別なら別アプリ、同じ業務の中の追加なら S / M / L、事業所が別なら追加事業所料金または別アプリ。</p>
+          <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700 border border-slate-100 mb-3">
+            <p class="font-semibold text-slate-900 mb-1">顧客へのご案内の例</p>
+            <p>「最初にまとめて多機能化することは可能ですが、1アプリ無制限ではなく、業務単位・機能単位に分けて整理します。そのうえで、1アプリ・追加機能S/M/L・追加事業所の組み合わせで固定金額をご案内します。」</p>
+          </div>
+          <h4 class="text-sm font-bold text-slate-800 mb-2">見積例</h4>
+          <ul class="text-sm text-slate-700 space-y-2 list-none">
+            <li class="border-l-4 border-indigo-300 pl-3"><strong>例1：</strong>シフト管理アプリ：330,000円＋88,000円/月。レポート機能追加（M）：165,000円。通知条件追加（S）：88,000円。</li>
+            <li class="border-l-4 border-indigo-300 pl-3"><strong>例2：</strong>インシデント報告アプリ：330,000円＋88,000円/月。同じアプリを2事業所追加：110,000円×2、33,000円/月×2。</li>
+            <li class="border-l-4 border-indigo-300 pl-3"><strong>例3：</strong>シフト管理・在庫管理・月次報告の3つは別業務のため、330,000円×3、88,000円/月×3で案内。</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-2">8. 追加アプリの料金</h3>
+          <p class="text-sm text-slate-700 mb-2">新しい業務を追加する場合：初期費用330,000円（税込）/アプリ、月額費用88,000円（税込）/アプリ。</p>
+          <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700 border border-slate-100">
+            <p class="font-semibold text-slate-900 mb-1">顧客へのご案内の例</p>
+            <p>「新しい業務を追加する場合は、既存アプリの改修ではなく新規アプリとして扱います。料金は1アプリごとに、初期330,000円（税込）・月額88,000円（税込）です。」</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. 外部連携 -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-3 border-b border-slate-200 pb-2">9. 外部連携の扱い</h3>
+        <p class="text-sm text-slate-700 mb-2">Google Workspace外の個別外部連携は原則対象外です。</p>
+        <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-700 border border-slate-200">
+          <p class="font-semibold text-slate-900 mb-1">顧客へのご案内の例</p>
+          <p>「このサービスは原則としてGoogle Workspace内で完結する前提です。外部システムとの個別連携は基本対象外です。」</p>
+        </div>
+      </div>
+
+      <!-- 10. 優先対応オプション -->
+      <div class="mb-10">
+        <h3 class="text-lg font-bold text-slate-900 mb-3 border-b border-slate-200 pb-2">10. 優先対応オプション</h3>
+        <div class="rounded-xl border-2 border-indigo-300 bg-indigo-50/50 p-5">
+          <p class="text-sm text-slate-600 mb-1">料金（税込・月額に追加）</p>
+          <p class="text-2xl font-extrabold text-indigo-800">110,000円<span class="text-base font-normal text-slate-600 ml-1">/ 月</span></p>
+          <p class="text-sm text-slate-700 mt-2">通常の月額88,000円に加える任意オプション。初回回答の短縮、修正反映の優先対応が含まれます。</p>
+        </div>
+      </div>
+
+      <!-- クイック参照：一覧表 -->
+      <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow mb-8">
         <div class="grid grid-cols-3 bg-slate-50 border-b border-slate-200 text-sm font-semibold text-slate-700">
           <div class="col-span-1 p-4 border-r border-slate-200">項目</div>
           <div class="col-span-2 p-4">内容</div>
@@ -427,54 +661,25 @@
             <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800">月額に含まれるもの</div>
             <div class="col-span-2 p-4 bg-indigo-50/50 border-l-4 border-indigo-400">
               <ul class="space-y-2 text-sm text-slate-800">
-                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>アプリ利用（1事業所・1アプリ）</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>対象アプリ1本の利用</span></li>
                 <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>保守・不具合修正</span></li>
-                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>チャット/メールでの運用サポート・操作確認・相談対応</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>チャット/メールでの運用サポート</span></li>
                 <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>月1回のオンライン打ち合わせ（60分）</span></li>
-                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>月2時間以内の軽微な改修（文言修正・項目名変更・表示調整・簡単な追加修正など）</span></li>
+                <li class="flex gap-2"><span class="text-indigo-600 font-bold flex-shrink-0">・</span><span>月2時間以内の軽微な改修</span></li>
               </ul>
             </div>
           </div>
           <div class="grid grid-cols-3 items-start">
-            <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800">含まれないもの</div>
+            <div class="col-span-1 p-4 bg-slate-50 border-r border-slate-200 font-semibold text-slate-800">含まれないもの（概要）</div>
             <div class="col-span-2 p-4 text-slate-700">
               <ul class="space-y-1.5 text-sm">
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>新規アプリ作成</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>新規画面追加</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>月2時間を超える改修</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>業務フロー自体が変わる大幅改修</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>外部システムとの個別連携</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>データ移行作業</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>現地訪問</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>24時間365日の監視・即時対応</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>複数事業所展開</span></li>
-                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>別業務の追加開発</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>新規画面・新機能・新業務フロー追加（別途 S/M/L または新規アプリ）</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>外部システムとの個別連携（原則対象外）</span></li>
+                <li class="flex gap-2"><span class="text-slate-400 flex-shrink-0">・</span><span>月2時間を超える改修、別業務の追加開発、別事業所向け個別調整（別途）</span></li>
               </ul>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- 補足文 -->
-      <div class="bg-slate-50 rounded-xl border border-slate-200 p-5 mb-6">
-        <ul class="space-y-2 text-sm text-slate-700">
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-slate-400 flex-shrink-0">•</span>
-            <span>複数業務をアプリ化する場合は、業務ごとに別アプリ・別契約となります。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-slate-400 flex-shrink-0">•</span>
-            <span>複数事業所で利用する場合は、運用範囲に応じて別途ご相談となります。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-slate-400 flex-shrink-0">•</span>
-            <span>大幅な仕様変更や新規機能追加は、内容確認のうえ別見積となります。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="mt-1 text-slate-400 flex-shrink-0">•</span>
-            <span>Google Workspace外の個別外部連携は原則対象外です。</span>
-          </li>
-        </ul>
       </div>
 
       <!-- 向いているケース -->
@@ -508,7 +713,6 @@
         </ul>
       </div>
     </section>
-
     <!-- ================= CASE STUDY ================= -->
     <section id="case-study" class="py-16">
       <h2 class="text-2xl font-bold mb-6">6. 導入実績</h2>
@@ -518,7 +722,7 @@
           <span class="px-4 py-2 bg-emerald-600 text-white rounded-lg font-bold">導入実績</span>
           <div>
             <h3 class="text-xl font-bold">リハビリデイサービスでの紙媒体の一括アプリ化</h3>
-            <p class="text-sm text-slate-600">Standardプラン導入事例</p>
+            <p class="text-sm text-slate-600">固定料金モデル導入事例</p>
           </div>
         </div>
 
@@ -672,6 +876,22 @@
               </div>
             </div>
             <p class="text-sm text-slate-600">試用期間中は費用はかかりません。正式契約後に初期費用と月額が発生します。</p>
+            <p class="text-sm text-slate-700">追加依頼は、<strong>追加カスタムS（88,000円・税込）</strong>・<strong>M（165,000円・税込）</strong>・<strong>L（330,000円・税込）</strong>の固定料金、または<strong>新規アプリ（初期330,000円＋月額88,000円・いずれも税込）</strong>で整理します。詳細は<a href="#price" class="text-indigo-600 underline hover:text-indigo-800">料金体系</a>をご覧ください。</p>
+          </div>
+        </details>
+
+        <!-- Q2b: 月額の範囲 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-slate-400">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-slate-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Q. 月額にはどこまで含まれますか？</span>
+          </summary>
+          <div class="mt-4 pl-9">
+            <p class="text-slate-700 leading-relaxed">
+              アプリ利用、保守、不具合修正、チャット/メールでの運用サポート、月1回のオンライン打ち合わせ、月2時間以内の軽微な改修が含まれます。
+            </p>
           </div>
         </details>
 
@@ -744,37 +964,61 @@
           </div>
         </details>
 
-        <!-- Q6: 契約後の変更 -->
+        <!-- Q6: 契約後の機能追加 -->
         <details class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
           <summary class="font-semibold cursor-pointer flex items-center gap-3">
             <svg class="w-6 h-6 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
-            <span>Q. 契約後に変更や追加はできますか？</span>
+            <span>Q. 契約後に機能追加はできますか？</span>
           </summary>
           <div class="mt-4 pl-9 space-y-3">
             <p class="text-slate-700 leading-relaxed">
-              はい、可能です。変更の内容によって対応が異なります。
+              はい、可能です。小さな修正は月額内（月2時間以内の軽微な改修）で対応し、それを超える追加は<strong>追加カスタムS / M / L</strong>の固定料金で対応します。別業務になる場合は<strong>新規アプリ</strong>として扱います。
             </p>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
-                <h4 class="font-semibold text-green-900 mb-2">月額内で対応できる変更</h4>
-                <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
-                  <li>軽微な修正（入力項目の追加など）</li>
-                  <li>微改善（表示の調整など）</li>
-                  <li>選択したプランの改善枠内</li>
-                </ul>
-              </div>
-              <div class="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500">
-                <h4 class="font-semibold text-orange-900 mb-2">別途見積が必要な変更</h4>
-                <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
-                  <li>画面の追加</li>
-                  <li>構造の大幅な変更</li>
-                  <li>外部システムとの連携追加</li>
-                  <li>広範囲な改修</li>
-                </ul>
-              </div>
+            <div class="overflow-x-auto rounded-lg border border-slate-200 text-sm">
+              <table class="w-full min-w-[280px]">
+                <tbody class="divide-y divide-slate-100">
+                  <tr><td class="p-2 bg-slate-50 font-medium w-40">月額内</td><td class="p-2">0円（条件：月2時間以内・軽微な修正）</td></tr>
+                  <tr><td class="p-2 bg-slate-50 font-medium">追加カスタム S</td><td class="p-2">88,000円（税込）/ 件</td></tr>
+                  <tr><td class="p-2 bg-slate-50 font-medium">追加カスタム M</td><td class="p-2">165,000円（税込）/ 件</td></tr>
+                  <tr><td class="p-2 bg-slate-50 font-medium">追加カスタム L</td><td class="p-2">330,000円（税込）/ 件</td></tr>
+                  <tr><td class="p-2 bg-slate-50 font-medium">新規アプリ</td><td class="p-2">初期330,000円（税込）＋月額88,000円（税込）</td></tr>
+                </tbody>
+              </table>
             </div>
+            <p class="text-sm text-slate-600">詳細は<a href="#price" class="text-indigo-600 underline">料金体系</a>の「追加依頼の料金体系」をご覧ください。</p>
+          </div>
+        </details>
+
+        <!-- Q6b: 事業所が増えた場合 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-teal-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+            <span>Q. 事業所が増えた場合はどうなりますか？</span>
+          </summary>
+          <div class="mt-4 pl-9 space-y-2">
+            <p class="text-slate-700 leading-relaxed">
+              同じアプリを同じ運用ルールで使う場合は、<strong>追加事業所料金</strong>で対応します。追加初期費用<strong>110,000円（税込）/事業所</strong>、追加月額<strong>33,000円（税込）/事業所</strong>です。運用ルールが大きく異なる場合は別アプリ扱いとなります。
+            </p>
+            <p class="text-sm text-slate-600"><a href="#price" class="text-indigo-600 underline">料金体系</a>の「追加事業所の料金体系」をご覧ください。</p>
+          </div>
+        </details>
+
+        <!-- Q6c: 最初から多機能 -->
+        <details class="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
+          <summary class="font-semibold cursor-pointer flex items-center gap-3">
+            <svg class="w-6 h-6 text-orange-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+            </svg>
+            <span>Q. 最初から多機能なアプリを頼めますか？</span>
+          </summary>
+          <div class="mt-4 pl-9">
+            <p class="text-slate-700 leading-relaxed">
+              可能ですが、1アプリに無制限に詰め込む形では受けません。業務単位・機能単位に分けて整理し、1アプリ・追加機能S/M/L・新規アプリの組み合わせで固定料金をご案内します。
+            </p>
           </div>
         </details>
 
@@ -812,7 +1056,7 @@
           </summary>
           <div class="mt-4 pl-9 space-y-3">
             <p class="text-slate-700 leading-relaxed">
-              はい、可能です。業務ごとに別アプリ・別契約となります。各アプリは独立して管理されます。
+              はい、可能です。<strong>別業務は新規アプリ扱い</strong>です。業務ごとに別アプリ・別契約となり、1アプリごとに初期330,000円（税込）、月額88,000円（税込）が発生します。各アプリは独立して管理されます。
             </p>
             <div class="bg-teal-50 rounded-lg p-4">
               <p class="text-sm font-semibold text-teal-900 mb-2">例：</p>
@@ -868,7 +1112,7 @@
               <ul class="text-sm text-slate-700 space-y-1 list-disc list-inside ml-2">
                 <li>問い合わせ対応：月〜土 9:00〜18:00（日本時間）</li>
                 <li>不具合対応：優先度に応じて対応（詳細は「詳細情報」セクションをご覧ください）</li>
-                <li>軽微な修正：選択したプランの改善枠内で対応</li>
+                <li>軽微な修正：月額に含まれる範囲（月2時間以内）で対応</li>
               </ul>
             </div>
             <p class="text-slate-700 leading-relaxed text-sm">
@@ -906,8 +1150,8 @@
                 </ul>
               </div>
               <div class="bg-indigo-50 rounded-lg p-4 border-2 border-indigo-500">
-                <h4 class="font-bold text-lg mb-2 text-indigo-900">優先オプション</h4>
-                <p class="text-sm font-semibold text-indigo-700 mb-2">+10万円/月</p>
+                <h4 class="font-bold text-lg mb-2 text-indigo-900">優先対応オプション</h4>
+                <p class="text-sm font-semibold text-indigo-700 mb-2">+110,000円（税込）/月（通常月額88,000円に追加）</p>
                 <ul class="text-sm text-slate-700 space-y-1">
                   <li>• 初回回答：48時間以内</li>
                   <li>• 反映・修正：最大5営業日</li>
@@ -1207,13 +1451,13 @@
             試用期間終了まで完全無料
           </p>
         </div>
-        <p class="text-indigo-100 mb-6">まずは無料相談で、あなたの施設に最適なプランをご提案します。試用期間中は一切の費用はかかりません。</p>
+        <p class="text-indigo-100 mb-6">まずは無料相談で、あなたの施設に合わせた業務の整理と料金のご案内をします。試用期間中は一切の費用はかかりません。</p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="#contact" class="px-6 py-3 rounded bg-white text-indigo-700 font-semibold text-center shadow hover:bg-slate-100">
             無料相談する
           </a>
           <a href="#price" class="px-6 py-3 rounded bg-yellow-300 text-slate-900 font-semibold text-center shadow hover:bg-yellow-400">
-            料金プランを見る
+            料金ルールを見る
           </a>
         </div>
         <p class="mt-3 text-xs text-indigo-200">初回アポイントの詳しい流れは <a href="first_meeting.html" class="underline hover:text-white">こちら</a></p>
