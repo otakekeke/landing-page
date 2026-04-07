@@ -618,7 +618,7 @@
           <div>屋号：嶽ノ子</div>
           <div>代表者：大嶽 耕太郎</div>
           <div>所在地：神奈川県相模原市中央区千代田7-10-7</div>
-          <div>メール：takenoko.ai.care@gmail.com</div>
+          <div>メール：kotaro.otake@takenokonoko.com</div>
           <div>電話：070-1383-4420</div>
           <div>受付時間：平日・土曜 9:00-18:00</div>
           <div style="margin-top: 15px; font-size: 7pt; color: #666;">
