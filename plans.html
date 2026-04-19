@@ -1,146 +1,122 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>導入例・活用イメージ｜嶽ノ子</title>
-  <meta property="og:title" content="導入例・活用イメージ｜嶽ノ子" />
-  <meta property="og:description" content="介護・福祉事業所での業務効率化アプリ導入例を30件ご紹介します。シフト管理、インシデント報告、月次報告など、あなたの施設に近い事例をご確認ください。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://takenoko-ai.care/assets/og-image.jpg" />
-  <meta property="og:url" content="https://takenoko-ai.care/plans.html" />
-  <meta property="og:site_name" content="嶽ノ子" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="導入例・活用イメージ｜嶽ノ子" />
-  <meta name="twitter:description" content="介護・福祉事業所での業務効率化アプリ導入例を30件ご紹介します。シフト管理、インシデント報告、月次報告など、あなたの施設に近い事例をご確認ください。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="src/css/takenoko-theme.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="src/js/tailwind-brand.js"></script>
-  <style>
-    html { scroll-behavior: smooth; }
-    /* タブ切り替えアニメーション */
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease-in;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* カードホバー効果 */
-    .persona-card {
-      transition: all 0.3s ease;
-    }
-    .persona-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    /* モバイル用の調整 */
-    @media (max-width: 768px) {
-      body { padding-bottom: 72px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>導入例・活用イメージ｜嶽ノ子</title>
+<meta name="description" content="介護・福祉事業所での業務効率化アプリ導入例を30件ご紹介します。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
 </head>
-<body class="bg-cream text-ink">
-  <!-- ================= HEADER ================= -->
-  <header class="bg-cream/95 backdrop-blur-md border-b border-stone/10 shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <a href="index.html" class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink hover:text-clay">
-        嶽ノ子
-      </a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
-        <a href="index.html#price" class="hover:text-clay">料金</a>
-        <a href="plans.html" class="text-clay font-semibold">導入例</a>
-        <a href="index.html#faq" class="hover:text-clay">FAQ</a>
-        <a href="index.html#contact" class="hover:text-clay">お問い合わせ</a>
-        <a href="company.html" class="hover:text-clay">会社概要</a>
-      </nav>
-      <!-- モバイルメニューボタン -->
-      <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-    <!-- モバイルメニュー -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
-      <div class="px-4 py-2 space-y-2">
-        <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
-        <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
-        <a href="plans.html" class="block py-2 text-clay font-semibold">導入例</a>
-        <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
-        <a href="index.html#contact" class="block py-2 hover:text-clay">お問い合わせ</a>
-        <a href="company.html" class="block py-2 hover:text-clay">会社概要</a>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">嶽</span>
+    <span class="brand-name">嶽ノ子</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#service" class="nav-link">サービス</a>
+    <a href="index.html#flow" class="nav-link">流れ</a>
+    <a href="index.html#price" class="nav-link">料金</a>
+    <a href="plans.html" class="nav-link active">導入例</a>
+    <a href="company.html" class="nav-link">会社概要</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
+</nav>
+
+<div class="page">
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="eyebrow">USE CASES — 30件</span>
+      <h1>導入例・活用イメージ</h1>
+      <p class="lead">紙やExcelで管理している業務を、専用アプリに置き換えた事例を30件ご紹介します。あなたの施設に近い事例を参考にしてください。</p>
+      <div style="margin-top: 28px; display: inline-flex; gap: 12px; flex-wrap: wrap;">
+        <span style="background: var(--yamabuki); color: var(--sumi); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">✓ 試用期間終了まで完全無料</span>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- ================= HERO ================= -->
-  <section class="bg-cream text-ink border-b border-stone/15">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 class="font-display text-3xl sm:text-4xl font-bold leading-tight mb-4 tracking-tight">
-        導入例・活用イメージ
-      </h1>
-      <p class="mt-6 text-lg leading-relaxed text-stone/50">
-        紙やExcelで管理している業務を、専用アプリに置き換えた事例を30件ご紹介します。<br class="hidden sm:block" />
-        あなたの施設に近い事例を参考にしてください。
-      </p>
-      <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-clay/20 text-ink rounded-lg shadow-lg">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span class="font-bold text-lg">試用期間終了まで完全無料</span>
-      </div>
-      <div class="mt-6 bg-white/90 backdrop-blur rounded-xl p-5 max-w-lg border border-stone/15 shadow-sm">
-        <p class="text-sm text-stone mb-3">正式契約後の料金（契約単位は2種類）</p>
-        <div class="grid sm:grid-cols-2 gap-3 text-sm">
-          <div class="rounded-lg bg-stone/5 p-3 border border-stone/15">
-            <p class="font-semibold text-ink">単一業務補助ツール</p>
-            <p class="text-lg font-extrabold mt-1">初期 100,000円</p>
-            <p class="text-stone/90">月額 2万～3万円（税込）</p>
-          </div>
-          <div class="rounded-lg bg-stone/5 p-3 border border-stone/15">
-            <p class="font-semibold text-ink">業務横断・運用管理</p>
-            <p class="text-lg font-extrabold mt-1">初期 800,000円</p>
-            <p class="text-stone/90">月額 88,000円（税込）</p>
-          </div>
-        </div>
-        <p class="text-xs text-stone/90 mt-3"><a href="index.html#price" class="underline text-clay hover:text-ink">料金の詳細（追加事業所・カスタムA/B・モジュール・優先オプションなど）</a></p>
+<main class="section">
+  <div class="container">
+    <div class="persona-filter">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="lite">小規模事業所向け</button>
+      <button class="filter-btn" data-filter="standard">中規模事業所向け</button>
+      <button class="filter-btn" data-filter="pro">法人・複数拠点向け</button>
+    </div>
+
+    <div id="all-personas" class="persona-grid"></div>
+  </div>
+</main>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>あなたの施設に近い事例はありましたか？</h2>
+      <p>無い場合もご安心ください。すべての施設に合わせてオーダーメイドで作ります。</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn btn-light">無料相談をはじめる <span>→</span></a>
+        <a href="index.html#price" class="btn btn-outline">料金のしくみを見る</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- ================= 導入例一覧 ================= -->
-    <div class="mb-6">
-      <p class="text-stone/90">どの業務の事例を見たいですか？</p>
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">嶽</span>
+        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
+      </div>
+      <p>介護の業務を丸ごとアプリに。対人に100%向き合える現場を、仕組みでつくります。</p>
     </div>
-    <div id="all-personas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 導入例カードはJavaScriptで動的に生成 -->
+    <div class="footer-col">
+      <h5>SERVICE</h5>
+      <ul>
+        <li><a href="index.html#service">サービス</a></li>
+        <li><a href="index.html#flow">試用までの流れ</a></li>
+        <li><a href="index.html#price">料金のしくみ</a></li>
+        <li><a href="plans.html">導入例</a></li>
+      </ul>
     </div>
-  </main>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>LEGAL</h5>
+      <ul>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
+    <span>社会を回す人の、大切な人を守る。</span>
+  </div>
+</footer>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="py-12 text-center text-xs text-stone/75 bg-white border-t border-stone/15 mt-16">
-    <p>© 2025年04月19日 嶽ノ子. All rights reserved.</p>
-    <p class="mt-2 space-x-4">
-      <a href="index.html" class="text-stone/60 hover:text-stone/90 underline">ホームに戻る</a>
-      <a href="contract.html" class="text-stone/60 hover:text-stone/90 underline">ベータ版プラン契約のご説明</a>
-      <a href="privacy.html" class="text-stone/60 hover:text-stone/90 underline">プライバシーポリシー</a>
-      <a href="terms.html" class="text-stone/60 hover:text-stone/90 underline">利用規約</a>
-    </p>
-  </footer>
+</div>
 
-  <script src="src/js/app.js"></script>
-  <script src="src/js/plans.js"></script>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+<script src="plans.js"></script>
 </body>
 </html>
-

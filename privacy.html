@@ -1,394 +1,223 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>プライバシーポリシー｜嶽ノ子</title>
-  <meta name="description" content="嶽ノ子のプライバシーポリシー。個人情報の取扱いについて詳しく説明しています。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="src/css/takenoko-theme.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="src/js/tailwind-brand.js"></script>
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー｜嶽ノ子</title>
+<meta name="description" content="嶽ノ子のプライバシーポリシー。個人情報の取扱いについて詳しく説明しています。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
 </head>
-<body class="bg-cream text-ink">
-  <!-- ================= HEADER ================= -->
-  <header class="bg-cream/95 backdrop-blur-md border-b border-stone/10 shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <div class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink">
-        <a href="index.html" class="hover:text-clay">嶽ノ子</a>
-      </div>
-      <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
-        <a href="index.html#price" class="hover:text-clay">料金</a>
-        <a href="plans.html" class="hover:text-clay">導入例</a>
-        <a href="index.html#faq" class="hover:text-clay">FAQ</a>
-        <a href="index.html#contact" class="hover:text-clay">お問い合わせ</a>
-        <a href="company.html" class="hover:text-clay">会社概要</a>
-      </nav>
-      <!-- モバイルメニューボタン -->
-      <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-    <!-- モバイルメニュー -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
-      <div class="px-4 py-2 space-y-2">
-        <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
-        <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
-        <a href="plans.html" class="block py-2 hover:text-clay">導入例</a>
-        <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
-        <a href="index.html#contact" class="block py-2 hover:text-clay">お問い合わせ</a>
-        <a href="company.html" class="block py-2 hover:text-clay">会社概要</a>
-      </div>
-    </div>
-  </header>
+<body>
 
-  <!-- ================= HERO ================= -->
-  <section class="bg-cream text-ink border-b border-stone/15">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-        プライバシーポリシー
-      </h1>
-      <p class="mt-4 text-lg">
-        個人情報の取扱いについて
-      </p>
-    </div>
-  </section>
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">嶽</span>
+    <span class="brand-name">嶽ノ子</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#service" class="nav-link">サービス</a>
+    <a href="index.html#flow" class="nav-link">流れ</a>
+    <a href="index.html#price" class="nav-link">料金</a>
+    <a href="plans.html" class="nav-link">導入例</a>
+    <a href="company.html" class="nav-link">会社概要</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
+</nav>
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<div class="page">
 
-    <!-- ================= 前文 ================= -->
-    <section class="mb-12">
-      <div class="bg-white rounded-lg shadow p-6">
-        <p class="text-stone/90 leading-relaxed">
-          嶽ノ子（以下「当事業者」）は、当事業者が提供するアプリケーション群（以下「本サービス」）の提供にあたり、
-          お客様の個人情報を適切に保護することが社会的責務であると認識し、個人情報の保護に関する法律、
-          その他関係法令等を遵守し、個人情報の適切な取扱いを行います。
-        </p>
-        <div class="mt-4 p-4 bg-stone/5 rounded-lg">
-          <p class="text-sm text-stone/90">
-            <strong>制定日・改定日:</strong> 2025年04月19日<br>
-            <strong>事業者:</strong> 嶽ノ子
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- アクセス解析（GA4） -->
-    <section class="mb-12">
-      <div class="bg-white rounded-lg shadow p-6 space-y-3">
-        <h2 class="text-xl font-bold mb-2 text-ink">アクセス解析（Google Analytics 4）</h2>
-        <p class="text-stone/90">本サービスでは、利用状況の把握と品質改善のためにGoogle Analytics 4（GA4）を利用する場合があります。収集される情報にはCookie等の識別子が含まれます。</p>
-        <ul class="list-disc list-inside text-sm text-stone/90 space-y-1">
-          <li>IPアドレスの匿名化（anonymize_ip）に対応します。</li>
-          <li>データはGoogle社のプライバシーポリシーに基づき管理されます。</li>
-          <li>ブラウザの設定でCookieを無効にすることで収集を拒否できます。</li>
-        </ul>
-        <p class="text-sm text-stone/90">オプトアウト: <a class="text-clay hover:text-ink" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google アナリティクス オプトアウト アドオン</a></p>
-      </div>
-    </section>
-
-    <!-- ================= 各条項 ================= -->
-    <div class="space-y-8">
-      
-      <!-- 第1条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第1条（個人情報の定義）</h2>
-        <p class="text-stone/90 leading-relaxed">
-          本ポリシーにおいて「個人情報」とは、個人情報の保護に関する法律第2条第1項に規定する個人情報を指すものとします。
-        </p>
-      </section>
-
-      <!-- 第2条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第2条（個人情報の収集方法）</h2>
-        <div class="space-y-4 text-stone/90">
-          <p>当事業者は、以下の方法により個人情報を収集します：</p>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="space-y-3">
-              <div class="p-3 bg-stone/5 rounded">
-                <h4 class="font-semibold text-stone">お問い合わせ・利用申込時</h4>
-                <p class="text-sm">事業所名、担当者名、メールアドレス、電話番号等</p>
-              </div>
-              <div class="p-3 bg-stone/5 rounded">
-                <h4 class="font-semibold text-stone">契約・取引時</h4>
-                <p class="text-sm">契約者情報、支払情報等</p>
-              </div>
-            </div>
-            <div class="space-y-3">
-              <div class="p-3 bg-stone/5 rounded">
-                <h4 class="font-semibold text-stone">技術情報の自動収集</h4>
-                <p class="text-sm">Cookie、IPアドレス、ブラウザ情報、アクセスログ等</p>
-              </div>
-              <div class="p-3 bg-stone/5 rounded">
-                <h4 class="font-semibold text-stone">提携先からの収集</h4>
-                <p class="text-sm">提携先サービス経由での情報取得</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第3条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第3条（利用目的）</h2>
-        <div class="text-stone/90">
-          <p class="mb-4">当事業者は、収集した個人情報を以下の利用目的の範囲内で利用します：</p>
-          <ul class="space-y-2">
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              サービスの提供・運営
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              お問い合わせ対応
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              情報提供（メルマガ、DM等）
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              サービス改善・新サービス開発
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              重要なお知らせの連絡
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              不正利用者の特定・利用拒否
-            </li>
-            <li class="flex items-start">
-              <span class="w-2 h-2 bg-clay rounded-full mt-2 mr-3 flex-shrink-0"></span>
-              ユーザー機能の提供
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- 第4条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第4条（利用目的の変更）</h2>
-        <p class="text-stone/90 leading-relaxed">
-          当事業者は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更するものとします。
-          利用目的を変更した場合には、変更後の目的について、本ウェブサイト上への掲載その他の方法により、
-          ユーザーに通知し、または公表するものとします。
-        </p>
-      </section>
-
-      <!-- 第5条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第5条（個人情報の第三者提供）</h2>
-        <div class="text-stone/90 space-y-4">
-          <p>
-            当事業者は、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、
-            第三者に個人情報を提供することはありません。
-          </p>
-          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-            <h4 class="font-semibold text-stone mb-2">例外事項:</h4>
-            <ul class="space-y-1 text-sm">
-              <li>• 法令に基づく場合</li>
-              <li>• 人の生命、身体または財産の保護のために必要がある場合</li>
-              <li>• 公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合</li>
-              <li>• 国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第6条-第8条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第6条～第8条（個人情報の開示・訂正・削除・利用停止）</h2>
-        <div class="text-stone/90 space-y-4">
-          <div class="grid md:grid-cols-3 gap-4">
-            <div class="p-4 bg-stone/5 rounded">
-              <h4 class="font-semibold text-stone mb-2">開示</h4>
-              <p class="text-sm">本人からの開示請求に対応します</p>
-            </div>
-            <div class="p-4 bg-stone/5 rounded">
-              <h4 class="font-semibold text-stone mb-2">訂正・削除</h4>
-              <p class="text-sm">誤情報の訂正・削除請求に対応します</p>
-            </div>
-            <div class="p-4 bg-stone/5 rounded">
-              <h4 class="font-semibold text-stone mb-2">利用停止</h4>
-              <p class="text-sm">不正取得や目的外利用の場合の利用停止</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第9条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第9条（Cookie等の技術利用）</h2>
-        <div class="text-stone/90 space-y-4">
-          <p>
-            当事業者は、Cookie、ウェブビーコン等の技術を利用してユーザーの行動履歴等の情報を収集することがあります。
-          </p>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="p-4 bg-stone/5 rounded">
-              <h4 class="font-semibold text-clay mb-2">Google Analytics</h4>
-              <p class="text-sm">アクセス解析のため利用しています</p>
-            </div>
-            <div class="p-4 bg-stone/5 rounded">
-              <h4 class="font-semibold text-clay mb-2">オプトアウト</h4>
-              <p class="text-sm">ブラウザ設定で無効化可能です</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第10条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第10条（安全管理措置）</h2>
-        <div class="text-stone/90">
-          <p class="mb-4">当事業者は、個人情報の漏えい、滅失または毀損の防止その他の個人情報の安全管理のために必要かつ適切な措置を講じます：</p>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="space-y-2">
-              <div class="flex items-center">
-                <svg class="w-5 h-5 text-clay mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-sm">組織的安全管理措置</span>
-              </div>
-              <div class="flex items-center">
-                <svg class="w-5 h-5 text-clay mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-sm">人的安全管理措置</span>
-              </div>
-            </div>
-            <div class="space-y-2">
-              <div class="flex items-center">
-                <svg class="w-5 h-5 text-clay mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-sm">物理的安全管理措置</span>
-              </div>
-              <div class="flex items-center">
-                <svg class="w-5 h-5 text-clay mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-sm">技術的安全管理措置</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 第11条 -->
-      <section class="bg-white rounded-lg shadow p-6">
-        <h2 class="text-xl font-bold mb-4 text-ink">第11条（プライバシーポリシーの変更）</h2>
-        <p class="text-stone/90 leading-relaxed">
-          本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく、変更することができるものとします。
-          当事業者が別途定める場合を除いて、変更後のプライバシーポリシーは、本ウェブサイトに掲載したときから効力を生じるものとします。
-        </p>
-      </section>
-
-    </div>
-
-    <!-- ================= お問い合わせ ================= -->
-    <section class="mt-12">
-      <div class="bg-ink text-white rounded-lg p-8">
-        <h2 class="text-2xl font-bold mb-4">第12条（お問い合わせ窓口）</h2>
-        <div class="space-y-4">
-          <p class="text-stone/50">
-            本ポリシーに関するお問い合わせは、下記の窓口までご連絡ください。
-          </p>
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold mb-2">連絡先</h4>
-              <div class="space-y-2 text-stone/50">
-                <p>
-                  <strong>メール:</strong> 
-                  <a href="mailto:takenoko.ai.care@gmail.com" class="text-white hover:text-yellow-300">
-                    takenoko.ai.care@gmail.com
-                  </a>
-                </p>
-                <p>
-                  <strong>電話:</strong> 
-              <a href="tel:07013834420" class="text-white hover:text-yellow-300">
-                070-1383-4420
-              </a>
-                </p>
-              </div>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-2">受付時間</h4>
-              <p class="text-stone/50">平日・土曜 9:00-18:00</p>
-              <p class="text-sm text-stone/55 mt-2">
-                代表が直接ご対応いたします
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-ink text-white py-12 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
-          <p class="text-stone/35 text-sm">
-            AIで介護の未来をデザインする
-          </p>
-        </div>
-        
-        <div>
-          <h4 class="font-semibold mb-4">リンク</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="text-stone/35 hover:text-white">ホーム</a></li>
-            <li><a href="company.html" class="text-stone/35 hover:text-white">会社概要</a></li>
-            <li><a href="privacy.html" class="text-stone/35 hover:text-white">プライバシーポリシー</a></li>
-            <li><a href="terms.html" class="text-stone/35 hover:text-white">利用規約</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="font-semibold mb-4">お問い合わせ</h4>
-          <div class="space-y-2 text-sm">
-            <p class="text-stone/35">
-              <a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">
-                takenoko.ai.care@gmail.com
-              </a>
-            </p>
-            <p class="text-stone/35">
-              <a href="tel:07013834420" class="hover:text-white">
-                070-1383-4420
-              </a>
-            </p>
-            <p class="text-stone/35">平日・土曜 9:00-18:00</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="border-t border-stone/25 mt-8 pt-8 text-center text-sm text-stone/60">
-        © 2025 嶽ノ子. All rights reserved.
-      </div>
-    </div>
-  </footer>
-
-  <!-- Sticky CTA (Mobile) -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-stone/15 p-3 z-50">
-    <div class="max-w-7xl mx-auto px-2">
-      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-cream text-ink border-b border-stone/15 font-semibold rounded-lg shadow hover:bg-ink">
-        無料相談する
-      </a>
+<section class="page-hero">
+  <div class="container-narrow">
+    <div class="page-hero-inner">
+      <span class="eyebrow">PRIVACY POLICY</span>
+      <h1>プライバシーポリシー</h1>
+      <p class="lead">個人情報の取扱いについて</p>
     </div>
   </div>
+</section>
 
-  <script src="src/js/app.js"></script>
+<main class="section">
+  <div class="container-narrow">
+
+    <div class="legal-intro">
+      <p>嶽ノ子（以下「当事業者」）は、当事業者が提供するアプリケーション群（以下「本サービス」）の提供にあたり、お客様の個人情報を適切に保護することが社会的責務であると認識し、個人情報の保護に関する法律、その他関係法令等を遵守し、個人情報の適切な取扱いを行います。</p>
+      <div class="meta">
+        <p><strong>制定日・改定日：</strong>2025年04月19日<br><strong>事業者：</strong>嶽ノ子</p>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 28px 32px; margin-bottom: 32px;">
+      <h3 style="font-family: var(--serif); font-size: 18px; margin-bottom: 12px;">アクセス解析（Google Analytics 4）</h3>
+      <p style="font-size: 14px; margin-bottom: 12px;">本サービスでは、利用状況の把握と品質改善のためにGoogle Analytics 4（GA4）を利用する場合があります。収集される情報にはCookie等の識別子が含まれます。</p>
+      <ul class="bullet" style="padding-left: 4px;">
+        <li>IPアドレスの匿名化（anonymize_ip）に対応します。</li>
+        <li>データはGoogle社のプライバシーポリシーに基づき管理されます。</li>
+        <li>ブラウザの設定でCookieを無効にすることで収集を拒否できます。</li>
+      </ul>
+      <p style="font-size: 13px; margin-top: 12px;">オプトアウト：<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener" style="color: var(--shu);">Google アナリティクス オプトアウト アドオン</a></p>
+    </div>
+
+    <div class="card" style="padding: 8px 36px;">
+      <article class="legal-article">
+        <h2><span class="num">第1条</span>個人情報の定義</h2>
+        <p>本ポリシーにおいて「個人情報」とは、個人情報の保護に関する法律第2条第1項に規定する個人情報を指すものとします。</p>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第2条</span>個人情報の収集方法</h2>
+        <p>当事業者は、以下の方法により個人情報を収集します：</p>
+        <div class="legal-mini-grid">
+          <div><h4>お問い合わせ・利用申込時</h4><p>事業所名、担当者名、メールアドレス、電話番号等</p></div>
+          <div><h4>契約・取引時</h4><p>契約者情報、支払情報等</p></div>
+          <div><h4>技術情報の自動収集</h4><p>Cookie、IPアドレス、ブラウザ情報、アクセスログ等</p></div>
+          <div><h4>提携先からの収集</h4><p>提携先サービス経由での情報取得</p></div>
+        </div>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第3条</span>利用目的</h2>
+        <p>当事業者は、収集した個人情報を以下の利用目的の範囲内で利用します：</p>
+        <ul class="bullet">
+          <li>サービスの提供・運営</li>
+          <li>お問い合わせ対応</li>
+          <li>情報提供（メルマガ、DM等）</li>
+          <li>サービス改善・新サービス開発</li>
+          <li>重要なお知らせの連絡</li>
+          <li>不正利用者の特定・利用拒否</li>
+          <li>ユーザー機能の提供</li>
+        </ul>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第4条</span>利用目的の変更</h2>
+        <p>当事業者は、利用目的が変更前と関連性を有すると合理的に認められる場合に限り、個人情報の利用目的を変更するものとします。利用目的を変更した場合には、変更後の目的について、本ウェブサイト上への掲載その他の方法により、ユーザーに通知し、または公表するものとします。</p>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第5条</span>個人情報の第三者提供</h2>
+        <p>当事業者は、次に掲げる場合を除いて、あらかじめユーザーの同意を得ることなく、第三者に個人情報を提供することはありません。</p>
+        <div class="legal-note">
+          <h4>例外事項</h4>
+          <ul class="bullet" style="padding-left: 4px;">
+            <li>法令に基づく場合</li>
+            <li>人の生命、身体または財産の保護のために必要がある場合</li>
+            <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合</li>
+            <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第6–8条</span>開示・訂正・削除・利用停止</h2>
+        <div class="legal-mini-grid">
+          <div><h4>開示</h4><p>本人からの開示請求に対応します</p></div>
+          <div><h4>訂正・削除</h4><p>誤情報の訂正・削除請求に対応します</p></div>
+          <div><h4>利用停止</h4><p>不正取得や目的外利用の場合の利用停止</p></div>
+        </div>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第9条</span>Cookie等の技術利用</h2>
+        <p>当事業者は、Cookie、ウェブビーコン等の技術を利用してユーザーの行動履歴等の情報を収集することがあります。</p>
+        <div class="legal-mini-grid">
+          <div><h4>Google Analytics</h4><p>アクセス解析のため利用しています</p></div>
+          <div><h4>オプトアウト</h4><p>ブラウザ設定で無効化可能です</p></div>
+        </div>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第10条</span>安全管理措置</h2>
+        <p>当事業者は、個人情報の漏えい、滅失または毀損の防止その他の個人情報の安全管理のために必要かつ適切な措置を講じます：</p>
+        <ul class="bullet">
+          <li>組織的安全管理措置</li>
+          <li>人的安全管理措置</li>
+          <li>物理的安全管理措置</li>
+          <li>技術的安全管理措置</li>
+        </ul>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第11条</span>プライバシーポリシーの変更</h2>
+        <p>本ポリシーの内容は、法令その他本ポリシーに別段の定めのある事項を除いて、ユーザーに通知することなく、変更することができるものとします。当事業者が別途定める場合を除いて、変更後のプライバシーポリシーは、本ウェブサイトに掲載したときから効力を生じるものとします。</p>
+      </article>
+
+      <article class="legal-article">
+        <h2><span class="num">第12条</span>お問い合わせ窓口</h2>
+        <p>本ポリシーに関するお問い合わせは、下記の窓口までご連絡ください。</p>
+        <div class="legal-mini-grid">
+          <div><h4>メール</h4><p><a href="mailto:takenoko.ai.care@gmail.com" style="color: var(--shu);">takenoko.ai.care@gmail.com</a></p></div>
+          <div><h4>電話</h4><p><a href="tel:07013834420" style="color: var(--shu);">070-1383-4420</a></p></div>
+          <div><h4>受付時間</h4><p>平日・土曜 9:00-18:00（代表が直接対応）</p></div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</main>
+
+<section class="cta-section">
+  <div class="container-narrow">
+    <div class="cta-box">
+      <h2>ご不明な点はお気軽に</h2>
+      <p>個人情報の取扱いに関するご質問にも、代表が直接お答えします。</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn btn-light">お問い合わせ <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">嶽</span>
+        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
+      </div>
+      <p>介護の業務を丸ごとアプリに。対人に100%向き合える現場を、仕組みでつくります。</p>
+    </div>
+    <div class="footer-col">
+      <h5>SERVICE</h5>
+      <ul>
+        <li><a href="index.html#service">サービス</a></li>
+        <li><a href="index.html#flow">試用までの流れ</a></li>
+        <li><a href="index.html#price">料金のしくみ</a></li>
+        <li><a href="plans.html">導入例</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>LEGAL</h5>
+      <ul>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
+    <span>社会を回す人の、大切な人を守る。</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
 </body>
 </html>
