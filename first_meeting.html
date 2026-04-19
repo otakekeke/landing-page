@@ -6,33 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>初回アポイントのご案内｜嶽ノ子</title>
     <meta name="description" content="介護事業所向けオーダーメイド業務アプリの、初回打合せから導入までの流れをカレンダー型UIでわかりやすく説明します（補助金あり／なし両方）。">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/takenoko-theme.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/js/tailwind-brand.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: 'Noto Sans JP', sans-serif; }
-        .step-number { background: linear-gradient(135deg,#6366f1,#4f46e5); }
-        .accent-gradient { background: linear-gradient(135deg, #eef2ff 0%, #F8FAFC 100%); }
-        .tab-active { background-color: #ffffff; color: #4f46e5; }
-        .tab-inactive { background-color: #e5e7eb; color: #4b5563; }
+        .step-number { background: linear-gradient(135deg, #A83C2B, #5A544B); }
+        .accent-gradient { background: linear-gradient(135deg, rgba(168, 60, 43, 0.08) 0%, #F4EFE6 100%); }
+        .tab-active { background-color: #ffffff; color: #A83C2B; }
+        .tab-inactive { background-color: rgba(90, 84, 75, 0.12); color: #5A544B; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-cream text-ink">
     <!-- Header -->
-    <header class="bg-white shadow sticky top-0 z-50">
+    <header class="bg-cream/95 backdrop-blur-md border-b border-stone/10 shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 hover:text-indigo-600">
+            <a href="index.html" class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink hover:text-clay">
                 嶽ノ子
             </a>
             <nav class="hidden md:flex gap-6 text-sm font-medium">
-                <a href="index.html#flow" class="hover:text-indigo-600">試用までの流れ</a>
-                <a href="index.html#price" class="hover:text-indigo-600">料金</a>
-                <a href="plans.html" class="hover:text-indigo-600">導入例</a>
-                <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
-                <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
-                <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+                <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
+                <a href="index.html#price" class="hover:text-clay">料金</a>
+                <a href="plans.html" class="hover:text-clay">導入例</a>
+                <a href="index.html#faq" class="hover:text-clay">FAQ</a>
+                <a href="index.html#contact" class="hover:text-clay">お問い合わせ</a>
+                <a href="company.html" class="hover:text-clay">会社概要</a>
             </nav>
             <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -40,14 +42,14 @@
                 </svg>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html#flow" class="block py-2 hover:text-indigo-600">試用までの流れ</a>
-                <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
-                <a href="plans.html" class="block py-2 hover:text-indigo-600">導入例</a>
-                <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
-                <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
-                <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+                <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
+                <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
+                <a href="plans.html" class="block py-2 hover:text-clay">導入例</a>
+                <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
+                <a href="index.html#contact" class="block py-2 hover:text-clay">お問い合わせ</a>
+                <a href="company.html" class="block py-2 hover:text-clay">会社概要</a>
             </div>
         </div>
     </header>
@@ -57,23 +59,23 @@
         <div class="max-w-5xl mx-auto px-4 py-10">
             <div class="grid md:grid-cols-2 gap-6 items-center">
                 <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800 leading-snug">
+                    <h2 class="text-2xl md:text-3xl font-bold text-ink leading-snug">
                         カレンダーを見ながら、<br class="hidden md:block">導入までの全体像を共有します。
                     </h2>
-                    <p class="mt-3 text-slate-700 text-sm md:text-base">
+                    <p class="mt-3 text-stone text-sm md:text-base">
                         このページは、初回打合せからプロトタイプ作成、補助金申請〜採択、<br class="hidden md:block">
                         そして本番導入までの流れを、<span class="font-semibold">カレンダー形式</span>でご説明するためのページです。
                     </p>
-                    <p class="mt-2 text-slate-600 text-xs">
+                    <p class="mt-2 text-stone/90 text-xs">
                         ※実際にお会いしたとき、この画面を一緒に見ながらご説明します。<br>
                         ※本日その場でご契約いただくことはありません。
                     </p>
                 </div>
                 <div class="bg-white rounded-xl shadow p-5 text-sm">
-                    <h3 class="font-semibold text-slate-800 mb-3 flex items-center">
-                        <i class="fas fa-diagram-project text-indigo-600 mr-2"></i>本日の流れ
+                    <h3 class="font-semibold text-ink mb-3 flex items-center">
+                        <i class="fas fa-diagram-project text-clay mr-2"></i>本日の流れ
                     </h3>
-                    <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                    <ul class="list-disc pl-5 space-y-2 text-stone">
                         <li>現場のお困りごと・やりたいことをヒアリング</li>
                         <li>「補助金あり／なし」2つの進め方をご説明</li>
                         <li>おおよそのスケジュールと料金レンジを共有</li>
@@ -86,7 +88,7 @@
     <!-- Tabs -->
     <section class="py-4">
         <div class="max-w-5xl mx-auto px-4">
-            <div class="inline-flex rounded-xl bg-slate-200 p-1 text-sm">
+            <div class="inline-flex rounded-xl bg-stone/12 p-1 text-sm">
                 <button id="tab-subsidy"
                         class="px-4 py-2 rounded-lg font-semibold tab-active shadow-sm flex items-center gap-2"
                         onclick="switchMode('subsidy')">
@@ -106,10 +108,10 @@
         <!-- カレンダー（補助金あり） -->
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-xl font-bold text-slate-800 mb-2">
+                <h2 class="text-xl font-bold text-ink mb-2">
                     補助金を使って導入する場合のカレンダー例
                 </h2>
-                <p class="text-slate-600 text-sm mb-4">
+                <p class="text-stone/90 text-sm mb-4">
                     例として、<span class="font-mono">4/1(月)</span>に初回打合せ（第1回）をした場合のイメージです。<br class="hidden md:block">
                     実際の日付は、施設さまのご予定と補助金の公募スケジュールに合わせて調整します。
                 </p>
@@ -118,126 +120,126 @@
                     <!-- 4月 -->
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-slate-800">4月（例）</h3>
-                            <span class="text-xs text-slate-500">月曜はじまり</span>
+                            <h3 class="font-semibold text-ink">4月（例）</h3>
+                            <span class="text-xs text-stone/75">月曜はじまり</span>
                         </div>
-                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
                             <!-- 1週目 (4/1〜) -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">1</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="text-[10px] text-stone/75 block">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     第1回 初回打合せ
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">2</span>
+                                <span class="text-[10px] text-stone/75 block">2</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">3</span>
+                                <span class="text-[10px] text-stone/75 block">3</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">4</span>
+                                <span class="text-[10px] text-stone/75 block">4</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">5</span>
+                                <span class="text-[10px] text-stone/75 block">5</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">6</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">6</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">7</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
                             <!-- 2週目 (4/8〜) 〜 第1回→第2回の期間 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">8</span>
+                                <span class="text-[10px] text-stone/75 block">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     課題の洗い出し
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">9</span>
+                                <span class="text-[10px] text-stone/75 block">9</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">10</span>
+                                <span class="text-[10px] text-stone/75 block">10</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">11</span>
+                                <span class="text-[10px] text-stone/75 block">11</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">12</span>
+                                <span class="text-[10px] text-stone/75 block">12</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">13</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">13</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">14</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
                             <!-- 3週目 (4/15〜) 1回目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">15</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="text-[10px] text-stone/75 block">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     1回目 プロトタイプ
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">16</span>
+                                <span class="text-[10px] text-stone/75 block">16</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">17</span>
+                                <span class="text-[10px] text-stone/75 block">17</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">18</span>
+                                <span class="text-[10px] text-stone/75 block">18</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">19</span>
+                                <span class="text-[10px] text-stone/75 block">19</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">20</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">20</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">21</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">21</span>
                             </div>
 
                             <!-- 4週目 (4/22〜) 2回目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">22</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="text-[10px] text-stone/75 block">22</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     2回目 仕様＆補助金
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">23</span>
+                                <span class="text-[10px] text-stone/75 block">23</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">24</span>
+                                <span class="text-[10px] text-stone/75 block">24</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">25</span>
+                                <span class="text-[10px] text-stone/75 block">25</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">26</span>
+                                <span class="text-[10px] text-stone/75 block">26</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">27</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">27</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">28</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">28</span>
                             </div>
 
                             <!-- 5週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">29</span>
+                                <span class="text-[10px] text-stone/75 block">29</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     申請内容の最終確認
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">30</span>
+                                <span class="text-[10px] text-stone/75 block">30</span>
                             </div>
                         </div>
                     </div>
@@ -245,127 +247,127 @@
                     <!-- 5月 -->
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-slate-800">5月（例）</h3>
-                            <span class="text-xs text-slate-500">申請〜採択待ち</span>
+                            <h3 class="font-semibold text-ink">5月（例）</h3>
+                            <span class="text-xs text-stone/75">申請〜採択待ち</span>
                         </div>
-                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
                             <!-- 1週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">1</span>
+                                <span class="text-[10px] text-stone/75 block">1</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
                                     申請書作成
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">2</span>
+                                <span class="text-[10px] text-stone/75 block">2</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">3</span>
+                                <span class="text-[10px] text-stone/75 block">3</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">4</span>
+                                <span class="text-[10px] text-stone/75 block">4</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">5</span>
+                                <span class="text-[10px] text-stone/75 block">5</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">6</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">6</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">7</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
                             <!-- 2週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">8</span>
+                                <span class="text-[10px] text-stone/75 block">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
                                     申請提出目安
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">9</span>
+                                <span class="text-[10px] text-stone/75 block">9</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">10</span>
+                                <span class="text-[10px] text-stone/75 block">10</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">11</span>
+                                <span class="text-[10px] text-stone/75 block">11</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">12</span>
+                                <span class="text-[10px] text-stone/75 block">12</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">13</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">13</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">14</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
                             <!-- 以降は「プロトタイプ利用＋待ち」 -->
                             <!-- 3週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">15</span>
+                                <span class="text-[10px] text-stone/75 block">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     プロトタイプ利用
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">16</span>
+                                <span class="text-[10px] text-stone/75 block">16</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">17</span>
+                                <span class="text-[10px] text-stone/75 block">17</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">18</span>
+                                <span class="text-[10px] text-stone/75 block">18</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">19</span>
+                                <span class="text-[10px] text-stone/75 block">19</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">20</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">20</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">21</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">21</span>
                             </div>
 
                             <!-- 4週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">22</span>
+                                <span class="text-[10px] text-stone/75 block">22</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     フィードバック
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">23</span>
+                                <span class="text-[10px] text-stone/75 block">23</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">24</span>
+                                <span class="text-[10px] text-stone/75 block">24</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">25</span>
+                                <span class="text-[10px] text-stone/75 block">25</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">26</span>
+                                <span class="text-[10px] text-stone/75 block">26</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">27</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">27</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">28</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">28</span>
                             </div>
 
                             <!-- 5週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">29</span>
+                                <span class="text-[10px] text-stone/75 block">29</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">30</span>
+                                <span class="text-[10px] text-stone/75 block">30</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">31</span>
+                                <span class="text-[10px] text-stone/75 block">31</span>
                             </div>
                         </div>
                     </div>
@@ -373,89 +375,89 @@
                     <!-- 6月 -->
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-slate-800">6月（例）</h3>
-                            <span class="text-xs text-slate-500">採択〜本番構築</span>
+                            <h3 class="font-semibold text-ink">6月（例）</h3>
+                            <span class="text-xs text-stone/75">採択〜本番構築</span>
                         </div>
-                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
                             <!-- 1週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">1</span>
+                                <span class="text-[10px] text-stone/75 block">1</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">2</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">2</span>
                             </div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50">
-                                <span class="text-[10px] text-slate-500 block">3</span>
+                            <div class="border rounded p-1.5 text-left bg-stone/5">
+                                <span class="text-[10px] text-stone/75 block">3</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
                                     採択のお知らせ
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">4</span>
+                                <span class="text-[10px] text-stone/75 block">4</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">5</span>
+                                <span class="text-[10px] text-stone/75 block">5</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">6</span>
+                                <span class="text-[10px] text-stone/75 block">6</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">7</span>
+                                <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
                             <!-- 2週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">8</span>
+                                <span class="text-[10px] text-stone/75 block">8</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">9</span>
+                                <span class="text-[10px] text-stone/75 block">9</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">10</span>
+                                <span class="text-[10px] text-stone/75 block">10</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">11</span>
+                                <span class="text-[10px] text-stone/75 block">11</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">12</span>
+                                <span class="text-[10px] text-stone/75 block">12</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     契約・Stripe登録
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">13</span>
+                                <span class="text-[10px] text-stone/75 block">13</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">14</span>
+                                <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
                             <!-- 3週目以降：本番構築 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">15</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                <span class="text-[10px] text-stone/75 block">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
                                     本番構築開始
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">16</span>
+                                <span class="text-[10px] text-stone/75 block">16</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">17</span>
+                                <span class="text-[10px] text-stone/75 block">17</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">18</span>
+                                <span class="text-[10px] text-stone/75 block">18</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">19</span>
+                                <span class="text-[10px] text-stone/75 block">19</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">20</span>
+                                <span class="text-[10px] text-stone/75 block">20</span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
-                                <span class="text-[10px] text-slate-500 block">21</span>
+                                <span class="text-[10px] text-stone/75 block">21</span>
                             </div>
                         </div>
                     </div>
@@ -464,7 +466,7 @@
                 <!-- 凡例 -->
                 <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span> 打合せ（0〜2回目）
+                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> 打合せ（0〜2回目）
                     </span>
                     <span class="inline-flex items-center gap-2">
                         <span class="w-3 h-3 rounded bg-amber-200 inline-block border border-amber-300"></span> 補助金の準備・申請
@@ -476,7 +478,7 @@
                         <span class="w-3 h-3 rounded bg-purple-600 inline-block"></span> 採択
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-indigo-100 inline-block border border-indigo-300"></span> 本番構築
+                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> 本番構築
                     </span>
                 </div>
             </div>
@@ -486,27 +488,27 @@
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
                 <!-- 0〜1 -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-indigo-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-clay">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">第1回→第2回</div>
-                            <h3 class="font-semibold text-slate-800">第1回〜第2回（約2週間）</h3>
+                            <h3 class="font-semibold text-ink">第1回〜第2回（約2週間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">初回打合せ〜プロトタイプ作成</span>
+                        <span class="text-xs text-stone/75">初回打合せ〜プロトタイプ作成</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>初回打合せの内容を踏まえて、<strong>「他にも困っていること」</strong>があれば考えておいていただく</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>ヒアリング内容を整理し、<strong>補助金が使えそうか判断</strong></li>
                                 <li>次回お見せするための<strong>プロトタイプを作成</strong></li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>ここまでは費用は一切かかりません。</p>
                         </div>
                     </div>
@@ -517,25 +519,25 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
-                            <h3 class="font-semibold text-slate-800">1回目〜2回目（約1週間）</h3>
+                            <h3 class="font-semibold text-ink">1回目〜2回目（約1週間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">プロトタイプ確認＆補助金ヒアリング</span>
+                        <span class="text-xs text-stone/75">プロトタイプ確認＆補助金ヒアリング</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li><strong>補助金補助アプリ（ヒアリングフォーム）</strong>への回答</li>
                                 <li>プロトタイプを見て感じたこと・直してほしいことのメモ</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>プロトタイプの<strong>指摘点を修正</strong></li>
                                 <li>補助金補助アプリの内容をもとに、どの補助金が合うか<strong>候補を絞り込み</strong></li>
                                 <li><strong>申請書作成補助</strong></li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
                         </div>
                     </div>
@@ -546,26 +548,26 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→n</div>
-                            <h3 class="font-semibold text-slate-800">2回目〜採択まで（補助金採択から実行までの間）</h3>
+                            <h3 class="font-semibold text-ink">2回目〜採択まで（補助金採択から実行までの間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">プロトタイプ運用＆申請のブラッシュアップ</span>
+                        <span class="text-xs text-stone/75">プロトタイプ運用＆申請のブラッシュアップ</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>プロトタイプを実際に触っていただき、<strong>現場の感覚でフィードバック</strong></li>
                                 <li>補助金申請に必要な書類・情報をご準備いただく</li>
                                 <li><strong>申請書作成と提出</strong></li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>フィードバックを元に、プロトタイプの<strong>改良</strong></li>
                                 <li>専門家と連携しながら、<strong>補助金申請書の作成・ブラッシュアップ</strong></li>
                                 <li><strong>申請書作成補助</strong></li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>申請の関わり方や開発の進め方によって、ここから費用が発生する場合があります。事前に必ずご説明のうえ進めます。</p>
                         </div>
                     </div>
@@ -576,27 +578,27 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">採択後</div>
-                            <h3 class="font-semibold text-slate-800">採択後｜契約・本番環境構築・納品</h3>
+                            <h3 class="font-semibold text-ink">採択後｜契約・本番環境構築・納品</h3>
                         </div>
-                        <span class="text-xs text-slate-500">本番構築フェーズ</span>
+                        <span class="text-xs text-stone/75">本番構築フェーズ</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li><strong>オンライン契約書</strong>への署名</li>
                                 <li><strong>Stripe</strong>への支払い情報登録</li>
                                 <li>本番導入のタイミング・対象職種の確認</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>決定した仕様に基づく<strong>本番環境の構築</strong></li>
                                 <li>必要なデータのセットアップ・テスト</li>
                                 <li>本番稼働後のフォロー・改善提案</li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
-                            <p><strong>料金：</strong>単一業務補助ツールまたは業務横断・運用管理アプリのいずれかの契約単位で、申請前に合意した内容どおりで進めます（金額は<a href="index.html#price" class="text-indigo-600 underline">料金体系</a>に準拠）。</p>
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
+                            <p><strong>料金：</strong>単一業務補助ツールまたは業務横断・運用管理アプリのいずれかの契約単位で、申請前に合意した内容どおりで進めます（金額は<a href="index.html#price" class="text-clay underline">料金体系</a>に準拠）。</p>
                         </div>
                     </div>
                 </div>
@@ -609,10 +611,10 @@
         <!-- カレンダー（補助金なし） -->
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4">
-                <h2 class="text-xl font-bold text-slate-800 mb-2">
+                <h2 class="text-xl font-bold text-ink mb-2">
                     補助金を使わず導入する場合のカレンダー例
                 </h2>
-                <p class="text-slate-600 text-sm mb-4">
+                <p class="text-stone/90 text-sm mb-4">
                     例として、<span class="font-mono">4/1(月)</span>に初回打合せ（第1回）をした場合、<br class="hidden md:block">
                     1〜2か月程度で本番稼働まで進めるイメージです。
                 </p>
@@ -621,130 +623,130 @@
                     <!-- 4月 -->
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-slate-800">4月（例）</h3>
-                            <span class="text-xs text-slate-500">月曜はじまり</span>
+                            <h3 class="font-semibold text-ink">4月（例）</h3>
+                            <span class="text-xs text-stone/75">月曜はじまり</span>
                         </div>
-                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
                             <!-- 1週目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">1</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="block text-[10px] text-stone/75">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     第1回 初回打合せ
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">2</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">3</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">4</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">5</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">6</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">7</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">2</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">3</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">4</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">5</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">6</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">7</span></div>
 
                             <!-- 2週目：第1回→第2回 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">8</span>
+                                <span class="block text-[10px] text-stone/75">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     課題の洗い出し
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">9</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">10</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">11</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">12</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">13</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">14</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">9</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">10</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">11</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">12</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">13</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">14</span></div>
 
                             <!-- 3週目：1回目 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">15</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="block text-[10px] text-stone/75">15</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     1回目 プロトタイプ
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">16</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">17</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">18</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">19</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">20</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">21</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">16</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">17</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">18</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">19</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">20</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">21</span></div>
 
                             <!-- 4週目：2回目（仕様・料金確定） -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">22</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600 text-white">
+                                <span class="block text-[10px] text-stone/75">22</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
                                     2回目 仕様・料金
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">23</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">24</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">25</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">26</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">27</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">28</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">23</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">24</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">25</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">26</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">27</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">28</span></div>
 
                             <!-- 5週目：3回目 契約 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">29</span>
+                                <span class="block text-[10px] text-stone/75">29</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
                                     3回目 契約・Stripe
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">30</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">30</span></div>
                         </div>
                     </div>
 
                     <!-- 5月 -->
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-slate-800">5月（例）</h3>
-                            <span class="text-xs text-slate-500">本番構築〜導入</span>
+                            <h3 class="font-semibold text-ink">5月（例）</h3>
+                            <span class="text-xs text-stone/75">本番構築〜導入</span>
                         </div>
-                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500 mb-1">
+                        <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
                             <!-- 1週目：本番構築開始 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">1</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                <span class="block text-[10px] text-stone/75">1</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
                                     本番構築開始
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">2</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">3</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">4</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">5</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">6</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">7</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">2</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">3</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">4</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">5</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">6</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">7</span></div>
 
                             <!-- 以降：構築＋テスト〜本番稼働 -->
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">8</span>
+                                <span class="block text-[10px] text-stone/75">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                     テスト・データ移行
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">9</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">10</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">11</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">12</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">13</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">14</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">9</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">10</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">11</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">12</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">13</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">14</span></div>
 
                             <div class="border rounded p-1.5 text-left">
-                                <span class="block text-[10px] text-slate-500">15</span>
+                                <span class="block text-[10px] text-stone/75">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500 text-white">
                                     本番稼働スタート
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">16</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">17</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">18</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-slate-500">19</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">20</span></div>
-                            <div class="border rounded p-1.5 text-left bg-slate-50"><span class="block text-[10px] text-slate-500">21</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">16</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">17</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">18</span></div>
+                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">19</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">20</span></div>
+                            <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">21</span></div>
                         </div>
                     </div>
                 </div>
@@ -752,13 +754,13 @@
                 <!-- 凡例 -->
                 <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span> 打合せ（0〜3回目）
+                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> 打合せ（0〜3回目）
                     </span>
                     <span class="inline-flex items-center gap-2">
                         <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> 課題整理・テスト
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-indigo-100 inline-block border border-indigo-300"></span> 本番構築
+                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> 本番構築
                     </span>
                     <span class="inline-flex items-center gap-2">
                         <span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> 本番稼働開始
@@ -771,27 +773,27 @@
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
                 <!-- 0〜1 -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-indigo-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-clay">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">第1回→第2回</div>
-                            <h3 class="font-semibold text-slate-800">第1回〜第2回（約1〜2週間）</h3>
+                            <h3 class="font-semibold text-ink">第1回〜第2回（約1〜2週間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">初回打合せ〜プロトタイプ作成</span>
+                        <span class="text-xs text-stone/75">初回打合せ〜プロトタイプ作成</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>初回打合せの内容をもとに、<strong>他の課題・理想の形</strong>を考えておいていただく</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>ヒアリング内容の整理</li>
                                 <li>次回お見せする<strong>プロトタイプの作成</strong></li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>ここまでは費用はかかりません。</p>
                         </div>
                     </div>
@@ -802,24 +804,24 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
-                            <h3 class="font-semibold text-slate-800">1回目〜2回目（約1週間）</h3>
+                            <h3 class="font-semibold text-ink">1回目〜2回目（約1週間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">プロトタイプ確認〜仕様・料金の方向性決定</span>
+                        <span class="text-xs text-stone/75">プロトタイプ確認〜仕様・料金の方向性決定</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>プロトタイプを触っていただき、<strong>良い点／気になる点</strong>を教えていただく</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>プロトタイプの修正・改善</li>
                                 <li>どの範囲をシステム化するか、<strong>仕様のたたき台</strong>を作成</li>
                                 <li>初期費用・月額の<strong>大まかなレンジ</strong>を整理</li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
                         </div>
                     </div>
@@ -830,23 +832,23 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→3</div>
-                            <h3 class="font-semibold text-slate-800">2回目〜3回目（約1週間）</h3>
+                            <h3 class="font-semibold text-ink">2回目〜3回目（約1週間）</h3>
                         </div>
-                        <span class="text-xs text-slate-500">最終仕様・見積確定〜ご契約</span>
+                        <span class="text-xs text-stone/75">最終仕様・見積確定〜ご契約</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>提示した仕様・料金をご検討いただき、<strong>やる／やらない</strong>のご判断</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>ご要望を反映した<strong>最終仕様書・お見積書</strong>の作成</li>
                                 <li>オンライン契約書・Stripe決済ページのご用意</li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>費用：</strong>ご契約前に、選定した契約単位に応じた初期費用・月額（税込）を明示します。</p>
                         </div>
                     </div>
@@ -857,26 +859,26 @@
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">契約後</div>
-                            <h3 class="font-semibold text-slate-800">契約後｜本番構築・テスト・導入</h3>
+                            <h3 class="font-semibold text-ink">契約後｜本番構築・テスト・導入</h3>
                         </div>
-                        <span class="text-xs text-slate-500">1〜2か月で本番稼働を目指します</span>
+                        <span class="text-xs text-stone/75">1〜2か月で本番稼働を目指します</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-slate-500 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>オンライン契約書への署名</li>
                                 <li>Stripeでの支払い情報登録</li>
                                 <li>導入する事業所・職種・開始日の確定</li>
                             </ul>
-                            <p class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
                                 <li>本番環境の構築・帳票レイアウトの設定</li>
                                 <li>テスト用データでの動作確認</li>
                                 <li>本番稼働日以降のフォロー（使い方レクチャー・改善提案）</li>
                             </ul>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
                             <p><strong>料金：</strong>初期費用は構築期間中に、月額は本番稼働月からの発生となるイメージです。</p>
                         </div>
                     </div>
@@ -886,14 +888,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 bg-white/80 mt-6">
-        <div class="max-w-5xl mx-auto px-4 py-6 text-sm text-slate-600 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+    <footer class="border-t border-stone/15 bg-white/80 mt-6">
+        <div class="max-w-5xl mx-auto px-4 py-6 text-sm text-stone/90 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
-                <a href="index.html#contact" class="text-indigo-700 hover:underline">
+                <a href="index.html#contact" class="text-clay hover:underline">
                     <i class="fas fa-calendar-check"></i> 無料で相談
                 </a>
-                <span class="text-slate-300">|</span>
-                <a href="index.html#flow" class="text-indigo-700 hover:underline">
+                <span class="text-stone/35">|</span>
+                <a href="index.html#flow" class="text-clay hover:underline">
                     <i class="fas fa-route"></i> 導入の流れ
                 </a>
             </div>

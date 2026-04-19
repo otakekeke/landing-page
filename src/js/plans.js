@@ -564,8 +564,8 @@
         
         // すべてのタブボタンとパネルを非アクティブに
         tabButtons.forEach(btn => {
-          btn.classList.remove('active', 'border-blue-600', 'border-indigo-600', 'border-purple-600', 'text-blue-600', 'text-indigo-600', 'text-purple-600');
-          btn.classList.add('border-transparent', 'text-slate-600');
+          btn.classList.remove('active', 'border-clay', 'border-stone', 'border-ink', 'text-clay', 'text-stone', 'text-ink');
+          btn.classList.add('border-transparent', 'text-stone/90');
           btn.setAttribute('aria-selected', 'false');
         });
         
@@ -576,15 +576,15 @@
         // 選択されたタブをアクティブに
         button.classList.add('active');
         button.setAttribute('aria-selected', 'true');
-        button.classList.remove('border-transparent', 'text-slate-600');
+        button.classList.remove('border-transparent', 'text-stone/90');
 
         // タブの色を設定
         if (targetTab === 'lite') {
-          button.classList.add('border-blue-600', 'text-blue-600');
+          button.classList.add('border-clay', 'text-clay');
         } else if (targetTab === 'standard') {
-          button.classList.add('border-indigo-600', 'text-indigo-600');
+          button.classList.add('border-stone', 'text-stone');
         } else if (targetTab === 'pro') {
-          button.classList.add('border-purple-600', 'text-purple-600');
+          button.classList.add('border-ink', 'text-ink');
         }
 
         const targetPanel = document.getElementById(`panel-${targetTab}`);
@@ -621,30 +621,30 @@
     card.setAttribute('data-persona-index', index);
 
     // プランごとの色クラスを設定
-    let badgeClass = 'bg-blue-100 text-blue-800';
-    let appTitleClass = 'text-blue-900';
-    let appTextClass = 'text-blue-800';
-    let effectBgClass = 'bg-blue-50';
-    let effectTextClass = 'text-blue-700';
-    let effectValueClass = 'text-blue-900';
-    let detailClass = 'text-blue-700 hover:text-blue-900';
+    let badgeClass = 'bg-stone/10 text-ink';
+    let appTitleClass = 'text-ink';
+    let appTextClass = 'text-ink';
+    let effectBgClass = 'bg-stone/5';
+    let effectTextClass = 'text-stone';
+    let effectValueClass = 'text-ink';
+    let detailClass = 'text-stone hover:text-ink';
 
     if (plan === 'standard') {
-      badgeClass = 'bg-indigo-100 text-indigo-800';
-      appTitleClass = 'text-indigo-900';
-      appTextClass = 'text-indigo-800';
-      effectBgClass = 'bg-indigo-50';
-      effectTextClass = 'text-indigo-700';
-      effectValueClass = 'text-indigo-900';
-      detailClass = 'text-indigo-700 hover:text-indigo-900';
+      badgeClass = 'bg-stone/10 text-ink';
+      appTitleClass = 'text-ink';
+      appTextClass = 'text-ink';
+      effectBgClass = 'bg-stone/5';
+      effectTextClass = 'text-clay';
+      effectValueClass = 'text-ink';
+      detailClass = 'text-clay hover:text-ink';
     } else if (plan === 'pro') {
-      badgeClass = 'bg-purple-100 text-purple-800';
-      appTitleClass = 'text-purple-900';
-      appTextClass = 'text-purple-800';
-      effectBgClass = 'bg-purple-50';
-      effectTextClass = 'text-purple-700';
-      effectValueClass = 'text-purple-900';
-      detailClass = 'text-purple-700 hover:text-purple-900';
+      badgeClass = 'bg-stone/10 text-ink';
+      appTitleClass = 'text-ink';
+      appTextClass = 'text-ink';
+      effectBgClass = 'bg-stone/5';
+      effectTextClass = 'text-stone';
+      effectValueClass = 'text-ink';
+      detailClass = 'text-stone hover:text-ink';
     }
 
     card.innerHTML = `
@@ -652,21 +652,21 @@
         <div class="flex items-center gap-3">
           <span class="text-4xl">${persona.icon}</span>
           <div>
-            <h3 class="font-bold text-lg text-slate-900">${persona.name}</h3>
-            <p class="text-sm text-slate-600">${persona.role}</p>
+            <h3 class="font-bold text-lg text-ink">${persona.name}</h3>
+            <p class="text-sm text-stone/90">${persona.role}</p>
           </div>
         </div>
         <span class="px-3 py-1 ${badgeClass} rounded text-xs font-semibold">${persona.facility}</span>
       </div>
 
       <div class="mb-4 space-y-2">
-        <div class="flex items-center gap-2 text-sm text-slate-600">
+        <div class="flex items-center gap-2 text-sm text-stone/90">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
           </svg>
           <span>職員数：${persona.staffCount}名</span>
         </div>
-        <div class="flex items-center gap-2 text-sm text-slate-600">
+        <div class="flex items-center gap-2 text-sm text-stone/90">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
           </svg>
@@ -675,26 +675,26 @@
       </div>
 
       <div class="mb-4">
-        <h4 class="font-semibold text-slate-800 mb-2 text-sm flex items-center gap-2">
+        <h4 class="font-semibold text-ink mb-2 text-sm flex items-center gap-2">
           <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
           </svg>
           導入前の課題
         </h4>
-        <p class="text-sm text-slate-700 leading-relaxed">${persona.problem}</p>
+        <p class="text-sm text-stone leading-relaxed">${persona.problem}</p>
       </div>
 
-      <div class="mb-4 bg-slate-50 rounded-lg p-3 border-l-4 ${plan === 'lite' ? 'border-blue-400' : plan === 'standard' ? 'border-indigo-400' : 'border-purple-400'}">
+      <div class="mb-4 bg-stone/5 rounded-lg p-3 border-l-4 ${plan === 'lite' ? 'border-clay/40' : plan === 'standard' ? 'border-stone/50' : 'border-ink/50'}">
         <h4 class="font-semibold ${appTitleClass} mb-2 text-sm">導入するアプリ</h4>
         <p class="text-sm font-semibold ${appTextClass} mb-2">${persona.app}</p>
-        <ul class="text-xs text-slate-700 space-y-1 list-disc pl-4">
+        <ul class="text-xs text-stone space-y-1 list-disc pl-4">
           ${persona.appFeatures.map(feature => `<li>${feature}</li>`).join('')}
         </ul>
       </div>
 
-      <div class="border-t border-slate-200 pt-4">
+      <div class="border-t border-stone/15 pt-4">
         <div class="grid grid-cols-2 gap-3 mb-3">
-          <div class="${effectBgClass} rounded-lg p-3 text-center border-2 ${plan === 'lite' ? 'border-blue-200' : plan === 'standard' ? 'border-indigo-200' : 'border-purple-200'}">
+          <div class="${effectBgClass} rounded-lg p-3 text-center border-2 ${plan === 'lite' ? 'border-clay/20' : plan === 'standard' ? 'border-stone/25' : 'border-ink/20'}">
             <div class="flex items-center justify-center gap-1 mb-1">
               <svg class="w-4 h-4 ${effectTextClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -703,7 +703,7 @@
             </div>
             <p class="text-xl font-bold ${effectValueClass}">${persona.effects.timeReduction}</p>
           </div>
-          <div class="${effectBgClass} rounded-lg p-3 text-center border-2 ${plan === 'lite' ? 'border-blue-200' : plan === 'standard' ? 'border-indigo-200' : 'border-purple-200'}">
+          <div class="${effectBgClass} rounded-lg p-3 text-center border-2 ${plan === 'lite' ? 'border-clay/20' : plan === 'standard' ? 'border-stone/25' : 'border-ink/20'}">
             <div class="flex items-center justify-center gap-1 mb-1">
               <svg class="w-4 h-4 ${effectTextClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -713,8 +713,8 @@
             <p class="text-xl font-bold ${effectValueClass}">${persona.effects.costReduction}</p>
           </div>
         </div>
-        <div class="bg-slate-50 rounded-lg p-2 mt-2">
-          <p class="text-xs text-slate-600 italic flex items-start gap-2">
+        <div class="bg-stone/5 rounded-lg p-2 mt-2">
+          <p class="text-xs text-stone/90 italic flex items-start gap-2">
             <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
@@ -723,7 +723,7 @@
         </div>
       </div>
 
-      <div class="mt-4 pt-4 border-t border-slate-200">
+      <div class="mt-4 pt-4 border-t border-stone/15">
         <details class="text-sm">
           <summary class="cursor-pointer font-semibold ${detailClass} flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -731,8 +731,8 @@
             </svg>
             詳細を見る
           </summary>
-          <div class="mt-3 space-y-3 text-xs text-slate-700">
-            <div class="bg-slate-50 rounded-lg p-3">
+          <div class="mt-3 space-y-3 text-xs text-stone">
+            <div class="bg-stone/5 rounded-lg p-3">
               <h5 class="font-semibold mb-2 flex items-center gap-2">
                 <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -741,14 +741,14 @@
               </h5>
               <p class="leading-relaxed">${persona.beforeScenario}</p>
             </div>
-            <div class="bg-green-50 rounded-lg p-3 border-l-4 border-green-400">
-              <h5 class="font-semibold mb-2 flex items-center gap-2 text-green-900">
-                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-stone/5 rounded-lg p-3 border-l-4 border-clay/30">
+              <h5 class="font-semibold mb-2 flex items-center gap-2 text-ink">
+                <svg class="w-4 h-4 text-clay" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 導入後の変化
               </h5>
-              <p class="leading-relaxed text-green-800">${persona.effects.story}</p>
+              <p class="leading-relaxed text-ink">${persona.effects.story}</p>
             </div>
           </div>
         </details>

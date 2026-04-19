@@ -14,7 +14,12 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="導入例・活用イメージ｜嶽ノ子" />
   <meta name="twitter:description" content="介護・福祉事業所での業務効率化アプリ導入例を30件ご紹介します。シフト管理、インシデント報告、月次報告など、あなたの施設に近い事例をご確認ください。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/takenoko-theme.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="src/js/tailwind-brand.js"></script>
   <style>
     html { scroll-behavior: smooth; }
     /* タブ切り替えアニメーション */
@@ -43,20 +48,20 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-cream text-ink">
   <!-- ================= HEADER ================= -->
-  <header class="bg-white shadow sticky top-0 z-50">
+  <header class="bg-cream/95 backdrop-blur-md border-b border-stone/10 shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 hover:text-indigo-600">
+      <a href="index.html" class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink hover:text-clay">
         嶽ノ子
       </a>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#flow" class="hover:text-indigo-600">試用までの流れ</a>
-        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
-        <a href="plans.html" class="text-indigo-600 font-semibold">導入例</a>
-        <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
-        <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
-        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+        <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
+        <a href="index.html#price" class="hover:text-clay">料金</a>
+        <a href="plans.html" class="text-clay font-semibold">導入例</a>
+        <a href="index.html#faq" class="hover:text-clay">FAQ</a>
+        <a href="index.html#contact" class="hover:text-clay">お問い合わせ</a>
+        <a href="company.html" class="hover:text-clay">会社概要</a>
       </nav>
       <!-- モバイルメニューボタン -->
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
@@ -66,49 +71,49 @@
       </button>
     </div>
     <!-- モバイルメニュー -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#flow" class="block py-2 hover:text-indigo-600">試用までの流れ</a>
-        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
-        <a href="plans.html" class="block py-2 text-indigo-600 font-semibold">導入例</a>
-        <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
-        <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
-        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+        <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
+        <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
+        <a href="plans.html" class="block py-2 text-clay font-semibold">導入例</a>
+        <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
+        <a href="index.html#contact" class="block py-2 hover:text-clay">お問い合わせ</a>
+        <a href="company.html" class="block py-2 hover:text-clay">会社概要</a>
       </div>
     </div>
   </header>
 
   <!-- ================= HERO ================= -->
-  <section class="bg-indigo-600 text-white">
+  <section class="bg-cream text-ink border-b border-stone/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
+      <h1 class="font-display text-3xl sm:text-4xl font-bold leading-tight mb-4 tracking-tight">
         導入例・活用イメージ
       </h1>
-      <p class="mt-6 text-lg leading-relaxed text-indigo-100">
+      <p class="mt-6 text-lg leading-relaxed text-stone/50">
         紙やExcelで管理している業務を、専用アプリに置き換えた事例を30件ご紹介します。<br class="hidden sm:block" />
         あなたの施設に近い事例を参考にしてください。
       </p>
-      <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-slate-900 rounded-lg shadow-lg">
+      <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-clay/20 text-ink rounded-lg shadow-lg">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <span class="font-bold text-lg">試用期間終了まで完全無料</span>
       </div>
-      <div class="mt-6 bg-white/10 backdrop-blur rounded-xl p-5 max-w-lg">
-        <p class="text-sm text-indigo-100 mb-3">正式契約後の料金（契約単位は2種類）</p>
+      <div class="mt-6 bg-white/90 backdrop-blur rounded-xl p-5 max-w-lg border border-stone/15 shadow-sm">
+        <p class="text-sm text-stone mb-3">正式契約後の料金（契約単位は2種類）</p>
         <div class="grid sm:grid-cols-2 gap-3 text-sm">
-          <div class="rounded-lg bg-white/10 p-3 border border-white/20">
-            <p class="font-semibold text-white">単一業務補助ツール</p>
+          <div class="rounded-lg bg-stone/5 p-3 border border-stone/15">
+            <p class="font-semibold text-ink">単一業務補助ツール</p>
             <p class="text-lg font-extrabold mt-1">初期 100,000円</p>
-            <p class="text-indigo-100">月額 2万～3万円（税込）</p>
+            <p class="text-stone/90">月額 2万～3万円（税込）</p>
           </div>
-          <div class="rounded-lg bg-white/10 p-3 border border-white/20">
-            <p class="font-semibold text-white">業務横断・運用管理</p>
+          <div class="rounded-lg bg-stone/5 p-3 border border-stone/15">
+            <p class="font-semibold text-ink">業務横断・運用管理</p>
             <p class="text-lg font-extrabold mt-1">初期 800,000円</p>
-            <p class="text-indigo-100">月額 88,000円（税込）</p>
+            <p class="text-stone/90">月額 88,000円（税込）</p>
           </div>
         </div>
-        <p class="text-xs text-indigo-200 mt-3"><a href="index.html#price" class="underline hover:text-white">料金の詳細（追加事業所・カスタムA/B・モジュール・優先オプションなど）</a></p>
+        <p class="text-xs text-stone/90 mt-3"><a href="index.html#price" class="underline text-clay hover:text-ink">料金の詳細（追加事業所・カスタムA/B・モジュール・優先オプションなど）</a></p>
       </div>
     </div>
   </section>
@@ -116,7 +121,7 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- ================= 導入例一覧 ================= -->
     <div class="mb-6">
-      <p class="text-slate-600">どの業務の事例を見たいですか？</p>
+      <p class="text-stone/90">どの業務の事例を見たいですか？</p>
     </div>
     <div id="all-personas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- 導入例カードはJavaScriptで動的に生成 -->
@@ -124,13 +129,13 @@
   </main>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="py-12 text-center text-xs text-slate-500 bg-white border-t border-slate-200 mt-16">
+  <footer class="py-12 text-center text-xs text-stone/75 bg-white border-t border-stone/15 mt-16">
     <p>© 2025年04月19日 嶽ノ子. All rights reserved.</p>
     <p class="mt-2 space-x-4">
-      <a href="index.html" class="text-slate-400 hover:text-slate-600 underline">ホームに戻る</a>
-      <a href="contract.html" class="text-slate-400 hover:text-slate-600 underline">ベータ版プラン契約のご説明</a>
-      <a href="privacy.html" class="text-slate-400 hover:text-slate-600 underline">プライバシーポリシー</a>
-      <a href="terms.html" class="text-slate-400 hover:text-slate-600 underline">利用規約</a>
+      <a href="index.html" class="text-stone/60 hover:text-stone/90 underline">ホームに戻る</a>
+      <a href="contract.html" class="text-stone/60 hover:text-stone/90 underline">ベータ版プラン契約のご説明</a>
+      <a href="privacy.html" class="text-stone/60 hover:text-stone/90 underline">プライバシーポリシー</a>
+      <a href="terms.html" class="text-stone/60 hover:text-stone/90 underline">利用規約</a>
     </p>
   </footer>
 

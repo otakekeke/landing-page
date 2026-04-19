@@ -6,27 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>利用規約｜嶽ノ子</title>
   <meta name="description" content="Google Apps Script版の利用規約およびDPA（個人情報取扱い契約）。Google Workspace/GASを用いる業務効率化アプリの条件を明記。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/takenoko-theme.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="src/js/tailwind-brand.js"></script>
   <style>
     html { scroll-behavior: smooth; }
   </style>
   <!-- 構造化データは必要に応じて index に準拠して追加 -->
   <meta name="robots" content="noindex" />
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-cream text-ink">
   <!-- ================= HEADER ================= -->
-  <header class="bg-white shadow sticky top-0 z-50">
+  <header class="bg-cream/95 backdrop-blur-md border-b border-stone/10 shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <div class="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-        <a href="index.html" class="hover:text-indigo-600">嶽ノ子</a>
+      <div class="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink">
+        <a href="index.html" class="hover:text-clay">嶽ノ子</a>
       </div>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#flow" class="hover:text-indigo-600">試用までの流れ</a>
-        <a href="index.html#price" class="hover:text-indigo-600">料金</a>
-        <a href="plans.html" class="hover:text-indigo-600">導入例</a>
-        <a href="index.html#faq" class="hover:text-indigo-600">FAQ</a>
-        <a href="index.html#contact" class="hover:text-indigo-600">お問い合わせ</a>
-        <a href="company.html" class="hover:text-indigo-600">会社概要</a>
+        <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
+        <a href="index.html#price" class="hover:text-clay">料金</a>
+        <a href="plans.html" class="hover:text-clay">導入例</a>
+        <a href="index.html#faq" class="hover:text-clay">FAQ</a>
+        <a href="index.html#contact" class="hover:text-clay">お問い合わせ</a>
+        <a href="company.html" class="hover:text-clay">会社概要</a>
       </nav>
       <button class="md:hidden" data-mobile-menu-button aria-label="メニューを開く" aria-expanded="false">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -34,20 +39,20 @@
         </svg>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200">
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#flow" class="block py-2 hover:text-indigo-600">試用までの流れ</a>
-        <a href="index.html#price" class="block py-2 hover:text-indigo-600">料金</a>
-        <a href="plans.html" class="block py-2 hover:text-indigo-600">導入例</a>
-        <a href="index.html#faq" class="block py-2 hover:text-indigo-600">FAQ</a>
-        <a href="index.html#contact" class="block py-2 hover:text-indigo-600">お問い合わせ</a>
-        <a href="company.html" class="block py-2 hover:text-indigo-600">会社概要</a>
+        <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
+        <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
+        <a href="plans.html" class="block py-2 hover:text-clay">導入例</a>
+        <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
+        <a href="index.html#contact" class="block py-2 hover:text-clay">お問い合わせ</a>
+        <a href="company.html" class="block py-2 hover:text-clay">会社概要</a>
       </div>
     </div>
   </header>
 
   <!-- ================= HERO ================= -->
-  <section class="bg-indigo-600 text-white">
+  <section class="bg-cream text-ink border-b border-stone/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">利用規約（ToS：Google Apps Script版）</h1>
       <p class="mt-4 text-lg">GASベースのオーダーメイド業務効率化アプリに適用</p>
@@ -59,13 +64,13 @@
     <!-- ================= 前文（GAS版） ================= -->
     <section class="mb-12">
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <p class="text-slate-700">
+        <p class="text-stone">
           本規約は、乙：<strong>嶽ノ子</strong>（以下「乙」）が提供する
           <strong>GASベースの業務効率化アプリ</strong>（以下「本サービス」）を、
           <strong>甲：お客様（法人・個人の事業者等）</strong>が利用する際の条件を定めるものです。
         </p>
-        <div class="p-4 bg-slate-50 rounded">
-          <p class="text-sm text-slate-600"><strong>最終更新日：</strong> 2025年09月14日</p>
+        <div class="p-4 bg-stone/5 rounded">
+          <p class="text-sm text-stone/90"><strong>最終更新日：</strong> 2025年09月14日</p>
         </div>
       </div>
     </section>
@@ -73,16 +78,16 @@
     <!-- ================= ToS 本体 ================= -->
     <div class="space-y-8">
       <section class="bg-white rounded-lg shadow p-6" id="tos-1">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第1条（適用）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第1条（適用）</h2>
+        <div class="text-stone space-y-3">
           <p>本規約は、甲による本サービスの利用に関し適用されます。</p>
           <p>乙は、必要に応じて本規約を改定でき、改定後の規約は乙所定の方法で告知した時点から効力を生じます。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-2">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第2条（提供内容）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第2条（提供内容）</h2>
+        <div class="text-stone space-y-3">
           <p>乙は、甲の業務効率化を目的としたオーダーメイドのGASアプリ（Webアプリ／アドオン／コンテナバインド等）を設計・実装・運用します。</p>
           <p>生成AI API等の外部サービスを組み合わせる場合があります。</p>
           <p>提供形態は、（a）甲のGoogle Workspace環境内にデプロイ、または（b）乙管理のGoogleアカウント／GCPプロジェクトを介した実行のいずれかとします（詳細は付属文書「技術仕様」参照）。</p>
@@ -90,8 +95,8 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-3">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第3条（アカウントと権限）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第3条（アカウントと権限）</h2>
+        <div class="text-stone space-y-3">
           <p>甲は本サービス利用に必要なGoogleアカウントおよびGoogle Workspace管理設定（OAuthクライアント承認、スコープ許可、ドメイン全体の委任等）を整備します。</p>
           <p>乙は<strong>最小権限（Least Privilege）</strong>原則に基づき、必要最小限のOAuthスコープのみを要求します。要求スコープは付属文書「スコープ一覧」に明記します。</p>
           <p>スーパ管理者権限が必要となる操作は、可能な限り甲側で実行します。</p>
@@ -99,8 +104,8 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-4">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第4条（料金・支払）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第4条（料金・支払）</h2>
+        <div class="text-stone space-y-3">
           <ul class="list-disc list-inside text-sm space-y-1">
             <li>月額料金：削減時間（時間/月）× 甲の申告時給 × 1/3。</li>
             <li>初月無料。削減時間が0の場合、翌月以降の料金も0円。</li>
@@ -112,8 +117,8 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-5">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第5条（SLA／サポート）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第5条（SLA／サポート）</h2>
+        <div class="text-stone space-y-3">
           <ul class="list-disc list-inside text-sm space-y-1">
             <li>標準キュー：初回回答5営業日以内、実装・反映21営業日以内。</li>
             <li>優先対応オプション（月額100,000円・税込追加）：初回回答48時間以内、実装・反映5営業日以内。</li>
@@ -123,8 +128,8 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-6">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第6条（データ・保存先）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第6条（データ・保存先）</h2>
+        <div class="text-stone space-y-3">
           <p>本サービスはGASを用い、甲のGoogleドライブ／スプレッドシート／カレンダー／Gmail等（必要スコープに限る）を甲環境内で処理することを原則とします。</p>
           <p>乙管理環境を用いる場合は、保存先（例：乙のGoogleドライブ、GCPのFirestore/Cloud Storage等）を<strong>付属文書「技術仕様」</strong>で明示します。</p>
           <p>ログは操作・エラー・処理結果のメタデータ中心で記録し、個人情報を含むログは原則収集しません（必要時は最小化・マスキング）。</p>
@@ -132,8 +137,8 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-7">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第7条（禁止事項）</h2>
-        <div class="text-slate-700">
+        <h2 class="text-xl font-bold mb-4 text-ink">第7条（禁止事項）</h2>
+        <div class="text-stone">
           <ul class="list-disc list-inside text-sm space-y-1">
             <li>法令違反、公序良俗に反する行為。</li>
             <li>不正アクセス、API/サービスの利用規約に反する利用。</li>
@@ -143,47 +148,47 @@
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-8">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第8条（知的財産権）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第8条（知的財産権）</h2>
+        <div class="text-stone space-y-3">
           <p>本サービスおよびソースコードの著作権は原則として乙に帰属します。甲は契約期間中、合意した範囲で本サービスを利用できます。</p>
           <p>別途合意により、コードの共有・譲渡・エスクローを実施可能（費用別途）。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-9">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第9条（秘密保持）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第9条（秘密保持）</h2>
+        <div class="text-stone space-y-3">
           <p>甲乙は、相手方の業務上の秘密情報を第三者に開示・漏洩しません。本条は契約終了後も<strong>3年間</strong>存続します。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-10">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第10条（保証・責任制限）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第10条（保証・責任制限）</h2>
+        <div class="text-stone space-y-3">
           <p>乙は本サービスについて、適法性・特定目的適合性を黙示的にも保証しません。</p>
           <p>乙の責任は、故意または重過失を除き、<strong>当該月の月額料金を上限</strong>とします。間接損害・逸失利益について乙は責任を負いません。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-11">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第11条（契約期間・解約）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第11条（契約期間・解約）</h2>
+        <div class="text-stone space-y-3">
           <p>契約は月単位で自動更新します。甲は毎月末までに翌月解約の意思表示をすることで解約できます。</p>
           <p>重大な規約違反がある場合、乙は催告の上で解除できます。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-12">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第12条（外部サービスの遵守）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第12条（外部サービスの遵守）</h2>
+        <div class="text-stone space-y-3">
           <p>本サービスがGoogle APIや生成AIを利用する場合、各提供者のポリシー（例：Google API Services User Data Policy 等）を遵守します。</p>
           <p>甲は自身のGoogle Workspaceポリシーおよび社内規程を遵守します。</p>
         </div>
       </section>
 
       <section class="bg-white rounded-lg shadow p-6" id="tos-13">
-        <h2 class="text-xl font-bold mb-4 text-slate-900">第13条（準拠法・合意管轄）</h2>
-        <div class="text-slate-700 space-y-3">
+        <h2 class="text-xl font-bold mb-4 text-ink">第13条（準拠法・合意管轄）</h2>
+        <div class="text-stone space-y-3">
           <p>本規約は日本法に準拠します。紛争は<strong>東京地方裁判所</strong>を第一審の専属的合意管轄裁判所とします。</p>
         </div>
       </section>
@@ -191,9 +196,9 @@
 
     <!-- ================= DPA ================= -->
     <section class="mt-16 bg-white rounded-lg shadow p-6" id="dpa">
-      <h2 class="text-2xl font-bold mb-4 text-slate-900">個人情報取扱い契約（DPA：Google Apps Script版）</h2>
-      <p class="text-slate-700 mb-4">本DPAは、甲が管理する個人情報（個人データ）を、本サービスが受託処理する場合の条件を定めます。ToSと矛盾する場合は本DPAが優先します。</p>
-      <div class="space-y-6 text-slate-700">
+      <h2 class="text-2xl font-bold mb-4 text-ink">個人情報取扱い契約（DPA：Google Apps Script版）</h2>
+      <p class="text-stone mb-4">本DPAは、甲が管理する個人情報（個人データ）を、本サービスが受託処理する場合の条件を定めます。ToSと矛盾する場合は本DPAが優先します。</p>
+      <div class="space-y-6 text-stone">
         <div>
           <h3 class="font-semibold">第1条（定義）</h3>
           <p>「個人情報」「個人データ」「保有個人データ」は個人情報保護法の定義に従い、「処理」は取得/記録/編集/保存/利用/提供/削除等を含みます。「サブプロセッサ」とは乙が再委託する処理者（例：Google LLC）。</p>
@@ -260,8 +265,8 @@
 
     <!-- ================= 付属文書（抜粋） ================= -->
     <section class="mt-16 bg-white rounded-lg shadow p-6" id="appendix">
-      <h2 class="text-2xl font-bold mb-4 text-slate-900">付属文書（GAS特化の実務付け・要点）</h2>
-      <div class="space-y-6 text-slate-700">
+      <h2 class="text-2xl font-bold mb-4 text-ink">付属文書（GAS特化の実務付け・要点）</h2>
+      <div class="space-y-6 text-stone">
         <div>
           <h3 class="font-semibold">A. 技術仕様（例）</h3>
           <ul class="list-disc list-inside text-sm space-y-1">
@@ -307,14 +312,14 @@
 
     <!-- ================= お問い合わせ ================= -->
     <section class="mt-12">
-      <div class="bg-indigo-700 text-white rounded-lg p-8">
+      <div class="bg-ink text-white rounded-lg p-8">
         <h2 class="text-2xl font-bold mb-4">お問い合わせ</h2>
         <div class="space-y-4">
-          <p class="text-indigo-100">本ページ内容や契約条件に関するお問い合わせは、下記までご連絡ください。</p>
+          <p class="text-stone/50">本ページ内容や契約条件に関するお問い合わせは、下記までご連絡ください。</p>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <h4 class="font-semibold mb-2">連絡先</h4>
-              <div class="space-y-2 text-indigo-100">
+              <div class="space-y-2 text-stone/50">
                 <p>
                   <strong>メール:</strong>
                   <a href="mailto:takenoko.ai.care@gmail.com" class="text-white hover:text-yellow-300">takenoko.ai.care@gmail.com</a>
@@ -327,8 +332,8 @@
             </div>
             <div>
               <h4 class="font-semibold mb-2">受付時間</h4>
-              <p class="text-indigo-100">平日・土曜 9:00-18:00</p>
-              <p class="text-sm text-indigo-200 mt-2">代表が直接ご対応いたします</p>
+              <p class="text-stone/50">平日・土曜 9:00-18:00</p>
+              <p class="text-sm text-stone/55 mt-2">代表が直接ご対応いたします</p>
             </div>
           </div>
         </div>
@@ -338,32 +343,32 @@
   </main>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-slate-800 text-white py-12 mt-16">
+  <footer class="bg-ink text-white py-12 mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
           <h3 class="text-xl font-bold mb-4">嶽ノ子</h3>
-          <p class="text-slate-300 text-sm">AIで介護の未来をデザインする</p>
+          <p class="text-stone/35 text-sm">AIで介護の未来をデザインする</p>
         </div>
         <div>
           <h4 class="font-semibold mb-4">リンク</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="text-slate-300 hover:text-white">ホーム</a></li>
-            <li><a href="company.html" class="text-slate-300 hover:text-white">会社概要</a></li>
-            <li><a href="privacy.html" class="text-slate-300 hover:text-white">プライバシーポリシー</a></li>
-            <li><a href="terms.html" class="text-slate-300 hover:text-white">利用規約</a></li>
+            <li><a href="index.html" class="text-stone/35 hover:text-white">ホーム</a></li>
+            <li><a href="company.html" class="text-stone/35 hover:text-white">会社概要</a></li>
+            <li><a href="privacy.html" class="text-stone/35 hover:text-white">プライバシーポリシー</a></li>
+            <li><a href="terms.html" class="text-stone/35 hover:text-white">利用規約</a></li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold mb-4">お問い合わせ</h4>
           <div class="space-y-2 text-sm">
-            <p class="text-slate-300"><a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">takenoko.ai.care@gmail.com</a></p>
-            <p class="text-slate-300"><a href="tel:07013834420" class="hover:text-white">070-1383-4420</a></p>
-            <p class="text-slate-300">平日・土曜 9:00-18:00</p>
+            <p class="text-stone/35"><a href="mailto:takenoko.ai.care@gmail.com" class="hover:text-white">takenoko.ai.care@gmail.com</a></p>
+            <p class="text-stone/35"><a href="tel:07013834420" class="hover:text-white">070-1383-4420</a></p>
+            <p class="text-stone/35">平日・土曜 9:00-18:00</p>
           </div>
         </div>
       </div>
-      <div class="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
+      <div class="border-t border-stone/25 mt-8 pt-8 text-center text-sm text-stone/60">
         © 2025 嶽ノ子. All rights reserved.
       </div>
     </div>
@@ -371,9 +376,9 @@
 
   <script src="src/js/app.js"></script>
   <!-- Sticky CTA (Mobile) -->
-  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-3 z-50">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-stone/15 p-3 z-50">
     <div class="max-w-7xl mx-auto px-2">
-      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+      <a href="index.html#contact" class="block w-full text-center px-6 py-3 bg-cream text-ink border-b border-stone/15 font-semibold rounded-lg shadow hover:bg-ink">
         無料相談する
       </a>
     </div>

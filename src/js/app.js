@@ -187,12 +187,12 @@
       const fieldId = 'reduction-hour-' + fieldCount;
       
       const fieldWrapper = document.createElement('div');
-      fieldWrapper.className = 'reduction-hour-field bg-slate-50 rounded-lg p-4 border border-slate-200';
+      fieldWrapper.className = 'reduction-hour-field bg-stone/5 rounded-lg p-4 border border-stone/15';
       fieldWrapper.dataset.fieldId = fieldId;
       
       fieldWrapper.innerHTML = `
         <div class="flex items-center justify-between mb-3">
-          <label for="${fieldId}-name" class="text-sm font-semibold text-slate-700">機能名称</label>
+          <label for="${fieldId}-name" class="text-sm font-semibold text-stone">機能名称</label>
           <button 
             type="button" 
             class="remove-field-btn px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm ${fieldCount === 1 ? 'hidden' : ''}"
@@ -207,50 +207,50 @@
           <input 
             type="text" 
             id="${fieldId}-name" 
-            class="function-name-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+            class="function-name-input w-full px-3 py-2 border border-stone/25 rounded-lg focus:outline-none focus:ring-2 focus:ring-clay focus:border-clay" 
             placeholder="例：シフト管理、在庫管理など">
         </div>
         <div class="grid md:grid-cols-2 gap-3">
           <div>
-            <label for="${fieldId}-per-task" class="block text-xs text-slate-600 mb-1">一つの作業当たりの削減時間</label>
+            <label for="${fieldId}-per-task" class="block text-xs text-stone/90 mb-1">一つの作業当たりの削減時間</label>
             <div class="flex items-center gap-2">
               <div class="flex-1">
                 <input 
                   type="number" 
                   id="${fieldId}-per-task-hours" 
-                  class="per-task-hours-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                  class="per-task-hours-input w-full px-3 py-2 border border-stone/25 rounded-lg focus:outline-none focus:ring-2 focus:ring-clay focus:border-clay" 
                   min="0" 
                   step="1"
                   placeholder="時間">
-                <label for="${fieldId}-per-task-hours" class="block text-xs text-slate-500 mt-1 text-center">時間</label>
+                <label for="${fieldId}-per-task-hours" class="block text-xs text-stone/75 mt-1 text-center">時間</label>
               </div>
               <div class="flex-1">
             <input 
               type="number" 
                   id="${fieldId}-per-task-minutes" 
-                  class="per-task-minutes-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+                  class="per-task-minutes-input w-full px-3 py-2 border border-stone/25 rounded-lg focus:outline-none focus:ring-2 focus:ring-clay focus:border-clay" 
               min="0" 
                   max="59"
                   step="1"
                   placeholder="分">
-                <label for="${fieldId}-per-task-minutes" class="block text-xs text-slate-500 mt-1 text-center">分</label>
+                <label for="${fieldId}-per-task-minutes" class="block text-xs text-stone/75 mt-1 text-center">分</label>
               </div>
             </div>
           </div>
           <div>
-            <label for="${fieldId}-per-month" class="block text-xs text-slate-600 mb-1">月当たりの回数（回）</label>
+            <label for="${fieldId}-per-month" class="block text-xs text-stone/90 mb-1">月当たりの回数（回）</label>
             <input 
               type="number" 
               id="${fieldId}-per-month" 
-              class="per-month-input w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" 
+              class="per-month-input w-full px-3 py-2 border border-stone/25 rounded-lg focus:outline-none focus:ring-2 focus:ring-clay focus:border-clay" 
               min="0" 
               step="1"
               placeholder="例：20">
           </div>
         </div>
-        <div class="mt-2 text-xs text-slate-500">
+        <div class="mt-2 text-xs text-stone/75">
           <span class="calculated-hours-label">削減時間（時間/月）: </span>
-          <span class="calculated-hours-value font-semibold text-indigo-600">0時間0分</span>
+          <span class="calculated-hours-value font-semibold text-clay">0時間0分</span>
         </div>
       `;
       
