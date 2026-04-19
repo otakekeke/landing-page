@@ -29,4 +29,4 @@
 ## 連絡先
 
 嶽ノ子
-Email: takenoko.ai.care@gmail.com
+Email: kotaro.otake@takenokonoko.com
