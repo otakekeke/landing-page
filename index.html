@@ -1323,6 +1323,165 @@
     .plan { padding: 40px 32px; }
     .biz-tags { padding: 28px; }
   }
+
+  /* ===== SIMPLE MODE (notepad view) ===== */
+  .simple-view { display: none; }
+  body.simple-mode { background: #FBF7EE; }
+  body.simple-mode .page { display: none; }
+  body.simple-mode .nav { display: none; }
+  body.simple-mode .simple-view { display: block; }
+
+  .simple-view {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 96px 32px 160px;
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    font-size: 15px;
+    line-height: 1.95;
+    color: #1A1614;
+    letter-spacing: 0.02em;
+  }
+  .simple-view h1 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .simple-view .sv-tag {
+    font-size: 13px;
+    color: #56504B;
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
+  }
+  .simple-view hr {
+    border: none;
+    border-top: 1px dashed #A89E8C;
+    margin: 24px 0;
+  }
+  .simple-view h2 {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: #1A1614;
+    margin: 40px 0 14px;
+    padding-left: 12px;
+    border-left: 3px solid #C04A3E;
+    letter-spacing: 0.06em;
+  }
+  .simple-view p { margin: 10px 0; }
+  .simple-view ul { list-style: none; padding: 0; margin: 10px 0; }
+  .simple-view li { padding: 2px 0; }
+  .simple-view li::before { content: "・"; color: #888578; margin-right: 2px; }
+  .simple-view table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14.5px; }
+  .simple-view td { padding: 6px 0; vertical-align: top; }
+  .simple-view td:first-child { width: 46%; font-weight: 500; }
+  .simple-view a {
+    color: #1A1614;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .simple-view a:hover { color: #C04A3E; }
+  .simple-view .sv-note { font-size: 12.5px; color: #56504B; }
+  .simple-view .sv-foot {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid #CFC4B0;
+    font-size: 12.5px;
+    color: #56504B;
+    line-height: 1.9;
+  }
+  .simple-view .sv-sig {
+    margin-top: 10px;
+    font-family: var(--serif);
+    font-size: 13.5px;
+    color: #888578;
+    letter-spacing: 0.08em;
+  }
+
+  /* Toggle button */
+  .mode-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    background: rgba(26, 22, 20, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 999px;
+    box-shadow: 0 10px 32px rgba(26, 22, 20, 0.28);
+    border: 1px solid rgba(245, 239, 227, 0.15);
+    cursor: pointer;
+    user-select: none;
+  }
+  .mode-toggle::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: #F5EFE3;
+    border-radius: 999px;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 1;
+  }
+  body.simple-mode .mode-toggle::before { transform: translateX(100%); }
+  .mode-toggle-opt {
+    position: relative;
+    z-index: 2;
+    padding: 10px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: rgba(245, 239, 227, 0.55);
+    border-radius: 999px;
+    transition: color 0.45s;
+    pointer-events: none;
+  }
+  .mode-toggle-opt.is-on { color: #1A1614; }
+
+  /* Ink-wash transition overlay */
+  .mode-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: #1A1614;
+    pointer-events: none;
+    clip-path: circle(0% at var(--x, 100%) var(--y, 100%));
+    transition: clip-path 0.75s cubic-bezier(0.83, 0, 0.17, 1);
+  }
+  .mode-overlay.active {
+    clip-path: circle(160% at var(--x, 100%) var(--y, 100%));
+  }
+  .mode-overlay::after {
+    content: "嶽";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
+    font-family: var(--serif);
+    font-size: clamp(120px, 18vw, 240px);
+    color: rgba(245, 239, 227, 0.08);
+    opacity: 0;
+    transition: opacity 0.35s, transform 0.75s cubic-bezier(0.83, 0, 0.17, 1);
+    pointer-events: none;
+  }
+  .mode-overlay.active::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  @media (max-width: 700px) {
+    .simple-view { padding: 72px 22px 140px; font-size: 14.5px; }
+    .mode-toggle { right: 12px; bottom: 12px; }
+    .mode-toggle-opt { padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em; }
+  }
 </style>
 </head>
 <body>
@@ -2486,6 +2645,73 @@
 
 </div>
 
+<!-- ===== SIMPLE VIEW (notepad) ===== -->
+<section class="simple-view" aria-hidden="true">
+  <h1>嶽ノ子</h1>
+  <div class="sv-tag">介護の業務を丸ごとアプリに。</div>
+
+  <hr>
+
+  <h2>サービス</h2>
+  <p>現場の業務フローをそのままアプリ化します。シフト・記録・報告・在庫・送迎などの紙／Excel 業務を、施設ごとの専用アプリに置き換えます。</p>
+  <ul>
+    <li>現場のやり方を変えない（学習コストを最小に）</li>
+    <li>小さく始めて、大きく育てる</li>
+    <li>Google Workspace 基盤で追加サーバ費ゼロ</li>
+    <li>料金は事前合意のみ。契約後に膨らまない</li>
+    <li>試用期間は完全無料</li>
+  </ul>
+
+  <h2>導入の流れ</h2>
+  <table>
+    <tr><td>01. 要件定義</td><td>30〜45 分</td></tr>
+    <tr><td>02. プロトタイプ作成</td><td>1〜2 週間</td></tr>
+    <tr><td>03. 実運用で試用</td><td>1 か月</td></tr>
+  </table>
+  <p>試用期間中は一切費用がかかりません。合わなければ、そのまま終了できます。</p>
+
+  <h2>料金</h2>
+  <table>
+    <tr><td>PLAN 01 単一ツール</td><td>初期 ¥100,000 ／ 月額 ¥20,000〜30,000</td></tr>
+    <tr><td>PLAN 02 統合アプリ</td><td>初期 ¥800,000 ／ 月額 ¥88,000</td></tr>
+  </table>
+  <p class="sv-note">※ すべて税込。他施設展開・機能追加・データ移行の詳細は別途ご案内します。</p>
+
+  <h2>導入実績</h2>
+  <p>通所リハビリテーション（スタッフ20名／1日あたり30名前後）</p>
+  <ul>
+    <li>転記作業 −15 時間／月</li>
+    <li>確認の電話・口頭確認 −70%</li>
+    <li>記録の検索・参照時間 −50%</li>
+    <li>報告書作成時間 −8 時間／月</li>
+  </ul>
+
+  <h2>連絡先</h2>
+  <table>
+    <tr><td>電話</td><td><a href="tel:07013834420">070-1383-4420</a>（平日・土 9:00〜18:00）</td></tr>
+    <tr><td>メール</td><td><a href="mailto:kotaro.otake@takenokonoko.com">kotaro.otake@takenokonoko.com</a></td></tr>
+  </table>
+  <p class="sv-note">通常 2 営業日以内に返信します。</p>
+
+  <div class="sv-foot">
+    嶽ノ子（たけのこ）／代表：大嶽 耕太郎<br>
+    神奈川県相模原市中央区千代田 7-10-7<br>
+    設立：2025 年 4 月 19 日<br>
+    <br>
+    <a href="company.html">会社概要</a>　／　<a href="plans.html">導入例</a>　／　<a href="privacy.html">プライバシー</a>　／　<a href="terms.html">利用規約</a>
+    <div class="sv-sig">── 社会を回す人の、大切な人を守る。</div>
+  </div>
+</section>
+
+<!-- ===== MODE TOGGLE ===== -->
+<button class="mode-toggle" id="modeToggle" type="button" aria-label="表示モード切替">
+  <span class="mode-toggle-opt" data-mode="rich">詳細</span>
+  <span class="mode-toggle-opt" data-mode="simple">シンプル</span>
+</button>
+
+<!-- Ink-wash transition overlay -->
+<div class="mode-overlay" id="modeOverlay" aria-hidden="true"></div>
+
 <script>
   document.documentElement.classList.add('js-ready');
   const nav = document.getElementById('nav');
@@ -2507,6 +2733,54 @@
   setTimeout(() => reveals.forEach(el => el.classList.add('in')), 1200);
   function toggleDetail(el) { el.parentElement.classList.toggle('open'); }
   function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+  // ===== Simple / Rich mode toggle =====
+  (function() {
+    const toggle = document.getElementById('modeToggle');
+    const overlay = document.getElementById('modeOverlay');
+    const simpleView = document.querySelector('.simple-view');
+    const opts = toggle.querySelectorAll('.mode-toggle-opt');
+    const body = document.body;
+    const STORAGE_KEY = 'takenokonoko.viewMode';
+
+    function syncState() {
+      const isSimple = body.classList.contains('simple-mode');
+      opts.forEach(o => {
+        o.classList.toggle('is-on', (o.dataset.mode === 'simple') === isSimple);
+      });
+      if (simpleView) simpleView.setAttribute('aria-hidden', String(!isSimple));
+    }
+
+    if (localStorage.getItem(STORAGE_KEY) === 'simple') {
+      body.classList.add('simple-mode');
+    }
+    syncState();
+
+    let animating = false;
+    toggle.addEventListener('click', () => {
+      if (animating) return;
+      animating = true;
+
+      const rect = toggle.getBoundingClientRect();
+      overlay.style.setProperty('--x', (rect.left + rect.width / 2) + 'px');
+      overlay.style.setProperty('--y', (rect.top + rect.height / 2) + 'px');
+
+      overlay.classList.add('active');
+
+      setTimeout(() => {
+        body.classList.toggle('simple-mode');
+        localStorage.setItem(STORAGE_KEY,
+          body.classList.contains('simple-mode') ? 'simple' : 'rich');
+        syncState();
+        window.scrollTo(0, 0);
+        // Ensure reveal-animated tiles are visible when switching back to rich
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+        requestAnimationFrame(() => overlay.classList.remove('active'));
+      }, 680);
+
+      setTimeout(() => { animating = false; }, 1500);
+    });
+  })();
 </script>
 <script src="interactive.js"></script>
 
