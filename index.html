@@ -1185,6 +1185,87 @@
     opacity: 0.5;
     text-align: center;
     margin-top: 16px;
+    transition: color 0.3s;
+  }
+  .form-note.is-success { color: var(--shu-light); opacity: 0.95; }
+  .form-note.is-error { color: var(--shu-light); opacity: 0.95; }
+
+  .form-row .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+  }
+  .form-row .form-label .req { color: var(--shu-light); margin-left: 4px; }
+
+  .form-radios, .form-checks {
+    display: grid;
+    gap: 8px;
+  }
+  .radio-opt, .check-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(245, 239, 227, 0.04);
+    border: 1px solid rgba(245, 239, 227, 0.12);
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    margin: 0;
+  }
+  .radio-opt:hover, .check-opt:hover {
+    background: rgba(245, 239, 227, 0.08);
+    border-color: rgba(245, 239, 227, 0.22);
+  }
+  .radio-opt input, .check-opt input {
+    accent-color: var(--shu);
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .radio-opt:has(input:checked), .check-opt:has(input:checked) {
+    background: rgba(192, 74, 62, 0.14);
+    border-color: var(--shu);
+  }
+
+  .consent-opt {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(245, 239, 227, 0.04);
+    border: 1px solid rgba(245, 239, 227, 0.12);
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 0 !important;
+    opacity: 1 !important;
+    letter-spacing: 0 !important;
+  }
+  .consent-opt:has(input:checked) {
+    background: rgba(192, 74, 62, 0.14);
+    border-color: var(--shu);
+  }
+  .consent-opt input {
+    accent-color: var(--shu);
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .consent-opt a {
+    color: var(--shu-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 
   /* ===== FINAL CTA ===== */
@@ -2561,25 +2642,52 @@
     </div>
     <div class="contact-r">
       <div class="form-eye">— INQUIRY FORM</div>
-      <form onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。2営業日以内にご連絡いたします。');">
+      <form id="contactForm" novalidate>
         <div class="form-row">
-          <label>事業所名 <span class="req">*</span></label>
-          <input type="text" required placeholder="例：〇〇デイサービス">
+          <label>お名前 <span class="req">*</span></label>
+          <input type="text" name="entry.1171959256" required placeholder="山田 太郎">
         </div>
         <div class="form-row">
-          <label>ご担当者名 <span class="req">*</span></label>
-          <input type="text" required placeholder="山田 太郎">
+          <label>会社名・団体名 <span class="req">*</span></label>
+          <input type="text" name="entry.1217538201" required placeholder="例：〇〇デイサービス（個人の場合は「なし」）">
         </div>
         <div class="form-row">
           <label>メールアドレス <span class="req">*</span></label>
-          <input type="email" required placeholder="example@email.com">
+          <input type="email" name="entry.1270768558" required placeholder="example@email.com">
         </div>
         <div class="form-row">
-          <label>ご質問・ご要望（任意）</label>
-          <textarea placeholder="現在の業務で困っていることなど"></textarea>
+          <label>電話番号（任意）</label>
+          <input type="tel" name="entry.205317164" placeholder="日中ご連絡可能な番号">
+        </div>
+        <div class="form-row">
+          <div class="form-label">お問い合わせの種類 <span class="req">*</span></div>
+          <div class="form-radios">
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="サービス/製品に関するご質問" required> サービス・製品に関するご質問</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="採用に関するお問い合わせ"> 採用に関するお問い合わせ</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="取材・プレスリリースに関するお問い合わせ"> 取材・プレスリリース</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="パートナーシップ/提携に関するご提案"> パートナーシップ・提携のご提案</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="その他"> その他</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>お問い合わせの詳細（任意）</label>
+          <textarea name="entry.639342087" placeholder="現在の業務で困っていることなど、具体的にご記入ください"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-label">ご希望の返信方法（任意・複数選択可）</div>
+          <div class="form-checks">
+            <label class="check-opt"><input type="checkbox" name="entry.558981454" value="メール"> メール</label>
+            <label class="check-opt"><input type="checkbox" name="entry.558981454" value="電話"> 電話</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="consent-opt">
+            <input type="checkbox" name="entry.346956938" value="弊社の個人情報保護方針に同意します。" required>
+            <span><a href="privacy.html" target="_blank" rel="noopener">個人情報保護方針</a> に同意します <span class="req">*</span></span>
+          </label>
         </div>
         <button type="submit" class="form-submit">送信する <span>→</span></button>
-        <p class="form-note">通常2営業日以内に、嶽ノ子の担当よりご連絡します。</p>
+        <p class="form-note" id="formNote">通常2営業日以内に、嶽ノ子の担当よりご連絡します。</p>
       </form>
     </div>
   </div>
@@ -2779,6 +2887,55 @@
       }, 680);
 
       setTimeout(() => { animating = false; }, 1500);
+    });
+  })();
+
+  // ===== Google Form submission =====
+  (function() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const note = document.getElementById('formNote');
+    const btn = form.querySelector('.form-submit');
+    const endpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSd-LlnXgx4y0QpEFz2-a6uvBJIjHotiEfIqYujjVLXKcg6G_w/formResponse';
+    const originalBtnHTML = btn.innerHTML;
+    const originalNoteHTML = note.innerHTML;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      btn.disabled = true;
+      btn.innerHTML = '送信中…';
+      note.classList.remove('is-success', 'is-error');
+
+      const body = new URLSearchParams();
+      new FormData(form).forEach((v, k) => body.append(k, v));
+
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: body.toString()
+        });
+        form.reset();
+        btn.innerHTML = '✓ 送信完了';
+        note.textContent = 'お問い合わせありがとうございました。2営業日以内にご連絡いたします。';
+        note.classList.add('is-success');
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.innerHTML = originalBtnHTML;
+          note.innerHTML = originalNoteHTML;
+          note.classList.remove('is-success');
+        }, 8000);
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHTML;
+        note.textContent = '送信に失敗しました。お手数ですが、直接お電話またはメールでご連絡ください。';
+        note.classList.add('is-error');
+      }
     });
   })();
 </script>
