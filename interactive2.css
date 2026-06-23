@@ -921,7 +921,8 @@
   position: sticky;
   top: 80px;
   height: 100vh;
-  max-height: 900px;
+  min-height: 720px;
+  max-height: 1100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
@@ -960,23 +961,23 @@
 }
 .ix-flow-step {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 20px;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
   align-items: start;
-  padding: 20px 0;
+  padding: 10px 0;
   opacity: 0.35;
   transition: opacity 0.5s ease;
 }
 .ix-flow-step.active { opacity: 1; }
 .ix-flow-bullet {
-  width: 48px; height: 48px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--kinari);
   border: 2px solid var(--nezu-surface);
   display: grid;
   place-items: center;
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 16px;
   color: var(--sumi);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 2;
@@ -990,15 +991,15 @@
 }
 .ix-flow-step h3 {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--sumi);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .ix-flow-step p {
-  font-size: 14px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.65;
   color: var(--sumi-2);
 }
 .ix-flow-step .dur {

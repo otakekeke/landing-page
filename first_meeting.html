@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初回アポイントのご案内｜嶽ノ子</title>
-    <meta name="description" content="介護事業所向けオーダーメイド業務アプリの、初回打合せから導入までの流れをカレンダー型UIでわかりやすく説明します（補助金あり／なし両方）。">
+    <title>初回相談のご案内｜嶽ノ子</title>
+    <meta name="description" content="介護事業所向けオーダーメイド業務アプリの、初回相談から本開発・運用支援までの流れを4工程でわかりやすくご案内します（補助金あり／なしの両コース）。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
                 嶽ノ子
             </a>
             <nav class="hidden md:flex gap-6 text-sm font-medium">
-                <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
+                <a href="index.html#flow" class="hover:text-clay">導入の流れ</a>
                 <a href="index.html#price" class="hover:text-clay">料金</a>
                 <a href="plans.html" class="hover:text-clay">導入例</a>
                 <a href="index.html#faq" class="hover:text-clay">FAQ</a>
@@ -44,7 +44,7 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
             <div class="px-4 py-2 space-y-2">
-                <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
+                <a href="index.html#flow" class="block py-2 hover:text-clay">導入の流れ</a>
                 <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
                 <a href="plans.html" class="block py-2 hover:text-clay">導入例</a>
                 <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
@@ -57,18 +57,25 @@
     <!-- Hero / Intro -->
     <section class="accent-gradient">
         <div class="max-w-5xl mx-auto px-4 py-10">
-            <div class="grid md:grid-cols-2 gap-6 items-center">
+            <p class="text-xs text-stone/75 mb-2 font-display">嶽ノ子のスタンス</p>
+            <h1 class="font-display text-2xl md:text-4xl font-bold text-ink leading-snug mb-2">
+                介護現場に、要件定義をさせない。
+            </h1>
+            <p class="text-stone/90 text-sm md:text-base mb-6">
+                紙・Excel・手作業を読み解き、現場に合うアプリを作ります。仕様書を書いていただく必要はありません。
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 items-start">
                 <div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-ink leading-snug">
-                        カレンダーを見ながら、<br class="hidden md:block">導入までの全体像を共有します。
+                    <h2 class="text-xl md:text-2xl font-bold text-ink leading-snug">
+                        本日は、<br class="hidden md:block">導入までの全体像を共有させてください。
                     </h2>
                     <p class="mt-3 text-stone text-sm md:text-base">
-                        このページは、初回打合せからプロトタイプ作成、補助金申請〜採択、<br class="hidden md:block">
-                        そして本番導入までの流れを、<span class="font-semibold">カレンダー形式</span>でご説明するためのページです。
+                        本ページは、初回相談から業務整理・試作・本開発・運用支援までの<span class="font-semibold">4工程</span>を、<br class="hidden md:block">
+                        補助金を使う場合・使わない場合の両方で、カレンダー形式でご説明するためのページです。
                     </p>
                     <p class="mt-2 text-stone/90 text-xs">
-                        ※実際にお会いしたとき、この画面を一緒に見ながらご説明します。<br>
-                        ※本日その場でご契約いただくことはありません。
+                        ※実際にお会いした際、この画面を一緒に見ながらご案内します。<br>
+                        ※本日その場でご契約いただくことはありません。初回相談は30〜45分・無料です。
                     </p>
                 </div>
                 <div class="bg-white rounded-xl shadow p-5 text-sm">
@@ -76,11 +83,57 @@
                         <i class="fas fa-diagram-project text-clay mr-2"></i>本日の流れ
                     </h3>
                     <ul class="list-disc pl-5 space-y-2 text-stone">
-                        <li>現場のお困りごと・やりたいことをヒアリング</li>
-                        <li>「補助金あり／なし」2つの進め方をご説明</li>
-                        <li>おおよそのスケジュールと料金レンジを共有</li>
+                        <li>困りごと・やりたいことの確認</li>
+                        <li>紙・Excel・既存システムを少し見せていただく</li>
+                        <li>「補助金あり／なし」の進め方と料金感のご案内</li>
+                        <li>業務整理（PHASE 01）に進むかどうかのご相談</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4工程の全体図 -->
+    <section class="py-8">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-xl md:text-2xl font-bold text-ink mb-2">嶽ノ子の進め方（4工程）</h2>
+            <p class="text-stone/90 text-sm mb-4">
+                いきなり本契約ではなく、段階的に進めながら「この先に進むか」を都度ご判断いただける形にしています。
+            </p>
+            <div class="grid md:grid-cols-5 gap-3 text-sm">
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-clay">
+                    <p class="text-[11px] text-stone/75">PHASE 00</p>
+                    <h3 class="font-semibold text-ink">初回相談</h3>
+                    <p class="text-clay font-bold mt-1">無料</p>
+                    <p class="text-[11px] text-stone/75">30〜45分</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-emerald-500">
+                    <p class="text-[11px] text-stone/75">PHASE 01</p>
+                    <h3 class="font-semibold text-ink">現場理解・業務整理</h3>
+                    <p class="text-ink font-bold mt-1">10〜30万円</p>
+                    <p class="text-[11px] text-stone/75">1〜2週間</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+                    <p class="text-[11px] text-stone/75">PHASE 02</p>
+                    <h3 class="font-semibold text-ink">試作・設計</h3>
+                    <p class="text-ink font-bold mt-1">20〜50万円</p>
+                    <p class="text-[11px] text-stone/75">2〜4週間</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-amber-500">
+                    <p class="text-[11px] text-stone/75">PHASE 03</p>
+                    <h3 class="font-semibold text-ink">本開発</h3>
+                    <p class="text-ink font-bold mt-1">50〜300万円</p>
+                    <p class="text-[11px] text-stone/75">1〜3か月</p>
+                </div>
+                <div class="bg-white rounded-lg shadow p-4 border-l-4 border-purple-500">
+                    <p class="text-[11px] text-stone/75">PHASE 04</p>
+                    <h3 class="font-semibold text-ink">運用支援・保守</h3>
+                    <p class="text-ink font-bold mt-1">月 3〜15万円</p>
+                    <p class="text-[11px] text-stone/75">本番稼働月から</p>
+                </div>
+            </div>
+            <div class="mt-4 bg-white rounded-lg p-4 text-sm text-stone border border-stone/15">
+                <p>各工程の終わりに「次に進むかどうか」をご判断いただけます。<strong>業務整理・試作の結果、本開発に進まないというご判断も可能です。</strong>無理に契約を迫ることはありません。代表が直接ご対応します。すべて税込価格です。</p>
             </div>
         </div>
     </section>
@@ -88,6 +141,7 @@
     <!-- Tabs -->
     <section class="py-4">
         <div class="max-w-5xl mx-auto px-4">
+            <p class="text-sm text-stone/90 mb-2">補助金を使うかどうかで、進め方に少し違いがあります。両方ご覧ください。</p>
             <div class="inline-flex rounded-xl bg-stone/12 p-1 text-sm">
                 <button id="tab-subsidy"
                         class="px-4 py-2 rounded-lg font-semibold tab-active shadow-sm flex items-center gap-2"
@@ -112,8 +166,8 @@
                     補助金を使って導入する場合のカレンダー例
                 </h2>
                 <p class="text-stone/90 text-sm mb-4">
-                    例として、<span class="font-mono">4/1(月)</span>に初回打合せ（第1回）をした場合のイメージです。<br class="hidden md:block">
-                    実際の日付は、施設さまのご予定と補助金の公募スケジュールに合わせて調整します。
+                    例として、<span class="font-mono">4/1(月)</span>に初回相談（PHASE 00）を行った場合のイメージです。<br class="hidden md:block">
+                    補助金の公募スケジュールに合わせて、PHASE 01／02 のあいだに申請対応が入ります。
                 </p>
 
                 <div class="grid md:grid-cols-3 gap-6">
@@ -131,7 +185,7 @@
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">1</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    第1回 初回打合せ
+                                    PHASE 00 初回相談
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -153,11 +207,11 @@
                                 <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
-                            <!-- 2週目 (4/8〜) 〜 第1回→第2回の期間 -->
+                            <!-- 2週目 (4/8〜) PHASE 01 業務整理 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    課題の洗い出し
+                                    PHASE 01 業務整理
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -179,15 +233,18 @@
                                 <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
-                            <!-- 3週目 (4/15〜) 1回目 -->
+                            <!-- 3週目 (4/15〜) 第2回 業務整理結果報告 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    1回目 プロトタイプ
+                                    第2回 業務整理結果
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">16</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                                    PHASE 02 試作開始
+                                </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">17</span>
@@ -205,11 +262,11 @@
                                 <span class="text-[10px] text-stone/75 block">21</span>
                             </div>
 
-                            <!-- 4週目 (4/22〜) 2回目 -->
+                            <!-- 4週目 (4/22〜) 補助金申請準備 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">22</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    2回目 仕様＆補助金
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                                    補助金申請準備
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -234,8 +291,8 @@
                             <!-- 5週目 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">29</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    申請内容の最終確認
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                                    申請書最終確認
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -258,7 +315,7 @@
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">1</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
-                                    申請書作成
+                                    申請書提出
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -280,11 +337,11 @@
                                 <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
-                            <!-- 2週目 -->
+                            <!-- 2週目 第3回 試作品確認 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">8</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
-                                    申請提出目安
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
+                                    第3回 試作確認
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -306,12 +363,11 @@
                                 <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
-                            <!-- 以降は「プロトタイプ利用＋待ち」 -->
-                            <!-- 3週目 -->
+                            <!-- 3週目 試作活用＋採択待ち -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    プロトタイプ利用
+                                    試作品で運用試行
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -337,7 +393,7 @@
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">22</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    フィードバック
+                                    現場フィードバック
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -376,7 +432,7 @@
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="font-semibold text-ink">6月（例）</h3>
-                            <span class="text-xs text-stone/75">採択〜本番構築</span>
+                            <span class="text-xs text-stone/75">採択〜本開発</span>
                         </div>
                         <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
@@ -408,7 +464,7 @@
                                 <span class="text-[10px] text-stone/75 block">7</span>
                             </div>
 
-                            <!-- 2週目 -->
+                            <!-- 2週目 第4回 契約 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">8</span>
                             </div>
@@ -423,8 +479,8 @@
                             </div>
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">12</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    契約・Stripe登録
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
+                                    第4回 契約・Stripe
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -434,11 +490,11 @@
                                 <span class="text-[10px] text-stone/75 block">14</span>
                             </div>
 
-                            <!-- 3週目以降：本番構築 -->
+                            <!-- 3週目以降：PHASE 03 本開発 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="text-[10px] text-stone/75 block">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
-                                    本番構築開始
+                                    PHASE 03 本開発開始
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left">
@@ -466,19 +522,22 @@
                 <!-- 凡例 -->
                 <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> 打合せ（0〜2回目）
+                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> ミーティング（第1〜4回）
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> PHASE 01 業務整理／試作運用
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-blue-100 inline-block border border-blue-300"></span> PHASE 02 試作・設計
                     </span>
                     <span class="inline-flex items-center gap-2">
                         <span class="w-3 h-3 rounded bg-amber-200 inline-block border border-amber-300"></span> 補助金の準備・申請
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> プロトタイプ利用・フィードバック
-                    </span>
-                    <span class="inline-flex items-center gap-2">
                         <span class="w-3 h-3 rounded bg-purple-600 inline-block"></span> 採択
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> 本番構築
+                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> PHASE 03 本開発
                     </span>
                 </div>
             </div>
@@ -487,118 +546,121 @@
         <!-- Interval details (補助金あり) -->
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
-                <!-- 0〜1 -->
+                <!-- PHASE 00→01 -->
                 <div class="bg-white rounded-xl shadow p-5 border-l-4 border-clay">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">第1回→第2回</div>
-                            <h3 class="font-semibold text-ink">第1回〜第2回（約2週間）</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 00→01</div>
+                            <h3 class="font-semibold text-ink">初回相談〜業務整理開始（約1〜2週間）</h3>
                         </div>
-                        <span class="text-xs text-stone/75">初回打合せ〜プロトタイプ作成</span>
+                        <span class="text-xs text-stone/75">業務整理（有償）の見積をお出しします</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>初回打合せの内容を踏まえて、<strong>「他にも困っていること」</strong>があれば考えておいていただく</li>
+                                <li>初回相談を踏まえて、<strong>「他にも困っていること」「補助金で実現したいこと」</strong>のイメージを社内で軽くすり合わせ</li>
+                                <li>当日見せていただいた紙・Excel・既存システムの情報の追加共有（任意）</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>ヒアリング内容を整理し、<strong>補助金が使えそうか判断</strong></li>
-                                <li>次回お見せするための<strong>プロトタイプを作成</strong></li>
+                                <li>初回相談の内容を整理し、<strong>業務整理（PHASE 01）のお見積書</strong>を作成</li>
+                                <li>補助金を活用する場合の候補と、想定スケジュールを下調べ</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>ここまでは費用は一切かかりません。</p>
+                            <p><strong>費用：</strong>PHASE 00 初回相談は無料です。PHASE 01 業務整理は10〜30万円（税込・期間1〜2週間）。お見積りをご覧いただいてから、進むかご判断いただけます。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 1〜2 -->
+                <!-- PHASE 01→02＋補助金準備 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 01→02</div>
+                            <h3 class="font-semibold text-ink">業務整理〜試作・設計開始＋補助金準備（約2〜3週間）</h3>
+                        </div>
+                        <span class="text-xs text-stone/75">第2回ミーティング・試作開始・補助金申請の準備</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
+                                <li>第2回ミーティングで業務整理結果の<strong>内容確認</strong>（現場とズレている部分の指摘）</li>
+                                <li>補助金申請に必要な書類・情報のご準備</li>
+                                <li>申請書ドラフトのご確認</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
+                                <li>業務整理メモ・アプリ化方針提案書のご報告</li>
+                                <li>試作・設計（PHASE 02）のお見積書をご提示</li>
+                                <li>専門家と連携して、<strong>補助金申請書の作成サポート</strong></li>
+                                <li>試作品の作成開始</li>
+                            </ul>
+                        </div>
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
+                            <p><strong>費用：</strong>PHASE 01 完了報告のあと、PHASE 02 試作・設計（20〜50万円・税込／2〜4週間）に進むかご判断いただけます。補助金申請に関わる業務の費用については事前に必ずご説明します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 02→採択待ち -->
                 <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
-                            <h3 class="font-semibold text-ink">1回目〜2回目（約1週間）</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 02→採択</div>
+                            <h3 class="font-semibold text-ink">試作・設計〜採択待ち</h3>
                         </div>
-                        <span class="text-xs text-stone/75">プロトタイプ確認＆補助金ヒアリング</span>
+                        <span class="text-xs text-stone/75">試作品で運用試行＆採択結果待ち</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li><strong>補助金補助アプリ（ヒアリングフォーム）</strong>への回答</li>
-                                <li>プロトタイプを見て感じたこと・直してほしいことのメモ</li>
+                                <li>第3回ミーティングで試作品の<strong>画面・サンプル出力・処理ルール</strong>を一緒にご確認</li>
+                                <li>試作品を実際の業務で軽く触っていただき、現場の感覚でフィードバック</li>
+                                <li>採択後の連絡受領・契約準備</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>プロトタイプの<strong>指摘点を修正</strong></li>
-                                <li>補助金補助アプリの内容をもとに、どの補助金が合うか<strong>候補を絞り込み</strong></li>
-                                <li><strong>申請書作成補助</strong></li>
+                                <li>フィードバックを反映した「開発する内容の確定書」の作成</li>
+                                <li>本開発（PHASE 03）と運用支援・保守（PHASE 04）の確定お見積り</li>
+                                <li>採択後の手続きフォロー</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2〜n -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→n</div>
-                            <h3 class="font-semibold text-ink">2回目〜採択まで（補助金採択から実行までの間）</h3>
-                        </div>
-                        <span class="text-xs text-stone/75">プロトタイプ運用＆申請のブラッシュアップ</span>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>プロトタイプを実際に触っていただき、<strong>現場の感覚でフィードバック</strong></li>
-                                <li>補助金申請に必要な書類・情報をご準備いただく</li>
-                                <li><strong>申請書作成と提出</strong></li>
-                            </ul>
-                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>フィードバックを元に、プロトタイプの<strong>改良</strong></li>
-                                <li>専門家と連携しながら、<strong>補助金申請書の作成・ブラッシュアップ</strong></li>
-                                <li><strong>申請書作成補助</strong></li>
-                            </ul>
-                        </div>
-                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>申請の関わり方や開発の進め方によって、ここから費用が発生する場合があります。事前に必ずご説明のうえ進めます。</p>
+                            <p><strong>費用：</strong>PHASE 02（20〜50万円・税込）まで進めた段階で、本開発に進まないというご判断も可能です。試作品をご覧になってからの判断で構いません。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 採択後 -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">採択後</div>
-                            <h3 class="font-semibold text-ink">採択後｜契約・本番環境構築・納品</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">採択後</div>
+                            <h3 class="font-semibold text-ink">採択後｜契約・本開発・本番稼働</h3>
                         </div>
-                        <span class="text-xs text-stone/75">本番構築フェーズ</span>
+                        <span class="text-xs text-stone/75">PHASE 03 本開発（1〜3か月）</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li><strong>オンライン契約書</strong>への署名</li>
-                                <li><strong>Stripe</strong>への支払い情報登録</li>
-                                <li>本番導入のタイミング・対象職種の確認</li>
+                                <li>第4回ミーティングで<strong>電子署名</strong>の完了</li>
+                                <li><strong>Stripe</strong>での支払い情報登録</li>
+                                <li>本番稼働の事業所・対象職種の最終確認</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>決定した仕様に基づく<strong>本番環境の構築</strong></li>
-                                <li>必要なデータのセットアップ・テスト</li>
-                                <li>本番稼働後のフォロー・改善提案</li>
+                                <li>確定した内容に基づく<strong>本開発・テスト・本番環境構築</strong></li>
+                                <li>必要なデータのセットアップ・移行</li>
+                                <li>本番稼働後のフォロー・軽微改善（PHASE 04）</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>料金：</strong>単一業務補助ツールまたは業務横断・運用管理アプリのいずれかの契約単位で、申請前に合意した内容どおりで進めます（金額は<a href="index.html#price" class="text-clay underline">料金体系</a>に準拠）。</p>
+                            <p><strong>料金：</strong>PHASE 03 本開発 50〜300万円（税込）／PHASE 04 運用支援・保守 月3〜15万円（税込）。確定金額は第3回までに明示し、契約書に記載した内容どおりで進めます。</p>
                         </div>
                     </div>
                 </div>
@@ -615,8 +677,8 @@
                     補助金を使わず導入する場合のカレンダー例
                 </h2>
                 <p class="text-stone/90 text-sm mb-4">
-                    例として、<span class="font-mono">4/1(月)</span>に初回打合せ（第1回）をした場合、<br class="hidden md:block">
-                    1〜2か月程度で本番稼働まで進めるイメージです。
+                    例として、<span class="font-mono">4/1(月)</span>に初回相談（PHASE 00）を行った場合、<br class="hidden md:block">
+                    2〜3か月程度で本番稼働まで進めるイメージです。
                 </p>
 
                 <div class="grid md:grid-cols-2 gap-6">
@@ -634,7 +696,7 @@
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">1</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    第1回 初回打合せ
+                                    PHASE 00 初回相談
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">2</span></div>
@@ -644,11 +706,11 @@
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">6</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">7</span></div>
 
-                            <!-- 2週目：第1回→第2回 -->
+                            <!-- 2週目：PHASE 01 業務整理 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">8</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    課題の洗い出し
+                                    PHASE 01 業務整理
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">9</span></div>
@@ -658,25 +720,30 @@
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">13</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">14</span></div>
 
-                            <!-- 3週目：1回目 -->
+                            <!-- 3週目：第2回 業務整理結果 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">15</span>
                                 <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    1回目 プロトタイプ
+                                    第2回 業務整理結果
                                 </span>
                             </div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">16</span></div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-stone/75">16</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                                    PHASE 02 試作開始
+                                </span>
+                            </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">17</span></div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">18</span></div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">19</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">20</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">21</span></div>
 
-                            <!-- 4週目：2回目（仕様・料金確定） -->
+                            <!-- 4週目：試作中 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">22</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
-                                    2回目 仕様・料金
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                                    試作・設計中
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">23</span></div>
@@ -686,11 +753,11 @@
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">27</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">28</span></div>
 
-                            <!-- 5週目：3回目 契約 -->
+                            <!-- 5週目：第3回 試作確認 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">29</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
-                                    3回目 契約・Stripe
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
+                                    第3回 試作確認
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">30</span></div>
@@ -701,31 +768,36 @@
                     <div class="bg-white rounded-xl shadow p-4">
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="font-semibold text-ink">5月（例）</h3>
-                            <span class="text-xs text-stone/75">本番構築〜導入</span>
+                            <span class="text-xs text-stone/75">契約〜本開発〜本番稼働</span>
                         </div>
                         <div class="grid grid-cols-7 text-center text-[11px] font-semibold text-stone/75 mb-1">
                             <div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div><div>日</div>
                         </div>
                         <div class="grid grid-cols-7 gap-1 text-xs">
-                            <!-- 1週目：本番構築開始 -->
+                            <!-- 1週目：第4回 契約 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">1</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
-                                    本番構築開始
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-cream text-ink border-b border-stone/15">
+                                    第4回 契約・Stripe
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">2</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">3</span></div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-stone/75">3</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
+                                    PHASE 03 本開発開始
+                                </span>
+                            </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">4</span></div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">5</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">6</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">7</span></div>
 
-                            <!-- 以降：構築＋テスト〜本番稼働 -->
+                            <!-- 2週目：本開発中 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">8</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    テスト・データ移行
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-stone/5 text-clay border border-clay/20">
+                                    本開発中
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">9</span></div>
@@ -735,16 +807,22 @@
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">13</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">14</span></div>
 
+                            <!-- 3週目：テスト→本番稼働 -->
                             <div class="border rounded p-1.5 text-left">
                                 <span class="block text-[10px] text-stone/75">15</span>
-                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500 text-white">
-                                    本番稼働スタート
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    テスト・データ移行
                                 </span>
                             </div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">16</span></div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">17</span></div>
                             <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">18</span></div>
-                            <div class="border rounded p-1.5 text-left"><span class="block text-[10px] text-stone/75">19</span></div>
+                            <div class="border rounded p-1.5 text-left">
+                                <span class="block text-[10px] text-stone/75">19</span>
+                                <span class="mt-0.5 inline-block text-[10px] px-1.5 py-0.5 rounded-full bg-purple-600 text-white">
+                                    本番稼働スタート
+                                </span>
+                            </div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">20</span></div>
                             <div class="border rounded p-1.5 text-left bg-stone/5"><span class="block text-[10px] text-stone/75">21</span></div>
                         </div>
@@ -754,16 +832,19 @@
                 <!-- 凡例 -->
                 <div class="mt-4 flex flex-wrap gap-3 text-[11px]">
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> 打合せ（0〜3回目）
+                        <span class="w-3 h-3 rounded bg-clay inline-block"></span> ミーティング（第1〜4回）
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> 課題整理・テスト
+                        <span class="w-3 h-3 rounded bg-emerald-100 inline-block border border-emerald-300"></span> PHASE 01 業務整理／テスト
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> 本番構築
+                        <span class="w-3 h-3 rounded bg-blue-100 inline-block border border-blue-300"></span> PHASE 02 試作・設計
                     </span>
                     <span class="inline-flex items-center gap-2">
-                        <span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> 本番稼働開始
+                        <span class="w-3 h-3 rounded bg-stone/10 inline-block border border-clay/30"></span> PHASE 03 本開発
+                    </span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="w-3 h-3 rounded bg-purple-600 inline-block"></span> 本番稼働開始
                     </span>
                 </div>
             </div>
@@ -772,114 +853,120 @@
         <!-- Interval details（補助金なし） -->
         <section class="py-6">
             <div class="max-w-5xl mx-auto px-4 space-y-6 text-sm">
-                <!-- 0〜1 -->
+                <!-- PHASE 00→01 -->
                 <div class="bg-white rounded-xl shadow p-5 border-l-4 border-clay">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">第1回→第2回</div>
-                            <h3 class="font-semibold text-ink">第1回〜第2回（約1〜2週間）</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 00→01</div>
+                            <h3 class="font-semibold text-ink">初回相談〜業務整理開始（約1週間）</h3>
                         </div>
-                        <span class="text-xs text-stone/75">初回打合せ〜プロトタイプ作成</span>
+                        <span class="text-xs text-stone/75">業務整理（有償）の見積をお出しします</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>初回打合せの内容をもとに、<strong>他の課題・理想の形</strong>を考えておいていただく</li>
+                                <li>初回相談を踏まえて、<strong>他の課題・理想の業務の形</strong>をイメージしておく</li>
+                                <li>当日見せていただいた紙・Excel・既存システムの追加情報があれば共有（任意）</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>ヒアリング内容の整理</li>
-                                <li>次回お見せする<strong>プロトタイプの作成</strong></li>
+                                <li>初回相談の内容を整理</li>
+                                <li><strong>業務整理（PHASE 01）のお見積書</strong>を作成・送付</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>ここまでは費用はかかりません。</p>
+                            <p><strong>費用：</strong>PHASE 00 初回相談は無料。PHASE 01 業務整理は10〜30万円（税込／1〜2週間）。お見積りを見てから進むかご判断いただけます。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 1〜2 -->
+                <!-- PHASE 01→02 -->
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 01→02</div>
+                            <h3 class="font-semibold text-ink">業務整理〜試作・設計開始（約2〜3週間）</h3>
+                        </div>
+                        <span class="text-xs text-stone/75">第2回ミーティングと試作品の制作期間</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
+                                <li>第2回ミーティングで業務整理メモ・アプリ化方針提案書を<strong>一緒に内容確認</strong>（現場とのズレを指摘していただく）</li>
+                                <li>優先度の方向性のすり合わせ</li>
+                            </ul>
+                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
+                            <ul class="list-disc pl-5 space-y-1 text-stone">
+                                <li>業務整理結果のご報告</li>
+                                <li>試作・設計（PHASE 02）のお見積書をご提示</li>
+                                <li>試作品（画面・サンプル出力・処理ルール）の作成</li>
+                            </ul>
+                        </div>
+                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
+                            <p><strong>費用：</strong>PHASE 02 試作・設計は20〜50万円（税込／2〜4週間）。お見積りをご覧いただいた上で、進むかご判断いただけます。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 02→03 -->
                 <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">1→2</div>
-                            <h3 class="font-semibold text-ink">1回目〜2回目（約1週間）</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">PHASE 02→03</div>
+                            <h3 class="font-semibold text-ink">試作確認〜契約締結（約1〜2週間）</h3>
                         </div>
-                        <span class="text-xs text-stone/75">プロトタイプ確認〜仕様・料金の方向性決定</span>
+                        <span class="text-xs text-stone/75">第3回・第4回ミーティング</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>プロトタイプを触っていただき、<strong>良い点／気になる点</strong>を教えていただく</li>
+                                <li>第3回ミーティングで試作品を一緒に確認</li>
+                                <li>「開発する内容の確定書」と本開発のお見積りを社内でご検討</li>
+                                <li>第4回ミーティングで電子署名・Stripe登録</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>プロトタイプの修正・改善</li>
-                                <li>どの範囲をシステム化するか、<strong>仕様のたたき台</strong>を作成</li>
-                                <li>初期費用・月額の<strong>大まかなレンジ</strong>を整理</li>
+                                <li>試作品のご説明と、現場視点でのフィードバック反映</li>
+                                <li>「開発する内容の確定書」と本開発（PHASE 03）の確定お見積り</li>
+                                <li>運用支援・保守（PHASE 04）の月額のご提示</li>
+                                <li>契約書・Stripe決済ページのご用意</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>ここまでも無料でご対応します。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2〜3 -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">2→3</div>
-                            <h3 class="font-semibold text-ink">2回目〜3回目（約1週間）</h3>
-                        </div>
-                        <span class="text-xs text-stone/75">最終仕様・見積確定〜ご契約</span>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div class="md:col-span-2">
-                            <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>提示した仕様・料金をご検討いただき、<strong>やる／やらない</strong>のご判断</li>
-                            </ul>
-                            <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
-                            <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>ご要望を反映した<strong>最終仕様書・お見積書</strong>の作成</li>
-                                <li>オンライン契約書・Stripe決済ページのご用意</li>
-                            </ul>
-                        </div>
-                        <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>費用：</strong>ご契約前に、選定した契約単位に応じた初期費用・月額（税込）を明示します。</p>
+                            <p><strong>費用：</strong>本開発（PHASE 03）50〜300万円（税込／1〜3か月）、運用支援・保守（PHASE 04）月3〜15万円（税込）。試作品を確認した後で、本開発に進まないというご判断も可能です。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 契約後 -->
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-emerald-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-amber-500">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full step-number text-white flex items-center justify-center text-sm font-bold">契約後</div>
-                            <h3 class="font-semibold text-ink">契約後｜本番構築・テスト・導入</h3>
+                            <div class="w-auto px-3 h-8 rounded-full step-number text-white flex items-center justify-center text-xs font-bold">契約後</div>
+                            <h3 class="font-semibold text-ink">契約後｜本開発・テスト・本番稼働</h3>
                         </div>
-                        <span class="text-xs text-stone/75">1〜2か月で本番稼働を目指します</span>
+                        <span class="text-xs text-stone/75">1〜3か月で本番稼働を目指します</span>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="md:col-span-2">
                             <p class="text-[11px] font-semibold text-stone/75 mb-1">▼ 施設さまでお願いしたいこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>オンライン契約書への署名</li>
-                                <li>Stripeでの支払い情報登録</li>
-                                <li>導入する事業所・職種・開始日の確定</li>
+                                <li>本開発キックオフでの確認事項のご準備</li>
+                                <li>導入事業所・職種・本番稼働日の確定</li>
+                                <li>必要に応じて社内向けの案内（職員向け説明）</li>
                             </ul>
                             <p class="text-[11px] font-semibold text-stone/75 mt-3 mb-1">▼ こちらで行うこと</p>
                             <ul class="list-disc pl-5 space-y-1 text-stone">
-                                <li>本番環境の構築・帳票レイアウトの設定</li>
+                                <li>本番環境の構築・帳票レイアウトの最終調整</li>
                                 <li>テスト用データでの動作確認</li>
-                                <li>本番稼働日以降のフォロー（使い方レクチャー・改善提案）</li>
+                                <li>本番稼働日以降のフォロー（使い方レクチャー・軽微な改善）</li>
                             </ul>
                         </div>
                         <div class="bg-stone/5 border border-stone/15 rounded-lg p-3 text-xs text-stone">
-                            <p><strong>料金：</strong>初期費用は構築期間中に、月額は本番稼働月からの発生となるイメージです。</p>
+                            <p><strong>料金：</strong>本開発費は契約書に記載した分割スケジュールに沿って、月額（PHASE 04）は本番稼働月から発生します。</p>
                         </div>
                     </div>
                 </div>
@@ -887,19 +974,52 @@
         </section>
     </main>
 
+    <!-- 共通：これから読んでいただくページ -->
+    <section class="py-8 bg-white border-t border-stone/10">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-xl font-bold text-ink mb-4">各ミーティングのご案内</h2>
+            <p class="text-stone/90 text-sm mb-4">各回の目的・本日の流れ・お渡しする資料を、別ページで詳しくご紹介しています。</p>
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                <a href="meeting_1.html" class="bg-cream rounded-lg p-4 border border-stone/15 hover:border-clay transition">
+                    <p class="text-[11px] text-stone/75">第1回</p>
+                    <p class="font-semibold text-ink">初回相談（PHASE 00）</p>
+                    <p class="text-xs text-stone/75 mt-1">無料・30〜45分</p>
+                </a>
+                <a href="meeting_2.html" class="bg-cream rounded-lg p-4 border border-stone/15 hover:border-clay transition">
+                    <p class="text-[11px] text-stone/75">第2回</p>
+                    <p class="font-semibold text-ink">業務整理結果（PHASE 01完了）</p>
+                    <p class="text-xs text-stone/75 mt-1">10〜30万円・1〜2週間</p>
+                </a>
+                <a href="meeting_3.html" class="bg-cream rounded-lg p-4 border border-stone/15 hover:border-clay transition">
+                    <p class="text-[11px] text-stone/75">第3回</p>
+                    <p class="font-semibold text-ink">試作確認（PHASE 02完了）</p>
+                    <p class="text-xs text-stone/75 mt-1">20〜50万円・2〜4週間</p>
+                </a>
+                <a href="meeting_4.html" class="bg-cream rounded-lg p-4 border border-stone/15 hover:border-clay transition">
+                    <p class="text-[11px] text-stone/75">第4回</p>
+                    <p class="font-semibold text-ink">契約締結（PHASE 03 着手）</p>
+                    <p class="text-xs text-stone/75 mt-1">50〜300万円・1〜3か月</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="border-t border-stone/15 bg-white/80 mt-6">
         <div class="max-w-5xl mx-auto px-4 py-6 text-sm text-stone/90 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
                 <a href="index.html#contact" class="text-clay hover:underline">
-                    <i class="fas fa-calendar-check"></i> 無料で相談
+                    <i class="fas fa-calendar-check"></i> 初回相談（無料）を申し込む
                 </a>
                 <span class="text-stone/35">|</span>
                 <a href="index.html#flow" class="text-clay hover:underline">
                     <i class="fas fa-route"></i> 導入の流れ
                 </a>
             </div>
-            <div>&copy; 2025 嶽ノ子</div>
+            <div class="text-xs text-stone/75">
+                <p class="font-display">介護現場に、要件定義をさせない。</p>
+                <p>&copy; 2025 嶽ノ子｜<a href="mailto:kotaro.otake@takenokonoko.com" class="text-clay underline">kotaro.otake@takenokonoko.com</a></p>
+            </div>
         </div>
     </footer>
 

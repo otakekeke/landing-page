@@ -157,14 +157,16 @@
       let p = (-rect.top) / h;
       p = Math.max(0, Math.min(1, p));
 
-      // Divide into 3 equal segments
-      let idx;
-      if (p < 0.33) idx = 0;
-      else if (p < 0.66) idx = 1;
-      else idx = 2;
+      // Map progress to active step (dynamic count)
+      const nSteps = steps.length || 1;
+      const stepIdx = Math.min(nSteps - 1, Math.floor(p * nSteps));
 
-      steps.forEach((s, i) => s.classList.toggle('active', i === idx));
-      scenes.forEach((s, i) => s.classList.toggle('active', i === idx));
+      // Scenes are coarse-grained illustrations — distribute steps across scenes
+      const nScenes = scenes.length || 1;
+      const sceneIdx = Math.min(nScenes - 1, Math.floor(p * nScenes));
+
+      steps.forEach((s, i) => s.classList.toggle('active', i === stepIdx));
+      scenes.forEach((s, i) => s.classList.toggle('active', i === sceneIdx));
 
       const pct = Math.min(100, p * 100 + 10);
       progressEl.style.setProperty('--flow-progress', pct + '%');

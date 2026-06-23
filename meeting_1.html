@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>第1回面談：初回ヒアリング｜嶽ノ子</title>
-  <meta property="og:title" content="第1回面談：初回ヒアリング｜嶽ノ子" />
-  <meta property="og:description" content="第1回面談の説明資料。困りごとを整理し、最初に作る「1業務＝1アプリ」を決め、録音同意のうえで要件定義書を作る前提を共有します。" />
+  <title>第1回ミーティング：初回相談｜嶽ノ子</title>
+  <meta property="og:title" content="第1回ミーティング：初回相談｜嶽ノ子" />
+  <meta property="og:description" content="第1回ミーティング（初回相談・30〜45分・無料）の説明資料。困りごとの確認と、紙・Excel・既存システムの実物確認のお願い、業務整理に進むかの判断方針を共有します。" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
         嶽ノ子
       </a>
       <nav class="hidden md:flex gap-6 text-sm font-medium">
-        <a href="index.html#flow" class="hover:text-clay">試用までの流れ</a>
+        <a href="index.html#flow" class="hover:text-clay">導入の流れ</a>
         <a href="index.html#price" class="hover:text-clay">料金</a>
         <a href="plans.html" class="hover:text-clay">導入例</a>
         <a href="index.html#faq" class="hover:text-clay">FAQ</a>
@@ -41,7 +41,7 @@
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone/15">
       <div class="px-4 py-2 space-y-2">
-        <a href="index.html#flow" class="block py-2 hover:text-clay">試用までの流れ</a>
+        <a href="index.html#flow" class="block py-2 hover:text-clay">導入の流れ</a>
         <a href="index.html#price" class="block py-2 hover:text-clay">料金</a>
         <a href="plans.html" class="block py-2 hover:text-clay">導入例</a>
         <a href="index.html#faq" class="block py-2 hover:text-clay">FAQ</a>
@@ -52,17 +52,31 @@
   </header>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- ================= キャッチコピー ================= -->
+    <section class="mb-8">
+      <div class="bg-stone/5 border-2 border-clay/30 rounded-lg p-6">
+        <p class="text-sm text-stone/75 mb-1">嶽ノ子のスタンス</p>
+        <h1 class="font-display text-2xl md:text-3xl font-bold text-ink leading-snug">
+          介護現場に、要件定義をさせない。
+        </h1>
+        <p class="mt-2 text-stone/90 text-sm">
+          紙・Excel・手作業を読み解き、現場に合うアプリを作ります。<br>
+          施設さまに仕様書を書いていただく必要はありません。
+        </p>
+      </div>
+    </section>
+
     <!-- ================= 現在地表示 ================= -->
     <section class="mb-8">
       <div class="bg-white rounded-lg shadow p-4">
-        <div class="flex items-center gap-2 text-sm">
-          <a href="meeting_1.html" class="text-clay font-semibold">第1回</a>
+        <div class="flex items-center gap-2 text-xs sm:text-sm flex-wrap">
+          <a href="meeting_1.html" class="text-clay font-semibold">第1回 初回相談</a>
           <span class="text-stone/60">→</span>
-          <a href="meeting_2.html" class="text-stone/75 hover:text-clay">第2回</a>
+          <a href="meeting_2.html" class="text-stone/75 hover:text-clay">第2回 業務整理結果</a>
           <span class="text-stone/60">→</span>
-          <a href="meeting_3.html" class="text-stone/75 hover:text-clay">第3回</a>
+          <a href="meeting_3.html" class="text-stone/75 hover:text-clay">第3回 試作確認</a>
           <span class="text-stone/60">→</span>
-          <a href="meeting_4.html" class="text-stone/75 hover:text-clay">第4回（契約）</a>
+          <a href="meeting_4.html" class="text-stone/75 hover:text-clay">第4回 契約締結</a>
         </div>
       </div>
     </section>
@@ -76,93 +90,86 @@
             <svg class="w-8 h-8 text-clay flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            <h3 class="text-lg font-semibold">困りごとを整理</h3>
+            <h3 class="text-lg font-semibold">困りごとの確認</h3>
           </div>
-          <p class="text-stone/90 text-sm">困りごとを整理して、最初に作る「1業務＝1アプリ」を決めます。</p>
+          <p class="text-stone/90 text-sm">介護現場の困りごと・やりたいことを伺います。</p>
         </div>
         <div class="bg-white rounded-lg shadow p-6 border-l-4 border-emerald-500">
           <div class="flex items-center gap-3 mb-3">
             <svg class="w-8 h-8 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <h3 class="text-lg font-semibold">録音同意</h3>
+            <h3 class="text-lg font-semibold">業務整理の必要性を判断</h3>
           </div>
-          <p class="text-stone/90 text-sm">録音同意のうえで、要件定義書を作る前提を共有します。</p>
+          <p class="text-stone/90 text-sm">紙・Excel・既存システムを少し見せていただき、業務整理が必要かを判断します。</p>
         </div>
         <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
           <div class="flex items-center gap-3 mb-3">
             <svg class="w-8 h-8 text-clay flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
             </svg>
-            <h3 class="text-lg font-semibold">プロトタイプ範囲の合意</h3>
+            <h3 class="text-lg font-semibold">次の進め方をご提案</h3>
           </div>
-          <p class="text-stone/90 text-sm">第2回で見せるプロトタイプの範囲を合意します。</p>
+          <p class="text-stone/90 text-sm">PHASE 01「現場理解・業務整理」に進むか、お見積りでご検討いただきます。</p>
         </div>
       </div>
     </section>
 
     <!-- ================= 本日の流れ ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">本日の流れ</h2>
+      <h2 class="text-2xl font-bold mb-4">本日の流れ（PHASE 00：初回相談）</h2>
       <div class="bg-white rounded-lg shadow p-6">
         <div class="space-y-4">
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-cream text-ink border-b border-stone/15 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
             <div class="flex-1">
               <h3 class="font-semibold mb-1">事前準備は不要です（5分）</h3>
-              <p class="text-sm text-stone/90">本日は口頭ヒアリング中心で進めます。個人情報・利用者情報は見ない／話さない前提でOKです。</p>
+              <p class="text-sm text-stone/90">本日は口頭で困りごとをお伺いするのが中心です。利用者の個人情報は見せない／話さない前提でOKです。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">録音同意（5分）</h3>
-              <p class="text-sm text-stone/90">録音の目的と扱いについて説明し、同意を取得します。</p>
+              <h3 class="font-semibold mb-1">録音のお願いと同意（5分）</h3>
+              <p class="text-sm text-stone/90">後で業務整理メモを正確にまとめるため、録音させていただいてよいかを確認します。録音なしでも進められます。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-clay text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">サービス定義の説明（10分）</h3>
-              <p class="text-sm text-stone/90">嶽ノ子のサービス定義と進め方について説明します。</p>
+              <h3 class="font-semibold mb-1">嶽ノ子のスタンス説明（5〜10分）</h3>
+              <p class="text-sm text-stone/90">「介護現場に要件定義をさせない」という考え方と、4工程の進め方をご説明します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">料金の説明（10分）</h3>
-              <p class="text-sm text-stone/90">通常プランの料金体系について説明します。</p>
+              <h3 class="font-semibold mb-1">困りごとのお伺い（15〜20分）</h3>
+              <p class="text-sm text-stone/90">日々の業務で「これに時間がかかっている」「ここでミスが起きる」といったお話を伺います。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">5</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">ヒアリング（30-45分）</h3>
-              <p class="text-sm text-stone/90">困りごとを具体化するためのヒアリングを行います。</p>
+              <h3 class="font-semibold mb-1">紙・Excel・既存システムの確認（5〜10分）</h3>
+              <p class="text-sm text-stone/90">実際に使っている帳票やExcelを少しだけ見せていただきます（個人情報は伏せてOK）。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">6</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">合意事項の確認（10分）</h3>
-              <p class="text-sm text-stone/90">本日決めること、決めないことを確認します。</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">7</div>
-            <div class="flex-1">
-              <h3 class="font-semibold mb-1">Q&A（5-10分）</h3>
-              <p class="text-sm text-stone/90">ご質問にお答えします。</p>
+              <h3 class="font-semibold mb-1">次の進め方のご提案（5分）</h3>
+              <p class="text-sm text-stone/90">PHASE 01（業務整理）に進むかどうか、後日お見積りでご検討いただきます。</p>
             </div>
           </div>
         </div>
         <div class="mt-6 p-4 bg-stone/5 rounded-lg">
-          <p class="text-sm font-semibold text-ink">所要時間の目安：約75-95分</p>
+          <p class="text-sm font-semibold text-ink">所要時間の目安：30〜45分／費用：無料</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= 事前準備は不要です ================= -->
+    <!-- ================= 事前準備は不要 ================= -->
     <section class="mb-8">
       <div class="bg-stone/5 border-2 border-clay/30 rounded-lg p-6">
         <div class="flex items-center gap-3 mb-3">
@@ -174,15 +181,15 @@
         <ul class="space-y-2 text-stone">
           <li class="flex items-start gap-2">
             <span class="text-clay mt-1">✓</span>
-            <span>本日は口頭ヒアリング中心で進めます</span>
+            <span>仕様書や要件のまとめを作っていただく必要はありません</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-clay mt-1">✓</span>
-            <span>個人情報・利用者情報は見ない／話さない前提でOKです</span>
+            <span>利用者の個人情報は見せない／話さない前提でOKです</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-clay mt-1">✓</span>
-            <span>資料の準備などは一切不要です</span>
+            <span>当日、いつも使っている紙・Excel・システム画面を「少しだけ」見せていただけると助かります</span>
           </li>
         </ul>
       </div>
@@ -190,37 +197,37 @@
 
     <!-- ================= 録音同意 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">録音同意</h2>
+      <h2 class="text-2xl font-bold mb-4">録音のお願い</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-6">
         <div>
           <h3 class="font-semibold mb-2">録音の目的</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
             <li>聞き漏れ防止</li>
-            <li>要件定義書を正確にするため</li>
+            <li>後日、業務整理メモを正確にまとめるため</li>
           </ul>
         </div>
         <div>
           <h3 class="font-semibold mb-2">録音の扱い</h3>
           <div class="bg-stone/5 rounded-lg p-4 space-y-2 text-sm">
             <div>
-              <span class="font-semibold">保管：</span>当社が管理（アクセスは当社のみ）
+              <span class="font-semibold">保管：</span>当社が管理（アクセスは代表のみ）
             </div>
             <div>
-              <span class="font-semibold">共有：</span>原則共有しない（必要なら要点を文書で共有）
+              <span class="font-semibold">共有：</span>原則共有しない（必要な場合は要点を文書化してから共有）
             </div>
             <div>
-              <span class="font-semibold">保管期間：</span>要件定義が固まり次第、整理・削除（運用方針として明記）
+              <span class="font-semibold">保管期間：</span>業務整理メモが固まった段階で削除します
             </div>
           </div>
         </div>
         <div>
           <h3 class="font-semibold mb-2">録音しない選択肢</h3>
-          <p class="text-stone">録音なしでも進められます</p>
+          <p class="text-stone">録音なしでも進められます。お気軽にお申し付けください。</p>
         </div>
         <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
-          <h3 class="font-semibold mb-3 text-yellow-900">同意取得の文言</h3>
+          <h3 class="font-semibold mb-3 text-yellow-900">同意確認の文言</h3>
           <div class="space-y-2">
-            <p class="text-ink font-medium">「本日の面談を録音して進めてよいですか」</p>
+            <p class="text-ink font-medium">「本日の初回相談を録音させていただいてよろしいですか」</p>
             <div class="flex items-center gap-4 mt-4">
               <label class="flex items-center gap-2 cursor-pointer">
                 <input type="radio" name="recording-consent" value="yes" class="w-4 h-4 text-clay">
@@ -238,145 +245,186 @@
 
     <!-- ================= 嶽ノ子のサービス定義 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">嶽ノ子のサービス定義</h2>
+      <h2 class="text-2xl font-bold mb-4">嶽ノ子のサービスについて</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-6">
         <div>
-          <h3 class="font-semibold mb-2 text-ink">提供価値</h3>
-          <p class="text-stone">介護現場の課題に対して<strong>業務補助アプリをオーダーメイドで作成</strong>し、導入後も軽微修正を迅速に回します。</p>
+          <h3 class="font-semibold mb-2 text-ink">提供すること</h3>
+          <p class="text-stone">介護現場の困りごとに対し、現場の業務を読み解いて<strong>オーダーメイドの業務アプリ</strong>をお作りします。導入後も軽微な修正を素早く回す体制でサポートします。</p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-ink">技術/前提</h3>
-          <p class="text-stone">Google Workspace／Googleグループ／Google Apps Script 等を用いた構築</p>
+          <h3 class="font-semibold mb-2 text-ink">大切にしていること</h3>
+          <p class="text-stone">施設さまに仕様書を書いていただかないこと。私たちが現場を見て、紙・Excel・手作業から業務を整理して、開発する内容を組み立てます。</p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-ink">単位</h3>
-          <p class="text-stone"><strong>1業務＝1アプリ</strong></p>
+          <h3 class="font-semibold mb-2 text-ink">使う技術（前提）</h3>
+          <p class="text-stone">Google Workspace／Google スプレッドシート／Google Apps Script を中心に、お客様の運用環境に合わせて構築します。</p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2 text-red-900">しないこと</h3>
+          <h3 class="font-semibold mb-2 text-red-900">対応していないこと</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
-            <li>外部システムとの個別API連携は基本対象外</li>
-            <li>24/365監視・常駐運用はしない</li>
-            <li>申請代行はしない</li>
+            <li>既存の介護記録ソフト等との個別API連携は基本的にお引き受けしません</li>
+            <li>24時間365日の常駐監視・常駐運用はしません</li>
+            <li>補助金の申請代行はしません（申請を前提とした業務整理・資料作成のお手伝いは別途ご相談）</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- ================= 進め方（全体スケジュール） ================= -->
+    <!-- ================= 4工程の進め方 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">進め方</h2>
+      <h2 class="text-2xl font-bold mb-4">全体の進め方（4工程）</h2>
       <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-sm text-stone/90 mb-4">本契約に向けて、無理なく段階的に進められるように4つの工程に分けています。各工程の最後で「次に進むかどうか」をご判断いただけます。</p>
         <div class="space-y-4">
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-cream text-ink border-b border-stone/15 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
+            <div class="w-10 h-10 bg-cream text-ink border-b border-stone/15 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">00</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">第1回：ヒアリング＋録音同意（本日）</h3>
-              <p class="text-sm text-stone/90">困りごとを整理し、最初に作る「1業務＝1アプリ」を決めます。</p>
+              <h3 class="font-semibold mb-1">PHASE 00：初回相談（本日／30〜45分・無料）</h3>
+              <p class="text-sm text-stone/90">困りごとを伺い、紙・Excel・既存システムを少し見せていただき、業務整理が必要かを判断します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
+            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">01</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">第2回：プロトタイプ提示＋要件定義書レビュー（v0.1→v0.5）</h3>
-              <p class="text-sm text-stone/90">作成したプロトタイプを見て、現場運用に合う形へ修正点を出し切ります。</p>
+              <h3 class="font-semibold mb-1">PHASE 01：現場理解・業務整理（10〜30万円・1〜2週間）</h3>
+              <p class="text-sm text-stone/90">現場確認を行い、帳票・Excel・過去データを整理して「業務整理メモ」「アプリ化方針提案書」をお渡しします。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-clay text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
+            <div class="w-10 h-10 bg-clay text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">02</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">第3回：最終仕様（v1.0凍結）＋見積確定＋契約条件サマリー</h3>
-              <p class="text-sm text-stone/90">仕様と金額を決め切り、契約回を短時間で終わらせる準備をします。</p>
+              <h3 class="font-semibold mb-1">PHASE 02：試作・設計（20〜50万円・2〜4週間）</h3>
+              <p class="text-sm text-stone/90">試作品を作り、画面・サンプル出力・処理ルールをご確認いただき、開発する内容を確定します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">4</div>
+            <div class="w-10 h-10 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">03</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">第4回：契約締結＋Stripe登録＋着手条件確認</h3>
-              <p class="text-sm text-stone/90">疑問をその場で解消し、署名と決済登録まで完了させます。</p>
+              <h3 class="font-semibold mb-1">PHASE 03：本開発（50〜300万円・1〜3か月）</h3>
+              <p class="text-sm text-stone/90">確定した内容に沿って本番アプリを開発・テスト・導入します。</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">5</div>
+            <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">04</div>
             <div class="flex-1">
-              <h3 class="font-semibold mb-1">契約後：本番構築→テスト→導入</h3>
-              <p class="text-sm text-stone/90">目安1〜2か月、規模で変動</p>
+              <h3 class="font-semibold mb-1">PHASE 04：運用支援・保守（月3〜15万円）</h3>
+              <p class="text-sm text-stone/90">実際の使い方に寄り添いながら、軽微な改善・問い合わせ対応・導入後サポートを継続します。</p>
             </div>
           </div>
+        </div>
+        <div class="mt-4 bg-stone/5 rounded-lg p-4 text-sm text-stone">
+          <p><strong>無理に契約を迫ることはありません。</strong>PHASE 01／02の結果を見て、本開発に進まないというご判断も可能です。各工程の見積は事前に明示します。</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= 料金（通常プラン） ================= -->
+    <!-- ================= 料金（4工程） ================= -->
     <section class="mb-8">
       <h2 class="text-2xl font-bold mb-4">料金</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
-        <div class="bg-stone/5 border-2 border-clay/30 rounded-lg p-4">
-          <div class="flex items-center gap-3 mb-2">
-            <svg class="w-6 h-6 text-clay" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h3 class="font-semibold text-ink">無料範囲</h3>
+        <p class="text-sm text-stone/90">すべて税込価格です。各工程の見積は、お見せいただいた業務量に応じて事前に確定します。</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="border-2 border-clay/30 bg-stone/5 rounded-lg p-4">
+            <p class="text-xs text-stone/75">PHASE 00</p>
+            <h3 class="font-bold text-base mb-1">初回相談</h3>
+            <p class="text-xl font-extrabold text-clay">無料</p>
+            <p class="text-xs text-stone/75 mt-1">30〜45分</p>
           </div>
-          <p class="text-stone"><strong>試用期間終了まで無料</strong></p>
-        </div>
-        <div>
-          <h3 class="font-semibold mb-2">正式契約後の料金（契約単位は2種類）</h3>
-          <ul class="text-stone text-sm space-y-2 list-disc pl-5">
-            <li><strong>単一業務補助ツール：</strong>初期100,000円（税込）、月額2万～3万円（税込）</li>
-            <li><strong>業務横断・運用管理アプリ：</strong>初期800,000円（税込）、月額88,000円（税込）</li>
-          </ul>
-          <p class="text-xs text-stone/75 mt-2">月額に含まれる範囲は契約単位により異なります。詳細は<a href="index.html#price" class="text-clay underline">料金体系</a>をご覧ください。</p>
+          <div class="border-2 border-stone/15 rounded-lg p-4">
+            <p class="text-xs text-stone/75">PHASE 01</p>
+            <h3 class="font-bold text-base mb-1">現場理解・業務整理</h3>
+            <p class="text-xl font-extrabold text-ink">10〜30万円</p>
+            <p class="text-xs text-stone/75 mt-1">1〜2週間</p>
+          </div>
+          <div class="border-2 border-stone/15 rounded-lg p-4">
+            <p class="text-xs text-stone/75">PHASE 02</p>
+            <h3 class="font-bold text-base mb-1">試作・設計</h3>
+            <p class="text-xl font-extrabold text-ink">20〜50万円</p>
+            <p class="text-xs text-stone/75 mt-1">2〜4週間</p>
+          </div>
+          <div class="border-2 border-stone/15 rounded-lg p-4">
+            <p class="text-xs text-stone/75">PHASE 03</p>
+            <h3 class="font-bold text-base mb-1">本開発</h3>
+            <p class="text-xl font-extrabold text-ink">50〜300万円</p>
+            <p class="text-xs text-stone/75 mt-1">1〜3か月</p>
+          </div>
+          <div class="border-2 border-stone/15 rounded-lg p-4 sm:col-span-2">
+            <p class="text-xs text-stone/75">PHASE 04</p>
+            <h3 class="font-bold text-base mb-1">運用支援・保守</h3>
+            <p class="text-xl font-extrabold text-ink">月 3〜15万円</p>
+            <p class="text-xs text-stone/75 mt-1">本番稼働月から</p>
+          </div>
         </div>
         <div class="bg-stone/5 rounded-lg p-4">
-          <p class="text-sm text-stone"><strong>ベータ版との差は料金のみ。進め方・契約運用は同じ</strong></p>
+          <p class="text-sm text-stone"><strong>初回相談は無料です。</strong>PHASE 01以降は有償となりますが、各工程の見積を事前にご確認いただいたうえで進めます。</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= ヒアリング項目 ================= -->
+    <!-- ================= 困りごとお伺い項目 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">ヒアリング項目</h2>
+      <h2 class="text-2xl font-bold mb-4">お伺いしたいこと</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-6">
         <div>
-          <h3 class="font-semibold mb-3 text-ink">1. 対象業務候補</h3>
-          <p class="text-stone mb-2">例：記録、申し送り、集計、帳票、在庫、委員会、インシデント等</p>
-          <p class="text-sm text-stone/90">どの業務を効率化したいですか？</p>
+          <h3 class="font-semibold mb-3 text-ink">1. 困っている業務</h3>
+          <p class="text-stone mb-2">例：記録、申し送り、集計、加算チェック、シフト、ご利用者情報の管理、委員会、ヒヤリハット など</p>
+          <p class="text-sm text-stone/90">どの業務に一番時間がかかっていますか／どこでミスが起きやすいですか？</p>
         </div>
         <div>
-          <h3 class="font-semibold mb-3 text-ink">2. 現状フロー（As-Is）</h3>
+          <h3 class="font-semibold mb-3 text-ink">2. 今のやり方</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
-            <li>誰が／いつ／どこで／何を見て／どこへ記録</li>
-            <li>転記・二重入力の有無</li>
-            <li>集計・提出の流れ</li>
+            <li>誰が／いつ／どこで／何を見て／どこに書いているか</li>
+            <li>紙・Excel・既存システムの間で転記が発生していないか</li>
+            <li>集計や提出までの流れ</li>
           </ul>
         </div>
         <div>
-          <h3 class="font-semibold mb-3 text-ink">3. 課題（困りごと）</h3>
+          <h3 class="font-semibold mb-3 text-ink">3. 困りごとの中身</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
-            <li>何が起きているか／頻度／影響</li>
+            <li>何に困っているか／どのくらいの頻度で起きるか／業務への影響</li>
           </ul>
         </div>
         <div>
-          <h3 class="font-semibold mb-3 text-ink">4. 成功条件（KPI）</h3>
-          <p class="text-stone">時間削減、ミス削減、検索性、証跡、教育工数など</p>
+          <h3 class="font-semibold mb-3 text-ink">4. こうなったら嬉しい、というイメージ</h3>
+          <p class="text-stone">時間削減、ミス削減、職員の負担軽減、新人教育のしやすさ など</p>
         </div>
         <div>
-          <h3 class="font-semibold mb-3 text-ink">5. 制約（非機能の種）</h3>
+          <h3 class="font-semibold mb-3 text-ink">5. 制約・環境</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
-            <li>端末</li>
-            <li>ネットワーク</li>
-            <li>アカウント管理</li>
-            <li>クラウド可否・セキュリティ上の制約</li>
+            <li>使っている端末（PC・タブレット・スマホ）</li>
+            <li>ネットワーク環境</li>
+            <li>Googleアカウントの利用可否</li>
+            <li>クラウド利用に関する施設のルール</li>
           </ul>
         </div>
         <div>
-          <h3 class="font-semibold mb-3 text-ink">6. 決裁</h3>
+          <h3 class="font-semibold mb-3 text-ink">6. 判断される方</h3>
           <ul class="list-disc list-inside space-y-1 text-stone ml-4">
-            <li>決裁者は誰か</li>
-            <li>必要資料は何か</li>
-            <li>いつまでに判断が必要か</li>
+            <li>導入の最終判断をされる方はどなたか</li>
+            <li>判断のためにどのような資料があるとよいか</li>
+            <li>いつごろまでに導入を始めたいか</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 紙・Excel・既存システムの確認のお願い ================= -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">紙・Excel・既存システムを少し見せてください</h2>
+      <div class="bg-stone/5 border-2 border-clay/30 rounded-lg p-6 space-y-4">
+        <p class="text-stone">嶽ノ子では、施設さまに仕様書を書いていただかない代わりに、<strong>こちらで現場の実物を見て業務整理する</strong>進め方を取っています。初回相談の場で、可能な範囲で実物を少しだけ見せていただけると、後の判断がぐっと早くなります。</p>
+        <div>
+          <h3 class="font-semibold mb-2">見せていただきたいもの（あるものだけでOK）</h3>
+          <ul class="list-disc list-inside space-y-1 text-stone ml-4">
+            <li>普段使っている紙の帳票・記録用紙</li>
+            <li>Excel／Googleスプレッドシートでの記録・集計ファイル</li>
+            <li>既存の介護記録ソフトや業務システムの画面</li>
+            <li>転記の元になっているメモ、申し送りノートなど</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-lg p-4 text-sm">
+          <p class="font-semibold text-ink mb-1">個人情報の扱いについて</p>
+          <p class="text-stone">利用者・職員の氏名等は伏せた状態で構いません。レイアウト・項目・運用ルールだけ見せていただければ十分です。</p>
         </div>
       </div>
     </section>
@@ -390,8 +438,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">最初に作る対象：「1業務」を決定</h3>
-            <p class="text-sm text-stone/90">どの業務を最初に効率化するか決定します。</p>
+            <h3 class="font-semibold mb-1">最初に取り組む業務の候補</h3>
+            <p class="text-sm text-stone/90">複数あれば、まず1つに絞ってどの業務から手をつけるかを決めます。</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -399,8 +447,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">第2回で見せるプロトタイプ範囲</h3>
-            <p class="text-sm text-stone/90">入力・一覧・帳票のどこまでを見せるか合意します。</p>
+            <h3 class="font-semibold mb-1">業務整理（PHASE 01）に進むかどうかの方針</h3>
+            <p class="text-sm text-stone/90">後日、PHASE 01 の見積をお渡しします。その時点で進むかどうかをご判断ください。</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -408,8 +456,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">面談後に送る成果物を確認</h3>
-            <p class="text-sm text-stone/90">要件定義書 v0.1、未決事項リスト、次回アジェンダ＋日程を確認します。</p>
+            <h3 class="font-semibold mb-1">後日お送りする内容の確認</h3>
+            <p class="text-sm text-stone/90">本日のお話のサマリーと、PHASE 01（業務整理）のお見積書をご案内します。</p>
           </div>
         </div>
       </div>
@@ -417,45 +465,46 @@
 
     <!-- ================= 本日決めないこと ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">今日は決めないこと</h2>
+      <h2 class="text-2xl font-bold mb-4">本日は決めないこと</h2>
       <div class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
         <ul class="space-y-2 text-stone">
           <li class="flex items-start gap-2">
             <span class="text-yellow-600 mt-1">⚠</span>
-            <span>詳細な仕様</span>
+            <span>開発する内容の詳細</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-yellow-600 mt-1">⚠</span>
-            <span>料金の確定</span>
+            <span>本開発の最終金額</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-yellow-600 mt-1">⚠</span>
-            <span>プランの選択</span>
+            <span>本契約の締結</span>
           </li>
         </ul>
+        <p class="text-sm text-stone/90 mt-4">本日は、業務整理（PHASE 01）に進むかどうかの「方向性」だけ確認できれば十分です。</p>
       </div>
     </section>
 
-    <!-- ================= 面談後にお渡しする成果物 ================= -->
+    <!-- ================= 面談後にお送りするもの ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">面談後にお渡しする成果物</h2>
+      <h2 class="text-2xl font-bold mb-4">初回相談後にお送りするもの</h2>
       <div class="bg-white rounded-lg shadow p-6 space-y-4">
         <div class="flex items-start gap-3">
           <svg class="w-6 h-6 text-clay flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">要件定義書 v0.1</h3>
-            <p class="text-sm text-stone/90">録音を元に作成した要件定義書のたたき台です。</p>
+            <h3 class="font-semibold mb-1">初回相談の要点まとめ</h3>
+            <p class="text-sm text-stone/90">本日伺った困りごと・現状・進めたい方向性を整理した1〜2枚のメモです。</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <svg class="w-6 h-6 text-clay flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">未決事項リスト</h3>
-            <p class="text-sm text-stone/90">本日の面談で出た論点を整理したリストです。</p>
+            <h3 class="font-semibold mb-1">業務整理（PHASE 01）のお見積書</h3>
+            <p class="text-sm text-stone/90">業務量・現状の複雑さから算出した、業務整理の費用と期間のお見積りです。</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -463,35 +512,36 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
           <div>
-            <h3 class="font-semibold mb-1">次回アジェンダ＋日程</h3>
-            <p class="text-sm text-stone/90">第2回面談のアジェンダと日程調整のご案内です。</p>
+            <h3 class="font-semibold mb-1">次回（第2回 業務整理結果）の進め方ご案内</h3>
+            <p class="text-sm text-stone/90">PHASE 01 に進む場合の流れと、第2回ミーティングのアジェンダ・日程候補をお送りします。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= 変更要望の扱い ================= -->
+    <!-- ================= 進まない判断もOK ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">変更要望の扱い</h2>
+      <h2 class="text-2xl font-bold mb-4">「業務整理には進まない」というご判断もOKです</h2>
       <div class="bg-white rounded-lg shadow p-6">
-        <p class="text-stone mb-4">本日は要件定義のたたき台を作るためのヒアリングです。第2回でプロトタイプを見ていただき、その時点で修正点を出し切っていただきます。第3回で最終仕様を凍結し、見積を確定します。</p>
+        <p class="text-stone mb-4">PHASE 01のお見積りを見ていただいて、「今は時期じゃない」「もう少し社内で検討したい」「他社と比較したい」というご判断も歓迎します。<strong>無理に契約を迫ることはありません。</strong></p>
         <div class="bg-stone/5 rounded-lg p-4">
-          <p class="text-sm text-stone"><strong>重要：</strong>第3回で仕様を凍結した後の変更は、月額内で吸収できる軽微な修正か、再見積が必要な変更かを判断します。</p>
+          <p class="text-sm text-stone">代表が直接お話を伺いますので、判断後に追いかけて売り込むようなこともいたしません。安心してご検討ください。</p>
         </div>
       </div>
     </section>
 
     <!-- ================= Q&A枠 ================= -->
     <section class="mb-8">
-      <h2 class="text-2xl font-bold mb-4">Q&A枠</h2>
+      <h2 class="text-2xl font-bold mb-4">Q&A</h2>
       <div class="bg-white rounded-lg shadow p-6">
-        <p class="text-stone mb-4">ご質問がございましたら、お気軽にお聞かせください。</p>
+        <p class="text-stone mb-4">ご質問があれば、いつでもお気軽にお聞かせください。</p>
         <div class="bg-stone/5 rounded-lg p-4">
-          <p class="text-sm text-ink font-semibold">よくある質問</p>
+          <p class="text-sm text-ink font-semibold">よくいただくご質問</p>
           <ul class="mt-2 space-y-2 text-sm text-stone">
-            <li>• プロトタイプはどのくらいの期間で作成されますか？</li>
-            <li>• 試用期間はどのくらいですか？</li>
-            <li>• 複数の業務を効率化したい場合はどうなりますか？</li>
+            <li>• 業務整理（PHASE 01）はどのくらいの期間で終わりますか？</li>
+            <li>• PHASE 01 まで進んで、本開発をやめても大丈夫ですか？</li>
+            <li>• 複数の業務を一度にアプリ化したい場合はどうなりますか？</li>
+            <li>• 既存の介護記録ソフトと併用できますか？</li>
           </ul>
         </div>
       </div>
@@ -502,8 +552,9 @@
   <footer class="bg-white border-t border-stone/15 py-8 mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center text-sm text-stone/90">
+        <p class="mb-1 font-display">介護現場に、要件定義をさせない。</p>
         <p class="mb-2">© 2025年 嶽ノ子. All rights reserved.</p>
-        <p class="text-xs text-stone/75 mb-2">免責：詳細は契約回で説明いたします。</p>
+        <p class="text-xs text-stone/75 mb-2">お問い合わせ：<a href="mailto:kotaro.otake@takenokonoko.com" class="text-clay underline">kotaro.otake@takenokonoko.com</a></p>
         <p class="text-xs space-x-4">
           <a href="index.html" class="text-stone/60 hover:text-stone/90 underline">ホーム</a>
           <a href="privacy.html" class="text-stone/60 hover:text-stone/90 underline">プライバシーポリシー</a>
@@ -516,4 +567,3 @@
   <script src="src/js/app.js"></script>
 </body>
 </html>
-

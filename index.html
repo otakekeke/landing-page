@@ -1567,6 +1567,18 @@
     .mode-toggle { right: 12px; bottom: 12px; }
     .mode-toggle-opt { padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em; }
   }
+
+  /* ===== New sections: mobile responsiveness ===== */
+  @media (max-width: 900px) {
+    .problem-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .boundaries-grid { grid-template-columns: 1fr !important; }
+    .case-detail { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 700px) {
+    .rule-card { padding: 22px 22px !important; }
+    .phase-card { padding: 24px 20px !important; }
+    .problem-item { padding: 16px 18px !important; }
+  }
 </style>
 </head>
 <body>
@@ -1680,26 +1692,6 @@
   </div>
 </section>
 
-<!-- ===== PHILOSOPHY ===== -->
-<section class="section" id="philosophy">
-  <div class="block philosophy reveal">
-    <div>
-      <span class="chip dark" style="background: rgba(245, 239, 227, 0.12); color: var(--on-sumi);">— 理念 / PHILOSOPHY</span>
-      <h2 class="philosophy-h" style="margin-top: 32px;">
-        介護職は、<br>
-        社会の<em>「心」</em>を<br>
-        支える仕事。
-      </h2>
-    </div>
-    <div class="philosophy-body">
-      <p>社会を動かしているのは、企業でも制度でもなく、毎日を生きる人たちです。その人たちが安心して働き、暮らし続けられるのは、「大切な人が守られている」という確信があるから。</p>
-      <p>介護は、人対人の究極の仕事であり、AI時代になっても最後まで残る崇高な仕事です。その貴重な人材を、誰でもできる事務作業や、アナログな反復作業に費やさせたくない。</p>
-      <p>ご家族の心が安定すれば、家庭が安定し、働く人が安定し、社会が固まる。介護職は、社会を支えている。その事実と理由を、ITで証明し、強化する ── それが嶽ノ子の存在理由です。</p>
-      <div class="philosophy-sig">── 嶽ノ子 CREDO</div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== PROBLEM ===== -->
 <section class="section" id="problem">
   <div class="section-head reveal">
@@ -1736,7 +1728,7 @@
   <div class="section-head reveal">
     <span class="section-tag">— 01 / SERVICE</span>
     <h2 class="section-title">嶽ノ子の<br><span class="accent">進め方</span>。</h2>
-    <span class="section-nav">01 / 06</span>
+    <span class="section-nav">進め方</span>
   </div>
 
   <div class="service-grid">
@@ -2361,7 +2353,7 @@
   <div class="section-head reveal">
     <span class="section-tag">— 04 / PRICING</span>
     <h2 class="section-title">料金は、<br><span class="accent">工程ごと</span>に明示。</h2>
-    <span class="section-nav">04 / 06</span>
+    <span class="section-nav">料金</span>
   </div>
 
   <div class="reveal" style="margin-bottom: 24px; padding: 28px 36px; background: var(--kinari-2); border-radius: var(--r-md);">
@@ -2443,7 +2435,7 @@
   <div class="section-head reveal">
     <span class="section-tag">— 05 / CASE STUDY</span>
     <h2 class="section-title">導入<br><span class="accent">実績</span></h2>
-    <span class="section-nav">05 / 06</span>
+    <span class="section-nav">実績</span>
   </div>
 
   <div class="case-wrap reveal">
@@ -2528,6 +2520,26 @@
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light); margin-bottom: 12px;">— METHOD / 認識齟齬をどう防いだか</div>
       <h4 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4; margin-bottom: 16px;">画面だけでなく、<br>サンプル結果で確認。</h4>
       <p style="font-size: 14px; line-height: 1.95; opacity: 0.85;">開発中は、画面だけでなく、実際の入力例・出力例・テストケースを確認しながら進行。現場担当者が長い仕様書を読まなくても、実際の動きを見て確認できる形にしました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHILOSOPHY (理念リセット) ===== -->
+<section class="section" id="philosophy">
+  <div class="block philosophy reveal">
+    <div>
+      <span class="chip dark" style="background: rgba(245, 239, 227, 0.12); color: var(--on-sumi);">— 理念 / PHILOSOPHY</span>
+      <h2 class="philosophy-h" style="margin-top: 32px;">
+        介護職は、<br>
+        社会の<em>「心」</em>を<br>
+        支える仕事。
+      </h2>
+    </div>
+    <div class="philosophy-body">
+      <p>社会を動かしているのは、企業でも制度でもなく、毎日を生きる人たちです。その人たちが安心して働き、暮らし続けられるのは、「大切な人が守られている」という確信があるから。</p>
+      <p>介護は、人対人の究極の仕事であり、AI時代になっても最後まで残る崇高な仕事です。その貴重な人材を、誰でもできる事務作業や、アナログな反復作業に費やさせたくない。</p>
+      <p>ご家族の心が安定すれば、家庭が安定し、働く人が安定し、社会が固まる。介護職は、社会を支えている。その事実と理由を、ITで証明し、強化する ── それが嶽ノ子の存在理由です。</p>
+      <div class="philosophy-sig">── 嶽ノ子 CREDO</div>
     </div>
   </div>
 </section>
