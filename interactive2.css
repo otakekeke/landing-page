@@ -916,23 +916,26 @@
 .ix-flow-outer {
   position: relative;
   padding: 0 24px;
+  min-height: 210vh; /* スクロール連動アニメ用の高さ。7ステップ × 約30vh */
 }
 .ix-flow-sticky {
   position: sticky;
   top: 80px;
-  height: 100vh;
-  min-height: 720px;
-  max-height: 1100px;
+  height: calc(100vh - 100px);
+  max-height: 820px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  padding: 48px 0;
+  padding: 32px 0;
+  overflow: hidden;
 }
 .ix-flow-l {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 32px;
+  gap: 24px;
+  min-height: 0;
+  overflow: hidden;
 }
 .ix-flow-progress {
   display: flex;
@@ -943,17 +946,17 @@
 .ix-flow-progress::before {
   content: "";
   position: absolute;
-  left: 23px;
-  top: 24px;
-  bottom: 24px;
+  left: 17px;
+  top: 18px;
+  bottom: 18px;
   width: 2px;
   background: var(--nezu-surface);
 }
 .ix-flow-progress::after {
   content: "";
   position: absolute;
-  left: 23px;
-  top: 24px;
+  left: 17px;
+  top: 18px;
   width: 2px;
   height: var(--flow-progress, 0%);
   background: var(--shu);
@@ -961,23 +964,23 @@
 }
 .ix-flow-step {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 16px;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
   align-items: start;
-  padding: 10px 0;
+  padding: 6px 0;
   opacity: 0.35;
   transition: opacity 0.5s ease;
 }
 .ix-flow-step.active { opacity: 1; }
 .ix-flow-bullet {
-  width: 40px; height: 40px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   background: var(--kinari);
   border: 2px solid var(--nezu-surface);
   display: grid;
   place-items: center;
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 14px;
   color: var(--sumi);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 2;
@@ -991,27 +994,42 @@
 }
 .ix-flow-step h3 {
   font-family: var(--serif);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.25;
   color: var(--sumi);
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 .ix-flow-step p {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 12.5px;
+  line-height: 1.55;
   color: var(--sumi-2);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s, margin-top 0.4s;
+  margin-top: 0;
+}
+.ix-flow-step.active p {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 4px;
 }
 .ix-flow-step .dur {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 0.15em;
   color: var(--shu);
-  margin-top: 6px;
+  margin-top: 4px;
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: max-height 0.4s, opacity 0.4s, margin-top 0.4s;
 }
-.ix-flow-step.active .dur { opacity: 1; }
+.ix-flow-step.active .dur {
+  opacity: 1;
+  max-height: 20px;
+}
 
 /* Right illustration for flow */
 .ix-flow-r {
@@ -1024,11 +1042,11 @@
 .ix-flow-scene {
   position: absolute;
   inset: 0;
-  padding: 48px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 24px;
+  gap: 20px;
   opacity: 0;
   transform: translateY(30px) scale(0.98);
   transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1040,20 +1058,20 @@
 }
 .ix-flow-scene .scene-num {
   font-family: var(--serif);
-  font-size: 180px;
+  font-size: 140px;
   line-height: 0.8;
   color: var(--shu);
   opacity: 0.15;
   position: absolute;
-  right: 40px;
-  top: 40px;
+  right: 32px;
+  top: 32px;
   pointer-events: none;
 }
 .ix-flow-scene h4 {
   font-family: var(--serif);
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.25;
   position: relative;
   z-index: 2;
 }
@@ -1599,7 +1617,12 @@
   .ix-phone-stage { padding: 56px 24px; }
   .ix-phone-frame { position: static; justify-self: center; }
   .ix-flow-outer { min-height: 0; }
-  .ix-flow-sticky { position: static; height: auto; max-height: none; grid-template-columns: 1fr; }
+  .ix-flow-sticky { position: static; height: auto; max-height: none; grid-template-columns: 1fr; overflow: visible; }
+  .ix-flow-l { overflow: visible; }
+  /* モバイル/タブレットでは sticky 連動が切れるため、全ステップの説明を表示 */
+  .ix-flow-step { opacity: 1; }
+  .ix-flow-step p { max-height: none; opacity: 1; margin-top: 4px; }
+  .ix-flow-step .dur { max-height: none; opacity: 1; }
   .ix-sim-body { grid-template-columns: 1fr; }
   .ix-ba-paper-stack, .ix-ba-phone { display: none; }
 }
