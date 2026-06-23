@@ -151,10 +151,19 @@
     const scenes = flowOuter.querySelectorAll('.ix-flow-scene');
     const progressEl = flowOuter.querySelector('.ix-flow-progress');
 
+    // イントロ部分を除いた範囲で進行を計算する
+    const intro = flowOuter.querySelector('.ix-flow-intro');
+    const stickyEl = flowOuter.querySelector('.ix-flow-sticky');
+
     function updateFlow() {
       const rect = flowOuter.getBoundingClientRect();
-      const h = flowOuter.offsetHeight - window.innerHeight;
-      let p = (-rect.top) / h;
+      const introH = intro ? intro.offsetHeight : 0;
+      const stickyH = stickyEl ? stickyEl.offsetHeight : window.innerHeight;
+      // アニメーション可能スクロール範囲 = outer 全体 - イントロ - sticky 自体
+      const animRange = flowOuter.offsetHeight - introH - stickyH;
+      // 開始位置 = outer top が viewport top の手前 introH 分まで進んだとき
+      const scrolled = -rect.top - introH;
+      let p = animRange > 0 ? scrolled / animRange : 0;
       p = Math.max(0, Math.min(1, p));
 
       // Map progress to active step (dynamic count)
