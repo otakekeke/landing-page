@@ -2315,31 +2315,171 @@
         </div>
       </div>
       <div class="ix-flow-r">
+        <!-- Scene 01: 初回相談 -->
         <div class="ix-flow-scene active">
           <span class="scene-num">01</span>
+          <span class="scene-phase">PHASE 00 — FIRST TALK</span>
           <h4>まず、<em>現場の声</em>を<br>聴きに伺います。</h4>
-          <div class="scene-body">
-            <div class="scene-card"><span class="ic">聴</span><span>困りごとを具体的に確認</span></div>
-            <div class="scene-card uguisu"><span class="ic">訪</span><span>現場訪問 or オンライン</span></div>
-            <div class="scene-card ai"><span class="ic">無</span><span>初回相談は無料</span></div>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">30〜45分</span></div>
+            <div class="scene-stat shu"><span class="k">費用</span><span class="v">無料</span></div>
+            <div class="scene-stat"><span class="k">担当</span><span class="v">代表直接</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— この回で確認すること</div>
+            <ul class="scene-bullets">
+              <li>現在の困りごと・現場の運用</li>
+              <li>使用中の紙・Excel・既存システム</li>
+              <li>業務整理が必要か、こちらで判断</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">進め方の方針メモ ／ 業務整理の見積書</div>
           </div>
         </div>
+
+        <!-- Scene 02: 現場理解・業務整理 -->
         <div class="ix-flow-scene">
           <span class="scene-num">02</span>
-          <h4>現場と資料を<br><em>こちらで読み解き</em>ます。</h4>
-          <div class="scene-body">
-            <div class="scene-card"><span class="ic">観</span><span>帳票・Excel・過去データを確認</span></div>
-            <div class="scene-card uguisu"><span class="ic">整</span><span>業務フローを整理</span></div>
-            <div class="scene-card ai"><span class="ic">¥</span><span>業務整理 10〜30万円</span></div>
+          <span class="scene-phase">PHASE 01 — OBSERVE</span>
+          <h4>現場と資料を、<br><em>こちらで読み解き</em>ます。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">1〜2週間</span></div>
+            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥10〜30万</span></div>
+            <div class="scene-stat"><span class="k">場所</span><span class="v">現場 or オンライン</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 確認するもの</div>
+            <ul class="scene-bullets">
+              <li>紙の帳票・Excel・シフト表・送迎表</li>
+              <li>月次集計・既存ソフト・過去データ</li>
+              <li>現場の確認作業・暗黙ルール</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">業務整理メモ ／ アプリ化方針提案書</div>
           </div>
         </div>
+
+        <!-- Scene 03: アプリ化方針の提案 -->
         <div class="ix-flow-scene">
           <span class="scene-num">03</span>
-          <h4>サンプルで<br><em>ズレを潰し</em>ます。</h4>
-          <div class="scene-body">
-            <div class="scene-card"><span class="ic">試</span><span>試作で画面と出力を確認</span></div>
-            <div class="scene-card uguisu"><span class="ic">合</span><span>仕様の合意は早い段階で</span></div>
-            <div class="scene-card ai"><span class="ic">運</span><span>運用に乗るまで伴走</span></div>
+          <span class="scene-phase">PHASE 01 — PROPOSAL</span>
+          <h4>整理結果を、<br><em>「何を作るか」</em>に落とす。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">1週間</span></div>
+            <div class="scene-stat"><span class="k">含む</span><span class="v">PHASE 01</span></div>
+            <div class="scene-stat"><span class="k">判断</span><span class="v">続行 or 終了</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— ご提示するもの</div>
+            <ul class="scene-bullets">
+              <li>アプリ化方針提案書（範囲・優先度）</li>
+              <li>機能の Must / Should / Could 分類</li>
+              <li>試作・本開発のおおよその費用レンジ</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">試作・設計の見積書（PHASE 02 用）</div>
+          </div>
+        </div>
+
+        <!-- Scene 04: 試作・画面/ロジック確認 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">04</span>
+          <span class="scene-phase">PHASE 02 — PROTOTYPE</span>
+          <h4>サンプルで、<br><em>ズレを潰し</em>ます。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">2〜4週間</span></div>
+            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥20〜50万</span></div>
+            <div class="scene-stat"><span class="k">対象</span><span class="v">重要機能のみ</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 試作で確認するもの</div>
+            <ul class="scene-bullets">
+              <li>画面イメージ・操作フロー</li>
+              <li>サンプル出力（帳票・集計結果）</li>
+              <li>シフト・加算など処理ルール</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">確定仕様書 ／ 本開発の見積書</div>
+          </div>
+        </div>
+
+        <!-- Scene 05: 本開発・小さく確認 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">05</span>
+          <span class="scene-phase">PHASE 03 — BUILD</span>
+          <h4>段階的に開発、<br><em>機能ごと</em>に現場確認。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">1〜3か月</span></div>
+            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥50〜300万</span></div>
+            <div class="scene-stat"><span class="k">確認</span><span class="v">機能単位</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 進めかた</div>
+            <ul class="scene-bullets">
+              <li>機能ごとに動くものを早めにお見せします</li>
+              <li>サンプル結果で「期待通り」を都度合意</li>
+              <li>仕様変更は早い段階で拾う（責めない）</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">動作確認済みの業務アプリ一式</div>
+          </div>
+        </div>
+
+        <!-- Scene 06: 試用・導入 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">06</span>
+          <span class="scene-phase">PHASE 03 — TRIAL</span>
+          <h4>本番環境で、<br><em>違和感</em>を最終調整。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">2〜4週間</span></div>
+            <div class="scene-stat"><span class="k">対象</span><span class="v">本番環境</span></div>
+            <div class="scene-stat"><span class="k">支援</span><span class="v">レクチャー</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 進めかた</div>
+            <ul class="scene-bullets">
+              <li>実際の業務で使っていただく</li>
+              <li>現場での違和感・運用の詰まりを拾う</li>
+              <li>レクチャー＋簡易マニュアル提供</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">本番稼働 ／ 運用支援への移行</div>
+          </div>
+        </div>
+
+        <!-- Scene 07: 運用支援・保守 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">07</span>
+          <span class="scene-phase">PHASE 04 — RUN</span>
+          <h4>運用に乗るまで、<br><em>伴走</em>します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">料金</span><span class="v">月額</span></div>
+            <div class="scene-stat shu"><span class="k">レンジ</span><span class="v">月¥3〜15万</span></div>
+            <div class="scene-stat"><span class="k">解約</span><span class="v">14日前通知</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 月額内に含まれるもの</div>
+            <ul class="scene-bullets">
+              <li>文言・表示順・項目名などの小修正</li>
+              <li>軽微な不具合修正・運用相談</li>
+              <li>月1回の定例（進捗・改善案）</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 別途お見積り</div>
+            <div class="scene-deliverable">新機能・帳票追加 ／ ロジック・業務フロー変更</div>
           </div>
         </div>
       </div>
