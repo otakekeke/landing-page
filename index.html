@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>嶽ノ子 — 介護現場に、要件定義をさせない。</title>
-<meta name="description" content="紙・Excel・手作業を読み解き、現場に合うアプリを作ります。介護現場の業務を観察・整理し、施設に合うオーダーメイドの業務アプリを設計・開発します。">
-<meta property="og:title" content="嶽ノ子 — 介護現場に、要件定義をさせない。">
-<meta property="og:description" content="紙・Excel・手作業を読み解き、現場に合うアプリを作ります。">
+<title>嶽ノ子 — 介護施設のシフト作成を、0から手作業で作らない。</title>
+<meta name="description" content="介護施設のシフト作成を、0から手作業で作らないサービス。希望休・資格・勤務条件・人員配置をもとにシフト案を作成し、管理者が確認・調整できます。シフトから紙・Excel業務にも広げられます。">
+<meta property="og:title" content="嶽ノ子 — 介護施設のシフト作成を、0から手作業で作らない。">
+<meta property="og:description" content="希望休・資格・勤務条件をもとに、介護シフト案を作成。最後は管理者が確認・調整できます。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1573,6 +1573,12 @@
     .problem-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
     .boundaries-grid { grid-template-columns: 1fr !important; }
     .case-detail { grid-template-columns: 1fr !important; }
+    .phases-grid-run { grid-template-columns: 1fr !important; }
+    .entry-detail-grid { grid-template-columns: 1fr !important; }
+    .low-price-conditions { grid-template-columns: 1fr !important; }
+    .warning-list { grid-template-columns: 1fr !important; }
+    .roles-grid { grid-template-columns: 1fr !important; }
+    .monthly-tier-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 700px) {
     .rule-card { padding: 22px 22px !important; }
@@ -1590,16 +1596,15 @@
     <span class="brand-name">嶽ノ子</span>
   </a>
   <div class="nav-links">
-    <a href="#problem" class="nav-link">なぜズレるか</a>
-    <a href="#service" class="nav-link">進め方</a>
+    <a href="#shift" class="nav-link">シフト作成</a>
+    <a href="#features" class="nav-link">できること</a>
     <a href="#flow" class="nav-link">流れ</a>
     <a href="#price" class="nav-link">料金</a>
-    <a href="#case" class="nav-link">実績</a>
-    <a href="plans.html" class="nav-link">導入例</a>
+    <a href="#case" class="nav-link">事例</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="company.html" class="nav-link">会社概要</a>
   </div>
-  <a href="#contact" class="nav-cta">ご相談 <span>→</span></a>
+  <a href="#contact" class="nav-cta">無料シフト診断 <span>→</span></a>
 </nav>
 
 <div class="page">
@@ -1609,50 +1614,50 @@
   <div class="hero-grid">
     <div class="tile tile-hero reveal">
       <div class="hero-meta">
-        <span class="chip"><span class="dot"></span>介護業務アプリ開発</span>
+        <span class="chip"><span class="dot"></span>介護シフト作成・業務改善</span>
         <span class="chip">EST. 2024</span>
-        <span class="chip shu">初回相談 無料</span>
+        <span class="chip shu">無料シフト診断</span>
       </div>
       <h1 class="hero-h1">
-        介護現場に、<br>
-        <span class="em">要件定義</span>をさせない。
+        介護施設のシフト作成を、<br>
+        <span class="em">0から手作業</span>で作らない。
       </h1>
       <p class="hero-sub">
-        紙・Excel・手作業を読み解き、現場に合うアプリを作ります。<br>
-        シフト、記録、送迎、月末集計、申し送り。<br>
-        現場に残る&ldquo;言語化しにくい業務&rdquo;を、こちらが読み解いてアプリ化します。
+        希望休・資格・勤務条件・人員配置をもとに、シフト案を作成。<br>
+        最後は管理者が確認・調整できるので、現場の判断を残したまま、毎月の作成負担を減らせます。<br>
+        <small style="display: block; margin-top: 12px; font-size: 14px; opacity: 0.8;">シフトを入口に、送迎・記録・月次集計・申し送りなど、紙・Excelで残る業務もアプリ化できます。</small>
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-filled">無料相談する <span>→</span></a>
-        <a href="#service" class="btn btn-outline">進め方を見る <span>↓</span></a>
+        <a href="#contact" class="btn btn-filled">無料シフト診断を受ける <span>→</span></a>
+        <a href="#shift" class="btn btn-outline">シフト作成の仕組みを見る <span>↓</span></a>
       </div>
     </div>
 
     <div class="tile tile-dark reveal">
-      <span class="tile-label">— CREDO / 理念</span>
+      <span class="tile-label">— SHIFT / シフト主力</span>
       <div class="tile-quote">
-        社会を回す人の、<br><em>大切な人</em>を守る。
+        完全自動ではなく、<br><em>シフト案</em>を作る。
       </div>
-      <a href="#philosophy" class="btn btn-tonal" style="background: var(--shu); color: var(--on-shu); align-self: flex-start;">続きを読む <span>→</span></a>
+      <a href="#shift" class="btn btn-tonal" style="background: var(--shu); color: var(--on-shu); align-self: flex-start;">仕組みを見る <span>→</span></a>
     </div>
 
     <div class="tile tile-stat reveal">
-      <span class="stat-k">MONTHLY SAVED</span>
-      <span class="stat-v">−15<small>時間/月</small></span>
-      <span style="font-size: 12px; opacity: 0.85;">転記作業の削減（実導入施設・CASE 01）</span>
+      <span class="stat-k">SHIFT</span>
+      <span class="stat-v">案を自動作成<small>＋管理者が調整</small></span>
+      <span style="font-size: 12px; opacity: 0.85;">希望休・資格・勤務条件をもとに、シフト案を作成</span>
     </div>
 
     <div class="tile tile-mini shu-surface reveal">
-      <span class="mini-k">FIRST TALK</span>
-      <span class="mini-v">初回相談 無料</span>
+      <span class="mini-k">FREE DIAGNOSIS</span>
+      <span class="mini-v">無料シフト診断</span>
     </div>
     <div class="tile tile-mini uguisu-surface reveal">
-      <span class="mini-k">BY</span>
-      <span class="mini-v">代表が直接対応</span>
+      <span class="mini-k">START FROM</span>
+      <span class="mini-v">初期 ¥300,000〜</span>
     </div>
     <div class="tile tile-mini ai-surface reveal">
-      <span class="mini-k">REDUCTION</span>
-      <span class="mini-v">−70% 電話・口頭確認</span>
+      <span class="mini-k">EXPAND</span>
+      <span class="mini-v">送迎・記録・月次集計</span>
     </div>
     <div class="tile tile-mini reveal" style="background: var(--yamabuki-surface); color: #6B5321;">
       <span class="mini-k">BASE</span>
@@ -1662,16 +1667,16 @@
     <!-- Marquee ticker -->
     <div class="hero-ticker reveal">
       <div class="ticker-track">
-        <span class="ticker-item">シフト管理</span>
-        <span class="ticker-item">在庫管理</span>
-        <span class="ticker-item">レク企画</span>
-        <span class="ticker-item">月次報告</span>
-        <span class="ticker-item">インシデント報告</span>
-        <span class="ticker-item">委員会運営</span>
-        <span class="ticker-item">利用者情報</span>
-        <span class="ticker-item">リハビリ記録</span>
+        <span class="ticker-item">シフト案作成</span>
+        <span class="ticker-item">希望休回収</span>
+        <span class="ticker-item">勤務条件設定</span>
+        <span class="ticker-item">人員配置チェック</span>
+        <span class="ticker-item">夜勤・早番・遅番</span>
         <span class="ticker-item">送迎管理</span>
-        <span class="ticker-item">日報入力</span>
+        <span class="ticker-item">月次集計</span>
+        <span class="ticker-item">申し送り</span>
+        <span class="ticker-item">記録チェック</span>
+        <span class="ticker-item">在庫管理</span>
         <span class="ticker-item">点検記録</span>
         <span class="ticker-item">申請承認</span>
         <!-- duplicate for seamless loop -->
@@ -1692,33 +1697,113 @@
   </div>
 </section>
 
-<!-- ===== PROBLEM ===== -->
-<section class="section" id="problem">
+<!-- ===== SHIFT (シフト作成の悩み + 嶽ノ子のシフト案作成) ===== -->
+<section class="section" id="shift">
   <div class="section-head reveal">
-    <span class="section-tag">— 00 / PROBLEM</span>
-    <h2 class="section-title">なぜ普通の開発は、<br><span class="accent">作った後にズレる</span>のか。</h2>
-    <span class="section-nav">問題提起</span>
+    <span class="section-tag">— 00 / SHIFT</span>
+    <h2 class="section-title">なぜシフト作成は、<br><span class="accent">普通のヒアリング</span>だけでは自動化できないのか。</h2>
+    <span class="section-nav">シフト</span>
   </div>
-  <div class="problem-grid reveal" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; padding: 0 8px;">
-    <div class="problem-body" style="font-family: var(--serif); font-size: 18px; line-height: 2; color: var(--sumi-2);">
-      <p style="margin-bottom: 20px;">介護現場の業務ルールは、紙・Excel・人の経験に分散しています。</p>
-      <p style="margin-bottom: 20px;">「シフトを組むときの暗黙のルール」「申し送りで使う独特の言い回し」「ベテランしか知らない判断基準」── 必要な仕様をすべて言葉にすること自体が、現場にとって大きな負担です。</p>
-      <p style="margin-bottom: 20px;">そのため、口頭ヒアリングだけで開発すると、後から必ず認識のズレが起きます。</p>
-      <p style="color: var(--shu); font-weight: 500;">「思っていたものと違う」を防ぐには、現場を見るしかありません。</p>
+
+  <div class="problem-grid reveal" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; padding: 0 8px; margin-bottom: 32px;">
+    <div class="problem-body" style="font-family: var(--serif); font-size: 17px; line-height: 1.95; color: var(--sumi-2);">
+      <p style="margin-bottom: 18px;">シフトには、Excelに書かれていない<strong style="color: var(--shu);">現場の判断</strong>が含まれています。</p>
+      <p style="margin-bottom: 18px;">「夜勤明けは休み」「新人は単独夜勤にしない」「特定の職員同士は組ませない」「資格者を必ず配置する」── これらは、口頭で聞いただけでは再現できません。</p>
+      <p style="margin-bottom: 18px;">嶽ノ子では、現在のシフト表・希望休・勤務条件を確認し、<strong>まずは「どこまで案を作れるか」を整理</strong>します。</p>
+      <p style="color: var(--shu); font-weight: 500;">完全自動ではなく、8割〜9割のシフト案を作る。最後は管理者が確認・調整できる仕組みです。</p>
     </div>
-    <div class="problem-list" style="display: flex; flex-direction: column; gap: 16px;">
-      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 20px 24px;">
-        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 8px;">RISK 01</div>
-        <div style="font-family: var(--serif); font-size: 16px; line-height: 1.7;">仕様書を現場に書かせる開発は、書ける人しか拾えない。</div>
+    <div class="problem-list" style="display: flex; flex-direction: column; gap: 12px;">
+      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 16px 20px;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 6px;">RULE 01</div>
+        <div style="font-family: var(--serif); font-size: 14.5px; line-height: 1.6;">夜勤明けは休み・連勤を避ける</div>
       </div>
-      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 20px 24px;">
-        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 8px;">RISK 02</div>
-        <div style="font-family: var(--serif); font-size: 16px; line-height: 1.7;">口頭ヒアリングだけでは、紙・Excelの中の運用が抜け落ちる。</div>
+      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 16px 20px;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 6px;">RULE 02</div>
+        <div style="font-family: var(--serif); font-size: 14.5px; line-height: 1.6;">新人は単独夜勤にしない・資格者を必ず配置</div>
       </div>
-      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 20px 24px;">
-        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 8px;">RISK 03</div>
-        <div style="font-family: var(--serif); font-size: 16px; line-height: 1.7;">完成してから「違う」と分かると、作り直しコストが跳ね上がる。</div>
+      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 16px 20px;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 6px;">RULE 03</div>
+        <div style="font-family: var(--serif); font-size: 14.5px; line-height: 1.6;">特定の職員同士は組ませない・相性を考慮</div>
       </div>
+      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 16px 20px;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 6px;">RULE 04</div>
+        <div style="font-family: var(--serif); font-size: 14.5px; line-height: 1.6;">希望休はなるべく通す・曜日別必要人数を満たす</div>
+      </div>
+      <div class="problem-item" style="background: var(--kinari-2); border-radius: var(--r-sm); padding: 16px 20px;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--shu); margin-bottom: 6px;">RULE 05</div>
+        <div style="font-family: var(--serif); font-size: 14.5px; line-height: 1.6;">管理者が最終調整できる余白を残す</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 嶽ノ子のアプローチ -->
+  <div class="reveal" style="padding: 32px 36px; background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md);">
+    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light); margin-bottom: 12px;">— APPROACH / 嶽ノ子のシフト案作成</div>
+    <h3 style="font-family: var(--serif); font-size: clamp(24px, 2.6vw, 32px); font-weight: 500; line-height: 1.5; margin-bottom: 18px;">条件をもとに<em style="color: var(--shu-light); font-style: normal;">「シフト案」</em>を作り、<br>管理者が確認・調整できる仕組み。</h3>
+    <p style="font-family: var(--serif); font-size: 15px; line-height: 1.95; opacity: 0.9; max-width: 76ch;">完全自動化を目指すのではなく、<strong>現場の判断を残したまま</strong>、毎月の作成負担を減らすことを目的にしています。0から手作業で作る時間を減らし、確認漏れを警告で防ぎます。最終判断は現場に残します。</p>
+  </div>
+</section>
+
+<!-- ===== FEATURES (シフト作成でできること) ===== -->
+<section class="section" id="features">
+  <div class="section-head reveal">
+    <span class="section-tag">— 01 / FEATURES</span>
+    <h2 class="section-title">シフト作成で、<br><span class="accent">できること</span>。</h2>
+    <span class="section-nav">できること</span>
+  </div>
+  <div class="features-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 01</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">希望休の回収</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">スタッフがスマホやフォームで希望休を入力。紙やLINEで集める手間を減らします。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 02</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">職員情報の管理</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">資格・勤務可能日・勤務区分・夜勤可否・役割を管理します。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 03</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">勤務条件の設定</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">早番・日勤・遅番・夜勤・休みなど、施設の勤務区分を登録できます。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 04</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">人員配置チェック</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">曜日や時間帯ごとに必要人数を設定。不足があれば警告します。</p>
+    </div>
+    <div class="feature-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; border: 2px solid var(--shu);">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 05 — 中心機能</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4; color: var(--shu);">シフト案作成</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">希望休・勤務条件・人員配置をもとに、シフト案を作成します。完全自動ではなく、8〜9割の案を提示。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 06</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">管理者による調整</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">自動作成後に、管理者が画面上で個別事情をふまえて修正できます。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 07</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">Excel／PDF 出力</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">既存の運用に合わせて、ExcelやPDFで出力できます。使い慣れた形式に近づけます。</p>
+    </div>
+    <div class="feature-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">FEATURE 08</div>
+      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">確認漏れ防止（警告）</h3>
+      <p style="font-size: 13px; line-height: 1.8; color: var(--sumi-2);">未入力・資格不足・人員不足・連勤・夜勤明け勤務などを警告で防ぎます。</p>
+    </div>
+  </div>
+
+  <!-- 警告例 -->
+  <div class="reveal" style="margin-top: 24px; padding: 24px 32px; background: var(--kinari-2); border-radius: var(--r-md);">
+    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 12px;">— WARNING / 表示する警告例</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px;" class="warning-list">
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>資格者が不足しています</div>
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>夜勤明けの翌日に勤務が入っています</div>
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>希望休と勤務が重なっています</div>
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>連勤が続いています</div>
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>この時間帯の必要人数を満たしていません</div>
+      <div style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7; color: var(--sumi-2); padding: 8px 12px; background: var(--kinari); border-radius: 6px;"><span style="color: var(--shu); font-weight: 700;">⚠</span>新人の単独夜勤になっています</div>
     </div>
   </div>
 </section>
@@ -2286,195 +2371,144 @@
         <div class="ix-flow-progress">
           <div class="ix-flow-step active">
             <div class="ix-flow-bullet">01</div>
-            <div><h3>初回相談</h3><p>現在の困りごと、使用中の紙・Excel・既存システムを確認し、業務整理が必要か判断します。</p><div class="dur">— 30〜45 分・無料</div></div>
+            <div><h3>無料相談・簡易診断</h3><p>困りごとを聞き、紙・Excelを軽く確認。アプリ化できる範囲・概算費用・合う商品プランをご案内します。要件定義はしません。</p><div class="dur">— 60分まで・0円</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">02</div>
-            <div><h3>現場理解・業務整理</h3><p>実際の帳票・Excel・過去データ・現場の流れを確認し、開発すべき範囲を整理します。</p><div class="dur">— 1〜2 週間・有償</div></div>
+            <div><h3>商品選定・お見積り</h3><p>4つのアプリ商品から、現場の規模・必要機能・予算で最適なものを選び、固定価格の見積を発行します。</p><div class="dur">— 数日〜1週間</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">03</div>
-            <div><h3>アプリ化方針の提案</h3><p>整理結果をもとに、何をどう作るかをご提案。優先順位と概算費用を共有します。</p><div class="dur">— 1 週間</div></div>
+            <div><h3>業務整理＋設計＋試作</h3><p>商品料金の中で、必要な深さで業務整理・設計・試作（中〜大規模のみ）を行います。追加料金は発生しません。</p><div class="dur">— 商品料金に含む</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">04</div>
-            <div><h3>試作・画面/ロジック確認</h3><p>必要な部分から小さく試作。画面イメージ、サンプル出力、処理ルールを確認しながら、開発前のズレを減らします。</p><div class="dur">— 2〜4 週間</div></div>
+            <div><h3>開発・試用・本番導入</h3><p>段階的に開発し機能ごとに確認、本番環境で試用してから導入。初回レクチャー・簡易マニュアル提供まで。</p><div class="dur">— 商品料金に含む</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">05</div>
-            <div><h3>開発・小さく確認</h3><p>段階的に開発し、機能ごとに現場で確認していただきます。仕様変更は早い段階で拾います。</p><div class="dur">— 1〜3 か月</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">06</div>
-            <div><h3>試用・導入</h3><p>本番環境で実際に使っていただき、現場での違和感を最終調整します。</p><div class="dur">— 2〜4 週間</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">07</div>
-            <div><h3>運用支援・保守</h3><p>運用に乗るまで伴走。小さな修正・改善・追加要望を継続的に対応します。</p><div class="dur">— 月額</div></div>
+            <div><h3>月額サポート</h3><p>最初の1〜3か月は月額の範囲で重点的にサポート。以降は標準保守として継続。アプリ使用中は継続いただきます。</p><div class="dur">— 月額・固定価格</div></div>
           </div>
         </div>
       </div>
       <div class="ix-flow-r">
-        <!-- Scene 01: 初回相談 -->
+        <!-- Scene 01: 無料相談・簡易診断 -->
         <div class="ix-flow-scene active">
           <span class="scene-num">01</span>
-          <span class="scene-phase">PHASE 00 — FIRST TALK</span>
-          <h4>まず、<em>現場の声</em>を<br>聴きに伺います。</h4>
+          <span class="scene-phase">STEP 01 — FREE TALK</span>
+          <h4>困りごとを聞き、<br><em>アプリ化の範囲</em>を見立てる。</h4>
           <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">30〜45分</span></div>
-            <div class="scene-stat shu"><span class="k">費用</span><span class="v">無料</span></div>
-            <div class="scene-stat"><span class="k">担当</span><span class="v">代表直接</span></div>
+            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
+            <div class="scene-stat"><span class="k">時間</span><span class="v">60分まで</span></div>
+            <div class="scene-stat"><span class="k">形式</span><span class="v">オンライン中心</span></div>
           </div>
           <div class="scene-section">
-            <div class="scene-section-title">— この回で確認すること</div>
+            <div class="scene-section-title">— ここでやること</div>
             <ul class="scene-bullets">
-              <li>現在の困りごと・現場の運用</li>
-              <li>使用中の紙・Excel・既存システム</li>
-              <li>業務整理が必要か、こちらで判断</li>
+              <li>困っている業務をお聞きする</li>
+              <li>紙・Excel・帳票を1〜2点まで軽く確認</li>
+              <li>改善できそうな範囲と概算費用を提示</li>
+              <li>合いそうな商品プランを提案</li>
             </ul>
           </div>
           <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">進め方の方針メモ ／ 業務整理の見積書</div>
+            <div class="scene-section-title">— やらないこと</div>
+            <div class="scene-deliverable">詳細業務整理 ／ 画面案 ／ 試作 ／ 要件定義書作成</div>
           </div>
         </div>
 
-        <!-- Scene 02: 現場理解・業務整理 -->
+        <!-- Scene 02: 商品選定 -->
         <div class="ix-flow-scene">
           <span class="scene-num">02</span>
-          <span class="scene-phase">PHASE 01 — OBSERVE</span>
-          <h4>現場と資料を、<br><em>こちらで読み解き</em>ます。</h4>
+          <span class="scene-phase">STEP 02 — CHOOSE</span>
+          <h4>4商品から、<br><em>合うサイズ</em>を選ぶ。</h4>
           <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">1〜2週間</span></div>
-            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥10〜30万</span></div>
-            <div class="scene-stat"><span class="k">場所</span><span class="v">現場 or オンライン</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 確認するもの</div>
-            <ul class="scene-bullets">
-              <li>紙の帳票・Excel・シフト表・送迎表</li>
-              <li>月次集計・既存ソフト・過去データ</li>
-              <li>現場の確認作業・暗黙ルール</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">業務整理メモ ／ アプリ化方針提案書</div>
-          </div>
-        </div>
-
-        <!-- Scene 03: アプリ化方針の提案 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">03</span>
-          <span class="scene-phase">PHASE 01 — PROPOSAL</span>
-          <h4>整理結果を、<br><em>「何を作るか」</em>に落とす。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">1週間</span></div>
-            <div class="scene-stat"><span class="k">含む</span><span class="v">PHASE 01</span></div>
+            <div class="scene-stat"><span class="k">期間</span><span class="v">数日〜1週間</span></div>
+            <div class="scene-stat"><span class="k">価格</span><span class="v">固定</span></div>
             <div class="scene-stat"><span class="k">判断</span><span class="v">続行 or 終了</span></div>
           </div>
           <div class="scene-section">
-            <div class="scene-section-title">— ご提示するもの</div>
+            <div class="scene-section-title">— 選べる商品</div>
             <ul class="scene-bullets">
-              <li>アプリ化方針提案書（範囲・優先度）</li>
-              <li>機能の Must / Should / Could 分類</li>
-              <li>試作・本開発のおおよその費用レンジ</li>
+              <li>紙・Excel改善パック（初期¥10万・月¥1万）</li>
+              <li>小規模アプリ（初期¥20万・月¥1.5万）</li>
+              <li>標準アプリ（初期¥50万・月¥3万）— 本命</li>
+              <li>ロジック重視アプリ（個別見積り）</li>
             </ul>
           </div>
           <div class="scene-section">
             <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">試作・設計の見積書（PHASE 02 用）</div>
+            <div class="scene-deliverable">固定価格の見積書 ／ 契約・キックオフ</div>
           </div>
         </div>
 
-        <!-- Scene 04: 試作・画面/ロジック確認 -->
+        <!-- Scene 03: 業務整理＋設計＋試作 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">03</span>
+          <span class="scene-phase">STEP 03 — ORGANIZE</span>
+          <h4>業務整理＋設計＋試作、<br><em>商品料金に含む</em>。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
+            <div class="scene-stat"><span class="k">深さ</span><span class="v">商品サイズ依存</span></div>
+            <div class="scene-stat"><span class="k">担当</span><span class="v">こちらが整理</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 商品サイズ別の深さ</div>
+            <ul class="scene-bullets">
+              <li>紙・Excel改善：簡易（既存をベースに整理）</li>
+              <li>小規模アプリ：簡易業務整理＋設計</li>
+              <li>標準アプリ：業務整理＋設計＋試作</li>
+              <li>ロジック重視：業務整理＋試作＋テストケース必須</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">業務整理メモ ／ 対応する／しない範囲の確認書</div>
+          </div>
+        </div>
+
+        <!-- Scene 04: 開発・試用・本番導入 -->
         <div class="ix-flow-scene">
           <span class="scene-num">04</span>
-          <span class="scene-phase">PHASE 02 — PROTOTYPE</span>
-          <h4>サンプルで、<br><em>ズレを潰し</em>ます。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">2〜4週間</span></div>
-            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥20〜50万</span></div>
-            <div class="scene-stat"><span class="k">対象</span><span class="v">重要機能のみ</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 試作で確認するもの</div>
-            <ul class="scene-bullets">
-              <li>画面イメージ・操作フロー</li>
-              <li>サンプル出力（帳票・集計結果）</li>
-              <li>シフト・加算など処理ルール</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">確定仕様書 ／ 本開発の見積書</div>
-          </div>
-        </div>
-
-        <!-- Scene 05: 本開発・小さく確認 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">05</span>
-          <span class="scene-phase">PHASE 03 — BUILD</span>
+          <span class="scene-phase">STEP 04 — BUILD</span>
           <h4>段階的に開発、<br><em>機能ごと</em>に現場確認。</h4>
           <div class="scene-meta-row">
             <div class="scene-stat"><span class="k">期間</span><span class="v">1〜3か月</span></div>
-            <div class="scene-stat shu"><span class="k">費用</span><span class="v">¥50〜300万</span></div>
+            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
             <div class="scene-stat"><span class="k">確認</span><span class="v">機能単位</span></div>
           </div>
           <div class="scene-section">
             <div class="scene-section-title">— 進めかた</div>
             <ul class="scene-bullets">
-              <li>機能ごとに動くものを早めにお見せします</li>
-              <li>サンプル結果で「期待通り」を都度合意</li>
-              <li>仕様変更は早い段階で拾う（責めない）</li>
+              <li>機能ごとに動くものを早めにお見せ</li>
+              <li>サンプル結果で都度合意</li>
+              <li>本番環境で試用してから導入</li>
+              <li>初回レクチャー・簡易マニュアル提供</li>
             </ul>
           </div>
           <div class="scene-section">
             <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">動作確認済みの業務アプリ一式</div>
+            <div class="scene-deliverable">動作確認済みアプリ ／ 本番稼働</div>
           </div>
         </div>
 
-        <!-- Scene 06: 試用・導入 -->
+        <!-- Scene 05: 月額サポート -->
         <div class="ix-flow-scene">
-          <span class="scene-num">06</span>
-          <span class="scene-phase">PHASE 03 — TRIAL</span>
-          <h4>本番環境で、<br><em>違和感</em>を最終調整。</h4>
+          <span class="scene-num">05</span>
+          <span class="scene-phase">STEP 05 — RUN</span>
+          <h4>月額で、<br><em>使い続ける</em>を支える。</h4>
           <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">2〜4週間</span></div>
-            <div class="scene-stat"><span class="k">対象</span><span class="v">本番環境</span></div>
-            <div class="scene-stat"><span class="k">支援</span><span class="v">レクチャー</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 進めかた</div>
-            <ul class="scene-bullets">
-              <li>実際の業務で使っていただく</li>
-              <li>現場での違和感・運用の詰まりを拾う</li>
-              <li>レクチャー＋簡易マニュアル提供</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">本番稼働 ／ 運用支援への移行</div>
-          </div>
-        </div>
-
-        <!-- Scene 07: 運用支援・保守 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">07</span>
-          <span class="scene-phase">PHASE 04 — RUN</span>
-          <h4>運用に乗るまで、<br><em>伴走</em>します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">料金</span><span class="v">月額</span></div>
-            <div class="scene-stat shu"><span class="k">レンジ</span><span class="v">月¥3〜15万</span></div>
+            <div class="scene-stat shu"><span class="k">月額</span><span class="v">固定価格</span></div>
+            <div class="scene-stat"><span class="k">最初1〜3か月</span><span class="v">重点</span></div>
             <div class="scene-stat"><span class="k">解約</span><span class="v">14日前通知</span></div>
           </div>
           <div class="scene-section">
-            <div class="scene-section-title">— 月額内に含まれるもの</div>
+            <div class="scene-section-title">— 月額に含まれるもの</div>
             <ul class="scene-bullets">
-              <li>文言・表示順・項目名などの小修正</li>
-              <li>軽微な不具合修正・運用相談</li>
-              <li>月1回の定例（進捗・改善案）</li>
+              <li>アプリ利用権・不具合対応・操作相談</li>
+              <li>軽微修正・職員入退職対応・権限変更</li>
+              <li>導入支援（最初1〜3か月は厚め）</li>
+              <li>3つの保守ティア：月¥10,000／¥20,000／¥50,000</li>
             </ul>
           </div>
           <div class="scene-section">
@@ -2488,85 +2522,190 @@
 </section>
 
 
-<!-- ===== PRICING (4-phase) ===== -->
+<!-- ===== PRICING (シフト中心・固定価格) ===== -->
 <section class="section" id="price">
   <div class="section-head reveal">
-    <span class="section-tag">— 04 / PRICING</span>
-    <h2 class="section-title">料金は、<br><span class="accent">工程ごと</span>に明示。</h2>
+    <span class="section-tag">— 02 / PRICING</span>
+    <h2 class="section-title">料金は、<br><span class="accent">固定価格</span>で明示。</h2>
     <span class="section-nav">料金</span>
   </div>
 
   <div class="reveal" style="margin-bottom: 24px; padding: 28px 36px; background: var(--kinari-2); border-radius: var(--r-md);">
-    <p style="font-family: var(--serif); font-size: 16px; line-height: 1.95; color: var(--sumi-2); max-width: 72ch;">無料相談後、必要に応じて<strong style="color: var(--shu);">「現場理解・業務整理」から</strong>始めます。業務整理・試作の結果、本開発に進まない判断も可能です。無理に契約を迫ることはありません。</p>
+    <p style="font-family: var(--serif); font-size: 16px; line-height: 1.95; color: var(--sumi-2); max-width: 80ch;">
+      まずは<strong style="color: var(--shu);">無料シフト診断（0円）</strong>から。シフト案作成プランは<strong style="color: var(--shu);">固定価格</strong>でご提示します。<br>
+      <strong>各プランの初期費用には、導入に必要なヒアリング・設定・テスト・初期レクチャーを含みます。</strong>
+    </p>
   </div>
 
-  <div class="phases-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
-    <!-- Phase 0 -->
-    <div class="phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PHASE 00</div>
-      <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4; color: var(--shu);">初回相談</h3>
-      <div style="font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--shu);">無料</div>
-      <p style="font-size: 13px; line-height: 1.85; color: var(--sumi-2);">現在の困りごと、紙・Excel・既存システムを確認し、業務整理が必要か判断します。</p>
-      <ul style="list-style: none; padding: 0; font-size: 12px; line-height: 1.95; color: var(--sumi-2); margin-top: 4px;">
-        <li>・ 30〜45分</li>
-        <li>・ 現場訪問 or オンライン</li>
-        <li>・ 代表が直接対応</li>
-      </ul>
+  <!-- ENTRY: 無料シフト診断 -->
+  <div class="reveal phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 32px 36px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">STEP 01 — FREE DIAGNOSIS</div>
+      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 4px 10px; border-radius: 999px;">オンライン中心・60分まで</span>
     </div>
-    <!-- Phase 1 -->
-    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--sumi);">PHASE 01</div>
-      <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4;">現場理解・<br>業務整理</h3>
-      <div style="font-family: var(--serif); font-size: 28px; font-weight: 500;">¥10〜30万<small style="font-size: 12px; font-weight: 400; opacity: 0.7;">税込</small></div>
-      <p style="font-size: 13px; line-height: 1.85; color: var(--sumi-2);">帳票・Excel・過去データ・現場の流れを確認し、開発すべき範囲を整理します。</p>
-      <ul style="list-style: none; padding: 0; font-size: 12px; line-height: 1.95; color: var(--sumi-2); margin-top: 4px;">
-        <li>・ 1〜2週間</li>
-        <li>・ 現場ヒアリング・資料確認</li>
-        <li>・ アプリ化方針の提案書</li>
-      </ul>
+    <h3 style="font-family: var(--serif); font-size: 24px; font-weight: 500; line-height: 1.4; color: var(--shu);">無料シフト診断</h3>
+    <div style="font-family: var(--serif); font-size: 32px; font-weight: 500; color: var(--shu);">0円</div>
+    <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2); max-width: 70ch;">現在のシフト表や勤務条件をもとに、<strong>自動化しやすい部分・人が判断した方がよい部分・想定プラン・概算費用</strong>を簡単に確認します。詳細な業務設計・本番用シフト作成は、ご契約後に行います。</p>
+    <div class="entry-detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 4px;">— やること</div>
+        <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.85; color: var(--sumi-2);">
+          <li>・ 現在のシフト作成方法を確認</li>
+          <li>・ 職員数・勤務区分・希望休の集め方</li>
+          <li>・ 人員配置ルールの有無</li>
+          <li>・ 自動化できそうな範囲を案内</li>
+          <li>・ 概算費用と想定プランを提示</li>
+        </ul>
+      </div>
+      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 4px;">— やらないこと</div>
+        <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.85; color: var(--sumi-2);">
+          <li>・ 詳細な業務設計</li>
+          <li>・ 本格的なシフトロジック整理</li>
+          <li>・ プロトタイプ作成</li>
+          <li>・ 本番用シフト作成</li>
+          <li>・ 個別ルールの完全反映</li>
+        </ul>
+      </div>
     </div>
-    <!-- Phase 2 -->
-    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--sumi);">PHASE 02</div>
-      <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4;">試作・<br>設計</h3>
-      <div style="font-family: var(--serif); font-size: 28px; font-weight: 500;">¥20〜50万<small style="font-size: 12px; font-weight: 400; opacity: 0.7;">税込</small></div>
-      <p style="font-size: 13px; line-height: 1.85; color: var(--sumi-2);">必要な部分から小さく試作。画面イメージとサンプル出力で開発前のズレを潰します。</p>
-      <ul style="list-style: none; padding: 0; font-size: 12px; line-height: 1.95; color: var(--sumi-2); margin-top: 4px;">
-        <li>・ 2〜4週間</li>
-        <li>・ 画面／ロジックの確認</li>
-        <li>・ 最終仕様の合意</li>
-      </ul>
+    <p style="font-size: 12px; line-height: 1.7; color: var(--sumi-2); margin-top: 4px; padding-top: 12px; border-top: 1px solid rgba(26,22,20,0.08);">※ 無料診断は契約前の簡易確認です。詳細な設計・設定・テストは、ご契約後にプラン内で行います。<br>※ 初回時点で、個人名入りのシフト表を共有いただく必要はありません。匿名化したサンプルでも確認可能です。</p>
+  </div>
+
+  <!-- SHIFT PLANS -->
+  <div class="reveal" style="margin: 8px 0 10px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
+    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— SHIFT PLANS</span>
+    <span style="font-family: var(--serif); font-size: 18px; color: var(--sumi);">シフト案作成プラン（固定価格・業務整理を含む）</span>
+    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
+  </div>
+
+  <div class="phases-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px;">
+    <!-- ライト -->
+    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PLAN 01</div>
+      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">シフト案作成<br>ライト</h3>
+      <div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 300,000円</div>
+        <div style="font-family: var(--serif); font-size: 15px; color: var(--sumi-2);">月額 30,000円</div>
+        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 2px;">（税込・固定価格）</div>
+      </div>
+      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">1事業所・職員30名程度まで・勤務区分が比較的シンプルな施設向け。</p>
+      <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2); margin-top: 4px;">
+        <strong>含む：</strong>希望休管理／シフト案作成／手動調整／Excel出力／初期レクチャー
+      </div>
     </div>
-    <!-- Phase 3 -->
-    <div class="phase-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">PHASE 03</div>
-      <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4;">本開発</h3>
-      <div style="font-family: var(--serif); font-size: 28px; font-weight: 500;">¥50〜300万<small style="font-size: 12px; font-weight: 400; opacity: 0.7;">税込</small></div>
-      <p style="font-size: 13px; line-height: 1.85; opacity: 0.85;">段階的に開発、機能ごとに現場で確認。試用期間を経て本番導入まで支援します。</p>
-      <ul style="list-style: none; padding: 0; font-size: 12px; line-height: 1.95; opacity: 0.85; margin-top: 4px;">
-        <li>・ 1〜3か月</li>
-        <li>・ 試用・本番導入を含む</li>
-        <li>・ 範囲により上下します</li>
-      </ul>
+    <!-- スタンダード（本命） -->
+    <div class="phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px; border: 2px solid var(--shu); position: relative;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PLAN 02</div>
+        <span style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 3px 8px; border-radius: 999px;">本命</span>
+      </div>
+      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4; color: var(--shu);">シフト案作成<br>スタンダード</h3>
+      <div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--shu);">初期 500,000円</div>
+        <div style="font-family: var(--serif); font-size: 15px; color: var(--sumi);">月額 50,000円</div>
+        <div style="font-size: 10.5px; color: var(--sumi); opacity: 0.7; margin-top: 2px;">（税込・固定価格）</div>
+      </div>
+      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi);">職員50名程度まで・複数勤務区分・資格役割条件・夜勤シフトに対応。</p>
+      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi); margin-top: 4px;">
+        <strong>含む：</strong>ライト＋複数勤務区分／資格役割条件／人員配置チェック／警告表示
+      </div>
     </div>
-    <!-- Phase 4 -->
-    <div class="phase-card" style="background: var(--uguisu-surface); border-radius: var(--r-md); padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; color: #2D3D1F;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--uguisu);">PHASE 04</div>
-      <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4;">運用支援・<br>保守</h3>
-      <div style="font-family: var(--serif); font-size: 28px; font-weight: 500;">月 ¥3〜15万<small style="font-size: 12px; font-weight: 400; opacity: 0.7;">税込</small></div>
-      <p style="font-size: 13px; line-height: 1.85;">運用に乗るまで伴走。小さな修正と継続改善を月額でサポートします。</p>
-      <ul style="list-style: none; padding: 0; font-size: 12px; line-height: 1.95; margin-top: 4px;">
-        <li>・ 月額・1か月単位の解約</li>
-        <li>・ 月1回の定例</li>
-        <li>・ 小さな修正は月内対応</li>
-      </ul>
+    <!-- 法人・複数事業所 -->
+    <div class="phase-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">PLAN 03</div>
+      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">法人・<br>複数事業所</h3>
+      <div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 1,000,000円〜</div>
+        <div style="font-family: var(--serif); font-size: 15px; color: var(--shu-light);">月額 100,000円〜</div>
+        <div style="font-size: 10.5px; opacity: 0.7; margin-top: 2px;">（税込・個別見積り）</div>
+      </div>
+      <p style="font-size: 12.5px; line-height: 1.75; opacity: 0.9;">複数事業所・本部管理・複数管理者・権限設定・集計・複雑な勤務条件に対応。</p>
+      <div style="background: rgba(245,239,227,0.08); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; opacity: 0.9; margin-top: 4px;">
+        <strong>含む：</strong>スタンダード＋複数事業所／本部管理／複数管理者／権限設定／集計
+      </div>
     </div>
   </div>
 
-  <!-- 小さな修正の範囲 -->
-  <div class="reveal" style="margin: 24px 0 8px; padding: 28px 36px; background: var(--kinari-2); border-radius: var(--r-md);">
-    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 12px;">— SCOPE / 小さな修正の範囲</div>
-    <p style="font-family: var(--serif); font-size: 15px; line-height: 1.95; color: var(--sumi-2); max-width: 80ch;"><strong>含まれるもの：</strong>文言変更、表示順変更、軽微な項目名変更など、既存仕様の範囲内の調整。<br><strong>別途お見積り：</strong>新機能追加、帳票追加、ロジック変更、業務フロー変更。</p>
+  <!-- 安心の一文 -->
+  <div class="reveal" style="margin-bottom: 32px; padding: 20px 28px; background: var(--shu-surface); border-left: 4px solid var(--shu); border-radius: var(--r-sm);">
+    <p style="font-family: var(--serif); font-size: 14px; line-height: 1.85; color: var(--sumi); max-width: 80ch;">
+      <strong>表示価格で対応できる範囲を、事前に明確にします。</strong>追加費用が発生する場合は、作業前に必ず内容と金額をご説明し、合意のうえで進めます。<strong>勝手に費用が増えることはありません。</strong>
+    </p>
+  </div>
+
+  <!-- 他業務拡張プラン -->
+  <div class="reveal" style="margin: 8px 0 10px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
+    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--uguisu); font-weight: 600;">— OTHER PLANS</span>
+    <span style="font-family: var(--serif); font-size: 18px; color: var(--sumi);">シフト以外に広げられる業務</span>
+    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
+  </div>
+
+  <div class="phases-grid phases-grid-run reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--uguisu);">EXTRA 01</div>
+      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">紙・Excel改善パック</h3>
+      <div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 100,000円</div>
+        <div style="font-family: var(--serif); font-size: 15px; color: var(--sumi-2);">月額 10,000円</div>
+      </div>
+      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">申し送り・備品管理・チェックリスト・記録管理・利用者一覧などを1業務だけアプリ化。</p>
+      <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2); margin-top: 4px;">
+        <strong>条件：</strong>1業務・3画面まで・帳票1種・複雑ロジックなし
+      </div>
+    </div>
+    <div class="phase-card" style="background: var(--uguisu-surface); border-radius: var(--r-md); padding: 26px 22px; display: flex; flex-direction: column; gap: 10px; color: #2D3D1F;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--uguisu);">EXTRA 02</div>
+      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">その他業務アプリ</h3>
+      <div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">個別見積り</div>
+        <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">送迎・月次集計・報告書・記録チェック・在庫・家族連絡 等</div>
+      </div>
+      <p style="font-size: 12.5px; line-height: 1.75;">シフト導入後、必要に応じて他の紙・Excel業務もアプリ化できます。範囲に応じて個別にお見積りします。</p>
+    </div>
+  </div>
+
+  <!-- 各プランに含まれる導入支援 -->
+  <div class="reveal" style="margin-bottom: 24px; padding: 24px 32px; background: var(--yamabuki-surface); border-radius: var(--r-md); color: #4A3A18;">
+    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: #8A6A1F; margin-bottom: 8px;">— ONBOARDING / 各プランの初期費用に含まれるもの</div>
+    <p style="font-family: var(--serif); font-size: 14.5px; line-height: 1.9; max-width: 80ch;">
+      <strong>導入に必要なヒアリング、設定、テスト、初期レクチャーは、すべて初期費用に含めています。</strong>業務整理を別料金にせず、シフトプランの中で実施します。ただし、複雑な個別ルール、大幅な帳票変更、外部連携、複数事業所対応は別途お見積りとなります。
+    </p>
+  </div>
+
+  <!-- 月額に含まれるもの -->
+  <div class="reveal" style="margin-bottom: 24px; padding: 28px 36px; background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md);">
+    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light); margin-bottom: 12px;">— MONTHLY / 月額に含まれる対応・対応時間目安</div>
+    <p style="font-family: var(--serif); font-size: 15px; line-height: 1.9; max-width: 76ch; margin-bottom: 14px;">
+      アプリは納品して終わりではなく、現場で使われ続けることで価値が出ます。月額は、シフト作成を毎月安定して回すための<strong>利用・管理・相談費用</strong>です。
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 14px;" class="monthly-tier-grid">
+      <div style="background: rgba(245,239,227,0.06); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-bottom: 4px;">PLAN 01 — LIGHT</div>
+        <div style="font-family: var(--serif); font-size: 14px; opacity: 0.95;">月額に含む対応：月30分まで</div>
+      </div>
+      <div style="background: rgba(245,239,227,0.06); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-bottom: 4px;">PLAN 02 — STANDARD</div>
+        <div style="font-family: var(--serif); font-size: 14px; opacity: 0.95;">月額に含む対応：月1時間まで</div>
+      </div>
+      <div style="background: rgba(245,239,227,0.06); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-bottom: 4px;">PLAN 03 — CORPORATE</div>
+        <div style="font-family: var(--serif); font-size: 14px; opacity: 0.95;">月額に含む対応：月3時間まで</div>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0;">
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">操作相談</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">軽微な文言・表示変更</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">職員追加・退職対応</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">勤務区分の軽微な変更</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">不具合修正</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">権限・設定変更</span>
+      <span class="chip" style="background: rgba(245,239,227,0.08); color: var(--on-sumi); border-color: rgba(245,239,227,0.15);">FAQ案内</span>
+    </div>
+    <p style="font-family: var(--serif); font-size: 13.5px; line-height: 1.85; max-width: 76ch; opacity: 0.85; padding-top: 12px; border-top: 1px solid rgba(245,239,227,0.12);">
+      <strong>対応目安：</strong>通常3営業日以内に一次返信／緊急対応は別途相談。<br>
+      <strong>別途お見積り：</strong>新しい勤務ルール追加・複雑なロジック変更・帳票レイアウト大幅変更・複数事業所対応・外部システム連携・新機能追加・法令変更に伴う大幅修正。<br>
+      月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。
+    </p>
   </div>
 </section>
 
@@ -2574,20 +2713,21 @@
 <section class="section" id="case">
   <div class="section-head reveal">
     <span class="section-tag">— 05 / CASE STUDY</span>
-    <h2 class="section-title">導入<br><span class="accent">実績</span></h2>
+    <h2 class="section-title">導入<br><span class="accent">事例</span></h2>
     <span class="section-nav">実績</span>
   </div>
 
   <div class="case-wrap reveal">
     <div class="case-l">
       <span class="case-tag">CASE 01 ／ 統合アプリ</span>
-      <h3 class="case-title">リハビリデイサービスでの<br>紙媒体の一括アプリ化</h3>
+      <h3 class="case-title">リハビリデイサービスでの<br>紙媒体・シフト業務のアプリ化</h3>
       <dl class="case-facts">
         <div class="case-fact"><dt>Type</dt><dd>通所リハビリテーション（リハビリデイサービス）</dd></div>
         <div class="case-fact"><dt>Staff</dt><dd>20名（リハビリ職・介護職・事務職）</dd></div>
         <div class="case-fact"><dt>Users</dt><dd>1日あたり30名前後</dd></div>
         <div class="case-fact"><dt>Before</dt><dd>紙媒体中心の業務管理、転記作業が多く情報共有が困難</dd></div>
       </dl>
+      <p style="font-size: 11.5px; line-height: 1.6; color: var(--sumi-2); opacity: 0.75; margin-top: 12px;">※ 数値は導入施設での担当者ヒアリング・作業時間比較に基づく参考値です（導入前後3か月の比較）。効果は業務内容・運用状況により異なります。<br>※ 現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</p>
     </div>
     <div class="case-r">
       <div class="case-metric shu has-donut">
@@ -2688,15 +2828,36 @@
 <section class="section" id="boundaries">
   <div class="boundaries-grid reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
     <div style="background: var(--kinari-2); border-radius: var(--r-lg); padding: 40px 44px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 14px;">— SCOPE / 対応しないこと</div>
-      <h3 style="font-family: var(--serif); font-size: clamp(24px, 2.5vw, 30px); font-weight: 500; line-height: 1.45; margin-bottom: 16px;">期待値を、<br>はっきり線引きします。</h3>
-      <p style="font-size: 14px; line-height: 1.95; color: var(--sumi-2); margin-bottom: 18px;">以下は初期開発では原則対応しません。事前にお伝えすることで、お互いに無理のない進め方をします。</p>
-      <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>法令判断の代行</li>
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>請求可否の最終判断</li>
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>完全自動シフト作成の保証</li>
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>現場確認なしの複雑なロジック開発</li>
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>仕様未確定のままの短納期開発</li>
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 14px;">— ROLES / 安全のために、役割を分けています</div>
+      <h3 style="font-family: var(--serif); font-size: clamp(24px, 2.5vw, 30px); font-weight: 500; line-height: 1.45; margin-bottom: 16px;">嶽ノ子と事業所、<br>それぞれの役割。</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px;" class="roles-grid">
+        <div style="background: rgba(255,255,255,0.6); border-radius: 8px; padding: 14px 16px;">
+          <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 6px;">— 嶽ノ子が行うこと</div>
+          <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.8; color: var(--sumi-2);">
+            <li>・ シフト案作成の仕組み化</li>
+            <li>・ 希望休・勤務条件の整理</li>
+            <li>・ 人員配置チェック・警告表示</li>
+            <li>・ Excel・PDF 出力の設計</li>
+            <li>・ 運用支援・操作相談</li>
+          </ul>
+        </div>
+        <div style="background: rgba(255,255,255,0.6); border-radius: 8px; padding: 14px 16px;">
+          <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 6px;">— 事業所様にお願いすること</div>
+          <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.8; color: var(--sumi-2);">
+            <li>・ 最終シフトの確認</li>
+            <li>・ 労務・法令上の最終判断</li>
+            <li>・ 職員の個別事情の判断</li>
+            <li>・ 急な欠勤時の現場判断</li>
+            <li>・ 実際の勤務命令の決定</li>
+          </ul>
+        </div>
+      </div>
+      <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 8px;">— 対応しないこと</div>
+      <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px;">
+        <li style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>完全自動シフト作成の保証</li>
+        <li style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>労務・法令判断の代行</li>
+        <li style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>請求・加算可否の最終判断</li>
+        <li style="display: flex; gap: 10px; font-size: 13px; line-height: 1.7;"><span style="color: var(--shu); font-weight: 600;">×</span>個別事情をすべて自動判定すること</li>
       </ul>
     </div>
     <div style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-lg); padding: 40px 44px;">
@@ -2726,6 +2887,79 @@
     </div>
 
     <div class="faq-list">
+      <!-- シフト関連 FAQ -->
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>シフトを完全自動で作れますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">完全自動を保証するものではありません。希望休・勤務条件・人員配置をもとに<strong>シフト案を作成し、最後は管理者が確認・調整</strong>する形を基本としています。完全自動を目指すと、現場の判断や個別事情が反映できなくなるためです。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>今使っているExcelシフトをそのまま使えますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">現在のExcelを確認したうえで、使い慣れた形式に近い出力を設計します。ただし、すべてのレイアウトを完全再現する場合は追加費用が発生することがあります。事前にどこまで再現するか、どこを変えるかを合意してから進めます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>希望休の回収もできますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">できます。スタッフがスマホやフォームで希望休を入力し、管理者が一覧で確認できる形にできます。紙やLINEで集める手間を減らせます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>職員の相性や家庭事情も自動で考慮できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">一部は条件として登録できますが、<strong>すべてを自動判定することはおすすめしません。</strong>人間の判断が必要な内容は、管理者が確認・調整できる形にします。最終的な「組ませない」「単独夜勤にしない」などの判断は、現場側に残します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>夜勤や早番・遅番にも対応できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">勤務区分として設定できます。施設ごとの勤務条件・夜勤明けの扱い・連勤制限を確認したうえで対応範囲を決めます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>人員配置基準の確認もできますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">設定した条件に対して、不足や確認漏れを<strong>警告</strong>することは可能です。ただし、法令判断や最終判断は事業所様側でお願いします。嶽ノ子は人員配置基準の代行判断は行いません。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>何名くらいの職員まで対応できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">ライトプランは職員30名程度、スタンダードは50名程度までを目安にしています。それ以上の規模や複数事業所の場合は、法人・複数事業所プランで対応します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>導入までどのくらいかかりますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">シンプルなシフトであれば、2〜4週間程度で試せる形にできます。夜勤・複数勤務区分・複雑な配置条件がある場合は、1〜2か月程度かかる場合があります。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>シフト以外の業務も相談できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい。シフト導入後、送迎管理・月次集計・記録チェック・申し送り・在庫管理・家族連絡などの紙・Excel業務もアプリ化できます。範囲に応じて個別にお見積りします。</div></div>
+      </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
@@ -2801,10 +3035,34 @@
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
+          <span>解約後、アプリやデータはどうなりますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">月額契約終了後は、保守・修正・問い合わせ対応・継続利用環境の管理は対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残ります。必要に応じてCSV等でのデータエクスポートにも対応します。Google Workspace内データの扱いは契約時に書面で明確にお伝えします。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>Google Workspace を契約していないと使えませんか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Google Workspaceをお使いの場合は、既存環境を活用できます。未導入の場合は、必要なアカウント数・Google側の月額利用料・管理方法を事前にご説明します。当社側の追加サーバー費用はかかりませんが、Google側の利用料（1ユーザー月¥680〜程度）は別途必要です。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>カイポケなど既存介護ソフトと自動連携できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">既存ソフトとの連携は、CSV出力・取り込み・手動運用を含め、可能な範囲で設計します。<strong>自動連携を保証するものではありません。</strong>多くの既存介護ソフトはAPIが公開されておらず、契約上の制約もあるため、現実的にはCSV出力やコピーペースト運用で対応することが多くなります。事前に対象ソフトの仕様を確認してご提案します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
           <span>解約はできますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。既に支払った費用の返金はありません。業務整理・試作の結果、本開発に進まない判断も可能です。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。既に支払った費用の返金はありません。解約後は保守・修正・問い合わせ対応の対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残り、必要に応じてCSV等でエクスポートできます。アプリの継続利用環境の管理は対象外となります。</div></div>
       </div>
     </div>
   </div>
@@ -2815,8 +3073,8 @@
   <div class="block contact reveal">
     <div class="contact-l">
       <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 07 / CONTACT</span>
-      <h2>紙・Excelの業務を、<br>見てもらう。</h2>
-      <p class="lede">初回のご相談は無料です。現場の困りごとをお聞きし、業務整理が必要か判断します。必要に応じて、現場理解・業務整理（有償）から始めます。代表が直接対応します。</p>
+      <h2>今のシフト表を、<br>見てもらう。</h2>
+      <p class="lede">無料シフト診断は0円（60分まで・オンライン中心）です。現在のシフト表・勤務条件をもとに、<strong>自動化しやすい部分・想定プラン・概算費用</strong>をご案内します。詳細な業務設計はご契約後に行います。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
       <dl class="contact-channels">
         <div class="contact-channel"><dt>Tel</dt><dd>070-1383-4420<small>平日・土曜 9:00 - 18:00（日本時間）</small></dd></div>
         <div class="contact-channel"><dt>Email</dt><dd>kotaro.otake@takenokonoko.com<small>通常2営業日以内に返信いたします</small></dd></div>
@@ -2845,10 +3103,11 @@
         <div class="form-row">
           <div class="form-label">ご相談内容 <span class="req">*</span></div>
           <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="無料相談する" required> 無料相談する（まず話してみたい）</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="現場理解・業務整理について相談する"> 現場理解・業務整理について相談する</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="紙・Excel業務を見てもらう"> 紙・Excel業務を見てもらう</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="料金の目安を聞く"> 料金の目安を聞く</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="無料シフト診断を受けたい" required> 無料シフト診断を受けたい</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="シフト作成アプリについて相談したい"> シフト作成アプリについて相談したい</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="今のExcelシフトを見てほしい"> 今のExcelシフトを見てほしい</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="料金の目安を知りたい"> 料金の目安を知りたい</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="その他の紙・Excel業務を相談したい"> その他の紙・Excel業務を相談したい</label>
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="採用・パートナーシップ・取材"> 採用・パートナーシップ・取材</label>
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="その他"> その他</label>
           </div>
@@ -2867,14 +3126,55 @@
         <div class="form-row">
           <div class="form-label">困っている業務（任意・複数選択可）</div>
           <div class="form-checks" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 6px;">
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="シフト"> シフト</label>
+            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="シフト作成"> シフト作成</label>
+            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="希望休回収"> 希望休回収</label>
+            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="人員配置確認"> 人員配置確認</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="記録"> 記録</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="送迎"> 送迎</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="月次集計"> 月次集計</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="在庫"> 在庫</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="申し送り"> 申し送り</label>
+            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="在庫"> 在庫</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="帳票作成"> 帳票作成</label>
             <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="その他"> その他</label>
+          </div>
+        </div>
+        <div class="form-row" id="shift-detail">
+          <div class="form-label" style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; background: var(--shu-surface); color: var(--shu); padding: 3px 8px; border-radius: 999px;">SHIFT</span>
+            <span>シフト診断用の追加項目（任意・分かる範囲で）</span>
+          </div>
+          <div class="form-checks" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+            <div>
+              <label style="display: block; font-size: 12px; color: var(--sumi-2); margin-bottom: 4px;">職員数</label>
+              <input type="text" name="entry.staff_count" placeholder="例：20名" style="width: 100%;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 12px; color: var(--sumi-2); margin-bottom: 4px;">夜勤の有無</label>
+              <select name="entry.night_shift" style="width: 100%;">
+                <option value="">選択してください</option>
+                <option value="あり">あり</option>
+                <option value="なし">なし</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 12px; color: var(--sumi-2); margin-bottom: 4px;">現在のシフト作成方法</label>
+              <select name="entry.shift_method" style="width: 100%;">
+                <option value="">選択してください</option>
+                <option value="Excel">Excel</option>
+                <option value="紙">紙</option>
+                <option value="既存ソフト">既存ソフト</option>
+                <option value="手書き＋Excel">手書き＋Excel</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 12px; color: var(--sumi-2); margin-bottom: 4px;">複数事業所</label>
+              <select name="entry.multi_site" style="width: 100%;">
+                <option value="">選択してください</option>
+                <option value="単一事業所">単一事業所</option>
+                <option value="複数事業所">複数事業所</option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="form-row">
@@ -2888,7 +3188,7 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-label">現場資料の共有可否（任意）</div>
+          <div class="form-label">現場資料の共有可否（任意）<br><small style="font-size: 11px; font-weight: 400; color: var(--sumi-2); opacity: 0.75;">※ 初回相談時点では、無理に共有いただく必要はありません。</small></div>
           <div class="form-radios">
             <label class="radio-opt"><input type="radio" name="entry.share_docs" value="可能"> 可能（帳票・Excel等を見せられる）</label>
             <label class="radio-opt"><input type="radio" name="entry.share_docs" value="一部可能"> 一部可能</label>
@@ -2932,10 +3232,10 @@
   <div class="final-cta reveal">
     <div class="final-cta-inner">
       <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 次の一歩</span>
-      <h2>初回相談は、<span class="accent">無料</span>。<br>まずは現場の話を、きかせてください。</h2>
-      <p>無料相談後、必要に応じて「現場理解・業務整理」から始めます。<br>業務整理・試作の結果、本開発に進まない判断も可能です。代表が直接対応します。</p>
+      <h2>無料シフト診断は、<span class="accent">0円</span>。<br>まずは今のシフト表を、見てもらってください。</h2>
+      <p>無料シフト診断は0円（60分まで・オンライン中心）。<br>シフト案作成プランは固定価格で、業務整理・設定・初期レクチャーまで含めて提示します。代表が直接対応します。</p>
       <div class="final-actions">
-        <a href="#contact" class="btn btn-filled">無料相談する <span>→</span></a>
+        <a href="#contact" class="btn btn-filled">無料シフト診断を受ける <span>→</span></a>
         <a href="#price" class="btn btn-tonal">料金を見る</a>
       </div>
     </div>
@@ -2950,17 +3250,16 @@
         <span class="brand-mark">嶽</span>
         <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
       </div>
-      <p>介護現場に、要件定義をさせない。紙・Excel・手作業を読み解き、現場に合うアプリを作ります。</p>
+      <p>介護施設のシフト作成を、0から手作業で作らない。シフトを入口に、紙・Excel業務もアプリ化できます。</p>
     </div>
     <div class="footer-col">
       <h5>Service</h5>
       <ul>
-        <li><a href="#problem">なぜズレるか</a></li>
-        <li><a href="#service">進め方</a></li>
-        <li><a href="#rules">開発ルール</a></li>
+        <li><a href="#shift">シフト作成</a></li>
+        <li><a href="#features">できること</a></li>
         <li><a href="#flow">導入の流れ</a></li>
         <li><a href="#price">料金</a></li>
-        <li><a href="#case">導入実績</a></li>
+        <li><a href="#case">導入事例</a></li>
         <li><a href="plans.html">導入例・活用イメージ</a></li>
       </ul>
     </div>
@@ -2991,42 +3290,51 @@
 <!-- ===== SIMPLE VIEW (notepad) ===== -->
 <section class="simple-view" aria-hidden="true">
   <h1>嶽ノ子</h1>
-  <div class="sv-tag">介護現場に、要件定義をさせない。</div>
+  <div class="sv-tag">介護施設のシフト作成を、0から手作業で作らない。</div>
 
   <hr>
 
   <h2>サービス</h2>
-  <p>紙・Excel・手作業を読み解き、現場に合うアプリを作ります。シフト・記録・報告・在庫・送迎などの業務を、こちらが現場を見て整理し、施設ごとの専用アプリに置き換えます。</p>
+  <p>介護施設のシフト作成を、0から手作業で作らないサービス。希望休・資格・勤務条件・人員配置をもとにシフト案を作成し、最後は管理者が確認・調整できます。シフトを入口に、送迎・記録・月次集計・申し送りなどの紙・Excel業務もアプリ化できます。</p>
   <ul>
-    <li>要件定義を、現場に丸投げしない</li>
-    <li>口頭ヒアリングだけでなく、帳票・Excel・過去データを確認</li>
-    <li>現場の負担を増やさず、必要なところだけ整える</li>
-    <li>まず1つの業務から始めて、効果を見てから広げる</li>
-    <li>料金は工程ごと明示（業務整理／試作／本開発／保守）</li>
-    <li>初回相談は無料、代表が直接対応</li>
+    <li>完全自動ではなく、シフト案を作成（管理者が調整できる仕組み）</li>
+    <li>希望休・資格・勤務条件・人員配置を一元管理</li>
+    <li>確認漏れ・連勤・配置不足を警告</li>
+    <li>無料シフト診断から始められる（0円・60分まで・オンライン中心）</li>
+    <li>料金は固定価格（業務整理は初期費用に含む）</li>
+    <li>代表が直接対応（件数を絞ってお受け）</li>
   </ul>
 
   <h2>導入の流れ</h2>
   <table>
-    <tr><td>00. 初回相談</td><td>30〜45 分・無料</td></tr>
-    <tr><td>01. 現場理解・業務整理</td><td>1〜2 週間・有償</td></tr>
-    <tr><td>02. アプリ化方針の提案</td><td>1 週間</td></tr>
-    <tr><td>03. 試作・画面/ロジック確認</td><td>2〜4 週間</td></tr>
-    <tr><td>04. 開発・小さく確認</td><td>1〜3 か月</td></tr>
-    <tr><td>05. 試用・導入</td><td>2〜4 週間</td></tr>
-    <tr><td>06. 運用支援・保守</td><td>月額</td></tr>
+    <tr><td>01. 無料シフト診断</td><td>60分まで・0円・オンライン中心</td></tr>
+    <tr><td>02. プラン提案・お見積り</td><td>数日〜1週間・固定価格</td></tr>
+    <tr><td>03. 申込・初期設定</td><td>職員・勤務区分・希望休・配置ルール登録</td></tr>
+    <tr><td>04. 過去シフトでテスト</td><td>過去のシフト表と比較・サンプル確認</td></tr>
+    <tr><td>05. 本番運用＋月額サポート</td><td>翌月から運用・月額継続</td></tr>
   </table>
-  <p>業務整理・試作の結果、本開発に進まない判断も可能です。無理に契約を迫ることはありません。</p>
+  <p>シフト案作成プランの初期費用には、導入に必要なヒアリング・設定・テスト・初期レクチャーを含みます。表示価格で対応できる範囲を事前に明確にし、追加費用は作業前に必ずご説明します。</p>
 
-  <h2>料金</h2>
+  <h2>料金（固定価格）</h2>
+
+  <p><strong>入口</strong></p>
   <table>
-    <tr><td>初回相談</td><td>無料</td></tr>
-    <tr><td>現場理解・業務整理</td><td>¥100,000〜300,000</td></tr>
-    <tr><td>試作・設計</td><td>¥200,000〜500,000</td></tr>
-    <tr><td>本開発</td><td>¥500,000〜3,000,000</td></tr>
-    <tr><td>運用支援・保守</td><td>月 ¥30,000〜150,000</td></tr>
+    <tr><td>無料シフト診断</td><td>0円（60分まで・オンライン中心）</td></tr>
   </table>
-  <p class="sv-note">※ すべて税込。範囲は業務の規模や複雑さによって変わります。事前にお見積りします。</p>
+
+  <p><strong>シフト案作成プラン（固定価格・業務整理を含む）</strong></p>
+  <table>
+    <tr><td>シフト案作成ライト</td><td>初期 300,000円 ／ 月額 30,000円（職員30名・月30分対応）</td></tr>
+    <tr><td>シフト案作成スタンダード（本命）</td><td>初期 500,000円 ／ 月額 50,000円（職員50名・月1時間対応）</td></tr>
+    <tr><td>法人・複数事業所</td><td>初期 1,000,000円〜 ／ 月額 100,000円〜（個別見積り・月3時間対応）</td></tr>
+  </table>
+
+  <p><strong>シフト以外に広げられる業務</strong></p>
+  <table>
+    <tr><td>紙・Excel改善パック</td><td>初期 100,000円 ／ 月額 10,000円（1業務・3画面まで）</td></tr>
+    <tr><td>その他業務アプリ（送迎・月次集計・記録・申し送り等）</td><td>個別見積り</td></tr>
+  </table>
+  <p class="sv-note">※ すべて税込・固定価格。各プランの初期費用には導入に必要なヒアリング・設定・テスト・初期レクチャーを含みます。アプリ使用中は月額を継続いただきます。複雑な個別ルール・大幅な帳票変更・外部連携・複数事業所対応は別途お見積り。</p>
 
   <h2>導入実績</h2>
   <p>通所リハビリテーション（スタッフ20名／1日あたり30名前後）</p>
