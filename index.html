@@ -2184,6 +2184,7 @@
     .ba3-arrow { transform: rotate(90deg); }
     .ba3-card.ba3-sample { transform: none; }
     .ask-grid { grid-template-columns: 1fr !important; }
+    .monthly-include-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 700px) {
     .rule-card { padding: 22px 22px !important; }
@@ -2743,12 +2744,12 @@
             <div class="scene-stat"><span class="k">解約</span><span class="v">14日前通知</span></div>
           </div>
           <div class="scene-section">
-            <div class="scene-section-title">— 月額に含まれるもの</div>
+            <div class="scene-section-title">— 月額運用サポート費に含まれるもの</div>
             <ul class="scene-bullets">
-              <li>不具合対応・軽微な修正・操作相談</li>
-              <li>職員入退職対応・権限変更・端末変更</li>
-              <li>3つの保守プラン：月¥10,000／¥20,000／¥50,000</li>
-              <li>使いながら出てきた追加改善は、範囲を整理してご提案</li>
+              <li>アプリの継続利用・不具合対応・軽微修正</li>
+              <li>操作相談・職員入退職対応・権限変更</li>
+              <li>初月の定着支援・バックアップ・運用確認</li>
+              <li>追加改善は範囲を整理して別途お見積り</li>
             </ul>
           </div>
           <div class="scene-section">
@@ -2946,13 +2947,13 @@
 <section class="section" id="price">
   <div class="section-head reveal">
     <span class="section-tag">— 05 / PRICING</span>
-    <h2 class="section-title">料金は、<br><span class="accent">固定価格</span>で明示。</h2>
+    <h2 class="section-title">料金は、<br><span class="accent">初期制作費＋月額運用サポート費</span>。</h2>
     <span class="section-nav">料金</span>
   </div>
 
   <div class="reveal" style="margin-bottom: 24px; padding: 28px 36px; background: var(--kinari-2); border-radius: var(--r-md);">
     <p style="font-family: var(--serif); font-size: 15px; line-height: 1.85; color: var(--sumi-2); max-width: 80ch;">
-      入口は<strong style="color: var(--shu);">無料相談・簡易診断（0円）</strong>から。アプリ商品は<strong style="color: var(--shu);">固定価格</strong>でご提示し、業務整理は商品料金の中に含めます。複雑な条件・判定を含む案件のみ、目安価格＋個別見積りとさせていただきます。
+      料金は、<strong style="color: var(--shu);">初期制作費</strong>と<strong style="color: var(--shu);">月額運用サポート費</strong>の2つだけです。月額には、アプリの利用・保守・軽微修正・操作相談・初月の定着支援を含みます。<br><strong>別で「アプリ使用料」と「保守料」を分けて請求することはありません。</strong>複雑な条件・判定を含む案件のみ、目安価格＋個別見積りとさせていただきます。
     </p>
   </div>
 
@@ -2981,9 +2982,11 @@
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PRODUCT 01</div>
       <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">紙・Excel<br>改善パック</h3>
       <div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 100,000円</div>
-        <div style="font-family: var(--serif); font-size: 14.5px; color: var(--sumi-2);">月額 10,000円</div>
-        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 2px;">（税込・固定）</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">100,000円</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
+        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">10,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
+        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
       </div>
       <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">既存の紙・Excelを1業務だけ仕組みにする。<strong>一番安く始められる入口商品。</strong></p>
       <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
@@ -2995,9 +2998,11 @@
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PRODUCT 02</div>
       <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">小規模<br>アプリ</h3>
       <div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 200,000円</div>
-        <div style="font-family: var(--serif); font-size: 14.5px; color: var(--sumi-2);">月額 15,000円</div>
-        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 2px;">（税込・固定）</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">200,000円</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
+        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">15,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
+        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
       </div>
       <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">備品・申し送り・記録・利用者一覧・チェックリスト・日報などを1業務しっかり仕組みにする。</p>
       <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
@@ -3012,9 +3017,11 @@
       </div>
       <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4; color: var(--shu);">標準<br>アプリ</h3>
       <div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--shu);">初期 500,000円</div>
-        <div style="font-family: var(--serif); font-size: 14.5px; color: var(--sumi);">月額 30,000円</div>
-        <div style="font-size: 10.5px; color: var(--sumi); opacity: 0.7; margin-top: 2px;">（税込・固定）</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--shu); line-height: 1.1;">500,000円</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
+        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">30,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
+        <div style="font-size: 10.5px; color: var(--sumi); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
       </div>
       <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi);">送迎管理・月次集計・記録・報告書・権限管理など、複数画面の業務アプリ。</p>
       <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi);">
@@ -3026,9 +3033,11 @@
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">PRODUCT 04</div>
       <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">複雑な条件・<br>判定に対応</h3>
       <div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">初期 800,000円〜</div>
-        <div style="font-family: var(--serif); font-size: 14.5px; color: var(--shu-light);">月額 50,000円〜</div>
-        <div style="font-size: 10.5px; opacity: 0.7; margin-top: 2px;">（税込・個別見積り）</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-bottom: 2px;">初期制作費</div>
+        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">800,000円〜</div>
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
+        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--shu-light);">50,000円〜<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
+        <div style="font-size: 10.5px; opacity: 0.7; margin-top: 6px;">（すべて税込・個別見積り）</div>
       </div>
       <p style="font-size: 12.5px; line-height: 1.75; opacity: 0.9;"><strong>例：</strong>シフト案作成 ／ 人員配置チェック ／ 複雑な月次集計 ／ 加算確認補助 ／ 請求前チェック</p>
       <div style="background: rgba(245,239,227,0.08); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; opacity: 0.9;">
@@ -3044,51 +3053,50 @@
     </p>
   </div>
 
-  <!-- MONTHLY -->
+  <!-- 月額運用サポート費の説明 -->
   <div class="reveal" style="margin: 8px 0 10px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
-    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--uguisu); font-weight: 600;">— MONTHLY</span>
-    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">月額保守（固定価格・3階層）</span>
+    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— MONTHLY SUPPORT</span>
+    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">月額運用サポート費に含まれるもの</span>
     <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
   </div>
 
-  <div class="phases-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
-    <div class="phase-card" style="background: var(--uguisu-surface); border-radius: var(--r-md); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px; color: #2D3D1F;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--uguisu);">TIER 01</div>
-      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">ライト保守</h3>
-      <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">月 10,000円</div>
-      <p style="font-size: 12px; line-height: 1.75;">月30分まで・小さなアプリ向け</p>
+  <div class="reveal" style="margin-bottom: 16px; padding: 28px 32px; background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-lg); position: relative; overflow: hidden;">
+    <div style="font-family: var(--serif); font-size: clamp(17px, 2vw, 22px); line-height: 1.75; margin-bottom: 14px;">
+      月額は<strong style="color: var(--shu-light);">「アプリ使用料」ではなく、「運用サポート費」</strong>です。<br>
+      別で「アプリ使用料」と「保守料」を分けて請求することはありません。
     </div>
-    <div class="phase-card" style="background: var(--uguisu-surface); border-radius: var(--r-md); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px; color: #2D3D1F; border: 2px solid var(--uguisu); position: relative;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--uguisu);">TIER 02</div>
-        <span style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; background: var(--uguisu); color: var(--on-uguisu); padding: 3px 8px; border-radius: 999px;">おすすめ</span>
+    <p style="font-size: 13.5px; line-height: 1.85; opacity: 0.88; max-width: 70ch;">
+      アプリを作って終わりではなく、現場で使い続けられるよう支えるための費用です。アプリの継続利用・保守・軽微修正・操作相談・初月の定着支援をまとめて、商品ごとの月額に含めています。
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;" class="monthly-include-grid">
+      <div style="background: rgba(245,239,227,0.06); border-radius: 8px; padding: 16px 18px; border-left: 3px solid var(--shu);">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; color: var(--shu-light); margin-bottom: 8px;">— 月額に含まれるもの</div>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.75;">
+          <li>・ アプリの継続利用</li>
+          <li>・ 不具合対応</li>
+          <li>・ 軽微な文言・表示順・項目名の変更</li>
+          <li>・ 操作相談（電話・メール・LINE）</li>
+          <li>・ 職員の入退職に伴う設定変更</li>
+          <li>・ 権限変更／端末変更時の相談</li>
+          <li>・ 初月の定着支援（1〜3か月厚め）</li>
+          <li>・ バックアップ・運用確認</li>
+        </ul>
       </div>
-      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">標準保守</h3>
-      <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">月 20,000円</div>
-      <p style="font-size: 12px; line-height: 1.75;">月1時間まで・通常の業務アプリ向け</p>
+      <div style="background: rgba(245,239,227,0.04); border-radius: 8px; padding: 16px 18px; border-left: 3px solid rgba(245,239,227,0.35);">
+        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; color: rgba(245,239,227,0.75); margin-bottom: 8px;">— 別途お見積りになるもの</div>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.75; opacity: 0.88;">
+          <li>・ 新機能追加</li>
+          <li>・ 新しい帳票の追加</li>
+          <li>・ 大きな画面変更</li>
+          <li>・ アプリが確認する条件の変更</li>
+          <li>・ 業務の流れそのものの変更</li>
+          <li>・ 別事業所への展開</li>
+        </ul>
+      </div>
     </div>
-    <div class="phase-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">TIER 03</div>
-      <h3 style="font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.4;">重点保守</h3>
-      <div style="font-family: var(--serif); font-size: 22px; font-weight: 500;">月 50,000円</div>
-      <p style="font-size: 12px; line-height: 1.75; opacity: 0.9;">月3時間まで・優先対応・重要業務向け</p>
-    </div>
-  </div>
-
-  <!-- ONBOARDING -->
-  <div class="reveal" style="margin-bottom: 16px; padding: 18px 24px; background: var(--yamabuki-surface); border-radius: var(--r-md); color: #4A3A18;">
-    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: #8A6A1F; margin-bottom: 6px;">— ONBOARDING / 導入支援は月額に込み</div>
-    <p style="font-family: var(--serif); font-size: 13.5px; line-height: 1.85; max-width: 80ch;"><strong>最初の1〜3か月は、月額の範囲で重点的にサポートします。</strong>導入支援を別料金で取ることはしません。</p>
-  </div>
-
-  <!-- SCOPE -->
-  <div class="reveal" style="padding: 18px 24px; background: var(--kinari-2); border-radius: var(--r-md);">
-    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 8px;">— SCOPE / 月額に含む対応／別途お見積り</div>
-    <p style="font-family: var(--serif); font-size: 13px; line-height: 1.85; color: var(--sumi-2); max-width: 80ch;">
-      <strong>月額内：</strong>文言・表示順・項目名の軽微変更、操作相談、権限変更、職員入退職対応。<br>
-      <strong>別途お見積り：</strong>新機能追加、帳票追加、アプリが確認する条件の変更、業務の流れの変更。<br>
-      <strong>対応目安：</strong>通常3営業日以内に一次返信。緊急対応は重点保守または別途相談。<br>
-      月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。
+    <p style="font-size: 11.5px; line-height: 1.7; opacity: 0.65; margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(245,239,227,0.18);">
+      ※ 対応目安：通常3営業日以内に一次返信。<br>
+      ※ 月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。
     </p>
   </div>
 </section>
@@ -3378,7 +3386,7 @@
           <span>送迎管理はどこまで対応できますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">利用者・送迎ルート・時間の管理、変更履歴の記録、職員間での最新版共有、印刷や一覧確認の効率化まで対応できます。標準アプリ（初期 ¥500,000／月額 ¥30,000）でカバーできる範囲が中心です。GPS追跡や自動ルート最適化など高度なものは個別見積りになります。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">利用者・送迎ルート・時間の管理、変更履歴の記録、職員間での最新版共有、印刷や一覧確認の効率化まで対応できます。標準アプリ（初期 ¥500,000／月額運用サポート費 ¥30,000）でカバーできる範囲が中心です。GPS追跡や自動ルート最適化など高度なものは個別見積りになります。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -3740,21 +3748,14 @@
     <tr><td>無料相談・簡易診断</td><td>0円（現場訪問が中心。初回訪問・持ち帰り整理・2回目訪問の3回まで）</td></tr>
   </table>
 
-  <p><strong>アプリ商品（固定価格・業務整理を含む）</strong></p>
+  <p><strong>アプリ商品（初期制作費＋月額運用サポート費）</strong></p>
   <table>
-    <tr><td>紙・Excel改善パック</td><td>初期 100,000円 ／ 月額 10,000円</td></tr>
-    <tr><td>小規模アプリ</td><td>初期 200,000円 ／ 月額 15,000円</td></tr>
-    <tr><td>標準アプリ（おすすめ）</td><td>初期 500,000円 ／ 月額 30,000円</td></tr>
-    <tr><td>複雑な条件・判定に対応</td><td>初期 800,000円〜 ／ 月額 50,000円〜（シフト案作成・人員配置チェック・複雑な月次集計・加算確認補助・請求前チェック等）</td></tr>
+    <tr><td>紙・Excel改善パック</td><td>初期 100,000円 ／ 月額運用サポート費 10,000円</td></tr>
+    <tr><td>小規模アプリ</td><td>初期 200,000円 ／ 月額運用サポート費 15,000円</td></tr>
+    <tr><td>標準アプリ（おすすめ）</td><td>初期 500,000円 ／ 月額運用サポート費 30,000円</td></tr>
+    <tr><td>複雑な条件・判定に対応</td><td>初期 800,000円〜 ／ 月額運用サポート費 50,000円〜（シフト案作成・人員配置チェック・複雑な月次集計・加算確認補助・請求前チェック等）</td></tr>
   </table>
-
-  <p><strong>月額保守（固定価格・3階層）</strong></p>
-  <table>
-    <tr><td>ライト保守</td><td>月 10,000円・月30分まで</td></tr>
-    <tr><td>標準保守</td><td>月 20,000円・月1時間まで</td></tr>
-    <tr><td>重点保守</td><td>月 50,000円・月3時間まで・優先対応</td></tr>
-  </table>
-  <p class="sv-note">※ すべて税込・固定価格。最初の1〜3か月は月額の範囲で重点的にサポートします（導入支援込み）。アプリ使用中は月額を継続いただきます。新機能・帳票追加・アプリが確認する条件の変更は別途お見積り。</p>
+  <p class="sv-note">※ すべて税込・固定価格。月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談・初月の定着支援を含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。新機能・帳票追加・アプリが確認する条件の変更は別途お見積り。</p>
 
   <h2>導入事例</h2>
   <p>通所リハビリテーション（スタッフ20名／1日あたり30名前後）</p>
