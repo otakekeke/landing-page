@@ -1593,6 +1593,109 @@
     .mode-toggle-opt { padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em; }
   }
 
+  /* ===== Hero strong block (御社専用の見本アプリ) ===== */
+  .hero-strong-outer {
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .hero-strong {
+    background: var(--sumi);
+    color: var(--on-sumi);
+    border-radius: var(--r-xl);
+    padding: 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-strong::before {
+    content: "見";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 280px;
+    color: #221C19;
+    right: -40px;
+    bottom: -80px;
+    line-height: 0.8;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-strong::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 10%, rgba(192, 74, 62, 0.15), transparent 50%);
+    pointer-events: none;
+  }
+  .hero-strong-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 920px;
+  }
+  .hero-strong-eye {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--shu-light);
+    display: inline-block;
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    background: rgba(192, 74, 62, 0.18);
+    border-radius: 999px;
+  }
+  .hero-strong-h {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    margin-bottom: 32px;
+  }
+  .hero-strong-h .em {
+    color: var(--shu-light);
+    position: relative;
+  }
+  .hero-strong-h .em::after {
+    content: "";
+    position: absolute;
+    left: 4%; bottom: 0.08em;
+    width: 92%; height: 12px;
+    background: var(--shu);
+    opacity: 0.35;
+    border-radius: 999px;
+    z-index: -1;
+  }
+  .hero-strong-p {
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.8vw, 19px);
+    line-height: 2;
+    color: rgba(245, 239, 227, 0.92);
+    margin-bottom: 36px;
+    max-width: 60ch;
+  }
+  .hero-strong-p strong {
+    color: var(--shu-light);
+    font-weight: 500;
+  }
+  .hero-strong-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .hero-strong-note {
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: rgba(245, 239, 227, 0.6);
+    padding: 16px 20px;
+    border-left: 3px solid var(--shu);
+    background: rgba(245, 239, 227, 0.04);
+    border-radius: 8px;
+    max-width: 60ch;
+  }
+  @media (max-width: 700px) {
+    .hero-strong { padding: 48px 28px; border-radius: var(--r-lg); }
+    .hero-strong::before { font-size: 200px; right: -30px; bottom: -60px; }
+  }
+
   /* ===== Contract before/after 2-col ===== */
   .contract-grid {
     display: grid;
@@ -1729,6 +1832,95 @@
     opacity: 1;
   }
 
+  /* ===== Before / 見本 / After 3-col ===== */
+  .ba3-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .ba3-card {
+    border-radius: var(--r-md);
+    padding: 28px 26px;
+    background: var(--kinari-2);
+    color: var(--sumi);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 230px;
+  }
+  .ba3-card.ba3-sample {
+    background: var(--shu);
+    color: var(--on-shu);
+    border: 3px solid var(--shu);
+    box-shadow: 0 12px 32px rgba(192, 74, 62, 0.18);
+    transform: translateY(-8px);
+  }
+  .ba3-card.ba3-after {
+    background: var(--sumi);
+    color: var(--on-sumi);
+  }
+  .ba3-eye {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    opacity: 0.7;
+  }
+  .ba3-card.ba3-sample .ba3-eye { opacity: 0.95; color: var(--on-shu); }
+  .ba3-h {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .ba3-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ba3-list li {
+    font-size: 13px;
+    line-height: 1.7;
+    padding-left: 14px;
+    position: relative;
+  }
+  .ba3-list li::before {
+    content: "・";
+    position: absolute;
+    left: 0;
+    opacity: 0.6;
+  }
+  .ba3-card.ba3-sample .ba3-list li::before { color: var(--shu-light); opacity: 1; }
+  .ba3-arrow {
+    display: grid;
+    place-items: center;
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--shu);
+    opacity: 0.6;
+  }
+
+  /* ===== Sample app contents list ===== */
+  .sample-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .sample-item {
+    background: var(--kinari);
+    border-radius: var(--r-sm);
+    padding: 14px 18px;
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--sumi);
+    border-left: 3px solid var(--shu);
+  }
+
   /* ===== New sections: mobile responsiveness ===== */
   @media (max-width: 900px) {
     .problem-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
@@ -1741,6 +1933,9 @@
     .roles-grid { grid-template-columns: 1fr !important; }
     .monthly-tier-grid { grid-template-columns: 1fr !important; }
     .contract-grid { grid-template-columns: 1fr !important; }
+    .ba3-grid { grid-template-columns: 1fr !important; }
+    .ba3-arrow { transform: rotate(90deg); }
+    .ba3-card.ba3-sample { transform: none; }
   }
   @media (max-width: 700px) {
     .rule-card { padding: 22px 22px !important; }
@@ -1851,6 +2046,32 @@
   </div>
 </section>
 
+<!-- ===== HERO-STRONG (御社専用の見本アプリ強調) ===== -->
+<section class="hero-strong-outer">
+  <div class="hero-strong reveal">
+    <div class="hero-strong-inner">
+      <span class="hero-strong-eye">— BEFORE CONTRACT</span>
+      <h2 class="hero-strong-h">
+        契約前に、<br>
+        <span class="em">御社専用の見本アプリ</span>を<br>作成します。
+      </h2>
+      <p class="hero-strong-p">
+        今使っている紙・Excel・帳票をもとに、<br>
+        <strong>画面・一覧・印刷物の見本</strong>を作ります。<br>
+        実際の見本を見てから、契約するかどうか判断できます。
+      </p>
+      <div class="hero-strong-actions">
+        <a href="#contact" class="btn btn-filled" style="background: var(--kinari); color: var(--sumi);">無料で見本アプリについて相談する <span>→</span></a>
+        <a href="#process" class="btn btn-outline" style="border-color: var(--kinari); color: var(--kinari);">作る流れを見る <span>↓</span></a>
+      </div>
+      <div class="hero-strong-note">
+        ※ 見本アプリは、契約前に完成イメージを確認するためのものです。<br>
+        実際に業務で使うアプリの作成は、契約後に行います。
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== PROBLEM (うまく説明できなくても大丈夫) ===== -->
 <section class="section" id="problem">
   <div class="section-head reveal">
@@ -1908,11 +2129,11 @@
       <ol class="contract-steps">
         <li>初回訪問で、今の作業を見る</li>
         <li>持ち帰って、作業の流れを整理する</li>
-        <li>画面と帳票の見本を作る</li>
-        <li>2回目訪問で、見本と費用を説明する</li>
+        <li>御社専用の見本アプリを作る</li>
+        <li>2回目訪問で、見本アプリと費用を説明する</li>
       </ol>
       <p class="contract-side-foot">
-        ※ 契約前の段階では、細かい入力項目・例外処理・実際に使うアプリの作成は行いません（契約後に実施）。
+        ※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。
       </p>
     </div>
     <div class="contract-side after">
@@ -1923,14 +2144,67 @@
       <h3 class="contract-side-h">契約後にやること</h3>
       <p class="contract-side-p">現場で実際に使える形へ整えるところまで、契約に含めます。</p>
       <ol class="contract-steps after">
-        <li>現場の横で、一緒に形にする</li>
+        <li>現場の横で、一緒に形を整える</li>
         <li>細かい項目や例外を整理する</li>
         <li>小さく作って、小さく確認する</li>
-        <li>例を入れて、結果を確認する</li>
+        <li>実際の例を入れて、出てくる結果を確認する</li>
       </ol>
       <p class="contract-side-foot">
         ※ 契約金額の中で対応します。表示価格に含まれない作業は、作業前に必ずお見積りします。
       </p>
+    </div>
+  </div>
+
+  <!-- Before / 見本 / After 3-column comparison -->
+  <div class="reveal" style="margin: 56px 0 14px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
+    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— STATES</span>
+    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">今の状態 → 見本アプリ → 契約後の状態</span>
+    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
+  </div>
+  <div class="ba3-grid reveal">
+    <div class="ba3-card ba3-now">
+      <div class="ba3-eye">— NOW</div>
+      <h4 class="ba3-h">今の状態</h4>
+      <ul class="ba3-list">
+        <li>紙・Excel・帳票・手作業で運用</li>
+        <li>転記・確認・二重入力が多い</li>
+        <li>何を作ればいいか分からない</li>
+      </ul>
+    </div>
+    <div class="ba3-arrow">→</div>
+    <div class="ba3-card ba3-sample">
+      <div class="ba3-eye">— SAMPLE APP</div>
+      <h4 class="ba3-h">契約前に作るもの<br><span style="font-size: 13px; color: var(--shu); letter-spacing: 0.1em;">御社専用の見本アプリ</span></h4>
+      <ul class="ba3-list">
+        <li>画面・一覧・印刷物の見本</li>
+        <li>見本を見ながら判断できる</li>
+        <li>費用・対応範囲もこの段階で確認</li>
+      </ul>
+    </div>
+    <div class="ba3-arrow">→</div>
+    <div class="ba3-card ba3-after">
+      <div class="ba3-eye">— AFTER</div>
+      <h4 class="ba3-h">契約後の状態</h4>
+      <ul class="ba3-list">
+        <li>現場に合わせて整えた仕組みで運用</li>
+        <li>転記・確認・手作業が減る</li>
+        <li>使いながら定着支援を受けられる</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 見本アプリで確認できるもの -->
+  <div class="reveal" style="margin-top: 32px; padding: 36px 40px; background: var(--shu-surface); border-radius: var(--r-lg);">
+    <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 14px;">— SAMPLE APP / 見本アプリで確認できるもの</div>
+    <h3 style="font-family: var(--serif); font-size: clamp(20px, 2.4vw, 26px); font-weight: 500; line-height: 1.4; color: var(--sumi); margin-bottom: 18px;">「どんなアプリになるか分からない」<br>まま契約する必要はありません。</h3>
+    <div class="sample-grid">
+      <div class="sample-item">どんな画面になるか</div>
+      <div class="sample-item">どんな項目を入力するか</div>
+      <div class="sample-item">一覧で何が見えるか</div>
+      <div class="sample-item">どんな印刷物が出るか</div>
+      <div class="sample-item">今のExcelのどこが置き換わるか</div>
+      <div class="sample-item">管理者と職員が何を見るか</div>
+      <div class="sample-item">どこまで自動で、どこを人が確認するか</div>
     </div>
   </div>
 
@@ -1948,11 +2222,11 @@
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">02</div>
-            <div><h3>持ち帰り整理・画面と帳票の見本づくり</h3><p>初回訪問で見た内容をもとに、今の作業の流れ・改善点・画面と帳票の見本を作成します。実際に使うアプリではなく、完成イメージを確認するための簡易版です。</p><div class="dur">— 数日〜2週間・0円</div></div>
+            <div><h3>持ち帰り整理・御社専用の見本アプリ作成</h3><p>初回訪問で見た内容をもとに、今の作業の流れ・減らせそうな転記・確認・手作業・御社専用の見本アプリを作成します。実際に使うアプリではなく、完成イメージを確認するための簡易版です。</p><div class="dur">— 数日〜2週間・0円</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">03</div>
-            <div><h3>2回目訪問・画面と帳票の見本提示</h3><p>整理した今の作業の流れと画面と帳票の見本を見ながら、「この形なら使えそうか」を確認します。あわせて概算費用・対応範囲・月額費用をご説明します。</p><div class="dur">— 訪問が中心・0円</div></div>
+            <div><h3>2回目訪問・見本アプリを見ながら確認</h3><p>整理した今の作業の流れと御社専用の見本アプリを見ながら、「この形なら使えそうか」を確認します。あわせて概算費用・対応範囲・月額費用をご説明します。</p><div class="dur">— 訪問が中心・0円</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">04</div>
@@ -1960,11 +2234,11 @@
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">05</div>
-            <div><h3>現場の横で一緒に形にする</h3><p>契約後は、必要に応じて現場に伺い、紙・Excel・画面と帳票の見本を見ながら一緒に形を整えます。作っている途中の画面や出力を見ていただきながら、現場に合う形に近づけます。</p><div class="dur">— 商品料金に含む</div></div>
+            <div><h3>現場の横で、一緒に形を整える</h3><p>契約後は、必要に応じて現場に伺い、紙・Excel・御社専用の見本アプリを見ながら一緒に形を整えます。作っている途中の画面や出力を見ていただきながら、現場に合う形に近づけます。</p><div class="dur">— 商品料金に含む</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">06</div>
-            <div><h3>開発・確認・テスト</h3><p>小さく作り、小さく確認します。シフト・集計・加算確認などのアプリが確認する条件は、入力例と結果のパターンで確認しながら進めます。</p><div class="dur">— 商品料金に含む</div></div>
+            <div><h3>開発・確認・テスト</h3><p>小さく作り、小さく確認します。シフト・集計・加算確認などのアプリが確認する条件は、実際の例を入れて、出てくる結果で確認しながら進めます。</p><div class="dur">— 商品料金に含む</div></div>
           </div>
           <div class="ix-flow-step">
             <div class="ix-flow-bullet">07</div>
@@ -2002,10 +2276,10 @@
           </div>
         </div>
 
-        <!-- Scene 02: 持ち帰り整理・画面と帳票の見本 -->
+        <!-- Scene 02: 持ち帰り整理・御社専用の見本アプリ -->
         <div class="ix-flow-scene">
           <span class="scene-num">02</span>
-          <span class="scene-phase">STEP 02 ／ 整理＋画面と帳票の見本</span>
+          <span class="scene-phase">STEP 02 ／ 整理＋見本アプリ作成</span>
           <h4>こちらで読み解き、<br><em>形に</em>します。</h4>
           <div class="scene-meta-row">
             <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
@@ -2017,21 +2291,21 @@
             <ul class="scene-bullets">
               <li>現場で確認した内容を今の作業の流れに整理</li>
               <li>改善できそうな点・小さく作れる範囲を抽出</li>
-              <li>画面・出力イメージの画面と帳票の見本を作成</li>
+              <li>画面・一覧・印刷物の見本を作成（御社専用の見本アプリ）</li>
               <li>合いそうな商品プランと概算費用を試算</li>
             </ul>
           </div>
           <div class="scene-section">
             <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">今の作業の流れの整理メモ ／ 画面と帳票の見本（画面・出力）</div>
+            <div class="scene-deliverable">今の作業の流れの整理メモ ／ 御社専用の見本アプリ（画面・一覧・印刷物）</div>
           </div>
         </div>
 
-        <!-- Scene 03: 2回目訪問・画面と帳票の見本提示 -->
+        <!-- Scene 03: 2回目訪問・見本アプリを見ながら確認 -->
         <div class="ix-flow-scene">
           <span class="scene-num">03</span>
           <span class="scene-phase">STEP 03 ／ 2回目訪問</span>
-          <h4>画面と帳票の見本で、<br><em>完成イメージ</em>を確認します。</h4>
+          <h4>御社専用の見本アプリで、<br><em>完成イメージ</em>を確認します。</h4>
           <div class="scene-meta-row">
             <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
             <div class="scene-stat"><span class="k">形式</span><span class="v">訪問が中心</span></div>
@@ -2041,7 +2315,7 @@
             <div class="scene-section-title">— この回でやること</div>
             <ul class="scene-bullets">
               <li>整理した今の作業の流れを一緒に確認</li>
-              <li>画面と帳票の見本で完成イメージを共有</li>
+              <li>御社専用の見本アプリで完成イメージを共有</li>
               <li>概算費用・対応範囲・月額費用をご説明</li>
               <li>進める／進めないをご判断いただく</li>
             </ul>
@@ -2077,7 +2351,7 @@
           </div>
         </div>
 
-        <!-- Scene 05: 現場の横で一緒に形にする -->
+        <!-- Scene 05: 現場の横で、一緒に形を整える -->
         <div class="ix-flow-scene">
           <span class="scene-num">05</span>
           <span class="scene-phase">STEP 05 ／ 現場同席</span>
@@ -2091,7 +2365,7 @@
             <div class="scene-section-title">— 進めかた</div>
             <ul class="scene-bullets">
               <li>必要に応じて現場に伺います</li>
-              <li>紙・Excel・画面と帳票の見本を並べて確認</li>
+              <li>紙・Excel・御社専用の見本アプリを並べて確認</li>
               <li>作っている途中の画面・出力を見ながら調整</li>
               <li>現場に合う形に少しずつ近づける</li>
             </ul>
@@ -2116,7 +2390,7 @@
             <div class="scene-section-title">— 進めかた</div>
             <ul class="scene-bullets">
               <li>機能ごとに動くものを早めにお見せします</li>
-              <li>アプリが確認する条件は入力例と結果のパターンで確認</li>
+              <li>アプリが確認する条件は実際の例を入れて、出てくる結果で確認</li>
               <li>本番環境で試用してから導入</li>
               <li>初回レクチャー・簡易マニュアル提供</li>
             </ul>
@@ -2286,7 +2560,7 @@
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 02</div>
       <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">入力例と結果で<br>確認します。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">シフト・集計・加算などのアプリが確認する条件は、画面ではなく実際の入力例・出力例で合意してから開発します。仕様書を読まなくても、動きを見て確認できる形にします。</p>
+      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">シフト・集計・加算などのアプリが確認する条件は、画面ではなく実際の実際の例を入れて結果を一緒に確認してから開発します。仕様書を読まなくても、動きを見て確認できる形にします。</p>
     </div>
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 03</div>
@@ -2719,7 +2993,7 @@
           <span>何を作りたいか、うまく説明できなくても大丈夫ですか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">大丈夫です。介護現場では、必要な仕組みを最初から言葉にするのは難しいものです。<strong>初回訪問で実際の運用と現物を見せていただければ、こちらで業務を整理し、画面と帳票の見本で完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">大丈夫です。介護現場では、必要な仕組みを最初から言葉にするのは難しいものです。<strong>初回訪問で実際の運用と現物を見せていただければ、こちらで業務を整理し、御社専用の見本アプリで完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2727,7 +3001,7 @@
           <span>現場に来て業務を見てもらえますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・画面と帳票の見本づくり → 2回目訪問・画面と帳票の見本提示</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、紙・Excel・画面と帳票の見本を並べて一緒に形を整える「現場の横で一緒に形にする」を行います。「できてから違った」を防ぎ、現場の感覚に合わせるためです。遠方の場合はオンライン併用も可能です（交通費別途）。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・御社専用の見本アプリ作成 → 2回目訪問・見本アプリを見ながら確認</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、紙・Excel・御社専用の見本アプリを並べて一緒に形を整える「現場の横で、一緒に形を整える」を行います。「できてから違った」を防ぎ、現場の感覚に合わせるためです。遠方の場合はオンライン併用も可能です（交通費別途）。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2767,7 +3041,7 @@
           <span>導入までどのくらいかかりますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">契約前に <strong>初回訪問 → 持ち帰り整理＋画面と帳票の見本 → 2回目訪問</strong> までを行います。契約後は必要に応じて現場の横で同席しながら開発します。紙・Excel改善パックなど小規模なものは2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。実際の期間は、業務の規模や複雑さによって変わります。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">契約前に <strong>初回訪問 → 持ち帰り整理＋御社専用の見本アプリ → 2回目訪問</strong> までを行います。契約後は必要に応じて現場の横で同席しながら開発します。紙・Excel改善パックなど小規模なものは2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。実際の期間は、業務の規模や複雑さによって変わります。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2982,7 +3256,7 @@
     <div class="final-cta-inner">
       <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 次の一歩</span>
       <h2>今のやり方を、<span class="accent">見せてください</span>。<br>こちらで整理します。</h2>
-      <p>無料相談・簡易診断は0円。初回訪問で現場を確認し、持ち帰って画面と帳票の見本を作り、2回目訪問でご提示します。<br>細かい仕様を決めていただく必要はありません。代表が直接対応します。</p>
+      <p>無料相談・簡易診断は0円。初回訪問で現場を確認し、持ち帰って御社専用の見本アプリを作り、2回目訪問でご提示します。<br>細かい仕様を決めていただく必要はありません。代表が直接対応します。</p>
       <div class="final-actions">
         <a href="#contact" class="btn btn-filled">無料で相談する <span>→</span></a>
         <a href="#price" class="btn btn-tonal">料金を見る</a>
@@ -3055,35 +3329,38 @@
     <li>代表が直接対応（件数を絞ってお受け）</li>
   </ul>
 
+  <h2>契約前に、御社専用の見本アプリを作ります</h2>
+  <p>今使っている紙・Excel・帳票をもとに、<strong>画面・一覧・印刷物の見本</strong>を作ります。実際の見本を見てから、契約するかどうか判断できます。</p>
+  <p class="sv-note">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
+
   <h2>契約前と契約後にやること</h2>
-  <p><strong>契約前に、完成イメージまで見えるようにします。</strong>契約後に、現場で使える形へ一緒に整えます。</p>
   <p><strong>契約前（0円）</strong></p>
   <ul>
     <li>初回訪問で、今の作業を見る</li>
     <li>持ち帰って、作業の流れを整理する</li>
-    <li>画面と帳票の見本を作る</li>
-    <li>2回目訪問で、見本と費用を説明する</li>
+    <li>御社専用の見本アプリを作る</li>
+    <li>2回目訪問で、見本アプリと費用を説明する</li>
   </ul>
   <p><strong>契約後（商品料金に含む）</strong></p>
   <ul>
-    <li>現場の横で、一緒に形にする</li>
+    <li>現場の横で、一緒に形を整える</li>
     <li>細かい項目や例外を整理する</li>
     <li>小さく作って、小さく確認する</li>
-    <li>例を入れて、結果を確認する</li>
+    <li>実際の例を入れて、出てくる結果を確認する</li>
   </ul>
 
   <h2>導入までの流れ（8ステップ）</h2>
   <table>
     <tr><td>01. 初回訪問・現場確認</td><td>現場訪問が中心・0円</td></tr>
-    <tr><td>02. 持ち帰り整理・画面と帳票の見本づくり</td><td>数日〜2週間・0円</td></tr>
-    <tr><td>03. 2回目訪問・画面と帳票の見本提示</td><td>訪問が中心・0円</td></tr>
+    <tr><td>02. 持ち帰り整理・御社専用の見本アプリ作成</td><td>数日〜2週間・0円</td></tr>
+    <tr><td>03. 2回目訪問・見本アプリを見ながら確認</td><td>訪問が中心・0円</td></tr>
     <tr><td>04. 契約</td><td>数日〜1週間</td></tr>
-    <tr><td>05. 現場の横で一緒に形にする</td><td>必要に応じて現場で同席</td></tr>
+    <tr><td>05. 現場の横で、一緒に形を整える</td><td>必要に応じて現場で同席</td></tr>
     <tr><td>06. 開発・確認・テスト</td><td>商品料金に含む</td></tr>
     <tr><td>07. 導入・初月支援</td><td>月額の範囲で厚めに</td></tr>
     <tr><td>08. 保守・追加改善</td><td>月額・固定価格</td></tr>
   </table>
-  <p>契約前に「実際の現場を見る → 業務を整理する → 画面と帳票の見本で完成イメージを共有する」までを無料で行います。契約後も、必要に応じて現場の横で一緒に作りながら、現場に合う形に近づけます。契約範囲内の対応については追加費用は発生しません。</p>
+  <p>契約前に「実際の現場を見る → 業務を整理する → 御社専用の見本アプリで完成イメージを共有する」までを無料で行います。契約後も、必要に応じて現場の横で一緒に作りながら、現場に合う形に近づけます。契約範囲内の対応については追加費用は発生しません。</p>
 
   <h2>料金（固定価格）</h2>
 
