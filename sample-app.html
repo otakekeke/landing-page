@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>御社専用の見本アプリとは｜嶽ノ子</title>
+<meta name="description" content="御社専用の見本アプリは、契約前に完成イメージを確認するための「専用の確認用アプリ」です。今使っている紙・Excel・帳票をもとに、画面・一覧・印刷物の見本を作成します。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
+<style>
+  .persona-eye {
+    display: inline-block;
+    background: var(--shu);
+    color: var(--on-shu);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+  }
+  .def-block {
+    background: var(--sumi);
+    color: var(--on-sumi);
+    border-radius: var(--r-lg);
+    padding: 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .def-block::before {
+    content: "見";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 220px;
+    color: #221C19;
+    right: -30px;
+    bottom: -70px;
+    line-height: 0.8;
+    pointer-events: none;
+  }
+  .def-block > * { position: relative; z-index: 2; }
+  .def-eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--shu-light);
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  .def-h {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.8vw, 30px);
+    font-weight: 500;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .def-h strong { color: var(--shu-light); font-weight: 500; }
+  .def-block p {
+    font-size: 14.5px;
+    line-height: 2;
+    opacity: 0.88;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .see-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .see-card {
+    background: var(--kinari-2);
+    border-radius: var(--r-md);
+    padding: 24px 26px;
+    border-top: 4px solid var(--shu);
+  }
+  .see-card .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--shu);
+    margin-bottom: 8px;
+  }
+  .see-card h3 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .see-card p {
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--sumi-2);
+    margin: 0;
+  }
+  .boundary-block {
+    background: var(--shu-surface);
+    border-radius: var(--r-lg);
+    padding: 36px 40px;
+    border-left: 6px solid var(--shu);
+  }
+  .boundary-block .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--shu);
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .boundary-block h3 {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 500;
+    line-height: 1.55;
+    color: var(--sumi);
+    margin-bottom: 14px;
+  }
+  .boundary-block h3 strong { color: var(--shu); font-weight: 500; }
+  .boundary-block p {
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--sumi-2);
+    margin: 0;
+  }
+  .flow-pills {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  @media (max-width: 820px) {
+    .flow-pills { grid-template-columns: 1fr; }
+    .flow-pills .arrow { transform: rotate(90deg); justify-self: center; }
+  }
+  .flow-pill {
+    background: var(--kinari);
+    border-radius: var(--r-md);
+    padding: 18px 20px;
+    text-align: center;
+    border: 1px solid rgba(26, 22, 20, 0.1);
+  }
+  .flow-pill .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--shu);
+    margin-bottom: 6px;
+  }
+  .flow-pill .label {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--sumi);
+  }
+  .arrow {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--shu);
+    opacity: 0.6;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">嶽</span>
+    <span class="brand-name">嶽ノ子</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#process" class="nav-link">進め方</a>
+    <a href="index.html#examples" class="nav-link">対応業務</a>
+    <a href="sample-app.html" class="nav-link active">見本アプリとは</a>
+    <a href="staff.html" class="nav-link">現場の方へ</a>
+    <a href="company.html" class="nav-link">会社概要</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="persona-eye">SAMPLE APP / 見本アプリとは</span>
+      <h1>御社専用の見本アプリとは。</h1>
+      <p class="lead">「契約してから、想像していたものと違ったらどうしよう」。<br>そんな不安をなくすために、嶽ノ子では<strong>契約前に、御社専用の見本アプリ</strong>を作ります。<br>実際の見本を見てから、契約するかどうか判断できます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 定義 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">01 — DEFINITION</span>御社専用の見本アプリ、とは。</h2>
+    <div class="def-block">
+      <span class="def-eye">— DEFINITION</span>
+      <h3>御社専用の見本アプリとは、<br>今使っている紙・Excel・帳票をもとに作る、<br><strong>契約前の確認用アプリ</strong>です。</h3>
+      <p>「プロトタイプ」と呼ぶこともありますが、嶽ノ子では、現場の方にイメージしてもらいやすいよう「御社専用の見本アプリ」と呼んでいます。<br>一般的なサンプルではなく、御社の紙・Excel・帳票を見たうえで、御社の業務に合わせて作る確認用のアプリです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 見本アプリで見られるもの -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">02 — WHAT YOU SEE</span>見本アプリで、確認できるもの</h2>
+    <div class="see-grid">
+      <div class="see-card">
+        <div class="eye">— 01</div>
+        <h3>画面の見本</h3>
+        <p>どんな画面で入力するか、どんな確認画面が出るか。現場で実際に触る画面のイメージを確認できます。</p>
+      </div>
+      <div class="see-card">
+        <div class="eye">— 02</div>
+        <h3>一覧の見本</h3>
+        <p>職員・利用者・記録・予定などが、どんな順番でどう並ぶか。今のExcelに近い見え方になっているかを確認できます。</p>
+      </div>
+      <div class="see-card">
+        <div class="eye">— 03</div>
+        <h3>印刷物の見本</h3>
+        <p>今使っている帳票・送迎表・シフト表・集計表に近い形で出力できるか。印刷した状態のイメージまで確認できます。</p>
+      </div>
+      <div class="see-card">
+        <div class="eye">— 04</div>
+        <h3>作業の流れ</h3>
+        <p>今の作業のどこが楽になるか、どこが今と同じか。実際の手順に合わせた流れを確認できます。</p>
+      </div>
+      <div class="see-card">
+        <div class="eye">— 05</div>
+        <h3>管理者と職員の違い</h3>
+        <p>誰が何を見て、何を操作するか。管理者の画面と職員の画面を分けて確認できます。</p>
+      </div>
+      <div class="see-card">
+        <div class="eye">— 06</div>
+        <h3>アプリが確認する条件</h3>
+        <p>入力漏れ、重複、条件違いなどを、どのタイミングでどう知らせるか。「自動で確認する」「人が確認する」の境界も確認できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 線引き -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">03 — BOUNDARY</span>見本アプリと、実際に使うアプリの違い</h2>
+    <div class="boundary-block">
+      <span class="eye">— IMPORTANT</span>
+      <h3>見本アプリは、<strong>契約前に完成イメージを確認するためのもの</strong>です。<br>実際に業務で使うアプリは、契約後に現場に合わせて整えていきます。</h3>
+      <p>見本アプリは、契約の判断材料です。実データを入れて運用するためのものではありません。<br>細かい入力項目・例外処理・権限設計・処理ルールの作り込み・本番環境の構築は、契約後に行います。</p>
+      <p style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(192,74,62,0.3); font-size: 13px;">
+        ※ 見本アプリの内容に著作権は発生しますが、契約後はそのまま実際に使うアプリの土台として活用します。<br>
+        ※ 契約前に行うのは、初回訪問・整理・見本作成・2回目訪問の4ステップまで。これらは0円で行います。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 4ステップ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">04 — STEPS</span>見本アプリができるまでの、4ステップ（0円）</h2>
+    <div class="flow-pills">
+      <div class="flow-pill">
+        <div class="num">STEP 01</div>
+        <div class="label">初回訪問で、<br>今の作業を見る</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-pill">
+        <div class="num">STEP 02</div>
+        <div class="label">持ち帰って、<br>作業の流れを整理</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-pill">
+        <div class="num">STEP 03</div>
+        <div class="label">御社専用の<br>見本アプリを作る</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-pill">
+        <div class="num">STEP 04</div>
+        <div class="label">2回目訪問で、<br>見本と費用を説明</div>
+      </div>
+    </div>
+    <p style="margin-top: 20px; text-align: center; font-size: 13.5px; color: var(--sumi-2);">
+      ここまで、すべて <strong style="color: var(--shu);">0円</strong> で行います。進めないと判断された場合も、追加費用は発生しません。
+    </p>
+  </div>
+</section>
+
+<!-- なぜ作るか -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">05 — WHY</span>なぜ、契約前に見本アプリを作るのか</h2>
+    <div class="card">
+      <p style="font-family: var(--serif); font-size: 16px; line-height: 1.95; color: var(--sumi);">
+        「契約してから、想像していたものと違った」── 介護現場でいちばん起きやすい失敗です。
+      </p>
+      <p style="margin-top: 14px;">仕様書だけで判断するのは、現場の方には負担が大きすぎます。文章で書かれた要件と、実際に使う画面では、見えるものが違うからです。</p>
+      <p style="margin-top: 14px;">嶽ノ子では、契約前に実際の見本を見せることで、<strong>「この形なら使えそうか」「どこまで作るとよさそうか」「費用はどれくらいか」</strong>を、現場の感覚で判断できるようにします。</p>
+      <p style="margin-top: 14px; padding: 14px 18px; background: var(--kinari); border-left: 3px solid var(--shu); border-radius: 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.95;">
+        「現場を見て、現場に合わせる。テクノロジーは、その手段です。」
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>御社専用の見本アプリ、まずは無料でご相談ください。</h2>
+      <p>今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。契約前まで0円です。</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn btn-light">無料相談する <span>→</span></a>
+        <a href="staff.html" class="btn btn-outline">現場の職員さんへ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">嶽</span>
+        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
+      </div>
+      <p>介護現場の紙・Excel・手作業を、現場に合うアプリに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
+    </div>
+    <div class="footer-col">
+      <h5>SERVICE</h5>
+      <ul>
+        <li><a href="index.html#process">進め方</a></li>
+        <li><a href="index.html#examples">対応業務</a></li>
+        <li><a href="index.html#price">料金</a></li>
+        <li><a href="sample-app.html">見本アプリとは</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>FOR</h5>
+      <ul>
+        <li><a href="staff.html">現場の職員さんへ</a></li>
+        <li><a href="manager.html">管理者向け</a></li>
+        <li><a href="dayservice.html">デイサービス向け</a></li>
+        <li><a href="small-facility.html">小規模事業所向け</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
+    <span>社会を回す人の、大切な人を守る。</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+</body>
+</html>

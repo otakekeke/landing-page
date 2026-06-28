@@ -1832,6 +1832,123 @@
     opacity: 1;
   }
 
+  /* ===== Promise: お願いすること / お願いしないこと ===== */
+  .ask-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .ask-side {
+    border-radius: var(--r-lg);
+    padding: 36px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ask-side.do {
+    background: var(--kinari-2);
+    color: var(--sumi);
+  }
+  .ask-side.dont {
+    background: var(--sumi);
+    color: var(--on-sumi);
+  }
+  .ask-side.do::before {
+    content: "お";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 150px;
+    color: #E2D9C2;
+    right: -20px; bottom: -50px;
+    line-height: 0.8;
+    pointer-events: none;
+  }
+  .ask-side.dont::before {
+    content: "✕";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 140px;
+    color: #221C19;
+    right: 20px; bottom: -10px;
+    line-height: 0.8;
+    pointer-events: none;
+  }
+  .ask-side-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .ask-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .ask-badge.do {
+    background: var(--shu);
+    color: var(--on-shu);
+  }
+  .ask-badge.dont {
+    background: var(--kinari);
+    color: var(--sumi);
+  }
+  .ask-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--shu);
+  }
+  .ask-meta.dont { color: var(--shu-light); }
+  .ask-side-h {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .ask-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .ask-list li {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.65;
+    padding: 10px 0 10px 28px;
+    position: relative;
+    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
+  }
+  .ask-list.dont li {
+    border-bottom-color: rgba(245, 239, 227, 0.18);
+  }
+  .ask-list li:last-child { border-bottom: none; }
+  .ask-list.do li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--shu);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .ask-list.dont li::before {
+    content: "×";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--shu-light);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
   /* ===== Before / 見本 / After 3-col ===== */
   .ba3-grid {
     display: grid;
@@ -2066,6 +2183,7 @@
     .ba3-grid { grid-template-columns: 1fr !important; }
     .ba3-arrow { transform: rotate(90deg); }
     .ba3-card.ba3-sample { transform: none; }
+    .ask-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 700px) {
     .rule-card { padding: 22px 22px !important; }
@@ -2088,10 +2206,10 @@
   </a>
   <div class="nav-links">
     <a href="#process" class="nav-link">進め方</a>
+    <a href="sample-app.html" class="nav-link">見本アプリ</a>
     <a href="#examples" class="nav-link">対応業務</a>
-    <a href="#rules" class="nav-link">約束</a>
     <a href="#price" class="nav-link">料金</a>
-    <a href="#case" class="nav-link">事例</a>
+    <a href="staff.html" class="nav-link">現場の方へ</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="company.html" class="nav-link">会社概要</a>
   </div>
@@ -2233,10 +2351,68 @@
   </div>
 </section>
 
+<!-- ===== PROMISE (現場へのお願い / お願いすること・お願いしないこと) ===== -->
+<section class="section" id="promise">
+  <div class="section-head reveal">
+    <span class="section-tag">— 01 / PROMISE</span>
+    <h2 class="section-title">現場の方に、難しい説明を<br><span class="accent">お願いしません</span>。</h2>
+    <span class="section-nav">現場へのお約束</span>
+  </div>
+
+  <div class="reveal" style="padding: 0 8px 28px;">
+    <p style="font-family: var(--serif); font-size: clamp(17px, 2vw, 22px); line-height: 1.75; color: var(--sumi); max-width: 60ch;">
+      お願いするのは、<strong style="color: var(--shu);">いつものやり方を見せてもらうこと</strong>。<br>
+      仕様書を書いてもらうことでも、IT用語を覚えてもらうことでもありません。
+    </p>
+  </div>
+
+  <div class="ask-grid reveal">
+    <div class="ask-side do">
+      <div class="ask-side-head">
+        <span class="ask-badge do">DO</span>
+        <span class="ask-meta">お願いすること</span>
+      </div>
+      <h3 class="ask-side-h">いつものやり方を、<br>見せてください。</h3>
+      <ul class="ask-list do">
+        <li>今使っている紙・Excelを見せてもらう</li>
+        <li>普段の作業の流れを見せてもらう</li>
+        <li>見本アプリを見て違和感を教えてもらう</li>
+        <li>使い始めて困った点を教えてもらう</li>
+        <li>現場の呼び方・言葉を教えてもらう</li>
+      </ul>
+    </div>
+    <div class="ask-side dont">
+      <div class="ask-side-head">
+        <span class="ask-badge dont">DON'T</span>
+        <span class="ask-meta dont">お願いしないこと</span>
+      </div>
+      <h3 class="ask-side-h">仕様書も、<br>IT用語も、必要ありません。</h3>
+      <ul class="ask-list dont">
+        <li>仕様書を書いてもらう</li>
+        <li>IT用語を覚えてもらう</li>
+        <li>長い資料を読んで確認してもらう</li>
+        <li>最初から完璧に使いこなしてもらう</li>
+        <li>すべての例外を事前に洗い出してもらう</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top: 24px; padding: 24px 32px; background: var(--kinari-2); border-radius: var(--r-md);">
+    <p style="font-family: var(--serif); font-size: 15px; line-height: 2; color: var(--sumi); margin: 0;">
+      現場のやり方を否定するのではなく、<strong style="color: var(--shu);">今の運用を読み解いて、無理なく続けられる形に整えていきます</strong>。<br>
+      もっと詳しい内容は、現場の方向け・見本アプリの説明ページをご覧ください。
+    </p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px;">
+      <a href="staff.html" style="padding: 12px 22px; background: var(--sumi); color: var(--kinari); border-radius: 999px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">現場の職員さんへ <span>→</span></a>
+      <a href="sample-app.html" style="padding: 12px 22px; background: var(--shu); color: var(--on-shu); border-radius: 999px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;">御社専用の見本アプリとは <span>→</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== PROCESS (契約前 ／ 契約後) ===== -->
 <section class="section" id="process">
   <div class="section-head reveal">
-    <span class="section-tag">— 01 / PROCESS</span>
+    <span class="section-tag">— 02 / PROCESS</span>
     <h2 class="section-title">契約前と<br><span class="accent">契約後</span>、それぞれにやること。</h2>
     <span class="section-nav">導入の流れ</span>
   </div>
@@ -2590,7 +2766,7 @@
 <!-- ===== EXAMPLES (対応業務 + 代表例3つ) ===== -->
 <section class="section" id="examples">
   <div class="section-head reveal">
-    <span class="section-tag">— 02 / BUSINESS</span>
+    <span class="section-tag">— 03 / BUSINESS</span>
     <h2 class="section-title">対応できる<br><span class="accent">業務</span>。</h2>
     <span class="section-nav">対応業務</span>
   </div>
@@ -2732,7 +2908,7 @@
 <!-- ===== RULES (5つの約束) ===== -->
 <section class="section" id="rules">
   <div class="section-head reveal">
-    <span class="section-tag">— 03 / RULES</span>
+    <span class="section-tag">— 04 / RULES</span>
     <h2 class="section-title">嶽ノ子の<br><span class="accent">5つの約束</span>。</h2>
     <span class="section-nav">決まりごと</span>
   </div>
@@ -2769,7 +2945,7 @@
 <!-- ===== PRICING (汎用4プラン・固定価格) ===== -->
 <section class="section" id="price">
   <div class="section-head reveal">
-    <span class="section-tag">— 04 / PRICING</span>
+    <span class="section-tag">— 05 / PRICING</span>
     <h2 class="section-title">料金は、<br><span class="accent">固定価格</span>で明示。</h2>
     <span class="section-nav">料金</span>
   </div>
@@ -2920,7 +3096,7 @@
 <!-- ===== CASE ===== -->
 <section class="section" id="case">
   <div class="section-head reveal">
-    <span class="section-tag">— 05 / CASE STUDY</span>
+    <span class="section-tag">— 06 / CASE STUDY</span>
     <h2 class="section-title">導入<br><span class="accent">事例</span></h2>
     <span class="section-nav">事例</span>
   </div>
@@ -3015,7 +3191,7 @@
 <!-- ===== PHILOSOPHY (理念) ===== -->
 <section class="section" id="philosophy">
   <div class="section-head reveal">
-    <span class="section-tag">— 06 / PHILOSOPHY</span>
+    <span class="section-tag">— 07 / PHILOSOPHY</span>
     <h2 class="section-title">嶽ノ子の<br><span class="accent">理念</span>。</h2>
     <span class="section-nav">理念</span>
   </div>
@@ -3040,7 +3216,7 @@
 <!-- ===== BOUNDARIES (役割分担 / 既存ソフトとの共存) ===== -->
 <section class="section" id="boundaries">
   <div class="section-head reveal">
-    <span class="section-tag">— 07 / SCOPE</span>
+    <span class="section-tag">— 08 / SCOPE</span>
     <h2 class="section-title">役割と<br><span class="accent">対応範囲</span>。</h2>
     <span class="section-nav">範囲</span>
   </div>
@@ -3099,7 +3275,7 @@
   <div class="faq-wrap reveal">
     <div class="faq-head">
       <div>
-        <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 08 / FAQ</span>
+        <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 09 / FAQ</span>
         <h2 style="margin-top: 16px;">よくある<br><span class="accent">ご質問</span></h2>
       </div>
       <p>ご検討時によくいただく質問をまとめました。記載がない事項についても、お気軽にお問い合わせください。</p>
@@ -3317,7 +3493,7 @@
 <section class="section" id="contact">
   <div class="block contact reveal">
     <div class="contact-l">
-      <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 09 / CONTACT</span>
+      <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 10 / CONTACT</span>
       <h2>今のやり方を、<br>見せてください。</h2>
       <p class="lede">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong>「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、合いそうな範囲・概算費用をご案内します。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
       <dl class="contact-channels">
@@ -3474,9 +3650,11 @@
     <div class="footer-col">
       <h5>For</h5>
       <ul>
-        <li><a href="dayservice.html">デイサービス向け</a></li>
+        <li><a href="staff.html">現場の職員さんへ</a></li>
         <li><a href="manager.html">管理者向け</a></li>
+        <li><a href="dayservice.html">デイサービス向け</a></li>
         <li><a href="small-facility.html">小規模事業所向け</a></li>
+        <li><a href="sample-app.html">見本アプリとは</a></li>
         <li><a href="plans.html">導入例・活用イメージ</a></li>
       </ul>
     </div>
