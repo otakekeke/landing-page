@@ -336,7 +336,7 @@
 
   /* Hero bottom row — small highlight tiles */
   .tile-mini {
-    grid-column: span 3;
+    grid-column: span 4;
     background: var(--kinari-2);
     padding: 20px 22px;
     min-height: 110px;
@@ -1002,6 +1002,29 @@
     color: var(--sumi-2);
   }
   .faq-list { max-width: 1000px; }
+  .faq-cat-head {
+    margin: 28px 0 12px;
+    padding: 6px 4px 14px;
+    border-bottom: 1px dashed rgba(26, 22, 20, 0.18);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .faq-cat-head:first-child { margin-top: 0; }
+  .faq-cat-eye {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--shu);
+    font-weight: 600;
+  }
+  .faq-cat-h {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--sumi);
+    margin: 0;
+  }
   .faq-item {
     background: var(--kinari);
     border-radius: var(--r-md);
@@ -1382,7 +1405,7 @@
     .tile-hero { grid-column: span 12; grid-row: span 2; min-height: 480px; padding: 48px 36px; }
     .tile-dark { grid-column: span 7; }
     .tile-stat { grid-column: span 5; }
-    .tile-mini { grid-column: span 6; }
+    .tile-mini { grid-column: span 4; }
     .philosophy { grid-template-columns: 1fr; gap: 40px; padding: 72px 40px; }
     .svc-1 { grid-column: span 12; }
     .svc-2, .svc-3, .svc-4, .svc-5 { grid-column: span 6; }
@@ -1570,6 +1593,142 @@
     .mode-toggle-opt { padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em; }
   }
 
+  /* ===== Contract before/after 2-col ===== */
+  .contract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .contract-side {
+    border-radius: var(--r-lg);
+    padding: 40px 36px;
+    background: var(--kinari-2);
+    color: var(--sumi);
+    position: relative;
+    overflow: hidden;
+  }
+  .contract-side.after {
+    background: var(--sumi);
+    color: var(--on-sumi);
+  }
+  .contract-side.after::before {
+    content: "後";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 150px;
+    color: #221C19;
+    right: -20px; bottom: -50px;
+    line-height: 0.8;
+    pointer-events: none;
+  }
+  .contract-side.before::before {
+    content: "前";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 150px;
+    color: #E2D9C2;
+    right: -20px; bottom: -50px;
+    line-height: 0.8;
+    pointer-events: none;
+  }
+  .contract-side-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  .contract-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    background: var(--shu);
+    color: var(--on-shu);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .contract-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--shu);
+  }
+  .contract-meta.after { color: var(--shu-light); }
+  .contract-side-h {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .contract-side-p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--sumi-2);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+  .contract-side.after .contract-side-p {
+    color: rgba(245, 239, 227, 0.78);
+  }
+  .contract-steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+    position: relative;
+    z-index: 2;
+  }
+  .contract-steps li {
+    position: relative;
+    padding: 14px 4px 14px 56px;
+    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.55;
+    counter-increment: step;
+  }
+  .contract-steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    background: var(--shu);
+    color: var(--on-shu);
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+  }
+  .contract-steps li:last-child { border-bottom: none; }
+  .contract-steps.after li {
+    border-bottom-color: rgba(245, 239, 227, 0.18);
+  }
+  .contract-side-foot {
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--sumi-2);
+    opacity: 0.78;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(26, 22, 20, 0.15);
+    position: relative;
+    z-index: 2;
+  }
+  .contract-side.after .contract-side-foot {
+    color: rgba(245, 239, 227, 0.75);
+    border-top-color: rgba(245, 239, 227, 0.2);
+    opacity: 1;
+  }
+
   /* ===== New sections: mobile responsiveness ===== */
   @media (max-width: 900px) {
     .problem-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
@@ -1581,11 +1740,16 @@
     .warning-list { grid-template-columns: 1fr !important; }
     .roles-grid { grid-template-columns: 1fr !important; }
     .monthly-tier-grid { grid-template-columns: 1fr !important; }
+    .contract-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 700px) {
     .rule-card { padding: 22px 22px !important; }
     .phase-card { padding: 24px 20px !important; }
     .problem-item { padding: 16px 18px !important; }
+    .contract-side { padding: 28px 24px !important; }
+    .contract-side-h { font-size: 20px !important; }
+    .contract-steps li { font-size: 14px !important; padding: 12px 4px 12px 50px !important; }
+    .contract-steps li::before { width: 32px !important; height: 32px !important; font-size: 10px !important; }
   }
 </style>
 </head>
@@ -1598,10 +1762,9 @@
     <span class="brand-name">嶽ノ子</span>
   </a>
   <div class="nav-links">
+    <a href="#process" class="nav-link">進め方</a>
     <a href="#examples" class="nav-link">対応業務</a>
-    <a href="#service" class="nav-link">進め方</a>
-    <a href="#rules" class="nav-link">決まりごと</a>
-    <a href="#flow" class="nav-link">流れ</a>
+    <a href="#rules" class="nav-link">約束</a>
     <a href="#price" class="nav-link">料金</a>
     <a href="#case" class="nav-link">事例</a>
     <a href="#faq" class="nav-link">FAQ</a>
@@ -1655,16 +1818,12 @@
       <span class="mini-v">現場訪問が中心</span>
     </div>
     <div class="tile tile-mini uguisu-surface reveal">
-      <span class="mini-k">FROM</span>
-      <span class="mini-v">初期 ¥100,000〜</span>
-    </div>
-    <div class="tile tile-mini ai-surface reveal">
-      <span class="mini-k">BUSINESS</span>
-      <span class="mini-v">シフト・送迎・集計 ほか</span>
+      <span class="mini-k">FIRST TALK</span>
+      <span class="mini-v">無料相談 0円</span>
     </div>
     <div class="tile tile-mini reveal" style="background: var(--yamabuki-surface); color: #6B5321;">
-      <span class="mini-k">BASE</span>
-      <span class="mini-v">Google Workspace</span>
+      <span class="mini-k">CONTACT</span>
+      <span class="mini-v">代表が直接対応</span>
     </div>
 
     <!-- Marquee ticker -->
@@ -1676,12 +1835,8 @@
         <span class="ticker-item">申し送り</span>
         <span class="ticker-item">記録チェック</span>
         <span class="ticker-item">備品管理</span>
-        <span class="ticker-item">ヒヤリハット報告</span>
-        <span class="ticker-item">報告書作成</span>
         <span class="ticker-item">家族連絡</span>
         <span class="ticker-item">利用者一覧</span>
-        <span class="ticker-item">点検記録</span>
-        <span class="ticker-item">申請承認</span>
         <!-- duplicate for seamless loop -->
         <span class="ticker-item">シフト作成</span>
         <span class="ticker-item">送迎管理</span>
@@ -1689,12 +1844,8 @@
         <span class="ticker-item">申し送り</span>
         <span class="ticker-item">記録チェック</span>
         <span class="ticker-item">備品管理</span>
-        <span class="ticker-item">ヒヤリハット報告</span>
-        <span class="ticker-item">報告書作成</span>
         <span class="ticker-item">家族連絡</span>
         <span class="ticker-item">利用者一覧</span>
-        <span class="ticker-item">点検記録</span>
-        <span class="ticker-item">申請承認</span>
       </div>
     </div>
   </div>
@@ -1731,10 +1882,311 @@
   </div>
 </section>
 
+<!-- ===== PROCESS (契約前 ／ 契約後) ===== -->
+<section class="section" id="process">
+  <div class="section-head reveal">
+    <span class="section-tag">— 01 / PROCESS</span>
+    <h2 class="section-title">契約前と<br><span class="accent">契約後</span>、それぞれにやること。</h2>
+    <span class="section-nav">導入の流れ</span>
+  </div>
+
+  <div class="reveal" style="padding: 0 8px 28px;">
+    <p style="font-family: var(--serif); font-size: clamp(17px, 2vw, 22px); line-height: 1.75; color: var(--sumi); max-width: 60ch;">
+      契約前に、<strong style="color: var(--shu);">完成イメージ</strong>まで見えるようにします。<br>
+      契約後に、<strong style="color: var(--shu);">現場で使える形</strong>へ一緒に整えます。
+    </p>
+  </div>
+
+  <div class="contract-grid reveal">
+    <div class="contract-side before">
+      <div class="contract-side-head">
+        <span class="contract-badge">BEFORE</span>
+        <span class="contract-meta">契約前 ／ 0円</span>
+      </div>
+      <h3 class="contract-side-h">契約前にやること</h3>
+      <p class="contract-side-p">完成イメージを一緒に確認するまでが、無料の範囲です。</p>
+      <ol class="contract-steps">
+        <li>初回訪問で、今の作業を見る</li>
+        <li>持ち帰って、作業の流れを整理する</li>
+        <li>画面と帳票の見本を作る</li>
+        <li>2回目訪問で、見本と費用を説明する</li>
+      </ol>
+      <p class="contract-side-foot">
+        ※ 契約前の段階では、細かい入力項目・例外処理・実際に使うアプリの作成は行いません（契約後に実施）。
+      </p>
+    </div>
+    <div class="contract-side after">
+      <div class="contract-side-head">
+        <span class="contract-badge after">AFTER</span>
+        <span class="contract-meta after">契約後 ／ 商品料金に含む</span>
+      </div>
+      <h3 class="contract-side-h">契約後にやること</h3>
+      <p class="contract-side-p">現場で実際に使える形へ整えるところまで、契約に含めます。</p>
+      <ol class="contract-steps after">
+        <li>現場の横で、一緒に形にする</li>
+        <li>細かい項目や例外を整理する</li>
+        <li>小さく作って、小さく確認する</li>
+        <li>例を入れて、結果を確認する</li>
+      </ol>
+      <p class="contract-side-foot">
+        ※ 契約金額の中で対応します。表示価格に含まれない作業は、作業前に必ずお見積りします。
+      </p>
+    </div>
+  </div>
+
+<div class="ix-flow-outer reveal">
+    <div class="ix-flow-intro">
+      <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— DETAIL ／ 8ステップ</span>
+      <h2 class="ix-flow-title"><span style="color: var(--shu);">具体的な8ステップ</span>で見る。</h2>
+    </div>
+    <div class="ix-flow-sticky">
+      <div class="ix-flow-l">
+        <div class="ix-flow-progress">
+          <div class="ix-flow-step active">
+            <div class="ix-flow-bullet">01</div>
+            <div><h3>初回訪問・現場確認</h3><p>実際に使っている紙・Excel・帳票、作業の流れを現場で確認します。何を作るか決まっていなくても大丈夫です。現場のやり方を見ながら、改善できそうな業務を一緒に探します。</p><div class="dur">— 現場訪問が中心・0円</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">02</div>
+            <div><h3>持ち帰り整理・画面と帳票の見本づくり</h3><p>初回訪問で見た内容をもとに、今の作業の流れ・改善点・画面と帳票の見本を作成します。実際に使うアプリではなく、完成イメージを確認するための簡易版です。</p><div class="dur">— 数日〜2週間・0円</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">03</div>
+            <div><h3>2回目訪問・画面と帳票の見本提示</h3><p>整理した今の作業の流れと画面と帳票の見本を見ながら、「この形なら使えそうか」を確認します。あわせて概算費用・対応範囲・月額費用をご説明します。</p><div class="dur">— 訪問が中心・0円</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">04</div>
+            <div><h3>契約</h3><p>開発範囲、費用、月額サポート、追加費用が発生する条件を確認し、合意のうえで進めます。</p><div class="dur">— 数日〜1週間</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">05</div>
+            <div><h3>現場の横で一緒に形にする</h3><p>契約後は、必要に応じて現場に伺い、紙・Excel・画面と帳票の見本を見ながら一緒に形を整えます。作っている途中の画面や出力を見ていただきながら、現場に合う形に近づけます。</p><div class="dur">— 商品料金に含む</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">06</div>
+            <div><h3>開発・確認・テスト</h3><p>小さく作り、小さく確認します。シフト・集計・加算確認などのアプリが確認する条件は、入力例と結果のパターンで確認しながら進めます。</p><div class="dur">— 商品料金に含む</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">07</div>
+            <div><h3>導入・初月支援</h3><p>実際の業務で使い始めた後も、紙に戻っていないか、二重入力がないか、職員が迷っていないかを確認し、運用に定着するまで支援します。</p><div class="dur">— 月額の範囲で厚めに</div></div>
+          </div>
+          <div class="ix-flow-step">
+            <div class="ix-flow-bullet">08</div>
+            <div><h3>保守・追加改善</h3><p>導入後は月額サポートで、不具合対応・軽微修正・操作相談を行います。使いながら出てきた追加改善は、範囲を整理したうえで別途ご提案します。</p><div class="dur">— 月額・固定価格</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ix-flow-r">
+        <!-- Scene 01: 初回訪問・現場確認 -->
+        <div class="ix-flow-scene active">
+          <span class="scene-num">01</span>
+          <span class="scene-phase">STEP 01 ／ 初回訪問</span>
+          <h4>現場で、<br><em>実際の運用</em>を確認します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
+            <div class="scene-stat"><span class="k">形式</span><span class="v">現場訪問が中心</span></div>
+            <div class="scene-stat"><span class="k">担当</span><span class="v">代表が直接</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— ここで確認するもの</div>
+            <ul class="scene-bullets">
+              <li>実際に使っている紙の帳票・Excel・記録</li>
+              <li>シフト表・送迎表・月次集計などの現物</li>
+              <li>作業の流れ・関わる人・確認のタイミング</li>
+              <li>困っている業務・続いている運用の理由</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— やらないこと</div>
+            <div class="scene-deliverable">細かい仕様の確定 ／ 本番設計（契約後に実施）</div>
+          </div>
+        </div>
+
+        <!-- Scene 02: 持ち帰り整理・画面と帳票の見本 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">02</span>
+          <span class="scene-phase">STEP 02 ／ 整理＋画面と帳票の見本</span>
+          <h4>こちらで読み解き、<br><em>形に</em>します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
+            <div class="scene-stat"><span class="k">期間</span><span class="v">数日〜2週間</span></div>
+            <div class="scene-stat"><span class="k">担当</span><span class="v">こちらが整理</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— こちらでやること</div>
+            <ul class="scene-bullets">
+              <li>現場で確認した内容を今の作業の流れに整理</li>
+              <li>改善できそうな点・小さく作れる範囲を抽出</li>
+              <li>画面・出力イメージの画面と帳票の見本を作成</li>
+              <li>合いそうな商品プランと概算費用を試算</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">今の作業の流れの整理メモ ／ 画面と帳票の見本（画面・出力）</div>
+          </div>
+        </div>
+
+        <!-- Scene 03: 2回目訪問・画面と帳票の見本提示 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">03</span>
+          <span class="scene-phase">STEP 03 ／ 2回目訪問</span>
+          <h4>画面と帳票の見本で、<br><em>完成イメージ</em>を確認します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
+            <div class="scene-stat"><span class="k">形式</span><span class="v">訪問が中心</span></div>
+            <div class="scene-stat"><span class="k">判断</span><span class="v">続行 or 終了</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— この回でやること</div>
+            <ul class="scene-bullets">
+              <li>整理した今の作業の流れを一緒に確認</li>
+              <li>画面と帳票の見本で完成イメージを共有</li>
+              <li>概算費用・対応範囲・月額費用をご説明</li>
+              <li>進める／進めないをご判断いただく</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">固定価格の見積書 ／ 合うアプリ商品のご提案</div>
+          </div>
+        </div>
+
+        <!-- Scene 04: 契約 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">04</span>
+          <span class="scene-phase">STEP 04 ／ 契約</span>
+          <h4>範囲と費用を、<br><em>合意</em>のうえで進めます。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">数日〜1週間</span></div>
+            <div class="scene-stat"><span class="k">合意</span><span class="v">書面</span></div>
+            <div class="scene-stat"><span class="k">担当</span><span class="v">代表と直接</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— ここで確認するもの</div>
+            <ul class="scene-bullets">
+              <li>開発範囲・対応する／しない範囲</li>
+              <li>固定価格の費用と月額サポート</li>
+              <li>追加費用が発生する条件</li>
+              <li>導入時期・運用担当・連絡経路</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">契約書 ／ 対応範囲の確認書</div>
+          </div>
+        </div>
+
+        <!-- Scene 05: 現場の横で一緒に形にする -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">05</span>
+          <span class="scene-phase">STEP 05 ／ 現場同席</span>
+          <h4>必要なときは、<br><em>現場の横</em>で一緒に作ります。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
+            <div class="scene-stat"><span class="k">形式</span><span class="v">現場訪問</span></div>
+            <div class="scene-stat"><span class="k">特徴</span><span class="v">作る過程を共有</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 進めかた</div>
+            <ul class="scene-bullets">
+              <li>必要に応じて現場に伺います</li>
+              <li>紙・Excel・画面と帳票の見本を並べて確認</li>
+              <li>作っている途中の画面・出力を見ながら調整</li>
+              <li>現場に合う形に少しずつ近づける</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— なぜやるか</div>
+            <div class="scene-deliverable">「できてから違った」を防ぎ、現場の感覚に合わせるため</div>
+          </div>
+        </div>
+
+        <!-- Scene 06: 開発・確認・テスト -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">06</span>
+          <span class="scene-phase">STEP 06 ／ 開発・確認</span>
+          <h4>小さく作り、<br><em>都度確認</em>します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat"><span class="k">期間</span><span class="v">商品サイズ依存</span></div>
+            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
+            <div class="scene-stat"><span class="k">確認</span><span class="v">機能単位</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 進めかた</div>
+            <ul class="scene-bullets">
+              <li>機能ごとに動くものを早めにお見せします</li>
+              <li>アプリが確認する条件は入力例と結果のパターンで確認</li>
+              <li>本番環境で試用してから導入</li>
+              <li>初回レクチャー・簡易マニュアル提供</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">動作確認済みアプリ ／ 本番稼働</div>
+          </div>
+        </div>
+
+        <!-- Scene 07: 導入・初月支援 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">07</span>
+          <span class="scene-phase">STEP 07 ／ 導入・初月支援</span>
+          <h4>使い始めた後も、<br><em>定着するまで</em>支援します。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">支援</span><span class="v">月額の範囲で厚め</span></div>
+            <div class="scene-stat"><span class="k">期間</span><span class="v">最初の1〜3か月</span></div>
+            <div class="scene-stat"><span class="k">確認</span><span class="v">運用に乗るまで</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 確認すること</div>
+            <ul class="scene-bullets">
+              <li>紙に戻っていないか</li>
+              <li>二重入力が発生していないか</li>
+              <li>職員が迷っていないか</li>
+              <li>使われていない機能がないか</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 成果物</div>
+            <div class="scene-deliverable">運用に定着したアプリ ／ 操作・運用ルールのメモ</div>
+          </div>
+        </div>
+
+        <!-- Scene 08: 保守・追加改善 -->
+        <div class="ix-flow-scene">
+          <span class="scene-num">08</span>
+          <span class="scene-phase">STEP 08 ／ 保守・追加改善</span>
+          <h4>使い続けられるよう、<br><em>月額で支えます</em>。</h4>
+          <div class="scene-meta-row">
+            <div class="scene-stat shu"><span class="k">月額</span><span class="v">固定価格</span></div>
+            <div class="scene-stat"><span class="k">追加改善</span><span class="v">別途お見積り</span></div>
+            <div class="scene-stat"><span class="k">解約</span><span class="v">14日前通知</span></div>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 月額に含まれるもの</div>
+            <ul class="scene-bullets">
+              <li>不具合対応・軽微な修正・操作相談</li>
+              <li>職員入退職対応・権限変更・端末変更</li>
+              <li>3つの保守プラン：月¥10,000／¥20,000／¥50,000</li>
+              <li>使いながら出てきた追加改善は、範囲を整理してご提案</li>
+            </ul>
+          </div>
+          <div class="scene-section">
+            <div class="scene-section-title">— 別途お見積り</div>
+            <div class="scene-deliverable">新機能・帳票追加 ／ アプリが確認する条件の変更 ／ 業務の流れの変更</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
 <!-- ===== EXAMPLES (対応業務 + 代表例3つ) ===== -->
 <section class="section" id="examples">
   <div class="section-head reveal">
-    <span class="section-tag">— 01 / BUSINESS</span>
+    <span class="section-tag">— 02 / BUSINESS</span>
     <h2 class="section-title">対応できる<br><span class="accent">業務</span>。</h2>
     <span class="section-nav">対応業務</span>
   </div>
@@ -1818,363 +2270,38 @@
   </div>
 </section>
 
-<!-- ===== SERVICE ===== -->
-<section class="section" id="service">
-  <div class="section-head reveal">
-    <span class="section-tag">— 02 / SERVICE</span>
-    <h2 class="section-title">嶽ノ子の<br><span class="accent">進め方</span>。</h2>
-    <span class="section-nav">進め方</span>
-  </div>
-
-  <div class="service-grid">
-    <div class="svc svc-1 reveal">
-      <span class="svc-num">— 01 / OBSERVE</span>
-      <div>
-        <h3 class="svc-h">細かい仕様を、<br>決めなくていい。</h3>
-        <p class="svc-p">「どんなアプリが必要か」を最初から決めていただく必要はありません。今使っている紙・Excel・帳票、実際の作業の流れを見ながら、こちらで必要な機能や進め方を整理します。</p>
-      </div>
-    </div>
-    <div class="svc svc-2 reveal">
-      <span class="svc-num">— 02 / RESPECT</span>
-      <div>
-        <h3 class="svc-h">現場の負担を<br>増やさない。</h3>
-        <p class="svc-p">今の運用を尊重し、無理なく使える形に整えます。非効率な部分は提案しますが、変えない方がいいものは変えません。学習コストを最小にし、定着を最優先します。</p>
-      </div>
-    </div>
-    <div class="svc svc-3 reveal">
-      <span class="svc-num">— 03 / SCALE</span>
-      <div>
-        <h3 class="svc-h">まず1つの業務<br>から始める。</h3>
-        <p class="svc-p">「丸ごとアプリ化」ではなく、面倒な業務1つから。効果を確認してから他業務へ広げます。小さく確認しながら進めるので、認識のズレを早く拾えます。</p>
-      </div>
-    </div>
-    <div class="svc svc-4 reveal">
-      <span class="svc-num">— 04 / BASE</span>
-      <div>
-        <h3 class="svc-h">Google<br>Workspace を活用。</h3>
-        <p class="svc-p">Google Workspace をお使いの場合は、現在の環境を活かして構成できます。未導入の場合は、必要なアカウント数や Google 側の利用料も含めて事前にご説明します。当社側の追加サーバー費用は原則かかりません。</p>
-      </div>
-    </div>
-    <div class="svc svc-5 reveal">
-      <span class="svc-num">— 05 / PRICING</span>
-      <div>
-        <h3 class="svc-h">料金は、<br>固定価格で明示。</h3>
-        <p class="svc-p">アプリ商品ごとに固定価格でご提示します。表示価格で対応できる範囲を事前に明確にし、追加費用は作業前に必ずご説明します。勝手に費用が増えることはありません。</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 確認するもの -->
-  <div class="reveal" style="margin: 28px 0 16px; padding: 28px 32px; background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md);">
-    <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; opacity: 0.6; margin-bottom: 16px;">— OBSERVE / 確認するもの</div>
-    <h3 style="font-family: var(--serif); font-size: clamp(18px, 2.3vw, 26px); font-weight: 500; line-height: 1.4; margin-bottom: 16px;">声を聴くだけでなく、<br>実際の業務を見ます。</h3>
-    <p style="font-family: var(--serif); font-size: 14px; line-height: 1.85; opacity: 0.85; max-width: 60ch;">紙の帳票、Excel、シフト表、記録用紙、送迎表、月次集計、既存システム、過去データ、現場で実際に行われている確認作業。これらから、現場に必要な仕組みを読み解きます。</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">紙の帳票</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">Excel</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">シフト表</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">記録用紙</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">送迎表</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">月次集計</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">既存システム</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">過去データ</span>
-      <span class="chip" style="background: rgba(245,239,227,0.12); color: var(--on-sumi); border-color: rgba(245,239,227,0.18);">現場の確認作業</span>
-    </div>
-  </div>
-
-</section>
-
-<!-- ===== RULES (嶽ノ子の開発ルール) ===== -->
+<!-- ===== RULES (5つの約束) ===== -->
 <section class="section" id="rules">
   <div class="section-head reveal">
     <span class="section-tag">— 03 / RULES</span>
-    <h2 class="section-title">嶽ノ子の<br><span class="accent">決まりごと</span>。</h2>
-    <span class="section-nav">7つの約束</span>
+    <h2 class="section-title">嶽ノ子の<br><span class="accent">5つの約束</span>。</h2>
+    <span class="section-nav">決まりごと</span>
   </div>
   <div class="rules-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 01</div>
       <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">細かい仕様書を<br>書かせません。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">「何を作りたいか」を最初から決めていただく必要はありません。こちらが現場と資料を読み解き、必要な機能や進め方を整理します。</p>
+      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">「何を作りたいか」を最初から決めていただく必要はありません。現場の紙・Excel・帳票と作業の流れを、こちらが読み解いて整理します。口頭説明だけでは進めません。</p>
     </div>
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 02</div>
-      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">口頭説明だけで<br>開発しません。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">実際の帳票・Excel・過去データを見せていただき、運用の実態を確認したうえで設計します。</p>
+      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">入力例と結果で<br>確認します。</h3>
+      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">シフト・集計・加算などのアプリが確認する条件は、画面ではなく実際の入力例・出力例で合意してから開発します。仕様書を読まなくても、動きを見て確認できる形にします。</p>
     </div>
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 03</div>
-      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">紙・Excel・過去データを<br>必ず確認します。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">現場で実際に流れているものを見ないと、本当に必要な機能は見えてきません。</p>
+      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">完全自動ではなく、<br>現場が直せる仕組み。</h3>
+      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">最後は人が判断します。シフト案・集計案などは自動で出し、管理者が確認・調整できる形に。完全自動化は保証しません。</p>
     </div>
     <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 04</div>
-      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">処理ルールは<br>入力例と結果で確認。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">シフト・集計・加算などの処理ルールは、画面ではなく実際の入力例・出力例で合意してから開発します。</p>
-    </div>
-    <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 05</div>
-      <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">完全自動ではなく、<br>現場が直せる仕組み。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">最後は人が判断します。シフト案・集計案などは自動で出し、管理者が確認・調整できる形に。</p>
-    </div>
-    <div class="rule-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">RULE 06</div>
       <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">変更は責めずに、<br>線引きで整理。</h3>
-      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">追加要望は自然なもの。不具合／仕様内調整／仕様変更／追加開発に分けて、誠実に整理します。</p>
+      <p style="font-size: 14px; line-height: 1.85; color: var(--sumi-2);">追加要望は自然なもの。不具合／月額内の軽微な調整／別途お見積りに分けて、誠実に整理します。「言った／言わない」では対応しません。</p>
     </div>
-    <div class="rule-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px; grid-column: span 1;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">RULE 07</div>
+    <div class="rule-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 28px 28px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">RULE 05</div>
       <h3 style="font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.5;">運用に乗るまで、<br>支援します。</h3>
       <p style="font-size: 14px; line-height: 1.85; opacity: 0.85;">納品して終わりではなく、現場で使えるようになるまで伴走します。代表が直接対応します。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FLOW (Interactive scroll-pinned) ===== -->
-<section class="section" id="flow" style="padding: 0;">
-  <div class="ix-flow-outer reveal">
-    <div class="ix-flow-intro">
-      <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 04 / PROCESS</span>
-      <h2 class="ix-flow-title"><span style="color: var(--shu);">導入までの流れ</span>。</h2>
-    </div>
-    <div class="ix-flow-sticky">
-      <div class="ix-flow-l">
-        <div class="ix-flow-progress">
-          <div class="ix-flow-step active">
-            <div class="ix-flow-bullet">01</div>
-            <div><h3>初回訪問・現場確認</h3><p>実際に使っている紙・Excel・帳票、作業の流れを現場で確認します。何を作るか決まっていなくても大丈夫です。現場のやり方を見ながら、改善できそうな業務を一緒に探します。</p><div class="dur">— 現場訪問が中心・0円</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">02</div>
-            <div><h3>持ち帰り整理・簡易プロトタイプ作成</h3><p>初回訪問で見た内容をもとに、業務フロー・改善点・簡易プロトタイプを作成します。本番用アプリではなく、完成イメージを確認するための簡易版です。</p><div class="dur">— 数日〜2週間・0円</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">03</div>
-            <div><h3>2回目訪問・プロトタイプ提示</h3><p>整理した業務フローと簡易プロトタイプを見ながら、「この形なら使えそうか」を確認します。あわせて概算費用・対応範囲・月額費用をご説明します。</p><div class="dur">— 訪問が中心・0円</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">04</div>
-            <div><h3>契約</h3><p>開発範囲、費用、月額サポート、追加費用が発生する条件を確認し、合意のうえで進めます。</p><div class="dur">— 数日〜1週間</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">05</div>
-            <div><h3>現場同席開発</h3><p>契約後は、必要に応じて現場に伺い、紙・Excel・プロトタイプを見ながら一緒に形を整えます。作っている途中の画面や出力を見ていただきながら、現場に合う形に近づけます。</p><div class="dur">— 商品料金に含む</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">06</div>
-            <div><h3>開発・確認・テスト</h3><p>小さく作り、小さく確認します。シフト・集計・加算確認などの処理ルールは、入力例と結果のパターンで確認しながら進めます。</p><div class="dur">— 商品料金に含む</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">07</div>
-            <div><h3>導入・初月支援</h3><p>実際の業務で使い始めた後も、紙に戻っていないか、二重入力がないか、職員が迷っていないかを確認し、運用に定着するまで支援します。</p><div class="dur">— 月額の範囲で厚めに</div></div>
-          </div>
-          <div class="ix-flow-step">
-            <div class="ix-flow-bullet">08</div>
-            <div><h3>保守・追加改善</h3><p>導入後は月額サポートで、不具合対応・軽微修正・操作相談を行います。使いながら出てきた追加改善は、範囲を整理したうえで別途ご提案します。</p><div class="dur">— 月額・固定価格</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="ix-flow-r">
-        <!-- Scene 01: 初回訪問・現場確認 -->
-        <div class="ix-flow-scene active">
-          <span class="scene-num">01</span>
-          <span class="scene-phase">STEP 01 ／ 初回訪問</span>
-          <h4>現場で、<br><em>実際の運用</em>を確認します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
-            <div class="scene-stat"><span class="k">形式</span><span class="v">現場訪問が中心</span></div>
-            <div class="scene-stat"><span class="k">担当</span><span class="v">代表が直接</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— ここで確認するもの</div>
-            <ul class="scene-bullets">
-              <li>実際に使っている紙の帳票・Excel・記録</li>
-              <li>シフト表・送迎表・月次集計などの現物</li>
-              <li>作業の流れ・関わる人・確認のタイミング</li>
-              <li>困っている業務・続いている運用の理由</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— やらないこと</div>
-            <div class="scene-deliverable">細かい仕様の確定 ／ 本番設計（契約後に実施）</div>
-          </div>
-        </div>
-
-        <!-- Scene 02: 持ち帰り整理・簡易プロトタイプ -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">02</span>
-          <span class="scene-phase">STEP 02 ／ 整理＋簡易プロトタイプ</span>
-          <h4>こちらで読み解き、<br><em>形に</em>します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
-            <div class="scene-stat"><span class="k">期間</span><span class="v">数日〜2週間</span></div>
-            <div class="scene-stat"><span class="k">担当</span><span class="v">こちらが整理</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— こちらでやること</div>
-            <ul class="scene-bullets">
-              <li>現場で確認した内容を業務フローに整理</li>
-              <li>改善できそうな点・小さく作れる範囲を抽出</li>
-              <li>画面・出力イメージの簡易プロトタイプを作成</li>
-              <li>合いそうな商品プランと概算費用を試算</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">業務フローの整理メモ ／ 簡易プロトタイプ（画面・出力）</div>
-          </div>
-        </div>
-
-        <!-- Scene 03: 2回目訪問・プロトタイプ提示 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">03</span>
-          <span class="scene-phase">STEP 03 ／ 2回目訪問</span>
-          <h4>プロトタイプで、<br><em>完成イメージ</em>を確認します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">料金</span><span class="v">0円</span></div>
-            <div class="scene-stat"><span class="k">形式</span><span class="v">訪問が中心</span></div>
-            <div class="scene-stat"><span class="k">判断</span><span class="v">続行 or 終了</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— この回でやること</div>
-            <ul class="scene-bullets">
-              <li>整理した業務フローを一緒に確認</li>
-              <li>簡易プロトタイプで完成イメージを共有</li>
-              <li>概算費用・対応範囲・月額費用をご説明</li>
-              <li>進める／進めないをご判断いただく</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">固定価格の見積書 ／ 合うアプリ商品のご提案</div>
-          </div>
-        </div>
-
-        <!-- Scene 04: 契約 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">04</span>
-          <span class="scene-phase">STEP 04 ／ 契約</span>
-          <h4>範囲と費用を、<br><em>合意</em>のうえで進めます。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">数日〜1週間</span></div>
-            <div class="scene-stat"><span class="k">合意</span><span class="v">書面</span></div>
-            <div class="scene-stat"><span class="k">担当</span><span class="v">代表と直接</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— ここで確認するもの</div>
-            <ul class="scene-bullets">
-              <li>開発範囲・対応する／しない範囲</li>
-              <li>固定価格の費用と月額サポート</li>
-              <li>追加費用が発生する条件</li>
-              <li>導入時期・運用担当・連絡経路</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">契約書 ／ 対応範囲の確認書</div>
-          </div>
-        </div>
-
-        <!-- Scene 05: 現場同席開発 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">05</span>
-          <span class="scene-phase">STEP 05 ／ 現場同席</span>
-          <h4>必要なときは、<br><em>現場の横</em>で一緒に作ります。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
-            <div class="scene-stat"><span class="k">形式</span><span class="v">現場訪問</span></div>
-            <div class="scene-stat"><span class="k">特徴</span><span class="v">作る過程を共有</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 進めかた</div>
-            <ul class="scene-bullets">
-              <li>必要に応じて現場に伺います</li>
-              <li>紙・Excel・プロトタイプを並べて確認</li>
-              <li>作っている途中の画面・出力を見ながら調整</li>
-              <li>現場に合う形に少しずつ近づける</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— なぜやるか</div>
-            <div class="scene-deliverable">「できてから違った」を防ぎ、現場の感覚に合わせるため</div>
-          </div>
-        </div>
-
-        <!-- Scene 06: 開発・確認・テスト -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">06</span>
-          <span class="scene-phase">STEP 06 ／ 開発・確認</span>
-          <h4>小さく作り、<br><em>都度確認</em>します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat"><span class="k">期間</span><span class="v">商品サイズ依存</span></div>
-            <div class="scene-stat shu"><span class="k">追加費用</span><span class="v">なし</span></div>
-            <div class="scene-stat"><span class="k">確認</span><span class="v">機能単位</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 進めかた</div>
-            <ul class="scene-bullets">
-              <li>機能ごとに動くものを早めにお見せします</li>
-              <li>処理ルールは入力例と結果のパターンで確認</li>
-              <li>本番環境で試用してから導入</li>
-              <li>初回レクチャー・簡易マニュアル提供</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">動作確認済みアプリ ／ 本番稼働</div>
-          </div>
-        </div>
-
-        <!-- Scene 07: 導入・初月支援 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">07</span>
-          <span class="scene-phase">STEP 07 ／ 導入・初月支援</span>
-          <h4>使い始めた後も、<br><em>定着するまで</em>支援します。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">支援</span><span class="v">月額の範囲で厚め</span></div>
-            <div class="scene-stat"><span class="k">期間</span><span class="v">最初の1〜3か月</span></div>
-            <div class="scene-stat"><span class="k">確認</span><span class="v">運用に乗るまで</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 確認すること</div>
-            <ul class="scene-bullets">
-              <li>紙に戻っていないか</li>
-              <li>二重入力が発生していないか</li>
-              <li>職員が迷っていないか</li>
-              <li>使われていない機能がないか</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 成果物</div>
-            <div class="scene-deliverable">運用に定着したアプリ ／ 操作・運用ルールのメモ</div>
-          </div>
-        </div>
-
-        <!-- Scene 08: 保守・追加改善 -->
-        <div class="ix-flow-scene">
-          <span class="scene-num">08</span>
-          <span class="scene-phase">STEP 08 ／ 保守・追加改善</span>
-          <h4>使い続けられるよう、<br><em>月額で支えます</em>。</h4>
-          <div class="scene-meta-row">
-            <div class="scene-stat shu"><span class="k">月額</span><span class="v">固定価格</span></div>
-            <div class="scene-stat"><span class="k">追加改善</span><span class="v">別途お見積り</span></div>
-            <div class="scene-stat"><span class="k">解約</span><span class="v">14日前通知</span></div>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 月額に含まれるもの</div>
-            <ul class="scene-bullets">
-              <li>不具合対応・軽微な修正・操作相談</li>
-              <li>職員入退職対応・権限変更・端末変更</li>
-              <li>3つの保守プラン：月¥10,000／¥20,000／¥50,000</li>
-              <li>使いながら出てきた追加改善は、範囲を整理してご提案</li>
-            </ul>
-          </div>
-          <div class="scene-section">
-            <div class="scene-section-title">— 別途お見積り</div>
-            <div class="scene-deliverable">新機能・帳票追加 ／ 処理ルールの変更 ／ 業務の流れの変更</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -2183,7 +2310,7 @@
 <!-- ===== PRICING (汎用4プラン・固定価格) ===== -->
 <section class="section" id="price">
   <div class="section-head reveal">
-    <span class="section-tag">— 05 / PRICING</span>
+    <span class="section-tag">— 04 / PRICING</span>
     <h2 class="section-title">料金は、<br><span class="accent">固定価格</span>で明示。</h2>
     <span class="section-nav">料金</span>
   </div>
@@ -2198,32 +2325,12 @@
   <div class="reveal phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 28px 32px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px;">
     <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">ENTRY ／ 無料</div>
-      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 4px 10px; border-radius: 999px;">現場訪問が中心・契約前まで一貫サポート</span>
+      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 4px 10px; border-radius: 999px;">契約前まで 0円・現場訪問が中心</span>
     </div>
     <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4; color: var(--shu);">無料相談・簡易診断</h3>
     <div style="font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--shu);">0円</div>
-    <p style="font-size: 13.5px; line-height: 1.85; color: var(--sumi-2); max-width: 72ch;">契約前に <strong>「初回訪問・現場確認」→「持ち帰り整理・簡易プロトタイプ作成」→「2回目訪問・プロトタイプ提示」</strong> まで行います。「何を作りたいか」が決まっていなくても、実際の運用と現物を見せていただければ、こちらで完成イメージまで作ってご提示します。</p>
-    <div class="entry-detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
-      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 4px;">— こちらでやること</div>
-        <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.85; color: var(--sumi-2);">
-          <li>・ 初回訪問で、紙・Excel・帳票と作業の流れを確認</li>
-          <li>・ 持ち帰って業務フローと改善点を整理</li>
-          <li>・ 簡易プロトタイプ（画面・出力イメージ）を作成</li>
-          <li>・ 2回目訪問で提示、概算費用と合うプランをご案内</li>
-        </ul>
-      </div>
-      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 12px 14px;">
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 4px;">— やらないこと</div>
-        <ul style="list-style: none; padding: 0; font-size: 12.5px; line-height: 1.85; color: var(--sumi-2);">
-          <li>・ 細かい仕様の確定（契約後に実施）</li>
-          <li>・ 入力項目・帳票・権限・例外の詳細確認</li>
-          <li>・ 本番用の処理ルールの作り込み</li>
-          <li>・ 本番用アプリの実装</li>
-        </ul>
-      </div>
-    </div>
-    <p style="font-size: 11.5px; line-height: 1.7; color: var(--sumi-2); margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(26,22,20,0.08);">※ 現場訪問が原則です（遠方の場合は交通費別途・またはオンライン併用）。<br>※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
+    <p style="font-size: 13.5px; line-height: 1.85; color: var(--sumi-2); max-width: 72ch;">契約前に <strong>完成イメージまで一緒に確認します。</strong>「何を作りたいか」が決まっていなくても、実際の運用と現物を見せていただければ、こちらで見本まで作ってご提示します。<br><a href="#process" style="color: var(--shu); text-decoration: underline; text-underline-offset: 3px; font-size: 12.5px;">→ 詳しい流れは「契約前と契約後にやること」を見る</a></p>
+    <p style="font-size: 12px; line-height: 1.85; color: var(--sumi-2); margin-top: 10px;">※ 現場訪問が原則です（遠方の場合は交通費別途・またはオンライン併用）。<br>※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
   </div>
 
   <!-- PRODUCTS -->
@@ -2243,7 +2350,7 @@
         <div style="font-family: var(--serif); font-size: 14.5px; color: var(--sumi-2);">月額 10,000円</div>
         <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 2px;">（税込・固定）</div>
       </div>
-      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">既存の紙・Excelを1業務だけアプリ化。<strong>一番安く始められる入口商品。</strong></p>
+      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">既存の紙・Excelを1業務だけ仕組みにする。<strong>一番安く始められる入口商品。</strong></p>
       <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
         <strong>条件：</strong>1業務・3画面まで・帳票1種・複雑な条件・判定なし
       </div>
@@ -2257,7 +2364,7 @@
         <div style="font-family: var(--serif); font-size: 14.5px; color: var(--sumi-2);">月額 15,000円</div>
         <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 2px;">（税込・固定）</div>
       </div>
-      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">備品・申し送り・記録・利用者一覧・チェックリスト・日報などを1業務しっかりアプリ化。</p>
+      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">備品・申し送り・記録・利用者一覧・チェックリスト・日報などを1業務しっかり仕組みにする。</p>
       <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
         <strong>含む：</strong>簡易業務整理／設計／開発／導入支援
       </div>
@@ -2290,7 +2397,7 @@
       </div>
       <p style="font-size: 12.5px; line-height: 1.75; opacity: 0.9;"><strong>例：</strong>シフト案作成 ／ 人員配置チェック ／ 複雑な月次集計 ／ 加算確認補助 ／ 請求前チェック</p>
       <div style="background: rgba(245,239,227,0.08); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; opacity: 0.9;">
-        <strong>必須：</strong>業務整理／試作／確認パターン作成／入力例と結果の確認
+        <strong>必須：</strong>業務整理／見本作成／確認パターン作成／入力例と結果の確認
       </div>
     </div>
   </div>
@@ -2344,7 +2451,7 @@
     <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 8px;">— SCOPE / 月額に含む対応／別途お見積り</div>
     <p style="font-family: var(--serif); font-size: 13px; line-height: 1.85; color: var(--sumi-2); max-width: 80ch;">
       <strong>月額内：</strong>文言・表示順・項目名の軽微変更、操作相談、権限変更、職員入退職対応。<br>
-      <strong>別途お見積り：</strong>新機能追加、帳票追加、処理ルールの変更、業務の流れの変更。<br>
+      <strong>別途お見積り：</strong>新機能追加、帳票追加、アプリが確認する条件の変更、業務の流れの変更。<br>
       <strong>対応目安：</strong>通常3営業日以内に一次返信。緊急対応は重点保守または別途相談。<br>
       月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。
     </p>
@@ -2354,7 +2461,7 @@
 <!-- ===== CASE ===== -->
 <section class="section" id="case">
   <div class="section-head reveal">
-    <span class="section-tag">— 06 / CASE STUDY</span>
+    <span class="section-tag">— 05 / CASE STUDY</span>
     <h2 class="section-title">導入<br><span class="accent">事例</span></h2>
     <span class="section-nav">事例</span>
   </div>
@@ -2362,7 +2469,7 @@
   <div class="case-wrap reveal">
     <div class="case-l">
       <span class="case-tag">CASE 01 ／ 統合アプリ</span>
-      <h3 class="case-title">リハビリデイサービスの<br>紙・Excel業務の一括アプリ化</h3>
+      <h3 class="case-title">リハビリデイサービスの<br>紙・Excel業務の一括で仕組みにする</h3>
       <dl class="case-facts">
         <div class="case-fact"><dt>Type</dt><dd>通所リハビリテーション（リハビリデイサービス）</dd></div>
         <div class="case-fact"><dt>Staff</dt><dd>20名（リハビリ職・介護職・事務職）</dd></div>
@@ -2449,7 +2556,7 @@
 <!-- ===== PHILOSOPHY (理念) ===== -->
 <section class="section" id="philosophy">
   <div class="section-head reveal">
-    <span class="section-tag">— 07 / PHILOSOPHY</span>
+    <span class="section-tag">— 06 / PHILOSOPHY</span>
     <h2 class="section-title">嶽ノ子の<br><span class="accent">理念</span>。</h2>
     <span class="section-nav">理念</span>
   </div>
@@ -2474,7 +2581,7 @@
 <!-- ===== BOUNDARIES (役割分担 / 既存ソフトとの共存) ===== -->
 <section class="section" id="boundaries">
   <div class="section-head reveal">
-    <span class="section-tag">— 08 / SCOPE</span>
+    <span class="section-tag">— 07 / SCOPE</span>
     <h2 class="section-title">役割と<br><span class="accent">対応範囲</span>。</h2>
     <span class="section-nav">範囲</span>
   </div>
@@ -2516,9 +2623,9 @@
     <div style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-lg); padding: 40px 44px;">
       <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light); margin-bottom: 14px;">— COEXIST / 既存ソフトとの共存</div>
       <h3 style="font-family: var(--serif); font-size: clamp(24px, 2.5vw, 30px); font-weight: 500; line-height: 1.45; margin-bottom: 16px;">既存の介護ソフトと、<br>併用できます。</h3>
-      <p style="font-size: 14px; line-height: 1.95; opacity: 0.85; margin-bottom: 18px;">請求・記録などの基幹業務は、現在お使いの介護ソフトを活かします。嶽ノ子では、既存ソフトでは カバーしきれない領域をアプリ化します。</p>
+      <p style="font-size: 14px; line-height: 1.95; opacity: 0.85; margin-bottom: 18px;">請求・記録などの基幹業務は、現在お使いの介護ソフトを活かします。嶽ノ子では、既存ソフトでは カバーしきれない領域を仕組みにします。</p>
       <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
-        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu-light); font-weight: 600;">○</span>紙・独自帳票のアプリ化</li>
+        <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu-light); font-weight: 600;">○</span>紙・独自帳票を仕組みに</li>
         <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu-light); font-weight: 600;">○</span>Excelで管理している業務の電子化</li>
         <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu-light); font-weight: 600;">○</span>施設独自の確認作業・集計作業</li>
         <li style="display: flex; gap: 10px; font-size: 14px; line-height: 1.7;"><span style="color: var(--shu-light); font-weight: 600;">○</span>シフト・送迎・申し送りなどの周辺業務</li>
@@ -2533,7 +2640,7 @@
   <div class="faq-wrap reveal">
     <div class="faq-head">
       <div>
-        <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 09 / FAQ</span>
+        <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 08 / FAQ</span>
         <h2 style="margin-top: 16px;">よくある<br><span class="accent">ご質問</span></h2>
       </div>
       <p>ご検討時によくいただく質問をまとめました。記載がない事項についても、お気軽にお問い合わせください。</p>
@@ -2541,6 +2648,11 @@
 
     <div class="faq-list">
       <!-- シフト関連 FAQ -->
+      
+      <div class="faq-cat-head">
+        <span class="faq-cat-eye">— SHIFT</span>
+        <h3 class="faq-cat-h">シフト作成について</h3>
+      </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
@@ -2597,13 +2709,33 @@
         </div>
         <div class="faq-a"><div class="faq-a-inner">小規模アプリ（初期 ¥200,000）は職員30名程度、標準アプリ（初期 ¥500,000）は50名程度までを目安にしています。それ以上の規模や複数事業所・複雑な配置条件がある場合は、「複雑な条件・判定に対応」（個別見積り）で対応します。</div></div>
       </div>
+      <div class="faq-cat-head">
+        <span class="faq-cat-eye">— PROCESS</span>
+        <h3 class="faq-cat-h">進め方・対応範囲について</h3>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>何を作りたいか、うまく説明できなくても大丈夫ですか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">大丈夫です。介護現場では、必要な仕組みを最初から言葉にするのは難しいものです。<strong>初回訪問で実際の運用と現物を見せていただければ、こちらで業務を整理し、画面と帳票の見本で完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>現場に来て業務を見てもらえますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・画面と帳票の見本づくり → 2回目訪問・画面と帳票の見本提示</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、紙・Excel・画面と帳票の見本を並べて一緒に形を整える「現場の横で一緒に形にする」を行います。「できてから違った」を防ぎ、現場の感覚に合わせるためです。遠方の場合はオンライン併用も可能です（交通費別途）。</div></div>
+      </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
           <span>シフト以外の業務も相談できますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">はい。送迎管理・月次集計・記録チェック・申し送り・在庫管理・家族連絡などの紙・Excel業務もアプリ化できます。範囲に応じて固定価格のプランから個別見積りまで、合うものをご提案します。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">はい。送迎管理・月次集計・記録チェック・申し送り・在庫管理・家族連絡などの紙・Excel業務も仕組みにできます。範囲に応じて固定価格のプランから個別見積りまで、合うものをご提案します。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2624,34 +2756,30 @@
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
-          <span>何を作りたいか、うまく説明できなくても大丈夫ですか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">大丈夫です。介護現場では、必要な仕組みを最初から言葉にするのは難しいものです。<strong>初回訪問で実際の運用と現物を見せていただければ、こちらで業務を整理し、簡易プロトタイプで完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>現場に来て業務を見てもらえますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・簡易プロトタイプ作成 → 2回目訪問・プロトタイプ提示</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、紙・Excel・プロトタイプを並べて一緒に形を整える「現場同席開発」を行います。「できてから違った」を防ぎ、現場の感覚に合わせるためです。遠方の場合はオンライン併用も可能です（交通費別途）。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>使ってから追加したいことが出た場合はどうなりますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">追加のご要望は自然に発生するものと考えています。内容を確認し、「不具合の修正」「月額内の軽微な調整」「別途お見積りが必要な変更」に分けて整理します。月額内の軽微な調整は保守範囲で対応し、新機能追加や業務の流れの変更は事前にお見積りします。お客様を責めるような対応はしません。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
           <span>既存の介護ソフトとは何が違いますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">請求や記録などの標準業務は既存ソフトが得意です。嶽ノ子では、既存ソフトでは対応しきれない紙・Excel・独自帳票・現場ごとの確認作業・集計作業などを、施設に合わせてアプリ化します。既存ソフトと併用することを前提に設計します。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">請求や記録などの標準業務は既存ソフトが得意です。嶽ノ子では、既存ソフトでは対応しきれない紙・Excel・独自帳票・現場ごとの確認作業・集計作業などを、施設に合わせて仕組みにします。既存ソフトと併用することを前提に設計します。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>導入までどのくらいかかりますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">契約前に <strong>初回訪問 → 持ち帰り整理＋画面と帳票の見本 → 2回目訪問</strong> までを行います。契約後は必要に応じて現場の横で同席しながら開発します。紙・Excel改善パックなど小規模なものは2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。実際の期間は、業務の規模や複雑さによって変わります。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>小さいツールから始めて、後で広げられますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">はい。まず1つの業務から始めて、効果を確認してから他業務へ広げる進め方が基本です。最初の確認で全体像を把握しているため、後から広げやすい設計にしています。</div></div>
+      </div>
+      <div class="faq-cat-head">
+        <span class="faq-cat-eye">— PRICING</span>
+        <h3 class="faq-cat-h">料金・契約について</h3>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2667,39 +2795,7 @@
           <span>「小さな修正」の範囲はどこまでですか？</span>
           <span class="faq-toggle">＋</span>
         </div>
-        <div class="faq-a"><div class="faq-a-inner">月額に含まれる「小さな修正」とは、文言変更、表示順変更、軽微な項目名変更など、既存仕様の範囲内の調整を指します。新機能追加、帳票追加、処理ルールの変更、業務の流れの変更は別途お見積りとなります。境界が曖昧な場合は、事前に整理してお伝えします。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>導入までどのくらいかかりますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">契約前に <strong>初回訪問 → 持ち帰り整理＋簡易プロトタイプ → 2回目訪問</strong> までを行います。契約後は必要に応じて現場の横で同席しながら開発します。紙・Excel改善パックなど小規模なものは2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。実際の期間は、業務の規模や複雑さによって変わります。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">介護に関する情報は要配慮個人情報を含み得るため、特に丁寧に扱います。Google Workspaceを前提とした運用構成、アクセス権限設計、操作記録、データ保存・委託先監督の方針を、導入前に書面でお伝えします。開発時の実データ利用は原則匿名化、または別環境で扱います。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>小さいツールから始めて、後で広げられますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">はい。まず1つの業務から始めて、効果を確認してから他業務へ広げる進め方が基本です。最初の確認で全体像を把握しているため、後から広げやすい設計にしています。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>解約後、アプリやデータはどうなりますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">月額契約終了後は、保守・修正・問い合わせ対応・継続利用環境の管理は対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残ります。必要に応じてCSV等でのデータエクスポートにも対応します。Google Workspace内データの扱いは契約時に書面で明確にお伝えします。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">月額に含まれる「小さな修正」とは、文言変更、表示順変更、軽微な項目名変更など、既存仕様の範囲内の調整を指します。新機能追加、帳票追加、アプリが確認する条件の変更、業務の流れの変更は別途お見積りとなります。境界が曖昧な場合は、事前に整理してお伝えします。</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
@@ -2712,19 +2808,48 @@
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">
           <span class="faq-q-mark">Q</span>
-          <span>カイポケなど既存介護ソフトと自動連携できますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">既存ソフトとの連携は、CSV出力・取り込み・手動運用を含め、可能な範囲で設計します。<strong>自動連携を保証するものではありません。</strong>多くの既存介護ソフトはAPIが公開されておらず、契約上の制約もあるため、現実的にはCSV出力やコピーペースト運用で対応することが多くなります。事前に対象ソフトの仕様を確認してご提案します。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
           <span>解約はできますか？</span>
           <span class="faq-toggle">＋</span>
         </div>
         <div class="faq-a"><div class="faq-a-inner">はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。既に支払った費用の返金はありません。解約後は保守・修正・問い合わせ対応の対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残り、必要に応じてCSV等でエクスポートできます。アプリの継続利用環境の管理は対象外となります。</div></div>
       </div>
+      <div class="faq-cat-head">
+        <span class="faq-cat-eye">— SUPPORT</span>
+        <h3 class="faq-cat-h">保守・安全・個人情報について</h3>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">介護に関する情報は要配慮個人情報を含み得るため、特に丁寧に扱います。Google Workspaceを前提とした運用構成、アクセス権限設計、操作記録、データ保存・委託先監督の方針を、導入前に書面でお伝えします。開発時の実データ利用は原則匿名化、または別環境で扱います。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>使ってから追加したいことが出た場合はどうなりますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">追加のご要望は自然に発生するものと考えています。内容を確認し、「不具合の修正」「月額内の軽微な調整」「別途お見積りが必要な変更」に分けて整理します。月額内の軽微な調整は保守範囲で対応し、新機能追加や業務の流れの変更は事前にお見積りします。お客様を責めるような対応はしません。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>解約後、アプリやデータはどうなりますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">月額契約終了後は、保守・修正・問い合わせ対応・継続利用環境の管理は対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残ります。必要に応じてCSV等でのデータエクスポートにも対応します。Google Workspace内データの扱いは契約時に書面で明確にお伝えします。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-mark">Q</span>
+          <span>カイポケなど既存介護ソフトと自動連携できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">既存ソフトとの連携は、CSV出力・取り込み・手動運用を含め、可能な範囲で設計します。<strong>自動連携を保証するものではありません。</strong>多くの既存介護ソフトはAPIが公開されておらず、契約上の制約もあるため、現実的にはCSV出力やコピーペースト運用で対応することが多くなります。事前に対象ソフトの仕様を確認してご提案します。</div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2733,7 +2858,7 @@
 <section class="section" id="contact">
   <div class="block contact reveal">
     <div class="contact-l">
-      <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 10 / CONTACT</span>
+      <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 09 / CONTACT</span>
       <h2>今のやり方を、<br>見せてください。</h2>
       <p class="lede">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong>「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、合いそうな範囲・概算費用をご案内します。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
       <dl class="contact-channels">
@@ -2765,7 +2890,7 @@
           <div class="form-label">ご相談内容 <span class="req">*</span></div>
           <div class="form-radios">
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="無料相談する" required> 無料相談する（まず話してみたい）</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="紙・Excel業務をアプリ化したい"> 紙・Excel業務をアプリ化したい</label>
+            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="紙・Excel業務を仕組みにしたい"> 紙・Excel業務を仕組みにしたい</label>
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="シフト作成について相談したい"> シフト作成について相談したい</label>
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="送迎・月次集計・記録など特定業務を相談したい"> 送迎・月次集計・記録など特定業務を相談したい</label>
             <label class="radio-opt"><input type="radio" name="entry.1422820564" value="料金の目安を知りたい"> 料金の目安を知りたい</label>
@@ -2857,7 +2982,7 @@
     <div class="final-cta-inner">
       <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 次の一歩</span>
       <h2>今のやり方を、<span class="accent">見せてください</span>。<br>こちらで整理します。</h2>
-      <p>無料相談・簡易診断は0円。初回訪問で現場を確認し、持ち帰って簡易プロトタイプを作り、2回目訪問でご提示します。<br>細かい仕様を決めていただく必要はありません。代表が直接対応します。</p>
+      <p>無料相談・簡易診断は0円。初回訪問で現場を確認し、持ち帰って画面と帳票の見本を作り、2回目訪問でご提示します。<br>細かい仕様を決めていただく必要はありません。代表が直接対応します。</p>
       <div class="final-actions">
         <a href="#contact" class="btn btn-filled">無料で相談する <span>→</span></a>
         <a href="#price" class="btn btn-tonal">料金を見る</a>
@@ -2880,10 +3005,9 @@
       <h5>Service</h5>
       <ul>
         <li><a href="#problem">嶽ノ子の姿勢</a></li>
+        <li><a href="#process">契約前と契約後にやること</a></li>
         <li><a href="#examples">対応業務</a></li>
-        <li><a href="#service">進め方</a></li>
-        <li><a href="#rules">決まりごと</a></li>
-        <li><a href="#flow">導入の流れ</a></li>
+        <li><a href="#rules">5つの約束</a></li>
         <li><a href="#price">料金</a></li>
         <li><a href="#case">導入事例</a></li>
         <li><a href="plans.html">導入例・活用イメージ</a></li>
@@ -2921,28 +3045,45 @@
   <hr>
 
   <h2>サービス</h2>
-  <p>介護施設のシフト作成を、0から手作業で作らないサービス。希望休・資格・勤務条件・人員配置をもとにシフト案を作成し、最後は管理者が確認・調整できます。シフトを入口に、送迎・記録・月次集計・申し送りなどの紙・Excel業務もアプリ化できます。</p>
+  <p>介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど、現場に残る業務を、現場の資料を見ながら整理し、仕組みにします。</p>
   <ul>
-    <li>完全自動ではなく、シフト案を作成（管理者が調整できる仕組み）</li>
-    <li>希望休・資格・勤務条件・人員配置を一元管理</li>
-    <li>確認漏れ・連勤・配置不足を警告</li>
+    <li>細かい仕様書を書かせない（こちらが現場と資料を読み解いて整理）</li>
+    <li>口頭ではなく入力例と結果で確認</li>
+    <li>完全自動ではなく、現場が直せる仕組み</li>
     <li>無料相談・簡易診断から始められる（0円・現場訪問が中心）</li>
-    <li>料金は固定価格（業務整理は初期費用に含む）</li>
+    <li>料金は固定価格（業務整理は商品料金に含む）</li>
     <li>代表が直接対応（件数を絞ってお受け）</li>
   </ul>
 
-  <h2>導入までの流れ</h2>
+  <h2>契約前と契約後にやること</h2>
+  <p><strong>契約前に、完成イメージまで見えるようにします。</strong>契約後に、現場で使える形へ一緒に整えます。</p>
+  <p><strong>契約前（0円）</strong></p>
+  <ul>
+    <li>初回訪問で、今の作業を見る</li>
+    <li>持ち帰って、作業の流れを整理する</li>
+    <li>画面と帳票の見本を作る</li>
+    <li>2回目訪問で、見本と費用を説明する</li>
+  </ul>
+  <p><strong>契約後（商品料金に含む）</strong></p>
+  <ul>
+    <li>現場の横で、一緒に形にする</li>
+    <li>細かい項目や例外を整理する</li>
+    <li>小さく作って、小さく確認する</li>
+    <li>例を入れて、結果を確認する</li>
+  </ul>
+
+  <h2>導入までの流れ（8ステップ）</h2>
   <table>
     <tr><td>01. 初回訪問・現場確認</td><td>現場訪問が中心・0円</td></tr>
-    <tr><td>02. 持ち帰り整理・簡易プロトタイプ作成</td><td>数日〜2週間・0円</td></tr>
-    <tr><td>03. 2回目訪問・プロトタイプ提示</td><td>訪問が中心・0円</td></tr>
+    <tr><td>02. 持ち帰り整理・画面と帳票の見本づくり</td><td>数日〜2週間・0円</td></tr>
+    <tr><td>03. 2回目訪問・画面と帳票の見本提示</td><td>訪問が中心・0円</td></tr>
     <tr><td>04. 契約</td><td>数日〜1週間</td></tr>
-    <tr><td>05. 現場同席開発</td><td>必要に応じて現場で同席</td></tr>
+    <tr><td>05. 現場の横で一緒に形にする</td><td>必要に応じて現場で同席</td></tr>
     <tr><td>06. 開発・確認・テスト</td><td>商品料金に含む</td></tr>
     <tr><td>07. 導入・初月支援</td><td>月額の範囲で厚めに</td></tr>
     <tr><td>08. 保守・追加改善</td><td>月額・固定価格</td></tr>
   </table>
-  <p>契約前に「実際の現場を見る → 業務を整理する → プロトタイプで完成イメージを共有する」までを無料で行います。契約後も、必要に応じて現場の横で一緒に作りながら、現場に合う形に近づけます。契約範囲内の対応については追加費用は発生しません。</p>
+  <p>契約前に「実際の現場を見る → 業務を整理する → 画面と帳票の見本で完成イメージを共有する」までを無料で行います。契約後も、必要に応じて現場の横で一緒に作りながら、現場に合う形に近づけます。契約範囲内の対応については追加費用は発生しません。</p>
 
   <h2>料金（固定価格）</h2>
 
@@ -2965,7 +3106,7 @@
     <tr><td>標準保守</td><td>月 20,000円・月1時間まで</td></tr>
     <tr><td>重点保守</td><td>月 50,000円・月3時間まで・優先対応</td></tr>
   </table>
-  <p class="sv-note">※ すべて税込・固定価格。最初の1〜3か月は月額の範囲で重点的にサポートします（導入支援込み）。アプリ使用中は月額を継続いただきます。新機能・帳票追加・処理ルールの変更は別途お見積り。</p>
+  <p class="sv-note">※ すべて税込・固定価格。最初の1〜3か月は月額の範囲で重点的にサポートします（導入支援込み）。アプリ使用中は月額を継続いただきます。新機能・帳票追加・アプリが確認する条件の変更は別途お見積り。</p>
 
   <h2>導入事例</h2>
   <p>通所リハビリテーション（スタッフ20名／1日あたり30名前後）</p>
