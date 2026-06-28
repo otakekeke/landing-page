@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理者向け｜シフト・集計・確認作業の時間を取り戻す｜嶽ノ子</title>
+<meta name="description" content="シフト作成・希望休確認・月次集計・職員からの確認に追われる管理者の時間を取り戻します。契約前に御社専用の見本アプリで完成イメージを確認できます。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
+<style>
+  .persona-eye {
+    display: inline-block;
+    background: var(--shu);
+    color: var(--on-shu);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+  }
+  .pain-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .pain-list li {
+    background: var(--kinari);
+    border-radius: var(--r-sm);
+    padding: 16px 20px;
+    font-family: var(--serif);
+    font-size: 15px; line-height: 1.55;
+    border-left: 3px solid var(--shu);
+  }
+  @media (max-width: 640px) { .pain-list { grid-template-columns: 1fr; } }
+  .sample-app-block {
+    background: var(--sumi); color: var(--on-sumi);
+    border-radius: var(--r-lg);
+    padding: 40px 44px;
+    position: relative; overflow: hidden;
+    margin-top: 16px;
+  }
+  .sample-app-block::before {
+    content: "見";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 180px;
+    color: #221C19;
+    right: -20px; bottom: -60px;
+    line-height: 0.8;
+    pointer-events: none; z-index: 0;
+  }
+  .sample-app-block > * { position: relative; z-index: 2; }
+  .sample-app-block .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: var(--shu-light);
+    margin-bottom: 12px; display: inline-block;
+  }
+  .sample-app-block h3 {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 500; line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .sample-app-block h3 strong { color: var(--shu-light); font-weight: 500; }
+  .sample-app-block p {
+    font-size: 14.5px; line-height: 1.95;
+    opacity: 0.9; margin-bottom: 22px; max-width: 60ch;
+  }
+  .sample-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;
+  }
+  .sample-list li {
+    background: rgba(245, 239, 227, 0.08);
+    border: 1px solid rgba(245, 239, 227, 0.15);
+    border-radius: var(--r-sm);
+    padding: 12px 16px;
+    font-family: var(--serif);
+    font-size: 14px; line-height: 1.55;
+  }
+  .sample-app-block .note {
+    font-size: 12px; line-height: 1.8;
+    opacity: 0.7; margin-top: 18px; padding-top: 14px;
+    border-top: 1px dashed rgba(245, 239, 227, 0.2);
+    margin-bottom: 0;
+  }
+  .can-do-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .can-do-list li {
+    padding: 12px 18px; border-radius: var(--r-sm);
+    background: var(--kinari);
+    font-size: 14px; line-height: 1.55;
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .can-do-list li::before {
+    content: "○"; color: var(--shu); font-weight: 600; flex-shrink: 0;
+  }
+  @media (max-width: 640px) { .can-do-list { grid-template-columns: 1fr; } }
+  .price-hint {
+    background: var(--yamabuki-surface);
+    border-radius: var(--r-md);
+    padding: 24px 28px;
+    color: #4A3A18;
+  }
+  .price-hint .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: #8A6A1F; margin-bottom: 10px;
+  }
+  .price-hint h4 {
+    font-family: var(--serif);
+    font-size: 18px; font-weight: 500; line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  .price-hint p { font-size: 14px; line-height: 1.85; margin: 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">嶽</span>
+    <span class="brand-name">嶽ノ子</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#process" class="nav-link">進め方</a>
+    <a href="index.html#examples" class="nav-link">対応業務</a>
+    <a href="index.html#price" class="nav-link">料金</a>
+    <a href="plans.html" class="nav-link">導入例</a>
+    <a href="company.html" class="nav-link">会社概要</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
+</nav>
+
+<div class="page">
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="persona-eye">FOR / 管理者</span>
+      <h1>シフト・集計・確認作業に追われる<br>管理者の時間を、取り戻す。</h1>
+      <p class="lead">毎月0からシフトを組み、希望休を回収し、月次集計に時間を取られ、職員からの確認にも追われている。<br>今使っているExcel・帳票を見せていただければ、こちらで整理して<strong>御社専用の見本アプリ</strong>まで作ってご提示します。</p>
+      <div style="margin-top: 28px; display: inline-flex; gap: 12px; flex-wrap: wrap;">
+        <span style="background: var(--shu); color: var(--on-shu); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">✓ 契約前まで 0円</span>
+        <span style="background: var(--kinari); color: var(--sumi); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">代表が直接対応</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">01 — PAIN</span>こんなお困りごとはありませんか？</h2>
+    <ul class="pain-list">
+      <li>シフトを毎月0から作っている</li>
+      <li>希望休の確認・回収が大変</li>
+      <li>集計・転記に時間がかかる</li>
+      <li>職員からの確認依頼が多い</li>
+      <li>月末処理が重く、定時で帰れない</li>
+      <li>夜勤明け・連勤・配置の確認漏れが心配</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">02 — OBSERVE</span>まず、今のExcel・帳票を見せてください。</h2>
+    <div class="card">
+      <p>今使っているシフト表、希望休フォーム、勤務区分表、人員配置表、月次集計表を確認します。</p>
+      <p>うまく説明できなくても大丈夫です。実際の表を見ながら、<strong>どこを楽にできそうかをこちらで整理</strong>します。</p>
+      <p style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(26,22,20,0.12); font-size: 13px; color: var(--sumi-2);">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">03 — SAMPLE APP</span>契約前に、御社専用の見本アプリを作成します。</h2>
+    <div class="sample-app-block">
+      <span class="eye">— SAMPLE APP</span>
+      <h3>確認した内容をもとに、<br><strong>画面・一覧・印刷物の見本</strong>を作ります。</h3>
+      <p>「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
+      <ul class="sample-list">
+        <li>希望休フォーム（職員入力）</li>
+        <li>シフト案の画面</li>
+        <li>勤務区分・連勤チェックの警告画面</li>
+        <li>人員配置の確認画面</li>
+        <li>印刷用シフト表</li>
+        <li>月次集計の見本</li>
+        <li>勤務実績の確認画面</li>
+        <li>職員からの確認画面（共有用）</li>
+      </ul>
+      <p class="note">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">04 — TOGETHER</span>契約後は、現場の横で一緒に整えます。</h2>
+    <div class="card">
+      <p>契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。<strong>完全自動ではなく、最後は管理者が確認・調整できる形</strong>が基本です。</p>
+      <p style="margin-top: 14px; padding: 14px 18px; background: var(--kinari); border-left: 3px solid var(--shu); border-radius: 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.9;">
+        「この人とこの人は同じシフトにしない」<br>
+        「夜勤明けの翌日は早番にしない」<br>
+        「この勤務区分は人数を絞りたい」
+      </p>
+      <p style="margin-top: 14px;">そういった現場の感覚・判断は、管理者が確認・調整できる形に残します。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">05 — CAN DO</span>できることの例</h2>
+    <ul class="can-do-list">
+      <li>希望休回収（職員入力フォーム）</li>
+      <li>シフト案の自動作成（管理者が最終調整）</li>
+      <li>勤務区分・連勤チェック</li>
+      <li>人員配置の警告表示</li>
+      <li>夜勤明け・休日数・偏りの確認</li>
+      <li>Excel・PDF出力／印刷用シフト</li>
+      <li>勤務実績の集計</li>
+      <li>職員からの確認・問い合わせ削減</li>
+    </ul>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--sumi-2);">※ 法令判断・人員配置基準の最終判断は事業所様側でお願いします。嶽ノ子は警告表示までを対応します。</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">06 — PRICE</span>料金の目安</h2>
+    <div class="price-hint">
+      <span class="eye">— PRICING REFERENCE</span>
+      <h4>シフト作成を含む場合は「複雑な条件・判定に対応」になることが多いです。</h4>
+      <p>初期 ¥800,000〜／月額 ¥50,000〜（税込・個別見積り）。希望休回収・人員配置警告までの範囲なら「標準アプリ（¥500,000／月¥30,000）」で対応できることもあります。<br>正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</p>
+      <p style="margin-top: 12px; font-size: 13px;"><a href="index.html#price" style="color: var(--shu); text-decoration: underline; text-underline-offset: 3px;">→ 料金プラン全体を見る</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">07 — FREE CONSULT</span>まずは無料で確認できます。</h2>
+    <div class="card">
+      <p>無料相談・簡易診断（0円）では、現在使っているExcel・帳票を確認し、どこを仕組みにできそうかを整理します。必要に応じて、契約前に<strong>御社専用の見本アプリ</strong>を作成し、完成イメージと費用感をご説明します。</p>
+      <ul style="list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 8px;">
+        <li>・ 初回訪問で、今の作業を見る（0円）</li>
+        <li>・ 持ち帰って、作業の流れを整理する（0円）</li>
+        <li>・ 御社専用の見本アプリを作る（0円）</li>
+        <li>・ 2回目訪問で、見本アプリと費用を説明する（0円）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>シフト・集計のことを、まず話してみませんか？</h2>
+      <p>初回相談は無料です。今使っているExcelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn btn-light">無料相談する <span>→</span></a>
+        <a href="index.html#process" class="btn btn-outline">進め方を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">嶽</span>
+        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
+      </div>
+      <p>介護現場の紙・Excel・手作業を、現場に合うアプリに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
+    </div>
+    <div class="footer-col">
+      <h5>SERVICE</h5>
+      <ul>
+        <li><a href="index.html#process">進め方</a></li>
+        <li><a href="index.html#examples">対応業務</a></li>
+        <li><a href="index.html#price">料金</a></li>
+        <li><a href="plans.html">導入例</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>FOR</h5>
+      <ul>
+        <li><a href="dayservice.html">デイサービス向け</a></li>
+        <li><a href="manager.html">管理者向け</a></li>
+        <li><a href="small-facility.html">小規模事業所向け</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
+    <span>社会を回す人の、大切な人を守る。</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+</body>
+</html>

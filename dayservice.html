@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デイサービス向け｜送迎表・月次集計を整える｜嶽ノ子</title>
+<meta name="description" content="デイサービスの送迎表・利用者管理・月次集計を、今の運用に合わせて整えます。契約前に御社専用の見本アプリで完成イメージを確認できます。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
+<style>
+  /* Persona page specific */
+  .persona-eye {
+    display: inline-block;
+    background: var(--shu);
+    color: var(--on-shu);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    margin-bottom: 18px;
+  }
+  .pain-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .pain-list li {
+    background: var(--kinari);
+    border-radius: var(--r-sm);
+    padding: 16px 20px;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.55;
+    border-left: 3px solid var(--shu);
+  }
+  @media (max-width: 640px) {
+    .pain-list { grid-template-columns: 1fr; }
+  }
+  .sample-app-block {
+    background: var(--sumi);
+    color: var(--on-sumi);
+    border-radius: var(--r-lg);
+    padding: 40px 44px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+  .sample-app-block::before {
+    content: "見";
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 180px;
+    color: #221C19;
+    right: -20px;
+    bottom: -60px;
+    line-height: 0.8;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sample-app-block > * { position: relative; z-index: 2; }
+  .sample-app-block .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--shu-light);
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .sample-app-block h3 {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .sample-app-block h3 strong {
+    color: var(--shu-light);
+    font-weight: 500;
+  }
+  .sample-app-block p {
+    font-size: 14.5px;
+    line-height: 1.95;
+    opacity: 0.9;
+    margin-bottom: 22px;
+    max-width: 60ch;
+  }
+  .sample-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .sample-list li {
+    background: rgba(245, 239, 227, 0.08);
+    border: 1px solid rgba(245, 239, 227, 0.15);
+    border-radius: var(--r-sm);
+    padding: 12px 16px;
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .sample-app-block .note {
+    font-size: 12px;
+    line-height: 1.8;
+    opacity: 0.7;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(245, 239, 227, 0.2);
+    margin-bottom: 0;
+  }
+  .can-do-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .can-do-list li {
+    padding: 12px 18px;
+    border-radius: var(--r-sm);
+    background: var(--kinari);
+    font-size: 14px;
+    line-height: 1.55;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .can-do-list li::before {
+    content: "○";
+    color: var(--shu);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .can-do-list { grid-template-columns: 1fr; }
+  }
+  .price-hint {
+    background: var(--yamabuki-surface);
+    border-radius: var(--r-md);
+    padding: 24px 28px;
+    color: #4A3A18;
+  }
+  .price-hint .eye {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: #8A6A1F;
+    margin-bottom: 10px;
+  }
+  .price-hint h4 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  .price-hint p {
+    font-size: 14px;
+    line-height: 1.85;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">嶽</span>
+    <span class="brand-name">嶽ノ子</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#process" class="nav-link">進め方</a>
+    <a href="index.html#examples" class="nav-link">対応業務</a>
+    <a href="index.html#price" class="nav-link">料金</a>
+    <a href="plans.html" class="nav-link">導入例</a>
+    <a href="company.html" class="nav-link">会社概要</a>
+  </div>
+  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="persona-eye">FOR / デイサービス</span>
+      <h1>送迎表・月次集計を、<br>今の運用に合わせて整えます。</h1>
+      <p class="lead">毎回Excelで作り直している送迎表、欠席・追加利用のたびに崩れる予定、月末に時間が取られる集計作業。<br>今使っている紙・Excel・帳票を見せていただければ、こちらで整理して<strong>御社専用の見本アプリ</strong>まで作ってご提示します。</p>
+      <div style="margin-top: 28px; display: inline-flex; gap: 12px; flex-wrap: wrap;">
+        <span style="background: var(--shu); color: var(--on-shu); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">✓ 契約前まで 0円</span>
+        <span style="background: var(--kinari); color: var(--sumi); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">代表が直接対応</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- こんなお困りごと -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">01 — PAIN</span>こんなお困りごとはありませんか？</h2>
+    <ul class="pain-list">
+      <li>送迎表を毎回Excelで作り直している</li>
+      <li>利用者ごとに曜日・時間・車椅子対応が違う</li>
+      <li>運転できる職員、添乗できる職員の確認が大変</li>
+      <li>欠席・追加利用・振替があるたびに表を直している</li>
+      <li>月末に記録・実績を集計するのに時間がかかる</li>
+      <li>家族連絡・記録の検索に時間が取られている</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 今の紙・Excelを見せてください -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">02 — OBSERVE</span>まず、今の紙・Excelを見せてください。</h2>
+    <div class="card">
+      <p>今使っている送迎表、利用者一覧、車両一覧、職員表、月次集計表を確認します。</p>
+      <p>うまく説明できなくても大丈夫です。実際の表を見ながら、<strong>どこを楽にできそうかをこちらで整理</strong>します。</p>
+      <p style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(26,22,20,0.12); font-size: 13px; color: var(--sumi-2);">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 契約前に作る見本アプリ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">03 — SAMPLE APP</span>契約前に、御社専用の見本アプリを作成します。</h2>
+    <div class="sample-app-block">
+      <span class="eye">— SAMPLE APP</span>
+      <h3>確認した内容をもとに、<br><strong>画面・一覧・印刷物の見本</strong>を作ります。</h3>
+      <p>「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
+      <ul class="sample-list">
+        <li>利用者一覧の画面</li>
+        <li>曜日別の送迎表</li>
+        <li>車両ごとの送迎一覧</li>
+        <li>職員・車両・利用者の確認画面</li>
+        <li>月次集計の見本</li>
+        <li>印刷用の送迎表</li>
+        <li>欠席・追加利用の入力画面</li>
+        <li>家族連絡の記録画面</li>
+      </ul>
+      <p class="note">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 契約後は現場の横で一緒に整える -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">04 — TOGETHER</span>契約後は、現場の横で一緒に整えます。</h2>
+    <div class="card">
+      <p>契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。</p>
+      <p style="margin-top: 14px; padding: 14px 18px; background: var(--kinari); border-left: 3px solid var(--shu); border-radius: 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.9;">
+        「この呼び方の方が現場では分かりやすい」<br>
+        「この順番で並んでいる方が見やすい」<br>
+        「これは自動で決めずに、人が確認したい」
+      </p>
+      <p style="margin-top: 14px;">そういった現場の感覚を拾いながら、無理なく使える形に整えます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- できることの例 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">05 — CAN DO</span>できることの例</h2>
+    <ul class="can-do-list">
+      <li>曜日別の送迎表作成</li>
+      <li>利用者ごとの送迎条件管理</li>
+      <li>車両・職員・利用者の確認</li>
+      <li>車椅子対応・送迎ルートの確認</li>
+      <li>欠席・追加利用・振替の反映</li>
+      <li>印刷用送迎表の出力</li>
+      <li>月次集計・記録の参照</li>
+      <li>CSV・帳票出力</li>
+    </ul>
+    <p style="margin-top: 16px; font-size: 13px; color: var(--sumi-2);">※ 現場の運用に合わせて、必要なものから順に作ります。すべてを一度に作る必要はありません。</p>
+  </div>
+</section>
+
+<!-- 料金の目安 -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">06 — PRICE</span>料金の目安</h2>
+    <div class="price-hint">
+      <span class="eye">— PRICING REFERENCE</span>
+      <h4>送迎表＋月次集計のセットなら「標準アプリ」が中心になることが多いです。</h4>
+      <p>初期 ¥500,000／月額 ¥30,000（税込・固定価格）。範囲が狭ければ「小規模アプリ（¥200,000／月¥15,000）」、複数事業所や複雑な条件があれば「複雑な条件・判定に対応（¥800,000〜）」になります。<br>正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</p>
+      <p style="margin-top: 12px; font-size: 13px;"><a href="index.html#price" style="color: var(--shu); text-decoration: underline; text-underline-offset: 3px;">→ 料金プラン全体を見る</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 無料相談で確認できること -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"><span class="num">07 — FREE CONSULT</span>まずは無料で確認できます。</h2>
+    <div class="card">
+      <p>無料相談・簡易診断（0円）では、現在使っている紙・Excel・帳票を確認し、どこを仕組みにできそうかを整理します。必要に応じて、契約前に<strong>御社専用の見本アプリ</strong>を作成し、完成イメージと費用感をご説明します。</p>
+      <ul style="list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 8px;">
+        <li>・ 初回訪問で、今の作業を見る（0円）</li>
+        <li>・ 持ち帰って、作業の流れを整理する（0円）</li>
+        <li>・ 御社専用の見本アプリを作る（0円）</li>
+        <li>・ 2回目訪問で、見本アプリと費用を説明する（0円）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>送迎表・月次集計のことを、まず話してみませんか？</h2>
+      <p>初回相談は無料です。今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn btn-light">無料相談する <span>→</span></a>
+        <a href="index.html#process" class="btn btn-outline">進め方を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-mark">嶽</span>
+        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
+      </div>
+      <p>介護現場の紙・Excel・手作業を、現場に合うアプリに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
+    </div>
+    <div class="footer-col">
+      <h5>SERVICE</h5>
+      <ul>
+        <li><a href="index.html#process">進め方</a></li>
+        <li><a href="index.html#examples">対応業務</a></li>
+        <li><a href="index.html#price">料金</a></li>
+        <li><a href="plans.html">導入例</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>FOR</h5>
+      <ul>
+        <li><a href="dayservice.html">デイサービス向け</a></li>
+        <li><a href="manager.html">管理者向け</a></li>
+        <li><a href="small-facility.html">小規模事業所向け</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="index.html#contact">お問い合わせ</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
+    <span>社会を回す人の、大切な人を守る。</span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+</script>
+</body>
+</html>
