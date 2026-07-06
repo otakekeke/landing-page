@@ -5,3398 +5,643 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>嶽ノ子 — 介護現場の紙・Excel・手作業を、現場に合わせて仕組みに変える。</title>
-<meta name="description" content="介護現場の紙・Excel・手作業を、現場に合わせて仕組みに変えるサービス。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど、現場に残る言葉にしづらい業務を、実際の資料や運用を見ながら整理し、使える仕組みに変えます。">
+<meta name="description" content="介護現場の紙・Excel・手作業を、現場に合わせて仕組みに変えるサービス。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど、現場に残る業務を整理し、使える仕組みに変えます。">
 <meta property="og:title" content="嶽ノ子 — 介護現場の紙・Excel・手作業を、現場に合わせて仕組みに変える。">
 <meta property="og:description" content="シフト作成・送迎管理・月次集計・申し送り・記録チェックなど、現場に残る業務を整理し、使える仕組みに変えます。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="interactive2.css">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ===== 和モダン × Material 3 Expressive ===== */
-  :root {
-    /* 和色ベース（Material 3風にトーン調整） */
-    --kinari: #F5EFE3;        /* 生成り（ベース） */
-    --kinari-2: #EDE4D1;
-    --sumi: #1A1614;          /* 墨 */
-    --sumi-2: #2E2825;
-    --shu: #C04A3E;           /* 朱 */
-    --shu-light: #E8A999;
-    --shu-surface: #F4D9D0;
-    --uguisu: #7A8450;        /* 鶯（渋い緑） */
-    --uguisu-surface: #D9DEC1;
-    --ai: #385E74;            /* 藍（深い青） */
-    --ai-surface: #C8D6DE;
-    --yamabuki: #D4A24A;      /* 山吹 */
-    --yamabuki-surface: #EFDEB8;
-    --nezu: #888578;          /* 鼠 */
-    --nezu-surface: #DDDAD1;
-
-    --on-sumi: #F5EFE3;
-    --on-shu: #FFF8F4;
-    --on-uguisu: #FFFDF2;
-    --on-ai: #F0F7FC;
-
-    --serif: "Shippori Mincho", "Yu Mincho", serif;
-    --sans: "Noto Sans JP", system-ui, sans-serif;
-    --mono: "JetBrains Mono", monospace;
-
-    --r-sm: 16px;
-    --r-md: 28px;
-    --r-lg: 44px;
-    --r-xl: 64px;
-    --r-pill: 999px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--sumi);
-    background: var(--kinari);
-    -webkit-font-smoothing: antialiased;
-    letter-spacing: 0.02em;
-    overflow-x: hidden;
-  }
-  ::selection { background: var(--sumi); color: var(--kinari); }
-  a { color: inherit; text-decoration: none; }
-  button { font-family: inherit; cursor: pointer; border: none; }
-
-  /* ===== NAV ===== */
-  .nav {
-    position: fixed;
-    top: 16px; left: 16px; right: 16px;
-    z-index: 100;
-    padding: 12px 16px 12px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(245, 239, 227, 0.85);
-    backdrop-filter: blur(24px) saturate(1.4);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    border-radius: var(--r-pill);
-    border: 1px solid rgba(26, 22, 20, 0.08);
-    transition: top 0.3s, background 0.3s;
-  }
-  .nav.scrolled { top: 8px; background: rgba(245, 239, 227, 0.95); }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-left: 4px;
-  }
-  .brand-mark {
-    width: 40px; height: 40px;
-    border-radius: 14px;
-    display: grid; place-items: center;
-    background: var(--sumi);
-    color: var(--kinari);
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 22px;
-  }
-  .brand-name {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-  }
-  .nav-links {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-  .nav-link {
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--sumi-2);
-    border-radius: var(--r-pill);
-    transition: all 0.2s;
-  }
-  .nav-link:hover { background: rgba(26, 22, 20, 0.06); }
-  .nav-cta {
-    padding: 12px 22px;
-    background: var(--sumi);
-    color: var(--kinari);
-    border-radius: var(--r-pill);
-    font-size: 13px;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s;
-  }
-  .nav-cta:hover { background: var(--shu); gap: 12px; }
-
-  /* ===== CANVAS ===== */
-  .page { padding: 16px; position: relative; z-index: 2; }
-  .block { border-radius: var(--r-lg); overflow: hidden; position: relative; }
-  .grid { display: grid; gap: 16px; }
-
-  /* ===== HERO ===== */
-  .hero-outer { padding-top: 88px; }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(120px, auto);
-    gap: 16px;
-  }
-  .tile {
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    position: relative;
-  }
-  /* Main headline tile */
-  .tile-hero {
-    grid-column: span 8;
-    grid-row: span 3;
-    background: var(--kinari-2);
-    padding: 48px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 460px;
-    position: relative;
-    overflow: hidden;
-  }
-  .tile-hero::before {
-    content: "嶽";
-    position: absolute;
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 220px;
-    color: #EAE3D2;
-    right: -20px;
-    bottom: -60px;
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-    z-index: 2;
-  }
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: var(--kinari);
-    border-radius: var(--r-pill);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--sumi-2);
-    border: 1px solid rgba(26, 22, 20, 0.08);
-  }
-  .chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--shu); }
-  .chip.dark { background: var(--sumi); color: var(--on-sumi); border-color: transparent; }
-  .chip.shu { background: var(--shu); color: var(--on-shu); border-color: transparent; }
-  .hero-h1 {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(28px, 4vw, 56px);
-    line-height: 1.15;
-    letter-spacing: 0.01em;
-    color: var(--sumi);
-    position: relative;
-    z-index: 2;
-    max-width: 18ch;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-  .hero-h1 .em {
-    color: var(--shu);
-    position: relative;
-  }
-  .hero-h1 .em::after {
-    content: "";
-    position: absolute;
-    left: 4%; bottom: 0.08em;
-    width: 92%; height: 10px;
-    background: var(--shu);
-    opacity: 0.25;
-    border-radius: 999px;
-    z-index: -1;
-  }
-  .hero-sub {
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.85;
-    color: var(--sumi-2);
-    max-width: 50ch;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 2;
-  }
-  .btn {
-    padding: 18px 28px;
-    border-radius: var(--r-pill);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .btn-filled { background: var(--sumi); color: var(--kinari); }
-  .btn-filled:hover { background: var(--shu); gap: 16px; }
-  .btn-tonal { background: var(--shu-surface); color: var(--shu); }
-  .btn-tonal:hover { background: var(--shu); color: var(--on-shu); gap: 16px; }
-  .btn-outline { background: transparent; color: var(--sumi); border: 1px solid var(--sumi); }
-  .btn-outline:hover { background: var(--sumi); color: var(--kinari); gap: 16px; }
-
-  /* Right column tiles */
-  .tile-dark {
-    grid-column: span 4;
-    grid-row: span 2;
-    background: var(--sumi);
-    color: var(--on-sumi);
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 280px;
-    position: relative;
-    overflow: hidden;
-  }
-  .tile-dark::before {
-    content: "心";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 140px;
-    color: #241E1B;
-    right: -10px; bottom: -40px;
-    line-height: 0.8;
-    pointer-events: none;
-  }
-  .tile-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 2;
-    opacity: 0.7;
-  }
-  .tile-dark .tile-label { opacity: 0.6; }
-  .tile-quote {
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 400;
-    position: relative;
-    z-index: 2;
-  }
-  .tile-quote em { font-style: normal; color: var(--shu-light); }
-
-  .tile-stat {
-    grid-column: span 4;
-    grid-row: span 1;
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 24px 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    min-height: 130px;
-  }
-  .tile-stat .stat-v {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: 0;
-  }
-  .tile-stat .stat-v small { font-size: 13px; font-weight: 400; opacity: 0.85; margin-left: 4px; display: block; margin-top: 4px; }
-  .tile-stat .stat-k {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.85;
-  }
-  .tile-stat.uguisu { background: var(--uguisu); color: var(--on-uguisu); }
-  .tile-stat.ai { background: var(--ai); color: var(--on-ai); }
-  .tile-stat.yamabuki { background: var(--yamabuki); color: var(--sumi); }
-
-  /* Hero bottom row — small highlight tiles */
-  .tile-mini {
-    grid-column: span 4;
-    background: var(--kinari-2);
-    padding: 20px 22px;
-    min-height: 110px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .tile-mini.shu-surface { background: var(--shu-surface); color: var(--shu); }
-  .tile-mini.uguisu-surface { background: var(--uguisu-surface); color: #3D4424; }
-  .tile-mini.ai-surface { background: var(--ai-surface); color: var(--ai); }
-  .tile-mini .mini-v {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  .tile-mini .mini-k {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
-
-  /* ===== Section shared ===== */
-  .section { padding: 80px 0; }
-  .section-head {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 32px;
-    align-items: baseline;
-    padding: 0 24px 48px;
-  }
-  .section-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-radius: var(--r-pill);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(26px, 3.4vw, 48px);
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-  }
-  .section-title .accent { color: var(--shu); }
-  .section-nav {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--nezu);
-    letter-spacing: 0.15em;
-    padding-bottom: 8px;
-  }
-
-  /* ===== Philosophy (full bleed dark) ===== */
-  .philosophy {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-radius: var(--r-xl);
-    padding: 56px 48px;
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
-  .philosophy::before {
-    content: "護";
-    position: absolute;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 180px;
-    color: #201B18;
-    right: -40px;
-    top: -60px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .philosophy-h {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(24px, 3vw, 40px);
-    line-height: 1.3;
-    letter-spacing: 0.02em;
-    position: relative;
-  }
-  .philosophy-h em {
-    font-style: normal;
-    color: var(--shu-light);
-    position: relative;
-  }
-  .philosophy-h em::before {
-    content: "";
-    position: absolute;
-    left: 50%; top: -18px;
-    transform: translateX(-50%);
-    width: 8px; height: 8px;
-    background: var(--shu-light);
-    border-radius: 50%;
-  }
-  .philosophy-body {
-    padding-top: 40px;
-    border-top: 1px solid rgba(245, 239, 227, 0.2);
-    position: relative;
-    z-index: 2;
-  }
-  .philosophy-body p {
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.95;
-    color: rgba(245, 239, 227, 0.85);
-  }
-  .philosophy-body p + p { margin-top: 24px; }
-  .philosophy-sig {
-    margin-top: 48px;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: rgba(245, 239, 227, 0.5);
-  }
-
-  /* ===== Service bento ===== */
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(120px, auto);
-    gap: 16px;
-  }
-  .svc {
-    border-radius: var(--r-lg);
-    padding: 28px 24px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .svc:hover { transform: translateY(-4px); }
-  .svc-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    opacity: 0.7;
-  }
-  .svc-h {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.35;
-    margin: 14px 0 10px;
-  }
-  .svc-p {
-    font-size: 12.5px;
-    line-height: 1.75;
-    opacity: 0.9;
-    max-width: 36ch;
-  }
-
-  .svc-1 { grid-column: span 5; grid-row: span 2; background: var(--shu); color: var(--on-shu); min-height: 220px; }
-  .svc-1 .svc-h { font-size: 26px; line-height: 1.3; }
-  .svc-1::after {
-    content: "";
-    position: absolute;
-    right: -40px; bottom: -40px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 248, 244, 0.14);
-  }
-  .svc-2 { grid-column: span 4; grid-row: span 1; background: var(--ai-surface); color: var(--ai); min-height: 160px; }
-  .svc-3 { grid-column: span 3; grid-row: span 1; background: var(--uguisu); color: var(--on-uguisu); min-height: 160px; }
-  .svc-4 { grid-column: span 4; grid-row: span 1; background: var(--yamabuki-surface); color: #6B5321; min-height: 160px; }
-  .svc-5 { grid-column: span 3; grid-row: span 1; background: var(--kinari-2); color: var(--sumi); min-height: 160px; }
-
-  /* Before/After — stylized */
-  .ba-block {
-    border-radius: var(--r-lg);
-    padding: 56px;
-    background: var(--kinari-2);
-    margin-top: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-  .ba-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .ba-head .chip { background: var(--sumi); color: var(--on-sumi); border-color: transparent; }
-  .ba-head h3 {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 500;
-  }
-  .ba-grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 40px;
-    align-items: stretch;
-  }
-  .ba-side {
-    padding: 32px;
-    border-radius: var(--r-md);
-    background: var(--kinari);
-  }
-  .ba-side.after { background: var(--sumi); color: var(--on-sumi); }
-  .ba-side h4 {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0.7;
-  }
-  .ba-side.after h4 { color: var(--shu-light); opacity: 1; }
-  .ba-list { list-style: none; }
-  .ba-list li {
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.8;
-    padding: 10px 0;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.15);
-  }
-  .ba-side.after .ba-list li { border-bottom-color: rgba(245, 239, 227, 0.15); }
-  .ba-side.after .ba-list li::before { content: "●  "; color: var(--shu-light); font-size: 10px; }
-  .ba-arrow {
-    display: grid;
-    place-items: center;
-    width: 64px;
-  }
-  .ba-arrow span {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--shu);
-    color: var(--on-shu);
-    display: grid;
-    place-items: center;
-    font-family: var(--mono);
-    font-size: 24px;
-  }
-
-  /* Business tags pill cluster */
-  .biz-tags {
-    margin-top: 16px;
-    padding: 40px;
-    background: var(--kinari-2);
-    border-radius: var(--r-lg);
-  }
-  .biz-tags-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    opacity: 0.6;
-    margin-bottom: 24px;
-  }
-  .biz-tags-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .biz-tag {
-    padding: 12px 22px;
-    background: var(--kinari);
-    border-radius: var(--r-pill);
-    font-family: var(--serif);
-    font-size: 15px;
-    color: var(--sumi-2);
-    border: 1px solid rgba(26, 22, 20, 0.08);
-    transition: all 0.2s;
-  }
-  .biz-tag:hover { background: var(--sumi); color: var(--kinari); border-color: transparent; transform: translateY(-2px); }
-
-  /* ===== Flow (timeline horizontal) ===== */
-  .flow-wrap {
-    background: var(--uguisu-surface);
-    border-radius: var(--r-xl);
-    padding: 80px 56px;
-    position: relative;
-  }
-  .flow-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 56px;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-  .flow-head h2 {
-    font-family: var(--serif);
-    font-size: clamp(24px, 3vw, 40px);
-    line-height: 1.1;
-    font-weight: 500;
-    color: #3D4424;
-  }
-  .flow-head h2 .accent { color: var(--shu); }
-  .flow-head p {
-    font-size: 14px;
-    line-height: 1.9;
-    max-width: 38ch;
-    color: #4A5230;
-  }
-  .flow-steps {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-  }
-  .flow-step {
-    background: var(--kinari);
-    border-radius: var(--r-md);
-    padding: 32px;
-    position: relative;
-    min-height: 260px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .flow-step-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .flow-step-num {
-    font-family: var(--serif);
-    font-size: 36px;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--sumi);
-  }
-  .flow-step-dur {
-    padding: 6px 14px;
-    border-radius: var(--r-pill);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    background: var(--shu-surface);
-    color: var(--shu);
-  }
-  .flow-step h3 {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-  }
-  .flow-step p {
-    font-size: 13.5px;
-    line-height: 1.85;
-    color: var(--sumi-2);
-    margin-top: 12px;
-  }
-
-  /* ===== Pricing (card blocks) ===== */
-  .price-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .plan {
-    border-radius: var(--r-lg);
-    padding: 56px 48px;
-    position: relative;
-    overflow: hidden;
-  }
-  .plan-a {
-    background: var(--kinari-2);
-    color: var(--sumi);
-  }
-  .plan-b {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .plan-b::before {
-    content: "統";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #221C19;
-    right: -10px; bottom: -40px;
-    line-height: 0.8;
-  }
-  .plan-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; position: relative; z-index: 2; }
-  .plan-name {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.25;
-    max-width: 14ch;
-  }
-  .plan-tag {
-    padding: 6px 14px;
-    border-radius: var(--r-pill);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    background: var(--kinari);
-    color: var(--sumi-2);
-  }
-  .plan-b .plan-tag { background: var(--shu); color: var(--on-shu); }
-  .plan-price {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    padding: 24px 0;
-    border-top: 1px solid rgba(26, 22, 20, 0.12);
-    border-bottom: 1px solid rgba(26, 22, 20, 0.12);
-    margin-bottom: 32px;
-    position: relative; z-index: 2;
-  }
-  .plan-b .plan-price { border-color: rgba(245, 239, 227, 0.18); }
-  .plan-price-k {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 8px;
-  }
-  .plan-price-v {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1.1;
-  }
-  .plan-price-v small { font-size: 13px; opacity: 0.7; margin-left: 4px; font-weight: 400; }
-  .plan-features { list-style: none; margin-bottom: 32px; position: relative; z-index: 2; }
-  .plan-features li {
-    padding: 10px 0;
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    line-height: 1.6;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.1);
-  }
-  .plan-b .plan-features li { border-color: rgba(245, 239, 227, 0.1); }
-  .plan-features li::before { content: "—"; opacity: 0.5; }
-  .plan-for {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 8px;
-  }
-  .plan-for-desc {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.85;
-    opacity: 0.9;
-  }
-
-  /* Detail accordion */
-  .price-details {
-    margin-top: 16px;
-    background: var(--kinari-2);
-    border-radius: var(--r-lg);
-    padding: 16px 40px;
-  }
-  .detail-item {
-    border-bottom: 1px solid rgba(26, 22, 20, 0.1);
-  }
-  .detail-item:last-child { border-bottom: none; }
-  .detail-head {
-    padding: 24px 0;
-    display: grid;
-    grid-template-columns: 40px 1fr 32px;
-    gap: 16px;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-  }
-  .detail-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    opacity: 0.6;
-  }
-  .detail-title {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-  }
-  .detail-toggle {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: var(--kinari);
-    display: grid;
-    place-items: center;
-    font-family: var(--mono);
-    font-size: 16px;
-    transition: transform 0.3s, background 0.2s;
-  }
-  .detail-item.open .detail-toggle { transform: rotate(45deg); background: var(--shu); color: var(--on-shu); }
-  .detail-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .detail-item.open .detail-body { max-height: 1400px; }
-  .detail-inner { padding: 0 0 32px 56px; }
-  .detail-inner table { width: 100%; border-collapse: collapse; }
-  .detail-inner td {
-    padding: 14px 20px;
-    border-top: 1px solid rgba(26, 22, 20, 0.08);
-    font-size: 14px;
-  }
-  .detail-inner td:first-child { font-family: var(--serif); font-size: 15px; width: 55%; }
-  .detail-inner td:last-child { font-family: var(--mono); text-align: right; color: var(--sumi-2); white-space: nowrap; }
-
-  /* ===== Case study ===== */
-  .case-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 16px;
-  }
-  .case-l {
-    background: var(--ai);
-    color: var(--on-ai);
-    border-radius: var(--r-lg);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  .case-l::before {
-    content: "実";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 140px;
-    color: #426A80;
-    right: -10px; bottom: -40px;
-    line-height: 0.8;
-  }
-  .case-tag {
-    padding: 6px 14px;
-    border-radius: var(--r-pill);
-    background: rgba(240, 247, 252, 0.18);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    display: inline-block;
-    margin-bottom: 24px;
-  }
-  .case-title {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.35;
-    margin-bottom: 24px;
-    position: relative; z-index: 2;
-  }
-  .case-facts { display: grid; gap: 14px; position: relative; z-index: 2; }
-  .case-fact {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(240, 247, 252, 0.15);
-    font-size: 13.5px;
-    line-height: 1.7;
-  }
-  .case-fact:last-child { border-bottom: none; }
-  .case-fact dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    opacity: 0.7;
-    text-transform: uppercase;
-    padding-top: 4px;
-  }
-  .case-r {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .case-metric {
-    border-radius: var(--r-md);
-    padding: 32px 28px;
-    min-height: 130px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .case-metric .v {
-    font-family: var(--serif);
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-  .case-metric .v small { font-size: 13px; opacity: 0.75; margin-left: 4px; font-weight: 400; }
-  .case-metric .k {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 6px;
-  }
-  .case-metric .d {
-    font-size: 13px;
-    line-height: 1.6;
-    margin-top: 12px;
-  }
-  .case-metric.shu { background: var(--shu); color: var(--on-shu); }
-  .case-metric.uguisu { background: var(--uguisu); color: var(--on-uguisu); }
-  .case-metric.yamabuki { background: var(--yamabuki); color: var(--sumi); }
-  .case-metric.kinari { background: var(--kinari-2); color: var(--sumi); }
-  .case-modules {
-    grid-column: span 2;
-    background: var(--kinari-2);
-    border-radius: var(--r-md);
-    padding: 32px;
-  }
-  .case-modules-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 16px;
-  }
-  .case-modules-list { display: flex; flex-wrap: wrap; gap: 8px; }
-  .case-mod {
-    padding: 8px 16px;
-    background: var(--kinari);
-    border-radius: var(--r-pill);
-    font-family: var(--serif);
-    font-size: 14px;
-  }
-
-  /* ===== FAQ ===== */
-  .faq-wrap {
-    background: var(--kinari-2);
-    border-radius: var(--r-xl);
-    padding: 80px 56px;
-  }
-  .faq-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 48px;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
-  }
-  .faq-head h2 {
-    font-family: var(--serif);
-    font-size: clamp(24px, 3vw, 40px);
-    line-height: 1.1;
-    font-weight: 500;
-  }
-  .faq-head h2 .accent { color: var(--shu); }
-  .faq-head p {
-    font-size: 14px;
-    line-height: 1.9;
-    max-width: 38ch;
-    color: var(--sumi-2);
-  }
-  .faq-list { max-width: 1000px; }
-  .faq-cat-head {
-    margin: 28px 0 12px;
-    padding: 6px 4px 14px;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.18);
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-  }
-  .faq-cat-head:first-child { margin-top: 0; }
-  .faq-cat-eye {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    color: var(--shu);
-    font-weight: 600;
-  }
-  .faq-cat-h {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--sumi);
-    margin: 0;
-  }
-  .faq-item {
-    background: var(--kinari);
-    border-radius: var(--r-md);
-    margin-bottom: 10px;
-    overflow: hidden;
-    transition: background 0.2s;
-  }
-  .faq-item.open { background: var(--sumi); color: var(--on-sumi); }
-  .faq-q {
-    padding: 24px 28px;
-    display: grid;
-    grid-template-columns: 36px 1fr 32px;
-    gap: 20px;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  .faq-q-mark {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--shu-surface);
-    color: var(--shu);
-    display: grid;
-    place-items: center;
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .faq-item.open .faq-q-mark { background: var(--shu); color: var(--on-shu); }
-  .faq-toggle {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(26, 22, 20, 0.06);
-    display: grid;
-    place-items: center;
-    font-family: var(--mono);
-    font-size: 16px;
-    transition: transform 0.3s, background 0.2s;
-  }
-  .faq-item.open .faq-toggle { transform: rotate(45deg); background: rgba(245, 239, 227, 0.15); }
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .faq-item.open .faq-a { max-height: 600px; }
-  .faq-a-inner {
-    padding: 0 28px 24px 84px;
-    font-size: 14px;
-    line-height: 1.95;
-    opacity: 0.9;
-  }
-
-  /* ===== Contact ===== */
-  .contact {
-    border-radius: var(--r-xl);
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .contact-l {
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 80px 64px;
-    position: relative;
-    overflow: hidden;
-  }
-  .contact-l::before {
-    content: "承";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 160px;
-    color: #C55446;
-    right: -10px; bottom: -40px;
-    line-height: 0.8;
-  }
-  .contact-l h2 {
-    font-family: var(--serif);
-    font-size: clamp(24px, 3vw, 40px);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 24px 0;
-    position: relative; z-index: 2;
-  }
-  .contact-l .lede {
-    font-family: var(--serif);
-    font-size: 17px;
-    line-height: 2;
-    opacity: 0.9;
-    max-width: 32ch;
-    margin-bottom: 48px;
-    position: relative; z-index: 2;
-  }
-  .contact-channels {
-    padding-top: 32px;
-    border-top: 1px solid rgba(255, 248, 244, 0.25);
-    position: relative; z-index: 2;
-  }
-  .contact-channel {
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(255, 248, 244, 0.2);
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 20px;
-    align-items: baseline;
-  }
-  .contact-channel:last-child { border-bottom: none; }
-  .contact-channel dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-  .contact-channel dd { font-family: var(--serif); font-size: 17px; }
-  .contact-channel dd small {
-    display: block;
-    font-family: var(--sans);
-    font-size: 12px;
-    opacity: 0.8;
-    margin-top: 4px;
-  }
-  .contact-r {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    padding: 80px 64px;
-  }
-  .form-eye {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 24px;
-  }
-  .form-row { margin-bottom: 24px; }
-  .form-row label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    opacity: 0.8;
-    letter-spacing: 0.05em;
-  }
-  .form-row label .req { color: var(--shu-light); margin-left: 4px; }
-  .form-row input, .form-row textarea {
-    width: 100%;
-    padding: 14px 18px;
-    background: rgba(245, 239, 227, 0.06);
-    border: 1px solid rgba(245, 239, 227, 0.15);
-    border-radius: var(--r-sm);
-    font-family: var(--sans);
-    font-size: 14px;
-    color: var(--on-sumi);
-    transition: all 0.2s;
-  }
-  .form-row input:focus, .form-row textarea:focus {
-    outline: none;
-    background: rgba(245, 239, 227, 0.1);
-    border-color: var(--shu-light);
-  }
-  .form-row textarea { resize: vertical; min-height: 90px; }
-  .form-submit {
-    width: 100%;
-    padding: 18px;
-    background: var(--shu);
-    color: var(--on-shu);
-    border-radius: var(--r-pill);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    margin-top: 8px;
-    transition: all 0.25s;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  .form-submit:hover { background: var(--kinari); color: var(--sumi); gap: 16px; }
-  .form-note {
-    font-size: 11px;
-    opacity: 0.5;
-    text-align: center;
-    margin-top: 16px;
-    transition: color 0.3s;
-  }
-  .form-note.is-success { color: var(--shu-light); opacity: 0.95; }
-  .form-note.is-error { color: var(--shu-light); opacity: 0.95; }
-
-  .form-row .form-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    opacity: 0.8;
-    letter-spacing: 0.05em;
-  }
-  .form-row .form-label .req { color: var(--shu-light); margin-left: 4px; }
-
-  .form-radios, .form-checks {
-    display: grid;
-    gap: 8px;
-  }
-  .radio-opt, .check-opt {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: rgba(245, 239, 227, 0.04);
-    border: 1px solid rgba(245, 239, 227, 0.12);
-    border-radius: var(--r-sm);
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-    margin: 0;
-  }
-  .radio-opt:hover, .check-opt:hover {
-    background: rgba(245, 239, 227, 0.08);
-    border-color: rgba(245, 239, 227, 0.22);
-  }
-  .radio-opt input, .check-opt input {
-    accent-color: var(--shu);
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    flex-shrink: 0;
-  }
-  .radio-opt:has(input:checked), .check-opt:has(input:checked) {
-    background: rgba(192, 74, 62, 0.14);
-    border-color: var(--shu);
-  }
-
-  .consent-opt {
-    display: flex !important;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: rgba(245, 239, 227, 0.04);
-    border: 1px solid rgba(245, 239, 227, 0.12);
-    border-radius: var(--r-sm);
-    font-size: 13px;
-    cursor: pointer;
-    margin-bottom: 0 !important;
-    opacity: 1 !important;
-    letter-spacing: 0 !important;
-  }
-  .consent-opt:has(input:checked) {
-    background: rgba(192, 74, 62, 0.14);
-    border-color: var(--shu);
-  }
-  .consent-opt input {
-    accent-color: var(--shu);
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    flex-shrink: 0;
-  }
-  .consent-opt a {
-    color: var(--shu-light);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .form-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  /* ===== FINAL CTA ===== */
-  .final-cta {
-    background: var(--kinari-2);
-    border-radius: var(--r-xl);
-    padding: 100px 72px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .final-cta::before, .final-cta::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .final-cta::before {
-    width: 380px; height: 380px;
-    background: var(--shu-surface);
-    left: -100px; top: -120px;
-    opacity: 0.7;
-  }
-  .final-cta::after {
-    width: 320px; height: 320px;
-    background: var(--uguisu-surface);
-    right: -80px; bottom: -100px;
-    opacity: 0.7;
-  }
-  .final-cta-inner { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
-  .final-cta h2 {
-    font-family: var(--serif);
-    font-size: clamp(26px, 3.4vw, 48px);
-    font-weight: 500;
-    line-height: 1.25;
-    margin: 20px 0;
-  }
-  .final-cta h2 .accent { color: var(--shu); }
-  .final-cta p {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.85;
-    color: var(--sumi-2);
-    margin-bottom: 40px;
-  }
-  .final-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  /* ===== Footer ===== */
-  .footer {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-radius: var(--r-xl);
-    padding: 72px 56px 40px;
-    margin-top: 16px;
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(245, 239, 227, 0.12);
-  }
-  .footer-brand .brand-name { color: var(--on-sumi); }
-  .footer-brand .brand-mark { background: var(--kinari); color: var(--sumi); }
-  .footer-brand p {
-    margin-top: 20px;
-    font-size: 13px;
-    line-height: 1.9;
-    opacity: 0.7;
-    max-width: 30ch;
-  }
-  .footer-col h5 {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 18px;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 10px; font-size: 13px; }
-  .footer-col a { opacity: 0.75; transition: opacity 0.2s; }
-  .footer-col a:hover { opacity: 1; color: var(--shu-light); }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 32px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    opacity: 0.5;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  /* ===== Reveal ===== */
-  .reveal { opacity: 1 !important; }
-  .js-ready .reveal:not(.in) { opacity: 0 !important; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.2, 0, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0, 0.2, 1); }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 1100px) {
-    .tile-hero { grid-column: span 12; grid-row: span 2; min-height: 480px; padding: 48px 36px; }
-    .tile-dark { grid-column: span 7; }
-    .tile-stat { grid-column: span 5; }
-    .tile-mini { grid-column: span 4; }
-    .philosophy { grid-template-columns: 1fr; gap: 40px; padding: 72px 40px; }
-    .svc-1 { grid-column: span 12; }
-    .svc-2, .svc-3, .svc-4, .svc-5 { grid-column: span 6; }
-    .case-wrap { grid-template-columns: 1fr; }
-    .ba-grid { grid-template-columns: 1fr; }
-    .ba-arrow { transform: rotate(90deg); margin: 0 auto; }
-    .price-grid { grid-template-columns: 1fr; }
-    .contact { grid-template-columns: 1fr; }
-    .flow-steps { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 700px) {
-    .nav-links { display: none; }
-    .page { padding: 8px; }
-    .hero-outer { padding-top: 80px; }
-    .tile-hero, .tile-dark, .tile-stat, .tile-mini, .svc-1, .svc-2, .svc-3, .svc-4, .svc-5 { grid-column: span 12; }
-    .tile-hero { padding: 36px 28px; min-height: 420px; }
-    .section-head { grid-template-columns: 1fr; gap: 16px; }
-    .philosophy { padding: 56px 28px; }
-    .flow-wrap, .faq-wrap, .final-cta { padding: 56px 28px; }
-    .contact-l, .contact-r { padding: 56px 32px; }
-    .ba-block { padding: 32px; }
-    .footer { padding: 56px 28px 32px; }
-    .footer-top { grid-template-columns: 1fr; gap: 32px; }
-    .plan { padding: 40px 32px; }
-    .biz-tags { padding: 28px; }
-  }
-
-  /* ===== SIMPLE MODE (notepad view) ===== */
-  .simple-view { display: none; }
-  body.simple-mode { background: #FBF7EE; }
-  body.simple-mode .page { display: none; }
-  body.simple-mode .nav { display: none; }
-  body.simple-mode .simple-view { display: block; }
-
-  .simple-view {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 96px 32px 160px;
-    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
-    font-size: 15px;
-    line-height: 1.95;
-    color: #1A1614;
-    letter-spacing: 0.02em;
-  }
-  .simple-view h1 {
-    font-family: var(--serif);
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
-  }
-  .simple-view .sv-tag {
-    font-size: 13px;
-    color: #56504B;
-    margin-bottom: 32px;
-    letter-spacing: 0.04em;
-  }
-  .simple-view hr {
-    border: none;
-    border-top: 1px dashed #A89E8C;
-    margin: 24px 0;
-  }
-  .simple-view h2 {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 600;
-    color: #1A1614;
-    margin: 40px 0 14px;
-    padding-left: 12px;
-    border-left: 3px solid #C04A3E;
-    letter-spacing: 0.06em;
-  }
-  .simple-view p { margin: 10px 0; }
-  .simple-view ul { list-style: none; padding: 0; margin: 10px 0; }
-  .simple-view li { padding: 2px 0; }
-  .simple-view li::before { content: "・"; color: #888578; margin-right: 2px; }
-  .simple-view table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14.5px; }
-  .simple-view td { padding: 6px 0; vertical-align: top; }
-  .simple-view td:first-child { width: 46%; font-weight: 500; }
-  .simple-view a {
-    color: #1A1614;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-  .simple-view a:hover { color: #C04A3E; }
-  .simple-view .sv-note { font-size: 12.5px; color: #56504B; }
-  .simple-view .sv-foot {
-    margin-top: 64px;
-    padding-top: 24px;
-    border-top: 1px solid #CFC4B0;
-    font-size: 12.5px;
-    color: #56504B;
-    line-height: 1.9;
-  }
-  .simple-view .sv-sig {
-    margin-top: 10px;
-    font-family: var(--serif);
-    font-size: 13.5px;
-    color: #888578;
-    letter-spacing: 0.08em;
-  }
-
-  /* Toggle button */
-  .mode-toggle {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 200;
-    display: inline-flex;
-    align-items: center;
-    padding: 4px;
-    background: rgba(26, 22, 20, 0.92);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 999px;
-    box-shadow: 0 10px 32px rgba(26, 22, 20, 0.28);
-    border: 1px solid rgba(245, 239, 227, 0.15);
-    cursor: pointer;
-    user-select: none;
-  }
-  .mode-toggle::before {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(50% - 4px);
-    height: calc(100% - 8px);
-    background: #F5EFE3;
-    border-radius: 999px;
-    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-    z-index: 1;
-  }
-  body.simple-mode .mode-toggle::before { transform: translateX(100%); }
-  .mode-toggle-opt {
-    position: relative;
-    z-index: 2;
-    padding: 10px 20px;
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: rgba(245, 239, 227, 0.55);
-    border-radius: 999px;
-    transition: color 0.45s;
-    pointer-events: none;
-  }
-  .mode-toggle-opt.is-on { color: #1A1614; }
-
-  /* Ink-wash transition overlay */
-  .mode-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: #1A1614;
-    pointer-events: none;
-    clip-path: circle(0% at var(--x, 100%) var(--y, 100%));
-    transition: clip-path 0.75s cubic-bezier(0.83, 0, 0.17, 1);
-  }
-  .mode-overlay.active {
-    clip-path: circle(160% at var(--x, 100%) var(--y, 100%));
-  }
-  .mode-overlay::after {
-    content: "嶽";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.6);
-    font-family: var(--serif);
-    font-size: clamp(120px, 18vw, 240px);
-    color: rgba(245, 239, 227, 0.08);
-    opacity: 0;
-    transition: opacity 0.35s, transform 0.75s cubic-bezier(0.83, 0, 0.17, 1);
-    pointer-events: none;
-  }
-  .mode-overlay.active::after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  @media (max-width: 700px) {
-    .simple-view { padding: 72px 22px 140px; font-size: 14.5px; }
-    .mode-toggle { right: 12px; bottom: 12px; }
-    .mode-toggle-opt { padding: 9px 14px; font-size: 11px; letter-spacing: 0.08em; }
-  }
-
-  /* ============================================================
-   * 「凛」統一コンポーネント
-   *   .trust-lead   — セクション導入文
-   *   .rin-duo      — 2列レイアウト (before/after, do/dont)
-   *   .rin-card     — カード共通ベース（.rin-light / .rin-dark）
-   *   .rin-badge    — 角付きラベル (.shu / .kinari)
-   *   .rin-h        — 見出し
-   *   .rin-list     — 箇条書き (.check / .cross)
-   *   .rin-steps    — 番号付きステップ (.light for dark bg)
-   *   .rin-note     — 補足ボックス
-   *   .rin-link     — ボタン風リンク
-   * ========================================================== */
-  .trust-lead {
-    padding: 0 8px 32px;
-  }
-  .trust-lead p {
-    font-family: var(--serif);
-    font-size: clamp(16px, 1.9vw, 21px);
-    line-height: 1.85;
-    color: var(--sumi);
-    max-width: 60ch;
-  }
-  .trust-lead p strong { color: var(--shu); font-weight: 500; }
-
-  .rin-duo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .rin-card {
-    border-radius: var(--r-lg);
-    padding: 44px 44px;
-    position: relative;
-    overflow: hidden;
-  }
-  .rin-card.rin-light {
-    background: var(--kinari-2);
-    color: var(--sumi);
-  }
-  .rin-card.rin-light::before {
-    content: "凛";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #E2D9C2;
-    right: -20px; bottom: -50px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .rin-card.rin-dark {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .rin-card.rin-dark::before {
-    content: "凛";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #221C19;
-    right: -20px; bottom: -50px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .rin-card > * { position: relative; z-index: 2; }
-
-  .rin-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .rin-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    padding: 6px 14px;
-    border-radius: 999px;
-  }
-  .rin-badge.shu { background: var(--shu); color: var(--on-shu); }
-  .rin-badge.kinari { background: var(--kinari); color: var(--sumi); }
-  .rin-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--shu);
-  }
-  .rin-meta.light { color: var(--shu-light); }
-
-  .rin-h {
-    font-family: var(--serif);
-    font-size: clamp(20px, 2.4vw, 26px);
-    font-weight: 500;
-    line-height: 1.45;
-    margin: 0 0 18px;
-  }
-
-  .rin-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .rin-list li {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.65;
-    padding: 12px 0 12px 30px;
-    position: relative;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
-  }
-  .rin-list li:last-child { border-bottom: none; }
-  .rin-card.rin-dark .rin-list li { border-bottom-color: rgba(245, 239, 227, 0.15); }
-  .rin-list.check li::before {
-    content: "○";
-    position: absolute;
-    left: 2px;
-    top: 12px;
-    color: var(--shu);
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .rin-list.cross li::before {
-    content: "×";
-    position: absolute;
-    left: 2px;
-    top: 12px;
-    color: var(--shu-light);
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .rin-steps {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    counter-reset: rinstep;
-  }
-  .rin-steps li {
-    position: relative;
-    padding: 14px 4px 14px 52px;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.6;
-    counter-increment: rinstep;
-  }
-  .rin-steps li:last-child { border-bottom: none; }
-  .rin-steps li::before {
-    content: counter(rinstep, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    background: var(--shu);
-    color: var(--on-shu);
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-  }
-  .rin-steps.light li { border-bottom-color: rgba(245, 239, 227, 0.18); }
-
-  .rin-foot {
-    font-size: 12px;
-    line-height: 1.75;
-    color: var(--sumi-2);
-    opacity: 0.8;
-    margin: 20px 0 0;
-    padding-top: 16px;
-    border-top: 1px dashed rgba(26, 22, 20, 0.15);
-  }
-  .rin-foot.light {
-    color: rgba(245, 239, 227, 0.75);
-    border-top-color: rgba(245, 239, 227, 0.2);
-    opacity: 1;
-  }
-
-  .rin-note {
-    margin-top: 24px;
-    padding: 24px 30px;
-    background: var(--kinari-2);
-    border-radius: var(--r-md);
-  }
-  .rin-note p {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.95;
-    color: var(--sumi);
-    margin: 0;
-  }
-  .rin-note p strong { color: var(--shu); font-weight: 500; }
-  .rin-note-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
-  .rin-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 20px;
-    background: var(--sumi);
-    color: var(--kinari);
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
-  }
-  .rin-link:hover { background: var(--shu); gap: 12px; }
-  .rin-link.outline {
-    background: transparent;
-    color: var(--sumi);
-    border: 1px solid var(--sumi);
-  }
-  .rin-link.outline:hover { background: var(--sumi); color: var(--kinari); }
-
-  @media (max-width: 900px) {
-    .rin-duo { grid-template-columns: 1fr; }
-    .rin-card { padding: 32px 28px; }
-    .rin-h { font-size: 20px; }
-  }
-
-  /* ===== Hero strong block (御社専用の見本アプリ) ===== */
-  .hero-strong-outer {
-    padding: 16px;
-    margin-top: 16px;
-  }
-  .hero-strong {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-radius: var(--r-xl);
-    padding: 72px 56px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-strong::before {
-    content: "見";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 280px;
-    color: #221C19;
-    right: -40px;
-    bottom: -80px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-strong::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 20% 10%, rgba(192, 74, 62, 0.15), transparent 50%);
-    pointer-events: none;
-  }
-  .hero-strong-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 920px;
-  }
-  .hero-strong-eye {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.28em;
-    color: var(--shu-light);
-    display: inline-block;
-    margin-bottom: 24px;
-    padding: 6px 14px;
-    background: rgba(192, 74, 62, 0.18);
-    border-radius: 999px;
-  }
-  .hero-strong-h {
-    font-family: var(--serif);
-    font-size: clamp(28px, 4vw, 52px);
-    font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: 0.01em;
-    margin-bottom: 32px;
-  }
-  .hero-strong-h .em {
-    color: var(--shu-light);
-    position: relative;
-  }
-  .hero-strong-h .em::after {
-    content: "";
-    position: absolute;
-    left: 4%; bottom: 0.08em;
-    width: 92%; height: 12px;
-    background: var(--shu);
-    opacity: 0.35;
-    border-radius: 999px;
-    z-index: -1;
-  }
-  .hero-strong-p {
-    font-family: var(--serif);
-    font-size: clamp(15px, 1.8vw, 19px);
-    line-height: 2;
-    color: rgba(245, 239, 227, 0.92);
-    margin-bottom: 36px;
-    max-width: 60ch;
-  }
-  .hero-strong-p strong {
-    color: var(--shu-light);
-    font-weight: 500;
-  }
-  .hero-strong-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-  }
-  .hero-strong-note {
-    font-size: 12.5px;
-    line-height: 1.85;
-    color: rgba(245, 239, 227, 0.6);
-    padding: 16px 20px;
-    border-left: 3px solid var(--shu);
-    background: rgba(245, 239, 227, 0.04);
-    border-radius: 8px;
-    max-width: 60ch;
-  }
-  @media (max-width: 700px) {
-    .hero-strong { padding: 48px 28px; border-radius: var(--r-lg); }
-    .hero-strong::before { font-size: 200px; right: -30px; bottom: -60px; }
-  }
-
-  /* ===== Contract before/after 2-col ===== */
-  .contract-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .contract-side {
-    border-radius: var(--r-lg);
-    padding: 40px 36px;
-    background: var(--kinari-2);
-    color: var(--sumi);
-    position: relative;
-    overflow: hidden;
-  }
-  .contract-side.after {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .contract-side.after::before {
-    content: "後";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #221C19;
-    right: -20px; bottom: -50px;
-    line-height: 0.8;
-    pointer-events: none;
-  }
-  .contract-side.before::before {
-    content: "前";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #E2D9C2;
-    right: -20px; bottom: -50px;
-    line-height: 0.8;
-    pointer-events: none;
-  }
-  .contract-side-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-    position: relative;
-    z-index: 2;
-  }
-  .contract-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 5px 12px;
-    border-radius: 999px;
-  }
-  .contract-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--shu);
-  }
-  .contract-meta.after { color: var(--shu-light); }
-  .contract-side-h {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 2;
-  }
-  .contract-side-p {
-    font-size: 13px;
-    line-height: 1.85;
-    color: var(--sumi-2);
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-  }
-  .contract-side.after .contract-side-p {
-    color: rgba(245, 239, 227, 0.78);
-  }
-  .contract-steps {
-    list-style: none;
-    padding: 0;
-    counter-reset: step;
-    position: relative;
-    z-index: 2;
-  }
-  .contract-steps li {
-    position: relative;
-    padding: 14px 4px 14px 56px;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
-    font-family: var(--serif);
-    font-size: 15.5px;
-    line-height: 1.55;
-    counter-increment: step;
-  }
-  .contract-steps li::before {
-    content: counter(step, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    background: var(--shu);
-    color: var(--on-shu);
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-  }
-  .contract-steps li:last-child { border-bottom: none; }
-  .contract-steps.after li {
-    border-bottom-color: rgba(245, 239, 227, 0.18);
-  }
-  .contract-side-foot {
-    font-size: 11.5px;
-    line-height: 1.7;
-    color: var(--sumi-2);
-    opacity: 0.78;
-    margin-top: 18px;
-    padding-top: 14px;
-    border-top: 1px dashed rgba(26, 22, 20, 0.15);
-    position: relative;
-    z-index: 2;
-  }
-  .contract-side.after .contract-side-foot {
-    color: rgba(245, 239, 227, 0.75);
-    border-top-color: rgba(245, 239, 227, 0.2);
-    opacity: 1;
-  }
-
-  /* ===== Promise: お願いすること / お願いしないこと ===== */
-  .ask-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .ask-side {
-    border-radius: var(--r-lg);
-    padding: 36px 36px;
-    position: relative;
-    overflow: hidden;
-  }
-  .ask-side.do {
-    background: var(--kinari-2);
-    color: var(--sumi);
-  }
-  .ask-side.dont {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .ask-side.do::before {
-    content: "お";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 150px;
-    color: #E2D9C2;
-    right: -20px; bottom: -50px;
-    line-height: 0.8;
-    pointer-events: none;
-  }
-  .ask-side.dont::before {
-    content: "✕";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 140px;
-    color: #221C19;
-    right: 20px; bottom: -10px;
-    line-height: 0.8;
-    pointer-events: none;
-  }
-  .ask-side-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-    position: relative;
-    z-index: 2;
-  }
-  .ask-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    padding: 5px 12px;
-    border-radius: 999px;
-  }
-  .ask-badge.do {
-    background: var(--shu);
-    color: var(--on-shu);
-  }
-  .ask-badge.dont {
-    background: var(--kinari);
-    color: var(--sumi);
-  }
-  .ask-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--shu);
-  }
-  .ask-meta.dont { color: var(--shu-light); }
-  .ask-side-h {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.45;
-    margin-bottom: 18px;
-    position: relative;
-    z-index: 2;
-  }
-  .ask-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    z-index: 2;
-  }
-  .ask-list li {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.65;
-    padding: 10px 0 10px 28px;
-    position: relative;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.12);
-  }
-  .ask-list.dont li {
-    border-bottom-color: rgba(245, 239, 227, 0.18);
-  }
-  .ask-list li:last-child { border-bottom: none; }
-  .ask-list.do li::before {
-    content: "○";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    color: var(--shu);
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .ask-list.dont li::before {
-    content: "×";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    color: var(--shu-light);
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  /* ===== Before / 見本 / After 3-col ===== */
-  .ba3-grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    gap: 16px;
-    align-items: stretch;
-  }
-  .ba3-card {
-    border-radius: var(--r-md);
-    padding: 28px 26px;
-    background: var(--kinari-2);
-    color: var(--sumi);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 230px;
-  }
-  .ba3-card.ba3-sample {
-    background: var(--shu);
-    color: var(--on-shu);
-    border: 3px solid var(--shu);
-    box-shadow: 0 12px 32px rgba(192, 74, 62, 0.18);
-    transform: translateY(-8px);
-  }
-  .ba3-card.ba3-after {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .ba3-eye {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    opacity: 0.7;
-  }
-  .ba3-card.ba3-sample .ba3-eye { opacity: 0.95; color: var(--on-shu); }
-  .ba3-h {
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 500;
-    line-height: 1.45;
-    margin: 0;
-  }
-  .ba3-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .ba3-list li {
-    font-size: 13px;
-    line-height: 1.7;
-    padding-left: 14px;
-    position: relative;
-  }
-  .ba3-list li::before {
-    content: "・";
-    position: absolute;
-    left: 0;
-    opacity: 0.6;
-  }
-  .ba3-card.ba3-sample .ba3-list li::before { color: var(--shu-light); opacity: 1; }
-  .ba3-arrow {
-    display: grid;
-    place-items: center;
-    font-family: var(--serif);
-    font-size: 28px;
-    color: var(--shu);
-    opacity: 0.6;
-  }
-
-  /* ===== Example cards (3-stage: 困りごと / 見本 / できること) ===== */
-  .examples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  .example-card {
-    background: var(--kinari-2);
-    border-radius: var(--r-lg);
-    padding: 32px 28px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
-  }
-  .example-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(26, 22, 20, 0.1);
-  }
-  .example-card.featured {
-    background: var(--shu-surface);
-    border: 2px solid var(--shu);
-  }
-  .ex-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .ex-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--shu);
-  }
-  .ex-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 4px 10px;
-    border-radius: 999px;
-  }
-  .ex-h {
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.35;
-    margin: 0;
-  }
-  .example-card.featured .ex-h { color: var(--shu); }
-  .ex-sub {
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--sumi);
-    font-weight: 500;
-    margin: 0;
-  }
-  .ex-stage {
-    padding: 14px 16px;
-    background: rgba(255, 255, 255, 0.55);
-    border-radius: var(--r-sm);
-    border-left: 3px solid rgba(26, 22, 20, 0.2);
-  }
-  .example-card.featured .ex-stage {
-    background: rgba(255, 255, 255, 0.6);
-  }
-  .ex-stage.ex-stage-sample {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-left-color: var(--shu);
-  }
-  .ex-stage-eye {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.22em;
-    color: var(--shu);
-    margin-bottom: 8px;
-  }
-  .ex-stage.ex-stage-sample .ex-stage-eye { color: var(--shu-light); }
-  .ex-stage-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .ex-stage-list li {
-    font-size: 12.5px;
-    line-height: 1.65;
-    padding-left: 14px;
-    position: relative;
-    color: var(--sumi-2);
-  }
-  .ex-stage-list li::before {
-    content: "・";
-    position: absolute;
-    left: 0;
-    color: var(--shu);
-  }
-  .ex-stage-desc {
-    font-size: 12.5px;
-    line-height: 1.75;
-    margin: 0;
-  }
-  .ex-stage-desc strong { color: var(--shu-light); font-weight: 500; }
-  .ex-link {
-    margin-top: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 18px;
-    background: var(--sumi);
-    color: var(--kinari);
-    border-radius: var(--r-pill);
-    font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-align: center;
-    justify-content: center;
-    transition: all 0.25s;
-    align-self: stretch;
-  }
-  .ex-link:hover { background: var(--shu); gap: 14px; }
-  .example-card.featured .ex-link { background: var(--shu); }
-  .example-card.featured .ex-link:hover { background: var(--sumi); }
-
-  /* ===== Sample app contents list ===== */
-  .sample-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 10px;
-  }
-  .sample-item {
-    background: var(--kinari);
-    border-radius: var(--r-sm);
-    padding: 14px 18px;
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--sumi);
-    border-left: 3px solid var(--shu);
-  }
-
-  /* ===== New sections: mobile responsiveness ===== */
-  @media (max-width: 900px) {
-    .problem-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
-    .boundaries-grid { grid-template-columns: 1fr !important; }
-    .case-detail { grid-template-columns: 1fr !important; }
-    .phases-grid-run { grid-template-columns: 1fr !important; }
-    .entry-detail-grid { grid-template-columns: 1fr !important; }
-    .low-price-conditions { grid-template-columns: 1fr !important; }
-    .warning-list { grid-template-columns: 1fr !important; }
-    .roles-grid { grid-template-columns: 1fr !important; }
-    .monthly-tier-grid { grid-template-columns: 1fr !important; }
-    .contract-grid { grid-template-columns: 1fr !important; }
-    .ba3-grid { grid-template-columns: 1fr !important; }
-    .ba3-arrow { transform: rotate(90deg); }
-    .ba3-card.ba3-sample { transform: none; }
-    .ask-grid { grid-template-columns: 1fr !important; }
-    .monthly-include-grid { grid-template-columns: 1fr !important; }
-  }
-  @media (max-width: 700px) {
-    .rule-card { padding: 22px 22px !important; }
-    .phase-card { padding: 24px 20px !important; }
-    .problem-item { padding: 16px 18px !important; }
-    .contract-side { padding: 28px 24px !important; }
-    .contract-side-h { font-size: 20px !important; }
-    .contract-steps li { font-size: 14px !important; padding: 12px 4px 12px 50px !important; }
-    .contract-steps li::before { width: 32px !important; height: 32px !important; font-size: 10px !important; }
-  }
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
+@keyframes tkr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+input,textarea{font-family:"Zen Kaku Gothic New",sans-serif}
+input::placeholder,textarea::placeholder{color:rgba(27,22,19,.35)}
+input:focus,textarea:focus{outline:none;border-color:#BE4633 !important}
+details summary::-webkit-details-marker{display:none}
+details[open] .faq-plus{transform:rotate(45deg)}
+details .faq-plus{transition:transform .25s ease}
+a{color:inherit;text-decoration:none}
 </style>
+<style>#contactForm button[type="submit"]:hover{background:#BE4633 !important}a{transition:opacity .2s}a:hover{opacity:.8}</style>
+
 </head>
 <body>
-
-<!-- ===== NAV ===== -->
-<nav class="nav" id="nav">
-  <a href="#top" class="brand">
-    <span class="brand-mark">嶽</span>
-    <span class="brand-name">嶽ノ子</span>
-  </a>
-  <div class="nav-links">
-    <a href="#process" class="nav-link">進め方</a>
-    <a href="sample-app.html" class="nav-link">見本アプリ</a>
-    <a href="#examples" class="nav-link">対応業務</a>
-    <a href="#price" class="nav-link">料金</a>
-    <a href="staff.html" class="nav-link">現場の方へ</a>
-    <a href="#faq" class="nav-link">FAQ</a>
-    <a href="company.html" class="nav-link">会社概要</a>
+<!-- ===================== MASTHEAD ===================== -->
+<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); padding: 20px 56px 18px; background: #F3EFE4;">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.55); margin-bottom: 14px;">
+    <span>介護現場のオーダーメイド業務アプリ</span>
+    <span>TAKENOKONOKO</span>
+    <span>無料相談 ／ ０円</span>
   </div>
-  <a href="#contact" class="nav-cta">無料相談 <span>→</span></a>
-</nav>
-
-<div class="page">
-
-<!-- ===== HERO (Bento) ===== -->
-<section class="hero-outer" id="top">
-  <div class="hero-grid">
-    <div class="tile tile-hero reveal">
-      <div class="hero-meta">
-        <span class="chip"><span class="dot"></span>介護現場の業務改善</span>
-        <span class="chip">EST. 2025</span>
-        <span class="chip shu">無料相談・簡易診断 0円</span>
-      </div>
-      <h1 class="hero-h1">
-        今のやり方を、<br>
-        <span class="em">見せてください</span>。
-      </h1>
-      <p class="hero-sub">
-        介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。<br>
-        シフト作成・送迎管理・月次集計・申し送り・記録チェックなど。今使っている帳票やExcelを確認しながら、現場に合うアプリを作ります。<br>
-        <small style="display: block; margin-top: 10px; font-size: 12.5px; opacity: 0.75;">特に相談が多い業務：シフト作成 ／ 送迎管理 ／ 月次集計</small>
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-filled">無料で相談する <span>→</span></a>
-        <a href="#examples" class="btn btn-outline">対応業務を見る <span>↓</span></a>
-      </div>
-    </div>
-
-    <div class="tile tile-dark reveal">
-      <span class="tile-label">— STANCE / 姿勢</span>
-      <div class="tile-quote">
-        うまく説明できなくても、<br><em>大丈夫です</em>。
-      </div>
-      <a href="#problem" class="btn btn-tonal" style="background: var(--shu); color: var(--on-shu); align-self: flex-start;">理由を読む <span>→</span></a>
-    </div>
-
-    <div class="tile tile-stat reveal">
-      <span class="stat-k">APPROACH</span>
-      <span class="stat-v">今のやり方を確認<small>＋使いやすく整える</small></span>
-      <span style="font-size: 12px; opacity: 0.85;">紙・Excel・帳票・シフト表を見ながら、こちらで整理します</span>
-    </div>
-
-    <div class="tile tile-mini shu-surface reveal">
-      <span class="mini-k">FORMAT</span>
-      <span class="mini-v">現場訪問が中心</span>
-    </div>
-    <div class="tile tile-mini uguisu-surface reveal">
-      <span class="mini-k">FIRST TALK</span>
-      <span class="mini-v">無料相談 0円</span>
-    </div>
-    <div class="tile tile-mini reveal" style="background: var(--yamabuki-surface); color: #6B5321;">
-      <span class="mini-k">CONTACT</span>
-      <span class="mini-v">代表が直接対応</span>
-    </div>
-
-    <!-- Marquee ticker -->
-    <div class="hero-ticker reveal">
-      <div class="ticker-track">
-        <span class="ticker-item">シフト作成</span>
-        <span class="ticker-item">送迎管理</span>
-        <span class="ticker-item">月次集計</span>
-        <span class="ticker-item">申し送り</span>
-        <span class="ticker-item">記録チェック</span>
-        <span class="ticker-item">備品管理</span>
-        <span class="ticker-item">家族連絡</span>
-        <span class="ticker-item">利用者一覧</span>
-        <!-- duplicate for seamless loop -->
-        <span class="ticker-item">シフト作成</span>
-        <span class="ticker-item">送迎管理</span>
-        <span class="ticker-item">月次集計</span>
-        <span class="ticker-item">申し送り</span>
-        <span class="ticker-item">記録チェック</span>
-        <span class="ticker-item">備品管理</span>
-        <span class="ticker-item">家族連絡</span>
-        <span class="ticker-item">利用者一覧</span>
-      </div>
-    </div>
+  <div style="display: flex; justify-content: center; align-items: baseline;">
+    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: 58px; font-weight: 700; letter-spacing: 0.3em; margin: 0; text-indent: 0.3em;">嶽ノ子</h1>
   </div>
-</section>
-
-<!-- ===== TRUST (安心・お願いすること) ===== -->
-<section class="section" id="trust">
-  <div class="section-head reveal">
-    <span class="section-tag">— 00 / TRUST</span>
-    <h2 class="section-title">うまく説明できなくても、<br><span class="accent">大丈夫</span>です。</h2>
-    <span class="section-nav">安心のお約束</span>
+  <div style="display: flex; justify-content: center; gap: 34px; margin-top: 14px; font-size: 11.5px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.75);">
+    <a href="#trust">00 姿勢</a>
+    <a href="#process">01 導入の流れ</a>
+    <a href="#examples">02 対応業務</a>
+    <a href="#price">03 料金</a>
+    <a href="#faq">04 よくある質問</a>
+    <a href="#contact" style="color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">05 無料で相談する →</a>
   </div>
-
-  <div class="reveal trust-lead">
-    <p>介護現場の業務は、毎日の中で自然に回っているため、言葉だけで説明するのが難しいことがあります。<br>
-    嶽ノ子では、今使っている紙・Excel・帳票を<strong>こちらで読み解いて</strong>、必要な仕組みに整えます。「何を作りたいか」が決まっていなくても、相談できます。</p>
-  </div>
-
-  <div class="rin-duo reveal">
-    <div class="rin-card rin-light">
-      <div class="rin-head">
-        <span class="rin-badge shu">DO</span>
-        <span class="rin-meta">お願いすること</span>
-      </div>
-      <h3 class="rin-h">いつものやり方を、<br>見せてください。</h3>
-      <ul class="rin-list check">
-        <li>今使っている紙・Excelを見せてもらう</li>
-        <li>普段の作業の流れを見せてもらう</li>
-        <li>見本アプリを見て違和感を教えてもらう</li>
-        <li>現場の呼び方・言葉を教えてもらう</li>
-      </ul>
-    </div>
-    <div class="rin-card rin-dark">
-      <div class="rin-head">
-        <span class="rin-badge kinari">DON&rsquo;T</span>
-        <span class="rin-meta light">お願いしないこと</span>
-      </div>
-      <h3 class="rin-h">仕様書も、<br>IT用語も、必要ありません。</h3>
-      <ul class="rin-list cross">
-        <li>仕様書を書いてもらう</li>
-        <li>IT用語を覚えてもらう</li>
-        <li>長い資料を読んで確認してもらう</li>
-        <li>すべての例外を事前に洗い出してもらう</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="rin-note reveal">
-    <p>現場のやり方を否定するのではなく、<strong>今の運用を読み解いて、無理なく続けられる形に整えます</strong>。</p>
-    <div class="rin-note-actions">
-      <a href="staff.html" class="rin-link">現場の職員さんへ <span>→</span></a>
-      <a href="sample-app.html" class="rin-link outline">御社専用の見本アプリとは <span>→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROCESS (契約前 ／ 契約後) ===== -->
-<section class="section" id="process">
-  <div class="section-head reveal">
-    <span class="section-tag">— 01 / PROCESS</span>
-    <h2 class="section-title">契約前と<br><span class="accent">契約後</span>、それぞれにやること。</h2>
-    <span class="section-nav">導入の流れ</span>
-  </div>
-
-  <div class="reveal trust-lead">
-    <p>契約前に、<strong>完成イメージ</strong>まで見えるようにします。<br>
-    契約後に、<strong>現場で使える形</strong>へ一緒に整えます。</p>
-  </div>
-
-  <div class="rin-duo reveal">
-    <div class="rin-card rin-light">
-      <div class="rin-head">
-        <span class="rin-badge shu">BEFORE</span>
-        <span class="rin-meta">契約前 ／ 0円</span>
-      </div>
-      <h3 class="rin-h">契約前にやること</h3>
-      <ol class="rin-steps">
-        <li>初回訪問で、今の作業を見る</li>
-        <li>持ち帰って、作業の流れを整理する</li>
-        <li>御社専用の見本アプリを作る</li>
-        <li>2回目訪問で、見本アプリと費用を説明する</li>
-      </ol>
-      <p class="rin-foot">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
-    </div>
-    <div class="rin-card rin-dark">
-      <div class="rin-head">
-        <span class="rin-badge kinari">AFTER</span>
-        <span class="rin-meta light">契約後 ／ 商品料金に含む</span>
-      </div>
-      <h3 class="rin-h">契約後にやること</h3>
-      <ol class="rin-steps light">
-        <li>現場の横で、一緒に形を整える</li>
-        <li>細かい項目や例外を整理する</li>
-        <li>小さく作って、小さく確認する</li>
-        <li>実際の例を入れて、出てくる結果を確認する</li>
-      </ol>
-      <p class="rin-foot light">※ 契約金額の中で対応します。表示価格に含まれない作業は、作業前に必ずお見積りします。</p>
-    </div>
-  </div>
-
-  <div class="rin-note reveal">
-    <p>もっと詳しい流れ（見本アプリで確認できるもの・8ステップ）は、下記ページをご覧ください。</p>
-    <div class="rin-note-actions">
-      <a href="sample-app.html" class="rin-link">御社専用の見本アプリとは <span>→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== EXAMPLES (対応業務 + 代表例3つ) ===== -->
-<section class="section" id="examples">
-  <div class="section-head reveal">
-    <span class="section-tag">— 02 / BUSINESS</span>
-    <h2 class="section-title">対応できる<br><span class="accent">業務</span>。</h2>
-    <span class="section-nav">対応業務</span>
-  </div>
-
-  <!-- 対応業務リスト -->
-  <div class="reveal" style="margin-bottom: 32px; padding: 24px 28px; background: var(--kinari-2); border-radius: var(--r-md);">
-    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu); margin-bottom: 12px;">— BUSINESS / 対応業務の例</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-      <span class="chip">シフト作成</span>
-      <span class="chip">送迎管理</span>
-      <span class="chip">月次集計</span>
-      <span class="chip">申し送り</span>
-      <span class="chip">記録チェック</span>
-      <span class="chip">備品管理</span>
-      <span class="chip">ヒヤリハット報告</span>
-      <span class="chip">報告書作成</span>
-      <span class="chip">家族連絡</span>
-      <span class="chip">職員管理</span>
-      <span class="chip">利用者一覧</span>
-      <span class="chip">加算確認補助</span>
-      <span class="chip">請求前チェック</span>
-      <span class="chip">紙帳票のExcel化</span>
-    </div>
-    <p style="font-family: var(--serif); font-size: 13px; line-height: 1.85; color: var(--sumi-2); margin-top: 14px;">上記は一例です。「今これに困っている」というところから、現場資料を見ながら範囲を決めていきます。</p>
-  </div>
-
-  <!-- 代表例見出し -->
-  <div class="reveal" style="margin: 8px 0 14px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
-    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— EXAMPLES</span>
-    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">たとえば、こんな業務を見本アプリにできます</span>
-    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
-  </div>
-
-  <div class="examples-grid reveal">
-    <!-- 代表例 01: シフト作成（おすすめ） -->
-    <div class="example-card featured">
-      <div class="ex-head">
-        <div class="ex-num">EXAMPLE 01</div>
-        <span class="ex-tag">特に多い</span>
-      </div>
-      <h3 class="ex-h">シフト作成</h3>
-      <p class="ex-sub">0から手作業で作らない。</p>
-
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 現場の困りごと</div>
-        <ul class="ex-stage-list">
-          <li>毎月0からExcelでシフトを組んでいる</li>
-          <li>希望休・連勤・夜勤の確認に時間がかかる</li>
-          <li>職員ごとの勤務条件をすべて記憶に頼っている</li>
-        </ul>
-      </div>
-      <div class="ex-stage ex-stage-sample">
-        <div class="ex-stage-eye">— 契約前に作る見本</div>
-        <p class="ex-stage-desc">希望休・勤務条件を入れた<strong>シフト画面の見本</strong>。実際の希望休フォーム、シフト案、人員配置警告の見え方まで確認できます。</p>
-      </div>
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 契約後にできること</div>
-        <ul class="ex-stage-list">
-          <li>シフト案作成（最終調整は管理者）</li>
-          <li>希望休回収・勤務偏りの確認</li>
-          <li>人員配置警告／Excel・PDF 出力</li>
-        </ul>
-      </div>
-
-      <a href="manager.html" class="ex-link">管理者向けページで詳しく見る <span>→</span></a>
-    </div>
-
-    <!-- 代表例 02: 送迎管理 -->
-    <div class="example-card">
-      <div class="ex-head">
-        <div class="ex-num">EXAMPLE 02</div>
-      </div>
-      <h3 class="ex-h">送迎表・送迎管理</h3>
-      <p class="ex-sub">紙・Excel・電話確認を減らす。</p>
-
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 現場の困りごと</div>
-        <ul class="ex-stage-list">
-          <li>送迎表を毎回Excelで作り直している</li>
-          <li>欠席・追加利用で表が崩れる</li>
-          <li>運転者・添乗者・車椅子対応の確認が大変</li>
-        </ul>
-      </div>
-      <div class="ex-stage ex-stage-sample">
-        <div class="ex-stage-eye">— 契約前に作る見本</div>
-        <p class="ex-stage-desc">利用者・車両・職員を一覧で見られる<strong>送迎表の見本</strong>。曜日別・車両別・印刷用フォーマットまで確認できます。</p>
-      </div>
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 契約後にできること</div>
-        <ul class="ex-stage-list">
-          <li>送迎表作成・曜日別ルート確認</li>
-          <li>車椅子対応・欠席・追加利用の反映</li>
-          <li>印刷用送迎表の出力・履歴管理</li>
-        </ul>
-      </div>
-
-      <a href="dayservice.html" class="ex-link">デイサービス向けページで詳しく見る <span>→</span></a>
-    </div>
-
-    <!-- 代表例 03: 月次集計・記録チェック -->
-    <div class="example-card">
-      <div class="ex-head">
-        <div class="ex-num">EXAMPLE 03</div>
-      </div>
-      <h3 class="ex-h">月次集計・記録チェック</h3>
-      <p class="ex-sub">転記・確認・報告書作成を減らす。</p>
-
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 現場の困りごと</div>
-        <ul class="ex-stage-list">
-          <li>月末にExcel集計に何時間も取られる</li>
-          <li>転記・確認漏れが心配で、結局見直す</li>
-          <li>記録の参照・検索に時間がかかる</li>
-        </ul>
-      </div>
-      <div class="ex-stage ex-stage-sample">
-        <div class="ex-stage-eye">— 契約前に作る見本</div>
-        <p class="ex-stage-desc">日々の記録から<strong>集計結果が見える画面の見本</strong>。今のExcelのどこが置き換わるか、出力されるCSV・帳票まで確認できます。</p>
-      </div>
-      <div class="ex-stage">
-        <div class="ex-stage-eye">— 契約後にできること</div>
-        <ul class="ex-stage-list">
-          <li>転記削減・確認漏れ防止</li>
-          <li>報告書テンプレート出力</li>
-          <li>CSV・帳票出力／参照の効率化</li>
-        </ul>
-      </div>
-
-      <a href="small-facility.html" class="ex-link">小規模事業所向けページで詳しく見る <span>→</span></a>
-    </div>
-  </div>
-
-  <!-- 補足 -->
-  <div class="reveal" style="margin-top: 20px; padding: 18px 24px; background: var(--kinari-2); border-radius: var(--r-sm); font-size: 13px; line-height: 1.85; color: var(--sumi-2);">
-    上記以外の業務、または「これに困っているけど該当しない」というケースもご相談ください。<strong>まずは無料相談で、合いそうな範囲を一緒に確認します。</strong>
-  </div>
-</section>
-
-<!-- ===== PRICING (汎用4プラン・固定価格) ===== -->
-<section class="section" id="price">
-  <div class="section-head reveal">
-    <span class="section-tag">— 03 / PRICING</span>
-    <h2 class="section-title">料金は、<br><span class="accent">初期制作費＋月額運用サポート費</span>。</h2>
-    <span class="section-nav">料金</span>
-  </div>
-
-  <div class="reveal" style="margin-bottom: 24px; padding: 28px 36px; background: var(--kinari-2); border-radius: var(--r-md);">
-    <p style="font-family: var(--serif); font-size: 15px; line-height: 1.85; color: var(--sumi-2); max-width: 80ch;">
-      料金は、<strong style="color: var(--shu);">初期制作費</strong>と<strong style="color: var(--shu);">月額運用サポート費</strong>の2つだけです。月額には、アプリの利用・保守・軽微修正・操作相談・初月の定着支援を含みます。<br><strong>別で「アプリ使用料」と「保守料」を分けて請求することはありません。</strong>複雑な条件・判定を含む案件のみ、目安価格＋個別見積りとさせていただきます。
-    </p>
-  </div>
-
-  <!-- ENTRY -->
-  <div class="reveal phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 28px 32px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px;">
-    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">ENTRY ／ 無料</div>
-      <span style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 4px 10px; border-radius: 999px;">契約前まで 0円・現場訪問が中心</span>
-    </div>
-    <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.4; color: var(--shu);">無料相談・簡易診断</h3>
-    <div style="font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--shu);">0円</div>
-    <p style="font-size: 13.5px; line-height: 1.85; color: var(--sumi-2); max-width: 72ch;">契約前に <strong>完成イメージまで一緒に確認します。</strong>「何を作りたいか」が決まっていなくても、実際の運用と現物を見せていただければ、こちらで見本まで作ってご提示します。<br><a href="#process" style="color: var(--shu); text-decoration: underline; text-underline-offset: 3px; font-size: 12.5px;">→ 詳しい流れは「契約前と契約後にやること」を見る</a></p>
-    <p style="font-size: 12px; line-height: 1.85; color: var(--sumi-2); margin-top: 10px;">※ 現場訪問が原則です（遠方の場合は交通費別途・またはオンライン併用）。<br>※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
-  </div>
-
-  <!-- PRODUCTS -->
-  <div class="reveal" style="margin: 8px 0 10px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
-    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— PRODUCTS</span>
-    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">アプリ商品（業務整理は商品料金に含む）</span>
-    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
-  </div>
-
-  <div class="phases-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 16px;">
-    <!-- 紙・Excel改善パック -->
-    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PRODUCT 01</div>
-      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">紙・Excel<br>改善パック</h3>
-      <div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">100,000円</div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
-        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">10,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
-        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
-      </div>
-      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">既存の紙・Excelを1業務だけ仕組みにする。<strong>一番安く始められる入口商品。</strong></p>
-      <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
-        <strong>条件：</strong>1業務・3画面まで・帳票1種・複雑な条件・判定なし
-      </div>
-    </div>
-    <!-- 小規模アプリ -->
-    <div class="phase-card" style="background: var(--kinari-2); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PRODUCT 02</div>
-      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">小規模<br>アプリ</h3>
-      <div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">200,000円</div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
-        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">15,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
-        <div style="font-size: 10.5px; color: var(--sumi-2); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
-      </div>
-      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi-2);">備品・申し送り・記録・利用者一覧・チェックリスト・日報などを1業務しっかり仕組みにする。</p>
-      <div style="background: var(--kinari); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi-2);">
-        <strong>含む：</strong>簡易業務整理／設計／開発／導入支援
-      </div>
-    </div>
-    <!-- 標準アプリ（おすすめ） -->
-    <div class="phase-card" style="background: var(--shu-surface); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px; border: 2px solid var(--shu); position: relative;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu);">PRODUCT 03</div>
-        <span style="font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; background: var(--shu); color: var(--on-shu); padding: 3px 8px; border-radius: 999px;">おすすめ</span>
-      </div>
-      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4; color: var(--shu);">標準<br>アプリ</h3>
-      <div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-bottom: 2px;">初期制作費</div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--shu); line-height: 1.1;">500,000円</div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
-        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--sumi);">30,000円<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
-        <div style="font-size: 10.5px; color: var(--sumi); opacity: 0.7; margin-top: 6px;">（すべて税込・固定価格）</div>
-      </div>
-      <p style="font-size: 12.5px; line-height: 1.75; color: var(--sumi);">送迎管理・月次集計・記録・報告書・権限管理など、複数画面の業務アプリ。</p>
-      <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; color: var(--sumi);">
-        <strong>含む：</strong>業務整理／設計／開発／試用／導入支援
-      </div>
-    </div>
-    <!-- 複雑な条件・判定に対応 -->
-    <div class="phase-card" style="background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-md); padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;">
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; color: var(--shu-light);">PRODUCT 04</div>
-      <h3 style="font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.4;">複雑な条件・<br>判定に対応</h3>
-      <div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-bottom: 2px;">初期制作費</div>
-        <div style="font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.1;">800,000円〜</div>
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.18em; color: var(--shu-light); margin-top: 8px; margin-bottom: 2px;">月額運用サポート費</div>
-        <div style="font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--shu-light);">50,000円〜<small style="font-size: 11px; opacity: 0.7; margin-left: 4px;">／月</small></div>
-        <div style="font-size: 10.5px; opacity: 0.7; margin-top: 6px;">（すべて税込・個別見積り）</div>
-      </div>
-      <p style="font-size: 12.5px; line-height: 1.75; opacity: 0.9;"><strong>例：</strong>シフト案作成 ／ 人員配置チェック ／ 複雑な月次集計 ／ 加算確認補助 ／ 請求前チェック</p>
-      <div style="background: rgba(245,239,227,0.08); border-radius: 8px; padding: 8px 10px; font-size: 10.5px; line-height: 1.6; opacity: 0.9;">
-        <strong>必須：</strong>業務整理／見本作成／確認パターン作成／入力例と結果の確認
-      </div>
-    </div>
-  </div>
-
-  <!-- 安心の一文 -->
-  <div class="reveal" style="margin-bottom: 32px; padding: 18px 24px; background: var(--shu-surface); border-left: 4px solid var(--shu); border-radius: var(--r-sm);">
-    <p style="font-family: var(--serif); font-size: 13.5px; line-height: 1.85; color: var(--sumi); max-width: 80ch;">
-      <strong>表示価格で対応できる範囲を、事前に明確にします。</strong>追加費用が発生する場合は、作業前に必ず内容と金額をご説明し、合意のうえで進めます。<strong>勝手に費用が増えることはありません。</strong>
-    </p>
-  </div>
-
-  <!-- 月額運用サポート費の説明 -->
-  <div class="reveal" style="margin: 8px 0 10px; display: flex; align-items: baseline; gap: 14px; padding: 0 4px;">
-    <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; color: var(--shu); font-weight: 600;">— MONTHLY SUPPORT</span>
-    <span style="font-family: var(--serif); font-size: 17px; color: var(--sumi);">月額運用サポート費に含まれるもの</span>
-    <span style="flex: 1; height: 1px; background: rgba(26,22,20,0.1);"></span>
-  </div>
-
-  <div class="reveal" style="margin-bottom: 16px; padding: 28px 32px; background: var(--sumi); color: var(--on-sumi); border-radius: var(--r-lg); position: relative; overflow: hidden;">
-    <div style="font-family: var(--serif); font-size: clamp(17px, 2vw, 22px); line-height: 1.75; margin-bottom: 14px;">
-      月額は<strong style="color: var(--shu-light);">「アプリ使用料」ではなく、「運用サポート費」</strong>です。<br>
-      別で「アプリ使用料」と「保守料」を分けて請求することはありません。
-    </div>
-    <p style="font-size: 13.5px; line-height: 1.85; opacity: 0.88; max-width: 70ch;">
-      アプリを作って終わりではなく、現場で使い続けられるよう支えるための費用です。アプリの継続利用・保守・軽微修正・操作相談・初月の定着支援をまとめて、商品ごとの月額に含めています。
-    </p>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;" class="monthly-include-grid">
-      <div style="background: rgba(245,239,227,0.06); border-radius: 8px; padding: 16px 18px; border-left: 3px solid var(--shu);">
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; color: var(--shu-light); margin-bottom: 8px;">— 月額に含まれるもの</div>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.75;">
-          <li>・ アプリの継続利用</li>
-          <li>・ 不具合対応</li>
-          <li>・ 軽微な文言・表示順・項目名の変更</li>
-          <li>・ 操作相談（電話・メール・LINE）</li>
-          <li>・ 職員の入退職に伴う設定変更</li>
-          <li>・ 権限変更／端末変更時の相談</li>
-          <li>・ 初月の定着支援（1〜3か月厚め）</li>
-          <li>・ バックアップ・運用確認</li>
-        </ul>
-      </div>
-      <div style="background: rgba(245,239,227,0.04); border-radius: 8px; padding: 16px 18px; border-left: 3px solid rgba(245,239,227,0.35);">
-        <div style="font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; color: rgba(245,239,227,0.75); margin-bottom: 8px;">— 別途お見積りになるもの</div>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.75; opacity: 0.88;">
-          <li>・ 新機能追加</li>
-          <li>・ 新しい帳票の追加</li>
-          <li>・ 大きな画面変更</li>
-          <li>・ アプリが確認する条件の変更</li>
-          <li>・ 業務の流れそのものの変更</li>
-          <li>・ 別事業所への展開</li>
-        </ul>
-      </div>
-    </div>
-    <p style="font-size: 11.5px; line-height: 1.7; opacity: 0.65; margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(245,239,227,0.18);">
-      ※ 対応目安：通常3営業日以内に一次返信。<br>
-      ※ 月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。
-    </p>
-  </div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section class="section" id="faq">
-  <div class="faq-wrap reveal">
-    <div class="faq-head">
-      <div>
-        <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 04 / FAQ</span>
-        <h2 style="margin-top: 16px;">よくある<br><span class="accent">ご質問</span></h2>
-      </div>
-      <p>ご検討時によくいただく質問をまとめました。記載がない事項についても、お気軽にお問い合わせください。</p>
-    </div>
-
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>何を作りたいか、うまく説明できなくても大丈夫ですか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">大丈夫です。<strong>初回訪問で実際の運用と現物を見せていただければ、こちらで業務を整理し、御社専用の見本アプリで完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>現場に来て業務を見てもらえますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・御社専用の見本アプリ作成 → 2回目訪問・見本アプリを見ながら確認</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、一緒に形を整えます。遠方の場合はオンライン併用も可能です（交通費別途）。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>契約後に費用が膨らむことはありませんか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">アプリ商品は固定価格でご提示します（初期制作費 ¥100,000〜／月額運用サポート費 ¥10,000〜）。表示価格で対応できる範囲を事前に明確にし、追加費用が発生する場合は作業前に必ず内容と金額をご説明します。合意のないまま費用が増えることはありません。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>月額はなぜ発生しますか？「アプリ使用料」ですか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">月額は<strong>「アプリ使用料」ではなく、「運用サポート費」</strong>です。アプリの継続利用・保守・軽微修正・操作相談・職員入退職対応・初月の定着支援をまとめて含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>導入までどのくらいかかりますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">契約前に <strong>初回訪問 → 持ち帰り整理＋見本アプリ作成 → 2回目訪問</strong> までを行います。契約後は現場の横で同席しながら開発します。紙・Excel改善パックなど小規模は2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">介護に関する情報は要配慮個人情報を含み得るため、特に丁寧に扱います。Google Workspaceを前提とした運用構成、アクセス権限設計、操作記録、データ保存・委託先監督の方針を、導入前に書面でお伝えします。開発時の実データ利用は原則匿名化、または別環境で扱います。</div></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-mark">Q</span>
-          <span>解約はできますか？</span>
-          <span class="faq-toggle">＋</span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。解約後は保守・修正・問い合わせ対応の対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残り、必要に応じてCSV等でエクスポートできます。</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section class="section" id="contact">
-  <div class="block contact reveal">
-    <div class="contact-l">
-      <span class="chip" style="background: rgba(255, 248, 244, 0.18); color: var(--on-shu); border-color: transparent;">— 05 / CONTACT</span>
-      <h2>今のやり方を、<br>見せてください。</h2>
-      <p class="lede">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong>「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、合いそうな範囲・概算費用をご案内します。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
-      <dl class="contact-channels">
-        <div class="contact-channel"><dt>Tel</dt><dd>070-1383-4420<small>平日・土曜 9:00 - 18:00（日本時間）</small></dd></div>
-        <div class="contact-channel"><dt>Email</dt><dd>kotaro.otake@takenokonoko.com<small>通常2営業日以内に返信いたします</small></dd></div>
-        <div class="contact-channel"><dt>Line</dt><dd>公式LINEアカウント<small>導入後のサポートにご利用ください</small></dd></div>
-      </dl>
-    </div>
-    <div class="contact-r">
-      <div class="form-eye">— INQUIRY FORM</div>
-      <form id="contactForm" novalidate>
-        <div class="form-row">
-          <label>お名前 <span class="req">*</span></label>
-          <input type="text" name="entry.1171959256" required placeholder="山田 太郎">
-        </div>
-        <div class="form-row">
-          <label>会社名・団体名 <span class="req">*</span></label>
-          <input type="text" name="entry.1217538201" required placeholder="例：〇〇デイサービス（個人の場合は「なし」）">
-        </div>
-        <div class="form-row">
-          <label>メールアドレス <span class="req">*</span></label>
-          <input type="email" name="entry.1270768558" required placeholder="example@email.com">
-        </div>
-        <div class="form-row">
-          <label>電話番号（任意）</label>
-          <input type="tel" name="entry.205317164" placeholder="日中ご連絡可能な番号">
-        </div>
-        <div class="form-row">
-          <div class="form-label">ご相談内容 <span class="req">*</span></div>
-          <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="無料相談する" required> 無料相談する（まず話してみたい）</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="紙・Excel業務を仕組みにしたい"> 紙・Excel業務を仕組みにしたい</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="シフト作成について相談したい"> シフト作成について相談したい</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="送迎・月次集計・記録など特定業務を相談したい"> 送迎・月次集計・記録など特定業務を相談したい</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="料金の目安を知りたい"> 料金の目安を知りたい</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="採用・パートナーシップ・取材"> 採用・パートナーシップ・取材</label>
-            <label class="radio-opt"><input type="radio" name="entry.1422820564" value="その他"> その他</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-label">事業種別（任意）</div>
-          <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="デイサービス"> デイサービス</label>
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="訪問介護"> 訪問介護</label>
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="居宅介護支援"> 居宅介護支援</label>
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="有料老人ホーム"> 有料老人ホーム</label>
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="障害福祉"> 障害福祉</label>
-            <label class="radio-opt"><input type="radio" name="entry.business_type" value="その他"> その他</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-label">困っている業務（任意・複数選択可）</div>
-          <div class="form-checks" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 6px;">
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="シフト作成"> シフト作成</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="送迎管理"> 送迎管理</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="月次集計"> 月次集計</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="申し送り"> 申し送り</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="記録チェック"> 記録チェック</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="備品管理"> 備品管理</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="ヒヤリハット報告"> ヒヤリハット報告</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="報告書作成"> 報告書作成</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="家族連絡"> 家族連絡</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="利用者一覧"> 利用者一覧</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="加算確認補助"> 加算確認補助</label>
-            <label class="check-opt"><input type="checkbox" name="entry.problem_area" value="その他"> その他</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-label">現在の管理方法（任意）</div>
-          <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.current_method" value="紙"> 紙</label>
-            <label class="radio-opt"><input type="radio" name="entry.current_method" value="Excel"> Excel</label>
-            <label class="radio-opt"><input type="radio" name="entry.current_method" value="既存介護ソフト"> 既存介護ソフト</label>
-            <label class="radio-opt"><input type="radio" name="entry.current_method" value="LINE／電話"> LINE／電話</label>
-            <label class="radio-opt"><input type="radio" name="entry.current_method" value="複数混在"> 複数混在</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-label">現場資料の共有可否（任意）<br><small style="font-size: 11px; font-weight: 400; color: var(--sumi-2); opacity: 0.75;">※ 初回相談時点では、無理に共有いただく必要はありません。</small></div>
-          <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.share_docs" value="可能"> 可能（帳票・Excel等を見せられる）</label>
-            <label class="radio-opt"><input type="radio" name="entry.share_docs" value="一部可能"> 一部可能</label>
-            <label class="radio-opt"><input type="radio" name="entry.share_docs" value="相談したい"> 相談したい</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-label">現場担当者との打ち合わせ可否（任意）</div>
-          <div class="form-radios">
-            <label class="radio-opt"><input type="radio" name="entry.field_meeting" value="可能"> 可能</label>
-            <label class="radio-opt"><input type="radio" name="entry.field_meeting" value="未定"> 未定</label>
-            <label class="radio-opt"><input type="radio" name="entry.field_meeting" value="難しい"> 難しい</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>その他ご質問・現場の困りごと（任意）</label>
-          <textarea name="entry.639342087" placeholder="どんな業務で困っているか、具体的にご記入ください"></textarea>
-        </div>
-        <div class="form-row">
-          <div class="form-label">ご希望の返信方法（任意・複数選択可）</div>
-          <div class="form-checks">
-            <label class="check-opt"><input type="checkbox" name="entry.558981454" value="メール"> メール</label>
-            <label class="check-opt"><input type="checkbox" name="entry.558981454" value="電話"> 電話</label>
-          </div>
-        </div>
-        <div class="form-row">
-          <label class="consent-opt">
-            <input type="checkbox" name="entry.346956938" value="弊社の個人情報保護方針に同意します。" required>
-            <span><a href="privacy.html" target="_blank" rel="noopener">個人情報保護方針</a> に同意します <span class="req">*</span></span>
-          </label>
-        </div>
-        <button type="submit" class="form-submit">送信する <span>→</span></button>
-        <p class="form-note" id="formNote">通常2営業日以内に、嶽ノ子の担当よりご連絡します。</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FINAL CTA ===== -->
-<section class="section">
-  <div class="final-cta reveal">
-    <div class="final-cta-inner">
-      <span class="chip" style="background: var(--sumi); color: var(--on-sumi); border-color: transparent;">— 次の一歩</span>
-      <h2>今のやり方を、<span class="accent">見せてください</span>。<br>こちらで整理します。</h2>
-      <p>無料相談・簡易診断は0円。初回訪問で現場を確認し、持ち帰って御社専用の見本アプリを作り、2回目訪問でご提示します。<br>細かい仕様を決めていただく必要はありません。代表が直接対応します。</p>
-      <div class="final-actions">
-        <a href="#contact" class="btn btn-filled">無料で相談する <span>→</span></a>
-        <a href="#price" class="btn btn-tonal">料金を見る</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="brand">
-        <span class="brand-mark">嶽</span>
-        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
-      </div>
-      <p>今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
-    </div>
-    <div class="footer-col">
-      <h5>Service</h5>
-      <ul>
-        <li><a href="#trust">嶽ノ子の姿勢</a></li>
-        <li><a href="#process">契約前と契約後にやること</a></li>
-        <li><a href="#examples">対応業務</a></li>
-        <li><a href="#price">料金</a></li>
-        <li><a href="plans.html">導入例</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>For</h5>
-      <ul>
-        <li><a href="staff.html">現場の職員さんへ</a></li>
-        <li><a href="manager.html">管理者向け</a></li>
-        <li><a href="dayservice.html">デイサービス向け</a></li>
-        <li><a href="small-facility.html">小規模事業所向け</a></li>
-        <li><a href="sample-app.html">見本アプリとは</a></li>
-        <li><a href="plans.html">導入例・活用イメージ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Company</h5>
-      <ul>
-        <li><a href="company.html">会社概要（理念・役割）</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Legal</h5>
-      <ul>
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
-        <li><a href="terms.html">利用規約</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
-    <span>今のやり方を見せてください。</span>
-  </div>
-</footer>
-
 </div>
 
-<!-- ===== SIMPLE VIEW (notepad) ===== -->
-<section class="simple-view" aria-hidden="true">
-  <h1>嶽ノ子</h1>
-  <div class="sv-tag">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。</div>
-
-  <hr>
-
-  <h2>サービス</h2>
-  <p>介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど、現場に残る業務を、現場の資料を見ながら整理し、仕組みにします。</p>
-  <ul>
-    <li>細かい仕様書を書かせない（こちらが現場と資料を読み解いて整理）</li>
-    <li>口頭ではなく入力例と結果で確認</li>
-    <li>完全自動ではなく、現場が直せる仕組み</li>
-    <li>無料相談・簡易診断から始められる（0円・現場訪問が中心）</li>
-    <li>料金は固定価格（業務整理は商品料金に含む）</li>
-    <li>代表が直接対応（件数を絞ってお受け）</li>
-  </ul>
-
-  <h2>契約前に、御社専用の見本アプリを作ります</h2>
-  <p>今使っている紙・Excel・帳票をもとに、<strong>画面・一覧・印刷物の見本</strong>を作ります。実際の見本を見てから、契約するかどうか判断できます。</p>
-  <p class="sv-note">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
-
-  <h2>契約前と契約後にやること</h2>
-  <p><strong>契約前（0円）</strong></p>
-  <ul>
-    <li>初回訪問で、今の作業を見る</li>
-    <li>持ち帰って、作業の流れを整理する</li>
-    <li>御社専用の見本アプリを作る</li>
-    <li>2回目訪問で、見本アプリと費用を説明する</li>
-  </ul>
-  <p><strong>契約後（商品料金に含む）</strong></p>
-  <ul>
-    <li>現場の横で、一緒に形を整える</li>
-    <li>細かい項目や例外を整理する</li>
-    <li>小さく作って、小さく確認する</li>
-    <li>実際の例を入れて、出てくる結果を確認する</li>
-  </ul>
-
-  <h2>料金（固定価格）</h2>
-  <p><strong>入口</strong></p>
-  <table>
-    <tr><td>無料相談・簡易診断</td><td>0円（初回訪問・整理・見本アプリ作成・2回目訪問まで）</td></tr>
-  </table>
-  <p><strong>アプリ商品（初期制作費＋月額運用サポート費）</strong></p>
-  <table>
-    <tr><td>紙・Excel改善パック</td><td>初期 100,000円 ／ 月額運用サポート費 10,000円</td></tr>
-    <tr><td>小規模アプリ</td><td>初期 200,000円 ／ 月額運用サポート費 15,000円</td></tr>
-    <tr><td>標準アプリ（おすすめ）</td><td>初期 500,000円 ／ 月額運用サポート費 30,000円</td></tr>
-    <tr><td>複雑な条件・判定に対応</td><td>初期 800,000円〜 ／ 月額運用サポート費 50,000円〜</td></tr>
-  </table>
-  <p class="sv-note">※ すべて税込・固定価格。月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談・初月の定着支援を含みます。「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
-
-  <h2>もっと詳しく</h2>
-  <ul>
-    <li><a href="sample-app.html">御社専用の見本アプリとは</a></li>
-    <li><a href="staff.html">現場の職員さんへ</a></li>
-    <li><a href="dayservice.html">デイサービス向け</a> ／ <a href="manager.html">管理者向け</a> ／ <a href="small-facility.html">小規模事業所向け</a></li>
-    <li><a href="plans.html">導入例・活用イメージ</a></li>
-    <li><a href="company.html">会社概要・理念</a></li>
-  </ul>
-
-  <h2>連絡先</h2>
-  <table>
-    <tr><td>電話</td><td><a href="tel:07013834420">070-1383-4420</a>（平日・土 9:00〜18:00）</td></tr>
-    <tr><td>メール</td><td><a href="mailto:kotaro.otake@takenokonoko.com">kotaro.otake@takenokonoko.com</a></td></tr>
-  </table>
-  <p class="sv-note">通常 2 営業日以内に返信します。</p>
-
-  <div class="sv-foot">
-    嶽ノ子（たけのこ）／代表：大嶽 耕太郎<br>
-    神奈川県相模原市中央区千代田 7-10-7<br>
-    設立：2025 年 4 月 19 日<br>
-    <br>
-    <a href="company.html">会社概要</a>　／　<a href="plans.html">導入例</a>　／　<a href="privacy.html">プライバシー</a>　／　<a href="terms.html">利用規約</a>
-    <div class="sv-sig">── 今のやり方を見せてください。</div>
+<!-- ===================== HERO ===================== -->
+<div style="display: grid; grid-template-columns: 1fr 340px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 72px 56px 64px; border-right: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
+    <div style="position: absolute; right: -30px; top: 8px; font-family: 'Zen Old Mincho', serif; font-size: 300px; font-weight: 900; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.14); pointer-events: none;">嶽</div>
+    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 40px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>介護現場の紙・Excel・手作業を、仕組みに</div>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(44px, 6.2vw, 88px); font-weight: 700; line-height: 1.28; letter-spacing: 0.02em; margin: 0 0 36px; position: relative; white-space: nowrap;">今のやり方を、<br><span style="background: linear-gradient(transparent 68%, rgba(190, 70, 51, 0.35) 68%);">見せてください</span>。</h2>
+    <div style="display: flex; gap: 40px; max-width: 760px;">
+      <p style="font-size: 13px; line-height: 2.15; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); margin: 0; flex: 1;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 40px; float: left; line-height: 1; padding: 6px 10px 0 0; color: #BE4633;">介</span>護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど。</p>
+      <p style="font-size: 13px; line-height: 2.15; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); margin: 0; flex: 1;">今使っている帳票やExcelを確認しながら、現場に合うアプリを作ります。細かい仕様書を書いていただく必要はありません。</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 26px; margin-top: 44px;">
+      <a href="#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #1B1613; color: #F3EFE4; font-size: 12.5px; letter-spacing: 0.18em; padding: 16px 34px;">無料で相談する<span>→</span></a>
+      <a href="#price" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.6); border-bottom: 1px solid rgba(27, 22, 19, 0.35); padding-bottom: 3px;">料金表を見る ↓</a>
+    </div>
   </div>
-</section>
+  <div style="padding: 72px 40px 64px; display: flex; flex-direction: column;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 26px;">このページの内容</div>
+    <div style="display: flex; flex-direction: column; font-size: 13px; letter-spacing: 0.06em;">
+      <a href="#trust" style="display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><span style="font-family: 'Zen Old Mincho', serif; font-weight: 700;">00</span><span>うまく説明できなくても、大丈夫</span><span style="flex: 1; border-bottom: 1px dotted rgba(27, 22, 19, 0.4);"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">安心</span></a>
+      <a href="#process" style="display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><span style="font-family: 'Zen Old Mincho', serif; font-weight: 700;">01</span><span>契約前と契約後にやること</span><span style="flex: 1; border-bottom: 1px dotted rgba(27, 22, 19, 0.4);"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">流れ</span></a>
+      <a href="#examples" style="display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><span style="font-family: 'Zen Old Mincho', serif; font-weight: 700;">02</span><span>対応できる業務</span><span style="flex: 1; border-bottom: 1px dotted rgba(27, 22, 19, 0.4);"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">業務</span></a>
+      <a href="#price" style="display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><span style="font-family: 'Zen Old Mincho', serif; font-weight: 700;">03</span><span>料金 — 固定価格</span><span style="flex: 1; border-bottom: 1px dotted rgba(27, 22, 19, 0.4);"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">価格</span></a>
+      <a href="#faq" style="display: flex; align-items: baseline; gap: 10px; padding: 13px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25);"><span style="font-family: 'Zen Old Mincho', serif; font-weight: 700;">04</span><span>よくある質問・お問い合わせ</span><span style="flex: 1; border-bottom: 1px dotted rgba(27, 22, 19, 0.4);"></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px;">相談</span></a>
+    </div>
+    <div style="margin-top: auto; background: #BE4633; color: #FFF6F1; padding: 22px 24px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; margin-bottom: 10px; opacity: 0.85;">私たちの約束</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; line-height: 1.8; letter-spacing: 0.06em;">仕様書も、IT用語も、必要ありません。</div>
+    </div>
+  </div>
+</div>
 
-<!-- ===== MODE TOGGLE ===== -->
-<button class="mode-toggle" id="modeToggle" type="button" aria-label="表示モード切替">
-  <span class="mode-toggle-opt" data-mode="rich">詳細</span>
-  <span class="mode-toggle-opt" data-mode="simple">シンプル</span>
-</button>
+<!-- ===================== TICKER ===================== -->
+<div style="border-bottom: 1px solid rgba(27, 22, 19, 0.35); overflow: hidden; padding: 13px 0; background: #EDE8D9;">
+  <div style="display: flex; width: max-content; animation: tkr 32s linear infinite;">
+    <div style="display: flex;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">シフト作成 SHIFT</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">送迎管理 TRANSPORT</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">月次集計 MONTHLY</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">申し送り HANDOVER</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">記録チェック RECORDS</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">備品管理 SUPPLIES</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">家族連絡 FAMILY</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">利用者一覧 ROSTER</span>
+    </div>
+    <div style="display: flex;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">シフト作成 SHIFT</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">送迎管理 TRANSPORT</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">月次集計 MONTHLY</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">申し送り HANDOVER</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">記録チェック RECORDS</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">備品管理 SUPPLIES</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">家族連絡 FAMILY</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.24em; padding: 0 26px; border-right: 1px solid rgba(27, 22, 19, 0.3); white-space: nowrap;">利用者一覧 ROSTER</span>
+    </div>
+  </div>
+</div>
 
-<!-- Ink-wash transition overlay -->
-<div class="mode-overlay" id="modeOverlay" aria-hidden="true"></div>
+<!-- ===================== 00 TRUST ===================== -->
+<div id="trust" data-screen-label="00 姿勢" style="display: grid; grid-template-columns: 480px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="padding: 64px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 24px;">00 — 安心のお約束</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.3vw, 44px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">「うまく説明<br>できなくても、<br>大丈夫です。」</div>
+    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 28px 0 0;">介護現場の業務は、毎日の中で自然に回っているため、言葉だけで説明するのが難しいことがあります。今使っている紙・Excel・帳票をこちらで読み解いて、必要な仕組みに整えます。「何を作りたいか」が決まっていなくても、相談できます。</p>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr;">
+    <div style="padding: 64px 44px; border-right: 1px solid rgba(27, 22, 19, 0.2);">
+      <div style="display: inline-block; background: #1B1613; color: #F3EFE4; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; padding: 6px 14px; margin-bottom: 30px;">お願いすること</div>
+      <div style="display: flex; flex-direction: column; gap: 22px; font-size: 13px; line-height: 1.9;">
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>今使っている紙・Excelを見せてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>普段の作業の流れを見せてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>見本アプリを見て違和感を教えてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>現場の呼び方・言葉を教えてもらう</div>
+      </div>
+    </div>
+    <div style="padding: 64px 44px;">
+      <div style="display: inline-block; border: 1px solid rgba(27, 22, 19, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; padding: 6px 14px; margin-bottom: 30px;">お願いしないこと</div>
+      <div style="display: flex; flex-direction: column; gap: 22px; font-size: 13px; line-height: 1.9; color: rgba(27, 22, 19, 0.55);">
+        <div style="display: flex; gap: 14px;"><span>□</span>仕様書を書いてもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>IT用語を覚えてもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>長い資料を読んで確認してもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>例外をすべて事前に洗い出してもらう</div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- ===================== 01 PROCESS ===================== -->
+<div id="process" data-screen-label="01 導入の流れ" style="padding: 64px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 40px; gap: 24px; flex-wrap: wrap;">
+    <div style="display: flex; align-items: baseline; gap: 18px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">01 — 導入の流れ</span>
+      <h3 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(25px, 2.6vw, 34px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">契約前と契約後、それぞれにやること。</h3>
+    </div>
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.55);">BEFORE ¥0 ／ AFTER 商品料金に含む</span>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+    <div>
+      <div style="border-top: 3px solid #BE4633; padding-top: 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 19px; font-weight: 700; letter-spacing: 0.08em;">契約前 — ０円</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: #BE4633;">BEFORE</span>
+      </div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">01</span><span style="font-size: 13px;">初回訪問で、今の作業を見る</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">02</span><span style="font-size: 13px;">持ち帰って、作業の流れを整理する</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">03</span><span style="font-size: 13px;">御社専用の見本アプリを作る</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">04</span><span style="font-size: 13px;">2回目訪問で、見本アプリと費用を説明する</span></div>
+    </div>
+    <div>
+      <div style="border-top: 3px solid #1B1613; padding-top: 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 19px; font-weight: 700; letter-spacing: 0.08em;">契約後 — 商品料金に含む</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.55);">AFTER</span>
+      </div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">05</span><span style="font-size: 13px;">現場の横で、一緒に形を整える</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">06</span><span style="font-size: 13px;">細かい項目や例外を整理する</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">07</span><span style="font-size: 13px;">小さく作って、小さく確認する</span></div>
+      <div style="display: flex; gap: 18px; padding: 16px 0; align-items: baseline;"><span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; color: rgba(27, 22, 19, 0.35);">08</span><span style="font-size: 13px;">実際の例を入れて、出てくる結果を確認する</span></div>
+    </div>
+  </div>
+  <div style="margin-top: 36px; border: 1px solid rgba(27, 22, 19, 0.4); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+    <p style="font-size: 12.5px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.75);">もっと詳しい流れ（見本アプリで確認できるもの・8ステップ）は、専用ページをご覧ください。</p>
+    <a href="sample-app.html" style="font-size: 12px; letter-spacing: 0.12em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; white-space: nowrap;">御社専用の見本アプリとは →</a>
+  </div>
+</div>
+
+<!-- ===================== 02 BUSINESS ===================== -->
+<div id="examples" data-screen-label="02 対応業務" style="border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="padding: 64px 56px 0;">
+    <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">02 — 対応業務</span>
+      <h3 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(25px, 2.6vw, 34px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">対応できる業務。</h3>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 0; border: 1px solid rgba(27, 22, 19, 0.35); border-right: none; margin-bottom: 14px;">
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">シフト作成</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">送迎管理</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">月次集計</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">申し送り</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">記録チェック</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">備品管理</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">ヒヤリハット報告</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">報告書作成</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">家族連絡</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">職員管理</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">利用者一覧</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">加算確認補助</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">請求前チェック</span>
+      <span style="font-size: 12px; letter-spacing: 0.1em; padding: 12px 20px; border-right: 1px solid rgba(27, 22, 19, 0.35);">紙帳票のExcel化</span>
+    </div>
+    <p style="font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.6); margin: 0 0 44px;">上記は一例です。「今これに困っている」というところから、現場資料を見ながら範囲を決めていきます。</p>
+  </div>
+
+  <div style="border-top: 1px solid rgba(27, 22, 19, 0.35); display: grid; grid-template-columns: 1fr 1fr 1fr;">
+    <!-- EX 01 -->
+    <div style="padding: 44px 40px 40px; border-right: 1px solid rgba(27, 22, 19, 0.2); display: flex; flex-direction: column; gap: 0;">
+      <div style="border-top: 3px solid #BE4633; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5);">EXAMPLE 01</span>
+        <span style="background: #BE4633; color: #FFF6F1; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.2em; padding: 4px 10px;">特に多い</span>
+      </div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px;">シフト作成</div>
+      <div style="font-size: 12px; color: #BE4633; letter-spacing: 0.08em; margin-bottom: 24px;">ゼロから手作業で作らない。</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">現場の困りごと</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 22px;">
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>毎月ゼロからExcelでシフトを組んでいる</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>希望休・連勤・夜勤の確認に時間がかかる</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>職員ごとの勤務条件を記憶に頼っている</div>
+      </div>
+      <div style="background: #EDE8D9; padding: 16px 18px; margin-bottom: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: #BE4633; margin-bottom: 8px;">契約前に作る見本</div>
+        <p style="font-size: 12px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.8);">希望休・勤務条件を入れた<strong>シフト画面の見本</strong>。希望休フォーム、シフト案、人員配置警告の見え方まで確認できます。</p>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">契約後にできること</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 26px;">
+        <div style="display: flex; gap: 10px;"><span>—</span>シフト案作成（最終調整は管理者）</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>希望休回収・勤務偏りの確認</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>人員配置警告／Excel・PDF出力</div>
+      </div>
+      <a href="manager.html" style="margin-top: auto; font-size: 12px; letter-spacing: 0.1em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; align-self: flex-start;">管理者向けページで詳しく →</a>
+    </div>
+    <!-- EX 02 -->
+    <div style="padding: 44px 40px 40px; border-right: 1px solid rgba(27, 22, 19, 0.2); display: flex; flex-direction: column;">
+      <div style="border-top: 3px solid #1B1613; padding-top: 16px; margin-bottom: 16px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5);">EXAMPLE 02</span>
+      </div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px;">送迎表・送迎管理</div>
+      <div style="font-size: 12px; color: #BE4633; letter-spacing: 0.08em; margin-bottom: 24px;">紙・Excel・電話確認を減らす。</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">現場の困りごと</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 22px;">
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>送迎表を毎回Excelで作り直している</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>欠席・追加利用で表が崩れる</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>運転者・添乗者・車椅子対応の確認が大変</div>
+      </div>
+      <div style="background: #EDE8D9; padding: 16px 18px; margin-bottom: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: #BE4633; margin-bottom: 8px;">契約前に作る見本</div>
+        <p style="font-size: 12px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.8);">利用者・車両・職員を一覧で見られる<strong>送迎表の見本</strong>。曜日別・車両別・印刷用フォーマットまで確認できます。</p>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">契約後にできること</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 26px;">
+        <div style="display: flex; gap: 10px;"><span>—</span>送迎表作成・曜日別ルート確認</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>車椅子対応・欠席・追加利用の反映</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>印刷用送迎表の出力・履歴管理</div>
+      </div>
+      <a href="dayservice.html" style="margin-top: auto; font-size: 12px; letter-spacing: 0.1em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; align-self: flex-start;">デイサービス向けページで詳しく →</a>
+    </div>
+    <!-- EX 03 -->
+    <div style="padding: 44px 40px 40px; display: flex; flex-direction: column;">
+      <div style="border-top: 3px solid #1B1613; padding-top: 16px; margin-bottom: 16px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5);">EXAMPLE 03</span>
+      </div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px;">月次集計・記録チェック</div>
+      <div style="font-size: 12px; color: #BE4633; letter-spacing: 0.08em; margin-bottom: 24px;">転記・確認・報告書作成を減らす。</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">現場の困りごと</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 22px;">
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>月末にExcel集計に何時間も取られる</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>転記・確認漏れが心配で、結局見直す</div>
+        <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>記録の参照・検索に時間がかかる</div>
+      </div>
+      <div style="background: #EDE8D9; padding: 16px 18px; margin-bottom: 22px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: #BE4633; margin-bottom: 8px;">契約前に作る見本</div>
+        <p style="font-size: 12px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.8);">日々の記録から<strong>集計結果が見える画面の見本</strong>。今のExcelのどこが置き換わるか、出力されるCSV・帳票まで確認できます。</p>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 10px;">契約後にできること</div>
+      <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; line-height: 1.8; color: rgba(27, 22, 19, 0.75); margin-bottom: 26px;">
+        <div style="display: flex; gap: 10px;"><span>—</span>転記削減・確認漏れ防止</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>報告書テンプレート出力</div>
+        <div style="display: flex; gap: 10px;"><span>—</span>CSV・帳票出力／参照の効率化</div>
+      </div>
+      <a href="small-facility.html" style="margin-top: auto; font-size: 12px; letter-spacing: 0.1em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; align-self: flex-start;">小規模事業所向けページで詳しく →</a>
+    </div>
+  </div>
+  <div style="border-top: 1px solid rgba(27, 22, 19, 0.2); padding: 18px 56px; font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.65);">
+    上記以外の業務、「これに困っているけど該当しない」というケースもご相談ください。<strong style="color: #1B1613;">まずは無料相談で、アプリにできそうな範囲を一緒に確認します。</strong>
+  </div>
+</div>
+
+<!-- ===================== 03 PRICING ===================== -->
+<div id="price" data-screen-label="03 料金" style="padding: 64px 56px 72px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 20px; flex-wrap: wrap;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">03 — 料金表</span>
+    <h3 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(25px, 2.6vw, 34px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">初期制作費＋月額運用サポート費。</h3>
+    <span style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6);">すべて税込・固定価格</span>
+  </div>
+  <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); max-width: 76em; margin: 0 0 44px;">料金は、<strong style="color: #BE4633;">初期制作費</strong>と<strong style="color: #BE4633;">月額運用サポート費</strong>の2つだけです。月額には、アプリの利用・保守・軽微修正・操作相談・導入後の定着支援を含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。複雑な条件・判定を含む案件のみ、目安価格＋個別見積りとさせていただきます。</p>
+
+  <!-- entry band -->
+  <div style="border: 1px solid #BE4633; display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; padding: 26px 32px; margin-bottom: 44px; background: rgba(190, 70, 51, 0.05);">
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: #BE4633; margin-bottom: 10px;">ENTRY — 契約前まで</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; letter-spacing: 0.06em;">無料相談・簡易診断</div>
+    </div>
+    <p style="font-size: 12.5px; line-height: 1.95; color: rgba(27, 22, 19, 0.75); margin: 0;">契約前に<strong>完成イメージまで一緒に確認します。</strong>「何を作りたいか」が決まっていなくても、普段の作業と今お使いの紙・Excelを見せていただければ、こちらで見本アプリまで作ってご提示します。現場訪問が原則（遠方は交通費別途・またはオンライン併用）。個人名入りの資料の共有は不要です。</p>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: 44px; font-weight: 700; color: #BE4633; white-space: nowrap;">０円</div>
+  </div>
+
+  <!-- products -->
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">PRODUCT 01</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 20px;">紙・Excel<br>改善パック</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 34px; font-weight: 700; line-height: 1;">¥100,000</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 18px;">＋ ¥10,000 /月</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0 0 14px;">既存の紙・Excelを1業務だけ仕組みに。一番安く始められる入口商品。</p>
+      <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 10px 12px; font-size: 10.5px; line-height: 1.7; color: rgba(27, 22, 19, 0.65);"><strong>条件：</strong>1業務・3画面まで・帳票1種・複雑な条件・判定なし</div>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">PRODUCT 02</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 20px;">小規模<br>アプリ</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 34px; font-weight: 700; line-height: 1;">¥200,000</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 18px;">＋ ¥15,000 /月</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0 0 14px;">備品・申し送り・記録・利用者一覧・チェックリスト・日報などを1業務しっかり仕組みに。</p>
+      <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 10px 12px; font-size: 10.5px; line-height: 1.7; color: rgba(27, 22, 19, 0.65);"><strong>含む：</strong>簡易業務整理／設計／開発／導入支援</div>
+    </div>
+    <div style="background: #1B1613; color: #F3EFE4; padding: 0 24px 24px; margin: -18px -8px 0;">
+      <div style="border-top: 3px solid #BE4633; padding-top: 18px; margin-top: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(243, 239, 228, 0.6);">PRODUCT 03</div>
+          <span style="background: #BE4633; color: #FFF6F1; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.2em; padding: 4px 10px;">おすすめ</span>
+        </div>
+        <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 20px;">標準<br>アプリ</div>
+        <div style="font-family: 'Zen Old Mincho', serif; font-size: 34px; font-weight: 700; line-height: 1;">¥500,000</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(243, 239, 228, 0.65); margin: 10px 0 18px;">＋ ¥30,000 /月</div>
+        <p style="font-size: 12px; line-height: 1.95; color: rgba(243, 239, 228, 0.8); margin: 0 0 14px;">送迎管理・月次集計・記録・報告書・権限管理など、複数画面の業務アプリ。</p>
+        <div style="border: 1px solid rgba(243, 239, 228, 0.3); padding: 10px 12px; font-size: 10.5px; line-height: 1.7; color: rgba(243, 239, 228, 0.75);"><strong>含む：</strong>業務整理／設計／開発／試用／導入支援</div>
+      </div>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">PRODUCT 04</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 20px;">複雑な条件・<br>判定に対応</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 34px; font-weight: 700; line-height: 1;">¥800,000〜</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 18px;">＋ ¥50,000〜 /月（個別見積り）</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0 0 14px;">シフト案作成／人員配置チェック／複雑な月次集計／加算確認補助／請求前チェックなど。</p>
+      <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 10px 12px; font-size: 10.5px; line-height: 1.7; color: rgba(27, 22, 19, 0.65);"><strong>必須：</strong>業務整理／見本作成／確認パターン作成／入力例と結果の確認</div>
+    </div>
+  </div>
+
+  <!-- promise -->
+  <div style="margin-top: 40px; border: 1px solid rgba(27, 22, 19, 0.4); padding: 18px 26px; display: flex; gap: 20px; align-items: center;">
+    <span style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; white-space: nowrap;">約束</span>
+    <p style="font-size: 12.5px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.8);"><strong>表示価格で対応できる範囲を、事前に明確にします。</strong>追加費用が発生する場合は、作業前に必ず内容と金額をご説明し、合意のうえで進めます。<strong>勝手に費用が増えることはありません。</strong></p>
+  </div>
+
+  <!-- monthly support -->
+  <div style="margin-top: 44px; background: #1B1613; color: #F3EFE4; padding: 44px 48px;">
+    <div style="display: grid; grid-template-columns: 380px 1fr 1fr; gap: 44px;">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: #E8A08F; margin-bottom: 18px;">月額運用サポート費について</div>
+        <div style="font-family: 'Zen Old Mincho', serif; font-size: 24px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 16px;">月額は「アプリ使用料」<br>ではなく、<br><span style="color: #E8A08F;">「運用サポート費」</span>です。</div>
+        <p style="font-size: 12px; line-height: 2; color: rgba(243, 239, 228, 0.7); margin: 0;">アプリを作って終わりではなく、現場で使い続けられるよう支えるための費用です。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
+      </div>
+      <div>
+        <div style="border-top: 2px solid #BE4633; padding-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(243, 239, 228, 0.7); margin-bottom: 16px;">月額に含まれるもの</div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; line-height: 1.8;">
+          <span>・ アプリの継続利用</span>
+          <span>・ 不具合対応</span>
+          <span>・ 軽微な文言・表示順・項目名の変更</span>
+          <span>・ 操作相談（電話・メール・LINE）</span>
+          <span>・ 職員の入退職に伴う設定変更</span>
+          <span>・ 権限変更／端末変更時の相談</span>
+          <span>・ 導入後の定着支援（1〜3か月は重点対応）</span>
+          <span>・ バックアップ・運用確認</span>
+        </div>
+      </div>
+      <div>
+        <div style="border-top: 2px solid rgba(243, 239, 228, 0.4); padding-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(243, 239, 228, 0.7); margin-bottom: 16px;">別途お見積りになるもの</div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; line-height: 1.8; color: rgba(243, 239, 228, 0.75);">
+          <span>・ 新機能追加</span>
+          <span>・ 新しい帳票の追加</span>
+          <span>・ 大きな画面変更</span>
+          <span>・ アプリが確認する条件の変更</span>
+          <span>・ 業務の流れそのものの変更</span>
+          <span>・ 別事業所への展開</span>
+        </div>
+        <p style="font-size: 10.5px; line-height: 1.8; color: rgba(243, 239, 228, 0.5); margin: 20px 0 0; border-top: 1px dashed rgba(243, 239, 228, 0.25); padding-top: 14px;">※ 対応目安：通常3営業日以内に一次返信。<br>※ 月額を停止された場合、本サービスの提供は終了します（買い切り対応は原則行いません）。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 04 FAQ ===================== -->
+<div id="faq" data-screen-label="04 よくある質問" style="display: grid; grid-template-columns: 420px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="padding: 64px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 24px;">04 — よくある質問</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(28px, 3vw, 40px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">よくある<br>ご質問。</div>
+    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 26px 0 0;">ご検討時によくいただく質問をまとめました。記載がない事項についても、お気軽にお問い合わせください。</p>
+  </div>
+  <div style="padding: 40px 48px 56px; display: flex; flex-direction: column;">
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q1</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">何を作りたいか、うまく説明できなくても大丈夫ですか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">大丈夫です。<strong>初回訪問で普段の作業と、今お使いの紙・Excelを見せていただければ、こちらで業務を整理し、御社専用の見本アプリで完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</p>
+    </details>
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q2</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">現場に来て業務を見てもらえますか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・御社専用の見本アプリ作成 → 2回目訪問・見本アプリを見ながら確認</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、一緒に形を整えます。遠方の場合はオンライン併用も可能です（交通費別途）。</p>
+    </details>
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q3</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">契約後に費用が膨らむことはありませんか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">アプリ商品は固定価格でご提示します（初期制作費 ¥100,000〜／月額運用サポート費 ¥10,000〜）。表示価格で対応できる範囲を事前に明確にし、追加費用が発生する場合は作業前に必ず内容と金額をご説明します。合意のないまま費用が増えることはありません。</p>
+    </details>
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q4</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">月額はなぜ発生しますか？「アプリ使用料」ですか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">月額は<strong>「アプリ使用料」ではなく、「運用サポート費」</strong>です。アプリの継続利用・保守・軽微修正・操作相談・職員入退職対応・導入後の定着支援をまとめて含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
+    </details>
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q5</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">導入までどのくらいかかりますか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">契約前に<strong>初回訪問 → 持ち帰り整理＋見本アプリ作成 → 2回目訪問</strong>までを行います。契約後は現場の横で同席しながら開発します。紙・Excel改善パックなど小規模は2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。</p>
+    </details>
+    <details style="border-bottom: 1px solid rgba(27, 22, 19, 0.2);">
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q6</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">介護に関する情報は要配慮個人情報を含み得るため、特に丁寧に扱います。Google Workspaceを前提とした運用構成、アクセス権限設計、操作記録、データ保存・委託先監督の方針を、導入前に書面でお伝えします。開発時の実データ利用は原則匿名化、または別環境で扱います。</p>
+    </details>
+    <details>
+      <summary style="display: flex; align-items: baseline; gap: 18px; padding: 22px 0; cursor: pointer; list-style: none;">
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #BE4633;">Q7</span>
+        <span style="font-size: 14px; letter-spacing: 0.04em; flex: 1;">解約はできますか？</span>
+        <span class="faq-plus" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(27, 22, 19, 0.5);">＋</span>
+      </summary>
+      <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.75); margin: 0; padding: 0 0 24px 44px;">はい、いつでも解約できます。14日前にご連絡いただければ、14日経過後に解約が成立します。解約後は保守・修正・問い合わせ対応の対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残り、必要に応じてCSV等でエクスポートできます。</p>
+    </details>
+  </div>
+</div>
+
+<!-- ===================== 05 CONTACT ===================== -->
+<div id="contact" data-screen-label="05 お問い合わせ" style="display: grid; grid-template-columns: minmax(340px, 480px) minmax(0, 1fr); border-bottom: 1px solid rgba(27, 22, 19, 0.35); scroll-margin-top: 20px;">
+  <div style="padding: 64px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35); display: flex; flex-direction: column;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 24px;">05 — お問い合わせ</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.3vw, 44px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em; margin-bottom: 26px;">今のやり方を、<br>見せてください。</div>
+    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 0 0 36px;">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong style="color: #1B1613;">「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、アプリにできそうな範囲と、概算費用をご案内します。<br><strong style="color: #1B1613;">現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
+    <div style="display: flex; flex-direction: column; margin-top: auto;">
+      <div style="display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); align-items: baseline;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: #BE4633;">TEL</span>
+        <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 18px; letter-spacing: 0.06em;">070-1383-4420</div><div style="font-size: 11px; color: rgba(27, 22, 19, 0.55); margin-top: 3px;">平日・土曜 9:00 - 18:00（日本時間）</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); align-items: baseline;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: #BE4633;">EMAIL</span>
+        <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; letter-spacing: 0.03em;">kotaro.otake@takenokonoko.com</div><div style="font-size: 11px; color: rgba(27, 22, 19, 0.55); margin-top: 3px;">通常2営業日以内に返信いたします</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25); align-items: baseline;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: #BE4633;">LINE</span>
+        <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; letter-spacing: 0.06em;">公式LINEアカウント</div><div style="font-size: 11px; color: rgba(27, 22, 19, 0.55); margin-top: 3px;">導入後のサポートにご利用ください</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 56px 48px; min-width: 0;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5); margin-bottom: 32px;">— お問い合わせフォーム</div>
+    <form id="contactForm">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px 36px; margin-bottom: 28px;">
+      <label style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7);">お名前 <span style="color: #BE4633;">*</span></span>
+        <input type="text" name="entry.1171959256" required placeholder="山田 太郎" style="border: none; border-bottom: 1px solid rgba(27, 22, 19, 0.4); background: transparent; padding: 8px 2px; font-size: 14px;">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7);">会社名・団体名 <span style="color: #BE4633;">*</span></span>
+        <input type="text" name="entry.1217538201" required placeholder="例：〇〇デイサービス（個人の場合は「なし」）" style="border: none; border-bottom: 1px solid rgba(27, 22, 19, 0.4); background: transparent; padding: 8px 2px; font-size: 14px;">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7);">メールアドレス <span style="color: #BE4633;">*</span></span>
+        <input type="email" name="entry.1270768558" required placeholder="example@email.com" style="border: none; border-bottom: 1px solid rgba(27, 22, 19, 0.4); background: transparent; padding: 8px 2px; font-size: 14px;">
+      </label>
+      <label style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7);">電話番号（任意）</span>
+        <input type="tel" name="entry.205317164" placeholder="日中ご連絡可能な番号" style="border: none; border-bottom: 1px solid rgba(27, 22, 19, 0.4); background: transparent; padding: 8px 2px; font-size: 14px;">
+      </label>
+    </div>
+    <div style="margin-bottom: 28px;">
+      <div style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7); margin-bottom: 12px;">ご相談内容 <span style="color: #BE4633;">*</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">無料相談する（まず話してみたい）</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">紙・Excel業務を仕組みにしたい</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">シフト作成について相談したい</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">送迎・月次集計・記録など特定業務</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">料金の目安を知りたい</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">採用・パートナーシップ・取材</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.1422820564" style="accent-color: #BE4633; margin: 0;">その他</label>
+      </div>
+    </div>
+    <div style="margin-bottom: 28px;">
+      <div style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7); margin-bottom: 12px;">事業種別（任意）</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">デイサービス</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">訪問介護</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">居宅介護支援</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">有料老人ホーム</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">障害福祉</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.business_type" style="accent-color: #BE4633; margin: 0;">その他</label>
+      </div>
+    </div>
+    <div style="margin-bottom: 28px;">
+      <div style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7); margin-bottom: 12px;">困っている業務（任意・複数選択可）</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">シフト作成</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">送迎管理</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">月次集計</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">申し送り</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">記録チェック</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">備品管理</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">ヒヤリハット報告</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">報告書作成</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">家族連絡</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">利用者一覧</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">加算確認補助</label>
+        <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.problem_area" style="accent-color: #BE4633; margin: 0;">その他</label>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px 36px; margin-bottom: 28px;">
+      <div>
+        <div style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7); margin-bottom: 12px;">現在の管理方法（任意）</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.current_method" style="accent-color: #BE4633; margin: 0;">紙</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.current_method" style="accent-color: #BE4633; margin: 0;">Excel</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.current_method" style="accent-color: #BE4633; margin: 0;">既存介護ソフト</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.current_method" style="accent-color: #BE4633; margin: 0;">LINE／電話</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.current_method" style="accent-color: #BE4633; margin: 0;">複数混在</label>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7); margin-bottom: 12px;">現場資料の共有可否（任意）<span style="font-size: 10px; color: rgba(27, 22, 19, 0.5);">※ 初回相談時点では、無理に共有いただく必要はありません。</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.share_docs" style="accent-color: #BE4633; margin: 0;">可能</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.share_docs" style="accent-color: #BE4633; margin: 0;">一部可能</label>
+          <label style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(27, 22, 19, 0.35); padding: 9px 16px; font-size: 12px; cursor: pointer;"><input type="radio" name="entry.share_docs" style="accent-color: #BE4633; margin: 0;">相談したい</label>
+        </div>
+      </div>
+    </div>
+    <label style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px;">
+      <span style="font-size: 11.5px; letter-spacing: 0.1em; color: rgba(27, 22, 19, 0.7);">その他ご質問・現場の困りごと（任意）</span>
+      <textarea rows="4" name="entry.639342087" placeholder="どんな業務で困っているか、具体的にご記入ください" style="border: 1px solid rgba(27, 22, 19, 0.4); background: transparent; padding: 12px 14px; font-size: 13px; line-height: 1.8; resize: vertical;"></textarea>
+    </label>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px; cursor: pointer;"><input type="checkbox" name="entry.346956938" value="弊社の個人情報保護方針に同意します。" required style="accent-color: #BE4633; margin: 0;"><span><a href="privacy.html" style="color: #BE4633; border-bottom: 1px solid #BE4633;">個人情報保護方針</a> に同意します <span style="color: #BE4633;">*</span></span></label>
+      <div style="display: flex; align-items: center; gap: 18px;">
+        <span style="font-size: 11px; color: rgba(27, 22, 19, 0.55);">通常2営業日以内に、嶽ノ子の担当よりご連絡します。</span>
+        <button type="submit" style="display: inline-flex; align-items: center; gap: 12px; background: #1B1613; color: #F3EFE4; font-size: 12.5px; letter-spacing: 0.18em; padding: 16px 38px; cursor: pointer; border: none; font-family: inherit;">送信する<span>→</span></button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden;">
+  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
+  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
+    <div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(34px, 3.9vw, 52px); font-weight: 700; line-height: 1.45; letter-spacing: 0.04em;">今のやり方を、<br>見せてください。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 20px 0 0;">無料相談・簡易診断は０円。現場訪問が中心。代表が直接対応します。</p>
+    </div>
+    <a href="#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px;">無料で相談する<span>→</span></a>
+  </div>
+  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+      </div>
+      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: rgba(243, 239, 228, 0.75);">
+        <a href="#trust">嶽ノ子の姿勢</a>
+        <a href="#process">契約前と契約後にやること</a>
+        <a href="#examples">対応業務</a>
+        <a href="#price">料金</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: rgba(243, 239, 228, 0.75);">
+        <a href="manager.html">管理者の方へ</a>
+        <a href="staff.html">現場職員の方へ</a>
+        <a href="dayservice.html">デイサービスの方へ</a>
+        <a href="small-facility.html">小規模事業所の方へ</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: rgba(243, 239, 228, 0.75);">
+        <a href="company.html">運営者情報</a>
+        <a href="privacy.html">個人情報保護方針</a>
+        <a href="terms.html">利用規約</a>
+      </div>
+    </div>
+  </div>
+  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
+    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+    <span>SAGAMIHARA, KANAGAWA</span>
+  </div>
+</div>
 <script>
-  document.documentElement.classList.add('js-ready');
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-  const reveals = document.querySelectorAll('.reveal');
-  // Immediately reveal above-the-fold
-  reveals.forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight * 0.9) el.classList.add('in');
-  });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => io.observe(el));
-  // Safety fallback — reveal everything after 1.2s no matter what
-  setTimeout(() => reveals.forEach(el => el.classList.add('in')), 1200);
-  function toggleDetail(el) { el.parentElement.classList.toggle('open'); }
-  function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
-
-  // ===== Simple / Rich mode toggle =====
-  (function() {
-    const toggle = document.getElementById('modeToggle');
-    const overlay = document.getElementById('modeOverlay');
-    const simpleView = document.querySelector('.simple-view');
-    const opts = toggle.querySelectorAll('.mode-toggle-opt');
-    const body = document.body;
-    const STORAGE_KEY = 'takenokonoko.viewMode';
-
-    function syncState() {
-      const isSimple = body.classList.contains('simple-mode');
-      opts.forEach(o => {
-        o.classList.toggle('is-on', (o.dataset.mode === 'simple') === isSimple);
-      });
-      if (simpleView) simpleView.setAttribute('aria-hidden', String(!isSimple));
-    }
-
-    if (localStorage.getItem(STORAGE_KEY) === 'simple') {
-      body.classList.add('simple-mode');
-    }
-    syncState();
-
-    let animating = false;
-    toggle.addEventListener('click', () => {
-      if (animating) return;
-      animating = true;
-
-      const rect = toggle.getBoundingClientRect();
-      overlay.style.setProperty('--x', (rect.left + rect.width / 2) + 'px');
-      overlay.style.setProperty('--y', (rect.top + rect.height / 2) + 'px');
-
-      overlay.classList.add('active');
-
-      setTimeout(() => {
-        body.classList.toggle('simple-mode');
-        localStorage.setItem(STORAGE_KEY,
-          body.classList.contains('simple-mode') ? 'simple' : 'rich');
-        syncState();
-        window.scrollTo(0, 0);
-        // Ensure reveal-animated tiles are visible when switching back to rich
-        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-        requestAnimationFrame(() => overlay.classList.remove('active'));
-      }, 680);
-
-      setTimeout(() => { animating = false; }, 1500);
-    });
-  })();
-
-  // ===== Google Form submission =====
-  (function() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    const note = document.getElementById('formNote');
-    const btn = form.querySelector('.form-submit');
-    const endpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSd-LlnXgx4y0QpEFz2-a6uvBJIjHotiEfIqYujjVLXKcg6G_w/formResponse';
-    const originalBtnHTML = btn.innerHTML;
-    const originalNoteHTML = note.innerHTML;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      btn.disabled = true;
-      btn.innerHTML = '送信中…';
-      note.classList.remove('is-success', 'is-error');
-
-      const body = new URLSearchParams();
-      new FormData(form).forEach((v, k) => body.append(k, v));
-
-      try {
-        await fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: body.toString()
-        });
-        form.reset();
-        btn.innerHTML = '✓ 送信完了';
-        note.textContent = 'お問い合わせありがとうございました。2営業日以内にご連絡いたします。';
-        note.classList.add('is-success');
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.innerHTML = originalBtnHTML;
-          note.innerHTML = originalNoteHTML;
-          note.classList.remove('is-success');
-        }, 8000);
-      } catch (err) {
-        btn.disabled = false;
-        btn.innerHTML = originalBtnHTML;
-        note.textContent = '送信に失敗しました。お手数ですが、直接お電話またはメールでご連絡ください。';
-        note.classList.add('is-error');
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var endpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSd-LlnXgx4y0QpEFz2-a6uvBJIjHotiEfIqYujjVLXKcg6G_w/formResponse';
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var params = new URLSearchParams();
+    form.querySelectorAll('input[name^="entry."], textarea[name^="entry."]').forEach(function (el) {
+      if (el.type === 'radio' || el.type === 'checkbox') {
+        if (!el.checked) return;
+        var v = (el.value && el.value !== 'on') ? el.value : (el.closest('label') ? el.closest('label').textContent.trim() : '');
+        params.append(el.name, v);
+      } else if (el.value) {
+        params.append(el.name, el.value);
       }
     });
-  })();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = '送信中…';
+    fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() })
+      .then(function () { btn.textContent = '送信しました。ありがとうございます。'; btn.style.background = '#7A8450'; })
+      .catch(function () { btn.disabled = false; btn.textContent = 'もう一度お試しください'; });
+  });
+})();
 </script>
-<script src="interactive.js"></script>
-
 </body>
 </html>

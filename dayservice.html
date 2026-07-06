@@ -3,389 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>デイサービス向け｜送迎表・月次集計を整える｜嶽ノ子</title>
-<meta name="description" content="デイサービスの送迎表・利用者管理・月次集計を、今の運用に合わせて整えます。契約前に御社専用の見本アプリで完成イメージを確認できます。">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>デイサービスの方へ — 嶽ノ子</title>
+<meta name="description" content="送迎表・月次集計を、今の運用に合わせて整えます。今使っている紙・Excelを見せていただければ、御社専用の見本アプリまで作ってご提示します。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="pages.css">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Persona page specific */
-  .persona-eye {
-    display: inline-block;
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    margin-bottom: 18px;
-  }
-  .pain-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .pain-list li {
-    background: var(--kinari);
-    border-radius: var(--r-sm);
-    padding: 16px 20px;
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.55;
-    border-left: 3px solid var(--shu);
-  }
-  @media (max-width: 640px) {
-    .pain-list { grid-template-columns: 1fr; }
-  }
-  .sample-app-block {
-    background: var(--sumi);
-    color: var(--on-sumi);
-    border-radius: var(--r-lg);
-    padding: 40px 44px;
-    position: relative;
-    overflow: hidden;
-    margin-top: 16px;
-  }
-  .sample-app-block::before {
-    content: "見";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 180px;
-    color: #221C19;
-    right: -20px;
-    bottom: -60px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .sample-app-block > * { position: relative; z-index: 2; }
-  .sample-app-block .eye {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--shu-light);
-    margin-bottom: 12px;
-    display: inline-block;
-  }
-  .sample-app-block h3 {
-    font-family: var(--serif);
-    font-size: clamp(20px, 2.4vw, 28px);
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 14px;
-  }
-  .sample-app-block h3 strong {
-    color: var(--shu-light);
-    font-weight: 500;
-  }
-  .sample-app-block p {
-    font-size: 14.5px;
-    line-height: 1.95;
-    opacity: 0.9;
-    margin-bottom: 22px;
-    max-width: 60ch;
-  }
-  .sample-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 10px;
-  }
-  .sample-list li {
-    background: rgba(245, 239, 227, 0.08);
-    border: 1px solid rgba(245, 239, 227, 0.15);
-    border-radius: var(--r-sm);
-    padding: 12px 16px;
-    font-family: var(--serif);
-    font-size: 14px;
-    line-height: 1.55;
-  }
-  .sample-app-block .note {
-    font-size: 12px;
-    line-height: 1.8;
-    opacity: 0.7;
-    margin-top: 18px;
-    padding-top: 14px;
-    border-top: 1px dashed rgba(245, 239, 227, 0.2);
-    margin-bottom: 0;
-  }
-  .can-do-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .can-do-list li {
-    padding: 12px 18px;
-    border-radius: var(--r-sm);
-    background: var(--kinari);
-    font-size: 14px;
-    line-height: 1.55;
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-  }
-  .can-do-list li::before {
-    content: "○";
-    color: var(--shu);
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-  @media (max-width: 640px) {
-    .can-do-list { grid-template-columns: 1fr; }
-  }
-  .price-hint {
-    background: var(--yamabuki-surface);
-    border-radius: var(--r-md);
-    padding: 24px 28px;
-    color: #4A3A18;
-  }
-  .price-hint .eye {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: #8A6A1F;
-    margin-bottom: 10px;
-  }
-  .price-hint h4 {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.45;
-    margin-bottom: 8px;
-  }
-  .price-hint p {
-    font-size: 14px;
-    line-height: 1.85;
-    margin: 0;
-  }
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <a href="index.html" class="brand">
-    <span class="brand-mark">嶽</span>
-    <span class="brand-name">嶽ノ子</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html#process" class="nav-link">進め方</a>
-    <a href="index.html#examples" class="nav-link">対応業務</a>
-    <a href="index.html#price" class="nav-link">料金</a>
-    <a href="plans.html" class="nav-link">導入例</a>
-    <a href="company.html" class="nav-link">会社概要</a>
-  </div>
-  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
-</nav>
-
-<div class="page">
-
-<!-- HERO -->
-<section class="page-hero">
-  <div class="container">
-    <div class="page-hero-inner">
-      <span class="persona-eye">FOR / デイサービス</span>
-      <h1>送迎表・月次集計を、<br>今の運用に合わせて整えます。</h1>
-      <p class="lead">毎回Excelで作り直している送迎表、欠席・追加利用のたびに崩れる予定、月末に時間が取られる集計作業。<br>今使っている紙・Excel・帳票を見せていただければ、こちらで整理して<strong>御社専用の見本アプリ</strong>まで作ってご提示します。</p>
-      <div style="margin-top: 28px; display: inline-flex; gap: 12px; flex-wrap: wrap;">
-        <span style="background: var(--shu); color: var(--on-shu); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">✓ 契約前まで 0円</span>
-        <span style="background: var(--kinari); color: var(--sumi); padding: 10px 18px; border-radius: var(--r-pill); font-size: 13px; font-weight: 600;">代表が直接対応</span>
-      </div>
+<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
+    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
+      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
+      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
+      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
+      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
+      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
+      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
     </div>
   </div>
-</section>
-
-<!-- こんなお困りごと -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">01 — PAIN</span>こんなお困りごとはありませんか？</h2>
-    <ul class="pain-list">
-      <li>送迎表を毎回Excelで作り直している</li>
-      <li>利用者ごとに曜日・時間・車椅子対応が違う</li>
-      <li>運転できる職員、添乗できる職員の確認が大変</li>
-      <li>欠席・追加利用・振替があるたびに表を直している</li>
-      <li>月末に記録・実績を集計するのに時間がかかる</li>
-      <li>家族連絡・記録の検索に時間が取られている</li>
-    </ul>
-  </div>
-</section>
-
-<!-- 今の紙・Excelを見せてください -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">02 — OBSERVE</span>まず、今の紙・Excelを見せてください。</h2>
-    <div class="card">
-      <p>今使っている送迎表、利用者一覧、車両一覧、職員表、月次集計表を確認します。</p>
-      <p>うまく説明できなくても大丈夫です。実際の表を見ながら、<strong>どこを楽にできそうかをこちらで整理</strong>します。</p>
-      <p style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(26,22,20,0.12); font-size: 13px; color: var(--sumi-2);">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
-    </div>
-  </div>
-</section>
-
-<!-- 契約前に作る見本アプリ -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">03 — SAMPLE APP</span>契約前に、御社専用の見本アプリを作成します。</h2>
-    <div class="sample-app-block">
-      <span class="eye">— SAMPLE APP</span>
-      <h3>確認した内容をもとに、<br><strong>画面・一覧・印刷物の見本</strong>を作ります。</h3>
-      <p>「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
-      <ul class="sample-list">
-        <li>利用者一覧の画面</li>
-        <li>曜日別の送迎表</li>
-        <li>車両ごとの送迎一覧</li>
-        <li>職員・車両・利用者の確認画面</li>
-        <li>月次集計の見本</li>
-        <li>印刷用の送迎表</li>
-        <li>欠席・追加利用の入力画面</li>
-        <li>家族連絡の記録画面</li>
-      </ul>
-      <p class="note">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
-    </div>
-  </div>
-</section>
-
-<!-- 契約後は現場の横で一緒に整える -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">04 — TOGETHER</span>契約後は、現場の横で一緒に整えます。</h2>
-    <div class="card">
-      <p>契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。</p>
-      <p style="margin-top: 14px; padding: 14px 18px; background: var(--kinari); border-left: 3px solid var(--shu); border-radius: 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.9;">
-        「この呼び方の方が現場では分かりやすい」<br>
-        「この順番で並んでいる方が見やすい」<br>
-        「これは自動で決めずに、人が確認したい」
-      </p>
-      <p style="margin-top: 14px;">そういった現場の感覚を拾いながら、無理なく使える形に整えます。</p>
-    </div>
-  </div>
-</section>
-
-<!-- できることの例 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">05 — CAN DO</span>できることの例</h2>
-    <ul class="can-do-list">
-      <li>曜日別の送迎表作成</li>
-      <li>利用者ごとの送迎条件管理</li>
-      <li>車両・職員・利用者の確認</li>
-      <li>車椅子対応・送迎ルートの確認</li>
-      <li>欠席・追加利用・振替の反映</li>
-      <li>印刷用送迎表の出力</li>
-      <li>月次集計・記録の参照</li>
-      <li>CSV・帳票出力</li>
-    </ul>
-    <p style="margin-top: 16px; font-size: 13px; color: var(--sumi-2);">※ 現場の運用に合わせて、必要なものから順に作ります。すべてを一度に作る必要はありません。</p>
-  </div>
-</section>
-
-<!-- 料金の目安 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">06 — PRICE</span>料金の目安</h2>
-    <div class="price-hint">
-      <span class="eye">— PRICING REFERENCE</span>
-      <h4>送迎表＋月次集計のセットなら「標準アプリ」が中心になることが多いです。</h4>
-      <p>初期制作費 ¥500,000／月額運用サポート費 ¥30,000（税込・固定価格）。範囲が狭ければ「小規模アプリ（初期 ¥200,000／月額運用サポート費 ¥15,000）」、複数事業所や複雑な条件があれば「複雑な条件・判定に対応（初期 ¥800,000〜）」になります。<br>月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談を含みます。<br>正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</p>
-      <p style="margin-top: 12px; font-size: 13px;"><a href="index.html#price" style="color: var(--shu); text-decoration: underline; text-underline-offset: 3px;">→ 料金プラン全体を見る</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- 無料相談で確認できること -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">07 — FREE CONSULT</span>まずは無料で確認できます。</h2>
-    <div class="card">
-      <p>無料相談・簡易診断（0円）では、現在使っている紙・Excel・帳票を確認し、どこを仕組みにできそうかを整理します。必要に応じて、契約前に<strong>御社専用の見本アプリ</strong>を作成し、完成イメージと費用感をご説明します。</p>
-      <ul style="list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 8px;">
-        <li>・ 初回訪問で、今の作業を見る（0円）</li>
-        <li>・ 持ち帰って、作業の流れを整理する（0円）</li>
-        <li>・ 御社専用の見本アプリを作る（0円）</li>
-        <li>・ 2回目訪問で、見本アプリと費用を説明する（0円）</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-box">
-      <h2>送迎表・月次集計のことを、まず話してみませんか？</h2>
-      <p>初回相談は無料です。今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
-      <div class="cta-actions">
-        <a href="index.html#contact" class="btn btn-light">無料相談する <span>→</span></a>
-        <a href="index.html#process" class="btn btn-outline">進め方を見る</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="brand">
-        <span class="brand-mark">嶽</span>
-        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
-      </div>
-      <p>介護現場の紙・Excel・手作業を、現場に合うアプリに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div class="footer-col">
-      <h5>SERVICE</h5>
-      <ul>
-        <li><a href="index.html#process">進め方</a></li>
-        <li><a href="index.html#examples">対応業務</a></li>
-        <li><a href="index.html#price">料金</a></li>
-        <li><a href="plans.html">導入例</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>FOR</h5>
-      <ul>
-        <li><a href="staff.html">現場の職員さんへ</a></li>
-        <li><a href="dayservice.html">デイサービス向け</a></li>
-        <li><a href="manager.html">管理者向け</a></li>
-        <li><a href="small-facility.html">小規模事業所向け</a></li>
-        <li><a href="sample-app.html">見本アプリとは</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>COMPANY</h5>
-      <ul>
-        <li><a href="company.html">会社概要</a></li>
-        <li><a href="index.html#contact">お問い合わせ</a></li>
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
-        <li><a href="terms.html">利用規約</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
-    <span>社会を回す人の、大切な人を守る。</span>
-  </div>
-</footer>
-
 </div>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-</script>
+<!-- HERO -->
+<div data-screen-label="dayservice: HERO" style="display: grid; grid-template-columns: 1fr 320px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 64px 56px 56px; border-right: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
+    <div style="position: absolute; right: -20px; top: 0; font-family: 'Zen Old Mincho', serif; font-size: 260px; font-weight: 900; line-height: 1.1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.13); pointer-events: none;">送</div>
+    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 34px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>FOR — デイサービスの方へ</div>
+    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(36px, 4.4vw, 60px); font-weight: 700; line-height: 1.42; letter-spacing: 0.02em; margin: 0 0 30px; position: relative;">送迎表・月次集計を、<br>今の運用に合わせて<span style="background: linear-gradient(transparent 68%, rgba(190, 70, 51, 0.35) 68%);">整えます</span>。</h1>
+    <p style="font-size: 13px; line-height: 2.15; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); max-width: 46em; margin: 0; position: relative;">毎回Excelで作り直している送迎表、欠席・追加利用のたびに崩れる予定、月末に時間が取られる集計作業。今使っている紙・Excel・帳票を見せていただければ、こちらで整理して<strong style="color: #BE4633;">御社専用の見本アプリ</strong>まで作ってご提示します。</p>
+  </div>
+  <div style="padding: 64px 40px 56px; display: flex; flex-direction: column;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 20px;">先にお伝えしたいこと</div>
+    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">契約前まで ０円</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">初回訪問から見本アプリの提示まで無料</div></div>
+    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">代表が直接対応</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">相談から開発・運用まで担当が変わりません</div></div>
+    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">仕様書は不要</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">今の紙・Excelを見せていただくだけ</div></div>
+  </div>
+</div>
+
+<!-- 01 PAIN -->
+<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">01 — お困りごと</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">こんなお困りごとはありませんか？</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 48px;">
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">一</span><span style="font-size: 13px; line-height: 1.9;">送迎表を毎回Excelで作り直している</span></div>
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">二</span><span style="font-size: 13px; line-height: 1.9;">利用者ごとに曜日・時間・車椅子対応が違う</span></div>
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">三</span><span style="font-size: 13px; line-height: 1.9;">運転・添乗できる職員の確認が大変</span></div>
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">四</span><span style="font-size: 13px; line-height: 1.9;">欠席・追加利用・振替のたびに表を直している</span></div>
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">五</span><span style="font-size: 13px; line-height: 1.9;">月末の記録・実績集計に時間がかかる</span></div>
+    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">六</span><span style="font-size: 13px; line-height: 1.9;">家族連絡・記録の検索に時間が取られている</span></div>
+  </div>
+</div>
+
+<!-- 02 OBSERVE -->
+<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">02 — まず見せてください</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">まず、今の紙・Excelを見せてください。</div>
+  </div>
+  <div style="padding: 56px 48px;">
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 16px;">今使っている送迎表、利用者一覧、車両一覧、職員表、月次集計表を確認します。</p>
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 24px;">うまく説明できなくても大丈夫です。実際の表を見ながら、<strong style="color: #BE4633;">どこを楽にできそうかをこちらで整理</strong>します。</p>
+    <p style="font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.55); border-top: 1px dashed rgba(27, 22, 19, 0.25); padding-top: 16px; margin: 0;">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
+  </div>
+</div>
+
+<!-- 03 SAMPLE APP -->
+<div style="background: #1B1613; color: #F3EFE4; padding: 64px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #E8A08F;">03 — 見本アプリ</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">契約前に、御社専用の見本アプリを作成します。</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px;">
+    <div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; line-height: 1.8; letter-spacing: 0.05em; margin-bottom: 18px;">確認した内容をもとに、<br><span style="color: #E8A08F;">画面・一覧・印刷物の見本</span>を作ります。</div>
+      <p style="font-size: 12.5px; line-height: 2.1; color: rgba(243, 239, 228, 0.72); margin: 0 0 22px;">「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
+      <p style="font-size: 11px; line-height: 1.9; color: rgba(243, 239, 228, 0.5); margin: 0; border-top: 1px dashed rgba(243, 239, 228, 0.25); padding-top: 14px;">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; align-content: start;">
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>利用者一覧の画面</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>曜日別の送迎表</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>車両ごとの送迎一覧</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>職員・車両・利用者の確認画面</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>月次集計の見本</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>印刷用の送迎表</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); border-bottom: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>欠席・追加利用の入力画面</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); border-bottom: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>家族連絡の記録画面</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 TOGETHER -->
+<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">04 — 契約後</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">契約後は、現場の横で一緒に整えます。</div>
+  </div>
+  <div style="padding: 56px 48px;">
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 22px;">契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。</p>
+    <div style="background: #EDE8D9; padding: 22px 28px; margin-bottom: 22px;">
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; line-height: 2.2; letter-spacing: 0.05em; color: rgba(27, 22, 19, 0.85);">「この呼び方の方が現場では分かりやすい」<br>「この順番で並んでいる方が見やすい」<br>「これは自動で決めずに、人が確認したい」</div>
+    </div>
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0;">そういった現場の感覚を拾いながら、無理なく使える形に整えます。</p>
+  </div>
+</div>
+
+<!-- 05 CAN DO -->
+<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 32px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">05 — できること</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">できることの例。</h2>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; border: 1px solid rgba(27, 22, 19, 0.35); border-right: none; margin-bottom: 16px;">
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">曜日別の送迎表作成</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">利用者ごとの送迎条件管理</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">車両・職員・利用者の確認</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">車椅子対応・送迎ルートの確認</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">欠席・追加利用・振替の反映</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">印刷用送迎表の出力</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">月次集計・記録の参照</span>
+    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">CSV・帳票出力</span>
+  </div>
+  <p style="font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.55); margin: 0;">※ 現場の運用に合わせて、必要なものから順に作ります。すべてを一度に作る必要はありません。</p>
+</div>
+
+<!-- 06 PRICE -->
+<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 32px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">06 — 料金の目安</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">送迎表＋月次集計の、料金の目安。</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;">
+    <div style="border-top: 3px solid #BE4633; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">中心になることが多い</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 16px;">標準アプリ</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 700; line-height: 1;">¥500,000</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 16px;">＋ ¥30,000 /月（税込・固定価格）</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">送迎表＋月次集計のセット。複数画面の業務アプリ。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">範囲が狭い場合</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 16px;">小規模アプリ</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 700; line-height: 1;">¥200,000</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 16px;">＋ ¥15,000 /月（税込・固定価格）</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">送迎表のみ、集計のみなど、1業務に絞る場合。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">複数事業所・複雑な条件</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 16px;">複雑な条件・判定に対応</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 700; line-height: 1;">¥800,000〜</div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 16px;">＋ ¥50,000〜 /月（税込・個別見積り）</div>
+      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">複数事業所への展開や、複雑な判定を含む場合。</p>
+    </div>
+  </div>
+  <div style="margin-top: 32px; border: 1px solid rgba(27, 22, 19, 0.4); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+    <p style="font-size: 12.5px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.75);">月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談を含みます。正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</p>
+    <a href="index.html#price" style="font-size: 12px; letter-spacing: 0.12em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; white-space: nowrap;">料金プラン全体を見る →</a>
+  </div>
+</div>
+
+<!-- 07 FREE CONSULT -->
+<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">07 — 無料相談</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">まずは無料で、ここまで確認できます。</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 01 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">初回訪問で、<br>今の作業を見る</div></div>
+    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 02 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">持ち帰って、<br>作業の流れを整理する</div></div>
+    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 03 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">御社専用の<br>見本アプリを作る</div></div>
+    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 04 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">2回目訪問で、<br>見本と費用を説明する</div></div>
+  </div>
+</div>
+
+<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
+  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
+    <div style="max-width: 720px;">
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">送迎表・月次集計のことを、まず話してみませんか？</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">初回相談は無料です。今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
+    </div>
+    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
+  </div>
+  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+      </div>
+      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
+        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
+        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
+        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
+        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
+        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
+        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
+        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
+        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
+        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
+    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+    <span>SAGAMIHARA, KANAGAWA</span>
+  </div>
+</div>
 </body>
 </html>

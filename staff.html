@@ -3,423 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>現場の職員さんへ｜嶽ノ子</title>
-<meta name="description" content="新しいアプリを入れる前に、現場の職員さんの不安を減らしたいと思っています。今のやり方を否定しない、難しい説明をお願いしない、使い始めの不安も支える。嶽ノ子の現場への姿勢をまとめました。">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>現場職員の方へ — 嶽ノ子</title>
+<meta name="description" content="現場のやり方を否定するのではなく、今の運用を読み解いて、無理なく続けられる形に整えます。現場の職員さんに嶽ノ子がお願いすること・しないこと。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="pages.css">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  .persona-eye {
-    display: inline-block;
-    background: var(--shu);
-    color: var(--on-shu);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    margin-bottom: 18px;
-  }
-  .promise-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 720px) { .promise-grid { grid-template-columns: 1fr; } }
-  .promise-card {
-    background: var(--kinari);
-    border-radius: var(--r-md);
-    padding: 24px 26px;
-    border-left: 3px solid var(--shu);
-  }
-  .promise-card .eye {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    color: var(--shu);
-    margin-bottom: 10px;
-  }
-  .promise-card h3 {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 10px;
-    color: var(--sumi);
-  }
-  .promise-card p {
-    font-size: 14px;
-    line-height: 1.9;
-    color: var(--sumi-2);
-    margin: 0;
-  }
-  .ask-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  @media (max-width: 720px) { .ask-grid { grid-template-columns: 1fr; } }
-  .ask-side {
-    border-radius: var(--r-lg);
-    padding: 32px 32px;
-  }
-  .ask-side.do {
-    background: var(--kinari-2);
-    color: var(--sumi);
-  }
-  .ask-side.dont {
-    background: var(--sumi);
-    color: var(--on-sumi);
-  }
-  .ask-side .eye {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    margin-bottom: 12px;
-    display: inline-block;
-  }
-  .ask-side.do .eye { color: var(--shu); }
-  .ask-side.dont .eye { color: var(--shu-light); }
-  .ask-side h3 {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 14px;
-  }
-  .ask-side ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .ask-side li {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.7;
-    padding: 8px 0 8px 22px;
-    position: relative;
-    border-bottom: 1px dashed rgba(26, 22, 20, 0.1);
-  }
-  .ask-side.dont li {
-    border-bottom-color: rgba(245, 239, 227, 0.15);
-  }
-  .ask-side li:last-child { border-bottom: none; }
-  .ask-side.do li::before {
-    content: "○";
-    position: absolute;
-    left: 0;
-    color: var(--shu);
-    font-weight: 600;
-  }
-  .ask-side.dont li::before {
-    content: "×";
-    position: absolute;
-    left: 0;
-    color: var(--shu-light);
-    font-weight: 600;
-  }
-  .voice-card {
-    background: var(--shu);
-    color: var(--on-shu);
-    border-radius: var(--r-lg);
-    padding: 40px 44px;
-    position: relative;
-    overflow: hidden;
-  }
-  .voice-card::before {
-    content: "声";
-    position: absolute;
-    font-family: var(--serif);
-    font-size: 180px;
-    color: #A53D33;
-    right: -20px;
-    bottom: -60px;
-    line-height: 0.8;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .voice-card > * { position: relative; z-index: 2; }
-  .voice-card h3 {
-    font-family: var(--serif);
-    font-size: clamp(20px, 2.4vw, 26px);
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 14px;
-  }
-  .voice-card p {
-    font-family: var(--serif);
-    font-size: 14.5px;
-    line-height: 1.95;
-    margin: 0;
-    max-width: 60ch;
-  }
-  .voice-quote {
-    margin-top: 22px;
-    padding: 18px 22px;
-    background: rgba(255, 248, 244, 0.14);
-    border-left: 3px solid var(--kinari);
-    border-radius: 10px;
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.95;
-  }
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-
-<nav class="nav" id="nav">
-  <a href="index.html" class="brand">
-    <span class="brand-mark">嶽</span>
-    <span class="brand-name">嶽ノ子</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html#process" class="nav-link">進め方</a>
-    <a href="index.html#examples" class="nav-link">対応業務</a>
-    <a href="sample-app.html" class="nav-link">見本アプリとは</a>
-    <a href="staff.html" class="nav-link active">現場の方へ</a>
-    <a href="company.html" class="nav-link">会社概要</a>
-  </div>
-  <a href="index.html#contact" class="nav-cta">ご相談 <span>→</span></a>
-</nav>
-
-<div class="page">
-
-<!-- HERO -->
-<section class="page-hero">
-  <div class="container">
-    <div class="page-hero-inner">
-      <span class="persona-eye">FOR / 現場の職員さん</span>
-      <h1>現場の職員さんへ。<br>不安なことを、減らしたいと思っています。</h1>
-      <p class="lead">新しいアプリを入れるとき、いちばん気になるのは、<strong>「今のやり方を否定されるのでは」「自分たちの仕事が増えるのでは」</strong>ということだと思います。<br>嶽ノ子では、現場のやり方を否定するのではなく、今の運用を読み解いて、無理なく続けられる形に整えていきます。</p>
+<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
+    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
+      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
+      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
+      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
+      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
+      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
+      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
     </div>
   </div>
-</section>
-
-<!-- いちばん大事な約束 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">01 — PROMISE</span>いちばん大事な約束</h2>
-    <div class="voice-card">
-      <h3>現場の方にお願いするのは、<br>仕様を考えることではありません。</h3>
-      <p>いつものやり方を見せてもらい、見本を見て違和感を教えてもらうこと。<br>それが嶽ノ子からのお願いの全部です。</p>
-      <div class="voice-quote">
-        現場のやり方を否定するのではなく、<br>
-        今の運用を読み解いて、<br>
-        無理なく続けられる形に整えていきます。
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 6つの姿勢 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">02 — STANCE</span>嶽ノ子が、現場の方に対して気をつけていること</h2>
-    <div class="promise-grid">
-      <div class="promise-card">
-        <div class="eye">— STANCE 01</div>
-        <h3>今のやり方を、<br>否定しません。</h3>
-        <p>今の紙・Excel・手作業には、現場で続いてきた理由があります。まずはそのやり方を見せてください。読み解いたうえで、必要なところだけ整えます。</p>
-      </div>
-      <div class="promise-card">
-        <div class="eye">— STANCE 02</div>
-        <h3>いきなり全部、<br>変えません。</h3>
-        <p>最初から全部を変えるのではなく、負担が大きい作業から小さく整えます。効果を確認してから、次へ広げる進め方が基本です。</p>
-      </div>
-      <div class="promise-card">
-        <div class="eye">— STANCE 03</div>
-        <h3>操作を、<br>難しくしません。</h3>
-        <p>できるだけ、いつもの言葉・いつもの順番に合わせて作ります。「現場の呼び方を変えてシステムに合わせてください」とは言いません。</p>
-      </div>
-      <div class="promise-card">
-        <div class="eye">— STANCE 04</div>
-        <h3>仕様を、<br>考えさせません。</h3>
-        <p>難しい説明や資料作成をお願いすることはありません。実際の作業を見せてもらい、こちらで整理します。</p>
-      </div>
-      <div class="promise-card">
-        <div class="eye">— STANCE 05</div>
-        <h3>使う人の声を、<br>拾います。</h3>
-        <p>管理者だけでなく、実際に使う職員さんの違和感も確認します。「これは自動ではなく、人が確認したい」といった声を大事にします。</p>
-      </div>
-      <div class="promise-card">
-        <div class="eye">— STANCE 06</div>
-        <h3>使い始めた後も、<br>直します。</h3>
-        <p>使ってみて分かることがあります。最初の1か月は、迷うところや使いにくいところを確認し、無理なく続けられる形に整えていきます。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- お願いすること／お願いしないこと -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">03 — WHAT WE ASK</span>現場にお願いすること／お願いしないこと</h2>
-    <div class="ask-grid">
-      <div class="ask-side do">
-        <span class="eye">— お願いすること</span>
-        <h3>“いつものやり方”を、<br>見せてください。</h3>
-        <ul>
-          <li>今使っている紙・Excelを見せてもらう</li>
-          <li>普段の作業の流れを見せてもらう</li>
-          <li>見本アプリを見て違和感を教えてもらう</li>
-          <li>使い始めて困った点を教えてもらう</li>
-          <li>現場の呼び方・言葉を教えてもらう</li>
-        </ul>
-      </div>
-      <div class="ask-side dont">
-        <span class="eye">— お願いしないこと</span>
-        <h3>仕様書も、<br>IT用語も、<br>必要ありません。</h3>
-        <ul>
-          <li>仕様書を書いてもらう</li>
-          <li>IT用語を覚えてもらう</li>
-          <li>長い資料を読んで確認してもらう</li>
-          <li>最初から完璧に使いこなしてもらう</li>
-          <li>すべての例外を事前に洗い出してもらう</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 現場の方への一文 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">04 — TO STAFF</span>現場の方に、難しい説明をお願いすることはありません。</h2>
-    <div class="card" style="padding: 40px 44px;">
-      <p style="font-family: var(--serif); font-size: 16px; line-height: 2; color: var(--sumi); margin: 0;">
-        今使っている紙・Excel・帳票を見せてください。<br>
-        普段どおりの作業を見せてください。
-      </p>
-      <p style="font-family: var(--serif); font-size: 16px; line-height: 2; color: var(--sumi); margin: 18px 0 0;">
-        こちらで作業の流れを整理し、<br>
-        <strong style="color: var(--shu);">御社専用の見本アプリ</strong>を作成します。
-      </p>
-      <p style="font-family: var(--serif); font-size: 16px; line-height: 2; color: var(--sumi); margin: 18px 0 0;">
-        見本を見ながら、<br>
-        「この言葉の方が分かりやすい」<br>
-        「この順番の方が見やすい」<br>
-        「ここは自動ではなく、人が確認したい」<br>
-        といった違和感を教えてください。
-      </p>
-      <p style="font-family: var(--serif); font-size: 16px; line-height: 2; color: var(--sumi); margin: 18px 0 0;">
-        現場のやり方を否定するのではなく、<br>
-        今の運用を読み解いて、<br>
-        無理なく続けられる形に整えていきます。
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- 使い始めの1か月 -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">05 — ONBOARDING</span>使い始めの1か月は、特に気をつけます。</h2>
-    <div class="card">
-      <p>導入して終わり、ではありません。<strong>最初の1〜3か月は、月額の範囲で重点的にサポート</strong>します。</p>
-      <ul style="list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 8px;">
-        <li>・ 紙に戻っていないかを確認します</li>
-        <li>・ 二重入力が発生していないかを確認します</li>
-        <li>・ 職員さんが迷っているところを確認します</li>
-        <li>・ 使われていない機能がないかを確認します</li>
-        <li>・ 出てきた違和感は、その場で直すか、整理して直します</li>
-      </ul>
-      <p style="margin-top: 18px; padding: 14px 18px; background: var(--kinari); border-left: 3px solid var(--shu); border-radius: 8px; font-family: var(--serif); font-size: 14.5px; line-height: 1.85;">
-        導入支援を別料金で取ることはしません。<br>
-        使い始めの不安は、月額の中でサポートします。
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- 管理者の方へ -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title"><span class="num">06 — FOR MANAGER</span>管理者の方へ</h2>
-    <div class="card">
-      <p style="font-family: var(--serif); font-size: 16px; line-height: 1.95;">
-        管理者の方だけが、現場への説明を背負わなくて大丈夫です。
-      </p>
-      <p style="margin-top: 14px;">
-        必要に応じて現場に伺い、作っている途中の画面や出力を一緒に確認します。職員さんの違和感を早めに拾いながら、現場に合う形へ整えます。
-      </p>
-      <p style="margin-top: 14px;">
-        「導入したのに紙に戻った」「職員に反発された」── そういった失敗を、現場の横で一緒に整えることで減らしていきます。
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-box">
-      <h2>まずは、今のやり方を見せてください。</h2>
-      <p>初回相談は無料です。職員さんの不安を減らしたいというご相談だけでも歓迎します。</p>
-      <div class="cta-actions">
-        <a href="index.html#contact" class="btn btn-light">無料相談する <span>→</span></a>
-        <a href="sample-app.html" class="btn btn-outline">見本アプリとは</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="brand">
-        <span class="brand-mark">嶽</span>
-        <span class="brand-name" style="color: var(--on-sumi);">嶽ノ子</span>
-      </div>
-      <p>介護現場の紙・Excel・手作業を、現場に合うアプリに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div class="footer-col">
-      <h5>SERVICE</h5>
-      <ul>
-        <li><a href="index.html#process">進め方</a></li>
-        <li><a href="index.html#examples">対応業務</a></li>
-        <li><a href="index.html#price">料金</a></li>
-        <li><a href="sample-app.html">見本アプリとは</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>FOR</h5>
-      <ul>
-        <li><a href="staff.html">現場の職員さんへ</a></li>
-        <li><a href="manager.html">管理者向け</a></li>
-        <li><a href="dayservice.html">デイサービス向け</a></li>
-        <li><a href="small-facility.html">小規模事業所向け</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>COMPANY</h5>
-      <ul>
-        <li><a href="company.html">会社概要</a></li>
-        <li><a href="index.html#contact">お問い合わせ</a></li>
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
-        <li><a href="terms.html">利用規約</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 嶽ノ子. ALL RIGHTS RESERVED.</span>
-    <span>社会を回す人の、大切な人を守る。</span>
-  </div>
-</footer>
-
 </div>
 
-<script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-</script>
+<!-- HERO -->
+<div data-screen-label="staff: HERO" style="display: grid; grid-template-columns: 1fr 320px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 64px 56px 56px; border-right: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
+    <div style="position: absolute; right: -20px; top: 0; font-family: 'Zen Old Mincho', serif; font-size: 260px; font-weight: 900; line-height: 1.1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.13); pointer-events: none;">現</div>
+    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 34px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>FOR — 現場の職員さんへ</div>
+    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(36px, 4.4vw, 60px); font-weight: 700; line-height: 1.42; letter-spacing: 0.02em; margin: 0 0 30px; position: relative;">現場の職員さんへ。<br>不安なことを、<span style="background: linear-gradient(transparent 68%, rgba(190, 70, 51, 0.35) 68%);">減らしたい</span>と思っています。</h1>
+    <p style="font-size: 13px; line-height: 2.15; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); max-width: 46em; margin: 0; position: relative;">新しいアプリを入れるとき、いちばん気になるのは、<strong>「今のやり方を否定されるのでは」「自分たちの仕事が増えるのでは」</strong>ということだと思います。嶽ノ子では、現場のやり方を否定するのではなく、今の運用を読み解いて、無理なく続けられる形に整えていきます。</p>
+  </div>
+  <div style="padding: 64px 40px 56px; display: flex; flex-direction: column;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 20px;">いちばん大事な約束</div>
+    <div style="background: #BE4633; color: #FFF6F1; padding: 26px 26px;">
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 18px; font-weight: 700; line-height: 1.9; letter-spacing: 0.05em;">現場の方にお願いするのは、仕様を考えることではありません。</div>
+      <p style="font-size: 11.5px; line-height: 2; margin: 14px 0 0; opacity: 0.9;">いつものやり方を見せてもらい、見本を見て違和感を教えてもらうこと。それが嶽ノ子からのお願いの全部です。</p>
+    </div>
+    <div style="margin-top: auto; padding-top: 24px; font-family: 'Zen Old Mincho', serif; font-size: 13.5px; line-height: 2.2; letter-spacing: 0.06em; color: rgba(27, 22, 19, 0.75);">現場のやり方を否定するのではなく、今の運用を読み解いて、無理なく続けられる形に整えていきます。</div>
+  </div>
+</div>
+
+<!-- 01 STANCE -->
+<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 40px;">
+    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">01 — 六つの姿勢</span>
+    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">嶽ノ子が、現場の方に対して気をつけていること。</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px 48px;">
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 01</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">今のやり方を、<br>否定しません。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">今の紙・Excel・手作業には、現場で続いてきた理由があります。まずはそのやり方を見せてください。読み解いたうえで、必要なところだけ整えます。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 02</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">いきなり全部、<br>変えません。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">最初から全部を変えるのではなく、負担が大きい作業から小さく整えます。効果を確認してから、次へ広げる進め方が基本です。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 03</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">操作を、<br>難しくしません。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">できるだけ、いつもの言葉・いつもの順番に合わせて作ります。「現場の呼び方を変えてシステムに合わせてください」とは言いません。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 04</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">仕様を、<br>考えさせません。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">難しい説明や資料作成をお願いすることはありません。実際の作業を見せてもらい、こちらで整理します。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 05</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">使う人の声を、<br>拾います。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">管理者だけでなく、実際に使う職員さんの違和感も確認します。「これは自動ではなく、人が確認したい」といった声を大事にします。</p>
+    </div>
+    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">STANCE 06</div>
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; margin-bottom: 14px;">使い始めた後も、<br>直します。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">使ってみて分かることがあります。最初の1か月は、迷うところや使いにくいところを確認し、無理なく続けられる形に整えていきます。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 02 ASK / DON'T ASK -->
+<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">02 — お願いすること</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">現場にお願いすること、しないこと。</div>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr;">
+    <div style="padding: 56px 44px; border-right: 1px solid rgba(27, 22, 19, 0.2);">
+      <div style="display: inline-block; background: #1B1613; color: #F3EFE4; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; padding: 6px 14px; margin-bottom: 26px;">お願いすること</div>
+      <div style="display: flex; flex-direction: column; gap: 18px; font-size: 13px; line-height: 1.9;">
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>今使っている紙・Excelを見せてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>普段の作業の流れを見せてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>見本アプリを見て違和感を教えてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>使い始めて困った点を教えてもらう</div>
+        <div style="display: flex; gap: 14px;"><span style="color: #BE4633;">■</span>現場の呼び方・言葉を教えてもらう</div>
+      </div>
+    </div>
+    <div style="padding: 56px 44px;">
+      <div style="display: inline-block; border: 1px solid rgba(27, 22, 19, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; padding: 6px 14px; margin-bottom: 26px;">お願いしないこと</div>
+      <div style="display: flex; flex-direction: column; gap: 18px; font-size: 13px; line-height: 1.9; color: rgba(27, 22, 19, 0.55);">
+        <div style="display: flex; gap: 14px;"><span>□</span>仕様書を書いてもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>IT用語を覚えてもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>長い資料を読んで確認してもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>最初から完璧に使いこなしてもらう</div>
+        <div style="display: flex; gap: 14px;"><span>□</span>例外をすべて事前に洗い出してもらう</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 TO STAFF (letter) -->
+<div style="padding: 72px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); background: #EDE8D9;">
+  <div style="max-width: 820px; margin: 0 auto;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 28px; text-align: center;">03 — 現場の方へ</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: 16.5px; line-height: 2.5; letter-spacing: 0.06em; color: rgba(27, 22, 19, 0.85); text-align: center;">
+      今使っている紙・Excel・帳票を見せてください。<br>普段どおりの作業を見せてください。<br><br>こちらで作業の流れを整理し、<span style="color: #BE4633;">御社専用の見本アプリ</span>を作成します。<br><br>見本を見ながら、「この言葉の方が分かりやすい」<br>「この順番の方が見やすい」「ここは自動ではなく、人が確認したい」<br>といった違和感を教えてください。<br><br>現場のやり方を否定するのではなく、今の運用を読み解いて、<br>無理なく続けられる形に整えていきます。
+    </div>
+  </div>
+</div>
+
+<!-- 04 ONBOARDING -->
+<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">04 — 使い始めの1か月</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">使い始めの1か月は、特に気をつけます。</div>
+    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 24px 0 0;">導入して終わり、ではありません。<strong style="color: #BE4633;">最初の1〜3か月は、月額の範囲で重点的にサポート</strong>します。</p>
+  </div>
+  <div style="padding: 56px 48px;">
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(27, 22, 19, 0.2); font-size: 13px; line-height: 1.9;"><span style="color: #BE4633; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-top: 4px;">01</span>紙に戻っていないかを確認します</div>
+      <div style="display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(27, 22, 19, 0.2); font-size: 13px; line-height: 1.9;"><span style="color: #BE4633; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-top: 4px;">02</span>二重入力が発生していないかを確認します</div>
+      <div style="display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(27, 22, 19, 0.2); font-size: 13px; line-height: 1.9;"><span style="color: #BE4633; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-top: 4px;">03</span>職員さんが迷っているところを確認します</div>
+      <div style="display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(27, 22, 19, 0.2); font-size: 13px; line-height: 1.9;"><span style="color: #BE4633; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-top: 4px;">04</span>使われていない機能がないかを確認します</div>
+      <div style="display: flex; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(27, 22, 19, 0.2); border-bottom: 1px solid rgba(27, 22, 19, 0.2); font-size: 13px; line-height: 1.9;"><span style="color: #BE4633; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-top: 4px;">05</span>出てきた違和感は、その場で直すか、整理して直します</div>
+    </div>
+    <div style="margin-top: 26px; border: 1px solid rgba(27, 22, 19, 0.4); padding: 16px 24px;">
+      <p style="font-family: 'Zen Old Mincho', serif; font-size: 13.5px; line-height: 2; margin: 0; color: rgba(27, 22, 19, 0.8);">導入支援を別料金で取ることはしません。使い始めの不安は、月額の中でサポートします。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 05 FOR MANAGER -->
+<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
+  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">05 — 管理者の方へ</div>
+    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">説明を、ひとりで背負わなくて大丈夫です。</div>
+  </div>
+  <div style="padding: 56px 48px;">
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 16px;">必要に応じて現場に伺い、作っている途中の画面や出力を一緒に確認します。職員さんの違和感を早めに拾いながら、現場に合う形へ整えます。</p>
+    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 24px;">「導入したのに紙に戻った」「職員に反発された」── そういった失敗を、現場の横で一緒に整えることで減らしていきます。</p>
+    <a href="manager.html" style="font-size: 12px; letter-spacing: 0.12em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">管理者向けページを見る →</a>
+  </div>
+</div>
+
+<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
+  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
+    <div style="max-width: 720px;">
+      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">まずは、今のやり方を見せてください。</div>
+      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">初回相談は無料です。職員さんの不安を減らしたいというご相談だけでも歓迎します。</p>
+    </div>
+    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
+  </div>
+  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
+        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+      </div>
+      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
+        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
+        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
+        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
+        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
+        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
+        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
+        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
+        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
+        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
+    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+    <span>SAGAMIHARA, KANAGAWA</span>
+  </div>
+</div>
 </body>
 </html>
