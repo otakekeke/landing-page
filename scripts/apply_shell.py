@@ -31,7 +31,7 @@ NAV_SUB = """<!-- SITE SHELL v2 nav-sub -->
     </a>
     <div class="nav__links">
       <a href="index.html">トップ</a>
-      <a href="sample-app.html">見本アプリ</a>
+      <a href="sample-app.html">見本アプリとは</a>
       <a href="index.html#price">料金</a>
       <a href="company.html">運営者情報</a>
       <a href="index.html#contact" class="nav__cta">無料で相談する</a>
@@ -99,7 +99,7 @@ FOOTER_HOME = """<!-- SITE SHELL v2 footer -->
     </div>
     <div class="footer__bar">
       <span>© 2026 嶽ノ子 — TAKENOKONOKO</span>
-      <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+      <span>TEL 070-1383-4420 ／ 平日・土曜 9:00-18:00</span>
       <span>SAGAMIHARA, KANAGAWA</span>
     </div>
   </div>
