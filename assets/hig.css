@@ -191,11 +191,10 @@ strong { font-weight: 650; color: inherit; }
 .nav__cta:hover { background: var(--accent) !important; color: #fff6f1 !important; }
 
 .brand-mark {
-  width: 30px; height: 30px; border-radius: 9px; background: var(--accent);
-  display: grid; place-items: center; color: #fff6f1; font-weight: 900; font-size: 15px;
-  flex: none; line-height: 1;
+  width: 30px; height: 30px; border-radius: 9px;
+  flex: none; display: block; object-fit: contain;
 }
-.brand-mark--sm { width: 28px; height: 28px; font-size: 14px; }
+.brand-mark--sm { width: 28px; height: 28px; }
 
 /* ---------- Buttons ---------- */
 .btn {

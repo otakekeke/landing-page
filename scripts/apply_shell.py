@@ -8,7 +8,7 @@ NAV_HOME = """<!-- SITE SHELL v2 nav-home -->
 <nav class="nav" aria-label="メイン">
   <div class="nav__inner">
     <a href="index.html" class="nav__brand">
-      <span class="brand-mark" aria-hidden="true">嶽</span>
+      <img class="brand-mark" src="assets/favicon.svg" alt="" width="30" height="30">
       <span class="nav__brand-name">嶽ノ子</span>
     </a>
     <div class="nav__links">
@@ -26,7 +26,7 @@ NAV_SUB = """<!-- SITE SHELL v2 nav-sub -->
 <nav class="nav" aria-label="メイン">
   <div class="nav__inner">
     <a href="index.html" class="nav__brand">
-      <span class="brand-mark" aria-hidden="true">嶽</span>
+      <img class="brand-mark" src="assets/favicon.svg" alt="" width="30" height="30">
       <span class="nav__brand-name">嶽ノ子</span>
     </a>
     <div class="nav__links">
@@ -45,7 +45,7 @@ FOOTER_HOME = """<!-- SITE SHELL v2 footer -->
     <div class="footer__cols">
       <div>
         <div class="footer__brand-row">
-          <span class="brand-mark brand-mark--sm" aria-hidden="true">嶽</span>
+          <img class="brand-mark brand-mark--sm" src="assets/favicon.svg" alt="" width="28" height="28">
           <span class="footer__brand-name">嶽ノ子</span>
         </div>
         <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
