@@ -1,32 +1,31 @@
 # 嶽ノ子 ランディングページ
 
-これは、嶽ノ子が提供するオーダーメイド業務効率化アプリ（本サービス）のランディングページプロジェクトです。
+介護現場向けオーダーメイド業務アプリ「嶽ノ子」のランディングページです。静的 HTML + `assets/hig.css` で構成されています。
 
-## 概要
+## デザインシステム
 
-このランディングページは、サービスの紹介、導入事例、料金プラン、導入の流れ、お問い合わせフォームなどを提供します。
-静的なHTML、CSS、JavaScriptで構築されています。
+- **本番正本**: `index.html` および各サブページ（通常 HTML）
+- **デザイン CSS**: [`assets/hig.css`](assets/hig.css) — dc 暖色トークン + Apple HIG 準拠（system font、44px タッチターゲット、skip-link、`:focus-visible`、`prefers-reduced-motion`）
+- **参考のみ**: [`index.dc.html`](index.dc.html) — Dynamic Canvas 形式の参考デザイン（本番では使用しません）
+
+共通 nav / footer は各 HTML に `<!-- SITE SHELL v2 -->` マーカー付きで同一ブロックを埋め込んでいます。
+
+## ページ一覧
+
+| ファイル | 内容 |
+|---------|------|
+| `index.html` | メイン LP |
+| `manager.html` 他 FOR 系 4 | ターゲット別 LP |
+| `sample-app.html` | 見本アプリ |
+| `business-improvement.html` | 業務改善支援 |
+| `subsidy-app.html` | 国の補助金 |
+| `company.html` | 運営者情報 |
+| `privacy.html` / `terms.html` / `conflict-of-interest.html` | 法務 |
 
 ## デプロイ
 
-このサイトはGitHub Pagesでデプロイできます。
-
-1. このリポジトリをクローンします。
-2. GitHubリポジトリの Settings > Pages に移動します。
-3. デプロイ元 (Source) として `main` ブランチの `/(root)` フォルダを選択し、保存します。
-4. しばらくすると `https://<ユーザー名>.github.io/landing-page/` で公開されます。
-
-## ファイル構成
-
-- `index.html`: メインのランディングページ（7ブロック構成）
-- `company.html`: 会社概要ページ
-- `privacy.html`: プライバシーポリシーページ
-- `terms.html`: 利用規約ページ
-- `src/`:
-    - `css/style.css`: スタイルシート
-    - `js/app.js`: 共通UI（ナビ/スクロール/フォーム）
+GitHub Pages: Settings → Pages → `main` ブランチ `/ (root)` を選択。
 
 ## 連絡先
 
-嶽ノ子
-Email: kotaro.otake@takenokonoko.com
+嶽ノ子 — kotaro.otake@takenokonoko.com

@@ -12,97 +12,76 @@
 <link rel="stylesheet" href="assets/hig.css">
 </head>
 <body>
+<a href="#main" class="skip-link">本文へスキップ</a>
 
 <!-- ===================== NAV ===================== -->
-<nav class="nav">
+<!-- SITE SHELL v2 nav-home -->
+<nav class="nav" aria-label="メイン">
   <div class="nav__inner">
     <a href="index.html" class="nav__brand">
+      <span class="brand-mark" aria-hidden="true">嶽</span>
       <span class="nav__brand-name">嶽ノ子</span>
-      <span class="nav__brand-tag">TAKENOKONOKO</span>
     </a>
     <div class="nav__links">
-      <a href="#trust">00 姿勢</a>
-      <a href="#process">01 導入の流れ</a>
-      <a href="#examples">02 対応業務</a>
-      <a href="#price">03 料金</a>
-      <a href="#faq">04 よくある質問</a>
-      <a href="#contact" class="nav__cta">05 無料で相談する →</a>
+      <a href="#trust">嶽ノ子の姿勢</a>
+      <a href="#process">導入の流れ</a>
+      <a href="#examples">対応業務</a>
+      <a href="#price">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact" class="nav__cta">無料で相談する</a>
     </div>
   </div>
 </nav>
 
+<main id="main">
 <!-- ===================== HERO ===================== -->
-<header class="hero">
+<header class="hero hero--center" id="top">
   <div class="container">
-    <p class="eyebrow">介護現場のオーダーメイド業務アプリ ／ 無料相談 ／ ０円</p>
     <span class="tag tag--dot">介護現場の紙・Excel・手作業を、仕組みに</span>
     <h1 class="hero__title">今のやり方を、<br><span class="hl">見せてください</span>。</h1>
-    <div class="grid grid-2 mt-3" style="gap: 22px 44px; max-width: 900px;">
-      <p class="hero__lead" style="margin-top:0;">介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト作成・送迎管理・月次集計・申し送り・記録チェックなど。</p>
-      <p class="hero__lead" style="margin-top:0;">今使っている帳票やExcelを確認しながら、現場に合うアプリを作ります。細かい仕様書を書いていただく必要はありません。</p>
-    </div>
+    <p class="hero__lead">介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。今使っている帳票やExcelを確認しながら、現場に合うアプリを作ります。細かい仕様書を書いていただく必要はありません。</p>
     <div class="hero__actions">
       <a href="#contact" class="btn btn--primary btn--lg">無料で相談する <span>→</span></a>
-      <a href="#price" class="link">料金表を見る ↓</a>
+      <a href="#price" class="link-underline">料金表を見る</a>
     </div>
-    <div class="card card--accent mt-4" style="max-width: 560px;">
-      <p class="card__eyebrow" style="color: rgba(255,255,255,0.75);">私たちの約束</p>
-      <p class="h4" style="color:#fff;">仕様書も、IT用語も、必要ありません。</p>
+    <div class="chip-row mt-4" style="max-width:900px;margin-left:auto;margin-right:auto;">
+      <span class="chip">シフト作成</span>
+      <span class="chip">送迎管理</span>
+      <span class="chip">月次集計</span>
+      <span class="chip">申し送り</span>
+      <span class="chip">記録チェック</span>
+      <span class="chip">備品管理</span>
+      <span class="chip">家族連絡</span>
+      <span class="chip">利用者一覧</span>
     </div>
   </div>
 </header>
 
-<!-- ===================== TICKER ===================== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <div class="marquee__group">
-      <span class="marquee__item">シフト作成 SHIFT</span>
-      <span class="marquee__item">送迎管理 TRANSPORT</span>
-      <span class="marquee__item">月次集計 MONTHLY</span>
-      <span class="marquee__item">申し送り HANDOVER</span>
-      <span class="marquee__item">記録チェック RECORDS</span>
-      <span class="marquee__item">備品管理 SUPPLIES</span>
-      <span class="marquee__item">家族連絡 FAMILY</span>
-      <span class="marquee__item">利用者一覧 ROSTER</span>
-    </div>
-    <div class="marquee__group">
-      <span class="marquee__item">シフト作成 SHIFT</span>
-      <span class="marquee__item">送迎管理 TRANSPORT</span>
-      <span class="marquee__item">月次集計 MONTHLY</span>
-      <span class="marquee__item">申し送り HANDOVER</span>
-      <span class="marquee__item">記録チェック RECORDS</span>
-      <span class="marquee__item">備品管理 SUPPLIES</span>
-      <span class="marquee__item">家族連絡 FAMILY</span>
-      <span class="marquee__item">利用者一覧 ROSTER</span>
-    </div>
-  </div>
-</div>
-
 <!-- ===================== 00 TRUST ===================== -->
-<section id="trust" data-screen-label="00 姿勢" class="section" style="scroll-margin-top: 70px;">
+<section id="trust" data-screen-label="00 姿勢" class="section section--warm scroll-anchor">
   <div class="container">
-    <div class="section__head">
-      <p class="eyebrow">00 — 安心のお約束</p>
-      <h2 class="h2">「うまく説明できなくても、大丈夫です。」</h2>
+    <div class="section__head section__head--center">
+      <p class="eyebrow">嶽ノ子の姿勢</p>
+      <h2 class="h2">うまく説明できなくても、大丈夫です。</h2>
       <p class="lead">介護現場の業務は、毎日の中で自然に回っているため、言葉だけで説明するのが難しいことがあります。今使っている紙・Excel・帳票をこちらで読み解いて、必要な仕組みに整えます。「何を作りたいか」が決まっていなくても、相談できます。</p>
     </div>
     <div class="grid grid-2">
-      <div class="card">
-        <span class="tag tag--solid">お願いすること</span>
-        <div class="list list--plain mt-3">
-          <div class="list__row"><span class="mark">■</span><span>今使っている紙・Excelを見せてもらう</span></div>
-          <div class="list__row"><span class="mark">■</span><span>普段の作業の流れを見せてもらう</span></div>
-          <div class="list__row"><span class="mark">■</span><span>見本アプリを見て違和感を教えてもらう</span></div>
-          <div class="list__row"><span class="mark">■</span><span>現場の呼び方・言葉を教えてもらう</span></div>
+      <div class="card card--elevated card--xl">
+        <span class="panel-label panel-label--solid">お願いすること</span>
+        <div class="check-list">
+          <div class="check-list__item"><span class="check-list__icon" aria-hidden="true">✓</span><span>今使っている紙・Excelを見せてもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon" aria-hidden="true">✓</span><span>普段の作業の流れを見せてもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon" aria-hidden="true">✓</span><span>見本アプリを見て違和感を教えてもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon" aria-hidden="true">✓</span><span>現場の呼び方・言葉を教えてもらう</span></div>
         </div>
       </div>
-      <div class="card card--flat card--tint">
-        <span class="chip">お願いしないこと</span>
-        <div class="list list--plain mt-3">
-          <div class="list__row"><span class="mark mark--muted">□</span><span class="muted">仕様書を書いてもらう</span></div>
-          <div class="list__row"><span class="mark mark--muted">□</span><span class="muted">IT用語を覚えてもらう</span></div>
-          <div class="list__row"><span class="mark mark--muted">□</span><span class="muted">長い資料を読んで確認してもらう</span></div>
-          <div class="list__row"><span class="mark mark--muted">□</span><span class="muted">例外をすべて事前に洗い出してもらう</span></div>
+      <div class="card card--elevated card--xl">
+        <span class="panel-label panel-label--outline">お願いしないこと</span>
+        <div class="check-list muted">
+          <div class="check-list__item"><span class="check-list__icon check-list__icon--muted" aria-hidden="true">–</span><span>仕様書を書いてもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon check-list__icon--muted" aria-hidden="true">–</span><span>IT用語を覚えてもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon check-list__icon--muted" aria-hidden="true">–</span><span>長い資料を読んで確認してもらう</span></div>
+          <div class="check-list__item"><span class="check-list__icon check-list__icon--muted" aria-hidden="true">–</span><span>例外をすべて事前に洗い出してもらう</span></div>
         </div>
       </div>
     </div>
@@ -110,20 +89,20 @@
 </section>
 
 <!-- ===================== 01 PROCESS ===================== -->
-<section id="process" data-screen-label="01 導入の流れ" class="section section--tint" style="scroll-margin-top: 70px;">
+<section id="process" data-screen-label="01 導入の流れ" class="section scroll-anchor">
   <div class="container">
-    <div class="section__head" style="max-width: none; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:16px;">
+    <div class="process-head">
       <div>
-        <p class="eyebrow">01 — 導入の流れ</p>
+        <p class="eyebrow">導入の流れ</p>
         <h2 class="h2">契約前と契約後、それぞれにやること。</h2>
       </div>
-      <span class="stat__label">BEFORE ¥0 ／ AFTER 商品料金に含む</span>
+      <span class="process-head__meta">契約前 ¥0　／　契約後は商品料金に含む</span>
     </div>
     <div class="grid grid-2">
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
-          <span class="h4">契約前 — ０円</span>
-          <span class="card__eyebrow" style="color:var(--accent); margin:0;">BEFORE</span>
+      <div class="panel panel--warm">
+        <div class="panel__title">
+          <h3>契約前 — ０円</h3>
+          <span class="panel__badge">BEFORE</span>
         </div>
         <div class="steps">
           <div class="step"><span class="step__no">01</span><span class="step__text">初回訪問で、今の作業を見る</span></div>
@@ -132,10 +111,10 @@
           <div class="step"><span class="step__no">04</span><span class="step__text">2回目訪問で、見本アプリと費用を説明する</span></div>
         </div>
       </div>
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
-          <span class="h4">契約後 — 商品料金に含む</span>
-          <span class="card__eyebrow" style="margin:0;">AFTER</span>
+      <div class="panel panel--outline">
+        <div class="panel__title">
+          <h3>契約後 — 商品料金に含む</h3>
+          <span class="panel__badge panel__badge--muted">AFTER</span>
         </div>
         <div class="steps">
           <div class="step"><span class="step__no">05</span><span class="step__text">現場の横で、一緒に形を整える</span></div>
@@ -153,10 +132,10 @@
 </section>
 
 <!-- ===================== 02 BUSINESS ===================== -->
-<section id="examples" data-screen-label="02 対応業務" class="section" style="scroll-margin-top: 70px;">
+<section id="examples" data-screen-label="02 対応業務" class="section section--warm scroll-anchor">
   <div class="container">
     <div class="section__head">
-      <p class="eyebrow">02 — 対応業務</p>
+      <p class="eyebrow">対応業務</p>
       <h2 class="h2">対応できる業務。</h2>
     </div>
     <div class="chip-row">
@@ -179,7 +158,7 @@
 
     <div class="grid grid-3 mt-4 grid--stretch">
       <!-- EX 01 -->
-      <div class="card" style="display:flex; flex-direction:column;">
+      <div class="card card--elevated example-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
           <span class="card__eyebrow" style="margin:0;">EXAMPLE 01</span>
           <span class="tag tag--solid">特に多い</span>
@@ -192,7 +171,7 @@
           <div class="list__row"><span class="mark">・</span><span class="small">希望休・連勤・夜勤の確認に時間がかかる</span></div>
           <div class="list__row"><span class="mark">・</span><span class="small">職員ごとの勤務条件を記憶に頼っている</span></div>
         </div>
-        <div class="note note--accent" style="margin:18px 0;">
+        <div class="inset-note">
           <p class="card__eyebrow" style="color:var(--accent); margin:0 0 8px;">契約前に作る見本</p>
           <span>希望休・勤務条件を入れた<strong>シフト画面の見本</strong>。希望休フォーム、シフト案、人員配置警告の見え方まで確認できます。</span>
         </div>
@@ -205,7 +184,7 @@
         <a href="manager.html" class="link link--sm" style="margin-top:18px;">管理者向けページで詳しく →</a>
       </div>
       <!-- EX 02 -->
-      <div class="card" style="display:flex; flex-direction:column;">
+      <div class="card card--elevated example-card">
         <span class="card__eyebrow">EXAMPLE 02</span>
         <h3 class="h3">送迎表・送迎管理</h3>
         <p class="small accent" style="margin:6px 0 20px;">紙・Excel・電話確認を減らす。</p>
@@ -215,7 +194,7 @@
           <div class="list__row"><span class="mark">・</span><span class="small">欠席・追加利用で表が崩れる</span></div>
           <div class="list__row"><span class="mark">・</span><span class="small">運転者・添乗者・車椅子対応の確認が大変</span></div>
         </div>
-        <div class="note note--accent" style="margin:18px 0;">
+        <div class="inset-note">
           <p class="card__eyebrow" style="color:var(--accent); margin:0 0 8px;">契約前に作る見本</p>
           <span>利用者・車両・職員を一覧で見られる<strong>送迎表の見本</strong>。曜日別・車両別・印刷用フォーマットまで確認できます。</span>
         </div>
@@ -228,7 +207,7 @@
         <a href="dayservice.html" class="link link--sm" style="margin-top:18px;">デイサービス向けページで詳しく →</a>
       </div>
       <!-- EX 03 -->
-      <div class="card" style="display:flex; flex-direction:column;">
+      <div class="card card--elevated example-card">
         <span class="card__eyebrow">EXAMPLE 03</span>
         <h3 class="h3">月次集計・記録チェック</h3>
         <p class="small accent" style="margin:6px 0 20px;">転記・確認・報告書作成を減らす。</p>
@@ -238,7 +217,7 @@
           <div class="list__row"><span class="mark">・</span><span class="small">転記・確認漏れが心配で、結局見直す</span></div>
           <div class="list__row"><span class="mark">・</span><span class="small">記録の参照・検索に時間がかかる</span></div>
         </div>
-        <div class="note note--accent" style="margin:18px 0;">
+        <div class="inset-note">
           <p class="card__eyebrow" style="color:var(--accent); margin:0 0 8px;">契約前に作る見本</p>
           <span>日々の記録から<strong>集計結果が見える画面の見本</strong>。今のExcelのどこが置き換わるか、出力されるCSV・帳票まで確認できます。</span>
         </div>
@@ -256,9 +235,9 @@
 </section>
 
 <!-- ===================== SUBSIDY BANNER ===================== -->
-<section data-screen-label="国の補助金バナー" class="section--tight section--tint">
+<section data-screen-label="国の補助金バナー" class="section--tight">
   <div class="container">
-    <a href="subsidy-app.html" class="card" style="display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+    <a href="subsidy-app.html" class="subsidy-banner">
       <div style="flex:1; min-width:300px;">
         <span class="tag tag--dot">国の補助金について</span>
         <p class="h3" style="margin:12px 0 8px;">アプリ本体の導入費が、<span class="hl">国の補助対象</span>になり得ます。</p>
@@ -269,29 +248,29 @@
           <p class="stat__label">補助率</p>
           <div class="stat__value">1/2 <small>〜 2/3</small></div>
         </div>
-        <span class="link">採択された場合の料金を見る →</span>
+        <span class="link accent">採択された場合の料金を見る →</span>
       </div>
     </a>
   </div>
 </section>
 
 <!-- ===================== 03 PRICING ===================== -->
-<section id="price" data-screen-label="03 料金" class="section" style="scroll-margin-top: 70px;">
+<section id="price" data-screen-label="03 料金" class="section scroll-anchor">
   <div class="container">
     <div class="section__head" style="max-width:none;">
-      <p class="eyebrow">03 — 料金表</p>
+      <p class="eyebrow">料金表</p>
       <h2 class="h2">初期制作費＋月額運用サポート費。 <span class="tag" style="vertical-align:middle;">すべて税込・固定価格</span></h2>
       <p class="lead">料金は、<strong class="accent">初期制作費</strong>と<strong class="accent">月額運用サポート費</strong>の2つだけです。月額には、アプリの利用・保守・軽微修正・操作相談・導入後の定着支援を含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。複雑な条件・判定を含む案件のみ、目安価格＋個別見積りとさせていただきます。</p>
     </div>
 
     <!-- entry band -->
-    <div class="card card--outline-accent" style="display:grid; grid-template-columns:auto 1fr auto; gap:28px; align-items:center; background:var(--accent-soft);">
+    <div class="entry-band">
       <div>
         <p class="card__eyebrow" style="color:var(--accent); margin:0 0 8px;">ENTRY — 契約前まで</p>
         <span class="h3">無料相談・簡易診断</span>
       </div>
       <p class="small">契約前に<strong>完成イメージまで一緒に確認します。</strong>「何を作りたいか」が決まっていなくても、普段の作業と今お使いの紙・Excelを見せていただければ、こちらで見本アプリまで作ってご提示します。現場訪問が原則（遠方は交通費別途・またはオンライン併用）。個人名入りの資料の共有は不要です。</p>
-      <div class="accent" style="font-size:40px; font-weight:700; white-space:nowrap;">０円</div>
+      <div class="entry-band__price">０円</div>
     </div>
 
     <!-- products -->
@@ -382,44 +361,44 @@
 </section>
 
 <!-- ===================== 04 FAQ ===================== -->
-<section id="faq" data-screen-label="04 よくある質問" class="section section--tint" style="scroll-margin-top: 70px;">
-  <div class="container">
-    <div class="section__head">
-      <p class="eyebrow">04 — よくある質問</p>
-      <h2 class="h2">よくあるご質問。</h2>
+<section id="faq" data-screen-label="04 よくある質問" class="section section--warm scroll-anchor">
+  <div class="container faq-layout">
+    <div class="section__head" style="margin-bottom:0;">
+      <p class="eyebrow">よくある質問</p>
+      <h2 class="h2">よくある<br>ご質問。</h2>
       <p class="lead">ご検討時によくいただく質問をまとめました。記載がない事項についても、お気軽にお問い合わせください。</p>
     </div>
-    <div>
+    <div class="faq-panel">
       <details class="faq">
-        <summary><span class="faq__q">Q1</span><span class="faq__t">何を作りたいか、うまく説明できなくても大丈夫ですか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q1</span><span class="faq__t">何を作りたいか、うまく説明できなくても大丈夫ですか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">大丈夫です。<strong>初回訪問で普段の作業と、今お使いの紙・Excelを見せていただければ、こちらで業務を整理し、御社専用の見本アプリで完成イメージをご提示します。</strong>細かい仕様書を書いていただく必要はありません。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q2</span><span class="faq__t">現場に来て業務を見てもらえますか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q2</span><span class="faq__t">現場に来て業務を見てもらえますか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">はい。<strong>初回訪問・現場確認 → 持ち帰り整理・御社専用の見本アプリ作成 → 2回目訪問・見本アプリを見ながら確認</strong>までを契約前の無料サービスとして行います。契約後も、必要に応じて現場に伺い、一緒に形を整えます。遠方の場合はオンライン併用も可能です（交通費別途）。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q3</span><span class="faq__t">契約後に費用が膨らむことはありませんか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q3</span><span class="faq__t">契約後に費用が膨らむことはありませんか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">アプリ商品は固定価格でご提示します（初期制作費 ¥100,000〜／月額運用サポート費 ¥10,000〜）。表示価格で対応できる範囲を事前に明確にし、追加費用が発生する場合は作業前に必ず内容と金額をご説明します。合意のないまま費用が増えることはありません。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q4</span><span class="faq__t">月額はなぜ発生しますか？「アプリ使用料」ですか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q4</span><span class="faq__t">月額はなぜ発生しますか？「アプリ使用料」ですか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">月額は<strong>「アプリ使用料」ではなく、「運用サポート費」</strong>です。アプリの継続利用・保守・軽微修正・操作相談・職員入退職対応・導入後の定着支援をまとめて含みます。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q5</span><span class="faq__t">介護テクノロジー導入支援事業（ICT補助金）は使えますか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q5</span><span class="faq__t">介護テクノロジー導入支援事業（ICT補助金）は使えますか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">この県の補助金で対象になるのは、原則として<strong>カタログに登録された製品（テクノエイド協会のTAISに登録された介護テクノロジー等）</strong>です。当社のオーダーメイドアプリはこれに該当しないため、<strong>アプリ本体は県のこの補助金の対象外</strong>です。当社は自社アプリを県のこの補助金と結びつけてご案内することはしません。ただし、補助金を活用したソフト・機器の導入時の<strong>業務整理・定着支援（業務改善支援）は補助対象経費となる場合があります</strong>。嶽ノ子は、補助金で導入したソフトの周辺に残る紙・Excel業務の仕組み化を得意としています。詳しくは <a href="business-improvement.html">業務改善支援ページ</a> をご覧ください。（アプリ本体は、別制度の<a href="subsidy-app.html">国の省力化投資補助金</a>で対象になり得る場合があります。）</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q6</span><span class="faq__t">導入までどのくらいかかりますか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q6</span><span class="faq__t">導入までどのくらいかかりますか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">契約前に<strong>初回訪問 → 持ち帰り整理＋見本アプリ作成 → 2回目訪問</strong>までを行います。契約後は現場の横で同席しながら開発します。紙・Excel改善パックなど小規模は2〜4週間、標準アプリは1〜2か月、複雑な条件・判定を含むものは2〜4か月程度が目安です。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q7</span><span class="faq__t">個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q7</span><span class="faq__t">個人情報を扱う場合、セキュリティ・法令は大丈夫ですか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">介護に関する情報は要配慮個人情報を含み得るため、特に丁寧に扱います。Google Workspaceを前提とした運用構成、アクセス権限設計、操作記録、データ保存・委託先監督の方針を、導入前に書面でお伝えします。開発時の実データ利用は原則匿名化、または別環境で扱います。</p>
       </details>
       <details class="faq">
-        <summary><span class="faq__q">Q8</span><span class="faq__t">解約はできますか？</span><span class="faq__plus">＋</span></summary>
+        <summary><span class="faq__q">Q8</span><span class="faq__t">解約はできますか？</span><span class="faq__chevron" aria-hidden="true">▾</span></summary>
         <p class="faq__a">はい、解約できます。契約は月単位で、毎月末までにお申し出いただくことで翌月に解約となります（日割りはありません）。解約後は保守・修正・問い合わせ対応の対象外となります。お客様のGoogle Workspace内に保存されたデータはお客様のものとして残り、必要に応じてCSV等でエクスポートできます。</p>
       </details>
     </div>
@@ -427,34 +406,30 @@
 </section>
 
 <!-- ===================== 05 CONTACT ===================== -->
-<section id="contact" data-screen-label="05 お問い合わせ" class="section" style="scroll-margin-top: 70px;">
-  <div class="container">
-    <div class="section__head">
-      <p class="eyebrow">05 — お問い合わせ</p>
-      <h2 class="h2">今のやり方を、見せてください。</h2>
-      <p class="lead">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong>「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、アプリにできそうな範囲と、概算費用をご案内します。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
-    </div>
-
-    <div class="grid grid-3 mt-2">
-      <div class="card card--tint card--flat">
-        <p class="card__eyebrow" style="color:var(--accent);">TEL</p>
-        <div class="h4">070-1383-4420</div>
-        <p class="tiny" style="margin-top:4px;">平日・土曜 9:00 - 18:00（日本時間）</p>
-      </div>
-      <div class="card card--tint card--flat">
-        <p class="card__eyebrow" style="color:var(--accent);">EMAIL</p>
-        <div class="h4"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a21253e2b382564253e2b212f0a3e2b212f242521252425212564292527">[email&#160;protected]</a></div>
-        <p class="tiny" style="margin-top:4px;">通常2営業日以内に返信いたします</p>
-      </div>
-      <div class="card card--tint card--flat">
-        <p class="card__eyebrow" style="color:var(--accent);">LINE</p>
-        <div class="h4">公式LINEアカウント</div>
-        <p class="tiny" style="margin-top:4px;">導入後のサポートにご利用ください</p>
+<section id="contact" data-screen-label="05 お問い合わせ" class="section scroll-anchor">
+  <div class="container contact-split">
+    <div class="contact-info">
+      <p class="eyebrow">お問い合わせ</p>
+      <h2 class="h2">今のやり方を、<br>見せてください。</h2>
+      <p class="small">無料相談・簡易診断は0円です（現場訪問が中心。遠方の場合はオンライン併用）。<strong>「何を作りたいか」が決まっていなくても大丈夫です。</strong>今使っている紙・Excel・帳票・シフト表などを見せていただきながら、アプリにできそうな範囲と、概算費用をご案内します。<br><strong>現在は品質を保つため、代表が直接対応できる件数に絞ってお受けしています。</strong></p>
+      <div class="contact-info__rows">
+        <div class="contact-row">
+          <span class="contact-row__key">TEL</span>
+          <div><div class="h4">070-1383-4420</div><p class="tiny" style="margin-top:4px;">平日・土曜 9:00 - 18:00（日本時間）</p></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row__key">EMAIL</span>
+          <div><div class="h4"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a21253e2b382564253e2b212f0a3e2b212f242521252425212564292527">[email&#160;protected]</a></div><p class="tiny" style="margin-top:4px;">通常2営業日以内に返信いたします</p></div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row__key">LINE</span>
+          <div><div class="h4">公式LINEアカウント</div><p class="tiny" style="margin-top:4px;">導入後のサポートにご利用ください</p></div>
+        </div>
       </div>
     </div>
 
-    <div class="card mt-4">
-      <p class="card__eyebrow">— お問い合わせフォーム</p>
+    <div class="card card--elevated">
+      <p class="card__eyebrow">お問い合わせフォーム</p>
       <form id="contactForm" class="flow">
         <div class="form-grid">
           <label class="field">
@@ -557,28 +532,47 @@
   </div>
 </section>
 
+<!-- ===================== PRE-FOOTER CTA ===================== -->
+<div class="cta-banner-wrap">
+  <div class="cta-banner">
+    <div class="cta-banner__inner">
+      <div>
+        <h2 class="cta-banner__title">今のやり方を、見せてください。</h2>
+        <p class="cta-banner__lead">無料相談・簡易診断は０円。現場訪問が中心。代表が直接対応します。</p>
+      </div>
+      <a href="#contact" class="btn btn--primary btn--lg">無料で相談する <span>→</span></a>
+    </div>
+  </div>
+</div>
+
+</main>
+
 <!-- ===================== FOOTER ===================== -->
-<footer class="footer">
+<!-- SITE SHELL v2 footer -->
+<footer class="footer footer--warm">
   <div class="footer__inner">
     <div class="footer__cols">
       <div>
-        <div class="footer__brand-name">嶽ノ子</div>
+        <div class="footer__brand-row">
+          <span class="brand-mark brand-mark--sm" aria-hidden="true">嶽</span>
+          <span class="footer__brand-name">嶽ノ子</span>
+        </div>
         <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
       </div>
       <div>
-        <p class="footer__col-h">Service</p>
+        <p class="footer__col-h">SERVICE</p>
         <div class="footer__links">
           <a href="#trust">嶽ノ子の姿勢</a>
-          <a href="#process">契約前と契約後にやること</a>
+          <a href="#process">導入の流れ</a>
           <a href="#examples">対応業務</a>
           <a href="#price">料金</a>
           <a href="sample-app.html">見本アプリとは</a>
-          <a href="business-improvement.html">業務改善支援(県のICT補助金)</a>
+          <a href="business-improvement.html">業務改善支援</a>
           <a href="subsidy-app.html">国の補助金について</a>
         </div>
       </div>
       <div>
-        <p class="footer__col-h">For</p>
+        <p class="footer__col-h">FOR</p>
         <div class="footer__links">
           <a href="manager.html">管理者の方へ</a>
           <a href="staff.html">現場職員の方へ</a>
@@ -587,7 +581,7 @@
         </div>
       </div>
       <div>
-        <p class="footer__col-h">Company</p>
+        <p class="footer__col-h">COMPANY</p>
         <div class="footer__links">
           <a href="company.html">運営者情報</a>
           <a href="privacy.html">個人情報保護方針</a>
@@ -597,22 +591,23 @@
       </div>
     </div>
     <div class="footer__disclaimer">
-      <p class="h">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</p>
+      <p class="h">役務の範囲と責任の所在</p>
       <p>当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
     </div>
     <div class="footer__security">
       <p class="h">SECURITY ACTION ／ 情報セキュリティ対策</p>
       <div class="footer__security-row">
         <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge">
-          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108">
+          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="72" height="72">
         </a>
         <div class="footer__security-text">
           <p>独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
           <p class="footer__security-id">自己宣言ID：50000228580</p>
         </div>
       </div>
-    </div>    <div class="footer__bar">
-      <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+    </div>
+    <div class="footer__bar">
+      <span>© 2026 嶽ノ子 — TAKENOKONOKO</span>
       <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
       <span>SAGAMIHARA, KANAGAWA</span>
     </div>
