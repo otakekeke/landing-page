@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -6,246 +6,298 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>管理者の方へ — 嶽ノ子</title>
 <meta name="description" content="シフト・集計・確認作業に追われる管理者の時間を減らす手助けを。今使っているExcel・帳票を見せていただければ、こちらで整理して御社専用の見本アプリまで作ってご提示します。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-</style>
+<meta property="og:title" content="管理者の方へ — 嶽ノ子">
+<meta property="og:description" content="シフト・集計・確認作業に追われる管理者の時間を減らす手助けを。今使っているExcel・帳票を見せていただければ、こちらで整理して御社専用の見本アプリまで作ってご提示します。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/hig.css">
 </head>
 <body>
-<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
-    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
-      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">
+      <span class="nav__brand-name">嶽ノ子</span>
+      <span class="nav__brand-tag">TAKENOKONOKO</span>
     </a>
-    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
-      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
-      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
-      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
-      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
-      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
+    <div class="nav__links">
+      <a href="index.html">トップ</a>
+      <a href="sample-app.html">見本アプリとは</a>
+      <a href="index.html#price">料金</a>
+      <a href="company.html">運営者情報</a>
+      <a href="index.html#contact" class="nav__cta">無料で相談する →</a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- HERO -->
-<div data-screen-label="manager: HERO" style="display: grid; grid-template-columns: 1fr 320px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 64px 56px 56px; border-right: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
-    <div style="position: absolute; right: -20px; top: 0; font-family: 'Zen Old Mincho', serif; font-size: 260px; font-weight: 900; line-height: 1.1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.13); pointer-events: none;">管</div>
-    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 34px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>FOR — 管理者の方へ</div>
-    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(36px, 4.4vw, 60px); font-weight: 700; line-height: 1.42; letter-spacing: 0.02em; margin: 0 0 30px; position: relative;">シフト・集計・確認作業に追われる<br>管理者の時間を、<span style="background: linear-gradient(transparent 68%, rgba(190, 70, 51, 0.35) 68%);">減らす手助けを</span>。</h1>
-    <p style="font-size: 13px; line-height: 2.15; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); max-width: 46em; margin: 0; position: relative;">毎月ゼロからシフトを組み、希望休を回収し、月次集計に時間を取られ、職員からの確認にも追われている。今使っているExcel・帳票を見せていただければ、こちらで整理して<strong style="color: #BE4633;">御社専用の見本アプリ</strong>まで作ってご提示します。</p>
-  </div>
-  <div style="padding: 64px 40px 56px; display: flex; flex-direction: column; gap: 0;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 20px;">先にお伝えしたいこと</div>
-    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">契約前まで ０円</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">初回訪問から見本アプリの提示まで無料</div></div>
-    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">代表が直接対応</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">相談から開発・運用まで担当が変わりません</div></div>
-    <div style="padding: 16px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25);"><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 5px;">仕様書は不要</div><div style="font-size: 11.5px; color: rgba(27, 22, 19, 0.6); line-height: 1.8;">今のExcel・帳票を見せていただくだけ</div></div>
-  </div>
-</div>
-
-<!-- 01 PAIN -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">01 — お困りごと</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">こんなお困りごとはありませんか？</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 48px;">
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">一</span><span style="font-size: 13px; line-height: 1.9;">シフトを毎月ゼロから作っている</span></div>
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">二</span><span style="font-size: 13px; line-height: 1.9;">希望休の確認・回収が大変</span></div>
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">三</span><span style="font-size: 13px; line-height: 1.9;">集計・転記に時間がかかる</span></div>
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">四</span><span style="font-size: 13px; line-height: 1.9;">職員からの確認依頼が多い</span></div>
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">五</span><span style="font-size: 13px; line-height: 1.9;">月末処理が重く、定時で帰れない</span></div>
-    <div style="display: flex; gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(27, 22, 19, 0.2);"><span style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; color: rgba(27, 22, 19, 0.3);">六</span><span style="font-size: 13px; line-height: 1.9;">夜勤明け・連勤・配置の確認漏れが心配</span></div>
-  </div>
-</div>
-
-<!-- 02 OBSERVE -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">02 — まず見せてください</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">まず、今のExcel・帳票を見せてください。</div>
-  </div>
-  <div style="padding: 56px 48px;">
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 16px;">今使っているシフト表、希望休フォーム、勤務区分表、人員配置表、月次集計表を確認します。</p>
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 24px;">うまく説明できなくても大丈夫です。実際の表を見ながら、<strong style="color: #BE4633;">どこを楽にできそうかをこちらで整理</strong>します。</p>
-    <p style="font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.55); border-top: 1px dashed rgba(27, 22, 19, 0.25); padding-top: 16px; margin: 0;">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</p>
-  </div>
-</div>
-
-<!-- 03 SAMPLE APP -->
-<div style="background: #1B1613; color: #F3EFE4; padding: 64px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #E8A08F;">03 — 見本アプリ</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">契約前に、御社専用の見本アプリを作成します。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px;">
-    <div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 22px; font-weight: 700; line-height: 1.8; letter-spacing: 0.05em; margin-bottom: 18px;">確認した内容をもとに、<br><span style="color: #E8A08F;">画面・一覧・印刷物の見本</span>を作ります。</div>
-      <p style="font-size: 12.5px; line-height: 2.1; color: rgba(243, 239, 228, 0.72); margin: 0 0 22px;">「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
-      <p style="font-size: 11px; line-height: 1.9; color: rgba(243, 239, 228, 0.5); margin: 0; border-top: 1px dashed rgba(243, 239, 228, 0.25); padding-top: 14px;">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</p>
-    </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; align-content: start;">
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>希望休フォーム（職員入力）</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>シフト案の画面</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>勤務区分・連勤チェックの警告画面</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>人員配置の確認画面</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>印刷用シフト表</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>月次集計の見本</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); border-bottom: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>勤務実績の確認画面</div>
-      <div style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(243, 239, 228, 0.15); border-bottom: 1px solid rgba(243, 239, 228, 0.15); font-size: 12.5px; line-height: 1.8;"><span style="color: #BE4633;">■</span>職員からの確認画面（共有用）</div>
-    </div>
-  </div>
-</div>
-
-<!-- 04 TOGETHER -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">04 — 契約後</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">契約後は、現場の横で一緒に整えます。</div>
-  </div>
-  <div style="padding: 56px 48px;">
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 22px;">契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。<strong style="color: #BE4633;">完全自動ではなく、最後は管理者が確認・調整できる形</strong>が基本です。</p>
-    <div style="background: #EDE8D9; padding: 22px 28px; margin-bottom: 22px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; line-height: 2.2; letter-spacing: 0.05em; color: rgba(27, 22, 19, 0.85);">「この人とこの人は同じシフトにしない」<br>「夜勤明けの翌日は早番にしない」<br>「この勤務区分は人数を絞りたい」</div>
-    </div>
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0;">そういった現場の感覚・判断は、管理者が確認・調整できる形に残します。</p>
-  </div>
-</div>
-
-<!-- 05 CAN DO -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 32px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">05 — できること</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">できることの例。</h2>
-  </div>
-  <div style="display: flex; flex-wrap: wrap; border: 1px solid rgba(27, 22, 19, 0.35); border-right: none; margin-bottom: 16px;">
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">希望休回収（職員入力フォーム）</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">シフト案の自動作成（管理者が最終調整）</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">勤務区分・連勤チェック</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">人員配置の警告表示</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">夜勤明け・休日数・偏りの確認</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">Excel・PDF出力／印刷用シフト</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">勤務実績の集計</span>
-    <span style="font-size: 12px; letter-spacing: 0.08em; padding: 13px 22px; border-right: 1px solid rgba(27, 22, 19, 0.35);">職員からの確認・問い合わせ削減</span>
-  </div>
-  <p style="font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.55); margin: 0;">※ 法令や人員配置基準に関わる最終判断は、事業所様にてお願いします。嶽ノ子が担当するのは、判断を助ける警告表示までです。</p>
-</div>
-
-<!-- 06 PRICE -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 32px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">06 — 料金の目安</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">シフト作成を含む場合の、料金の目安。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
-    <div style="border-top: 3px solid #BE4633; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">多くの場合</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 16px;">複雑な条件・判定に対応</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 700; line-height: 1;">¥800,000〜</div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 16px;">＋ ¥50,000〜 /月（税込・個別見積り）</div>
-      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">シフト案の自動作成・人員配置チェックなど、複雑な条件・判定を含む場合。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 12px;">範囲が狭い場合</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 16px;">標準アプリ</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 32px; font-weight: 700; line-height: 1;">¥550,000</div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(27, 22, 19, 0.6); margin: 10px 0 16px;">＋ ¥30,000 /月（税込・固定価格）</div>
-      <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">希望休回収・人員配置警告までの範囲なら、こちらで対応できることもあります。</p>
-    </div>
-  </div>
-  <div style="margin-top: 32px; border: 1px solid rgba(27, 22, 19, 0.4); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
-    <p style="font-size: 12.5px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.75);">月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談を含みます。正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</p>
-    <a href="index.html#price" style="font-size: 12px; letter-spacing: 0.12em; color: #BE4633; border-bottom: 1px solid #BE4633; padding-bottom: 2px; white-space: nowrap;">料金プラン全体を見る →</a>
-  </div>
-</div>
-
-<!-- 07 FREE CONSULT -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">07 — 無料相談</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">まずは無料で、ここまで確認できます。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 01 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">初回訪問で、<br>今の作業を見る</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 02 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">持ち帰って、<br>作業の流れを整理する</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 03 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">御社専用の<br>見本アプリを作る</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 04 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 1.8; letter-spacing: 0.04em;">2回目訪問で、<br>見本と費用を説明する</div></div>
-  </div>
-</div>
-
-<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
-  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
-    <div style="max-width: 720px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">シフト・集計のことを、まず話してみませんか？</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">初回相談は無料です。今使っているExcelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
-    </div>
-    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
-  </div>
-  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
-    <div>
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
-        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+<!-- ===================== HERO ===================== -->
+<header class="hero" data-screen-label="manager: HERO">
+  <div class="container">
+    <span class="tag tag--dot">FOR — 管理者の方へ</span>
+    <h1 class="hero__title">シフト・集計・確認作業に追われる<br>管理者の時間を、<span class="hl">減らす手助けを</span>。</h1>
+    <p class="hero__lead">毎月ゼロからシフトを組み、希望休を回収し、月次集計に時間を取られ、職員からの確認にも追われている。今使っているExcel・帳票を見せていただければ、こちらで整理して<strong class="accent">御社専用の見本アプリ</strong>まで作ってご提示します。</p>
+    <div class="grid grid-3 mt-4 grid--stretch">
+      <div class="card card--tint card--flat">
+        <p class="card__eyebrow" style="color:var(--accent);">先にお伝えしたいこと</p>
+        <div class="h4">契約前まで ０円</div>
+        <p class="small" style="margin-top:6px;">初回訪問から見本アプリの提示まで無料</p>
       </div>
-      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
-        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
-        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
-        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
-        <a href="business-improvement.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">業務改善支援</a>
+      <div class="card card--tint card--flat">
+        <p class="card__eyebrow" style="color:var(--accent);">先にお伝えしたいこと</p>
+        <div class="h4">代表が直接対応</div>
+        <p class="small" style="margin-top:6px;">相談から開発・運用まで担当が変わりません</p>
       </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
-        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
-        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
-        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
-        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
-        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
-        <a href="conflict-of-interest.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利益相反管理規程</a>
-        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
+      <div class="card card--tint card--flat">
+        <p class="card__eyebrow" style="color:var(--accent);">先にお伝えしたいこと</p>
+        <div class="h4">仕様書は不要</div>
+        <p class="small" style="margin-top:6px;">今のExcel・帳票を見せていただくだけ</p>
       </div>
     </div>
   </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 12px;">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</div>
-    <p style="font-size: 11px; line-height: 2; color: rgba(243, 239, 228, 0.55); margin: 0;">当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
-  </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 14px;">SECURITY ACTION ／ 情報セキュリティ対策</div>
-    <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-      <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" style="display: block; flex-shrink: 0; line-height: 0; background: #fff; border-radius: 4px; padding: 4px;">
-        <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108" style="display: block; width: 108px; height: auto;">
-      </a>
-      <div style="min-width: 220px; flex: 1;">
-        <p style="font-size: 10.5px; line-height: 1.95; color: rgba(243, 239, 228, 0.55); margin: 0 0 8px;">独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(243, 239, 228, 0.45); margin: 0;">自己宣言ID：50000228580</p>
+</header>
+
+<!-- ===================== 01 PAIN ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">01 — お困りごと</p>
+      <h2 class="h2">こんなお困りごとはありませんか？</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">一</span><span>シフトを毎月ゼロから作っている</span></div>
+      </div>
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">二</span><span>希望休の確認・回収が大変</span></div>
+      </div>
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">三</span><span>集計・転記に時間がかかる</span></div>
+      </div>
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">四</span><span>職員からの確認依頼が多い</span></div>
+      </div>
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">五</span><span>月末処理が重く、定時で帰れない</span></div>
+      </div>
+      <div class="list list--plain">
+        <div class="list__row"><span class="mark">六</span><span>夜勤明け・連勤・配置の確認漏れが心配</span></div>
       </div>
     </div>
   </div>
-  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
-    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
-    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
-    <span>SAGAMIHARA, KANAGAWA</span>
+</section>
+
+<!-- ===================== 02 OBSERVE ===================== -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">02 — まず見せてください</p>
+      <h2 class="h2">まず、今のExcel・帳票を見せてください。</h2>
+    </div>
+    <div class="flow" style="max-width: 720px;">
+      <p class="body">今使っているシフト表、希望休フォーム、勤務区分表、人員配置表、月次集計表を確認します。</p>
+      <p class="body">うまく説明できなくても大丈夫です。実際の表を見ながら、<strong class="accent">どこを楽にできそうかをこちらで整理</strong>します。</p>
+      <div class="note note--outline">※ 初回時点で、個人名入りの資料を共有いただく必要はありません。匿名化したサンプルでも確認できます。</div>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- ===================== 03 SAMPLE APP ===================== -->
+<section class="section section--contrast">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">03 — 見本アプリ</p>
+      <h2 class="h2" style="color: var(--contrast-ink);">契約前に、御社専用の見本アプリを作成します。</h2>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <p class="h3" style="color: var(--contrast-ink);">確認した内容をもとに、<br><span class="accent">画面・一覧・印刷物の見本</span>を作ります。</p>
+        <p class="body mt-3">「どんなアプリになるのか分からない」まま契約する必要はありません。実際の見本を見ながら、この形なら使えそうか、どこまで作るとよさそうか、費用はどれくらいかを確認できます。</p>
+        <div class="note note--outline mt-3" style="border-color: var(--contrast-hairline); color: var(--contrast-ink-2);">※ 見本アプリは、契約前に完成イメージを確認するためのものです。実際に業務で使うアプリの作成は、契約後に行います。</div>
+      </div>
+      <div class="card card--contrast">
+        <div class="list list--plain">
+          <div class="list__row"><span class="mark">■</span><span>希望休フォーム（職員入力）</span></div>
+          <div class="list__row"><span class="mark">■</span><span>シフト案の画面</span></div>
+          <div class="list__row"><span class="mark">■</span><span>勤務区分・連勤チェックの警告画面</span></div>
+          <div class="list__row"><span class="mark">■</span><span>人員配置の確認画面</span></div>
+          <div class="list__row"><span class="mark">■</span><span>印刷用シフト表</span></div>
+          <div class="list__row"><span class="mark">■</span><span>月次集計の見本</span></div>
+          <div class="list__row"><span class="mark">■</span><span>勤務実績の確認画面</span></div>
+          <div class="list__row"><span class="mark">■</span><span>職員からの確認画面（共有用）</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 TOGETHER ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">04 — 契約後</p>
+      <h2 class="h2">契約後は、現場の横で一緒に整えます。</h2>
+    </div>
+    <div class="flow" style="max-width: 760px;">
+      <p class="body">契約後は、必要に応じて現場に伺い、作っている途中の画面や出力を見ながら調整します。<strong class="accent">完全自動ではなく、最後は管理者が確認・調整できる形</strong>が基本です。</p>
+      <div class="note note--accent">「この人とこの人は同じシフトにしない」<br>「夜勤明けの翌日は早番にしない」<br>「この勤務区分は人数を絞りたい」</div>
+      <p class="body">そういった現場の感覚・判断は、管理者が確認・調整できる形に残します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 CAN DO ===================== -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">05 — できること</p>
+      <h2 class="h2">できることの例。</h2>
+    </div>
+    <div class="chip-row">
+      <span class="chip">希望休回収（職員入力フォーム）</span>
+      <span class="chip">シフト案の自動作成（管理者が最終調整）</span>
+      <span class="chip">勤務区分・連勤チェック</span>
+      <span class="chip">人員配置の警告表示</span>
+      <span class="chip">夜勤明け・休日数・偏りの確認</span>
+      <span class="chip">Excel・PDF出力／印刷用シフト</span>
+      <span class="chip">勤務実績の集計</span>
+      <span class="chip">職員からの確認・問い合わせ削減</span>
+    </div>
+    <p class="small mt-3">※ 法令や人員配置基準に関わる最終判断は、事業所様にてお願いします。嶽ノ子が担当するのは、判断を助ける警告表示までです。</p>
+  </div>
+</section>
+
+<!-- ===================== 06 PRICE ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">06 — 料金の目安</p>
+      <h2 class="h2">シフト作成を含む場合の、料金の目安。</h2>
+    </div>
+    <div class="grid grid-2 grid--stretch">
+      <div class="price">
+        <p class="price__eyebrow">多くの場合</p>
+        <p class="price__name">複雑な条件・判定に対応</p>
+        <div class="price__amount">¥800,000〜</div>
+        <p class="price__period">＋ ¥50,000〜 /月（税込・個別見積り）</p>
+        <p class="price__desc">シフト案の自動作成・人員配置チェックなど、複雑な条件・判定を含む場合。</p>
+      </div>
+      <div class="price">
+        <p class="price__eyebrow">範囲が狭い場合</p>
+        <p class="price__name">標準アプリ</p>
+        <div class="price__amount">¥550,000</div>
+        <p class="price__period">＋ ¥30,000 /月（税込・固定価格）</p>
+        <p class="price__desc">希望休回収・人員配置警告までの範囲なら、こちらで対応できることもあります。</p>
+      </div>
+    </div>
+    <div class="note note--outline mt-3" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px;">
+      <span>月額運用サポート費には、アプリの利用・保守・軽微修正・操作相談を含みます。正確な金額は、現場の資料を見たうえで、契約前に提示する見本アプリと一緒にお伝えします。</span>
+      <a href="index.html#price" class="link link--sm">料金プラン全体を見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 FREE CONSULT ===================== -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">07 — 無料相談</p>
+      <h2 class="h2">まずは無料で、ここまで確認できます。</h2>
+    </div>
+    <div class="grid grid-4 grid--stretch">
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 01 — ¥0</p>
+        <p class="h4">初回訪問で、<br>今の作業を見る</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 02 — ¥0</p>
+        <p class="h4">持ち帰って、<br>作業の流れを整理する</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 03 — ¥0</p>
+        <p class="h4">御社専用の<br>見本アプリを作る</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 04 — ¥0</p>
+        <p class="h4">2回目訪問で、<br>見本と費用を説明する</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="section section--contrast">
+  <div class="container">
+    <div class="section__head" style="max-width:none; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:32px; margin-bottom:0;">
+      <div style="max-width: 720px;">
+        <h2 class="h2" style="color: var(--contrast-ink);">シフト・集計のことを、まず話してみませんか？</h2>
+        <p class="lead">初回相談は無料です。今使っているExcelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
+      </div>
+      <a href="index.html#contact" class="btn btn--primary btn--lg">無料で相談する <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
+      <div>
+        <div class="footer__brand-name">嶽ノ子</div>
+        <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
+      </div>
+      <div>
+        <p class="footer__col-h">Service</p>
+        <div class="footer__links">
+          <a href="#trust">嶽ノ子の姿勢</a>
+          <a href="#process">契約前と契約後にやること</a>
+          <a href="#examples">対応業務</a>
+          <a href="#price">料金</a>
+          <a href="sample-app.html">見本アプリとは</a>
+          <a href="business-improvement.html">業務改善支援(県のICT補助金)</a>
+          <a href="subsidy-app.html">国の補助金について</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">For</p>
+        <div class="footer__links">
+          <a href="manager.html">管理者の方へ</a>
+          <a href="staff.html">現場職員の方へ</a>
+          <a href="dayservice.html">デイサービスの方へ</a>
+          <a href="small-facility.html">小規模事業所の方へ</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">Company</p>
+        <div class="footer__links">
+          <a href="company.html">運営者情報</a>
+          <a href="privacy.html">個人情報保護方針</a>
+          <a href="terms.html">利用規約</a>
+          <a href="conflict-of-interest.html">利益相反管理規程</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__disclaimer">
+      <p class="h">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</p>
+      <p>当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
+    </div>
+    <div class="footer__security">
+      <p class="h">SECURITY ACTION ／ 情報セキュリティ対策</p>
+      <div class="footer__security-row">
+        <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge">
+          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108">
+        </a>
+        <div class="footer__security-text">
+          <p>独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
+          <p class="footer__security-id">自己宣言ID：50000228580</p>
+        </div>
+      </div>
+    </div>    <div class="footer__bar">
+      <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+      <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+      <span>SAGAMIHARA, KANAGAWA</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

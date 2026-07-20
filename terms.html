@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -6,325 +6,303 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>利用規約 — 嶽ノ子</title>
 <meta name="description" content="嶽ノ子が提供するGASベースの業務効率化アプリの利用規約および個人情報取扱い契約（DPA）。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-</style>
+<link rel="stylesheet" href="assets/hig.css">
 </head>
 <body>
-<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
-    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
-      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">
+      <span class="nav__brand-name">嶽ノ子</span>
+      <span class="nav__brand-tag">TAKENOKONOKO</span>
     </a>
-    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
-      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
-      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
-      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
-      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
-      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
+    <div class="nav__links">
+      <a href="index.html">トップ</a>
+      <a href="sample-app.html">見本アプリとは</a>
+      <a href="index.html#price">料金</a>
+      <a href="company.html">運営者情報</a>
+      <a href="index.html#contact" class="nav__cta">無料で相談する →</a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- HERO -->
-<div data-screen-label="terms: HERO" style="padding: 64px 56px 48px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="max-width: 860px; margin: 0 auto;">
-    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 30px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>TERMS OF SERVICE</div>
-    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(32px, 3.6vw, 48px); font-weight: 700; line-height: 1.5; letter-spacing: 0.03em; margin: 0 0 20px;">利用規約。</h1>
-    <p style="font-size: 13px; line-height: 2.15; color: rgba(27, 22, 19, 0.78); margin: 0 0 20px;">本規約は、乙：<strong>嶽ノ子</strong>（以下「乙」）が提供する<strong>GASベースの業務効率化アプリ</strong>（以下「本サービス」）を、<strong>甲：お客様（法人・個人の事業者等）</strong>が利用する際の条件を定めるものです。Google Apps Script版／GASベースのオーダーメイド業務効率化アプリに適用されます。</p>
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: rgba(27, 22, 19, 0.55);">最終更新日：2025年09月14日</div>
+<!-- ===================== HERO ===================== -->
+<header class="hero" data-screen-label="terms: HERO">
+  <div class="container container--narrow">
+    <p class="eyebrow">TERMS OF SERVICE</p>
+    <h1 class="hero__title">利用規約。</h1>
+    <p class="hero__lead">本規約は、乙：<strong>嶽ノ子</strong>（以下「乙」）が提供する<strong>GASベースの業務効率化アプリ</strong>（以下「本サービス」）を、<strong>甲：お客様（法人・個人の事業者等）</strong>が利用する際の条件を定めるものです。Google Apps Script版／GASベースのオーダーメイド業務効率化アプリに適用されます。</p>
+    <p class="tiny mt-3">最終更新日：2025年09月14日</p>
   </div>
-</div>
+</header>
 
-<!-- ToS ARTICLES -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="max-width: 860px; margin: 0 auto; display: flex; flex-direction: column;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 20px;">TERMS — 利用規約本文</div>
+<!-- ===================== ToS ARTICLES ===================== -->
+<section class="section" style="padding-top: clamp(32px, 5vw, 56px);">
+  <div class="container container--narrow">
+    <div class="prose">
+      <p class="eyebrow" style="margin-bottom:0;">TERMS — 利用規約本文</p>
 
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第1条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">適用</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">本規約は、甲による本サービスの利用に関し適用されます。乙は、必要に応じて本規約を改定でき、改定後の規約は乙所定の方法で告知した時点から効力を生じます。</p>
+      <h2>第1条　適用</h2>
+      <p>本規約は、甲による本サービスの利用に関し適用されます。乙は、必要に応じて本規約を改定でき、改定後の規約は乙所定の方法で告知した時点から効力を生じます。</p>
+
+      <h2>第2条　提供内容</h2>
+      <p>乙は、甲の業務効率化を目的としたオーダーメイドのGASアプリ（Webアプリ／アドオン／コンテナバインド等）を設計・実装・運用します。生成AI API等の外部サービスを組み合わせる場合があります。提供形態は、（a）甲のGoogle Workspace環境内にデプロイ、または（b）乙管理のGoogleアカウント／GCPプロジェクトを介した実行のいずれかとします。</p>
+
+      <h2>第3条　アカウントと権限</h2>
+      <p>甲は本サービス利用に必要なGoogleアカウントおよびGoogle Workspace管理設定を整備します。乙は<strong>最小権限（Least Privilege）</strong>原則に基づき、必要最小限のOAuthスコープのみを要求します。スーパー管理者権限が必要となる操作は、可能な限り甲側で実行します。</p>
+
+      <h2>第4条　料金・支払</h2>
+      <p>料金は<strong>「入口（無料）」「初期制作費」「月額運用サポート費」</strong>の3要素で構成されます。アプリ商品ごとに、初期制作費と月額運用サポート費を固定価格で明示します。業務整理は必ず行い、アプリ商品の初期制作費に含めて提示します。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
+
+      <h3>入口（契約前まで 0円）</h3>
+      <p>無料相談・簡易診断：0円。初回訪問・現場確認 → 持ち帰り整理 → 御社専用の見本アプリ作成 → 2回目訪問・見本提示までを行います。現場訪問が原則（遠方の場合は交通費別途・またはオンライン併用）。</p>
+
+      <h3>アプリ商品（初期制作費＋月額運用サポート費・すべて税込）</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th>初期制作費</th>
+              <th>月額運用サポート費</th>
+              <th>対応範囲・含むもの</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>紙・Excel改善パック</strong></td>
+              <td>100,000円</td>
+              <td>10,000円（固定）</td>
+              <td>1業務・3画面まで・帳票1種・複雑な条件や判定なしの範囲。</td>
+            </tr>
+            <tr>
+              <td><strong>小規模アプリ</strong></td>
+              <td>200,000円</td>
+              <td>15,000円（固定）</td>
+              <td>備品・申し送り・記録・利用者一覧・チェックリスト・日報など1業務。簡易業務整理＋設計＋開発＋導入支援込み。</td>
+            </tr>
+            <tr>
+              <td><strong>標準アプリ</strong></td>
+              <td>550,000円</td>
+              <td>30,000円（固定）</td>
+              <td>送迎管理・月次集計・記録・報告書・権限管理など複数画面。業務整理＋設計＋開発＋試用＋導入支援込み。</td>
+            </tr>
+            <tr>
+              <td><strong>複雑な条件・判定に対応</strong></td>
+              <td>800,000円〜</td>
+              <td>50,000円〜（個別見積り）</td>
+              <td>シフト案の自動生成・人員配置チェック・複雑な月次集計・算定要件のセルフチェック・記録・算定のセルフチェック（請求代行はしません）等。業務整理＋見本作成＋確認パターン作成＋入力例と結果の確認必須。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>月額運用サポート費（本サービス使用中は継続）</h3>
+      <ul>
+        <li>月額に含むもの：アプリの継続利用、不具合対応、軽微な文言・表示順・項目名の変更、操作相談（電話・メール・LINE）、職員の入退職に伴う設定変更、権限変更、端末変更時の相談、初月（1〜3か月）の定着支援、バックアップ・運用確認、生成AI／Google API等の実行費・API料金。</li>
+        <li>最初の1〜3か月は、月額の範囲で重点的にサポートします（導入支援込み）。導入支援を別料金で取ることはしません。</li>
+        <li>月額費用は単なる保守費ではなく、アプリを安全に使い続けるための利用・管理・相談を含む運用サポート費です。月額を停止される場合、本サービスの提供は終了します（買い切り対応は原則行いません）。</li>
+        <li>別途お見積り：新機能追加、新しい帳票の追加、大きな画面変更、アプリが確認する条件の変更、業務の流れの変更、別事業所への展開。</li>
+        <li>請求は月末締め翌月末払い（振込手数料は甲負担）。表示価格・請求額はすべて税込です。</li>
+      </ul>
+
+      <h2>第5条　SLA／サポート</h2>
+      <ul>
+        <li>標準キュー：初回回答5営業日以内、実装・反映21営業日以内。</li>
+        <li>優先対応オプション（月額100,000円・税込追加）：初回回答48時間以内、実装・反映5営業日以内。</li>
+        <li>稼働時間・保守窓口：平日・土曜 9:00–18:00（日本時間）。代表が直接対応します。</li>
+      </ul>
+
+      <h2>第6条　データ・保存先</h2>
+      <p>本サービスはGASを用い、甲のGoogleドライブ／スプレッドシート／カレンダー／Gmail等を甲環境内で処理することを原則とします。ログは操作・エラー・処理結果のメタデータ中心で記録し、個人情報を含むログは原則収集しません。</p>
+
+      <h2>第7条　禁止事項</h2>
+      <ul>
+        <li>法令違反、公序良俗に反する行為。</li>
+        <li>不正アクセス、API／サービスの利用規約に反する利用。</li>
+        <li>本サービスの逆コンパイル、第三者再販、競合調査目的の無断利用。</li>
+      </ul>
+
+      <h2>第8条　知的財産権</h2>
+      <p>本サービスおよびソースコードの著作権は原則として乙に帰属します。甲は契約期間中、合意した範囲で本サービスを利用できます。別途合意により、コードの共有・譲渡・エスクローを実施可能（費用別途）。</p>
+
+      <h2>第9条　秘密保持</h2>
+      <p>甲乙は、相手方の業務上の秘密情報を第三者に開示・漏洩しません。本条は契約終了後も<strong>3年間</strong>存続します。</p>
+
+      <h2>第10条　保証・責任制限</h2>
+      <p>乙は本サービスについて、適法性・特定目的適合性を黙示的にも保証しません。乙の責任は、故意または重過失を除き、<strong>当該月の月額料金を上限</strong>とします。間接損害・逸失利益について乙は責任を負いません。</p>
+
+      <h2>第11条　契約期間・解約</h2>
+      <p>契約は月単位で自動更新します。甲は毎月末までに翌月解約の意思表示をすることで解約できます。重大な規約違反がある場合、乙は催告の上で解除できます。</p>
+
+      <h2>第12条　外部サービスの遵守</h2>
+      <p>本サービスがGoogle APIや生成AIを利用する場合、各提供者のポリシー（例：Google API Services User Data Policy 等）を遵守します。</p>
+
+      <h2>第13条　事業継続・ソースコードの承継</h2>
+      <p>第8条にかかわらず、乙（代表者）の死亡・廃業、または重篤な疾病等により本サービスの提供を継続できなくなった場合、乙は、本サービスの<strong>ソースコード一式および運用手順書を、甲に無償で譲渡</strong>します。譲渡後、甲は自己の責任において本サービスを継続利用・改修できます。本条は、代表者個人に依存することによる事業継続リスクに備えるため、すべての契約に標準で適用されます。</p>
+
+      <h2>第14条　準拠法・合意管轄</h2>
+      <p>本規約は日本法に準拠します。紛争は<strong>東京地方裁判所</strong>を第一審の専属的合意管轄裁判所とします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DPA ===================== -->
+<section class="section section--tint">
+  <div class="container container--narrow">
+    <div class="prose">
+      <p class="eyebrow" style="margin-bottom:0;">DPA — 個人情報取扱い契約</p>
+      <p>本DPAは、甲が管理する個人情報を本サービスが受託処理する場合の条件を定めます。利用規約と矛盾する場合は本DPAが優先します。</p>
+
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>条項</th>
+              <th>見出し</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>D-1条</td>
+              <td>定義</td>
+              <td>「個人情報」「個人データ」「保有個人データ」は個人情報保護法の定義に従い、「処理」は取得／記録／編集／保存／利用／提供／削除等を含みます。</td>
+            </tr>
+            <tr>
+              <td>D-2条</td>
+              <td>処理の目的・範囲</td>
+              <td>目的：甲の業務効率化のため、甲が指定する業務プロセスにおける個人情報処理。処理場所：原則、甲のWorkspace内。</td>
+            </tr>
+            <tr>
+              <td>D-3条</td>
+              <td>法令遵守・適法性</td>
+              <td>乙は個人情報保護法、関連ガイドライン、Google各ポリシーを遵守。甲は適法性確保を行い、乙に必要資料を提示。</td>
+            </tr>
+            <tr>
+              <td>D-4条</td>
+              <td>安全管理措置</td>
+              <td>組織的：権限管理、アクセス記録、定期的な権限棚卸し。人的：守秘義務・教育、アカウント共有禁止、退職時の即時権限剥奪。物理的：端末暗号化、持出し制限。技術的：OAuthスコープ最小化、暗号化、ログ最小化、CSRF対策、署名検証。</td>
+            </tr>
+            <tr>
+              <td>D-5条</td>
+              <td>サブプロセッサ</td>
+              <td>乙はGoogle LLCをサブプロセッサとして利用し得ます。その他の再委託は事前に甲へ通知し、同等の保護水準を契約で担保。</td>
+            </tr>
+            <tr>
+              <td>D-6条</td>
+              <td>第三国移転</td>
+              <td>Googleのインフラ仕様上、データが日本国外で処理される可能性があります。乙はGoogleの契約条件・セキュリティ基準に依拠します。</td>
+            </tr>
+            <tr>
+              <td>D-7条</td>
+              <td>データ主体の権利対応</td>
+              <td>開示・訂正・利用停止等の請求があった場合、乙は甲の指示に従い合理的期間内に対応します。</td>
+            </tr>
+            <tr>
+              <td>D-8条</td>
+              <td>インシデント対応</td>
+              <td>個人データの漏えい等が判明した場合、24時間以内に一次報告、72時間以内に詳細報告（判明範囲、影響、初動、再発防止策）。</td>
+            </tr>
+            <tr>
+              <td>D-9条</td>
+              <td>監査</td>
+              <td>甲は年1回を上限に書面監査を実施できます。現地監査は日程・範囲を協議の上、実費を甲負担で実施。</td>
+            </tr>
+            <tr>
+              <td>D-10条</td>
+              <td>保存期間・削除</td>
+              <td>目的達成後、合意した保存期間経過で安全に削除／不可逆化。甲からの即時削除要求には可能な限り速やかに対応。</td>
+            </tr>
+            <tr>
+              <td>D-11条</td>
+              <td>機密保持・目的外利用禁止</td>
+              <td>乙は甲の事前承諾なく目的外利用・第三者提供を行いません。テスト・検証にはダミー／匿名化データを優先使用します。</td>
+            </tr>
+            <tr>
+              <td>D-12条</td>
+              <td>責任</td>
+              <td>乙の責任は、故意・重過失を除き、当該月の月額料金を上限とします。</td>
+            </tr>
+            <tr>
+              <td>D-13条</td>
+              <td>終了時義務</td>
+              <td>契約終了時、乙は甲の指示に従い、保管中の個人データを削除または返却します。</td>
+            </tr>
+            <tr>
+              <td>D-14条</td>
+              <td>準拠法・管轄</td>
+              <td>日本法に準拠し、東京地方裁判所を第一審の専属管轄とします。</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</section>
 
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第2条</div>
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
       <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">提供内容</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">乙は、甲の業務効率化を目的としたオーダーメイドのGASアプリ（Webアプリ／アドオン／コンテナバインド等）を設計・実装・運用します。生成AI API等の外部サービスを組み合わせる場合があります。提供形態は、（a）甲のGoogle Workspace環境内にデプロイ、または（b）乙管理のGoogleアカウント／GCPプロジェクトを介した実行のいずれかとします。</p>
+        <div class="footer__brand-name">嶽ノ子</div>
+        <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
       </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第3条</div>
       <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">アカウントと権限</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">甲は本サービス利用に必要なGoogleアカウントおよびGoogle Workspace管理設定を整備します。乙は<strong>最小権限（Least Privilege）</strong>原則に基づき、必要最小限のOAuthスコープのみを要求します。スーパー管理者権限が必要となる操作は、可能な限り甲側で実行します。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第4条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">料金・支払</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0 0 16px;">料金は<strong>「入口（無料）」「初期制作費」「月額運用サポート費」</strong>の3要素で構成されます。アプリ商品ごとに、初期制作費と月額運用サポート費を固定価格で明示します。業務整理は必ず行い、アプリ商品の初期制作費に含めて提示します。別で「アプリ使用料」と「保守料」を分けて請求することはありません。</p>
-        <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 16px 20px; margin-bottom: 14px;">
-          <div style="font-size: 12px; font-weight: 700; margin-bottom: 10px;">入口（契約前まで 0円）</div>
-          <p style="font-size: 12px; line-height: 1.95; color: rgba(27, 22, 19, 0.7); margin: 0;">無料相談・簡易診断：0円。初回訪問・現場確認 → 持ち帰り整理 → 御社専用の見本アプリ作成 → 2回目訪問・見本提示までを行います。現場訪問が原則（遠方の場合は交通費別途・またはオンライン併用）。</p>
+        <p class="footer__col-h">Service</p>
+        <div class="footer__links">
+          <a href="#trust">嶽ノ子の姿勢</a>
+          <a href="#process">契約前と契約後にやること</a>
+          <a href="#examples">対応業務</a>
+          <a href="#price">料金</a>
+          <a href="sample-app.html">見本アプリとは</a>
+          <a href="business-improvement.html">業務改善支援(県のICT補助金)</a>
+          <a href="subsidy-app.html">国の補助金について</a>
         </div>
-        <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 16px 20px; margin-bottom: 14px;">
-          <div style="font-size: 12px; font-weight: 700; margin-bottom: 10px;">アプリ商品（初期制作費＋月額運用サポート費・すべて税込）</div>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.7);">
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span><span><strong>紙・Excel改善パック</strong>：初期 100,000円／月額 10,000円（固定）。1業務・3画面まで・帳票1種・複雑な条件や判定なしの範囲。</span></div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span><span><strong>小規模アプリ</strong>：初期 200,000円／月額 15,000円（固定）。備品・申し送り・記録・利用者一覧・チェックリスト・日報など1業務。簡易業務整理＋設計＋開発＋導入支援込み。</span></div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span><span><strong>標準アプリ</strong>：初期 550,000円／月額 30,000円（固定）。送迎管理・月次集計・記録・報告書・権限管理など複数画面。業務整理＋設計＋開発＋試用＋導入支援込み。</span></div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span><span><strong>複雑な条件・判定に対応</strong>：初期 800,000円〜／月額 50,000円〜（個別見積り）。シフト案の自動生成・人員配置チェック・複雑な月次集計・算定要件のセルフチェック・記録・算定のセルフチェック（請求代行はしません）等。業務整理＋見本作成＋確認パターン作成＋入力例と結果の確認必須。</span></div>
-          </div>
-        </div>
-        <div style="border: 1px solid rgba(27, 22, 19, 0.25); padding: 16px 20px;">
-          <div style="font-size: 12px; font-weight: 700; margin-bottom: 10px;">月額運用サポート費（本サービス使用中は継続）</div>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.9; color: rgba(27, 22, 19, 0.7);">
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>月額に含むもの：アプリの継続利用、不具合対応、軽微な文言・表示順・項目名の変更、操作相談（電話・メール・LINE）、職員の入退職に伴う設定変更、権限変更、端末変更時の相談、初月（1〜3か月）の定着支援、バックアップ・運用確認、生成AI／Google API等の実行費・API料金。</div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>最初の1〜3か月は、月額の範囲で重点的にサポートします（導入支援込み）。導入支援を別料金で取ることはしません。</div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>月額費用は単なる保守費ではなく、アプリを安全に使い続けるための利用・管理・相談を含む運用サポート費です。月額を停止される場合、本サービスの提供は終了します（買い切り対応は原則行いません）。</div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>別途お見積り：新機能追加、新しい帳票の追加、大きな画面変更、アプリが確認する条件の変更、業務の流れの変更、別事業所への展開。</div>
-            <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>請求は月末締め翌月末払い（振込手数料は甲負担）。表示価格・請求額はすべて税込です。</div>
-          </div>
+      </div>
+      <div>
+        <p class="footer__col-h">For</p>
+        <div class="footer__links">
+          <a href="manager.html">管理者の方へ</a>
+          <a href="staff.html">現場職員の方へ</a>
+          <a href="dayservice.html">デイサービスの方へ</a>
+          <a href="small-facility.html">小規模事業所の方へ</a>
         </div>
       </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第5条</div>
       <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">SLA／サポート</div>
-        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 2; color: rgba(27, 22, 19, 0.78);">
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>標準キュー：初回回答5営業日以内、実装・反映21営業日以内。</div>
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>優先対応オプション（月額100,000円・税込追加）：初回回答48時間以内、実装・反映5営業日以内。</div>
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>稼働時間・保守窓口：平日・土曜 9:00–18:00（日本時間）。代表が直接対応します。</div>
+        <p class="footer__col-h">Company</p>
+        <div class="footer__links">
+          <a href="company.html">運営者情報</a>
+          <a href="privacy.html">個人情報保護方針</a>
+          <a href="terms.html">利用規約</a>
+          <a href="conflict-of-interest.html">利益相反管理規程</a>
         </div>
       </div>
     </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第6条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">データ・保存先</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">本サービスはGASを用い、甲のGoogleドライブ／スプレッドシート／カレンダー／Gmail等を甲環境内で処理することを原則とします。ログは操作・エラー・処理結果のメタデータ中心で記録し、個人情報を含むログは原則収集しません。</p>
-      </div>
+    <div class="footer__disclaimer">
+      <p class="h">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</p>
+      <p>当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
     </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第7条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">禁止事項</div>
-        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 2; color: rgba(27, 22, 19, 0.78);">
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>法令違反、公序良俗に反する行為。</div>
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>不正アクセス、API／サービスの利用規約に反する利用。</div>
-          <div style="display: flex; gap: 10px;"><span style="color: #BE4633;">・</span>本サービスの逆コンパイル、第三者再販、競合調査目的の無断利用。</div>
+    <div class="footer__security">
+      <p class="h">SECURITY ACTION ／ 情報セキュリティ対策</p>
+      <div class="footer__security-row">
+        <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge">
+          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108">
+        </a>
+        <div class="footer__security-text">
+          <p>独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
+          <p class="footer__security-id">自己宣言ID：50000228580</p>
         </div>
       </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第8条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">知的財産権</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">本サービスおよびソースコードの著作権は原則として乙に帰属します。甲は契約期間中、合意した範囲で本サービスを利用できます。別途合意により、コードの共有・譲渡・エスクローを実施可能（費用別途）。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第9条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">秘密保持</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">甲乙は、相手方の業務上の秘密情報を第三者に開示・漏洩しません。本条は契約終了後も<strong>3年間</strong>存続します。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第10条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">保証・責任制限</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">乙は本サービスについて、適法性・特定目的適合性を黙示的にも保証しません。乙の責任は、故意または重過失を除き、<strong>当該月の月額料金を上限</strong>とします。間接損害・逸失利益について乙は責任を負いません。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第11条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">契約期間・解約</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">契約は月単位で自動更新します。甲は毎月末までに翌月解約の意思表示をすることで解約できます。重大な規約違反がある場合、乙は催告の上で解除できます。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第12条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">外部サービスの遵守</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">本サービスがGoogle APIや生成AIを利用する場合、各提供者のポリシー（例：Google API Services User Data Policy 等）を遵守します。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第13条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">事業継続・ソースコードの承継</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">第8条にかかわらず、乙（代表者）の死亡・廃業、または重篤な疾病等により本サービスの提供を継続できなくなった場合、乙は、本サービスの<strong>ソースコード一式および運用手順書を、甲に無償で譲渡</strong>します。譲渡後、甲は自己の責任において本サービスを継続利用・改修できます。本条は、代表者個人に依存することによる事業継続リスクに備えるため、すべての契約に標準で適用されます。</p>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 26px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 16px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">第14条</div>
-      <div>
-        <div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 12px;">準拠法・合意管轄</div>
-        <p style="font-size: 13px; line-height: 2.05; color: rgba(27, 22, 19, 0.78); margin: 0;">本規約は日本法に準拠します。紛争は<strong>東京地方裁判所</strong>を第一審の専属的合意管轄裁判所とします。</p>
-      </div>
+    </div>    <div class="footer__bar">
+      <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+      <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+      <span>SAGAMIHARA, KANAGAWA</span>
     </div>
   </div>
-</div>
+</footer>
 
-<!-- DPA -->
-<div style="padding: 56px 56px 72px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); background: #EDE8D9;">
-  <div style="max-width: 860px; margin: 0 auto; display: flex; flex-direction: column;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 14px;">DPA — 個人情報取扱い契約</div>
-    <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0 0 20px;">本DPAは、甲が管理する個人情報を本サービスが受託処理する場合の条件を定めます。利用規約と矛盾する場合は本DPAが優先します。</p>
-
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-1条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">定義</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">「個人情報」「個人データ」「保有個人データ」は個人情報保護法の定義に従い、「処理」は取得／記録／編集／保存／利用／提供／削除等を含みます。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-2条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">処理の目的・範囲</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">目的：甲の業務効率化のため、甲が指定する業務プロセスにおける個人情報処理。処理場所：原則、甲のWorkspace内。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-3条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">法令遵守・適法性</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">乙は個人情報保護法、関連ガイドライン、Google各ポリシーを遵守。甲は適法性確保を行い、乙に必要資料を提示。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-4条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">安全管理措置</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">組織的：権限管理、アクセス記録、定期的な権限棚卸し。人的：守秘義務・教育、アカウント共有禁止、退職時の即時権限剥奪。物理的：端末暗号化、持出し制限。技術的：OAuthスコープ最小化、暗号化、ログ最小化、CSRF対策、署名検証。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-5条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">サブプロセッサ</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">乙はGoogle LLCをサブプロセッサとして利用し得ます。その他の再委託は事前に甲へ通知し、同等の保護水準を契約で担保。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-6条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">第三国移転</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">Googleのインフラ仕様上、データが日本国外で処理される可能性があります。乙はGoogleの契約条件・セキュリティ基準に依拠します。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-7条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">データ主体の権利対応</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">開示・訂正・利用停止等の請求があった場合、乙は甲の指示に従い合理的期間内に対応します。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-8条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">インシデント対応</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">個人データの漏えい等が判明した場合、24時間以内に一次報告、72時間以内に詳細報告（判明範囲、影響、初動、再発防止策）。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-9条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">監査</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">甲は年1回を上限に書面監査を実施できます。現地監査は日程・範囲を協議の上、実費を甲負担で実施。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-10条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">保存期間・削除</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">目的達成後、合意した保存期間経過で安全に削除／不可逆化。甲からの即時削除要求には可能な限り速やかに対応。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-11条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">機密保持・目的外利用禁止</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">乙は甲の事前承諾なく目的外利用・第三者提供を行いません。テスト・検証にはダミー／匿名化データを優先使用します。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-12条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">責任</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">乙の責任は、故意・重過失を除き、当該月の月額料金を上限とします。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-13条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">終了時義務</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">契約終了時、乙は甲の指示に従い、保管中の個人データを削除または返却します。</p></div>
-    </div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid rgba(27, 22, 19, 0.25); border-bottom: 1px solid rgba(27, 22, 19, 0.25);">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; font-weight: 700; color: #BE4633; letter-spacing: 0.08em;">D-14条</div>
-      <div><div style="font-family: 'Zen Old Mincho', serif; font-size: 15.5px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 8px;">準拠法・管轄</div><p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.75); margin: 0;">日本法に準拠し、東京地方裁判所を第一審の専属管轄とします。</p></div>
-    </div>
-  </div>
-</div>
-
-<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
-  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
-    <div style="max-width: 720px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">契約条件のご質問も、お気軽に。</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">個別条項のご相談も、すべて代表が直接お答えします。</p>
-    </div>
-    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
-  </div>
-  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
-    <div>
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
-        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
-      </div>
-      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
-        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
-        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
-        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
-        <a href="business-improvement.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">業務改善支援</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
-        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
-        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
-        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
-        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
-        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
-        <a href="conflict-of-interest.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利益相反管理規程</a>
-        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
-      </div>
-    </div>
-  </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 12px;">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</div>
-    <p style="font-size: 11px; line-height: 2; color: rgba(243, 239, 228, 0.55); margin: 0;">当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
-  </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 14px;">SECURITY ACTION ／ 情報セキュリティ対策</div>
-    <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-      <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" style="display: block; flex-shrink: 0; line-height: 0; background: #fff; border-radius: 4px; padding: 4px;">
-        <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108" style="display: block; width: 108px; height: auto;">
-      </a>
-      <div style="min-width: 220px; flex: 1;">
-        <p style="font-size: 10.5px; line-height: 1.95; color: rgba(243, 239, 228, 0.55); margin: 0 0 8px;">独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(243, 239, 228, 0.45); margin: 0;">自己宣言ID：50000228580</p>
-      </div>
-    </div>
-  </div>
-  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
-    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
-    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
-    <span>SAGAMIHARA, KANAGAWA</span>
-  </div>
-</div>
 </body>
 </html>

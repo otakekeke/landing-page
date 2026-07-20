@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -6,202 +6,248 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>運営者情報 — 嶽ノ子</title>
 <meta name="description" content="嶽ノ子（たけのこ）は、介護現場の業務を理解し、紙・Excel・口頭運用を整理して、現場に合う業務アプリを設計・開発する事業者です。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-</style>
+<link rel="stylesheet" href="assets/hig.css">
 </head>
 <body>
-<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
-    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
-      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">
+      <span class="nav__brand-name">嶽ノ子</span>
+      <span class="nav__brand-tag">TAKENOKONOKO</span>
     </a>
-    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
-      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
-      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
-      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
-      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
-      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
+    <div class="nav__links">
+      <a href="index.html">トップ</a>
+      <a href="sample-app.html">見本アプリとは</a>
+      <a href="index.html#price">料金</a>
+      <a href="company.html">運営者情報</a>
+      <a href="index.html#contact" class="nav__cta">無料で相談する →</a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- HERO -->
-<div data-screen-label="company: HERO" style="padding: 72px 56px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
-  <div style="position: absolute; right: -20px; top: -10px; font-family: 'Zen Old Mincho', serif; font-size: 280px; font-weight: 900; line-height: 1.1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.13); pointer-events: none;">嶽</div>
-  <div style="max-width: 900px; position: relative;">
-    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 36px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>COMPANY — 運営者情報</div>
-    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(40px, 5vw, 68px); font-weight: 700; line-height: 1.4; letter-spacing: 0.02em; margin: 0 0 30px;">運営者情報。</h1>
-    <p style="font-size: 13.5px; line-height: 2.2; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); max-width: 46em; margin: 0;">介護現場の業務を理解し、紙・Excel・口頭運用を整理して、現場に合う業務アプリを設計・開発する事業者です。</p>
+<!-- ===================== HERO ===================== -->
+<header class="hero" data-screen-label="company: HERO">
+  <div class="container">
+    <p class="eyebrow">COMPANY — 運営者情報</p>
+    <span class="tag tag--dot">COMPANY</span>
+    <h1 class="hero__title">運営者情報。</h1>
+    <p class="hero__lead">介護現場の業務を理解し、紙・Excel・口頭運用を整理して、現場に合う業務アプリを設計・開発する事業者です。</p>
   </div>
-</div>
+</header>
 
-<!-- 01 BASIC INFO -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">01 — 基本情報</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">基本情報。</div>
-  </div>
-  <div style="padding: 40px 48px 48px;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px;">
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">屋号</span><span style="font-family: 'Zen Old Mincho', serif; font-size: 15px; letter-spacing: 0.06em;">嶽ノ子（たけのこ）</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">代表者</span><span style="font-family: 'Zen Old Mincho', serif; font-size: 15px; letter-spacing: 0.06em;">大嶽 耕太郎</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">事業形態</span><span style="font-size: 13px;">個人事業主</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">設立日</span><span style="font-size: 13px;">2025年04月19日</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">所在地</span><span style="font-size: 13px;">神奈川県相模原市中央区千代田7-10-7</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">請求書発行</span><span style="font-size: 13px;">対応可（インボイス制度は個別ご相談）</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">支払方法</span><span style="font-size: 13px;">銀行振込／Stripe決済</span></div>
-      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">NDA</span><span style="font-size: 13px;">秘密保持契約 対応可</span></div>
+<!-- ===================== 01 BASIC INFO ===================== -->
+<section data-screen-label="01 基本情報" class="section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head">
+      <p class="eyebrow">01 — 基本情報</p>
+      <h2 class="h2">基本情報。</h2>
     </div>
-  </div>
-</div>
-
-<!-- 02 BUSINESS -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 40px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">02 — 事業内容</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">事業内容。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;">
-    <div style="border-top: 3px solid #BE4633; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 01</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">現場理解・業務整理</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">紙・Excel・帳票・過去データ・現場の流れを確認し、業務を整理します。お客様に要件定義を丸投げせず、こちらで読み解いてアプリの形に落とし込みます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 02</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">介護・福祉アプリ開発</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">シフト管理、記録、送迎管理、月次集計、インシデント報告など。施設の業務に合わせてオーダーメイドで設計・開発します。AI・RPAは目的に応じた手段として組み合わせます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 03</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">運用支援・継続改善</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">納品して終わりではなく、運用に乗るまで伴走します。小さな修正・追加要望は月額の中で対応し、大きな変更は事前に整理してお見積りします。</p>
-    </div>
-  </div>
-</div>
-
-<!-- 03 MESSAGE -->
-<div style="padding: 72px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); background: #EDE8D9;">
-  <div style="max-width: 820px; margin: 0 auto;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 32px; text-align: center;">03 — 代表者メッセージ</div>
-    <p style="font-family: 'Zen Old Mincho', serif; font-size: 19px; font-weight: 700; line-height: 2.1; letter-spacing: 0.04em; margin: 0 0 26px; text-align: center;">介護現場の方に、開発会社のような要件定義を<br>求めるべきではないと考えています。</p>
-    <p style="font-size: 13px; line-height: 2.3; color: rgba(27, 22, 19, 0.78); margin: 0 0 16px;">現場には、言葉にしづらい判断、暗黙のルール、紙やExcelに残った工夫があります。嶽ノ子では、それらをこちらが読み解き、現場の負担を増やさずに使える形へ整えます。</p>
-    <p style="font-size: 13px; line-height: 2.3; color: rgba(27, 22, 19, 0.78); margin: 0 0 32px;">介護士としての現場経験と、システム開発の知識を組み合わせ、ヒアリングだけでなく実物を見て設計します。初回相談から設計・開発・運用支援まで、代表が直接対応します。</p>
-    <div style="border-top: 1px solid rgba(27, 22, 19, 0.25); padding-top: 26px; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap;">
-      <p style="font-family: 'Zen Old Mincho', serif; font-size: 17px; color: #BE4633; letter-spacing: 0.05em; line-height: 1.9; margin: 0;">「現場を見て、現場に合わせる。<br>テクノロジーは、その手段です。」</p>
-      <p style="font-family: 'Zen Old Mincho', serif; font-size: 14px; letter-spacing: 0.1em; margin: 0;">代表　大嶽 耕太郎</p>
-    </div>
-  </div>
-</div>
-
-<!-- 04 SECURITY ACTION -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">04 — 情報セキュリティ</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">SECURITY ACTION。</div>
-    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 24px 0 0;">IPA（情報処理推進機構）のセキュリティ対策自己宣言制度に登録しています。お客様の業務データを扱う事業者として、情報セキュリティへの取組を公開しています。</p>
-  </div>
-  <div style="padding: 48px; display: flex; align-items: flex-start; gap: 36px; flex-wrap: wrap;">
-    <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" style="display: block; flex-shrink: 0; line-height: 0;">
-      <img src="assets/security-action/security_action_hitotsuboshi-large_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="168" height="168" style="display: block; width: 168px; height: auto;">
-    </a>
-    <div style="min-width: 260px; flex: 1;">
-      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">取組段階</span><span style="font-size: 13px;">一つ星（情報セキュリティ五か条への取組宣言）</span></div>
-      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">自己宣言ID</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em;">50000228580</span></div>
-      <div style="display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 16px 0; align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.5);">制度</span><span style="font-size: 13px;"><a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" style="color: #BE4633; border-bottom: 1px solid rgba(190, 70, 51, 0.4);">SECURITY ACTION（IPA）</a></span></div>
-    </div>
-  </div>
-</div>
-
-<!-- 05 CONTACT -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">05 — 連絡先</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">連絡先。</div>
-    <p style="font-size: 12.5px; line-height: 2.1; color: rgba(27, 22, 19, 0.7); margin: 24px 0 0;">代表の大嶽が直接ご対応いたします。お気軽にお問い合わせください。</p>
-  </div>
-  <div style="padding: 48px;">
-    <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: #BE4633;">EMAIL</span><span style="font-family: 'Zen Old Mincho', serif; font-size: 16px; letter-spacing: 0.03em;">kotaro.otake@takenokonoko.com</span></div>
-    <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(27, 22, 19, 0.18); align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: #BE4633;">TEL</span><span style="font-family: 'Zen Old Mincho', serif; font-size: 16px; letter-spacing: 0.06em;">070-1383-4420</span></div>
-    <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 18px 0; align-items: baseline;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: #BE4633;">HOURS</span><span style="font-size: 13px;">平日・土曜 9:00 – 18:00（日本時間）</span></div>
-  </div>
-</div>
-
-<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
-  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
-    <div style="max-width: 720px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">まずはお気軽にご相談ください。</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">初回相談は無料です。今のやり方を見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
-    </div>
-    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
-  </div>
-  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
-    <div>
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
-        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+    <div class="deflist">
+      <div class="deflist__row">
+        <span class="deflist__key">屋号</span>
+        <span class="deflist__val">嶽ノ子（たけのこ）</span>
       </div>
-      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
-        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
-        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
-        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
-        <a href="business-improvement.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">業務改善支援</a>
+      <div class="deflist__row">
+        <span class="deflist__key">代表者</span>
+        <span class="deflist__val">大嶽 耕太郎</span>
       </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
-        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
-        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
-        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
+      <div class="deflist__row">
+        <span class="deflist__key">事業形態</span>
+        <span class="deflist__val">個人事業主</span>
       </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
-        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
-        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
-        <a href="conflict-of-interest.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利益相反管理規程</a>
-        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
+      <div class="deflist__row">
+        <span class="deflist__key">設立日</span>
+        <span class="deflist__val">2025年04月19日</span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">所在地</span>
+        <span class="deflist__val">神奈川県相模原市中央区千代田7-10-7</span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">請求書発行</span>
+        <span class="deflist__val">対応可（インボイス制度は個別ご相談）</span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">支払方法</span>
+        <span class="deflist__val">銀行振込／Stripe決済</span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">NDA</span>
+        <span class="deflist__val">秘密保持契約 対応可</span>
       </div>
     </div>
   </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 12px;">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</div>
-    <p style="font-size: 11px; line-height: 2; color: rgba(243, 239, 228, 0.55); margin: 0;">当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
+</section>
+
+<!-- ===================== 02 BUSINESS ===================== -->
+<section data-screen-label="02 事業内容" class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">02 — 事業内容</p>
+      <h2 class="h2">事業内容。</h2>
+    </div>
+    <div class="grid grid-3 grid--stretch">
+      <div class="card">
+        <p class="card__eyebrow">— 01</p>
+        <h3 class="card__title">現場理解・業務整理</h3>
+        <p class="card__body">紙・Excel・帳票・過去データ・現場の流れを確認し、業務を整理します。お客様に要件定義を丸投げせず、こちらで読み解いてアプリの形に落とし込みます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 02</p>
+        <h3 class="card__title">介護・福祉アプリ開発</h3>
+        <p class="card__body">シフト管理、記録、送迎管理、月次集計、インシデント報告など。施設の業務に合わせてオーダーメイドで設計・開発します。AI・RPAは目的に応じた手段として組み合わせます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 03</p>
+        <h3 class="card__title">運用支援・継続改善</h3>
+        <p class="card__body">納品して終わりではなく、運用に乗るまで伴走します。小さな修正・追加要望は月額の中で対応し、大きな変更は事前に整理してお見積りします。</p>
+      </div>
+    </div>
   </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 14px;">SECURITY ACTION ／ 情報セキュリティ対策</div>
-    <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-      <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" style="display: block; flex-shrink: 0; line-height: 0; background: #fff; border-radius: 4px; padding: 4px;">
-        <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108" style="display: block; width: 108px; height: auto;">
+</section>
+
+<!-- ===================== 03 MESSAGE ===================== -->
+<section data-screen-label="03 代表者メッセージ" class="section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head section__head--center">
+      <p class="eyebrow">03 — 代表者メッセージ</p>
+    </div>
+    <div class="prose">
+      <p class="h3 center">介護現場の方に、開発会社のような要件定義を<br>求めるべきではないと考えています。</p>
+      <p>現場には、言葉にしづらい判断、暗黙のルール、紙やExcelに残った工夫があります。嶽ノ子では、それらをこちらが読み解き、現場の負担を増やさずに使える形へ整えます。</p>
+      <p>介護士としての現場経験と、システム開発の知識を組み合わせ、ヒアリングだけでなく実物を見て設計します。初回相談から設計・開発・運用支援まで、代表が直接対応します。</p>
+      <div class="divider mt-3"></div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; gap:24px; flex-wrap:wrap;">
+        <p class="h4 accent">「現場を見て、現場に合わせる。<br>テクノロジーは、その手段です。」</p>
+        <p class="body">代表　大嶽 耕太郎</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 SECURITY ===================== -->
+<section data-screen-label="04 情報セキュリティ" class="section">
+  <div class="container container--narrow">
+    <div class="section__head">
+      <p class="eyebrow">04 — 情報セキュリティ</p>
+      <h2 class="h2">SECURITY ACTION。</h2>
+      <p class="lead">IPA（情報処理推進機構）のセキュリティ対策自己宣言制度に登録しています。お客様の業務データを扱う事業者として、情報セキュリティへの取組を公開しています。</p>
+    </div>
+    <div class="card" style="display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap;">
+      <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge" style="box-shadow:none;">
+        <img src="assets/security-action/security_action_hitotsuboshi-large_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="168" height="168" style="width:140px;">
       </a>
-      <div style="min-width: 220px; flex: 1;">
-        <p style="font-size: 10.5px; line-height: 1.95; color: rgba(243, 239, 228, 0.55); margin: 0 0 8px;">独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(243, 239, 228, 0.45); margin: 0;">自己宣言ID：50000228580</p>
+      <div class="deflist" style="flex:1; min-width:260px;">
+        <div class="deflist__row"><span class="deflist__key">取組段階</span><span class="deflist__val">一つ星（情報セキュリティ五か条への取組宣言）</span></div>
+        <div class="deflist__row"><span class="deflist__key">自己宣言ID</span><span class="deflist__val">50000228580</span></div>
+        <div class="deflist__row"><span class="deflist__key">制度</span><span class="deflist__val"><a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" class="accent">SECURITY ACTION（IPA）</a></span></div>
       </div>
     </div>
   </div>
-  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
-    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
-    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
-    <span>SAGAMIHARA, KANAGAWA</span>
+</section>
+
+<!-- ===================== 05 CONTACT ===================== -->
+<section data-screen-label="05 連絡先" class="section section--tint">
+  <div class="container container--narrow">
+    <div class="section__head">
+      <p class="eyebrow">05 — 連絡先</p>
+      <h2 class="h2">連絡先。</h2>
+      <p class="lead">代表の大嶽が直接ご対応いたします。お気軽にお問い合わせください。</p>
+    </div>
+    <div class="deflist">
+      <div class="deflist__row">
+        <span class="deflist__key">EMAIL</span>
+        <span class="deflist__val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a21253e2b382564253e2b212f0a3e2b212f242521252425212564292527">[email&#160;protected]</a></span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">TEL</span>
+        <span class="deflist__val">070-1383-4420</span>
+      </div>
+      <div class="deflist__row">
+        <span class="deflist__key">HOURS</span>
+        <span class="deflist__val">平日・土曜 9:00 – 18:00（日本時間）</span>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section data-screen-label="CTA お問い合わせ" class="section section--contrast">
+  <div class="container">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:32px;">
+      <div style="max-width:720px;">
+        <h2 class="h2">まずはお気軽にご相談ください。</h2>
+        <p class="body mt-2">初回相談は無料です。今のやり方を見せていただければ、こちらで整理して見本アプリまで作ってご提示します。</p>
+      </div>
+      <a href="index.html#contact" class="btn btn--primary btn--lg">無料で相談する <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
+      <div>
+        <div class="footer__brand-name">嶽ノ子</div>
+        <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
+      </div>
+      <div>
+        <p class="footer__col-h">Service</p>
+        <div class="footer__links">
+          <a href="#trust">嶽ノ子の姿勢</a>
+          <a href="#process">契約前と契約後にやること</a>
+          <a href="#examples">対応業務</a>
+          <a href="#price">料金</a>
+          <a href="sample-app.html">見本アプリとは</a>
+          <a href="business-improvement.html">業務改善支援(県のICT補助金)</a>
+          <a href="subsidy-app.html">国の補助金について</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">For</p>
+        <div class="footer__links">
+          <a href="manager.html">管理者の方へ</a>
+          <a href="staff.html">現場職員の方へ</a>
+          <a href="dayservice.html">デイサービスの方へ</a>
+          <a href="small-facility.html">小規模事業所の方へ</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">Company</p>
+        <div class="footer__links">
+          <a href="company.html">運営者情報</a>
+          <a href="privacy.html">個人情報保護方針</a>
+          <a href="terms.html">利用規約</a>
+          <a href="conflict-of-interest.html">利益相反管理規程</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__disclaimer">
+      <p class="h">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</p>
+      <p>当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
+    </div>
+    <div class="footer__security">
+      <p class="h">SECURITY ACTION ／ 情報セキュリティ対策</p>
+      <div class="footer__security-row">
+        <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge">
+          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108">
+        </a>
+        <div class="footer__security-text">
+          <p>独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
+          <p class="footer__security-id">自己宣言ID：50000228580</p>
+        </div>
+      </div>
+    </div>    <div class="footer__bar">
+      <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+      <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+      <span>SAGAMIHARA, KANAGAWA</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -6,213 +6,234 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <title>御社専用の見本アプリとは — 嶽ノ子</title>
 <meta name="description" content="契約前に、御社の紙・Excel・帳票をもとにした見本アプリを0円で作成。実際の見本を見てから、契約するかどうか判断できます。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-html{scroll-behavior:smooth}
-body{margin:0;background:#F3EFE4;color:#1B1613;font-family:"Zen Kaku Gothic New",sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-</style>
+<link rel="stylesheet" href="assets/hig.css">
 </head>
 <body>
-<div style="border-bottom: 3px double rgba(27, 22, 19, 0.75); background: #F3EFE4; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 56px; gap: 24px;">
-    <a href="index.html" style="display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: #1B1613;">
-      <span style="font-family: 'Zen Old Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em;">嶽ノ子</span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(27, 22, 19, 0.5);">TAKENOKONOKO</span>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">
+      <span class="nav__brand-name">嶽ノ子</span>
+      <span class="nav__brand-tag">TAKENOKONOKO</span>
     </a>
-    <div style="display: flex; align-items: center; gap: 28px; font-size: 11.5px; letter-spacing: 0.16em; color: rgba(27, 22, 19, 0.75);">
-      <a href="index.html" style="color: inherit; text-decoration: none;">トップ</a>
-      <a href="sample-app.html" style="color: inherit; text-decoration: none;">見本アプリとは</a>
-      <a href="index.html#price" style="color: inherit; text-decoration: none;">料金</a>
-      <a href="company.html" style="color: inherit; text-decoration: none;">運営者情報</a>
-      <a href="index.html#contact" style="color: #BE4633; text-decoration: none; border-bottom: 1px solid #BE4633; padding-bottom: 2px;">無料で相談する →</a>
+    <div class="nav__links">
+      <a href="index.html">トップ</a>
+      <a href="sample-app.html">見本アプリとは</a>
+      <a href="index.html#price">料金</a>
+      <a href="company.html">運営者情報</a>
+      <a href="index.html#contact" class="nav__cta">無料で相談する →</a>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- HERO -->
-<div data-screen-label="sample-app: HERO" style="padding: 72px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); position: relative; overflow: hidden;">
-  <div style="position: absolute; right: -20px; top: -10px; font-family: 'Zen Old Mincho', serif; font-size: 280px; font-weight: 900; line-height: 1.1; color: transparent; -webkit-text-stroke: 1px rgba(27, 22, 19, 0.13); pointer-events: none;">見</div>
-  <div style="max-width: 900px; position: relative;">
-    <div style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(27, 22, 19, 0.6); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.26em; margin-bottom: 36px;"><span style="width: 6px; height: 6px; background: #BE4633; border-radius: 50%;"></span>SAMPLE APP — 見本アプリとは</div>
-    <h1 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(40px, 5vw, 68px); font-weight: 700; line-height: 1.4; letter-spacing: 0.02em; margin: 0 0 30px;">御社専用の<span style="background: linear-gradient(transparent 68%, rgba(190, 70, 51, 0.35) 68%);">見本アプリ</span>とは。</h1>
-    <p style="font-size: 13.5px; line-height: 2.2; letter-spacing: 0.03em; color: rgba(27, 22, 19, 0.8); max-width: 46em; margin: 0;">「契約してから、想像していたものと違ったらどうしよう」。そんな不安をなくすために、嶽ノ子では<strong style="color: #BE4633;">契約前に、御社専用の見本アプリ</strong>を作ります。実際の見本を見てから、契約するかどうか判断できます。</p>
+<!-- ===================== HERO ===================== -->
+<header class="hero" data-screen-label="sample-app: HERO">
+  <div class="container">
+    <p class="eyebrow">SAMPLE APP — 見本アプリとは</p>
+    <span class="tag tag--dot">SAMPLE APP</span>
+    <h1 class="hero__title">御社専用の<span class="hl">見本アプリ</span>とは。</h1>
+    <p class="hero__lead">「契約してから、想像していたものと違ったらどうしよう」。そんな不安をなくすために、嶽ノ子では<strong class="accent">契約前に、御社専用の見本アプリ</strong>を作ります。実際の見本を見てから、契約するかどうか判断できます。</p>
   </div>
-</div>
+</header>
 
-<!-- 01 DEFINITION -->
-<div style="padding: 72px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35); background: #EDE8D9;">
-  <div style="max-width: 860px; margin: 0 auto; text-align: center;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 30px;">01 — 定義</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; line-height: 2; letter-spacing: 0.04em; margin-bottom: 26px;">御社専用の見本アプリとは、<br>今使っている紙・Excel・帳票をもとに作る、<br><span style="color: #BE4633;">契約前の確認用アプリ</span>です。</div>
-    <p style="font-size: 13px; line-height: 2.2; color: rgba(27, 22, 19, 0.7); margin: 0;">「プロトタイプ」と呼ぶこともありますが、嶽ノ子では、現場の方にイメージしてもらいやすいよう「御社専用の見本アプリ」と呼んでいます。一般的なサンプルではなく、御社の紙・Excel・帳票を見たうえで、御社の業務に合わせて作る確認用のアプリです。</p>
+<!-- ===================== 01 DEFINITION ===================== -->
+<section data-screen-label="01 定義" class="section section--tint">
+  <div class="container container--narrow center">
+    <p class="eyebrow">01 — 定義</p>
+    <h2 class="h2">御社専用の見本アプリとは、<br>今使っている紙・Excel・帳票をもとに作る、<br><span class="accent">契約前の確認用アプリ</span>です。</h2>
+    <p class="lead">「プロトタイプ」と呼ぶこともありますが、嶽ノ子では、現場の方にイメージしてもらいやすいよう「御社専用の見本アプリ」と呼んでいます。一般的なサンプルではなく、御社の紙・Excel・帳票を見たうえで、御社の業務に合わせて作る確認用のアプリです。</p>
   </div>
-</div>
+</section>
 
-<!-- 02 WHAT YOU SEE -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 40px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">02 — 確認できるもの</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">見本アプリで、確認できるもの。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px 48px;">
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 01</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">画面の見本</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">どんな画面で入力するか、どんな確認画面が出るか。現場で実際に触る画面のイメージを確認できます。</p>
+<!-- ===================== 02 WHAT YOU SEE ===================== -->
+<section data-screen-label="02 確認できるもの" class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">02 — 確認できるもの</p>
+      <h2 class="h2">見本アプリで、確認できるもの。</h2>
     </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 02</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">一覧の見本</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">職員・利用者・記録・予定などが、どんな順番でどう並ぶか。今のExcelに近い見え方になっているかを確認できます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 03</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">印刷物の見本</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">今使っている帳票・送迎表・シフト表・集計表に近い形で出力できるか。印刷した状態のイメージまで確認できます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 04</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">作業の流れ</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">今の作業のどこが楽になるか、どこが今と同じか。実際の手順に合わせた流れを確認できます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 05</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">管理者と職員の違い</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">誰が何を見て、何を操作するか。管理者の画面と職員の画面を分けて確認できます。</p>
-    </div>
-    <div style="border-top: 3px solid #1B1613; padding-top: 18px;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: rgba(27, 22, 19, 0.5); margin-bottom: 14px;">— 06</div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 14px;">アプリが確認する条件</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(27, 22, 19, 0.7); margin: 0;">入力漏れ、重複、条件違いなどを、どのタイミングでどう知らせるか。「自動で確認する」「人が確認する」の境界も確認できます。</p>
-    </div>
-  </div>
-</div>
-
-<!-- 03 BOUNDARY -->
-<div style="background: #1B1613; color: #F3EFE4; padding: 64px 56px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #E8A08F;">03 — 大事な線引き</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">見本アプリと、実際に使うアプリの違い。</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 56px;">
-    <div>
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 21px; font-weight: 700; line-height: 1.9; letter-spacing: 0.05em; margin-bottom: 18px;">見本アプリは、<span style="color: #E8A08F;">契約前に完成イメージを確認するためのもの</span>です。実際に業務で使うアプリは、契約後に現場に合わせて整えていきます。</div>
-      <p style="font-size: 12.5px; line-height: 2.1; color: rgba(243, 239, 228, 0.72); margin: 0;">見本アプリは、契約の判断材料です。実データを入れて運用するためのものではありません。細かい入力項目・例外処理・権限設計・処理ルールの作り込み・本番環境の構築は、契約後に行います。</p>
-    </div>
-    <div style="align-self: end;">
-      <div style="border-top: 1px dashed rgba(243, 239, 228, 0.3); padding-top: 18px; display: flex; flex-direction: column; gap: 12px; font-size: 12px; line-height: 1.95; color: rgba(243, 239, 228, 0.6);">
-        <span>※ 見本アプリの内容に著作権は発生しますが、契約後はそのまま実際に使うアプリの土台として活用します。</span>
-        <span>※ 契約前に行うのは、初回訪問・整理・見本作成・2回目訪問の4ステップまで。これらは0円で行います。</span>
+    <div class="grid grid-3 grid--stretch">
+      <div class="card">
+        <p class="card__eyebrow">— 01</p>
+        <h3 class="card__title">画面の見本</h3>
+        <p class="card__body">どんな画面で入力するか、どんな確認画面が出るか。現場で実際に触る画面のイメージを確認できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 02</p>
+        <h3 class="card__title">一覧の見本</h3>
+        <p class="card__body">職員・利用者・記録・予定などが、どんな順番でどう並ぶか。今のExcelに近い見え方になっているかを確認できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 03</p>
+        <h3 class="card__title">印刷物の見本</h3>
+        <p class="card__body">今使っている帳票・送迎表・シフト表・集計表に近い形で出力できるか。印刷した状態のイメージまで確認できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 04</p>
+        <h3 class="card__title">作業の流れ</h3>
+        <p class="card__body">今の作業のどこが楽になるか、どこが今と同じか。実際の手順に合わせた流れを確認できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 05</p>
+        <h3 class="card__title">管理者と職員の違い</h3>
+        <p class="card__body">誰が何を見て、何を操作するか。管理者の画面と職員の画面を分けて確認できます。</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow">— 06</p>
+        <h3 class="card__title">アプリが確認する条件</h3>
+        <p class="card__body">入力漏れ、重複、条件違いなどを、どのタイミングでどう知らせるか。「自動で確認する」「人が確認する」の境界も確認できます。</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- 04 STEPS -->
-<div style="padding: 56px 56px 64px; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 36px;">
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633;">04 — 4ステップ</span>
-    <h2 style="font-family: 'Zen Old Mincho', serif; font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; letter-spacing: 0.04em; margin: 0;">見本アプリができるまでの、4ステップ。</h2>
-    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: rgba(27, 22, 19, 0.55);">ALL ¥0</span>
+<!-- ===================== 03 BOUNDARY ===================== -->
+<section data-screen-label="03 大事な線引き" class="section section--contrast">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">03 — 大事な線引き</p>
+      <h2 class="h2">見本アプリと、実際に使うアプリの違い。</h2>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <p class="h3">見本アプリは、<span class="accent">契約前に完成イメージを確認するためのもの</span>です。実際に業務で使うアプリは、契約後に現場に合わせて整えていきます。</p>
+        <p class="body mt-2">見本アプリは、契約の判断材料です。実データを入れて運用するためのものではありません。細かい入力項目・例外処理・権限設計・処理ルールの作り込み・本番環境の構築は、契約後に行います。</p>
+      </div>
+      <div class="stack" style="align-self:end;">
+        <p class="small">※ 見本アプリの内容に著作権は発生しますが、契約後はそのまま実際に使うアプリの土台として活用します。</p>
+        <p class="small">※ 契約前に行うのは、初回訪問・整理・見本作成・2回目訪問の4ステップまで。これらは0円で行います。</p>
+      </div>
+    </div>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 28px;">
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 01 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; line-height: 1.8; letter-spacing: 0.04em;">初回訪問で、<br>今の作業を見る</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 02 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; line-height: 1.8; letter-spacing: 0.04em;">持ち帰って、<br>作業の流れを整理</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 03 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; line-height: 1.8; letter-spacing: 0.04em;">御社専用の<br>見本アプリを作る</div></div>
-    <div style="border-top: 3px solid #BE4633; padding-top: 16px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; color: #BE4633; margin-bottom: 12px;">STEP 04 — ¥0</div><div style="font-family: 'Zen Old Mincho', serif; font-size: 17px; line-height: 1.8; letter-spacing: 0.04em;">2回目訪問で、<br>見本と費用を説明</div></div>
-  </div>
-  <div style="border: 1px solid rgba(27, 22, 19, 0.4); padding: 16px 24px; text-align: center;">
-    <p style="font-size: 12.5px; line-height: 1.9; margin: 0; color: rgba(27, 22, 19, 0.75);">ここまで、すべて<strong style="color: #BE4633;">０円</strong>で行います。進めないと判断された場合も、追加費用は発生しません。</p>
-  </div>
-</div>
+</section>
 
-<!-- 05 WHY -->
-<div style="display: grid; grid-template-columns: 440px 1fr; border-bottom: 1px solid rgba(27, 22, 19, 0.35);">
-  <div style="padding: 56px 48px; border-right: 1px solid rgba(27, 22, 19, 0.35);">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; color: #BE4633; margin-bottom: 22px;">05 — なぜ作るのか</div>
-    <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(26px, 2.8vw, 36px); font-weight: 700; line-height: 1.55; letter-spacing: 0.04em;">なぜ、契約前に見本アプリを作るのか。</div>
-  </div>
-  <div style="padding: 56px 48px;">
-    <p style="font-family: 'Zen Old Mincho', serif; font-size: 16px; line-height: 2.1; color: rgba(27, 22, 19, 0.85); margin: 0 0 18px;">「契約してから、想像していたものと違った」── 介護現場でいちばん起きやすい失敗です。</p>
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 16px;">仕様書だけで判断するのは、現場の方には負担が大きすぎます。文章で書かれた要件と、実際に使う画面では、見えるものが違うからです。</p>
-    <p style="font-size: 13.5px; line-height: 2.15; color: rgba(27, 22, 19, 0.8); margin: 0 0 24px;">嶽ノ子では、契約前に実際の見本を見せることで、<strong style="color: #BE4633;">「この形なら使えそうか」「どこまで作るとよさそうか」「費用はどれくらいか」</strong>を、現場の感覚で判断できるようにします。</p>
-    <div style="background: #EDE8D9; padding: 20px 28px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: 15px; line-height: 2; letter-spacing: 0.05em; color: rgba(27, 22, 19, 0.85);">「現場を見て、現場に合わせる。テクノロジーは、その手段です。」</div>
+<!-- ===================== 04 STEPS ===================== -->
+<section data-screen-label="04 4ステップ" class="section">
+  <div class="container">
+    <div class="section__head" style="max-width:none; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:16px;">
+      <div>
+        <p class="eyebrow">04 — 4ステップ</p>
+        <h2 class="h2">見本アプリができるまでの、4ステップ。</h2>
+      </div>
+      <span class="stat__label">ALL ¥0</span>
+    </div>
+    <div class="grid grid-4 grid--stretch">
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 01 — ¥0</p>
+        <p class="h4">初回訪問で、今の作業を見る</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 02 — ¥0</p>
+        <p class="h4">持ち帰って、作業の流れを整理</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 03 — ¥0</p>
+        <p class="h4">御社専用の見本アプリを作る</p>
+      </div>
+      <div class="card">
+        <p class="card__eyebrow" style="color:var(--accent);">STEP 04 — ¥0</p>
+        <p class="h4">2回目訪問で、見本と費用を説明</p>
+      </div>
+    </div>
+    <div class="note note--outline mt-3 center">
+      ここまで、すべて<strong class="accent">０円</strong>で行います。進めないと判断された場合も、追加費用は発生しません。
     </div>
   </div>
-</div>
+</section>
 
-<div style="background: #1B1613; color: #F3EFE4; padding: 72px 56px 40px; position: relative; overflow: hidden; font-family: 'Zen Kaku Gothic New', sans-serif;">
-  <div style="position: absolute; inset: 0; opacity: 0.07; background-image: radial-gradient(circle at 50% 100%, transparent 34px, #F3EFE4 34px, #F3EFE4 36px, transparent 36px); background-size: 90px 45px; pointer-events: none;"></div>
-  <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 64px; flex-wrap: wrap;">
-    <div style="max-width: 720px;">
-      <div style="font-family: 'Zen Old Mincho', serif; font-size: clamp(30px, 3.4vw, 46px); font-weight: 700; line-height: 1.5; letter-spacing: 0.04em;">御社専用の見本アプリ、まずは無料でご相談ください。</div>
-      <p style="font-size: 12.5px; line-height: 2; color: rgba(243, 239, 228, 0.65); margin: 18px 0 0;">今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。契約前まで0円です。</p>
-    </div>
-    <a href="index.html#contact" style="display: inline-flex; align-items: center; gap: 12px; background: #BE4633; color: #FFF6F1; font-size: 13px; letter-spacing: 0.18em; padding: 18px 40px; text-decoration: none;">無料で相談する<span>→</span></a>
-  </div>
-  <div style="position: relative; display: grid; grid-template-columns: 1fr auto auto auto; gap: 64px; padding-bottom: 48px;">
-    <div>
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-        <span style="width: 34px; height: 34px; background: #BE4633; display: grid; place-items: center; font-family: 'Zen Old Mincho', serif; font-size: 17px; font-weight: 700; color: #FFF6F1;">嶽</span>
-        <span style="font-family: 'Zen Old Mincho', serif; font-size: 20px; font-weight: 700; letter-spacing: 0.14em;">嶽ノ子</span>
+<!-- ===================== 05 WHY ===================== -->
+<section data-screen-label="05 なぜ作るのか" class="section section--tint">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="section__head" style="margin-bottom:0;">
+        <p class="eyebrow">05 — なぜ作るのか</p>
+        <h2 class="h2">なぜ、契約前に見本アプリを作るのか。</h2>
       </div>
-      <p style="font-size: 11.5px; line-height: 2; color: rgba(243, 239, 228, 0.55); max-width: 34em; margin: 0;">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。契約前に御社専用の見本アプリで、完成イメージまで確認できます。</p>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">SERVICE</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="index.html#process" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">契約前と契約後にやること</a>
-        <a href="index.html#examples" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">対応業務</a>
-        <a href="index.html#price" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">料金</a>
-        <a href="sample-app.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">見本アプリとは</a>
-        <a href="business-improvement.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">業務改善支援</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">FOR</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="manager.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">管理者の方へ</a>
-        <a href="staff.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">現場職員の方へ</a>
-        <a href="dayservice.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">デイサービスの方へ</a>
-        <a href="small-facility.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">小規模事業所の方へ</a>
-      </div>
-    </div>
-    <div>
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 16px;">COMPANY</div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-        <a href="company.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">運営者情報</a>
-        <a href="privacy.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">個人情報保護方針</a>
-        <a href="terms.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利用規約</a>
-        <a href="conflict-of-interest.html" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">利益相反管理規程</a>
-        <a href="index.html#contact" style="color: rgba(243, 239, 228, 0.75); text-decoration: none;">お問い合わせ</a>
+      <div class="prose">
+        <p class="h4">「契約してから、想像していたものと違った」── 介護現場でいちばん起きやすい失敗です。</p>
+        <p>仕様書だけで判断するのは、現場の方には負担が大きすぎます。文章で書かれた要件と、実際に使う画面では、見えるものが違うからです。</p>
+        <p>嶽ノ子では、契約前に実際の見本を見せることで、<strong class="accent">「この形なら使えそうか」「どこまで作るとよさそうか」「費用はどれくらいか」</strong>を、現場の感覚で判断できるようにします。</p>
+        <div class="note note--accent">「現場を見て、現場に合わせる。テクノロジーは、その手段です。」</div>
       </div>
     </div>
   </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 12px;">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</div>
-    <p style="font-size: 11px; line-height: 2; color: rgba(243, 239, 228, 0.55); margin: 0;">当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
-  </div>
-  <div style="position: relative; border-top: 1px solid rgba(243, 239, 228, 0.14); padding-top: 22px; margin-bottom: 26px; max-width: 62em;">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.26em; color: rgba(243, 239, 228, 0.5); margin-bottom: 14px;">SECURITY ACTION ／ 情報セキュリティ対策</div>
-    <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-      <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" style="display: block; flex-shrink: 0; line-height: 0; background: #fff; border-radius: 4px; padding: 4px;">
-        <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108" style="display: block; width: 108px; height: auto;">
-      </a>
-      <div style="min-width: 220px; flex: 1;">
-        <p style="font-size: 10.5px; line-height: 1.95; color: rgba(243, 239, 228, 0.55); margin: 0 0 8px;">独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
-        <p style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(243, 239, 228, 0.45); margin: 0;">自己宣言ID：50000228580</p>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section data-screen-label="CTA お問い合わせ" class="section section--contrast">
+  <div class="container">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:32px;">
+      <div style="max-width:720px;">
+        <h2 class="h2">御社専用の見本アプリ、まずは無料でご相談ください。</h2>
+        <p class="body mt-2">今使っている紙・Excelを見せていただければ、こちらで整理して見本アプリまで作ってご提示します。契約前まで0円です。</p>
       </div>
+      <a href="index.html#contact" class="btn btn--primary btn--lg">無料で相談する <span>→</span></a>
     </div>
   </div>
-  <div style="position: relative; display: flex; justify-content: space-between; border-top: 1px solid rgba(243, 239, 228, 0.2); padding-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: rgba(243, 239, 228, 0.5); flex-wrap: wrap; gap: 12px;">
-    <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
-    <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
-    <span>SAGAMIHARA, KANAGAWA</span>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
+      <div>
+        <div class="footer__brand-name">嶽ノ子</div>
+        <p class="footer__about">今のやり方を見せてください。介護現場の紙・Excel・手作業を、使いやすい仕組みに整えます。シフト・送迎・月次集計・申し送りなど、現場に残る業務に対応。</p>
+      </div>
+      <div>
+        <p class="footer__col-h">Service</p>
+        <div class="footer__links">
+          <a href="#trust">嶽ノ子の姿勢</a>
+          <a href="#process">契約前と契約後にやること</a>
+          <a href="#examples">対応業務</a>
+          <a href="#price">料金</a>
+          <a href="sample-app.html">見本アプリとは</a>
+          <a href="business-improvement.html">業務改善支援(県のICT補助金)</a>
+          <a href="subsidy-app.html">国の補助金について</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">For</p>
+        <div class="footer__links">
+          <a href="manager.html">管理者の方へ</a>
+          <a href="staff.html">現場職員の方へ</a>
+          <a href="dayservice.html">デイサービスの方へ</a>
+          <a href="small-facility.html">小規模事業所の方へ</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__col-h">Company</p>
+        <div class="footer__links">
+          <a href="company.html">運営者情報</a>
+          <a href="privacy.html">個人情報保護方針</a>
+          <a href="terms.html">利用規約</a>
+          <a href="conflict-of-interest.html">利益相反管理規程</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__disclaimer">
+      <p class="h">SCOPE OF SERVICE ／ 役務の範囲と責任の所在</p>
+      <p>当方（嶽ノ子）が提供する役務は、助言・教育・ツールの提供・データ整備に限られます。介護保険法および労働・社会保険関係法令に基づく書類の作成代行・提出代行は行いません（これらは社会保険労務士・行政書士等の独占業務です）。各種書類の作成・提出および報告内容の最終責任は、事業者ご本人にあります。書類の作成・提出が必要な場合は、お客様と各士業とのご契約を中立にご案内します（当方は紹介料を一切いただきません）。</p>
+    </div>
+    <div class="footer__security">
+      <p class="h">SECURITY ACTION ／ 情報セキュリティ対策</p>
+      <div class="footer__security-row">
+        <a href="https://www.ipa.go.jp/security/security-action/" target="_blank" rel="noopener noreferrer" title="SECURITY ACTION セキュリティ対策自己宣言（IPA）" class="footer__security-badge">
+          <img src="assets/security-action/security_action_hitotsuboshi-small_color.png" alt="SECURITY ACTION 一つ星（セキュリティ対策自己宣言）" width="108" height="108">
+        </a>
+        <div class="footer__security-text">
+          <p>独立行政法人情報処理推進機構（IPA）の「SECURITY ACTION」一つ星に自己宣言しています。中小企業向け情報セキュリティ五か条への取組を宣言した事業者です。</p>
+          <p class="footer__security-id">自己宣言ID：50000228580</p>
+        </div>
+      </div>
+    </div>    <div class="footer__bar">
+      <span>© 2025 嶽ノ子 — TAKENOKONOKO</span>
+      <span>TEL 070-1383-4420 ／ 平日・土 9:00-18:00</span>
+      <span>SAGAMIHARA, KANAGAWA</span>
+    </div>
   </div>
-</div>
+</footer>
+
 </body>
 </html>
