@@ -1,16 +1,20 @@
 /**
  * 嶽ノ子 LP 問い合わせフォーム — 任意項目4列を追加する Apps Script
  *
- * gcloud 認証は Google Workspace によりブロックされるため、
- * フォーム編集画面からこのスクリプトを実行してください（1回だけ）。
+ * 任意の管理用補助。LPのビルドには不要。2026-09-19版のLPは
+ * Googleフォームの公開画面へリンクし、LP自身から回答を送信しません。
+ * このファイルを保存・更新しただけでは外部フォームは変わりません。
+ * 実行はフォーム所有者が変更内容と権限を確認した場合のみ行ってください。
  *
  * 手順:
  * 1. Google Form「お問い合わせフォーム」を編集画面で開く
- * 2. 拡張機能 → Apps Script
+ * 2. 対象フォームに紐づく Apps Script プロジェクトを開く
  * 3. この内容を貼り付けて保存
  * 4. 関数 addOptionalFields を選択 → 実行
- * 5. 初回は「権限を確認」→ 自分のアカウントで許可（Google製スクリプトなのでブロックされない）
- * 6. 実行ログに entry ID が出る → index.html の name を差し替え
+ * 5. 権限要求と組織のポリシーを確認する。許可・実行できることは保証しません。
+ * 6. 実行後に公開フォームの項目・順番・説明・プライバシー案内を目視確認
+ * LPへ entry ID を埋め込む作業は不要です。
+ * 実利用者情報・診療情報・職員給与を問い合わせに入力させないでください。
  */
 function addOptionalFields() {
   var form = FormApp.getActiveForm();
@@ -52,8 +56,8 @@ function addOptionalFields() {
     insertAt++;
   });
 
-  Logger.log('=== 追加完了。送信に使う entry ID（公開フォームから確認） ===');
-  Logger.log('※ item.getId() は送信用 ID と異なります。lp/scripts/list_form_fields.py で確認してください。');
+  Logger.log('追加処理が完了しました。公開フォームの表示を確認してください。');
+  Logger.log('以下は管理用 item ID です。送信用 entry ID ではありません。');
   form.getItems().forEach(function (item) {
     Logger.log(item.getTitle() + ' (itemId=' + item.getId() + ')');
   });
@@ -65,10 +69,4 @@ function findItemIndex(form, title) {
     if (items[i].getTitle() === title) return i;
   }
   return -1;
-}
-
-function findEntryId(form, title) {
-  var idx = findItemIndex(form, title);
-  if (idx < 0) return '(未作成)';
-  return form.getItems()[idx].getId();
 }

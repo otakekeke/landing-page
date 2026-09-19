@@ -1,0 +1,106 @@
+/* Subpages share the home page's paper/forest palette and navigation. */
+.breadcrumb { display:flex; gap:14px; flex-wrap:wrap; padding-top:29px; color:var(--muted); font-size:12px; }
+.breadcrumb a:hover { text-decoration:underline; }
+.sub-hero { padding:52px 0 69px; border-bottom:1px solid var(--line); }
+.sub-hero h1 { white-space:normal; font-size:clamp(32px,4vw,50px); max-width:1000px; }
+.sub-hero .sub-lead { max-width:720px; font-size:15px; line-height:2.1; color:var(--muted); margin-top:24px; }
+.sub-hero .text-link { margin-top:24px; }
+.sub-section { padding:76px 0; }
+.sub-section .section-heading { margin-bottom:32px; }
+.sub-section h2 { font-size:clamp(26px,3vw,36px); }
+.sub-section h3 { font-size:20px; }
+.sub-tint { background:var(--sage); }
+.sub-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:30px; }
+.sub-grid-two { grid-template-columns:repeat(2,minmax(0,1fr)); gap:50px; }
+.sub-card { border-top:1px solid #acba9d; padding-top:23px; }
+.sub-card h3 { margin:8px 0 14px; }
+.sub-card p { font-size:14px; line-height:2.1; color:var(--muted); }
+.sub-card p+p { margin-top:15px; }
+.sub-number { font-family:Georgia,serif; font-size:32px; color:#869c6d; }
+.reading { max-width:800px; font-size:15px; line-height:2.2; }
+.reading p+p { margin-top:21px; }
+.reading a:not(.text-link),.policy-copy a,.sub-definitions a { text-decoration:underline; text-underline-offset:4px; }
+.reading .text-link { margin-top:25px; }
+.sub-note { background:var(--white); border-left:3px solid #9caf7b; padding:25px 29px; line-height:2.1; }
+p.sub-note { margin-top:30px; font-size:14px; }
+.sub-note p { margin-top:14px; }
+.sub-price-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+.sub-price-grid p { font-size:14px; line-height:2.1; }
+.sub-price-grid .eyebrow { font-size:12px; margin-bottom:13px; }
+.sub-rate strong { display:block; font-family:var(--serif); font-size:33px; font-weight:600; margin:5px 0 12px; }
+.sub-rate>span { display:block; font-size:12px; color:var(--muted); }
+.sub-price-grid .sub-formula { font-size:20px; font-weight:700; padding:19px 0 13px; }
+.sub-steps { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:30px; counter-reset:steps; }
+.sub-steps>li { border-top:1px solid #b8c4a8; padding-top:18px; }
+.sub-steps>li:before { counter-increment:steps; content:'0' counter(steps); display:block; font-family:Georgia,serif; font-size:29px; color:#899c71; margin-bottom:11px; }
+.sub-steps h3 { font-size:18px; margin-bottom:12px; }
+.sub-steps p { font-size:14px; line-height:2.1; color:var(--muted); }
+.sub-cta { background:var(--sage); padding:54px 0; }
+.sub-cta>.container { display:flex; align-items:center; justify-content:space-between; gap:38px; }
+.sub-cta h2 { font-size:30px; }
+.sub-cta .eyebrow { margin-bottom:12px; }
+.sub-cta p:not(.eyebrow) { font-size:13px; color:var(--muted); margin-top:17px; max-width:680px; }
+.sub-cta .button { flex-shrink:0; }
+.source-note { font-size:12px; color:var(--muted); margin-top:25px; }
+.sub-definitions { margin:0; max-width:940px; }
+.sub-definitions>div { display:grid; grid-template-columns:190px minmax(0,1fr); border-top:1px solid #ced7c1; padding:22px 0; gap:24px; }
+.sub-definitions dt { font-size:13px; font-weight:700; }
+.sub-definitions dd { margin:0; font-size:14px; line-height:2; overflow-wrap:anywhere; }
+.policy-page .sub-hero { padding-bottom:47px; }
+.policy-copy { max-width:920px; font-size:15px; line-height:2.1; }
+.policy-copy h2 { font-family:var(--sans); font-size:23px; font-weight:700; border-top:1px solid var(--line); padding-top:27px; margin:43px 0 18px; }
+.policy-copy h3 { font-size:18px; margin:25px 0 13px; }
+.policy-copy p+p { margin-top:17px; }
+.policy-copy ul { padding-left:24px; }
+.policy-copy li { margin:9px 0; }
+.policy-date { font-size:12px; color:var(--muted); margin-bottom:25px; }
+.policy-copy .policy-formula { padding:18px; background:var(--sage); font-weight:700; font-size:21px; }
+.table-scroll { overflow-x:auto; margin:25px 0; }
+.table-scroll table { border-collapse:collapse; width:100%; min-width:570px; font-size:13px; line-height:1.9; text-align:left; }
+.table-scroll caption { text-align:left; font-size:12px; font-weight:700; margin-bottom:10px; }
+.table-scroll th,.table-scroll td { border-bottom:1px solid var(--line); padding:16px 13px; vertical-align:top; }
+.table-scroll thead { background:var(--sage); }
+.table-scroll tbody th { min-width:160px; font-weight:500; }
+.table-scroll .money { white-space:nowrap; font-variant-numeric:tabular-nums; }
+.policy-dpa { margin:24px 0; }
+.policy-dpa>div { border-bottom:1px solid var(--line); padding:18px 0; display:grid; grid-template-columns:185px minmax(0,1fr); gap:22px; }
+.policy-dpa dt { font-size:14px; font-weight:700; }
+.policy-dpa dd { font-size:14px; margin:0; }
+@media(max-width:900px) {
+  .sub-hero { padding:40px 0 51px; }
+  .sub-grid { gap:22px; }
+  .sub-card h3 { font-size:18px; }
+  .sub-price-grid { gap:30px; }
+  .sub-rate strong { font-size:28px; }
+  .sub-price-grid .sub-formula { font-size:18px; }
+  .sub-cta>.container { align-items:flex-start; flex-direction:column; gap:25px; }
+  .sub-definitions>div { grid-template-columns:150px minmax(0,1fr); }
+}
+@media(max-width:650px) {
+  .breadcrumb { padding-top:23px; font-size:10px; gap:10px; }
+  .sub-hero { padding:30px 0 42px; }
+  .sub-hero h1 { font-size:clamp(26px,7.6vw,36px); line-height:1.75; }
+  .sub-hero .sub-lead { font-size:13px; margin-top:20px; }
+  .sub-section { padding:49px 0; }
+  .sub-section h2 { font-size:25px; }
+  .sub-grid,.sub-grid-two,.sub-price-grid,.sub-steps { grid-template-columns:1fr; gap:30px; }
+  .sub-card { padding-top:17px; }
+  .sub-card h3 { font-size:19px; margin-top:5px; }
+  .sub-card p,.sub-steps p,.reading { font-size:14px; }
+  .sub-rate strong { font-size:28px; }
+  .sub-price-grid .sub-formula { font-size:19px; }
+  .sub-note { padding:21px 20px; }
+  .sub-cta { padding:40px 0; }
+  .sub-cta h2 { font-size:25px; }
+  .sub-definitions>div { display:block; padding:17px 0; }
+  .sub-definitions dt { margin-bottom:7px; }
+  .policy-copy { font-size:14px; }
+  .policy-copy h2 { font-size:20px; margin-top:34px; padding-top:23px; }
+  .policy-copy h3 { font-size:17px; }
+  .policy-copy .policy-formula { font-size:18px; padding:14px; }
+  .policy-dpa>div { display:block; padding:17px 0; }
+  .policy-dpa dt { margin-bottom:7px; }
+  .table-scroll { margin-inline:0; }
+  .source-note { font-size:11px; }
+}
+@media print { .sub-hero,.sub-section { padding:25px 0; }.sub-cta,.breadcrumb { display:none; }.policy-copy { font-size:11px; }.table-scroll table { min-width:0; }.sub-card { break-inside:avoid; } }
