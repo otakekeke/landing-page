@@ -25,7 +25,7 @@ export function header(home = false) {
     <a class="brand" href="${top}" aria-label="タケノコ トップへ"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>タケノコ<small>TAKENOKO</small></span></a>
     <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden><span>メニュー</span><span class="menu-lines" aria-hidden="true"></span></button>
     <nav class="main-nav" id="main-nav" aria-label="メインナビゲーション">
-      <a href="${base}#value">できること</a><a href="${base}#examples">活用イメージ</a>
+      <a href="${base}#trust">作り方</a><a href="${base}#examples">活用例</a>
       <a href="${base}#price">料金</a><a href="${base}#faq">よくある質問</a>
       <a class="nav-contact" href="${base}#contact">相談する <span aria-hidden="true">↗</span></a>
     </nav>
