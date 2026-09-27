@@ -27,20 +27,20 @@ export function header(home = false) {
     <nav class="main-nav" id="main-nav" aria-label="メインナビゲーション">
       <a href="${base}#value">できること</a><a href="${base}#examples">活用イメージ</a>
       <a href="${base}#price">料金</a><a href="${base}#faq">よくある質問</a>
-      <a class="nav-contact" href="${base}#contact">無料で相談する <span aria-hidden="true">↗</span></a>
+      <a class="nav-contact" href="${base}#contact">相談する <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>`;
 }
 export function footer(home = false) {
   return `<footer class="site-footer"><div class="container">
-  <div class="footer-top"><div><a class="brand" href="${home ? '#top' : 'index.html'}" aria-label="タケノコ トップへ"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>タケノコ<small>TAKENOKO</small></span></a><p class="footer-tagline">現場の時間も、気がかりも、少し軽く。</p></div>
+  <div class="footer-top"><div><a class="brand" href="${home ? '#top' : 'index.html'}" aria-label="タケノコ トップへ"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>タケノコ<small>TAKENOKO</small></span></a><p class="footer-tagline">介護現場の業務アプリ制作と運用支援</p></div>
     <nav class="footer-nav" aria-label="フッターナビゲーション">${links.map(([href,label])=>`<a href="${href}">${label}</a>`).join('\n')}</nav></div>
   <div class="footer-bottom"><div class="security-declaration"><img src="assets/security-action/security_action_hitotsuboshi-small_color.png" width="48" height="48" alt="SECURITY ACTION 一つ星"><p>SECURITY ACTION 一つ星を自己宣言しています。<small>自己宣言ID：50000228580 ／ 認証・認定ではありません。</small></p></div><small>© 2026 タケノコ（屋号：嶽ノ子）</small></div>
   <p class="footer-scope">提供するのは、業務アプリの制作・利用・運用支援、助言・教育・データ整備です。申請書類の作成・提出代行、税務・法律上の判断は行いません。効果は業務・運用によって異なり、ミスの完全な防止や残業の解消、補助金の採択は保証しません。</p>
 </div></footer>`;
 }
-export const cta = `<section class="sub-cta"><div class="container"><div><p class="eyebrow">まずは、いつもの業務から。</p><h2>その困りごとを、聞かせてください。</h2><p>ご相談・現状確認・契約前のデモは無料です。遠方への訪問費などは事前に合意します。</p></div><a class="button button-primary" href="index.html#contact">無料で相談する <span aria-hidden="true">↗</span></a></div></section>`;
+export const cta = `<section class="sub-cta"><div class="container"><div><p class="eyebrow">お問い合わせ</p><h2>相談を受け付けています。</h2><p>今の業務を見ながら、困っていることを伺います。相談と契約前のデモに費用はかかりません。</p></div><a class="button button-primary" href="index.html#contact">相談する <span aria-hidden="true">↗</span></a></div></section>`;
 export function section(kicker, title, body, tint = false) {
   return `<section class="section sub-section${tint ? ' sub-tint' : ''}"><div class="container"><div class="section-heading"><p class="eyebrow">${kicker}</p><h2>${title}</h2></div>${body}</div></section>`;
 }
@@ -49,5 +49,5 @@ export function cards(items) {
 }
 export const initialTable = () => `<p class="policy-formula">${initialFormula}</p><div class="table-scroll" role="region" aria-label="月額と初期費用の例。横にスクロールできます" tabindex="0"><table><caption>料金例（税込・紹介割引適用前）</caption><thead><tr><th scope="col">月間削減時間</th><th scope="col">確定した月額</th><th scope="col">初期費用（初回のみ）</th></tr></thead><tbody>${[0,1,5,10].map(hours=>`<tr><th scope="row">${hours}時間</th><td class="money">${money(hours*rate)}円</td><td class="money">${money(hours*rate*pricing.initialFeeMonths)}円</td></tr>`).join('')}</tbody></table></div>`;
 export function pricePanel() {
-  return section('共通の料金ルール', '時間だけでは測れない価値を。<br>料金は、見える基準で。', `<div class="sub-price-grid"><div><p class="eyebrow">月額利用・運用支援料</p><p class="sub-rate">月間の削減<strong>1時間につき ${money(rate)}円</strong><span>税込・最低月額なし。合意した削減時間が0分なら月額0円。</span></p><p class="sub-formula">${formula}</p><p>基準時給2,000円と係数3は全顧客共通です。実際の給与に連動させたり、交渉で係数を変えたりしません。係数3は、金銭的効果が3倍になるという意味ではありません。</p></div><div class="sub-note"><h3>減った時間だけの代金ではありません。</h3><p>アプリの利用と、ミス・確認の不安・引き継ぎの負担を減らす仕組みの運用を支える料金です。新たに発生する入力・確認時間は差し引き、合意した作業範囲だけを数えます。</p><p><strong>${initialFormula}</strong>。初回のみの制作・導入費で、月額の前払いではありません。月額・初期費用とも、使う前と後の作業時間を比べて確定してからのご請求です。作業時間が短くならなければ、どちらも0円です。使う前の時間は訪問時に手順を書き出して一緒に確認し、使った後はアプリが自動で記録します。</p><p>ご要望による追加機能・対象業務の変更時は、変更後の全体の削減時間で月額を再計算します。内容・金額・適用開始月を着手前に合意します。</p><p><strong>${additionalFormula}</strong>。標準範囲の機能追加にかかる一度きりの制作費で、月額の前払いではありません。月額30,000円から48,000円への変更なら、増加分18,000円×3＝${money(additionalFee(30000,48000))}円です。対象範囲を着手前に確認し、大規模改修など標準範囲を超える対応は別途見積もりとします。</p><a class="text-link" href="index.html#price">料金シミュレーターと制作費を見る <span aria-hidden="true">↗</span></a></div></div>`,true);
+  return section('料金', '料金は、<br>減った作業時間で決まります。', `<div class="reading"><p>月額は「${formula}」（税込）で、すべてのお客さまに同じ式です。初期費用は月額の3か月分です。使う前と後の作業時間を比べて金額が決まってから請求し、短くならなければ0円です。</p><a class="text-link" href="index.html#price">金額の決まり方を見る <span aria-hidden="true">→</span></a></div>`,true);
 }

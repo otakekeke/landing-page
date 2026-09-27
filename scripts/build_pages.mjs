@@ -43,7 +43,7 @@ for (const page of pages) {
   ${header()}
   <main id="main">
     <div class="container breadcrumb"><a href="index.html">トップ</a><span aria-hidden="true">/</span><span>${page.title}</span></div>
-    <section class="sub-hero"><div class="container"><p class="eyebrow">${page.eyebrow}</p><h1>${page.heading}</h1><p class="sub-lead">${page.description}</p>${page.policy?'':'<a class="text-link" href="index.html#contact">この業務について相談する <span aria-hidden="true">↗</span></a>'}</div></section>
+    <section class="sub-hero"><div class="container">${page.eyebrow?`<p class="eyebrow">${page.eyebrow}</p>`:''}<h1>${page.heading}</h1><p class="sub-lead">${page.description}</p>${page.policy?'':'<a class="text-link" href="index.html#contact">相談する <span aria-hidden="true">↗</span></a>'}</div></section>
     ${page.body}
   </main>
   ${footer()}

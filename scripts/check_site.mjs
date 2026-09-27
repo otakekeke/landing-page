@@ -39,7 +39,7 @@ assert.equal(pricing.initialFeeMonths,3);
 assert.equal(pricing.additionalFeeMonths,3);
 const additionalFeeCases = [[30000,48000,54000],[30000,30000,0],[30000,24000,0],[0,6000,18000],[30000,30100,300],[0,0,0]];
 for(const [before,after,expected] of additionalFeeCases) assert.equal(additionalFee(before,after),expected,`Additional fee ${before} -> ${after}`);
-for(const name of ['index.html','manager.html','staff.html','dayservice.html','small-facility.html','sample-app.html','subsidy-app.html','terms.html']) {
+for(const name of ['index.html','terms.html']) {
   const html = documents.get(name);
   for(const text of [additionalFormula,'標準範囲','大規模改修','54,000円','着手前']) assert.ok(html.includes(text),`${name}: additional development ${text}`);
 }
@@ -54,8 +54,10 @@ assert.ok(documents.get('index.html').includes(formula));
 for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) assert.ok(documents.get(p.file).includes(formula),p.file);
 for (const [name,html] of documents) assert.doesNotMatch(html,/紙・Excel改善パック|550,000円|800,000円/,`${name}: obsolete initial plans`);
 assert.ok(documents.get('index.html').includes(initialFormula));
-{const home=documents.get('index.html');for(const text of ['料金は、こうやって決まります','使う前は、手順を一緒に書き出して決めます。','使った後は、アプリが記録します。','差がなければ0円。','数字は説明のための例です。','assets/price-flow.js','月額 8,000円','差がなかったら？']) assert.ok(home.includes(text),`price flow: ${text}`);assert.doesNotMatch(home,/ストップウォッチで測って/,'price flow: no stopwatch');}
-for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) {assert.ok(documents.get(p.file).includes(initialFormula),p.file);assert.ok(documents.get(p.file).includes('月額を再計算'),p.file);}
+{const home=documents.get('index.html');for(const text of ['金額の決まり方','使う前は、手順を一緒に書き出して決めます。','使った後は、アプリが記録します。','差がなければ0円。','数字は説明のための例です。','assets/price-flow.js','月額 8,000円','差がなかったら？']) assert.ok(home.includes(text),`price flow: ${text}`);assert.doesNotMatch(home,/ストップウォッチで測って/,'price flow: no stopwatch');}
+for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) {assert.ok(documents.get(p.file).includes('index.html#price'),`${p.file}: link to pricing details`);assert.ok(documents.get(p.file).includes('月額の3か月分'),`${p.file}: initial fee summary`);}
+// Copy that was removed on 2026-09-27 as salesy or cliched must not come back.
+for (const [name,html] of documents) if(!/terms|privacy|conflict|index\.dc/.test(name)) assert.doesNotMatch(html,/余白を|わたしたち|LET’S START|MONTHLY ESTIMATE|FOR MANAGERS|FOR CARE TEAMS|FOR DAY SERVICES|FOR SMALL TEAMS|TRY BEFORE YOU DECIDE|WORKFLOW SUPPORT|FUNDING &amp; CONDITIONS|ABOUT TAKENOKO|時間だけでは測れない価値を|値札をつけない|「これなら私にも使えそう」|だからこそ/,`${name}: removed copy came back`);
 for(const term of ['第13条','D-14','0円','最低月額','既存契約','個別契約','90,000円','180,000円',initialFormula,'月額を再計算','適用開始月']) assert.ok(documents.get('terms.html').includes(term),term);
 class Element {
   constructor(value='') {this.value=value;this.attrs={};this.events={};this.textContent='';this.hidden=true;this.dataset={};}
