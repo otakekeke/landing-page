@@ -40,12 +40,11 @@
   const presets = document.querySelectorAll('[data-hours]');
   if (!hours || !minutes || !amount || !initialAmount || !detail || !error) return;
 
-  // The same reference hourly rate and multiplier apply to every estimate.
-  // There is no minimum fee. The calculation is in whole worker-minutes.
-  const REFERENCE_HOURLY_RATE = 2000;
+  // The reference wage is the prefecture's minimum wage at contract time; the estimate uses
+  // Kanagawa's rate from 2026-10-01. There is no minimum fee. Fractions of a yen are dropped.
+  const MINIMUM_WAGE = 1279;
   const COMMON_MULTIPLIER = 3;
   const INITIAL_FEE_MONTHS = 3;
-  const PRICE_PER_MINUTE = REFERENCE_HOURLY_RATE * COMMON_MULTIPLIER / 60;
   const formatter = new Intl.NumberFormat('ja-JP');
 
   const updateEstimate = () => {
@@ -72,7 +71,7 @@
     error.hidden = true;
     error.textContent = '';
     const totalMinutes = h * 60 + m;
-    const monthly = totalMinutes * PRICE_PER_MINUTE;
+    const monthly = Math.floor(totalMinutes * MINIMUM_WAGE * COMMON_MULTIPLIER / 60);
     amount.value = formatter.format(monthly);
     initialAmount.value = formatter.format(monthly * INITIAL_FEE_MONTHS);
     detail.textContent = totalMinutes === 0

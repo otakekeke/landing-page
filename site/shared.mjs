@@ -1,10 +1,14 @@
+// The reference wage is the regional minimum wage of the customer's prefecture at contract time
+// (fixed for the contract). Examples on the site use Kanagawa's rate from 2026-10-01.
 export const pricing = Object.freeze({
-  updated: '2026-09-19', referenceHourlyRate: 2000, multiplier: 3,
-  initialFeeMonths: 3, additionalFeeMonths: 3
+  updated: '2026-09-27', exampleMinimumWage: 1279, examplePrefecture: '神奈川県', exampleEffective: '2026年10月1日',
+  multiplier: 3, initialFeeMonths: 3, additionalFeeMonths: 3
 });
 export const money = n => n.toLocaleString('ja-JP');
-export const formula = `月間削減時間 × ${money(pricing.referenceHourlyRate)}円 × ${pricing.multiplier}`;
-export const rate = pricing.referenceHourlyRate * pricing.multiplier;
+export const formula = `月間削減時間 × 最低賃金 × ${pricing.multiplier}`;
+// Monthly fee in yen for a number of saved worker-minutes; fractions of a yen are dropped.
+export const monthlyFee = (minutes, wage = pricing.exampleMinimumWage) => Math.floor(minutes * wage * pricing.multiplier / 60);
+export const rate = monthlyFee(60);
 export const initialFormula = `初期費用 ＝ 確定した月額 × ${pricing.initialFeeMonths}か月分（税込）`;
 export const additionalFormula = `追加開発費 ＝ 月額の増加分 × ${pricing.additionalFeeMonths}か月分（税込）`;
 export const additionalFee = (before, after) => Math.max(0, after - before) * pricing.additionalFeeMonths;
@@ -42,7 +46,7 @@ export function section(kicker, title, body, tint = false) {
 export function cards(items) {
   return `<div class="sub-grid">${items.map(([title,body],i)=>`<article class="sub-card"><span class="sub-number">0${i+1}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>`;
 }
-export const initialTable = () => `<p class="policy-formula">${initialFormula}</p><div class="table-scroll" role="region" aria-label="月額と初期費用の例。横にスクロールできます" tabindex="0"><table><caption>料金例（税込・紹介割引適用前）</caption><thead><tr><th scope="col">月間削減時間</th><th scope="col">確定した月額</th><th scope="col">初期費用（初回のみ）</th></tr></thead><tbody>${[0,1,5,10].map(hours=>`<tr><th scope="row">${hours}時間</th><td class="money">${money(hours*rate)}円</td><td class="money">${money(hours*rate*pricing.initialFeeMonths)}円</td></tr>`).join('')}</tbody></table></div>`;
+export const initialTable = () => `<p class="policy-formula">${initialFormula}</p><div class="table-scroll" role="region" aria-label="月額と初期費用の例。横にスクロールできます" tabindex="0"><table><caption>料金例（神奈川県の最低賃金1,279円の場合・税込・紹介割引適用前）</caption><thead><tr><th scope="col">月間削減時間</th><th scope="col">確定した月額</th><th scope="col">初期費用（初回のみ）</th></tr></thead><tbody>${[0,1,5,10].map(hours=>`<tr><th scope="row">${hours}時間</th><td class="money">${money(monthlyFee(hours*60))}円</td><td class="money">${money(monthlyFee(hours*60)*pricing.initialFeeMonths)}円</td></tr>`).join('')}</tbody></table></div>`;
 export function pricePanel() {
-  return section('料金', '料金は、<br>減った作業時間で決まります。', `<div class="reading"><p>月額は「${formula}」（税込）で、すべてのお客さまに同じ式です。初期費用は月額の3か月分です。使う前と後の作業時間を比べて金額が決まってから請求し、短くならなければ0円です。</p><a class="text-link" href="index.html#price">金額の決まり方を見る <span aria-hidden="true">→</span></a></div>`,true);
+  return section('料金', '料金は、<br>減った作業時間で決まります。', `<div class="reading"><p>月額は「${formula}」（税込）で、すべてのお客さまに同じ式です。最低賃金は、契約した時点の、事業所がある都道府県の額を使います。初期費用は月額の3か月分です。使う前と後の作業時間を比べて金額が決まってから請求し、短くならなければ0円です。</p><a class="text-link" href="index.html#price">金額の決まり方を見る <span aria-hidden="true">→</span></a></div>`,true);
 }
