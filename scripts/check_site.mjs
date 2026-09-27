@@ -3,7 +3,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
-import {pages} from '../site/pages.mjs';
+import {pages,moved} from '../site/pages.mjs';
 import {pricing,rate,formula,initialFormula,additionalFormula,additionalFee,header,footer} from '../site/shared.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const names = ['index.html',...pages.map(p=>p.file),'index.dc.html'];
@@ -51,6 +51,11 @@ for (const name of ['terms.html','privacy.html']) {
   assert.doesNotMatch(documents.get(name),/一次返信は原則2営業日以内/,`${name}: obsolete response time`);
 }
 assert.ok(documents.get('index.html').includes(formula));
+for (const page of moved) {
+  const stub = await fs.readFile(path.join(root,page.file),'utf8');
+  assert.ok(stub.includes(`url=${page.to}`) && stub.includes('noindex'),`${page.file}: redirect stub`);
+  for (const [name,html] of documents) assert.ok(!html.includes(`href="${page.file}"`),`${name}: links to merged page ${page.file}`);
+}
 for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) assert.ok(documents.get(p.file).includes(formula),p.file);
 for (const [name,html] of documents) assert.doesNotMatch(html,/紙・Excel改善パック|550,000円|800,000円/,`${name}: obsolete initial plans`);
 assert.ok(documents.get('index.html').includes(initialFormula));

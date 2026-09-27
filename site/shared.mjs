@@ -10,8 +10,6 @@ export const additionalFormula = `追加開発費 ＝ 月額の増加分 × ${pr
 export const additionalFee = (before, after) => Math.max(0, after - before) * pricing.additionalFeeMonths;
 export const contacts = { email:'kotaro.otake@takenokonoko.com', phone:'070-1383-4420' };
 export const links = [
-  ['manager.html','管理者の方へ'], ['staff.html','現場職員の方へ'],
-  ['dayservice.html','デイサービスの方へ'], ['small-facility.html','小規模事業所の方へ'],
   ['sample-app.html','契約前のデモについて'], ['business-improvement.html','業務改善支援'],
   ['subsidy-app.html','補助金をご検討の方へ'], ['company.html','事業者情報'],
   ['privacy.html','個人情報保護方針'], ['terms.html','利用規約'],

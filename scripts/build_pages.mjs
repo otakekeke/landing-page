@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {pages} from '../site/pages.mjs';
+import {pages,moved} from '../site/pages.mjs';
 import {header,footer} from '../site/shared.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const check = process.argv.includes('--check');
@@ -59,5 +59,8 @@ const refreshedHome = home
 await write('index.html',refreshedHome.replaceAll('\r\n','\n'));
 await write('index.dc.html', `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://takenokonoko.com/"><meta http-equiv="refresh" content="0;url=index.html"><title>タケノコ｜現行ページへ移動</title></head><body><p>参考デザインは現行ページに統合しました。<a href="index.html">タケノコのトップページへ</a></p></body></html>
+`);
+for (const page of moved) await write(page.file, `<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://takenokonoko.com/"><meta http-equiv="refresh" content="0;url=${page.to}"><title>タケノコ｜ページを移動しました</title></head><body><p>「${page.title}」の内容は、トップページにまとめました。<a href="${page.to}">タケノコのトップページへ</a></p></body></html>
 `);
 console.log(check ? 'All generated pages are current.' : `Build complete (${changed} files updated).`);

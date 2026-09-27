@@ -52,8 +52,7 @@ python -m http.server 4318 --bind 127.0.0.1
 | ファイル | 内容 |
 | --- | --- |
 | `index.html` | メインLP・料金計算・問い合わせ導線 |
-| `manager.html` / `staff.html` | 経営・管理者向け／現場職員向け |
-| `dayservice.html` / `small-facility.html` | デイサービス／小規模施設向け |
+| `manager.html` / `staff.html` / `dayservice.html` / `small-facility.html` | 2026-09-27にトップへ統合。トップの活用例へ移動するだけのページ（`site/pages.mjs` の `moved`） |
 | `sample-app.html` | 見本・無料相談とデモの範囲 |
 | `business-improvement.html` | 独立した業務改善支援との区別 |
 | `subsidy-app.html` | 国・県の制度と通常料金の切り分け |
