@@ -54,6 +54,7 @@ assert.ok(documents.get('index.html').includes(formula));
 for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) assert.ok(documents.get(p.file).includes(formula),p.file);
 for (const [name,html] of documents) assert.doesNotMatch(html,/紙・Excel改善パック|550,000円|800,000円/,`${name}: obsolete initial plans`);
 assert.ok(documents.get('index.html').includes(initialFormula));
+{const home=documents.get('index.html');for(const text of ['料金は、こうやって決まります','使う前は、手順を一緒に書き出して決めます。','使った後は、アプリが記録します。','差がなければ0円。','数字は説明のための例です。','assets/price-flow.js','月額 8,000円','差がなかったら？']) assert.ok(home.includes(text),`price flow: ${text}`);assert.doesNotMatch(home,/ストップウォッチで測って/,'price flow: no stopwatch');}
 for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) {assert.ok(documents.get(p.file).includes(initialFormula),p.file);assert.ok(documents.get(p.file).includes('月額を再計算'),p.file);}
 for(const term of ['第13条','D-14','0円','最低月額','既存契約','個別契約','90,000円','180,000円',initialFormula,'月額を再計算','適用開始月']) assert.ok(documents.get('terms.html').includes(term),term);
 class Element {

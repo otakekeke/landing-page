@@ -76,7 +76,7 @@
     amount.value = formatter.format(monthly);
     initialAmount.value = formatter.format(monthly * INITIAL_FEE_MONTHS);
     detail.textContent = totalMinutes === 0
-      ? '導入時の削減時間がゼロなら、月額・初期費用ともにゼロです。'
+      ? '削減時間がゼロなら、月額・初期費用ともにゼロです。'
       : `月${h ? `${formatter.format(h)}時間` : ''}${m ? `${m}分` : ''}の削減を想定した目安です。`;
   };
 
