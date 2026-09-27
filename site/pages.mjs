@@ -1,12 +1,16 @@
 import {section, cards, pricePanel, initialTable, cta, formula} from './shared.mjs';
-import {terms, privacy, conflict} from './policies.mjs';
+import {terms, privacy} from './policies.mjs';
 
 // Audience pages merged into the top page on 2026-09-27. Old URLs redirect so shared links keep working.
 export const moved = [
   {file:'manager.html', title:'管理者の方へ', to:'index.html#examples'},
   {file:'staff.html', title:'現場職員の方へ', to:'index.html#examples'},
   {file:'dayservice.html', title:'デイサービスの方へ', to:'index.html#examples'},
-  {file:'small-facility.html', title:'小規模事業所の方へ', to:'index.html#examples'}
+  {file:'small-facility.html', title:'小規模事業所の方へ', to:'index.html#examples'},
+  // Services not offered for now (decided 2026-09-27). Pages removed; old URLs go to the top page.
+  {file:'business-improvement.html', title:'業務改善支援', to:'index.html'},
+  {file:'subsidy-app.html', title:'補助金をご検討の方へ', to:'index.html'},
+  {file:'conflict-of-interest.html', title:'利益相反管理規程', to:'index.html'}
 ];
 
 export const pages = [
@@ -21,28 +25,11 @@ export const pages = [
     ]))+section('02 / 無料の範囲','契約するか決めるまでは、<br>費用はかかりません。',`<ol class="sub-steps"><li><h3>いつもの帳票を見る</h3><p>資料づくりは要りません。紙やExcelは、個人情報を伏せた見本をご用意ください。</p></li><li><h3>試作を触って確認する</h3><p>合意した一つのテーマでデモを作ります。無料の段階で、完成品まで作るものではありません。</p></li><li><h3>費用と範囲を確認する</h3><p>削減時間と料金の見込み、作る範囲、実費、使った後の記録の方法、見直しの時期をお伝えします。月額は、使った後の記録で決まります。契約しないという判断もできます。</p></li></ol><p class="sub-note">デモは検討のためのものです。本番のデータ移行、セキュリティの設定、受け入れの確認を終えるまで、本番の業務では使いません。</p>`,true)+pricePanel()+cta
   },
   {
-    file:'business-improvement.html', title:'業務改善支援', eyebrow:'',
-    heading:'アプリを作らずに、<br>業務の流れだけを見直す支援もあります。',
-    description:'業務整理・改善提案・定着確認の支援です。アプリ制作に含まれる業務整理と、独立した業務改善支援を分けてご案内します。',
-    body:section('01 / 2つの依頼方法','アプリのための整理と、<br>独立した改善支援を分けています。',`<div class="sub-grid sub-grid-two"><article class="sub-card"><h3>アプリ制作に伴う業務整理</h3><p>アプリを作るために必要な業務整理です。契約後の詳しい設計と業務整理は初期費用に、導入後の相談は月額に含まれます。同じ作業を、別の支援費として請求することはありません。</p><a class="text-link" href="index.html#price">アプリの料金を見る <span aria-hidden="true">→</span></a></article><article class="sub-card"><h3>独立した業務改善支援</h3><p>アプリ制作を前提にせず、業務調査・改善提案・効果測定などの成果物を依頼していただく別のサービスです。対象範囲と報酬は、別の見積書・契約書で決めます。</p><p>この支援の費用は、アプリの月額の式では計算しません。</p></article></div>`)+section('02 / 独立した支援の目安','作業内容と成果物を決めてから、<br>見積もります。',cards([
-      ['事前評価：100,000円〜','現場訪問1〜2回、作業の整理、レポート。1事業所を対象とする目安です。'],
-      ['改善提案：200,000円〜','業務の流れの見直しと、運用ルールの整理。対象の業務と成果物を事前に合意します。'],
-      ['定着確認：100,000円〜','導入後1〜3か月の定着の確認と、合意した指標の効果測定レポート。']
-    ])+`<p class="sub-note">3つの合計は400,000円〜（税込・目安）です。事業所の数、業務の範囲、訪問の回数などで見積もります。アプリの制作費・利用料は含まず、補助金の採否とも関係しません。</p>`,true)+section('03 / 中立性と制度','支援する立場と、売る立場を分けています。',`<div class="reading"><p>補助金制度の第三者支援者として関わる場合は、その案件で自社のアプリを勧めず、自社製品の導入を評価する立場も兼ねません。契約を分けただけで中立と認められるとは限らないため、制度の要件を別に確認します。</p><p>公的な無料相談や、今のソフトの設定変更で足りる場合もあります。申請書類の作成・提出の代行や、採択・加算取得の保証は行いません。</p><a class="text-link" href="conflict-of-interest.html">利益相反管理規程を読む <span aria-hidden="true">→</span></a></div>`)+cta
-  },
-  {
-    file:'subsidy-app.html', title:'補助金をご検討の方へ', eyebrow:'',
-    heading:'補助金が使えるかは、<br>制度と案件ごとに確認します。',
-    description:'国の省力化投資補助金と、神奈川県の介護ロボット・ICT導入支援を区別してご案内します。アプリの通常の料金と補助対象の経費は、別に確認します。',
-    body:section('01 / 通常の料金と分けて考える','補助金を前提にした料金にはしません。',`<div class="reading"><p>初期費用と月額は、通常の料金の式でご案内します。補助の対象になる経費、補助率、税の扱い、申請・契約のタイミングは、利用する公募回と案件ごとに確認します。</p><p>対象になると確認できる前に、補助金を差し引いた「実質価格」は示しません。月額が対象になることも前提にせず、補助がなくても負担できるかを確かめてください。</p></div>`)+section('02 / 制度を混同しない','国の制度と、県の制度。',`<div class="sub-grid sub-grid-two"><article class="sub-card"><h3>中小企業省力化投資補助金〈一般型〉</h3><p>現場に合わせた設備導入やシステム構築を支援する制度です。ただし、このサービスが対象になるかは個別の確認が必要です。法人区分、投資内容、賃上げなどの要件、経費区分を現行の要領で確認します。</p><a class="text-link" href="https://shoryokuka.smrj.go.jp/ippan/" target="_blank" rel="noopener noreferrer">公式の制度案内（別タブ） ↗</a></article><article class="sub-card"><h3>神奈川県の介護ロボット・ICT導入支援</h3><p>対象のテクノロジーや、導入と一体の業務支援など、県の要件に従う別の制度です。TAISに登録していないタケノコの個別開発アプリを、県の補助の対象製品として案内することはありません。第三者支援者としての適格性も別に確認します。</p><a class="text-link" href="https://www.pref.kanagawa.jp/docs/u6s/cnt/f420373/p1075201.html" target="_blank" rel="noopener noreferrer">県の公式案内（別タブ） ↗</a></article></div><p class="source-note">確認日：2026年9月19日。募集期間や条件は変わるため、申請する時点の公式案内を確認してください。</p>`,true)+section('03 / 先に確認すること','契約・発注の前に、確認します。',`<ol class="sub-steps"><li><h3>制度・公募回・申請者の要件</h3><p>法人形態、規模、業務内容、対象経費などを、公募要領と、必要に応じて事務局の回答で確認します。</p></li><li><h3>契約・発注・支払いの時期</h3><p>補助の対象になる期間と、交付決定の前に着手できない制限を確認するまで、有料の制作や発注は進めません。</p></li><li><h3>採択後の義務と資金</h3><p>賃上げ・報告・証拠の保存・自己負担などを確認します。採択や交付、事業計画の達成は保証できません。</p></li></ol><p class="sub-note">タケノコは業務と技術の情報を整理します。申請書類の作成・提出や、行政との代理交渉はお引き受けしません。必要な場合は、専門家にご相談ください。</p>`)+pricePanel()+cta
-  },
-  {
     file:'company.html', title:'事業者情報', eyebrow:'',
     heading:'タケノコについて',
     description:'タケノコ（屋号：嶽ノ子）は、神奈川県相模原市を拠点に、介護現場向け業務アプリの設計・開発・運用支援を行う個人事業です。',
     body:section('01 / 大切にしていること','今の運用を見るところから始めます。',`<div class="reading"><p>介護の現場には、言葉にしにくい判断や、帳票の中に残る工夫があります。まず実物と仕事の流れを見せていただき、その現場で続けられる形を考えます。</p><p>代表は介護の現場で働いた経験があり、相談から設計・制作・運用支援まで一人で担当します。新しい道具が、別の負担にならないことを大切にしています。</p><p>作業時間だけでなく、ミスや確認の手間、特定の人に仕事が集まることも減らすことを目指します。料金は相手によって変えず、共通の式と、事前に合意した制作範囲で決めます。</p></div>`)+section('02 / 事業者概要','運営者',`<dl class="sub-definitions"><div><dt>サービス名・屋号</dt><dd>タケノコ ／ 嶽ノ子（たけのこ）</dd></div><div><dt>代表者</dt><dd>大嶽 耕太郎</dd></div><div><dt>事業形態・設立日</dt><dd>個人事業 ／ 2025年4月19日</dd></div><div><dt>所在地</dt><dd>神奈川県相模原市中央区千代田7-10-7</dd></div><div><dt>事業内容</dt><dd>業務アプリの設計・制作・導入・運用支援、業務整理・助言・教育・データ整備</dd></div><div><dt>請求・支払</dt><dd>請求書を発行します。適格請求書発行事業者（インボイス）の登録はしていません。銀行振込／Stripe決済（契約で合意した方法）。</dd></div><div><dt>秘密保持</dt><dd>秘密保持契約に対応します。</dd></div><div><dt>連絡先</dt><dd><a href="mailto:kotaro.otake@takenokonoko.com">kotaro.otake@takenokonoko.com</a><br><a href="tel:07013834420">070-1383-4420</a></dd></div><div><dt>受付時間</dt><dd>平日・土曜 9:00〜18:00（日本時間）。対応中は折り返しになる場合があります。</dd></div></dl>`,true)+section('03 / 情報の取り扱い','データの扱いは、案件ごとに先に決めます。',`<div class="reading"><p>保存先・所有者・アクセス権限・バックアップ・契約終了時のデータの返し方を、案件ごとに確認します。相談とデモでは、個人を特定できる情報を伏せた資料を使います。</p><p>IPAのSECURITY ACTION 一つ星を自己宣言しています（自己宣言ID：50000228580）。第三者による認証や、安全性の保証ではありません。</p><p><a href="privacy.html">個人情報保護方針</a> ／ <a href="terms.html">利用規約・事業継続時の取り決め</a></p></div>`)+cta
   },
   {file:'terms.html',title:'利用規約',eyebrow:'',heading:'利用規約',description:'タケノコの業務アプリに関する料金・支払・運用支援・データ・契約条件と個人情報取扱い契約。',policy:true,body:terms(initialTable())},
-  {file:'privacy.html',title:'個人情報保護方針',eyebrow:'',heading:'個人情報保護方針',description:'タケノコの個人情報の取得・利用・委託・安全管理措置・問い合わせ窓口について。',policy:true,body:privacy},
-  {file:'conflict-of-interest.html',title:'利益相反管理規程',eyebrow:'',heading:'利益相反管理規程',description:'タケノコの自社アプリ販売と中立的な業務改善支援を区別するための利益相反管理規程。',policy:true,body:conflict}
+  {file:'privacy.html',title:'個人情報保護方針',eyebrow:'',heading:'個人情報保護方針',description:'タケノコの個人情報の取得・利用・委託・安全管理措置・問い合わせ窓口について。',policy:true,body:privacy}
 ];

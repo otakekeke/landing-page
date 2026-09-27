@@ -54,10 +54,9 @@ python -m http.server 4318 --bind 127.0.0.1
 | `index.html` | メインLP・料金計算・問い合わせ導線 |
 | `manager.html` / `staff.html` / `dayservice.html` / `small-facility.html` | 2026-09-27にトップへ統合。トップの活用例へ移動するだけのページ（`site/pages.mjs` の `moved`） |
 | `sample-app.html` | 見本・無料相談とデモの範囲 |
-| `business-improvement.html` | 独立した業務改善支援との区別 |
-| `subsidy-app.html` | 国・県の制度と通常料金の切り分け |
+| `business-improvement.html` / `subsidy-app.html` / `conflict-of-interest.html` | 2026-09-27に公開停止（当面売らないため）。トップへ移動するだけのページ |
 | `company.html` | 運営者・連絡先 |
-| `terms.html` / `privacy.html` / `conflict-of-interest.html` | 規約・DPA／情報の取扱い／利益相反 |
+| `terms.html` / `privacy.html` | 規約・DPA／情報の取扱い |
 | `index.dc.html` | 旧参考ページから現行トップへのリダイレクト（noindex） |
 
 ## 旧ファイルの扱い
