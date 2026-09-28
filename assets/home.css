@@ -409,3 +409,48 @@ details[open]>summary .disclosure-sign:after{transform:rotate(0deg)}
 .ss-note{margin:6px 0 0;font-size:11px;color:var(--muted);text-align:right}
 @media(max-width:900px){.scene{grid-template-columns:1fr 1fr;gap:20px 24px}.scene-head{grid-column:1/-1}.scene-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}.scene-event{margin:0}.scene-voice{flex-basis:100%;margin-top:4px}}
 @media(max-width:600px){.scene{grid-template-columns:1fr;padding:22px 20px}.scene-time{font-size:26px}}
+
+/* 本質を前に（2026-09-28）：全体図・違い・実例 */
+.hero-map .system-map{position:absolute;inset:0;width:100%;height:100%}
+.system-map text{font-family:var(--sans);font-size:15px;font-weight:700;fill:var(--ink)}
+.sm-line{fill:none;stroke:#b9c99e;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;animation:sm-draw .7s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(.25s + var(--i) * .07s)}
+.sm-link{fill:none;stroke:#4f6b3a;stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.75;animation:sm-draw .8s ease forwards;animation-delay:calc(1.1s + var(--i) * .15s)}
+.sm-node rect{fill:var(--white);stroke:var(--line);stroke-width:1.5}
+.sm-node{opacity:0;animation:sm-pop .5s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(.45s + var(--i) * .07s);transform-box:fill-box;transform-origin:center}
+.sm-core rect{fill:var(--ink)}
+.sm-core text{fill:var(--paper);font-family:var(--serif);font-size:21px;font-weight:600}
+@keyframes sm-draw{to{stroke-dashoffset:0}}
+@keyframes sm-pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.sm-line,.sm-link{animation:none;stroke-dashoffset:0}.sm-node{animation:none;opacity:1}}
+.diff-table-wrap{overflow-x:auto}
+.diff-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;line-height:1.8;min-width:640px}
+.diff-table th,.diff-table td{padding:18px 20px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.diff-table thead th{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.diff-table tbody th{font-size:13px;color:var(--muted);font-weight:700;width:18%}
+.diff-table td{color:var(--muted);width:27%}
+.diff-table .is-us{background:var(--white);color:var(--ink);font-weight:700;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.diff-table thead .is-us{border-top:1px solid var(--line);border-radius:10px 10px 0 0;color:var(--ink);font-size:15px}
+.diff-table tbody tr:last-child .is-us{border-radius:0 0 10px 10px}
+.diff-note{margin-top:18px;font-size:12px;line-height:1.9;color:var(--muted)}
+.diff-note a{color:inherit}
+.case-screens{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.case-screens li{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:18px 12px;font-size:14px;font-weight:700;text-align:center;line-height:1.5;display:grid;place-items:center;min-height:84px}
+@media(max-width:1100px){.case-screens{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.case-screens{grid-template-columns:repeat(2,minmax(0,1fr))}.diff-table{font-size:13px}.diff-table th,.diff-table td{padding:14px 12px}}
+.hero-map{height:540px!important;padding:0!important;margin-top:0!important}
+@media(max-width:900px){.hero-map{height:480px!important;margin:32px auto 0!important;max-width:560px}}
+@media(max-width:650px){.hero-map{height:370px!important;max-width:390px}}
+.hero-map figcaption{bottom:-22px!important}
+@media(max-width:700px){
+.diff-table-wrap{overflow:visible}
+.diff-table,.diff-table tbody,.diff-table tr,.diff-table th,.diff-table td{display:block;min-width:0;width:auto}
+.diff-table thead{display:none}
+.diff-table tr{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden;background:var(--paper)}
+.diff-table tbody th{padding:12px 16px;border-bottom:1px solid var(--line);font-size:12px;width:auto}
+.diff-table td{padding:10px 16px;border-bottom:0;font-size:13px}
+.diff-table td::before{content:attr(data-label);display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.diff-table td.is-us{order:-1;border:0;border-bottom:1px solid var(--line);border-radius:0;font-size:14px;padding:14px 16px}
+.diff-table tbody th{order:-2}
+.diff-table td.is-us::before{color:var(--green,#4f6b3a)}
+}
+@media(max-width:700px){.diff-table tbody tr:last-child .is-us{border-radius:0}}
