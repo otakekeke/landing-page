@@ -387,3 +387,25 @@ details[open]>summary .disclosure-sign:after{transform:rotate(0deg)}
 .pf-compare.pf-settled .pf-fade,.pf-compare.pf-settled .pf-draw{transition-delay:0s!important}
 @media(max-width:900px){.pf-panels{grid-template-columns:1fr;gap:34px}.pf-panel svg{max-width:460px}}
 @media(max-width:650px){.price-flow{margin-top:40px;padding:26px 20px 22px}.price-flow-head h3{font-size:21px}.pf-line{font-size:16px}}
+
+/* 活用例：デイサービスの一日（2026-09-28） */
+.day-scenes{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.scene{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,1fr) minmax(0,1.35fr);gap:30px;padding:28px 30px;background:var(--white);border:1px solid var(--line);border-radius:8px}
+.scene-time{margin:0;font-family:var(--serif);font-size:30px;line-height:1.2;letter-spacing:.02em}
+.scene-event{margin:6px 0 0;font-size:14px;font-weight:700}
+.scene-voice{margin:12px 0 0;font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--muted)}
+.scene-label{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+.scene-after .scene-label{color:#4f6b3a}
+.scene-now ol{margin:0;padding-left:1.3em;font-size:14px;line-height:1.9;color:var(--muted)}
+.scene-now li::marker{font-size:12px}
+.scene-after>p:not(.scene-label){margin:0;font-size:14px;line-height:1.9}
+.scene-screen{margin-top:16px;border:1px solid var(--line);border-radius:6px;background:#fff;padding:12px 14px;font-size:13px}
+.ss-title{margin:0 0 6px;font-size:12px;font-weight:700;color:var(--muted);border-bottom:1px solid var(--sage);padding-bottom:6px}
+.ss-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;padding:6px 0;border-bottom:1px solid #f0f2ea;align-items:baseline}
+.ss-row:last-of-type{border-bottom:0}
+.ss-row span:last-child{font-size:12px;color:var(--muted);text-align:right}
+.ss-row.is-off span:nth-child(-n+2){text-decoration:line-through;color:#9aa391}
+.ss-row.is-off span:last-child{color:#a0522d;text-decoration:none}
+.ss-note{margin:6px 0 0;font-size:11px;color:var(--muted);text-align:right}
+@media(max-width:900px){.scene{grid-template-columns:1fr 1fr;gap:20px 24px}.scene-head{grid-column:1/-1}.scene-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}.scene-event{margin:0}.scene-voice{flex-basis:100%;margin-top:4px}}
+@media(max-width:600px){.scene{grid-template-columns:1fr;padding:22px 20px}.scene-time{font-size:26px}}
