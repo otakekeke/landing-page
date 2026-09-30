@@ -1,7 +1,7 @@
 import {additionalFormula} from './shared.mjs';
 
 const wrap = text => `<section class="section sub-section"><div class="container policy-copy">${text}</div></section>`;
-const date = '<p class="policy-date">改定日：2026年9月27日。新料金は個別の合意後に適用し、既存契約を自動変更しません。</p>';
+const date = '<p class="policy-date">改定日：2026年9月30日。新料金は個別の合意後に適用し、既存契約を自動変更しません。</p>';
 
 export const terms = initial => wrap(`${date}
 <p>本規約は、嶽ノ子（サービス名：タケノコ。以下「乙」）が提供するGoogle Apps Script（GAS）ベースのオーダーメイド業務アプリおよび運用支援を、お客様である法人・個人事業者等（以下「甲」）が利用する際の条件を定めます。その他の構成・技術による提供は、個別契約で適用範囲を確認します。</p>
