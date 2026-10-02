@@ -17,8 +17,7 @@ for (const [name,html] of documents) {
     assert.equal((html.match(/<h1\b/g)||[]).length,1,`${name}: one H1`);
     assert.ok(html.includes(header(name==='index.html')),`${name}: shared navigation`);
     assert.ok(html.includes(footer(name==='index.html')),`${name}: shared footer`);
-    // The top page carries its own stylesheet (home.css cut down to what it uses, plus its design).
-    assert.ok(html.includes(name==='index.html' ? 'assets/top.css' : 'assets/home.css') && html.includes('assets/home.js'),name);
+    assert.ok(html.includes('assets/home.css') && html.includes('assets/home.js'),name);
     assert.doesNotMatch(html,/固定価格|月額運用サポート費|月額[^<\n]{0,15}1\/3|¥(?:10,000|15,000|30,000)\s*\/月/,`${name}: obsolete pricing`);
     assert.doesNotMatch(html,/gtag\(|googletagmanager\.com|mode:\s*['"]no-cors/,`${name}: undeclared tracking or opaque form submission`);
   }
@@ -42,9 +41,8 @@ assert.equal(pricing.initialFeeMonths,3);
 assert.equal(pricing.additionalFeeMonths,3);
 const additionalFeeCases = [[30000,48000,54000],[30000,30000,0],[30000,24000,0],[0,6000,18000],[30000,30100,300],[0,0,0]];
 for(const [before,after,expected] of additionalFeeCases) assert.equal(additionalFee(before,after),expected,`Additional fee ${before} -> ${after}`);
-const plain = html => html.replace(/<span class="nw">([^<]*)<\/span>/g, '$1');
 for(const name of ['index.html','terms.html']) {
-  const html = plain(documents.get(name));
+  const html = documents.get(name);
   for(const text of [additionalFormula,'標準範囲','大規模改修','34,533円','着手前']) assert.ok(html.includes(text),`${name}: additional development ${text}`);
 }
 assert.ok(documents.get('terms.html').includes('0円未満の場合は0円'));
@@ -64,7 +62,7 @@ for (const page of moved) {
 }
 for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) assert.ok(documents.get(p.file).includes(formula),p.file);
 for (const [name,html] of documents) assert.doesNotMatch(html,/紙・Excel改善パック|550,000円|800,000円/,`${name}: obsolete initial plans`);
-assert.ok(plain(documents.get('index.html')).includes(initialFormula));
+assert.ok(documents.get('index.html').includes(initialFormula));
 {const home=documents.get('index.html');for(const text of ['金額の決まり方','使う前は、お話しながら一緒に整理します。','使った後も、同じように整理します。','目の前で時間を測ることはしません','差がなければ0円。','数字は説明のための例です。','assets/price-flow.js','この差が、料金のもと','差がなかったら？']) assert.ok(home.includes(text),`price flow: ${text}`);assert.doesNotMatch(home,/ストップウォッチで測って/,'price flow: no stopwatch');}
 // Facts decided on 2026-09-27 after the manager-perspective review.
 for(const [name,texts] of [['index.html',['短いほうを採ります','無料のGoogleアカウント','インボイス）の登録をしていません','翌営業日までに','最初に伺うときは','>19,185</output>','その施設専用の','毎日使われています','14の画面','施設の実際の時給は伺いません','令和6年度介護従事者処遇状況等調査','令和3年就労条件総合調査','2は、減った時間の人件費にあたる分']],['terms.html',['削減時間が小さくなるほう','有料のGoogle Workspaceの契約は必須としません','適格請求書発行事業者の登録をしていません','翌営業日までに']],['company.html',['インボイス）の登録はしていません']]]) for(const text of texts) assert.ok(documents.get(name).includes(text),`${name}: ${text}`);
