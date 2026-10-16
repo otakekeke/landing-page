@@ -43,7 +43,7 @@
   // The reference wage is the prefecture's minimum wage at contract time; the estimate uses
   // Kanagawa's rate from 2026-10-01. There is no minimum fee. Fractions of a yen are dropped.
   const MINIMUM_WAGE = 1279;
-  const COMMON_MULTIPLIER = 3;
+  const COMMON_MULTIPLIER = 1;
   const INITIAL_FEE_MONTHS = 3;
   const formatter = new Intl.NumberFormat('ja-JP');
 

@@ -2,10 +2,10 @@
 // (fixed for the contract). Examples on the site use Kanagawa's rate from 2026-10-01.
 export const pricing = Object.freeze({
   updated: '2026-09-27', exampleMinimumWage: 1279, examplePrefecture: '神奈川県', exampleEffective: '2026年10月1日',
-  multiplier: 3, initialFeeMonths: 3, additionalFeeMonths: 3
+  multiplier: 1, initialFeeMonths: 3, additionalFeeMonths: 3
 });
 export const money = n => n.toLocaleString('ja-JP');
-export const formula = `月間削減時間 × 最低賃金 × ${pricing.multiplier}`;
+export const formula = `月間削減時間 × 最低賃金`;
 // Monthly fee in yen for a number of saved worker-minutes; fractions of a yen are dropped.
 export const monthlyFee = (minutes, wage = pricing.exampleMinimumWage) => Math.floor(minutes * wage * pricing.multiplier / 60);
 export const rate = monthlyFee(60);
