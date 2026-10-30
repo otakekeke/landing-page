@@ -41,7 +41,7 @@ assert.equal(pricing.initialFeeMonths,3);
 assert.equal(pricing.additionalFeeMonths,3);
 const additionalFeeCases = [[30000,48000,54000],[30000,30000,0],[30000,24000,0],[0,6000,18000],[30000,30100,300],[0,0,0]];
 for(const [before,after,expected] of additionalFeeCases) assert.equal(additionalFee(before,after),expected,`Additional fee ${before} -> ${after}`);
-for(const name of ['index.html','terms.html']) {
+for(const name of ['terms.html']) {
   const html = documents.get(name);
   for(const text of [additionalFormula,'標準範囲','大規模改修','11,511円','着手前']) assert.ok(html.includes(text),`${name}: additional development ${text}`);
 }
@@ -54,39 +54,18 @@ for (const name of ['terms.html','privacy.html']) {
   assert.ok(documents.get(name).includes('一次返信は通常3営業日以内'),`${name}: public form response time`);
   assert.doesNotMatch(documents.get(name),/一次返信は原則2営業日以内/,`${name}: obsolete response time`);
 }
-assert.ok(documents.get('index.html').includes(formula));
 for (const page of moved) {
   const stub = await fs.readFile(path.join(root,page.file),'utf8');
   assert.ok(stub.includes(`url=${page.to}`) && stub.includes('noindex'),`${page.file}: redirect stub`);
   for (const [name,html] of documents) assert.ok(!html.includes(`href="${page.file}"`),`${name}: links to merged page ${page.file}`);
 }
-for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) assert.ok(documents.get(p.file).includes(formula),p.file);
 for (const [name,html] of documents) assert.doesNotMatch(html,/紙・Excel改善パック|550,000円|800,000円/,`${name}: obsolete initial plans`);
-assert.ok(documents.get('index.html').includes(initialFormula));
-{const home=documents.get('index.html');for(const text of ['金額の決まり方','使う前は、お話しながら一緒に整理します。','使った後も、同じように整理します。','目の前で時間を測ることはしません','差がなければ0円。','数字は説明のための例です。','assets/price-flow.js','この差が、料金のもと','差がなかったら？']) assert.ok(home.includes(text),`price flow: ${text}`);assert.doesNotMatch(home,/ストップウォッチで測って/,'price flow: no stopwatch');}
+// 2026-10-30: core message is 'care software is hard to use'; price is told after hearing, no 0-yen promise on the top page.
+{const home=documents.get('index.html');for(const text of ['介護ソフトは、','使いにくい。','お話を聞いてから','法改正']) assert.ok(home.includes(text),`core: ${text}`);assert.doesNotMatch(home,/減らなければ0円|短くならなければ0円|price-flow\.js|calculator/,'top page: no time-based pricing');}
 // Facts decided on 2026-09-27 after the manager-perspective review.
-for(const [name,texts] of [['index.html',['短いほうを採ります','無料のGoogleアカウント','インボイス）の登録をしていません','翌営業日までに','最初に伺うときは','>6,395</output>','その施設専用の','毎日使われています','14の画面','施設の実際の時給は伺いません','令和6年度介護従事者処遇状況等調査','令和3年就労条件総合調査','減った時間の人件費のおよそ半分']],['terms.html',['削減時間が小さくなるほう','有料のGoogle Workspaceの契約は必須としません','適格請求書発行事業者の登録をしていません','翌営業日までに']],['company.html',['インボイス）の登録はしていません']]]) for(const text of texts) assert.ok(documents.get(name).includes(text),`${name}: ${text}`);
-for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) {assert.ok(documents.get(p.file).includes('index.html#price'),`${p.file}: link to pricing details`);assert.ok(documents.get(p.file).includes('月額の3か月分'),`${p.file}: initial fee summary`);}
+for(const [name,texts] of [['index.html',['無料のGoogleアカウント','インボイス）の登録をしていません','翌営業日までに','最初に伺うときは','毎日使われています','14の画面']],['terms.html',['削減時間が小さくなるほう','有料のGoogle Workspaceの契約は必須としません','適格請求書発行事業者の登録をしていません','翌営業日までに']],['company.html',['インボイス）の登録はしていません']]]) for(const text of texts) assert.ok(documents.get(name).includes(text),`${name}: ${text}`);
+for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-app|subsidy-app/.test(p.file))) {assert.ok(documents.get(p.file).includes('index.html#price'),`${p.file}: link to pricing details`);}
 // Copy that was removed on 2026-09-27 as salesy or cliched must not come back.
 for (const [name,html] of documents) if(!/terms|privacy|conflict|index\.dc/.test(name)) assert.doesNotMatch(html,/余白を|わたしたち|LET’S START|MONTHLY ESTIMATE|FOR MANAGERS|FOR CARE TEAMS|FOR DAY SERVICES|FOR SMALL TEAMS|TRY BEFORE YOU DECIDE|WORKFLOW SUPPORT|FUNDING &amp; CONDITIONS|ABOUT TAKENOKO|時間だけでは測れない価値を|値札をつけない|「これなら私にも使えそう」|だからこそ/,`${name}: removed copy came back`);
 for(const term of ['第13条','D-14','0円','最低月額','既存契約','個別契約','19,185円','38,370円','地域別最低賃金','契約締結時の基準時給',initialFormula,'月額を再計算','適用開始月']) assert.ok(documents.get('terms.html').includes(term),term);
-class Element {
-  constructor(value='') {this.value=value;this.attrs={};this.events={};this.textContent='';this.hidden=true;this.dataset={};}
-  get valueAsNumber(){return this.value===''?NaN:Number(this.value);}
-  setAttribute(name,value){this.attrs[name]=value;}
-  addEventListener(name,callback){this.events[name]=callback;}
-}
-const nodes=Object.fromEntries(['saving-hours','saving-minutes','monthly-price','initial-price','result-detail','calculator-error'].map(id=>['#'+id,new Element()]));
-nodes['#saving-hours'].value='5';nodes['#saving-minutes'].value='0';
-const presets=[0,5,10,20].map(h=>{const e=new Element();e.dataset.hours=String(h);return e;});
-const document={querySelector:s=>nodes[s]||null,querySelectorAll:()=>presets};
-vm.runInNewContext(await fs.readFile(path.join(root,'assets/home.js'),'utf8'),{document,Intl});
-let cases=0;
-for(const [h,m,expected] of [['0','0','0'],['0','1','21'],['0','59',null],['1','0','1,279'],['1','20','1,705'],['5','0','6,395'],['5','30',null],['8','0','10,232'],['20','0',null],['10000','59',null],['-1','0','—'],['1.5','0','—'],['','0','—'],['0','','—'],['0','60','—'],['0','-1','—'],['0','0.5','—'],['10001','0','—']].map(([h,m,e])=>[h,m,e??new Intl.NumberFormat('ja-JP').format(monthlyFee(Number(h)*60+Number(m)))])) {
-  nodes['#saving-hours'].value=h;nodes['#saving-minutes'].value=m;nodes['#saving-hours'].events.input();
-  assert.equal(nodes['#monthly-price'].value,expected,`${h}h ${m}m`);
-  assert.equal(nodes['#initial-price'].value,expected==='—'?'—':new Intl.NumberFormat('ja-JP').format(Number(expected.replaceAll(',',''))*pricing.initialFeeMonths),`${h}h ${m}m initial`);
-  assert.equal(nodes['#calculator-error'].hidden,expected!=='—');cases++;
-}
-for(const button of presets){button.events.click();assert.equal(nodes['#monthly-price'].value,new Intl.NumberFormat('ja-JP').format(monthlyFee(Number(button.dataset.hours)*60)));assert.equal(nodes['#initial-price'].value,new Intl.NumberFormat('ja-JP').format(monthlyFee(Number(button.dataset.hours)*60)*pricing.initialFeeMonths));assert.equal(button.attrs['aria-pressed'],'true');cases++;}
-console.log(JSON.stringify({pages:documents.size,localReferences:references,calculatorCases:cases,additionalFeeCases:additionalFeeCases.length,result:'PASS'},null,2));
+console.log(JSON.stringify({pages:documents.size,localReferences:references,additionalFeeCases:additionalFeeCases.length,result:'PASS'},null,2));

@@ -25,7 +25,7 @@ export function header(home = false) {
     <a class="brand" href="${top}" aria-label="タケノコ トップへ"><img src="assets/favicon.svg" width="36" height="36" alt=""><span>タケノコ<small>TAKENOKO</small></span></a>
     <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" hidden><span>メニュー</span><span class="menu-lines" aria-hidden="true"></span></button>
     <nav class="main-nav" id="main-nav" aria-label="メインナビゲーション">
-      <a href="${base}#difference">違い</a><a href="${base}#case">実例</a>
+      <a href="${base}#difference">理由</a><a href="${base}#case">実例</a>
       <a href="${base}#price">料金</a><a href="${base}#faq">よくある質問</a>
       <a class="nav-contact" href="${base}#contact">相談する <span aria-hidden="true">↗</span></a>
     </nav>
@@ -48,5 +48,6 @@ export function cards(items) {
 }
 export const initialTable = () => `<p class="policy-formula">${initialFormula}</p><div class="table-scroll" role="region" aria-label="月額と初期費用の例。横にスクロールできます" tabindex="0"><table><caption>料金例（神奈川県の最低賃金1,279円の場合・税込・紹介割引適用前）</caption><thead><tr><th scope="col">月間削減時間</th><th scope="col">確定した月額</th><th scope="col">初期費用（初回のみ）</th></tr></thead><tbody>${[0,1,5,10].map(hours=>`<tr><th scope="row">${hours}時間</th><td class="money">${money(monthlyFee(hours*60))}円</td><td class="money">${money(monthlyFee(hours*60)*pricing.initialFeeMonths)}円</td></tr>`).join('')}</tbody></table></div>`;
 export function pricePanel() {
-  return section('料金', '料金は、<br>減った作業時間で決まります。', `<div class="reading"><p>月額は「${formula}」（税込）で、すべてのお客さまに同じ式です。最低賃金は、契約した時点の、事業所がある都道府県の額を使います。初期費用は月額の3か月分です。使う前と後の作業時間を比べて金額が決まってから請求し、短くならなければ0円です。</p><a class="text-link" href="index.html#price">金額の決まり方を見る <span aria-hidden="true">→</span></a></div>`,true);
+  return section('料金', '料金は、<br>お話を聞いてからお伝えします。', `<div class="reading"><p>作るものは、施設ごとに違います。使いにくい所と今の運用を伺ってから、その施設の額をお伝えします。お話を聞くことと、試作を見ていただくところまでは無料です。</p><a class="text-link" href="index.html#price">料金について見る <span aria-hidden="true">→</span></a></div>`,true);
 }
+
