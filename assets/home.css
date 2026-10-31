@@ -410,6 +410,13 @@ details[open]>summary .disclosure-sign:after{transform:rotate(0deg)}
 .ss-note{margin:6px 0 0;font-size:11px;color:var(--muted);text-align:right}
 @media(max-width:900px){.scene{grid-template-columns:1fr 1fr;gap:20px 24px}.scene-head{grid-column:1/-1}.scene-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}.scene-event{margin:0}.scene-voice{flex-basis:100%;margin-top:4px}}
 @media(max-width:600px){.scene{grid-template-columns:1fr;padding:22px 20px}.scene-time{font-size:26px}}
+/* 2026-10-31 04の最後に、触れる見本（mihon.html）と操作の動画への入口 */
+.mihon-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;margin-top:40px;padding:28px 30px;background:var(--sage);border-radius:8px}
+.mihon-cta>div:first-child{flex:1 1 420px;min-width:0}
+.mihon-cta h3{font-size:18px;line-height:1.6}
+.mihon-cta p{margin-top:8px;font-size:13px;line-height:1.9;color:var(--muted)}
+.mihon-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+@media(max-width:600px){.mihon-cta{padding:22px 20px}.mihon-actions{width:100%}.mihon-actions .button{width:100%}}
 
 /* 本質を前に（2026-09-28）：全体図・違い・実例 */
 .hero-map .system-map{position:absolute;inset:0;width:100%;height:100%}
