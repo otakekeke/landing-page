@@ -5,6 +5,8 @@
 // - 変わったファイル：一覧に無ければデグレ候補
 // - 変わったページ：前の版に一覧の置き換えだけをしたものが、新しい版と1字も違わないこと（違えばデグレ候補）
 // - 一覧の置き換えが前の版に1回だけ現れなければ漏れ（意図した差が入っていない）
+// - 生成元（generators）：ページを作る元のファイルを大きく組み替えた時。置き換えの一覧にできないので、出来上がりのページで確かめる
+//   （変わっていないページは git で1字も同じ・変わったページは一覧にあること・check:generated で元と出来上がりが合うこと）
 // - 新しく足したファイル（added）：前の版に無く、今の版にあること（2026-11-12 新しいページを足す時に足した）
 // - 変わったページと新しいページ：人が受け取る形（スマホ・パソコンの画面と A4 の紙）で開いて測る（scripts/look_page.cjs。新しいページは厳しく）
 // - 今までの試験（npm test・npm run check:generated）も通すこと
@@ -53,8 +55,9 @@ const tool = new Set(intended.tool || []);
 const pages = intended.pages || {};
 const sources = intended.sources || {};
 const added = new Set(intended.added || []);
+const generators = new Set(intended.generators || []);
 for (const file of changed) {
-    if (!tool.has(file) && !pages[file] && !sources[file] && !added.has(file)) candidates.push(`一覧に無いファイルが変わった：${file}`);
+    if (!tool.has(file) && !pages[file] && !sources[file] && !added.has(file) && !generators.has(file)) candidates.push(`一覧に無いファイルが変わった：${file}`);
 }
 lines.push(`1字も同じと git で確かめたファイル: ${allFiles.length - changed.length}/${allFiles.length}`);
 lines.push(`変わったファイル: ${changed.join('、') || 'なし'}`);
@@ -71,6 +74,13 @@ for (const [file, swaps] of Object.entries({ ...pages, ...sources })) {
     const actual = show(head, file).toString('utf8');
     if (expected === actual) lines.push(`${file}: 置き換え ${swaps.length} か所のほかは1字も同じ`);
     else candidates.push(`${file}：一覧の置き換えのほかにも差がある`);
+}
+
+// 生成元：site/ の中のファイルだけ。出来上がりの HTML で変わった物を並べて見せる（一覧に無い HTML の変更は、上でデグレ候補になっている）
+for (const file of generators) {
+    if (!/^site\//.test(file)) candidates.push(`生成元に指定できるのは site/ の中だけ：${file}`);
+    else if (!changed.includes(file)) misses.push(`一覧にあるのに変わっていない：${file}`);
+    else lines.push(`${file}: 生成元の組み替え。出来上がりで変わった HTML は ${changed.filter((f) => /^[^/]+\.html$/.test(f)).join('、') || 'なし'} だけ`);
 }
 
 // 新しく足したファイル：前の版に無く、今の版にあること

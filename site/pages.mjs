@@ -1,6 +1,6 @@
 import {section, cards, pricePanel, cta} from './shared.mjs';
 import {terms, privacy} from './policies.mjs';
-import {houmon} from './houmon.mjs';
+import {houmon, houmonKawasaki} from './houmon.mjs';
 
 // Audience pages merged into the top page on 2026-09-27. Old URLs redirect so shared links keep working.
 export const moved = [
@@ -33,6 +33,7 @@ export const pages = [
   },
   {file:'terms.html',title:'利用規約',eyebrow:'',heading:'利用規約',description:'タケノコの業務アプリに関する料金・支払・運用支援・データ・契約条件と個人情報取扱い契約。',policy:true,body:terms},
   {file:'privacy.html',title:'個人情報保護方針',eyebrow:'',heading:'個人情報保護方針',description:'タケノコの個人情報の取得・利用・委託・安全管理措置・問い合わせ窓口について。',policy:true,body:privacy},
-  // 訪問介護の事業所向けのご案内（説明しながら見せる・トップからはつなげない・検索に出さない）
-  houmon
+  // 訪問介護の事業所向けのご案内（説明しながら見せる・トップからはつなげない・検索に出さない）。地域ごとに1ページ
+  houmon,
+  houmonKawasaki
 ];
