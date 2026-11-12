@@ -56,4 +56,22 @@ for(const p of pages.filter(p=>/manager|staff|dayservice|small-facility|sample-a
 // Copy that was removed on 2026-09-27 as salesy or cliched must not come back.
 for (const [name,html] of documents) if(!/terms|privacy|conflict|index\.dc/.test(name)) assert.doesNotMatch(html,/余白を|わたしたち|LET’S START|MONTHLY ESTIMATE|FOR MANAGERS|FOR CARE TEAMS|FOR DAY SERVICES|FOR SMALL TEAMS|TRY BEFORE YOU DECIDE|WORKFLOW SUPPORT|FUNDING &amp; CONDITIONS|ABOUT TAKENOKO|時間だけでは測れない価値を|値札をつけない|「これなら私にも使えそう」|だからこそ/,`${name}: removed copy came back`);
 for(const term of ['第13条','D-14','既存契約','個別契約','適用開始月']) assert.ok(documents.get('terms.html').includes(term),term);
+// 2026-11-12: the home-care subsidy guide (houmon.html). Not indexed, not linked from other pages. It must never promise a free or guaranteed result or an application service,
+// must not use IT jargon in the body text, and must cover every stage from the first call to the money arriving, plus the what-if cases (no holes).
+{const h=documents.get('houmon.html');
+const body=h.slice(h.indexOf('<main'),h.indexOf('</main>')).replace(/<[^>]+>/g,' ');
+assert.ok(h.includes('<meta name="robots" content="noindex,nofollow">'),'houmon: noindex');
+assert.ok(h.includes('assets/houmon.css'),'houmon: page stylesheet');
+for(const text of ['補助が決まれば','補助が決まった時だけ作ります','事業所ご本人か行政書士','タケノコは申請書を作りません','県の窓口や、県から頼まれた事業者ではありません','お約束するものではありません','お振込の手数料','30万円']) assert.ok(body.includes(text),`houmon: ${text}`);
+assert.doesNotMatch(body,/完全無料|完全に無料|必ず通|確実に|(?<![0-9０-９万,])0円|ゼロ円|今なら|限定|申請を代行|申請書を作成します|申請をサポート/,'houmon: wording that must not appear');
+// 2026-11-12 the owner asked for no IT jargon (say 入力欄・住所・入口・原稿・置き場 instead).
+const jargon=body.match(/フォーム|URL|ＵＲＬ|アドレス|ドメイン|サーバ|オンライン|アップロード|ダウンロード|PDF|Excel|Zoom|リンク|クリック|タップ|ログイン|アカウント|データ|サイト|ウェブ|Web|システム|コンテンツ|スマホ対応|レスポンシブ|SEO|SNS/g);
+assert.equal(jargon,null,`houmon: IT words in the body: ${jargon}`);
+// 2026-11-12 the owner asked for no holes from start to end: every stage and the what-if cases must be there.
+const stages={'試作を見る':['試作','見積書','申請の手順の動画'],'県へ申請':['11月30日まで','県へ申請します','申請の表'],'決定':['決定のお知らせが届きます','およそ30日'],'注文':['注文書','ここからが、ご契約です'],'聞き取り':['お話を伺います','1時間ほど','写真'],'案と直し':['案をお見せします','直しは2回まで'],'公開':['1月22日まで','ホームページを公開します','takenokonoko.com','応募が届くかを、一緒に試します','今のホームページがある場合'],'チラシ':['チラシが届きます','1,000枚','原稿'],'支払い':['1月29日まで','納品書と請求書','領収書','1月31日まで'],'県へ報告':['2月12日まで','県へ報告します','5年間'],'補助金':['3月まで','補助金が入ります'],'そのあと':['公開から3か月は','無料で直します','1か月後'],'もしもの時':['補助が決まらなかった時','終わらないと分かった時','途中でやめたくなった時','分からない時','ほかへ移したくなった時'],'連絡先':['翌営業日までに']};
+for(const [stage,words] of Object.entries(stages)) for(const w of words) assert.ok((stage==='連絡先'?h:body).includes(w),`houmon: stage ${stage} lacks ${w}`);
+const steps=h.split('<li class="hm-step').slice(1).map(c=>c.split('</ol>')[0]);
+assert.equal(steps.length,12,'houmon: 12 steps');
+for(const [i,c] of steps.entries()) {assert.ok(c.includes('class="hm-when"'),`houmon: step ${i+1} has no date`);assert.ok(c.includes('class="hm-chip '),`houmon: step ${i+1} does not say who acts`);assert.ok(c.includes('<ul><li>'),`houmon: step ${i+1} has no concrete lines`);}
+for(const [name,html] of documents) if(name!=='houmon.html') assert.ok(!html.includes('houmon.html'),`${name}: links to the houmon guide`);}
 console.log(JSON.stringify({pages:documents.size,localReferences:references,result:'PASS'},null,2));
