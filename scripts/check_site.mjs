@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {pages,moved} from '../site/pages.mjs';
 import {header,footer} from '../site/shared.mjs';
+import {audit} from './served.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const names = ['index.html',...pages.map(p=>p.file),'index.dc.html'];
 const documents = new Map(await Promise.all(names.map(async n=>[n,await fs.readFile(path.join(root,n),'utf8')])));
@@ -81,4 +82,7 @@ const steps=h.split('<li class="hm-step').slice(1).map(c=>c.split('</ol>')[0]);
 assert.equal(steps.length,12,`${g.file}: 12 steps`);
 for(const [i,c] of steps.entries()) {assert.ok(c.includes('class="hm-when"'),`${g.file}: step ${i+1} has no date`);assert.ok(c.includes('class="hm-chip '),`${g.file}: step ${i+1} does not say who acts`);assert.ok(c.includes('<ul><li>'),`${g.file}: step ${i+1} has no concrete lines`);}
 for(const [name,html] of documents) if(name!==g.file) assert.ok(!html.includes(`"${g.file}"`),`${name}: links to ${g.file}`);}}
-console.log(JSON.stringify({pages:documents.size,localReferences:references,result:'PASS'},null,2));
+// 2026-11-14: internal files (docs/, scripts/, site/, README, package.json) were readable at takenokonoko.com. _config.yml tells GitHub Pages not to serve them.
+// Every tracked file must be either a public file (top-level page, assets/) or hidden by the exclude list, and no public file may be caught by it.
+const serving = audit();
+console.log(JSON.stringify({pages:documents.size,localReferences:references,servedFiles:serving.served,internalFilesHidden:serving.internal,result:'PASS'},null,2));

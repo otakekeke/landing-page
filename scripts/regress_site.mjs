@@ -10,10 +10,12 @@
 // - 新しく足したファイル（added）：前の版に無く、今の版にあること（2026-11-12 新しいページを足す時に足した）
 // - 変わったページと新しいページ：人が受け取る形（スマホ・パソコンの画面と A4 の紙）で開いて測る（scripts/look_page.cjs。新しいページは厳しく）
 // - 今までの試験（npm test・npm run check:generated）も通すこと
+// - 内部のファイルを配らないこと（2026-11-14）：追っているファイルが「配る物」か「配らない物」に分かれること・前の版が配らない設定を持つ時は、今の本番で読めないこと
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { classify, live as liveCheck } from './served.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const started = Date.now();
@@ -47,6 +49,20 @@ for (const file of served) {
     }
 }
 lines.push(`本番と前の版の一致: ${sameAsLive}/${served.length} ファイル`);
+
+// 内部のファイル（docs/・scripts/・site/ など）が本番から読めないこと（2026-11-14 足した。scripts/served.mjs）
+// 前の版が「配らない設定（_config.yml）」を持つ時は、今の本番で本当に読めないかを見る。持たない時は、今の版で足したかを見る
+const baseServing = classify(base);
+if (baseServing.exclude) {
+    const r = await liveCheck(base);
+    for (const p of r.problems.filter((x) => x.startsWith('本番で内部'))) misses.push(p);
+    lines.push(`今の本番で内部のファイルが読めない: ${r.closed}/${r.addresses} の住所`);
+} else {
+    lines.push(`前の版は内部のファイル ${baseServing.internal.length} 個を配っていた（配らない設定 _config.yml が無い）`);
+}
+const headServing = classify(head);
+for (const p of headServing.problems) candidates.push(p);
+lines.push(`今の版のファイルの分け方: 配る ${headServing.served.length}・配らない ${headServing.internal.length}・分けられない ${headServing.problems.length}`);
 
 // 変わったファイル
 const changed = git('diff', '--name-only', base, head).split('\n').filter(Boolean);

@@ -1,0 +1,12 @@
+# GitHub Pages（Jekyll）に「サイトで配らないファイル」を伝える（2026-11-14）。
+# ここに無いファイルは takenokonoko.com から誰でも読める。
+# 内部の文書・道具・ページの元を足した時は、ここにも足す（足し忘れは npm test が止める）。
+# 名前の頭が同じファイルも一緒に配られなくなる（例：site と書くと sitemap.xml も）。巻き込みも npm test が止める。
+exclude:
+  - README.md
+  - docs
+  - scripts
+  - site
+  - package.json
+  - package-lock.json
+  - node_modules
