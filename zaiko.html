@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- takenokonoko/sales-demo/build_lp_zaiko.cjs で zaiko-demo.html から作る。ここは直接直さない -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff">
+<title>在庫と注文の見本｜タケノコ</title>
+<meta name="description" content="架空の施設と商品で動く、介護施設の在庫と注文のアプリの見本です。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
+<style>
+:root{
+  --white:#ffffff; --black:#000000;
+  --g50:#f2f2f2; --g100:#e6e6e6; --g200:#cccccc; --g300:#b3b3b3; --g420:#949494; --g600:#666666; --g700:#4d4d4d; --g800:#333333; --g900:#1a1a1a;
+  --key-50:#e8f1fe; --key-100:#d9e6ff; --key-200:#c5d7fb; --key-300:#9db7f9; --key-900:#0017c1; --key-1000:#00118f; --key-1200:#000060;
+  --ok-1:#259d63; --ok-2:#197a4b; --ok-ink:#115a36; --ok-bg:#e6f5ec;
+  --warn-line:#b78f00; --warn-ink:#806300; --warn-bg:#fbf5e0;
+  --err-1:#ec0000; --err-ink:#ce0000; --err-bg:#fdeeee;
+  --hai-ink:#ac3e00; --hai-bg:#ffeee2;
+  --eis-ink:#0066be; --eis-bg:#e8f1fe;
+  --sho-ink:#115a36; --sho-bg:#e6f5ec;
+  --sou-ink:#4d4d4d; --sou-bg:#f2f2f2;
+  --bic-ink:#6f23d0; --bic-bg:#f1eafa;
+  --focus:#ffd43d;
+  --font:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%}
+body{min-height:100%;display:flex;flex-direction:column;background:var(--white);color:var(--g800);font-family:var(--font);font-size:16px;line-height:1.7;letter-spacing:.02em;word-break:auto-phrase;line-break:strict;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer}
+h1,h2,h3,p,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+h1,h2,h3{text-wrap:balance;line-height:1.4}
+:focus-visible{outline:4px solid var(--black);outline-offset:2px;border-radius:4px;box-shadow:0 0 0 2px var(--focus)}
+h1:focus{outline:none;box-shadow:none}
+[data-pointer] button:focus-visible,[data-pointer] summary:focus-visible{outline:none;box-shadow:none}
+.num{font-variant-numeric:tabular-nums}
+.nb{display:inline-block;max-width:100%;overflow-wrap:anywhere}
+svg.i{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vh{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap.wide{max-width:1080px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--white)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex:none;background:var(--white);border-bottom:1px solid var(--g420)}
+.bar .wrap{display:flex;align-items:center;gap:8px;min-height:56px}
+.bar b{font-size:18px;line-height:1.3}
+.bar span{color:var(--g700)}
+.back{display:inline-flex;align-items:center;gap:2px;min-height:48px;margin-left:-8px;padding:0 12px 0 4px;border:0;border-radius:8px;background:none;color:var(--key-900);font-size:17px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (hover:hover){.back:hover{background:var(--key-50);text-decoration-thickness:3px}}
+main{flex:1 0 auto}
+.view{display:flex;flex-direction:column;gap:24px;padding-block:24px 48px}
+.view>h1{font-size:26px}
+.view.tight{gap:16px;padding-top:16px}
+.view.snug{gap:12px;padding-top:12px}
+.lead{font-size:17px}
+.aside{color:var(--g700)}
+.sec{display:flex;flex-direction:column;gap:12px}
+.sec>h2{display:flex;align-items:center;gap:12px;font-size:18px;color:var(--g700)}
+.sec>h2::after{content:"";flex:1;border-top:2px solid var(--g200)}
+.foot{position:sticky;bottom:0;z-index:4;flex:none;background:var(--white);border-top:1px solid var(--g420)}
+.foot .wrap{display:flex;flex-direction:column;gap:8px;padding-block:12px;padding-bottom:max(12px,env(safe-area-inset-bottom,0px))}
+.foot .pair{display:flex;gap:8px}
+.foot .pair .btn{flex:0 1 auto;white-space:nowrap}
+.foot .pair .btn.solid,.foot .pair .wait{flex:1 1 0;white-space:normal}
+.foot .pair .wait{padding:0 2px}
+.wait{display:grid;place-items:center;min-height:60px;padding:0 8px;color:var(--g700);font-size:16px;line-height:1.4;text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:96px;min-height:48px;max-width:100%;padding:8px 16px;border:1px solid currentColor;border-radius:8px;background:var(--white);color:var(--key-900);font-weight:700;font-size:16px;line-height:1.3;text-align:center;text-decoration:none;text-underline-offset:3px}
+.btn.lg{min-height:60px;padding:12px 16px;font-size:18px}
+.btn.solid{border:4px double transparent;background:var(--key-900);color:var(--white)}
+.btn.text{min-width:0;border:0;background:transparent;text-decoration:underline;text-decoration-thickness:1px}
+.btn.wide{width:100%}
+.btn svg.i{width:22px;height:22px}
+.btn.two{justify-content:flex-start;gap:12px;padding:10px 16px;text-align:left}
+.btn.two b,.btn.two small{display:block}
+.btn.two small{font-size:16px;font-weight:400;color:var(--g700)}
+@media (hover:hover){
+  .btn:hover{background:var(--key-200);color:var(--key-1000);text-decoration:underline;text-decoration-thickness:1px}
+  .btn.solid:hover{background:var(--key-1000);color:var(--white)}
+  .btn.text:hover{background:var(--key-50);text-decoration-thickness:3px}
+}
+.btn:active{background:var(--key-300);color:var(--key-1200)}
+.btn.solid:active{background:var(--key-1200);color:var(--white)}
+.btn.text:focus-visible{background:var(--focus)}
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:3px 8px;border:1px solid var(--g700);border-radius:8px;background:var(--g50);color:var(--g800);font-size:16px;font-weight:400;line-height:1.2;white-space:nowrap}
+.chip svg.i{width:20px;height:20px}
+.chip.ok{border-color:var(--ok-2);background:var(--ok-bg);color:var(--ok-ink)}
+.chip.low{border-color:var(--warn-line);background:var(--warn-bg);color:var(--warn-ink)}
+.chip.out{border-color:var(--err-1);background:var(--err-bg);color:var(--err-ink)}
+.chip.key{border-color:var(--key-900);background:var(--key-50);color:var(--key-1000)}
+.chip.plain{background:var(--white)}
+.pic{position:relative;display:grid;place-items:center;flex:none;width:56px;height:56px;border-radius:12px;background:var(--sou-bg);color:var(--sou-ink)}
+.pic .tg{position:absolute;right:-5px;bottom:-5px;min-width:24px;height:22px;padding:0 4px;border:1px solid var(--white);border-radius:6px;background:var(--g800);color:var(--white);font-size:16px;font-style:normal;font-weight:700;line-height:20px;letter-spacing:0;text-align:center;white-space:nowrap}
+.pic svg.i{width:36px;height:36px;stroke-width:1.75}
+.pic.hai{background:var(--hai-bg);color:var(--hai-ink)} .pic.eis{background:var(--eis-bg);color:var(--eis-ink)}
+.pic.sho{background:var(--sho-bg);color:var(--sho-ink)} .pic.bic{background:var(--bic-bg);color:var(--bic-ink)}
+.pic.key{background:var(--key-50);color:var(--key-900)} .pic.yel{background:var(--warn-bg);color:var(--warn-ink)}
+.pic.sm{width:44px;height:44px;border-radius:10px} .pic.sm svg.i{width:28px;height:28px}
+.pic.lg{width:72px;height:72px;border-radius:16px} .pic.lg svg.i{width:46px;height:46px}
+.bigs{display:flex;flex-direction:column;gap:12px}
+.big{display:grid;grid-template-columns:64px minmax(0,1fr) 24px;gap:16px;align-items:center;width:100%;min-height:104px;padding:16px;border:1px solid var(--key-900);border-radius:12px;background:var(--white);color:var(--g900);text-align:left}
+.big .pic{width:64px;height:64px;border-radius:50%}
+.big b{display:block;font-size:22px;line-height:1.4}
+.big small{display:block;font-size:16px;line-height:1.5;color:var(--g700)}
+.big .chip{margin-top:6px;font-weight:700}
+.big>svg.i{color:var(--key-900)}
+.big.solid{border:4px double transparent;background:var(--key-900);color:var(--white)}
+.big.solid small{color:var(--white)}
+.big.solid .pic{background:var(--white);color:var(--key-900)}
+.big.solid .chip{border-color:var(--white);background:var(--white);color:var(--key-1000)}
+.big.solid>svg.i{color:var(--white)}
+@media (hover:hover){.big:hover{background:var(--key-50)}.big:hover b{text-decoration:underline;text-underline-offset:4px}.big.solid:hover{background:var(--key-1000)}}
+.big:active{background:var(--key-100)} .big.solid:active{background:var(--key-1200)}
+.others{border-top:1px solid var(--g420)}
+.other{display:grid;grid-template-columns:44px minmax(0,1fr) 20px;gap:12px;align-items:center;width:100%;min-height:68px;padding:10px 0;border:0;border-bottom:1px solid var(--g420);background:none;color:var(--g900);text-align:left}
+.other b{display:block;font-size:18px;line-height:1.4}
+.other .st{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;color:var(--g700)}
+.other>svg.i{width:20px;height:20px;color:var(--key-900)}
+@media (hover:hover){.other:hover{background:var(--g50)}.other:hover b{text-decoration:underline;text-underline-offset:3px}}
+.h2{font-size:18px;color:var(--g700)}
+.search{display:flex;flex-direction:column;gap:8px}
+.search label{font-size:17px;font-weight:700}
+.field{display:block;width:100%;height:56px;padding:0 16px;border:1px solid var(--g600);border-radius:8px;background:var(--white);color:var(--g900);font-size:17px;line-height:1}
+.field::placeholder{color:var(--g600)}
+@media (hover:hover){.field:hover{border-color:var(--black)}}
+#results{display:flex;flex-direction:column;gap:12px}
+.fchips{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:599px){.fchips{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:thin}.fchip{flex:none;white-space:nowrap}}
+.fwrap{position:relative}
+@media (max-width:599px){.fwrap::after{content:"";position:absolute;top:0;right:-16px;bottom:6px;width:28px;background:linear-gradient(to right,rgba(255,255,255,0),var(--white));pointer-events:none}}
+.fchip{min-height:48px;padding:0 14px;border:1px solid var(--g600);border-radius:24px;background:var(--white);color:var(--g800);font-size:16px}
+.fchip[aria-pressed="true"]{border:2px solid var(--key-900);padding:0 13px;background:var(--key-50);color:var(--key-1000);font-weight:700}
+@media (hover:hover){.fchip:hover{border-color:var(--black)}}
+.prods{display:flex;flex-direction:column;gap:8px}
+.prod{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 12px;align-items:center;width:100%;padding:12px;border:1px solid var(--g420);border-radius:12px;background:var(--white);color:var(--g900);text-align:left;line-height:1.5}
+button.prod{grid-template-columns:28px 56px minmax(0,1fr)}
+button.prod.go{grid-template-columns:56px minmax(0,1fr) 24px}
+button.prod.go>svg.i{color:var(--key-900)}
+.nf{display:flex;flex-direction:column;gap:4px;padding:12px 16px;border-radius:12px;background:var(--g50)}
+.nf li{padding:2px 0}
+.prod b{display:block;font-size:18px}
+.prod .mk{display:block;color:var(--g700)}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;color:var(--g700)}
+.box{flex:none;display:grid;place-items:center;width:28px;height:28px;border:2px solid var(--g600);border-radius:4px;background:var(--white);color:var(--white)}
+.box svg.i{width:20px;height:20px;stroke-width:3;opacity:0}
+[aria-pressed="true"]>.box{border-color:var(--key-900);background:var(--key-900)}
+[aria-pressed="true"]>.box svg.i{opacity:1}
+button.prod[aria-pressed="true"]{padding:11px;border:2px solid var(--key-900);background:var(--key-50)}
+@media (hover:hover){button.prod:hover,.sz:hover{border-color:var(--black)}}
+.sizes{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px}
+.sz{display:flex;align-items:center;gap:10px;min-height:56px;padding:6px 10px;border:1px solid var(--g420);border-radius:8px;background:var(--white);color:var(--g900);text-align:left;line-height:1.3}
+.sz b{font-size:18px}
+.sz small{display:block;font-size:16px;color:var(--g700)}
+.sz[aria-pressed="true"]{padding:5px 9px;border:2px solid var(--key-900);background:var(--key-50)}
+.prods.cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.prod.slim{grid-template-columns:28px 44px minmax(0,1fr);min-height:58px;padding:6px 12px}
+button.prod.slim[aria-pressed="true"]{padding:5px 11px}
+.lead.near{margin-top:-8px}
+.lowlist{display:flex;flex-direction:column;gap:14px}
+.lowlist .sec{gap:6px}
+.lowlist .prods{gap:6px}
+.prod.slim b{font-size:17px}
+div.prod.still{background:var(--g50);border-style:dashed;border-color:var(--g600)}
+.shot{display:block;width:100%;max-height:240px;object-fit:contain;border:1px solid var(--g420);border-radius:12px;background:var(--g50)}
+.thumbs{display:flex;flex-wrap:wrap;gap:6px}
+.thumbs img{display:block;width:72px;height:72px;object-fit:cover;border:1px solid var(--g420);border-radius:8px;background:var(--g50)}
+.seen{display:flex;align-items:center;gap:4px;color:var(--g700)}
+.seen svg.i{width:20px;height:20px}
+.footres{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:0 12px;padding:0 4px}
+.footres b{font-size:24px;line-height:1.3}
+.radios{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+.radio{display:flex;align-items:center;gap:12px;min-height:68px;padding:8px 16px 8px 12px;border:1px solid var(--g420);border-radius:8px;background:var(--white);color:var(--g800);text-align:left;line-height:1.4}
+.radio[aria-checked="true"]{padding:7px 15px 7px 11px;border:2px solid var(--key-900);background:var(--key-50)}
+.radio .o{flex:none;display:grid;place-items:center;width:36px;height:36px;border:3px solid var(--g600);border-radius:50%;background:var(--white)}
+.radio[aria-checked="true"] .o{border-color:var(--key-900)}
+.radio[aria-checked="true"] .o::after{content:"";width:16px;height:16px;border-radius:50%;background:var(--key-900)}
+.radio b{display:block;font-size:18px}
+.radio small{display:block;font-size:16px;color:var(--g700)}
+@media (hover:hover){.radio:hover{border-color:var(--black)}}
+.checks{display:flex;flex-direction:column;gap:8px}
+.check{display:grid;grid-template-columns:28px 44px minmax(0,1fr);gap:12px;align-items:center;min-height:68px;padding:8px 16px 8px 12px;border:1px solid var(--g420);border-radius:8px;background:var(--white);color:var(--g800);text-align:left;line-height:1.4}
+.check[aria-pressed="true"]{padding:7px 15px 7px 11px;border:2px solid var(--key-900);background:var(--key-50)}
+.check b{display:block;font-size:18px}
+.check small{display:block;font-size:16px;color:var(--g700)}
+.lines{border-top:1px solid var(--g420)}
+.line{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--g420)}
+.line .nm{font-size:18px;font-weight:700;line-height:1.4}
+.line .nm small{display:block;font-size:16px;font-weight:400;color:var(--g700)}
+.line .qty{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.line .qty.fix{justify-content:flex-start}
+.line .ql{font-weight:700}
+.line .qs{flex-basis:100%;color:var(--g700)}
+.stepper{display:inline-flex;align-items:center;gap:4px}
+.stepper button{display:grid;place-items:center;min-width:52px;height:52px;padding:0 4px;border:1px solid var(--key-900);border-radius:8px;background:var(--white);color:var(--key-900);font-size:16px;font-weight:700}
+.stepper output{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:6em;min-height:52px;font-size:20px;font-weight:700;line-height:1.3}
+.stepper output small{font-size:16px;font-weight:400;color:var(--g700)}
+@media (hover:hover){.stepper button:hover{background:var(--key-200)}}
+.stepper button:active{background:var(--key-300)}
+.stepper.xl{align-self:center;gap:12px}
+.stepper.xl button{min-width:64px;height:64px}
+.stepper.xl output{min-width:5em;font-size:32px}
+.price{font-size:18px;font-weight:700}
+.prog{font-size:17px;font-weight:700;color:var(--g700)}
+.bar .prog{margin-left:auto}
+.who{display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid var(--g420);border-radius:12px}
+.who b{display:block;font-size:20px;line-height:1.4}
+.who small{display:block;font-size:16px;color:var(--g700)}
+.hint{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:8px 16px;border-radius:12px;background:var(--g50)}
+.hint p{font-size:16px;line-height:1.6}
+.hint p.at{flex:1 1 96px;color:var(--g700)}
+.hint p.at b{display:block;font-size:20px;line-height:1.4;color:var(--g900)}
+.hint p.all{flex-basis:100%}
+.tag{display:inline-flex;flex-direction:column;gap:0;padding:6px 14px;border:2px dashed var(--g600);border-radius:4px;background:var(--white);color:var(--g900);line-height:1.3;transform:rotate(-2deg)}
+.tag small{font-size:16px;color:var(--g700)}
+.tag b{font-size:22px;letter-spacing:.06em;white-space:nowrap}
+.tag b .on{border-radius:3px;background:var(--key-100);box-shadow:inset 0 -3px 0 var(--key-900);color:var(--key-1000)}
+.tag b .ph{font-size:16px;font-weight:400;letter-spacing:0;color:var(--g600)}
+.tag b .ph.on{color:var(--key-1000)}
+.photo{display:flex;flex-direction:column;gap:8px}
+.dp{display:flex;align-items:stretch;gap:6px}
+.slot{display:inline-flex;align-items:center;justify-content:center;gap:1px;min-width:60px;min-height:52px;padding:0 10px;border:1px solid var(--key-900);border-radius:8px;background:var(--white);color:var(--key-900);font-size:17px;white-space:nowrap}
+.slot b{font-size:22px;line-height:1}
+.slot.blank{border-style:dashed;border-color:var(--g600);color:var(--g700)}
+.slot[aria-pressed="true"]{padding:0 9px;border:2px solid var(--key-900);background:var(--key-50);color:var(--key-1000)}
+@media (hover:hover){.slot:hover{border-color:var(--black)}}
+.dp .left{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;font-size:16px;font-weight:700;line-height:1.3;text-align:right;color:var(--key-1000)}
+.dp .left.past{color:var(--err-ink)}
+.ask{font-size:16px;line-height:1.4;color:var(--g800)}
+.picks{display:grid;gap:6px}
+.picks.y{grid-template-columns:repeat(auto-fill,minmax(76px,1fr))}
+.picks.m{grid-template-columns:repeat(auto-fill,minmax(48px,1fr))}
+.picks.d{grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:3px}
+.picks button{min-height:52px;padding:0 2px;border:1px solid var(--g420);border-radius:8px;background:var(--white);color:var(--g800);font-size:18px}
+.picks.m button{font-size:17px}
+.picks.d button{min-height:46px;font-size:17px}
+.picks button.more{grid-column:1/-1;justify-self:start;min-height:44px;padding:0 8px;border:0;background:none;font-size:16px;color:var(--key-900);text-decoration:underline;text-underline-offset:3px}
+.picks button[aria-pressed="true"]{border:2px solid var(--key-900);background:var(--key-900);color:var(--white);font-weight:700}
+@media (hover:hover){.picks button:not([aria-pressed="true"]):hover{border-color:var(--black);background:var(--key-50)}}
+.lots{display:flex;flex-direction:column;gap:8px}
+.lot{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 12px;align-items:start;padding:16px;border:1px solid var(--g420);border-radius:12px}
+.lot.soon{border-color:var(--err-1)} .lot.near{border-color:var(--warn-line)}
+.lot .nm{font-size:18px;font-weight:700;line-height:1.4}
+.lot .first{font-weight:700;color:var(--g900)}
+.lot .acts{grid-column:1/-1}
+.todo{display:flex;flex-direction:column;gap:12px;padding:16px;border:2px solid var(--warn-line);border-radius:12px;background:var(--warn-bg)}
+.todo h2{display:flex;align-items:center;gap:8px;font-size:18px;color:var(--warn-ink)}
+.todo ul{color:var(--g900)}
+.rows{border-top:1px solid var(--g420)}
+.row{display:grid;grid-template-columns:44px minmax(0,1fr) 20px;gap:12px;align-items:center;width:100%;min-height:68px;padding:8px 0;border:0;border-bottom:1px solid var(--g420);background:none;color:var(--g900);text-align:left}
+.row .nm{font-size:18px;font-weight:700;line-height:1.4}
+.row .nm small{display:block;font-size:16px;font-weight:400;color:var(--g700)}
+.row>svg.i{width:20px;height:20px;color:var(--key-900)}
+@media (hover:hover){button.row:hover{background:var(--g50)}button.row:hover .nm{text-decoration:underline;text-underline-offset:3px}}
+.one{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 16px;border:1px solid var(--g420);border-radius:12px;text-align:center}
+.one b{font-size:20px}
+.one small{font-size:16px;color:var(--g700)}
+.facts{border-top:1px solid var(--g420)}
+.facts div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--g200)}
+@media (min-width:560px){.facts div{grid-template-columns:9em minmax(0,1fr)}}
+.facts dt{color:var(--g700)}
+.facts dd{font-weight:700;color:var(--g900)}
+.note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding:12px 16px 12px 20px;border:2px solid var(--ok-2);box-shadow:inset 8px 0 0 var(--ok-2);background:var(--white);color:var(--g900);font-size:17px;font-weight:700}
+.note span{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.note svg.i{color:var(--ok-2)}
+.note.err{border-color:var(--err-1);box-shadow:inset 8px 0 0 var(--err-1)}
+.note.err svg.i{color:var(--err-1)}
+.note.info{border-color:var(--g600);box-shadow:inset 8px 0 0 var(--g600)}
+.note.info svg.i{color:var(--g700)}
+.note.warn{border-color:var(--warn-line);box-shadow:inset 8px 0 0 var(--warn-line)}
+.note.warn svg.i{color:var(--warn-ink)}
+#note:empty,#err:empty,#xmsg:empty{display:none}
+.empty{padding:24px 16px;border:1px dashed var(--g420);border-radius:12px;color:var(--g700);font-size:17px;text-align:center}
+.demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding-top:16px;border-top:1px solid var(--g200);color:var(--g700)}
+.demo .link{flex-basis:100%;display:flex;align-items:center;gap:6px}
+.demo .link svg.i{width:20px;height:20px;color:var(--ok-2)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-shelf" viewBox="0 0 24 24"><path d="M4 3v18M20 3v18M4 9h16M4 15h16M4 21h16M8 9V6h4v3M13 15v-3h4v3"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h10L20 7H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v5M12 18h.01"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h5l4 4v3h-9z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h1M4 12h1M4 18h1"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+  <symbol id="i-pad" viewBox="0 0 24 24"><path d="M12 3c2.5 0 4 1.5 4 4 0 2-1 3-1 5s1 3 1 5c0 2.5-1.5 4-4 4s-4-1.5-4-4c0-2 1-3 1-5s-1-3-1-5c0-2.5 1.5-4 4-4zM12 8v8"/></symbol>
+  <symbol id="i-pants" viewBox="0 0 24 24"><path d="M4 6h16v5c-3 .5-5 3-5.5 7h-5C9 14 7 11.5 4 11zM4 8.5h16"/></symbol>
+  <symbol id="i-tape" viewBox="0 0 24 24"><path d="M4 6h16v5c-3 .5-5 3-5.5 7h-5C9 14 7 11.5 4 11zM4 8.5h3M20 8.5h-3M7 7.5v2M17 7.5v2"/></symbol>
+  <symbol id="i-wipe" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="11" rx="2"/><path d="M8 13h8M10 9c0-3 1-5 2-5s2 2 2 5"/></symbol>
+  <symbol id="i-glove" viewBox="0 0 24 24"><path d="M8 21v-5l-3-4a1.5 1.5 0 0 1 2.4-1.8L9 12V5a1.5 1.5 0 0 1 3 0V4a1.5 1.5 0 0 1 3 0v1.5a1.5 1.5 0 0 1 3 0V14c0 3-1 5-2 7zM12 5v6M15 5.5V11"/></symbol>
+  <symbol id="i-mask" viewBox="0 0 24 24"><path d="M5 9c2.5-1 4.5-2 7-2s4.5 1 7 2v6c-2.5 1-4.5 2-7 2s-4.5-1-7-2zM5 10c-2.5 0-2.5 4 0 4M19 10c2.5 0 2.5 4 0 4M9 11h6M9 13.5h6"/></symbol>
+  <symbol id="i-roll" viewBox="0 0 24 24"><path d="M4 8c0-1.7 2.2-3 5-3s5 1.3 5 3v9c0 1.7-2.2 3-5 3s-5-1.3-5-3zM14 8h4a2 2 0 0 1 2 2v9h-6M9 8h.01"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M8 8c0-1.2-1-2-1-3.5h10C17 6 16 6.8 16 8c2.5 2 4 5 4 8 0 3-2 5-4 5H8c-2 0-4-2-4-5 0-3 1.5-6 4-8zM8 8h8"/></symbol>
+  <symbol id="i-pouch" viewBox="0 0 24 24"><path d="M6 4h12l-1 3 1 13H6L7 7zM7 7h10M10 13h4"/></symbol>
+  <symbol id="i-carton" viewBox="0 0 24 24"><path d="M8 7l2-4h4l2 4v14H8zM8 7h8M10.5 13h3"/></symbol>
+  <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 3h4v3l2 3v12H8V9l2-3zM8 13h8"/></symbol>
+  <symbol id="i-pump" viewBox="0 0 24 24"><path d="M9 10h6v11H9zM12 10V5M8 5h5l3 2"/></symbol>
+  <symbol id="i-water" viewBox="0 0 24 24"><path d="M10 2h4v3c2 1 3 3 3 5v11a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V10c0-2 1-4 3-5zM7 13h10M7 17h10"/></symbol>
+  <symbol id="i-rice" viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0zM9 21h6M9 4c-1 1.5 1 2.5 0 4M14 4c-1 1.5 1 2.5 0 4"/></symbol>
+  <symbol id="i-toilet" viewBox="0 0 24 24"><path d="M6 4h4v7h8a6 6 0 0 1-5 6v3H8v-4a5 5 0 0 1-2-4z"/></symbol>
+  <symbol id="i-gown" viewBox="0 0 24 24"><path d="M9 3c0 2 1.5 3 3 3s3-1 3-3l4 2-1 5-2-1v12H8V9l-2 1-1-5z"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><path d="M3 7h18v10H3zM3 11h18M15 7v10"/></symbol>
+  <symbol id="i-batt" viewBox="0 0 24 24"><rect x="8" y="5" width="8" height="16" rx="1.5"/><path d="M10.5 5V3h3v2M12 10v4M10 12h4"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17h6M10 20h4M8.5 14a5.5 5.5 0 1 1 7 0c-.6.6-1 1.5-1 3h-5c0-1.5-.4-2.4-1-3z"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M7 4h10l-1.5 16h-7zM7.5 9h9"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18zM14 7l3 3"/></symbol>
+  <symbol id="i-ttape" viewBox="0 0 24 24"><circle cx="10" cy="12" r="6"/><circle cx="10" cy="12" r="2"/><path d="M10 18h10v-4"/></symbol>
+  <symbol id="i-spray" viewBox="0 0 24 24"><path d="M9 9h6v12H9zM10 9V6h4v3M14 6h3M17 4v4"/></symbol>
+  <symbol id="i-tissue" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="9" rx="1.5"/><path d="M9 11c0-3 1-6 3-6s1.5 3 3 2-1 4-1 4"/></symbol>
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M4 20L14 10M13 6l5 5M15 4l5 5-3 3-5-5z"/></symbol>
+</svg>
+<header class="bar" id="bar" lang="ja"></header>
+<main lang="ja"><div id="view"></div></main>
+<div class="foot" id="foot" lang="ja" hidden></div>
+<input type="file" id="cam" accept="image/*" capture="environment" hidden>
+<input type="file" id="shots" accept="image/*,video/*" multiple hidden>
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var ic=function(n){return '<svg class="i" aria-hidden="true"><use href="#i-'+n+'"/></svg>'};
+var yen=function(n){return n.toLocaleString('ja-JP')+'円'};
+var T0=new Date(), TODAY=new Date(T0.getFullYear(),T0.getMonth(),T0.getDate()), W='日月火水木金土', Y0=TODAY.getFullYear();
+var day=function(n){var d=new Date(TODAY);d.setDate(d.getDate()+n);return d};
+var md=function(d){return (d.getMonth()+1)+'月'+d.getDate()+'日（'+W[d.getDay()]+'）'};
+var rel=function(d){var n=Math.round((d-TODAY)/864e5);return n<=0?'今日':n===1?'あす':n===2?'あさって':''};
+var lotDate=function(o){return o.d?new Date(o.y,o.m-1,o.d):new Date(o.y,o.m,0)};
+var leftDays=function(o){return Math.round((lotDate(o)-TODAY)/864e5)};
+var ymdTxt=function(o){return o.y+'年'+o.m+'月'+(o.d?o.d+'日':'')};
+var remain=function(d){if(d<0)return '期限が過ぎています';if(d<=45)return 'あと'+d+'日';var mo=Math.round(d/30.4), y=Math.floor(mo/12), r=mo%12;return 'あと'+(y?y+'年':'')+(r||!y?r+'か月':'')};
+var norm=function(s){s=String(s);try{s=s.normalize('NFKC')}catch(e){}return s.toLowerCase().replace(/[\u30a1-\u30f6]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0x60)}).replace(/[\s\u3000]/g,'')};
+var CATS=[['omutsu','おむつ・パッド','hai'],['tebukuro','手袋・マスク','eis'],['shodoku','消毒・せっけん','bic'],['shokuji','食事・口のケア','sho'],['souji','そうじ・紙','sou'],['nichiyo','日用品・事務','yel'],['bichiku','備蓄','key']];
+var CATN={}, CATC={};CATS.forEach(function(c){CATN[c[0]]=c[1];CATC[c[0]]=c[2]});
+var CAT=[], JAN=1;
+function fam(f){f.v.forEach(function(v){CAT.push({id:f.id+(v.s?'-'+v.s.toLowerCase():''),fam:f.id,n:f.n,size:v.s||'',mk:f.mk,cat:f.cat,c:CATC[f.cat],ic:f.ic,pop:f.pop||99,exp:f.exp||null,
+  pk:v.pk,u:f.u,ou:f.ou||f.u,os:f.os||1,oq:f.oq||1,pr:v.pr||f.pr,jan:'4990000'+('000000'+(JAN++)).slice(-6),key:norm(f.n+(v.s||'')+f.mk+f.kw)})})}
+var E=function(t,f,at,life){return {t:t,f:f,at:at,life:life}};
+fam({id:'pants',n:'はくパンツ うす型',cat:'omutsu',ic:'pants',mk:'ひまわり衛材',kw:'おむつ ぱんつ りはびりぱんつ りはぱん かみぱんつ 紙パンツ 紙おむつ',pop:1,u:'袋',pr:1980,oq:3,v:[{s:'S',pk:'1袋 22枚'},{s:'M',pk:'1袋 20枚'},{s:'L',pk:'1袋 18枚'},{s:'LL',pk:'1袋 16枚'}]});
+fam({id:'pad-d',n:'尿とりパッド 昼用',cat:'omutsu',ic:'pad',mk:'ひまわり衛材',kw:'ぱっど にょうとり おむつ',pop:2,u:'袋',ou:'ケース',os:3,pr:4980,oq:2,v:[{pk:'1袋 54枚'}]});
+fam({id:'pad-n',n:'尿とりパッド 夜用',cat:'omutsu',ic:'pad',mk:'ひまわり衛材',kw:'ぱっど にょうとり おむつ',pop:3,u:'袋',ou:'ケース',os:3,pr:5640,oq:2,v:[{pk:'1袋 30枚'}]});
+fam({id:'wipe',n:'おしりふき 厚手',cat:'omutsu',ic:'wipe',mk:'こもれび製紙',kw:'おしりふき うぇっと',pop:4,u:'袋',ou:'ケース',os:12,pr:3480,oq:1,v:[{pk:'1袋 72枚'}]});
+fam({id:'tape',n:'テープ止めおむつ',cat:'omutsu',ic:'tape',mk:'ひまわり衛材',kw:'おむつ てーぷ 紙おむつ',u:'袋',pr:2180,oq:2,v:[{s:'M',pk:'1袋 23枚'},{s:'L',pk:'1袋 20枚'}]});
+fam({id:'sheet',n:'防水シーツ',cat:'omutsu',ic:'sheet',mk:'こもれび製紙',kw:'しーつ ぼうすい',u:'枚',pr:1280,oq:2,v:[{pk:'1枚'}]});
+fam({id:'glove-n',n:'使い捨て手袋 ニトリル',cat:'tebukuro',ic:'glove',mk:'あおぞら化学',kw:'てぶくろ ぐろーぶ にとりる',pop:5,u:'箱',pr:850,oq:5,v:[{s:'S',pk:'1箱 100枚'},{s:'M',pk:'1箱 100枚'},{s:'L',pk:'1箱 100枚'}]});
+fam({id:'glove-p',n:'使い捨て手袋 プラスチック',cat:'tebukuro',ic:'glove',mk:'あおぞら化学',kw:'てぶくろ ぐろーぶ ぷらすちっく',u:'箱',pr:480,oq:5,v:[{s:'M',pk:'1箱 100枚'},{s:'L',pk:'1箱 100枚'}]});
+fam({id:'mask',n:'マスク ふつう',cat:'tebukuro',ic:'mask',mk:'あおぞら化学',kw:'ますく',pop:7,u:'箱',pr:480,oq:5,v:[{pk:'1箱 50枚'}]});
+fam({id:'apron',n:'使い捨てエプロン',cat:'tebukuro',ic:'gown',mk:'あおぞら化学',kw:'えぷろん',u:'箱',pr:780,oq:3,v:[{pk:'1箱 50枚'}]});
+fam({id:'hand',n:'手指の消毒液',cat:'shodoku',ic:'pump',mk:'あおぞら化学',kw:'しょうどく あるこーる てゆび',pop:8,u:'本',pr:980,oq:5,exp:E('使用期限','ym','ボトルの裏',36),v:[{pk:'1本 500ミリリットル'}]});
+fam({id:'hand5',n:'手指の消毒液 詰め替え',cat:'shodoku',ic:'bottle',mk:'あおぞら化学',kw:'しょうどく あるこーる てゆび つめかえ',u:'本',pr:4980,oq:1,exp:E('使用期限','ym','ボトルの裏',36),v:[{pk:'1本 5リットル'}]});
+fam({id:'soap',n:'ハンドソープ 詰め替え',cat:'shodoku',ic:'pump',mk:'あおぞら化学',kw:'せっけん はんどそーぷ',u:'袋',pr:680,oq:3,v:[{pk:'1袋 2リットル'}]});
+fam({id:'body',n:'ボディソープ',cat:'shodoku',ic:'bottle',mk:'あおぞら化学',kw:'せっけん ぼでぃそーぷ',u:'本',pr:1980,oq:1,v:[{pk:'1本 4リットル'}]});
+fam({id:'bleach',n:'塩素系の漂白剤',cat:'shodoku',ic:'bottle',mk:'あおぞら化学',kw:'ひょうはく えんそ じあえんそさん',u:'本',pr:298,oq:2,v:[{pk:'1本 600ミリリットル'}]});
+fam({id:'toromi',n:'とろみ剤',cat:'shokuji',ic:'pouch',mk:'みどり食品',kw:'とろみ',pop:6,u:'袋',pr:2480,oq:2,exp:E('賞味期限','ym','袋の裏の下',18),v:[{pk:'1袋 800グラム'}]});
+fam({id:'toromi-s',n:'とろみ剤 スティック',cat:'shokuji',ic:'pouch',mk:'みどり食品',kw:'とろみ',u:'箱',pr:1180,oq:2,exp:E('賞味期限','ym','箱の底',18),v:[{pk:'1箱 3グラム×50本'}]});
+fam({id:'drink',n:'栄養補助飲料',cat:'shokuji',ic:'carton',mk:'みどり食品',kw:'えいよう いんりょう こうかろりー どりんく',pop:9,u:'箱',pr:3980,oq:1,exp:E('賞味期限','ymd','箱の横',12),v:[{pk:'1箱 125ミリリットル×24本'}]});
+fam({id:'jelly',n:'栄養補助ゼリー',cat:'shokuji',ic:'pouch',mk:'みどり食品',kw:'えいよう ぜりー',u:'箱',pr:1280,oq:2,exp:E('賞味期限','ymd','箱の横',9),v:[{pk:'1箱 6個'}]});
+fam({id:'ptowel',n:'ペーパータオル',cat:'souji',ic:'roll',mk:'こもれび製紙',kw:'ぺーぱーたおる かみ',pop:10,u:'パック',pr:198,oq:10,v:[{pk:'1パック 200枚'}]});
+fam({id:'tp',n:'トイレットペーパー',cat:'souji',ic:'roll',mk:'こもれび製紙',kw:'といれっとぺーぱー かみ',pop:11,u:'袋',pr:598,oq:3,v:[{pk:'1袋 12ロール'}]});
+fam({id:'gomi',n:'ごみ袋',cat:'souji',ic:'bag',mk:'こもれび製紙',kw:'ごみぶくろ ぽり',pop:12,u:'袋',pr:698,oq:5,v:[{s:'45L',pk:'1袋 50枚'},{s:'90L',pk:'1袋 30枚',pr:980}]});
+fam({id:'dish',n:'食器用の洗剤',cat:'souji',ic:'bottle',mk:'あおぞら化学',kw:'せんざい しょっき',u:'本',pr:1280,oq:1,v:[{pk:'1本 4リットル'}]});
+fam({id:'wrap',n:'ラップ',cat:'souji',ic:'roll',mk:'こもれび製紙',kw:'らっぷ',u:'本',pr:398,oq:3,v:[{pk:'1本 50メートル'}]});
+fam({id:'water',n:'保存水',cat:'bichiku',ic:'water',mk:'みどり食品',kw:'みず ほぞんすい びちく 備蓄 ひじょう 非常',u:'箱',pr:1680,oq:5,exp:E('賞味期限','ym','箱の横',60),v:[{pk:'1箱 2リットル×6本'}]});
+fam({id:'rice',n:'アルファ化米',cat:'bichiku',ic:'rice',mk:'みどり食品',kw:'ごはん こめ あるふぁ びちく 備蓄 ひじょうしょく 非常食',u:'箱',pr:14800,oq:1,exp:E('賞味期限','ym','箱の横',60),v:[{pk:'1箱 50食'}]});
+fam({id:'toilet',n:'簡易トイレ',cat:'bichiku',ic:'toilet',mk:'こもれび製紙',kw:'といれ かんい びちく 備蓄 ひじょう 非常',u:'箱',pr:8980,oq:1,v:[{pk:'1箱 100回分'}]});
+fam({id:'pad-m',n:'尿とりパッド 男性用',cat:'omutsu',ic:'pad',mk:'ひまわり衛材',kw:'ぱっど にょうとり おむつ だんせい',u:'袋',ou:'ケース',os:3,pr:4480,oq:1,v:[{pk:'1袋 42枚'}]});
+fam({id:'flat',n:'フラットおむつ',cat:'omutsu',ic:'sheet',mk:'ひまわり衛材',kw:'おむつ ふらっと',u:'袋',pr:1580,oq:2,v:[{pk:'1袋 30枚'}]});
+fam({id:'seishiki',n:'からだふきタオル 大判',cat:'omutsu',ic:'wipe',mk:'こもれび製紙',kw:'せいしき からだふき ぬれたおる うぇっと',u:'袋',pr:598,oq:5,v:[{pk:'1袋 30枚'}]});
+fam({id:'mask-s',n:'マスク 小さめ',cat:'tebukuro',ic:'mask',mk:'あおぞら化学',kw:'ますく',u:'箱',pr:480,oq:3,v:[{pk:'1箱 50枚'}]});
+fam({id:'glove-pe',n:'ポリエチレン手袋',cat:'tebukuro',ic:'glove',mk:'あおぞら化学',kw:'てぶくろ ぽりえちれん ぽりて',u:'箱',pr:298,oq:5,v:[{pk:'1箱 200枚'}]});
+fam({id:'glove-g',n:'炊事用のゴム手袋',cat:'tebukuro',ic:'glove',mk:'あおぞら化学',kw:'てぶくろ ごむ すいじ',u:'双',pr:248,oq:3,v:[{s:'M',pk:'1双'},{s:'L',pk:'1双'}]});
+fam({id:'jokin',n:'除菌シート',cat:'shodoku',ic:'wipe',mk:'あおぞら化学',kw:'じょきん うぇっと あるこーる しーと',u:'個',pr:398,oq:5,exp:E('使用期限','ym','ボトルの底',36),v:[{s:'本体',pk:'1個 100枚'},{s:'詰め替え',pk:'1袋 100枚',pr:298}]});
+fam({id:'awa',n:'薬用の泡ハンドソープ',cat:'shodoku',ic:'pump',mk:'あおぞら化学',kw:'せっけん はんどそーぷ あわ やくよう',u:'本',pr:498,oq:3,v:[{pk:'1本 500ミリリットル'}]});
+fam({id:'shampoo',n:'リンスインシャンプー',cat:'shodoku',ic:'bottle',mk:'あおぞら化学',kw:'しゃんぷー りんす',u:'本',pr:1680,oq:1,v:[{pk:'1本 4リットル'}]});
+fam({id:'ors',n:'経口補水液',cat:'shokuji',ic:'water',mk:'みどり食品',kw:'けいこうほすいえき すいぶん どりんく',u:'箱',pr:3480,oq:1,exp:E('賞味期限','ymd','箱の横',12),v:[{pk:'1箱 500ミリリットル×24本'}]});
+fam({id:'cup',n:'紙コップ',cat:'shokuji',ic:'cup',mk:'こもれび製紙',kw:'かみこっぷ こっぷ',u:'袋',pr:298,oq:5,v:[{pk:'1袋 100個'}]});
+fam({id:'spoon',n:'使い捨てスプーン',cat:'shokuji',ic:'pen',mk:'こもれび製紙',kw:'すぷーん つかいすて',u:'袋',pr:398,oq:3,v:[{pk:'1袋 100本'}]});
+fam({id:'straw',n:'曲がるストロー',cat:'shokuji',ic:'pen',mk:'こもれび製紙',kw:'すとろー',u:'箱',pr:498,oq:2,v:[{pk:'1箱 500本'}]});
+fam({id:'sponge',n:'口腔ケアのスポンジ',cat:'shokuji',ic:'brush',mk:'ひまわり衛材',kw:'こうくう すぽんじ くちのけあ',u:'箱',pr:980,oq:2,v:[{pk:'1箱 50本'}]});
+fam({id:'ireba',n:'入れ歯の洗浄剤',cat:'shokuji',ic:'pouch',mk:'ひまわり衛材',kw:'いれば せんじょう',u:'箱',pr:698,oq:2,v:[{pk:'1箱 108錠'}]});
+fam({id:'haburashi',n:'歯ブラシ やわらかめ',cat:'shokuji',ic:'brush',mk:'ひまわり衛材',kw:'はぶらし',u:'箱',pr:980,oq:1,v:[{pk:'1箱 12本'}]});
+fam({id:'tissue',n:'ティッシュペーパー',cat:'souji',ic:'tissue',mk:'こもれび製紙',kw:'てぃっしゅ かみ',u:'パック',pr:398,oq:5,v:[{pk:'1パック 5箱'}]});
+fam({id:'kpaper',n:'キッチンペーパー',cat:'souji',ic:'roll',mk:'こもれび製紙',kw:'きっちんぺーぱー かみ',u:'袋',pr:298,oq:3,v:[{pk:'1袋 4ロール'}]});
+fam({id:'sentaku',n:'洗濯用の洗剤',cat:'souji',ic:'bottle',mk:'あおぞら化学',kw:'せんたく せんざい',u:'本',pr:1480,oq:2,v:[{pk:'1本 4キログラム'}]});
+fam({id:'junan',n:'柔軟剤',cat:'souji',ic:'bottle',mk:'あおぞら化学',kw:'じゅうなんざい せんたく',u:'本',pr:1280,oq:1,v:[{pk:'1本 4リットル'}]});
+fam({id:'toilet-c',n:'トイレ用の洗剤',cat:'souji',ic:'spray',mk:'あおぞら化学',kw:'といれ せんざい そうじ',u:'本',pr:248,oq:3,v:[{pk:'1本 500ミリリットル'}]});
+fam({id:'wiper',n:'床用ワイパーのシート',cat:'souji',ic:'sheet',mk:'こもれび製紙',kw:'わいぱー ゆか しーと そうじ',u:'袋',pr:398,oq:3,v:[{s:'乾いたタイプ',pk:'1袋 40枚'},{s:'ぬれたタイプ',pk:'1袋 20枚',pr:448}]});
+fam({id:'shoshu',n:'消臭スプレー',cat:'souji',ic:'spray',mk:'あおぞら化学',kw:'しょうしゅう すぷれー におい',u:'本',pr:398,oq:3,v:[{pk:'1本 370ミリリットル'}]});
+fam({id:'denchi',n:'アルカリ乾電池',cat:'nichiyo',ic:'batt',mk:'あかり電機',kw:'でんち かんでんち',u:'パック',pr:980,oq:1,v:[{s:'単3',pk:'1パック 20本'},{s:'単4',pk:'1パック 20本'}]});
+fam({id:'led',n:'LED電球 60形',cat:'nichiyo',ic:'bulb',mk:'あかり電機',kw:'でんきゅう えるいーでぃー らいと',u:'個',pr:598,oq:2,v:[{pk:'1個'}]});
+fam({id:'copy',n:'コピー用紙 A4',cat:'nichiyo',ic:'sheet',mk:'こもれび製紙',kw:'こぴーようし かみ えーよん',u:'箱',pr:2480,oq:1,v:[{pk:'1箱 500枚×5'}]});
+fam({id:'pen',n:'ボールペン 黒',cat:'nichiyo',ic:'pen',mk:'あかり電機',kw:'ぼーるぺん ぺん',u:'箱',pr:598,oq:1,v:[{pk:'1箱 10本'}]});
+fam({id:'gum',n:'布のガムテープ',cat:'nichiyo',ic:'ttape',mk:'こもれび製紙',kw:'がむてーぷ てーぷ',u:'個',pr:298,oq:2,v:[{pk:'1個 25メートル'}]});
+fam({id:'hokan',n:'食品の保存袋',cat:'nichiyo',ic:'bag',mk:'こもれび製紙',kw:'ほぞんぶくろ じっぱー ふくろ',u:'箱',pr:298,oq:3,v:[{s:'M',pk:'1箱 50枚'},{s:'L',pk:'1箱 30枚'}]});
+fam({id:'bombe',n:'カセットボンベ',cat:'bichiku',ic:'spray',mk:'あかり電機',kw:'かせっとぼんべ がす びちく 備蓄 ひじょう 非常',u:'パック',pr:398,oq:2,v:[{pk:'1パック 3本'}]});
+fam({id:'okayu',n:'レトルトのおかゆ',cat:'bichiku',ic:'rice',mk:'みどり食品',kw:'おかゆ れとると びちく 備蓄 ひじょうしょく 非常食',u:'箱',pr:5980,oq:1,exp:E('賞味期限','ym','箱の横',36),v:[{pk:'1箱 40食'}]});
+fam({id:'blanket',n:'アルミの保温シート',cat:'bichiku',ic:'sheet',mk:'あかり電機',kw:'ほおん あるみ もうふ びちく 備蓄 ひじょう 非常',u:'袋',pr:980,oq:1,v:[{pk:'1袋 10枚'}]});
+var BY={};CAT.forEach(function(x){BY[x.id]=x});
+var it=function(id){return BY[id]};
+var nm=function(x){return x.n+(x.size?' '+x.size:'')};
+var priceTxt=function(x){return '1'+x.ou+(x.os>1?'（'+x.os+x.u+'）':'')+' '+yen(x.pr)};
+var S, SAMPLE=null, CAN_PHOTO=false, IMG_MAX=4, MAX_SHOTS=12, SCAN_T=0;
+var SAMPLE_IDS=['pants-m','pants-l','pad-d','pad-n','wipe','glove-n-m','mask','hand','toromi','drink','ptowel','tp'];
+function init(kind){
+  S={view:'home',q:'',cat:null,reg:{},oq:{},sel:{},keep:null,ord:{},cart:{},how:'haitatsu',note:null,err:null,flow:null,x:null,edit:null,seq:1,
+     orders:[],lots:[],lk:1,need:[],nk:1,addFrom:null,regN:0,scan:null};
+  CAT.forEach(function(x){S.oq[x.id]=x.oq;S.ord[x.id]=null});
+  if(kind==='empty')return;
+  SAMPLE_IDS.forEach(function(id){S.reg[id]=true});
+  var d=day(38), a=new Date(Y0,TODAY.getMonth()+7,1), b=new Date(Y0,TODAY.getMonth()+20,1);
+  addLot('drink',null,{y:d.getFullYear(),m:d.getMonth()+1,d:d.getDate()});
+  addLot('toromi',null,{y:a.getFullYear(),m:a.getMonth()+1,d:null});
+  addLot('hand',null,{y:b.getFullYear(),m:b.getMonth()+1,d:null});
+}
+var KEY='zaiko-demo-v4';
+function pack(){var reg={}, cart={};CAT.forEach(function(x){if(S.reg[x.id])reg[x.id]=true;if(S.cart[x.id]>0)cart[x.id]=S.cart[x.id]});
+  return JSON.stringify({reg:reg,oq:S.oq,ord:S.ord,cart:cart,how:S.how,seq:S.seq,lk:S.lk,nk:S.nk,lots:S.lots,need:S.need,
+    orders:S.orders.map(function(o){return {id:o.id,eta:+o.eta,how:o.how,lines:o.lines}})})}
+function save(){var s=pack();try{localStorage.setItem(KEY,s)}catch(e){}push(s)}
+function unpack(j){
+  if(!j||!j.reg)return false;
+  var ok=function(id){return !!BY[id]};
+  S.reg={};S.cart={};
+  Object.keys(j.reg).forEach(function(id){if(ok(id)&&j.reg[id])S.reg[id]=true});
+  CAT.forEach(function(x){var id=x.id;S.oq[id]=j.oq&&j.oq[id]>0?j.oq[id]:x.oq;S.ord[id]=j.ord&&(j.ord[id]==='cart'||j.ord[id]==='ordered')?j.ord[id]:null;if(j.cart&&j.cart[id]>0&&S.ord[id]==='cart')S.cart[id]=j.cart[id]});
+  S.how=j.how==='mise'?'mise':'haitatsu';S.seq=j.seq||1;S.lk=j.lk||1;S.nk=j.nk||1;
+  S.lots=(j.lots||[]).filter(function(l){return ok(l.id)&&l.d8&&l.d8.y&&l.d8.m});
+  S.need=(j.need||[]).filter(function(n){return ok(n.id)});
+  S.orders=(j.orders||[]).map(function(o){return {id:o.id,eta:new Date(o.eta),how:o.how,lines:(o.lines||[]).filter(function(l){return ok(l.id)})}}).filter(function(o){return o.lines.length});
+  CAT.forEach(function(x){var id=x.id;if(S.ord[id]==='ordered'&&!orderOf(id))S.ord[id]=null;if(S.ord[id]==='cart'&&!S.cart[id])S.ord[id]=null});
+  return true}
+function load(){try{var j=JSON.parse(localStorage.getItem(KEY)||'null');if(!j||!j.reg)return false;init('empty');return unpack(j)}catch(e){return false}}
+var DOC=null, SHARED=false, REMOTE=null, TOUCHED=false, SENDING=false, ME='t'+Math.random().toString(36).slice(2,10);
+function push(s){
+  if(!SHARED||!TOUCHED||SENDING||s===REMOTE)return;
+  SENDING=true;
+  var w;try{w=DOC.set({v:1,by:ME,at:Date.now(),s:s})}catch(e){SENDING=false;SHARED=false;return}
+  w.then(function(){REMOTE=s},function(e){
+    var c=e&&e.code;if(c==='invalid_argument'||c==='revoked'||c==='not_granted'||c==='capability_disabled'||c==='capability_removed'){SHARED=false;if(S.view==='home')render()}
+  }).then(function(){SENDING=false;var now=pack();if(now!==s)push(now)});
+}
+function fixView(){
+  var v=S.view;
+  if(v==='expq'){var X=S.x, i0=X?X.i:0;
+    while(X&&X.i<X.keys.length&&!needOf(X.keys[X.i]))X.i++;
+    if(!X||X.i>=X.keys.length){S.x=null;S.view='home';S.note=null;return true}
+    if(X.i!==i0){X.y=X.m=X.d=null;X.at='y';X.wide=false;X.msg=null;X.busy=false;return true}
+    return false}
+  if(v==='recv'){var F=S.flow, keys={}, same=!!F;
+    S.orders.forEach(function(o){o.lines.forEach(function(l){var k=o.id+'_'+l.id;keys[k]=1;if(F&&!(k in F.got))same=false})});
+    if(F)Object.keys(F.got).forEach(function(k){if(!keys[k])same=false});
+    if(!same){if(S.orders.length)startRecv();else S.flow=null}
+    return true}
+  if(v==='edit'&&!S.reg[S.edit])S.view='items';
+  return v!=='find'&&v!=='scan';
+}
+function onRemote(snap){
+  if(!snap||(snap.metadata&&snap.metadata.hasPendingWrites))return;
+  var first=!SHARED, d=snap.exists?snap.data():null, s=d&&typeof d.s==='string'?d.s:null, j;
+  SHARED=true;
+  if(!s||s===REMOTE){if(first&&S.view==='home')render();return}
+  REMOTE=s;
+  if(d.by===ME||s===pack()){if(first&&S.view==='home')render();return}
+  try{j=JSON.parse(s)}catch(e){return}
+  var c0=cartIds().length, w0=waitN();
+  if(!unpack(j))return;
+  TOUCHED=false;
+  if(S.note&&S.note.undo)S.note=null;
+  var draw=fixView(), c1=cartIds().length, w1=waitN();
+  if(!first&&(S.view==='home'||S.view==='order'))S.note={t:c1>c0?'ほかの端末で、注文かごに '+(c1-c0)+'種類 入りました。':w1>w0?'ほかの端末で、注文されました。':'ほかの端末で変わった所を、反映しました。'};
+  if(draw)render();else try{localStorage.setItem(KEY,pack())}catch(e){}
+}
+var qtxt=function(x,q){return x.os>1?q+x.ou+'（'+(q*x.os)+x.u+'）':q+x.u};
+var regs=function(){return CAT.filter(function(x){return S.reg[x.id]})};
+var cartIds=function(){return CAT.filter(function(x){return S.ord[x.id]==='cart'}).map(function(x){return x.id})};
+var selIds=function(){return CAT.filter(function(x){return S.sel[x.id]}).map(function(x){return x.id})};
+var waitN=function(){return S.orders.reduce(function(a,o){return a+o.lines.length},0)};
+var firstOrder=function(){return S.orders.slice().sort(function(a,b){return a.eta-b.eta})[0]};
+var orderOf=function(id){return S.orders.filter(function(o){return o.lines.some(function(l){return l.id===id})})[0]};
+var nearLots=function(){return S.lots.filter(function(l){return leftDays(l.d8)<=45})};
+var etaTxt=function(d){var r=rel(d);return (r?r+' ':'')+md(d)};
+var etaWord=function(o){return o.how==='mise'?'店で受け取る':(rel(o.eta)||md(o.eta))+'届く'};
+function btn(label,act,kind,k){return '<button type="button" class="btn '+(kind||'')+'" data-act="'+act+'" data-k="'+(k||act)+'">'+label+'</button>'}
+function tagOf(x){return x.size&&x.size.length<=3?x.size:/昼用/.test(x.n)?'昼':/夜用/.test(x.n)?'夜':''}
+function pic(x,size,plain){var t=plain?'':tagOf(x);return '<span class="pic '+x.c+(size?' '+size:'')+'">'+ic(x.ic)+(t?'<i class="tg num" aria-hidden="true">'+esc(t)+'</i>':'')+'</span>'}
+function tail(t){return /</.test(t)?t:t.replace(/、([^、]+)$/,'、<span class="nb">$1</span>')}
+function h1(t){return '<h1 id="h" tabindex="-1">'+tail(t)+'</h1>'}
+function noteHtml(){
+  var n=S.note, h='<div id="note" aria-live="polite">';
+  if(n)h+='<p class="note"><span>'+ic('check')+esc(n.t)+'</span>'+(n.undo?btn(n.ul||'取り消す','undo','text'):'')+'</p>';
+  return h+'</div>';
+}
+function errHtml(){return '<div id="err" role="alert">'+(S.err?'<p class="note err"><span>'+ic('warn')+esc(S.err)+'</span></p>':'')+'</div>'}
+function stepper(act,label,out,xl){return '<span class="stepper'+(xl?' xl':'')+'"><button type="button" data-act="'+act+':-1" data-k="'+act+':-1" aria-label="'+label+'を1つ減らす">'+ic('minus')+'</button><output class="num">'+out+'</output><button type="button" data-act="'+act+':1" data-k="'+act+':1" aria-label="'+label+'を1つ増やす">'+ic('plus')+'</button></span>'}
+function pkt(x){return esc(x.pk)+(/\s/.test(x.pk)?'入り':'')}
+function wait(t){return '<p class="wait"><span>'+tail(t)+'</span></p>'}
+var boxHtml='<span class="box">'+ic('check')+'</span>';
+function found(){
+  var q=norm(S.q), list=CAT.filter(function(x){return !S.reg[x.id]}), title, fz=q&&S.fz&&S.fz.q===S.q?S.fz:null;
+  if(fz){var ids=fz.ids;list=list.filter(function(x){return ids.indexOf(x.id)>=0}).sort(function(a,b){return ids.indexOf(a.id)-ids.indexOf(b.id)});title='「'+esc(S.q.trim())+'」に近い商品'}
+  else if(q){var ts=S.q.split(/[\s\u3000]+/).map(norm).filter(Boolean);list=list.filter(function(x){return ts.every(function(t){return x.key.indexOf(t)>=0})});title='「'+esc(S.q.trim())+'」で見つかった商品'}
+  else if(S.cat){list=list.filter(function(x){return x.cat===S.cat});title=CATN[S.cat]}
+  else{list=list.filter(function(x){return x.pop<99}).sort(function(a,b){return a.pop-b.pop});title='よく買われている商品'}
+  var fams=[], seen={};
+  list.forEach(function(x){if(!seen[x.fam]){seen[x.fam]=[];fams.push(seen[x.fam])}seen[x.fam].push(x)});
+  return {title:title,fams:fams,n:list.length,fz:!!fz};
+}
+function prodRow(f){
+  var x=f[0], ex=x.exp?'<span class="chip plain">'+ic('clock')+'期限あり</span>':'';
+  if(f.length===1&&!x.size)return '<button type="button" class="prod" aria-pressed="'+(!!S.sel[x.id])+'" data-act="pick:'+x.id+'" data-k="pick:'+x.id+'">'+boxHtml+pic(x)+'<span><b>'+esc(x.n)+'</b><span class="mk">'+esc(x.mk)+'・<span class="nb">'+pkt(x)+'</span>'+'</span><span class="meta"><span class="num">'+priceTxt(x)+'</span>'+ex+'</span></span></button>';
+  var same=f.every(function(v){return v.pr===x.pr});
+  return '<div class="prod">'+pic(x,'',true)+'<div><b>'+esc(x.n)+'</b><span class="mk">'+esc(x.mk)+'</span><span class="meta"><span class="num">'+(same?priceTxt(x):'サイズで値段が変わります')+'</span>'+ex+'</span></div><div class="sizes" role="group" aria-label="'+esc(x.n)+'のサイズ">'+f.map(function(v){
+    return '<button type="button" class="sz" aria-pressed="'+(!!S.sel[v.id])+'" data-act="pick:'+v.id+'" data-k="pick:'+v.id+'">'+boxHtml+'<span><b>'+esc(v.size)+'</b><small class="num">'+esc(v.pk)+(same?'':'・'+yen(v.pr))+'</small></span></button>'}).join('')+'</div></div>';
+}
+function resultsHtml(){
+  var r=found(), none;
+  if(r.fz)none='近い商品も、見つかりませんでした。言葉を変えるか、上の種類から選んでください。';
+  else if(S.q&&CAN_PHOTO)none='見つかりませんでした。'+(S.fzBusy?'<br>近い商品を、探しています…':'<br>'+btn('近い商品を探す','fuzzy',''));
+  else none='見つかりませんでした。言葉を変えるか、上の種類から選んでください。';
+  return '<div class="fwrap"><div class="fchips" role="group" aria-label="種類でしぼる">'+[[null,'よく買われている商品']].concat(CATS).map(function(c){
+      return '<button type="button" class="fchip" aria-pressed="'+(!S.q&&S.cat===c[0])+'" data-act="cat:'+(c[0]||'')+'" data-k="cat:'+(c[0]||'')+'">'+c[1]+'</button>'}).join('')+'</div></div>'+
+    '<section class="sec"><h2 id="rt" aria-live="polite"'+(S.q?'':' class="vh"')+'>'+r.title+'</h2>'+(r.fams.length?'<div class="prods">'+r.fams.map(prodRow).join('')+'</div>':'<div class="empty">'+none+'</div>')+'</section>';
+}
+function vFind(){
+  var n=selIds().length, from=S.addFrom||'items';
+  return {tight:1,back:1,backTo:from,
+    h:h1('どの商品を、登録しますか')+
+      (CAN_PHOTO?'<div><button type="button" class="btn lg wide two" data-act="shots" data-k="shots">'+ic('cam')+'<span><b>写真や動画で、まとめて探す</b><small>棚を撮ると、写っている商品が出ます</small></span></button></div>':'')+
+      '<div class="search"><label for="q">商品の名前で探す</label><input class="field" id="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="例：おむつ、手袋、電池" value="'+esc(S.q)+'"></div>'+
+      '<div id="results">'+resultsHtml()+'</div>',
+    foot:n?errHtml()+btn(n+'個を登録する','regdone','solid lg wide'):wait('商品を押すと、ここに「登録する」が出ます')};
+}
+function isVideo(f){return /^video\//.test(f.type||'')||/\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name||'')}
+function framesOf(file,max){
+  return new Promise(function(res){
+    var v=document.createElement('video'), url=URL.createObjectURL(file), out=[], times=null, done=false, fixing=false;
+    var timer=setTimeout(finish,25000);
+    function finish(){if(done)return;done=true;clearTimeout(timer);try{URL.revokeObjectURL(url)}catch(e){}res(out)}
+    function plan(){var d=v.duration, n=Math.max(1,Math.min(max,Math.round(d/1.5)));times=[];for(var i=0;i<n;i++)times.push((i+0.5)*d/n);next()}
+    function next(){if(!times.length){finish();return}v.currentTime=times.shift()}
+    v.muted=true;v.playsInline=true;v.preload='auto';
+    v.onerror=finish;
+    v.onloadedmetadata=function(){
+      if(isFinite(v.duration)&&v.duration>0){plan();return}
+      fixing=true;v.currentTime=1e7;
+    };
+    v.onseeked=function(){
+      if(fixing){fixing=false;if(isFinite(v.duration)&&v.duration>0){plan()}else finish();return}
+      if(!times)return;
+      var w=v.videoWidth, h=v.videoHeight;if(!w||!h){next();return}
+      var k=Math.min(1,1280/Math.max(w,h)), c=document.createElement('canvas');c.width=Math.round(w*k);c.height=Math.round(h*k);
+      try{c.getContext('2d').drawImage(v,0,0,c.width,c.height);c.toBlob(function(b){if(b)out.push(b);next()},'image/jpeg',0.82)}catch(e){next()}
+    };
+    v.src=url;try{v.load()}catch(e){}
+  });
+}
+function askScan(imgs){
+  var ask='';
+  return SAMPLE.json(ask,{images:imgs,modelTier:'quick'});
+}
+function scanMsg(sc,m){sc.msg=m;if(S.scan===sc&&S.view==='scan')render()}
+function startScan(files,prev){
+  var off={};if(prev)prev.found.forEach(function(id){if(!S.sel[id])off[id]=1});
+  var sc=S.scan={phase:'busy',msg:'準備しています…',qs:[],qi:0,found:prev?prev.found.slice():[],nf:prev?prev.nf.slice():[],dups:prev?prev.dups:{},seen:prev?prev.seen:{},
+    urls:prev?prev.urls.slice():[],base:prev?prev.urls.length:0,now:[],off:off}, imgs=[], vids=[], t=++SCAN_T;
+  var live=function(){return S.scan===sc&&SCAN_T===t};
+  S.sel={};show('scan');
+  files.forEach(function(f){(isVideo(f)?vids:imgs).push(f)});
+  var p=Promise.resolve();
+  vids.forEach(function(v){p=p.then(function(){if(!live())return;scanMsg(sc,'動画から、写真を取り出しています…');return framesOf(v,MAX_SHOTS).then(function(fr){imgs=imgs.concat(fr)})})});
+  p.then(function(){
+    if(!live())return;
+    imgs=imgs.slice(0,MAX_SHOTS);
+    if(!imgs.length){sc.phase='err';sc.msg=vids.length?'この動画からは、写真を取り出せませんでした。写真で試すか、名前で探してください。':'写真がありませんでした。';render();return}
+    sc.now=imgs.map(function(b){try{return URL.createObjectURL(b)}catch(e){return ''}});sc.urls=sc.urls.concat(sc.now);
+    var batches=[], raw=[], q=Promise.resolve(), i;
+    for(i=0;i<imgs.length;i+=IMG_MAX)batches.push(imgs.slice(i,i+IMG_MAX));
+    batches.forEach(function(b,bi){q=q.then(function(){if(!live())return;scanMsg(sc,'写っている商品を、探しています…'+(batches.length>1?'（'+(bi+1)+' / '+batches.length+'）':''));
+      return askScan(b).then(function(r){if(r&&r.items&&r.items.length)r.items.forEach(function(x){if(x){var k=Math.round(+x.img||1);x._img=sc.base+bi*IMG_MAX+Math.min(b.length,Math.max(1,k))-1;raw.push(x)}})})})});
+    return q.then(function(){if(live())digest(sc,raw)});
+  }).catch(function(e){
+    if(!live())return;var c=e&&e.code;
+    if(c==='not_granted'||c==='sampling_disabled'||c==='images_unavailable'||c==='not_declared'||c==='capability_disabled'||c==='capability_removed')CAN_PHOTO=false;
+    sc.phase='err';sc.msg=c==='rate_limited'?'いまは写真を読めません。少し待ってから、もう一度試してください。':c==='image_rejected'?'この写真は読めませんでした。撮り直すか、名前で探してください。':'写真から読み取れませんでした。もう一度撮るか、名前で探してください。';render();
+  });
+}
+function digest(sc,raw){
+  var took={};sc.found.forEach(function(id){took[id]=1});
+  function add(id,seen){if(took[id])return;took[id]=1;sc.found.push(id);sc.seen[id]=seen}
+  raw.forEach(function(r){
+    var c=[], seen=String(r&&r.seen||'').slice(0,40);
+    (r&&Array.isArray(r.cands)?r.cands:[]).forEach(function(id){if(BY[id]&&c.indexOf(id)<0&&c.length<3)c.push(id)});
+    if(!c.length){if(seen&&sc.nf.indexOf(seen)<0)sc.nf.push(seen);return}
+    var open=c.filter(function(id){return !S.reg[id]});
+    if(r.sure||c.length===1){if(S.reg[c[0]])sc.dups[c[0]]=1;else add(c[0],seen);return}
+    if(!open.length){sc.dups[c[0]]=1;return}
+    if(open.length===1){add(open[0],seen);return}
+    var k='q'+open.slice().sort().join(',');if(took[k])return;took[k]=1;
+    sc.qs.push({seen:seen,cands:open,img:r._img});
+  });
+  sc.qs=sc.qs.filter(function(q){return !q.cands.some(function(id){return took[id]})});
+  endAsk(sc);
+}
+function endAsk(sc){
+  if(sc.qi<sc.qs.length){sc.phase='ask';render();return}
+  sc.phase='sum';S.sel={};sc.found.forEach(function(id){S.sel[id]=!sc.off[id]});S.err=null;render();
+}
+function vScan(){
+  var sc=S.scan, base={back:1,backTo:'find',foot:''};
+  function out(h,foot){base.h=h;base.foot=foot||'';return base}
+  if(sc.phase==='busy')return out(h1('写っている商品を、探しています')+'<p class="note info"><span>'+ic('cam')+esc(sc.msg)+'</span></p><p class="lead">少しかかります。このまま、お待ちください。</p>'+
+    (sc.now.length?'<div class="thumbs">'+sc.now.map(function(u,i){return u?'<img src="'+u+'" alt="撮った写真 '+(i+1)+'">':''}).join('')+'</div>':''));
+  if(sc.phase==='err')return out(h1('うまく読めませんでした')+'<p class="lead">'+esc(sc.msg)+'</p><div class="bigs">'+(CAN_PHOTO?btn(ic('cam')+'もう一度、撮る','shots','solid lg wide'):'')+btn('名前で探す','go:find','lg wide')+'</div>');
+  if(sc.phase==='ask'){
+    var q=sc.qs[sc.qi], f0=it(q.cands[0]).fam, same=q.cands.every(function(id){return it(id).fam===f0});
+    return out((sc.qs.length>1?'<p class="prog num">'+sc.qs.length+'つのうち '+(sc.qi+1)+'つ目</p>':'')+h1(same?'サイズは、どれですか':'この商品は、どれですか')+
+      (sc.urls[q.img]?'<img class="shot" src="'+sc.urls[q.img]+'" alt="この商品が写っている写真">':'')+
+      '<div class="who"><span class="pic key">'+ic('cam')+'</span><span><small>写真に写っていた物</small><b>'+esc(q.seen||'（名前は読み取れませんでした）')+'</b></span></div>'+
+      '<div class="prods">'+q.cands.map(function(id){var x=it(id);return '<button type="button" class="prod go" data-act="qpick:'+id+'" data-k="qpick:'+id+'">'+pic(x)+'<span><b>'+esc(same&&x.size?x.size:nm(x))+'</b><span class="mk">'+(same?esc(x.n)+'・':esc(x.mk)+'・')+'<span class="nb">'+pkt(x)+'</span></span></span>'+ic('chev')+'</button>'}).join('')+'</div>'+
+      '<div>'+btn('この中に無い','qnone','wide')+'</div>');
+  }
+  var ids=sc.found, n=selIds().length;
+  var nf=sc.nf.length?'<section class="sec"><h2>店の商品に、見つからなかった物</h2><ul class="nf">'+sc.nf.map(function(t,i){return '<li>'+btn('「'+esc(t)+'」を名前で探す','nfsearch:'+i,'text')+'</li>'}).join('')+'</ul></section>':'';
+  var dn=Object.keys(sc.dups).length, dup=dn?'<p class="lead">ほかに '+dn+'個は、もう登録してあります。</p>':'';
+  if(!ids.length)return out(h1('新しく登録する商品は、見つかりませんでした')+dup+nf+'<div class="bigs">'+(CAN_PHOTO?btn(ic('cam')+'もう一度、撮る','shots','solid lg wide'):'')+btn('名前で探す','go:find','lg wide')+'</div>');
+  return out(h1(ids.length+'個の商品が、見つかりました')+'<p class="lead">ちがう物は、押して印を外します。</p><div class="prods">'+ids.map(function(id){var x=it(id);
+      return '<button type="button" class="prod" aria-pressed="'+(!!S.sel[id])+'" data-act="pick:'+id+'" data-k="pick:'+id+'">'+boxHtml+pic(x)+'<span><b>'+esc(nm(x))+'</b><span class="mk">'+esc(x.mk)+'・<span class="nb">'+pkt(x)+'</span>'+'</span>'+
+        (sc.seen[id]?'<span class="seen">'+ic('cam')+'写真の文字「'+esc(sc.seen[id])+'」</span>':'')+(x.exp?'<span class="meta"><span class="chip plain">'+ic('clock')+'期限あり</span></span>':'')+'</span></button>'}).join('')+'</div>'+
+      (CAN_PHOTO?'<div>'+btn(ic('cam')+'写真を足す','shots','wide')+'</div>':'')+dup+nf,
+    n?errHtml()+btn(n+'個を登録する','regdone','solid lg wide'):wait('商品を押すと、ここに「登録する」が出ます'));
+}
+function needOf(k){return S.need.filter(function(n){return n.k===k})[0]}
+function startExp(keys,kind,back){S.x={keys:keys,i:0,y:null,m:null,d:null,at:'y',wide:false,kind:kind,back:back,busy:false,msg:null,done:0}}
+function curNeed(){return S.x?needOf(S.x.keys[S.x.i]):null}
+function yearsFor(x){var a=[], w=S.x.wide, top=w?Y0+10:Y0+Math.ceil(x.exp.life/12);for(var y=w?Y0-1:Y0;y<=top;y++)a.push(y);if(S.x.y&&a.indexOf(S.x.y)<0){a.push(S.x.y);a.sort()}return a}
+function nextAt(X,ymd,now){return !X.y?'y':!X.m?'m':(ymd&&!X.d)?'d':now}
+function vExpq(){
+  var X=S.x, nd=curNeed(), x=it(nd.id), e=x.exp, ymd=e.f==='ymd', total=X.keys.length, rest=X.keys.slice(X.i).filter(needOf).length;
+  if(X.at==='d'&&!ymd)X.at='m';
+  var at=X.at, NAME={y:'年',m:'月',d:'日'}, full=X.y&&X.m&&(!ymd||X.d), o=full?{y:X.y,m:X.m,d:ymd?X.d:null}:null, dl=o?leftDays(o):0;
+  var arr=[], i, dim=X.y&&X.m?new Date(X.y,X.m,0).getDate():31;
+  if(at==='y')arr=yearsFor(x);else for(i=1;i<=(at==='m'?12:dim);i++)arr.push(i);
+  var grid='<div class="picks '+at+'" id="picks" role="group" aria-label="'+NAME[at]+'を選ぶ">'+arr.map(function(v){return '<button type="button" aria-pressed="'+(X[at]===v)+'" data-act="e'+at+':'+v+'" data-k="e'+at+':'+v+'">'+v+(at==='m'?'月':'')+'</button>'}).join('')+
+    (at==='y'&&!X.wide?'<button type="button" class="more" data-act="ewide" data-k="ewide">この中に無い時は、ほかの年を出す</button>':'')+'</div>';
+  function slot(k){var v=X[k];return '<button type="button" class="slot'+(v?'':' blank')+'" aria-pressed="'+(at===k)+'" data-act="eat:'+k+'" data-k="eat:'+k+'">'+(v?'<b class="num">'+v+'</b>':'')+NAME[k]+'</button>'}
+  var res='<p class="left'+(o&&dl<0?' past':'')+'" id="res" aria-live="polite">'+(!o?'':dl<0?'期限が<br>過ぎています':'期限まで<br>'+remain(dl).replace(/年(?=\d)/,'年<wbr>'))+'</p>';
+  var ask='<p class="ask" id="ask">'+(o?'直す時は、上の '+(ymd?'年・月・日':'年・月')+' を押します。':NAME[at]+'を、押してください。')+'</p>';
+  var z=function(n){return ('0'+n).slice(-2)}, part=function(k,ph){var v=X[k];return '<span class="'+(at===k?'on':'')+(v?'':' ph')+'">'+(v?(k==='y'?v:z(v)):ph)+'</span>'};
+  var msg=X.msg?'<p class="note '+(X.msg.ok?'':'info')+'"><span>'+ic(X.msg.ok?'check':'info')+esc(X.msg.t)+'</span></p>':'';
+  var photo='';
+  if(CAN_PHOTO)photo='<div class="photo">'+(X.busy?'<p class="note info"><span>'+ic('cam')+'写真を読んでいます…</span></p>':btn(ic('cam')+'写真を撮って、読み取る','photo','lg wide'))+'<div id="xmsg" aria-live="polite">'+msg+'</div></div>';
+  return {tight:1,snug:1,back:1,backTo:X.back,
+    prog:total>1?total+'つのうち '+(X.i+1)+'つ目':'',
+    h:h1(e.t+'は、いつですか')+
+      '<div class="who">'+pic(x,'sm')+'<span><b>'+esc(nm(x))+'</b><small>'+(nd.q?'届いた '+qtxt(x,nd.q):'いま棚にある分')+'</small></span></div>'+
+      '<div class="hint"><p class="at">書いてある所<b>'+esc(e.at)+'</b></p><span class="tag" id="tag" aria-hidden="true"><small>'+e.t+'</small><b class="num">'+part('y','○○○○')+'.'+part('m','○○')+(ymd?'.'+part('d','○○'):'')+'</b></span>'+
+        '</div>'+
+      photo+
+      (!nd.q||nd.q>1?'<p class="aside mix">箱や袋によって日付がちがう時は、いちばん早い日付を入れます。</p>':'')+
+      (rest>1?'<div>'+btn('残りの '+(rest-1)+'つも、あとでまとめて入れる','expskipall','text')+'</div>':''),
+    foot:errHtml()+'<div class="dp" role="group" aria-label="入れる日付">'+slot('y')+slot('m')+(ymd?slot('d'):'')+res+'</div>'+ask+grid+
+      '<div class="pair">'+btn('あとで入れる','expskip','lg')+(o?btn('これで登録する','expok','solid lg'):wait('<span class="nb">入れ終えると、ここに</span><span class="nb">「登録する」が出ます</span>'))+'</div>'};
+}
+function big(act,icon,title,sub,cnt,solid){
+  return '<button type="button" class="big'+(solid?' solid':'')+'" data-act="'+act+'" data-k="'+act+'"><span class="pic key">'+ic(icon)+'</span><span><b>'+title+'</b><small>'+tail(sub)+'</small>'+(cnt?'<span class="chip key num">'+cnt+'</span>':'')+'</span>'+ic('chev')+'</button>';
+}
+function other(act,icon,title,st){return '<button type="button" class="other" data-act="'+act+'" data-k="'+act+'"><span class="pic key sm">'+ic(icon)+'</span><span><b>'+title+'</b><span class="st">'+st+'</span></span>'+ic('chev')+'</button>'}
+function vHome(){
+  var cs=cartIds(), wn=waitN(), fo=firstOrder(), due=S.orders.some(function(o){return o.eta<=TODAY}), near=nearLots().length, nd=S.need.length, rn=regs().length, none=!rn;
+  var next=none?'reg':due?'recv':cs.length?'order':'low';
+  var est=((nd?'<span class="chip low">'+ic('warn')+'まだ入れていない物が '+nd+'つ</span>':'')+(near?'<span class="chip low">'+ic('warn')+'期限が近い物が '+near+'つ</span>':''))||'期限が近い物は ありません';
+  var urg=S.lots.filter(function(l){return leftDays(l.d8)<=7}), past=urg.filter(function(l){return leftDays(l.d8)<0}), u0=urg[0]&&leftDays(urg[0].d8);
+  var warn=urg.length?'<p class="note '+(past.length?'err':'warn')+'"><span>'+ic('warn')+(urg.length===1?esc(nm(it(urg[0].id)))+'の期限'+(u0<0?'が、過ぎています。':u0===0?'は、今日までです。':'まで、'+remain(u0)+'です。'):'期限が7日以内の物が、'+urg.length+'つ あります。')+'</span>'+btn('期限を見る','go:exp','text','urg')+'</p>':'';
+  return {bar:ic('home')+'<b>見本のグループホーム</b><span>入居 18人</span>',
+    h:h1('何をしますか')+noteHtml()+warn+(none?'<p class="note info"><span>'+ic('info')+'はじめに、使う商品を登録します。</span></p>':'')+'<div class="bigs">'+
+      (none?big('addfrom:home','list','商品を登録する','店の商品から、使う物を選びます','',true):'')+
+      big('go:low','shelf','物が少なくなった','残りが1つの物を、<span class="nb">注文かごに入れます</span>','',next==='low')+
+      big('go:order','cart','注文する',cs.length?'中を確かめて、注文します':'注文かごは、いま空です',cs.length?'注文かごに '+cs.length+'種類':'',next==='order')+
+      big('go:recv','truck','物が届いた',wn?'届いた物を、棚に入れます':'待っている物は、ありません',wn?etaWord(fo)+' '+wn+'種類':'',next==='recv')+
+      '</div><section class="sec" style="gap:4px"><p class="h2">ほかにできること</p><div class="others">'+
+      other('go:exp','clock','期限を見る',est)+
+      (none?'':other('go:items','list','商品を登録する・直す','いま '+rn+'個を登録しています'))+
+      '</div></section><p class="demo"><span><b>この画面は見本です。</b>施設・商品・値段は、すべて架空です。</span>'+
+      (SHARED?'<span class="link" id="link">'+ic('check')+'ほかの端末と、つながっています。もう1台で開くと、ここで押した物が、そちらにもすぐ出ます。</span>':'')+
+      '<span>'+btn('見本の状態に戻す','reset:sample','text')+btn('商品が無い状態から試す','reset:empty','text')+'</span></p>',
+    foot:''};
+}
+function lowRow(x){
+  var st=S.ord[x.id], head=pic(x,'sm')+'<span><b>'+esc(nm(x))+'</b>';
+  if(st==='cart')return '<div class="prod slim still lowstill"><span></span>'+head+'<span class="chip key">'+ic('cart')+'注文かごの中</span></span></div>';
+  if(st==='ordered')return '<div class="prod slim still lowstill"><span></span>'+head+'<span class="chip plain">'+ic('truck')+etaWord(orderOf(x.id))+'</span></span></div>';
+  return '<button type="button" class="prod slim lowrow" aria-pressed="'+(!!S.sel[x.id])+'" data-act="pick:'+x.id+'" data-k="pick:'+x.id+'">'+boxHtml+head+'<span class="mk">'+pkt(x)+'</span></span></button>';
+}
+function vLow(){
+  var n=selIds().length, list=regs();
+  if(!list.length)return {back:1,h:h1('商品が、まだ登録されていません')+'<p class="lead">はじめに、使う商品を登録します。</p><div>'+btn(ic('plus')+'商品を登録する','addfrom:low','solid lg wide')+'</div>',foot:''};
+  return {tight:1,back:1,wide:1,
+    h:h1('どれが、残り1つですか')+'<p class="lead near">全部の商品が並んでいます。残りが <span class="nb">1袋・1箱・1本</span> の物だけ、<span class="nb">押してください。</span></p>'+
+      '<div class="lowlist">'+CATS.map(function(c){var a=list.filter(function(x){return x.cat===c[0]});
+        return a.length?'<section class="sec"><h2>'+c[1]+'</h2><div class="prods cols">'+a.map(lowRow).join('')+'</div></section>':''}).join('')+'</div>'+
+      '<div>'+btn(ic('plus')+'ここに無い商品を登録する','addfrom:low','wide')+'</div>',
+    foot:n?errHtml()+btn(n+'種類を注文かごに入れる','lowdone','solid lg wide'):wait('物を押すと、ここに「注文かごに入れる」が出ます')};
+}
+function vOrder(){
+  var cs=cartIds(), sum=0;
+  if(!cs.length)return {back:1,h:h1('注文かごは、いま空です')+noteHtml()+'<p class="lead">残りが1つになった物を選ぶと、ここに入ります。</p><div>'+btn('少なくなった物を選ぶ','go:low','solid lg wide')+'</div>',foot:''};
+  var lines=cs.map(function(id){var x=it(id), q=S.cart[id];sum+=q*x.pr;
+    return '<li class="line">'+pic(x,'sm')+'<p class="nm">'+esc(nm(x))+'<small>'+pkt(x)+'</small></p><div class="qty"><span class="stepper"><button type="button" data-act="qty:'+id+':-1" data-k="qty:'+id+':-1"'+(q>1?' aria-label="'+esc(nm(x))+'を1つ減らす">'+ic('minus'):' aria-label="'+esc(nm(x))+'を注文かごから外す">外す')+'</button><output class="num">'+q+x.ou+(x.os>1?'<small>'+(q*x.os)+x.u+'</small>':'')+'</output><button type="button" data-act="qty:'+id+':1" data-k="qty:'+id+':1" aria-label="'+esc(nm(x))+'を1つ増やす">'+ic('plus')+'</button></span><span class="price num">'+yen(q*x.pr)+'</span></div></li>'}).join('');
+  var how=[['haitatsu','届けてもらう','あす '+md(day(1))+'に届きます'],['mise','店で受け取る','今日の夕方から 受け取れます']].map(function(r){
+    return '<button type="button" class="radio" role="radio" aria-checked="'+(S.how===r[0])+'" data-act="how:'+r[0]+'" data-k="how:'+r[0]+'"><span class="o"></span><span><b>'+r[1]+'</b><small>'+r[2]+'</small></span></button>'}).join('');
+  return {back:1,
+    h:h1('注文かごの中を、確かめてください')+noteHtml()+'<ul class="lines">'+lines+'</ul><section class="sec"><h2>受け取り方</h2><div class="radios" role="radiogroup" aria-label="受け取り方">'+how+'</div></section><p class="aside">値段は、見本の数字です。</p>',
+    foot:'<p class="footres num" id="tot" aria-live="polite"><span>合わせて '+cs.length+'種類</span><b>'+yen(sum)+'</b></p>'+btn('この内容で注文する','order','solid lg wide')};
+}
+function startRecv(){var F={got:{},fix:false,q:{}}, fo=firstOrder();S.orders.forEach(function(o){o.lines.forEach(function(l){F.got[o.id+'_'+l.id]=(o===fo)})});S.flow=F}
+function gotQ(o,l){var F=S.flow, k=o.id+'_'+l.id;return F.fix?Math.max(0,Math.min(l.q,F.q[k]||0)):(F.got[k]?l.q:0)}
+function vRecv(){
+  if(!S.orders.length)return {back:1,h:h1('届くのを待っている物は、ありません')+'<p class="lead">注文すると、ここに出ます。</p>',foot:''};
+  var F=S.flow, anyExp=false, gotN=0;
+  var list=S.orders.slice().sort(function(a,b){return a.eta-b.eta}).map(function(o){
+    var rows=o.lines.map(function(l){var x=it(l.id), k=o.id+'_'+l.id, g=gotQ(o,l);if(g>0){gotN++;if(x.exp)anyExp=true}
+      if(F.fix)return '<li class="line">'+pic(x,'sm')+'<p class="nm">'+esc(nm(x))+'<small>注文した数 '+qtxt(x,l.q)+'</small></p><div class="qty fix"><span class="ql">届いた数</span>'+stepper('rq:'+k,esc(nm(x))+'の届いた数',g+x.ou+(x.os>1?'<small>'+(g*x.os)+x.u+'</small>':''))+(g<l.q?'<span class="qs">'+(g<=0?'まだ届いていない':'残りの '+(l.q-g)+x.ou+'は、待ちます')+'</span>':'')+'</div></li>';
+      return '<button type="button" class="check" aria-pressed="'+(!!F.got[k])+'" data-act="got:'+k+'" data-k="got:'+k+'">'+boxHtml+pic(x,'sm')+'<span><b>'+esc(nm(x))+'</b><small>'+qtxt(x,l.q)+(x.exp?'・期限あり':'')+'</small></span></button>'}).join('');
+    return '<section class="sec"><h2>'+(o.how==='mise'?'店で受け取る分':etaTxt(o.eta)+'に届く予定の分')+'</h2>'+(F.fix?'<ul class="lines">'+rows+'</ul>':'<div class="checks">'+rows+'</div>')+'</section>'}).join('');
+  return {back:1,h:h1(F.fix?'届いた数を、入れてください':'届いた物を、確かめてください')+'<p class="lead">'+(F.fix?'注文した数が入っています。ちがう物だけ、直してください。届いていない物は 0 にします。':'はじめから印が付いています。届いていない物は、押して印を外します。')+'</p>'+list+
+      (F.fix?'':'<div>'+btn('一部だけ届いた物がある（数を入れる）','recvfix','wide')+'</div>'),
+    foot:gotN?errHtml()+btn(anyExp?'つぎへ（期限を入れる）':'棚に入れる','recvdone','solid lg wide'):wait(F.fix?'届いた数を入れると、ここにボタンが出ます':'届いた物に印を付けると、ここにボタンが出ます')};
+}
+function lotCard(l){
+  var x=it(l.id), d=leftDays(l.d8), cls=d<=7?'soon':d<=45?'near':'', tag;
+  if(d<0)tag='<span class="chip out">'+ic('out')+'期限が過ぎた</span>';
+  else if(d<=7)tag='<span class="chip out">'+ic('warn')+remain(d)+'</span>';
+  else if(d<=45)tag='<span class="chip low">'+ic('warn')+remain(d)+'</span>';
+  else tag='<span class="chip plain">'+remain(d)+'</span>';
+  return '<article class="lot '+cls+'">'+pic(x)+'<div><p class="nm">'+esc(nm(x))+'</p><p class="meta">'+tag+'<span class="num nb">'+ymdTxt(l.d8)+'まで</span><span class="num nb">'+(l.q?'届いた '+qtxt(x,l.q):'棚にあった分')+'</span></p>'+(d<=45&&d>=0?'<p class="first">新しい物より先に使います</p>':'')+'</div><div class="acts" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">'+btn(d<0?'捨てた':'使い切った','used:'+l.k,'')+btn('期限を直す','fixlot:'+l.k,'text')+'</div></article>';
+}
+function vExp(){
+  var all=S.lots.slice().sort(function(a,b){return lotDate(a.d8)-lotDate(b.d8)}), nd=S.need;
+  var todo=nd.length?'<section class="todo"><h2>'+ic('warn')+'期限を、まだ入れていない物が '+nd.length+'つ</h2><ul>'+nd.map(function(n){var x=it(n.id);return '<li>'+esc(nm(x))+(n.q?'（届いた '+qtxt(x,n.q)+'）':'（いま棚にある分）')+'</li>'}).join('')+'</ul>'+btn('期限を入れる','expall','solid lg wide')+'</section>':'';
+  return {back:1,h:h1('期限の近い順に、並んでいます')+noteHtml()+todo+(all.length?'<div class="lots">'+all.map(lotCard).join('')+'</div>':(nd.length?'':'<p class="empty">期限のある商品は、まだありません。<br>届いた時に期限を入れると、ここに並びます。</p>')),foot:''};
+}
+function vItems(){
+  var list=regs();
+  return {back:1,h:h1('登録している商品')+noteHtml()+(list.length?'':'<p class="empty">商品は、まだ登録されていません。</p>')+CATS.map(function(c){var a=list.filter(function(x){return x.cat===c[0]});
+    return a.length?'<section class="sec"><h2>'+c[1]+'</h2><div class="rows">'+a.map(function(x){
+      return '<button type="button" class="row" data-act="edit:'+x.id+'" data-k="edit:'+x.id+'">'+pic(x,'sm')+'<span class="nm">'+esc(nm(x))+'<small class="num">'+pkt(x)+'・1回に '+S.oq[x.id]+x.ou+'</small></span>'+ic('chev')+'</button>'}).join('')+'</div></section>':''}).join(''),foot:btn(ic('plus')+'商品を登録する','addfrom:items','solid lg wide')};
+}
+function vEdit(){
+  var x=it(S.edit), e=x.exp, ls=S.lots.filter(function(l){return l.id===x.id}).sort(function(a,b){return lotDate(a.d8)-lotDate(b.d8)});
+  function row(a,b){return '<div><dt>'+a+'</dt><dd>'+b+'</dd></div>'}
+  return {back:1,backTo:'items',
+    h:h1(esc(nm(x)))+'<div class="one">'+pic(x,'lg')+'<small>'+esc(x.mk)+'・<span class="nb">'+pkt(x)+'</span>'+'</small></div>'+
+      '<section class="sec"><h2>この施設で決めること</h2><p class="lead">1回に頼む数（注文かごに、この数で入ります）</p>'+stepper('oq:'+x.id,'頼む数',S.oq[x.id]+x.ou+(x.os>1?'<small>'+(S.oq[x.id]*x.os)+x.u+'</small>':''),1)+'</section>'+
+      '<section class="sec"><h2>店の商品データ（自動で入ります）</h2><dl class="facts">'+row('メーカー',esc(x.mk))+(x.size?row('サイズ',esc(x.size)):'')+row('入り数',esc(x.pk))+row('注文の単位',x.os>1?x.ou+'（'+x.os+x.u+'入り）':x.u)+row('値段','<span class="num">1'+x.ou+' '+yen(x.pr)+'</span>')+row('商品番号','<span class="num">'+x.jan+'</span>')+row('期限',e?e.t+'（'+(e.f==='ymd'?'年月日':'年月')+'まで・'+esc(e.at)+'に書いてある）':'なし')+row('届くまで','届けてもらうと 次の日')+'</dl></section>'+
+      (e?'<section class="sec"><h2>いま入っている期限</h2>'+(ls.length?'<dl class="facts">'+ls.map(function(l){return row(l.q?qtxt(x,l.q):'棚にある分','<span class="num">'+ymdTxt(l.d8)+'まで（'+remain(leftDays(l.d8))+'）</span>')}).join('')+'</dl>':'<p class="lead">まだ入っていません。</p>')+'</section>':'')+
+      '<div>'+btn('この商品を外す','unreg:'+x.id,'text')+'</div>',
+    foot:btn('これでよい','go:items','solid lg wide','editok')};
+}
+var VIEWS={find:vFind,scan:vScan,expq:vExpq,home:vHome,low:vLow,order:vOrder,recv:vRecv,exp:vExp,items:vItems,edit:vEdit};
+var lastKey=null;
+function viewKey(){return S.view+'/'+(S.view==='expq'&&S.x?S.x.keys[S.x.i]:'')+(S.view==='scan'&&S.scan?S.scan.phase+S.scan.qi:'')}
+function render(focus){
+  var key=viewKey(), changed=lastKey!==key, k=focus||(document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k:null), V=VIEWS[S.view]();
+  $('#bar').innerHTML='<div class="wrap'+(V.wide?' wide':'')+'">'+(V.back?'<button type="button" class="back" data-act="go:'+(V.backTo||'home')+'" data-k="back">'+ic('back')+'もどる</button>':V.bar)+(V.prog?'<span class="prog num">'+V.prog+'</span>':'')+'</div>';
+  $('#view').className='wrap view'+(V.wide?' wide':'')+(V.tight?' tight':'')+(V.snug?' snug':'');
+  $('#view').innerHTML=V.h;
+  $('#foot').hidden=!V.foot;
+  $('#foot').innerHTML=V.foot?'<div class="wrap'+(V.wide?' wide':'')+'">'+V.foot+'</div>':'';
+  save();syncHist();
+  lastKey=key;
+  if(changed){window.scrollTo(0,0);var hh=$('#h');if(hh)hh.focus({preventScroll:true});return}
+  var el=k?document.querySelector('[data-k="'+k+'"]'):null;
+  if(el)el.focus({preventScroll:true});
+}
+function show(v,note){S.view=v;S.note=note||null;S.err=null;render()}
+var HIST_IGN=false;
+try{history.scrollRestoration='manual'}catch(e){}
+function syncHist(){try{
+  var sub=history.state&&history.state.sub;
+  if(S.view!=='home'&&!sub)history.pushState({sub:1},'');
+  else if(S.view==='home'&&sub){HIST_IGN=true;history.back()}
+}catch(e){}}
+window.addEventListener('popstate',function(){
+  if(HIST_IGN){HIST_IGN=false;return}
+  if(S.view==='home')return;
+  var b=$('#bar .back');if(b)b.click();
+});
+function addLot(id,q,o){S.lots.push({k:S.lk++,id:id,q:q||null,d8:o})}
+function epick(k,v){
+  var X=S.x, ymd=it(curNeed().id).exp.f==='ymd', was=X.at;
+  X[k]=v;
+  if(X.d&&X.y&&X.m&&X.d>new Date(X.y,X.m,0).getDate())X.d=null;
+  X.at=nextAt(X,ymd,k);X.msg=null;S.err=null;
+  render(X.at!==was?'eat:'+X.at:null);
+}
+function afterReg(from,n,tail){
+  if(from==='low'){show('low');return}
+  show(from==='home'?'home':'items',{t:n+'個の商品を登録しました。'+(tail||'')});
+}
+function afterExp(){
+  var X=S.x, kind=X.kind, back=X.back, done=X.done, left=X.keys.filter(function(k){return needOf(k)}).length;S.x=null;
+  var tail=left?'期限をあとで入れる物が '+left+'つ あります。':'';
+  if(kind==='add'){afterReg(back,S.regN,tail);return}
+  if(kind==='recv'){show('home',{t:'届いた物を棚に入れました。'+tail});return}
+  show('exp',{t:done?done+'つの期限を入れました。':'期限は、あとで入れます。'});
+}
+var ACT={
+  go:function(v){
+    if(v==='low'){if(S.view==='find')S.sel=S.keep||{};else if(S.view!=='expq')S.sel={}}
+    if(v==='recv'&&S.orders.length)startRecv();
+    if(S.view==='expq'&&v!=='expq')S.x=null;
+    if(S.view==='find'&&v!=='low')S.sel={};
+    if(S.view==='scan'){S.scan=null;SCAN_T++;S.sel={}}
+    if(v==='home'||v==='items'){S.flow=null;S.addFrom=null}
+    S.q='';S.cat=null;
+    show(v);
+  },
+  cat:function(c){S.cat=c||null;S.q='';S.err=null;render()},
+  pick:function(id){S.sel[id]=!S.sel[id];S.err=null;render()},
+  regdone:function(){var ids=selIds();
+    if(!ids.length){S.err='登録する商品を、1つ以上選んでください。';render();return}
+    var keys=[], from=S.addFrom||'items';
+    ids.forEach(function(id){if(S.reg[id])return;S.reg[id]=true;if(it(id).exp){var n={k:S.nk++,id:id,q:null};S.need.push(n);keys.push(n.k)}});
+    S.sel=from==='low'?(S.keep||{}):{};S.q='';S.cat=null;S.regN=ids.length;S.scan=null;
+    if(keys.length){startExp(keys,'add',from);show('expq');return}
+    afterReg(from,ids.length,'')},
+  addfrom:function(from){S.addFrom=from;S.keep=from==='low'?S.sel:null;S.sel={};S.q='';S.cat=null;show('find')},
+  ey:function(y){epick('y',+y)},
+  em:function(m){epick('m',+m)},
+  ed:function(d){epick('d',+d)},
+  eat:function(k){S.x.at=k;S.err=null;render()},
+  ewide:function(){S.x.wide=true;render('eat:y')},
+  expok:function(){var X=S.x, nd=curNeed(), x=it(nd.id), ymd=x.exp.f==='ymd';
+    if(!X.y||!X.m||(ymd&&!X.d)){X.at=!X.y?'y':!X.m?'m':'d';S.err={y:'年',m:'月',d:'日'}[X.at]+'を選んでください。';render();return}
+    addLot(nd.id,nd.q,{y:X.y,m:X.m,d:ymd?X.d:null});S.need=S.need.filter(function(n){return n!==nd});X.done++;ACT.expnext()},
+  expskip:function(){ACT.expnext()},
+  expnext:function(){var X=S.x;X.i++;X.y=X.m=X.d=null;X.at='y';X.wide=false;X.msg=null;X.busy=false;S.err=null;
+    while(X.i<X.keys.length&&!needOf(X.keys[X.i]))X.i++;
+    if(X.i>=X.keys.length){afterExp();return}render()},
+  expall:function(){startExp(S.need.map(function(n){return n.k}),'one','exp');show('expq')},
+  expskipall:function(){afterExp()},
+  fixlot:function(k){var l=S.lots.filter(function(l){return l.k===+k})[0];if(!l)return;S.lots=S.lots.filter(function(z){return z!==l});
+    var nd={k:S.nk++,id:l.id,q:l.q};S.need.push(nd);startExp([nd.k],'one','exp');
+    S.x.y=l.d8.y;S.x.m=l.d8.m;S.x.d=l.d8.d||null;
+    show('expq')},
+  nfsearch:function(i){var t=S.scan&&S.scan.nf[+i];if(!t)return;S.scan=null;SCAN_T++;S.q=t;S.cat=null;show('find')},
+  fuzzy:function(){var q=S.q;if(!q||!SAMPLE||S.fzBusy)return;S.fzBusy=true;render();
+    var ask='';
+    SAMPLE.json(ask,{modelTier:'quick'}).then(function(r){var ids=[];(r&&Array.isArray(r.ids)?r.ids:[]).forEach(function(id){if(BY[id]&&ids.indexOf(id)<0)ids.push(id)});S.fz={q:q,ids:ids}})
+      .catch(function(){S.fz={q:q,ids:[]}}).then(function(){S.fzBusy=false;if(S.view==='find')render()})},
+  photo:function(){var c=$('#cam');c.value='';c.click()},
+  shots:function(){var c=$('#shots');c.value='';c.click()},
+  qpick:function(id){var sc=S.scan;if(sc.found.indexOf(id)<0){sc.found.push(id);sc.seen[id]=sc.qs[sc.qi].seen}sc.qi++;endAsk(sc)},
+  qnone:function(){var sc=S.scan, q=sc.qs[sc.qi];if(q.seen&&sc.nf.indexOf(q.seen)<0)sc.nf.push(q.seen);sc.qi++;endAsk(sc)},
+  lowdone:function(){var ids=CAT.filter(function(x){return S.sel[x.id]&&S.reg[x.id]&&!S.ord[x.id]}).map(function(x){return x.id});
+    if(!ids.length){S.err='残りが1つになった物を、1つ以上選んでください。';render();return}
+    ids.forEach(function(id){S.ord[id]='cart';S.cart[id]=S.oq[id]});S.sel={};
+    show('home',{t:ids.length+'種類を注文かごに入れました。',undo:function(){ids.forEach(function(id){S.ord[id]=null;delete S.cart[id]})}})},
+  qty:function(id,d){var q=S.cart[id]+(+d), x=it(id);
+    if(q<1){var keep=S.cart[id];S.ord[id]=null;delete S.cart[id];
+      S.note={t:nm(x)+'を、注文かごから外しました。',ul:'戻す',undo:function(){S.ord[id]='cart';S.cart[id]=keep}};render('undo');return}
+    S.cart[id]=q;S.note=null;render()},
+  how:function(v){S.how=v;render()},
+  order:function(){var cs=cartIds(), how=S.how, o={id:S.seq++,eta:how==='mise'?day(0):day(1),how:how,lines:cs.map(function(id){return {id:id,q:S.cart[id]}})}, old={};
+    cs.forEach(function(id){S.ord[id]='ordered';old[id]=S.oq[id];S.oq[id]=S.cart[id];delete S.cart[id]});S.orders.push(o);
+    show('home',{t:how==='mise'?'注文しました。今日の夕方から、店で受け取れます。':'注文しました。'+etaTxt(o.eta)+'に届きます。',undo:function(){S.orders=S.orders.filter(function(z){return z!==o});o.lines.forEach(function(l){S.ord[l.id]='cart';S.cart[l.id]=l.q;S.oq[l.id]=old[l.id]})}})},
+  undo:function(){if(S.note&&S.note.undo)S.note.undo();S.note=null;render('go:low')},
+  got:function(k){S.flow.got[k]=!S.flow.got[k];S.err=null;render()},
+  recvfix:function(){var F=S.flow;F.fix=true;S.orders.forEach(function(o){o.lines.forEach(function(l){var k=o.id+'_'+l.id;F.q[k]=F.got[k]?l.q:0})});S.err=null;render()},
+  rq:function(k,d){var F=S.flow, max=0;S.orders.forEach(function(o){o.lines.forEach(function(l){if(o.id+'_'+l.id===k)max=l.q})});
+    F.q[k]=Math.max(0,Math.min(max,(F.q[k]||0)+(+d)));S.err=null;render()},
+  recvdone:function(){var F=S.flow, n=0, keys=[];
+    S.orders.forEach(function(o){o.lines.forEach(function(l){if(gotQ(o,l)>0)n++})});
+    if(!n){S.err=F.fix?'届いた数を、入れてください。':'届いた物を、1つ以上選んでください。';render();return}
+    S.orders.forEach(function(o){o.lines=o.lines.filter(function(l){var g=gotQ(o,l);if(g<=0)return true;
+      if(it(l.id).exp){var nd={k:S.nk++,id:l.id,q:g};S.need.push(nd);keys.push(nd.k)}
+      if(g<l.q){l.q-=g;return true}
+      S.ord[l.id]=null;return false})});
+    S.orders=S.orders.filter(function(o){return o.lines.length});S.flow=null;
+    if(keys.length){startExp(keys,'recv','home');show('expq');return}
+    show('home',{t:n+'種類を棚に入れました。'+(S.orders.length?'届いていない物は、そのまま待ちます。':'')})},
+  used:function(k){var l=S.lots.filter(function(l){return l.k===+k})[0], x=it(l.id);S.lots=S.lots.filter(function(z){return z!==l});
+    S.note={t:nm(x)+'を、一覧から外しました。',ul:'戻す',undo:function(){S.lots.push(l)}};render('undo')},
+  edit:function(id){S.edit=id;show('edit')},
+  oq:function(id,d){S.oq[id]=Math.max(1,S.oq[id]+(+d));render()},
+  unreg:function(id){var x=it(id), was=S.ord[id], q=S.cart[id], nds=S.need.filter(function(n){return n.id===id});delete S.reg[id];if(was==='cart'){S.ord[id]=null;delete S.cart[id]}
+    S.need=S.need.filter(function(n){return n.id!==id});
+    show('items',{t:nm(x)+'を外しました。',ul:'戻す',undo:function(){S.reg[id]=true;S.need=S.need.concat(nds);if(was==='cart'){S.ord[id]='cart';S.cart[id]=q}}})},
+  reset:function(kind){try{localStorage.removeItem(KEY)}catch(e){}init(kind==='empty'?'empty':'sample');lastKey=null;render()}
+};
+document.addEventListener('pointerdown',function(){document.documentElement.dataset.pointer='1'},true);
+document.addEventListener('keydown',function(e){if(e.key==='Tab'||e.key.indexOf('Arrow')===0)delete document.documentElement.dataset.pointer},true);
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-act]');if(!el)return;
+  var p=el.dataset.act.split(':'), f=ACT[p[0]];
+  if(f){TOUCHED=true;f(p[1],p[2])}
+});
+document.addEventListener('input',function(e){
+  if(e.target.id!=='q')return;
+  S.q=e.target.value;S.cat=null;S.err=null;
+  var r=$('#results');if(r)r.innerHTML=resultsHtml();
+});
+$('#cam').addEventListener('change',function(){
+  var f=this.files&&this.files[0], X=S.x;if(!f||!X||!SAMPLE)return;
+  var token=X.keys[X.i], x=it(curNeed().id);X.busy=true;X.msg=null;render();
+  var ask='';
+  SAMPLE.json(ask,{images:[f],modelTier:'quick'}).then(function(r){
+    if(S.x!==X||X.keys[X.i]!==token)return;
+    var y=r&&+r.year, m=r&&+r.month, d=r&&r.day?+r.day:null;
+    if(r&&r.found&&y>=Y0-2&&y<=Y0+15&&m>=1&&m<=12){X.y=y;X.m=m;X.d=(x.exp.f==='ymd'&&d>=1&&d<=31)?d:null;X.at=x.exp.f==='ymd'?'d':'m';
+      X.msg={ok:1,t:'写真から「'+ymdTxt({y:X.y,m:X.m,d:X.d})+'」と読みました。箱と見くらべて、合っていれば登録してください。'+(x.exp.f==='ymd'&&!X.d?'日は読めなかったので、下で選んでください。':'')}}
+    else X.msg={t:'写真から読み取れませんでした。下で選んでください。'};
+  }).catch(function(e){
+    if(S.x!==X||X.keys[X.i]!==token)return;
+    var c=e&&e.code;
+    if(c==='not_granted'||c==='sampling_disabled'||c==='images_unavailable'||c==='not_declared'||c==='capability_disabled'||c==='capability_removed')CAN_PHOTO=false;
+    X.msg={t:c==='rate_limited'?'いまは写真を読めません。少し待つか、下で選んでください。':c==='image_rejected'?'この写真は読めませんでした。撮り直すか、下で選んでください。':'写真から読み取れませんでした。下で選んでください。'};
+  }).then(function(){if(S.x===X&&X.keys[X.i]===token){X.busy=false;render()}});
+});
+$('#shots').addEventListener('change',function(){
+  var fs=[].slice.call(this.files||[]);if(!fs.length||!SAMPLE)return;
+  if(S.view!=='find'&&S.view!=='scan')return;
+  startScan(fs,S.view==='scan'&&S.scan&&S.scan.phase==='sum'?S.scan:null);
+});
+if(!load())init();
+render();
+})();
+</script>
+</body>
+</html>

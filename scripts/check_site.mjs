@@ -82,6 +82,16 @@ const steps=h.split('<li class="hm-step').slice(1).map(c=>c.split('</ol>')[0]);
 assert.equal(steps.length,12,`${g.file}: 12 steps`);
 for(const [i,c] of steps.entries()) {assert.ok(c.includes('class="hm-when"'),`${g.file}: step ${i+1} has no date`);assert.ok(c.includes('class="hm-chip '),`${g.file}: step ${i+1} does not say who acts`);assert.ok(c.includes('<ul><li>'),`${g.file}: step ${i+1} has no concrete lines`);}
 for(const [name,html] of documents) if(name!==g.file) assert.ok(!html.includes(`"${g.file}"`),`${name}: links to ${g.file}`);}}
+// 2026-11-14: zaiko.html is a demo app (stock and orders for a care home, fictional data) that is shown by address only.
+// It is generated outside this repository (never edit it here). Not indexed, not linked from other pages,
+// and it carries no notes from the generator (one header comment only) and nothing that only works in the preview version.
+{const z=await fs.readFile(path.join(root,'zaiko.html'),'utf8');
+assert.match(z,/^<!doctype html>\n<html lang="ja">/,'zaiko.html: document start');
+assert.ok(z.includes('<meta name="robots" content="noindex,nofollow">'),'zaiko.html: noindex');
+assert.equal((z.match(/<!--/g)||[]).length,1,'zaiko.html: comments left in the served page');
+assert.doesNotMatch(z,/claude|Artifact/i,'zaiko.html: preview-only code left');
+assert.ok(!z.includes('\r'),'zaiko.html: CRLF');
+for (const [name,html] of documents) assert.ok(!html.includes('zaiko.html'),`${name}: links to zaiko.html`);}
 // 2026-11-14: internal files (docs/, scripts/, site/, README, package.json) were readable at takenokonoko.com. _config.yml tells GitHub Pages not to serve them.
 // Every tracked file must be either a public file (top-level page, assets/) or hidden by the exclude list, and no public file may be caught by it.
 const serving = audit();
