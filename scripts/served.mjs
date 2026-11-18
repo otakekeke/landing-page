@@ -21,7 +21,8 @@ const excludeAt = (rev) => {
 };
 
 // 配る物：いちばん上のページと assets/。CNAME は GitHub Pages が自分で使う（住所では配られない）
-const isPublic = (file) => /^[^/]+\.html$/.test(file) || file.startsWith('assets/');
+// 2026-11-19：suryo/（下水道の数量拾いの試作品と見本の図面）も配る。名前が「.」で始まる物（suryo/.gitattributes）は配らない
+const isPublic = (file) => /^[^/]+\.html$/.test(file) || file.startsWith('assets/') || /^suryo\/[^./][^/]*$/.test(file);
 const isHosting = (file) => file === 'CNAME';
 // Jekyll は名前の頭が同じ物も外す（site と書くと sitemap.xml も外れる）
 const caught = (file, exclude) => exclude.some((e) => file.startsWith(e));

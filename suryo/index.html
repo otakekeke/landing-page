@@ -1,0 +1,1334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>図面から数量を拾う（試作品）｜タケノコ</title>
+<!--
+  画面の手本：デジタル庁デザインシステム（https://design.digital.go.jp/dads/）
+  使った物：色（青900・灰800・成功＝緑・注意＝黄）、字 16px・行間 1.7、フォーカスの黒と黄、
+  ボタン（塗り＝1画面に1つ・枠・文字）、知らせのバナー、手順の表示（ステップナビゲーション）、
+  ラジオ（大）、タブ、チップ、アコーディオン（details）。
+  流れは「1画面に1つのこと」：① 図面を読み込む → ② 要確認の所を1か所ずつ確かめる → ③ 数量を書き出す。
+  外のファイル（字の形・ライブラリ）は読まない。インターネットにつながない所でも動くように。
+-->
+<style>
+:root{
+  --blue-50:#e8f1fe; --blue-100:#d9e6ff; --blue-200:#c5d7fb; --blue-300:#9db7f9;
+  --blue-900:#0017c1; --blue-1000:#00118f; --blue-1200:#000060;
+  --gray-50:#f2f2f2; --gray-100:#e6e6e6; --gray-200:#cccccc; --gray-300:#b3b3b3; --gray-536:#767676;
+  --gray-600:#666666; --gray-700:#4d4d4d; --gray-800:#333333; --gray-900:#1a1a1a;
+  --green-50:#e6f5ec; --green-600:#259d63; --green-800:#197a4b; --green-900:#115a36;
+  --yellow-50:#fbf5e0; --yellow-700:#b78f00; --yellow-900:#927200; --yellow-1000:#806300;
+  --red-50:#fdeeee; --red-800:#ec0000;
+  --radius:8px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--gray-800);
+  font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  font-size:16px;line-height:1.7;letter-spacing:.02em}
+a{color:var(--blue-900);text-underline-offset:3px}
+a:hover{color:var(--blue-1000);text-decoration-thickness:3px}
+:focus-visible{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+h2[tabindex]:focus{outline:none}
+h2[tabindex]:focus-visible{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+.skip{position:absolute;left:-9999px;top:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip:focus{left:16px;top:8px;background:#fff;padding:8px 12px;z-index:10}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header.bar{border-bottom:1px solid var(--gray-200)}
+header.bar .wrap{display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--gray-900);letter-spacing:.08em}
+.brand-sub{color:var(--gray-600)}
+h1{font-size:28px;line-height:1.4;margin:32px 0 8px;color:var(--gray-900)}
+h2{font-size:24px;line-height:1.4;margin:0 0 8px;color:var(--gray-900)}
+h3{font-size:20px;line-height:1.5;margin:0;color:var(--gray-900)}
+p{margin:0 0 12px}
+.lead{font-size:18px;margin:0 0 8px}
+.muted{color:var(--gray-600)}
+.screen{padding:32px 0 8px}
+/* ボタン（DADS：塗り・枠・文字） */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:700;
+  border-radius:var(--radius);cursor:pointer;text-decoration:none;min-height:48px;padding:8px 16px;letter-spacing:.02em}
+.btn-lg{min-height:56px;padding:12px 20px;font-size:17px}
+.btn-sm{min-height:36px;padding:2px 12px;position:relative;border-radius:6px}
+.btn-sm::after{content:"";position:absolute;inset:-4px 0}
+.btn-fill{background:var(--blue-900);color:#fff;border:4px double transparent}
+.btn-fill:hover{background:var(--blue-1000);text-decoration:underline;text-underline-offset:3px}
+.btn-fill:active{background:var(--blue-1200)}
+.btn-line{background:#fff;color:var(--blue-900);border:1px solid var(--blue-900)}
+.btn-line:hover{background:var(--blue-200);color:var(--blue-1000);text-decoration:underline;text-underline-offset:3px}
+.btn-line:active{background:var(--blue-300)}
+.btn-text{background:none;border:0;color:var(--blue-900);text-decoration:underline;text-underline-offset:3px;padding:8px;min-height:44px}
+.btn-text:hover{background:var(--blue-50);text-decoration-thickness:3px}
+.btn-text:focus-visible{background:#ffd43d}
+.btn:disabled{background:var(--gray-300);color:var(--gray-50);border-color:var(--gray-300);cursor:not-allowed;text-decoration:none}
+.btn input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+label.btn{position:relative}
+label.btn:focus-within{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0 12px;align-items:center}
+.actions .push{margin-left:auto}
+/* 手順の表示（DADS：ステップナビゲーション） */
+ol.steps{list-style:none;display:flex;margin:24px 0 0;padding:0;gap:0}
+ol.steps li{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;color:var(--gray-700)}
+ol.steps li::before{content:"";position:absolute;top:16px;left:-50%;width:100%;height:1px;background:var(--gray-600);z-index:0}
+ol.steps li:first-child::before{display:none}
+ol.steps .num{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;border:1px solid var(--gray-600);background:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:6px}
+ol.steps li[aria-current=step]{color:var(--gray-900);font-weight:700}
+ol.steps li[aria-current=step] .num{background:var(--gray-800);color:#fff;border-color:var(--gray-800);box-shadow:0 0 0 3px #fff,0 0 0 4px var(--gray-800)}
+ol.steps li.done .num{background:var(--gray-50)}
+ol.steps li.done .num span{display:none}
+ol.steps li.done .num::after{content:"";width:12px;height:7px;border-left:3px solid var(--gray-800);border-bottom:3px solid var(--gray-800);transform:rotate(-45deg) translate(1px,-2px)}
+.files{margin:20px 0 0;color:var(--gray-600)}
+.note{display:flex;gap:10px;align-items:flex-start;color:var(--gray-700);margin:0 0 4px}
+.note svg{flex:none;margin-top:4px}
+/* 落とした時の案内（落とした時だけ出る） */
+.dropzone{position:fixed;inset:12px;z-index:20;border:3px dashed var(--blue-900);border-radius:12px;background:rgba(232,241,254,.94);
+  display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--blue-1000);pointer-events:none}
+/* 知らせ（DADS：バナー） */
+.banner{border:3px solid;border-radius:12px;padding:24px;margin:0 0 20px;display:flex;gap:12px;align-items:flex-start}
+.banner > div{flex:1;min-width:0}
+.banner h3{margin:0 0 4px;font-size:20px}
+.banner p:last-child{margin:0}
+.banner.caution{border-color:var(--yellow-700);background:var(--yellow-50)}
+.banner.success{border-color:var(--green-800);background:var(--green-50)}
+.banner.error{border-color:var(--red-800);background:var(--red-50)}
+.banner svg{flex:none;margin-top:3px}
+ul.decided{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+ul.decided li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+ul.decided b{white-space:nowrap}
+/* チップ */
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:3px 7px;border-radius:8px;border:1px solid;font-size:16px;line-height:1.4;white-space:nowrap;font-weight:700}
+.chip.ok{background:var(--green-50);border-color:var(--green-800);color:var(--green-900)}
+.chip.warn{background:var(--yellow-50);border-color:var(--yellow-900);color:var(--yellow-1000)}
+.chip.done{background:var(--blue-50);border-color:var(--blue-900);color:var(--blue-1000)}
+/* 要確認の所（1画面に1か所） */
+.count{font-weight:400;color:var(--gray-700);margin-left:8px;font-variant-numeric:tabular-nums}
+.flag{border:1px solid var(--gray-300);border-left:8px solid var(--yellow-700);border-radius:8px;padding:20px 24px;margin-top:20px}
+.flag-head{display:flex;gap:8px 12px;align-items:center;flex-wrap:wrap}
+.evid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}
+.evid figure{margin:0;border:1px solid var(--gray-200);border-radius:8px;overflow:hidden;background:#fff}
+svg{letter-spacing:0}
+.evid svg{display:block;width:100%;aspect-ratio:2/1;height:auto;background:#fff}
+.evid figcaption{padding:6px 10px;border-top:1px solid var(--gray-200)}
+.evid figcaption b{font-variant-numeric:tabular-nums}
+fieldset{border:0;padding:0;margin:16px 0 0}
+legend{font-weight:700;font-size:18px;margin-bottom:4px;padding:0}
+.radio{display:flex;align-items:flex-start;gap:12px;min-height:44px;padding:6px 0;cursor:pointer}
+.radio input{appearance:none;-webkit-appearance:none;flex:none;width:36px;height:36px;margin:0;border:3px solid var(--gray-600);border-radius:50%;background:#fff;display:grid;place-items:center;cursor:pointer}
+.radio input:checked{border-color:var(--blue-900)}
+.radio input:checked::after{content:"";width:16px;height:16px;border-radius:50%;background:var(--blue-900)}
+.radio > span{padding-top:4px}
+.radio .sub{display:block;color:var(--gray-600)}
+.need{color:var(--red-800);font-weight:700;margin:0 0 4px}
+.flag .actions{margin-bottom:0}
+/* 図面 */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--gray-300);margin:20px 0 8px}
+.tab{font:inherit;background:none;border:0;border-bottom:4px solid transparent;padding:8px 16px;min-height:48px;cursor:pointer;color:var(--gray-700)}
+.tab[aria-selected=true]{color:var(--gray-900);font-weight:700;border-bottom-color:var(--blue-900)}
+.tab:hover{background:var(--blue-50)}
+.viewer-wrap{border:1px solid var(--gray-300);border-radius:8px;overflow:hidden}
+.viewer-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px;border-bottom:1px solid var(--gray-200);background:var(--gray-50)}
+#viewer{display:block;width:100%;height:min(60vh,480px);min-height:300px;background:#fff;touch-action:none;cursor:grab}
+#viewer.drag{cursor:grabbing}
+.caption{padding:10px 12px;border-top:1px solid var(--gray-200);min-height:48px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-left:auto;color:var(--gray-700)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:4px}
+/* 表 */
+.table-wrap{overflow-x:auto;border:1px solid var(--gray-300);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;border-bottom:1px solid var(--gray-200);text-align:left;vertical-align:middle;white-space:nowrap}
+thead th{background:var(--gray-50);font-weight:700;border-bottom:1px solid var(--gray-300)}
+td.n,th.n{text-align:right}
+td.wide{white-space:normal;min-width:14em}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+tr.warn td{background:var(--yellow-50)}
+button.val{font:inherit;background:none;border:0;border-bottom:1px dashed var(--blue-900);color:var(--blue-900);padding:2px 2px;cursor:pointer;min-height:32px;font-variant-numeric:tabular-nums;position:relative}
+button.val::after{content:"";position:absolute;inset:-6px -2px}
+button.val:hover{background:var(--blue-50);border-bottom-style:solid}
+button.val.sel{background:var(--blue-100);border-bottom-style:solid}
+/* 畳む所（DADS：アコーディオン） */
+details{border:1px solid var(--gray-300);border-radius:8px;margin-top:12px}
+summary{cursor:pointer;padding:12px 16px;font-weight:700;min-height:48px;color:var(--gray-900)}
+summary:hover{background:var(--blue-50)}
+details[open] > summary{border-bottom:1px solid var(--gray-200)}
+details .inner{padding:16px}
+#texts-details{margin-top:16px}
+ul.about{padding-left:1.2em;margin:0}
+ul.about li{margin:0 0 8px}
+ul.about li:last-child{margin:0}
+ul.about a{display:inline-block;padding:9px 2px;margin:-9px 0} /* 押せる高さを 44px 以上に（並びは変えない） */
+.about-box{margin-top:40px}
+footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;color:var(--gray-600)}
+[hidden]{display:none !important}
+@media (max-width:760px){
+  h1{font-size:24px;margin-top:24px}
+  h2{font-size:22px}
+  .screen{padding-top:24px}
+  .actions .btn{width:100%}
+  .actions .push{margin-left:0}
+  ol.steps li{font-size:14px}
+  .flag{padding:16px}
+  .banner{padding:16px}
+  /* 数量の集計：狭い画面では1行を縦に組む（数量の列が横に隠れないように） */
+  #qty-table thead{display:none}
+  #qty-table,#qty-table tbody{display:block}
+  #qty-table tr{display:grid;grid-template-columns:1fr auto auto;column-gap:6px;padding:12px 16px;border-bottom:1px solid var(--gray-200)}
+  #qty-table tbody tr:last-child{border-bottom:0}
+  #qty-table td{display:block;padding:0;border:0;white-space:normal}
+  #qty-table td:nth-child(1){grid-column:1;grid-row:1;color:var(--gray-700)}
+  #qty-table td:nth-child(2){grid-column:1;grid-row:2;font-weight:700;color:var(--gray-900)}
+  #qty-table td:nth-child(3){grid-column:2;grid-row:1/3;align-self:center;font-size:20px}
+  #qty-table td:nth-child(4){grid-column:3;grid-row:1/3;align-self:center}
+  #qty-table td:nth-child(5){grid-column:1/4;grid-row:3;min-width:0;color:var(--gray-600);margin-top:4px}
+  #qty-table td:nth-child(6){grid-column:1/4;grid-row:4;margin-top:4px}
+  #qty-table td:nth-child(6):empty{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="bar"><div class="wrap"><span class="brand">タケノコ</span><span class="brand-sub">下水道の数量拾い（試作品）</span></div></header>
+
+<main id="main" class="wrap">
+  <h1>図面から、数量を拾う</h1>
+  <p class="lead" id="lead">平面図と縦断図（DXF）から、管きょの延長と人孔の数を拾います。<br>図面どうしで数字が合わない所だけを、人が確かめます。</p>
+
+  <ol class="steps" id="steps" aria-label="進み具合">
+    <li data-step="1" aria-current="step"><span class="num"><span>1</span></span>図面を読み込む</li>
+    <li data-step="2"><span class="num"><span>2</span></span>要確認の所を見る</li>
+    <li data-step="3"><span class="num"><span>3</span></span>数量を書き出す</li>
+  </ol>
+  <p class="files" id="files-line" hidden></p>
+
+  <div id="msg" aria-live="polite"></div>
+  <div id="sr" class="sr-only" aria-live="polite"></div>
+
+  <!-- ① 図面を読み込む -->
+  <section id="start" class="screen" aria-labelledby="start-h">
+    <h2 id="start-h" class="sr-only">図面を読み込む</h2>
+    <div class="actions" style="margin-top:0">
+      <label class="btn btn-line btn-lg">自分の図面（DXF）を選ぶ<input type="file" id="file" accept=".dxf,.jww" multiple></label>
+      <button type="button" class="btn btn-fill btn-lg" id="btn-sample">見本の図面で試す</button>
+    </div>
+    <p class="note"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span>平面図と縦断図の DXF を、まとめて選べます。どちらの図面かは、中の文字で見分けます。</span></p>
+    <p class="note"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="9" rx="2" fill="none" stroke="#333" stroke-width="2"/><path d="M7 9V6a3 3 0 0 1 6 0v3" fill="none" stroke="#333" stroke-width="2"/></svg>
+      <span>図面は外へ送らず、このブラウザの中だけで読みます。</span></p>
+  </section>
+
+  <!-- ② 要確認の所を1か所ずつ -->
+  <section id="review" class="screen" hidden aria-labelledby="review-h">
+    <h2 id="review-h" tabindex="-1">確かめが要る所<span class="count" id="review-count"></span></h2>
+    <p class="muted" id="review-lead"></p>
+    <div id="flag-box"></div>
+  </section>
+
+  <!-- ③ 数量を書き出す -->
+  <section id="result" class="screen" hidden aria-labelledby="result-h">
+    <h2 id="result-h" tabindex="-1">数量の集計</h2>
+    <div id="result-banner"></div>
+    <div class="table-wrap"><table id="qty-table"></table></div>
+    <div class="actions" id="csv-actions">
+      <button type="button" class="btn btn-fill btn-lg" id="csv-sum">数量の集計を CSV で書き出す</button>
+    </div>
+    <p class="muted">この試作品の CSV は見本の形です。列の並びと文字コードは、実証で市の積算システムの取り込み形式に合わせます。</p>
+
+    <details id="basis">
+      <summary>根拠を見る（区間ごとの数字と図面）</summary>
+      <div class="inner">
+        <p class="muted">数字を押すと、図面の上の元の文字を示します。平均深さは、上流と下流の深さの平均です。</p>
+        <div class="table-wrap"><table id="sec-table"></table></div>
+        <div class="actions" id="sec-actions" style="margin:12px 0 0"><button type="button" class="btn btn-line" id="csv-sec">区間ごとの明細を CSV で書き出す</button></div>
+        <div id="dwg-sec">
+          <div class="tabs" role="tablist" id="tabs"></div>
+          <div class="viewer-wrap">
+            <div class="viewer-tools">
+              <button type="button" class="btn btn-line btn-sm" id="zin" aria-label="拡大">＋ 拡大</button>
+              <button type="button" class="btn btn-line btn-sm" id="zout" aria-label="縮小">− 縮小</button>
+              <button type="button" class="btn btn-line btn-sm" id="zall">全体を表示</button>
+              <span class="legend" aria-hidden="true"><span><i style="background:#c5d7fb;border:2px solid #0017c1"></i>選んだ文字</span><span><i style="background:#e6f5ec;border:2px solid #259d63"></i>拾った管きょ・人孔</span></span>
+            </div>
+            <svg id="viewer" role="img" aria-label="図面"></svg>
+            <div class="caption" id="caption" aria-live="polite">ドラッグで動かせます。上の表の数字を押すと、その元の文字をここに示します。</div>
+          </div>
+        </div>
+        <details id="texts-details"><summary id="texts-sum">読み取った文字をすべて見る</summary><div class="inner"><div class="table-wrap"><table id="texts-table"></table></div></div></details>
+      </div>
+    </details>
+
+    <div class="actions"><button type="button" class="btn btn-text" id="btn-again">別の図面を読む</button></div>
+  </section>
+
+  <details class="about-box">
+    <summary>この試作品について</summary>
+    <div class="inner">
+      <ul class="about">
+        <li>図面を画像として読まず、DXF に入っている文字（値・位置・向き）をそのまま使います。推測をしないので、「3」と「8」の取り違えや、回して書かれた数字の読み誤りは起きません。</li>
+        <li>表は、行の順番ではなく見出しの文字（「地盤高」「管底高」など）で読み分けます。見本の縦断図は「深さ」の行が「地盤高」より上にありますが、同じように読めます。</li>
+        <li>検算の決まり（見本）：延長は平面図・縦断図・縦断図の追加距離から計算した値が同じか。勾配は（上流の管底高 − 下流の管底高）÷ 延長。深さは地盤高 − 管底高。管径・管種は2枚の図面で同じか。実証では、市の数量計算書の決まりに合わせます。</li>
+        <li>工事として成り立つかの判断は、これまでどおり職員の方が行います。この道具が受け持つのは、拾う・計算する・根拠を付けて並べるところまでです。</li>
+        <li>読める形式は DXF です（Shift_JIS と UTF-8）。Jw_cad の図面は［ファイル］→［DXF形式で保存］で DXF にできます。DXF のファイルは、この画面に落としても読み込めます。</li>
+        <li>見本の図面と数字は、すべて架空です（<a href="sample-heimen.dxf" download>平面図</a>・<a href="sample-judan.dxf" download>縦断図</a>）。</li>
+      </ul>
+    </div>
+  </details>
+</main>
+<footer><div class="wrap">タケノコ（嶽ノ子）　<a href="https://takenokonoko.com/">takenokonoko.com</a></div></footer>
+<div class="dropzone" id="drop" hidden aria-hidden="true">ここで離すと、図面を読み込みます</div>
+
+<script id="core">
+/* 読み取りと計算（画面に触れない。node でも同じ物を試せる） */
+(function (root) {
+  'use strict';
+
+  function nk(s) { try { return String(s).normalize('NFKC'); } catch (e) { return String(s); } }
+  function round(v, d) { var p = Math.pow(10, d); return Math.round(v * p + (v >= 0 ? 1e-9 : -1e-9)) / p; }
+  function decimals(str) { var m = String(str).match(/\.(\d+)/); return m ? m[1].length : 0; }
+
+  // ---------- 文字コード ----------
+  function decodeDxf(bytes) {
+    var u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    var head = '';
+    var lim = Math.min(u8.length, 40000);
+    for (var i = 0; i < lim; i++) head += String.fromCharCode(u8[i]);
+    if (head.indexOf('AutoCAD Binary DXF') === 0) throw new Error('binary');
+    var ver = (head.match(/\$ACADVER\s*\r?\n\s*1\s*\r?\n\s*(AC\d+)/) || [])[1] || '';
+    var cp = (head.match(/\$DWGCODEPAGE\s*\r?\n\s*3\s*\r?\n\s*([^\r\n]+)/) || [])[1] || '';
+    var enc = null;
+    if (ver && ver >= 'AC1021') enc = 'utf-8';
+    else if (/932/.test(cp)) enc = 'shift_jis';
+    var text;
+    if (!enc) {
+      try { text = new TextDecoder('utf-8', { fatal: true }).decode(u8); enc = 'utf-8'; }
+      catch (e) { enc = 'shift_jis'; }
+    }
+    if (text === undefined) text = new TextDecoder(enc).decode(u8);
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    return { text: text, encoding: enc === 'utf-8' ? 'UTF-8' : 'Shift_JIS', version: ver };
+  }
+
+  // ---------- DXF の組み立て ----------
+  function readRecords(text) {
+    var lines = text.split(/\r\n|\r|\n/);
+    var recs = [], cur = null;
+    for (var i = 0; i + 1 < lines.length; i += 2) {
+      var code = parseInt(lines[i].trim(), 10);
+      if (isNaN(code)) { i -= 1; continue; }
+      var val = lines[i + 1];
+      if (code === 0) { cur = { type: val.trim(), g: [] }; recs.push(cur); }
+      else if (cur) cur.g.push([code, val]);
+    }
+    return recs;
+  }
+  function gv(rec, code, def) {
+    for (var i = 0; i < rec.g.length; i++) if (rec.g[i][0] === code) return rec.g[i][1];
+    return def;
+  }
+  function gn(rec, code, def) { var v = gv(rec, code, null); if (v === null) return def; var n = parseFloat(v); return isNaN(n) ? def : n; }
+
+  function splitSections(recs) {
+    var sec = null, out = { header: {}, entities: [], blocks: {} }, blk = null;
+    for (var r = 0; r < recs.length; r++) {
+      var rec = recs[r], t = rec.type;
+      if (t === 'SECTION') {
+        sec = (gv(rec, 2, '') || '').trim();
+        if (sec === 'HEADER') {
+          for (var k = 0; k < rec.g.length; k++) if (rec.g[k][0] === 9) {
+            var name = rec.g[k][1].trim(), nx = rec.g[k + 1];
+            if (nx) out.header[name] = nx[1].trim();
+          }
+        }
+        continue;
+      }
+      if (t === 'ENDSEC') { sec = null; continue; }
+      if (t === 'EOF') break;
+      if (sec === 'BLOCKS') {
+        if (t === 'BLOCK') { blk = { name: (gv(rec, 2, '') || '').trim(), bx: gn(rec, 10, 0), by: gn(rec, 20, 0), ents: [] }; out.blocks[blk.name] = blk; continue; }
+        if (t === 'ENDBLK') { blk = null; continue; }
+        if (blk) blk.ents.push(rec);
+        continue;
+      }
+      if (sec === 'ENTITIES') out.entities.push(rec);
+    }
+    return out;
+  }
+
+  var ID = [1, 0, 0, 1, 0, 0];
+  function mul(m, n) { // m・n（n を先に当てる）
+    return [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3], m[1] * n[2] + m[3] * n[3],
+      m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
+  }
+  function ap(m, x, y) { return [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]]; }
+  function mRot(m) { return Math.atan2(m[1], m[0]) * 180 / Math.PI; }
+  function mScale(m) { return Math.sqrt(Math.abs(m[0] * m[3] - m[1] * m[2])) || 1; }
+
+  function cleanText(s, isM) {
+    var t = String(s);
+    t = t.replace(/\\U\+([0-9A-Fa-f]{4})/g, function (_, h) { return String.fromCharCode(parseInt(h, 16)); });
+    t = t.replace(/%%[cC]/g, 'φ').replace(/%%[dD]/g, '°').replace(/%%[pP]/g, '±').replace(/%%[uUoOkK]/g, '').replace(/%%%/g, '%')
+      .replace(/%%(\d{3})/g, function (_, d) { return String.fromCharCode(parseInt(d, 10)); });
+    if (isM) {
+      t = t.replace(/\\P/g, '\n').replace(/\\[fFcCHhTtQqWwAap][^;]*;/g, '').replace(/\\[LlOoKkNn]/g, '')
+        .replace(/\\S([^;]*)\^([^;]*);/g, '$1/$2').replace(/\\~/g, ' ').replace(/[{}]/g, '').replace(/\\\\/g, '\\');
+    }
+    return t.replace(/\s+$/g, '');
+  }
+  function charW(ch) {
+    var c = ch.charCodeAt(0);
+    if (c < 0x80) return ch === ' ' ? 0.45 : 0.62;
+    if (c >= 0xFF61 && c <= 0xFF9F) return 0.55;
+    return 1.0;
+  }
+  function textWidth(s) { var w = 0; for (var ch of s) w += charW(ch); return w; }
+
+  function makeText(id, s, h, rot, ax, ay, dx, dy, w, hh, layer, kind) {
+    var a = rot * Math.PI / 180, c = Math.cos(a), sn = Math.sin(a);
+    function P(lx, ly) { return [ax + lx * c - ly * sn, ay + lx * sn + ly * c]; }
+    var corners = [P(dx, dy), P(dx + w, dy), P(dx + w, dy + hh), P(dx, dy + hh)];
+    var ctr = P(dx + w / 2, dy + hh / 2), org = P(dx, dy);
+    return { t: 'T', id: id, s: s, n: nk(s).replace(/\s+/g, ' ').trim(), h: h, rot: ((rot % 360) + 360) % 360, ox: org[0], oy: org[1],
+      cx: ctr[0], cy: ctr[1], corners: corners, layer: layer, kind: kind };
+  }
+
+  function toItems(dxf) {
+    var items = [], texts = [], seq = 0;
+    function conv(recs, m, depth, inBlockLayer) {
+      for (var i = 0; i < recs.length; i++) {
+        var rec = recs[i], t = rec.type, layer = (gv(rec, 8, inBlockLayer || '0') || '0').trim();
+        if (t === 'LINE') {
+          var p1 = ap(m, gn(rec, 10, 0), gn(rec, 20, 0)), p2 = ap(m, gn(rec, 11, 0), gn(rec, 21, 0));
+          items.push({ t: 'L', x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1], layer: layer });
+        } else if (t === 'CIRCLE' || t === 'ARC') {
+          var c0 = ap(m, gn(rec, 10, 0), gn(rec, 20, 0)), r = gn(rec, 40, 0) * mScale(m), rr = mRot(m);
+          if (t === 'CIRCLE') items.push({ t: 'C', x: c0[0], y: c0[1], r: r, layer: layer });
+          else items.push({ t: 'A', x: c0[0], y: c0[1], r: r, a1: gn(rec, 50, 0) + rr, a2: gn(rec, 51, 360) + rr, layer: layer });
+        } else if (t === 'LWPOLYLINE') {
+          var pts = [], xs = null;
+          for (var k = 0; k < rec.g.length; k++) {
+            if (rec.g[k][0] === 10) xs = parseFloat(rec.g[k][1]);
+            else if (rec.g[k][0] === 20 && xs !== null) { pts.push(ap(m, xs, parseFloat(rec.g[k][1]))); xs = null; }
+          }
+          items.push({ t: 'P', pts: pts, closed: (gn(rec, 70, 0) & 1) === 1, layer: layer });
+        } else if (t === 'POLYLINE') {
+          var pp = [], closed = (gn(rec, 70, 0) & 1) === 1;
+          while (i + 1 < recs.length && recs[i + 1].type === 'VERTEX') { i++; pp.push(ap(m, gn(recs[i], 10, 0), gn(recs[i], 20, 0))); }
+          if (i + 1 < recs.length && recs[i + 1].type === 'SEQEND') i++;
+          items.push({ t: 'P', pts: pp, closed: closed, layer: layer });
+        } else if (t === 'TEXT' || t === 'ATTRIB') {
+          var raw = gv(rec, 1, ''); var s = cleanText(raw, false);
+          if (!s.trim()) continue;
+          var h = gn(rec, 40, 1) * mScale(m), rot = gn(rec, 50, 0) + mRot(m);
+          var ha = gn(rec, 72, 0), va = gn(rec, t === 'ATTRIB' ? 74 : 73, 0);
+          var useAlign = (ha !== 0 || va !== 0) && ha !== 3 && ha !== 5;
+          var anc = useAlign ? ap(m, gn(rec, 11, gn(rec, 10, 0)), gn(rec, 21, gn(rec, 20, 0))) : ap(m, gn(rec, 10, 0), gn(rec, 20, 0));
+          var w = textWidth(s) * h;
+          var dx = (ha === 1 || ha === 4) ? -w / 2 : (ha === 2 ? -w : 0);
+          var dy = ha === 4 ? -h / 2 : (va === 2 ? -h / 2 : (va === 3 ? -h : 0));
+          var it = makeText(seq++, s, h, rot, anc[0], anc[1], dx, dy, w, h, layer, t);
+          it.raw = raw; items.push(it); texts.push(it);
+        } else if (t === 'MTEXT') {
+          var parts = '';
+          for (var q = 0; q < rec.g.length; q++) if (rec.g[q][0] === 3) parts += rec.g[q][1];
+          var ms = cleanText(parts + gv(rec, 1, ''), true);
+          if (!ms.trim()) continue;
+          var mh = gn(rec, 40, 1) * mScale(m);
+          var mrot = gn(rec, 50, null);
+          if (mrot === null) { var vx = gn(rec, 11, 1), vy = gn(rec, 21, 0); mrot = Math.atan2(vy, vx) * 180 / Math.PI; }
+          mrot += mRot(m);
+          var att = gn(rec, 71, 1), col = (att - 1) % 3, row = Math.floor((att - 1) / 3);
+          var lines = ms.split('\n'), mw = 0;
+          lines.forEach(function (ln) { mw = Math.max(mw, textWidth(ln)); });
+          mw *= mh; var tot = mh + mh * 1.6 * (lines.length - 1);
+          var mdx = -col * mw / 2, mdy = row === 0 ? -tot : (row === 1 ? -tot / 2 : 0);
+          var ins = ap(m, gn(rec, 10, 0), gn(rec, 20, 0));
+          var mt = makeText(seq++, ms.replace(/\n/g, ' '), mh, mrot, ins[0], ins[1], mdx, mdy, mw, tot, layer, t);
+          mt.raw = parts + gv(rec, 1, ''); mt.lines = lines; items.push(mt); texts.push(mt);
+        } else if (t === 'INSERT' && depth < 5) {
+          var b = dxf.blocks[(gv(rec, 2, '') || '').trim()];
+          if (!b) continue;
+          var ix = gn(rec, 10, 0), iy = gn(rec, 20, 0), sx = gn(rec, 41, 1), sy = gn(rec, 42, 1), ra = gn(rec, 50, 0) * Math.PI / 180;
+          var c1 = Math.cos(ra), s1 = Math.sin(ra);
+          var local = mul([c1, s1, -s1, c1, ix, iy], mul([sx, 0, 0, sy, 0, 0], [1, 0, 0, 1, -b.bx, -b.by]));
+          conv(b.ents, mul(m, local), depth + 1, layer);
+        }
+      }
+    }
+    conv(dxf.entities, ID, 0, null);
+    return { items: items, texts: texts };
+  }
+
+  function loadDxf(bytes, name) {
+    var dec = decodeDxf(bytes);
+    var recs = readRecords(dec.text);
+    var dxf = splitSections(recs);
+    if (!dxf.entities.length && !Object.keys(dxf.header).length) throw new Error('notdxf');
+    var res = toItems(dxf);
+    return { name: name, encoding: dec.encoding, version: dec.version, items: res.items, texts: res.texts };
+  }
+
+  // ---------- 言葉の決まり ----------
+  var RE = {
+    no: /^(?:No|NO|no)\s*\.?\s*(\d+)$/,
+    kind: /^(\d+\s*号\s*(?:組立)?人孔|組立人孔|小型人孔|特殊人孔|既設人孔|マンホール)$/,
+    spec: /^[φΦøØ⌀]\s*(\d+)\s*(.*)$/,
+    len: /^L\s*=\s*(\d+(?:\.\d+)?)\s*m?$/i,
+    slope: /^i\s*=\s*(\d+(?:\.\d+)?)\s*(‰|%)?$/i,
+    numOnly: /^-?\d+(?:\.\d+)?$/,
+    noteNo: /No\s*\.?\s*(\d+)/,
+    noteKw: /(既設|既存|撤去|廃止|利用)/,
+    pt: [
+      { k: 'gh', re: /^(?:GH|FH|計画地盤高|地盤高)\s*[=:]?\s*(-?\d+(?:\.\d+)?)\s*m?$/i },
+      { k: 'inv', re: /^(?:DL|IL|管底高|管底)\s*[=:]?\s*(-?\d+(?:\.\d+)?)\s*m?$/i }
+    ]
+  };
+  var ROWS = [
+    { key: 'no', re: /^(測点|人孔番号|マンホール番号)/, kind: 'pt', name: '測点' },
+    { key: 'add', re: /^(追加距離|累加距離|累積距離)/, kind: 'pt', name: '追加距離' },
+    { key: 'dep', re: /^(人孔深さ|人孔深|深さ)/, kind: 'pt', name: '深さ' },
+    { key: 'cov', re: /^(土被り|土かぶり)/, kind: 'pt', name: '土被り' },
+    { key: 'gh', re: /^(計画地盤高|現況地盤高|地盤高|GH)/, kind: 'pt', name: '地盤高' },
+    { key: 'inv', re: /^(計画管底高|管底標高|管底高|IL)/, kind: 'pt', name: '管底高' },
+    { key: 'slope', re: /^(管勾配|勾配)/, kind: 'sec', name: '勾配' },
+    { key: 'len', re: /^(区間延長|管きょ延長|管渠延長|延長|単距離)/, kind: 'sec', name: '延長' },
+    { key: 'spec', re: /^(管径|管種)/, kind: 'sec', name: '管径・管種' }
+  ];
+  function specNorm(s) { var m = nk(s).replace(/\s+/g, ' ').trim().match(RE.spec); return m ? ('φ' + m[1] + (m[2] ? ' ' + m[2].trim() : '')) : nk(s).trim(); }
+  var MATERIAL = { 'VU': '硬質塩化ビニル管', 'VP': '硬質塩化ビニル管', 'PRP': 'リブ付き硬質塩化ビニル管', 'HP': '鉄筋コンクリート管', 'RCP': '鉄筋コンクリート管', 'DIP': 'ダクタイル鋳鉄管' };
+
+  function segDist(px, py, x1, y1, x2, y2) {
+    var dx = x2 - x1, dy = y2 - y1, L2 = dx * dx + dy * dy;
+    var t = L2 ? ((px - x1) * dx + (py - y1) * dy) / L2 : 0;
+    var inside = t >= -0.02 && t <= 1.02; t = Math.max(0, Math.min(1, t));
+    return { d: Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy)), inside: inside };
+  }
+  function median(a) { if (!a.length) return 1; var b = a.slice().sort(function (x, y) { return x - y; }); return b[Math.floor(b.length / 2)]; }
+
+  // ---------- 平面図 ----------
+  function readPlan(f) {
+    var circles = f.items.filter(function (it) { return it.t === 'C'; });
+    var hMed = median(f.texts.map(function (t) { return t.h; }));
+    var used = {}, mhs = {}, notes = [];
+    var noTexts = f.texts.filter(function (t) { return RE.no.test(t.n); });
+    var pairs = [];
+    noTexts.forEach(function (t) {
+      circles.forEach(function (c, ci) {
+        var d = Math.hypot(t.cx - c.x, t.cy - c.y);
+        if (d < Math.max(8 * t.h, 6 * c.r)) pairs.push({ d: d, t: t, ci: ci });
+      });
+    });
+    pairs.sort(function (a, b) { return a.d - b.d; });
+    var takenC = {}, takenT = {};
+    pairs.forEach(function (p) {
+      if (takenC[p.ci] || takenT[p.t.id]) return;
+      var n = parseInt(p.t.n.match(RE.no)[1], 10);
+      if (mhs[n]) return;
+      takenC[p.ci] = 1; takenT[p.t.id] = 1; used[p.t.id] = 'mh-no:' + n;
+      var c = circles[p.ci];
+      mhs[n] = { n: n, x: c.x, y: c.y, r: c.r, noSrc: p.t.id, kind: null };
+    });
+    // 人孔を円で描かない図面：番号のいちばん近くにある線の端を人孔の位置とみなす
+    var ends = [];
+    f.items.forEach(function (it) {
+      if (it.t === 'L') { ends.push([it.x1, it.y1]); ends.push([it.x2, it.y2]); }
+      else if (it.t === 'P') it.pts.forEach(function (q) { ends.push(q); });
+    });
+    noTexts.forEach(function (t) {
+      if (takenT[t.id]) return;
+      var n = parseInt(t.n.match(RE.no)[1], 10);
+      if (mhs[n]) return;
+      var best = null, bd = Infinity;
+      ends.forEach(function (q) {
+        var d = Math.hypot(t.cx - q[0], t.cy - q[1]);
+        if (d >= bd) return;
+        var taken = Object.keys(mhs).some(function (k) { return Math.hypot(mhs[k].x - q[0], mhs[k].y - q[1]) < 0.01 * t.h; });
+        if (!taken) { bd = d; best = q; }
+      });
+      if (!best || bd > 8 * t.h) return;
+      takenT[t.id] = 1; used[t.id] = 'mh-no:' + n;
+      mhs[n] = { n: n, x: best[0], y: best[1], r: 0.4 * t.h, noSrc: t.id, kind: null, noSymbol: true };
+    });
+    var list = Object.keys(mhs).map(function (k) { return mhs[k]; });
+    f.texts.forEach(function (t) {
+      if (used[t.id] || !RE.kind.test(t.n)) return;
+      var best = null, bd = Infinity;
+      list.forEach(function (m) { var d = Math.hypot(t.cx - m.x, t.cy - m.y); if (d < bd) { bd = d; best = m; } });
+      if (best && bd < 10 * t.h && !best.kind) { best.kind = { v: t.n.replace(/\s+/g, ''), src: t.id }; used[t.id] = 'mh-kind:' + best.n; }
+    });
+    // 人孔の高さの文字（平面図に書く形：GH=15.82、DL=12.450 など）
+    f.texts.forEach(function (t) {
+      if (used[t.id]) return;
+      for (var i = 0; i < RE.pt.length; i++) {
+        var mm = t.n.match(RE.pt[i].re); if (!mm) continue;
+        var best = null, bd = Infinity;
+        list.forEach(function (m) { var d = Math.hypot(t.cx - m.x, t.cy - m.y); if (d < bd) { bd = d; best = m; } });
+        var k = RE.pt[i].k;
+        if (best && bd < 10 * t.h && !best[k]) { best[k] = { v: parseFloat(mm[1]), str: mm[1], src: t.id }; used[t.id] = 'mh-' + k + ':' + best.n; }
+        break;
+      }
+    });
+    // 管きょ：両端が人孔の中心の近くにある線
+    var pipes = {};
+    function nearMh(x, y) {
+      var best = null, bd = Infinity;
+      list.forEach(function (m) { var d = Math.hypot(x - m.x, y - m.y); if (d < bd) { bd = d; best = m; } });
+      return best && bd <= best.r * 1.6 + 0.05 * hMed ? best : null;
+    }
+    function addSeg(x1, y1, x2, y2) {
+      var a = nearMh(x1, y1), b = nearMh(x2, y2);
+      if (!a || !b || a === b) return;
+      var lo = Math.min(a.n, b.n), hi = Math.max(a.n, b.n), key = lo + '-' + hi;
+      if (!pipes[key]) pipes[key] = { a: lo, b: hi, x1: mhs[lo].x, y1: mhs[lo].y, x2: mhs[hi].x, y2: mhs[hi].y };
+    }
+    f.items.forEach(function (it) {
+      if (it.t === 'L') addSeg(it.x1, it.y1, it.x2, it.y2);
+      else if (it.t === 'P') for (var i = 0; i + 1 < it.pts.length; i++) addSeg(it.pts[i][0], it.pts[i][1], it.pts[i + 1][0], it.pts[i + 1][1]);
+    });
+    var plist = Object.keys(pipes).map(function (k) { return pipes[k]; });
+    f.texts.forEach(function (t) {
+      if (used[t.id]) return;
+      var kind = RE.spec.test(t.n) ? 'spec' : (RE.len.test(t.n) ? 'len' : (RE.slope.test(t.n) ? 'slope' : null));
+      if (!kind) return;
+      var best = null, bd = Infinity;
+      plist.forEach(function (p) { var r = segDist(t.cx, t.cy, p.x1, p.y1, p.x2, p.y2); if (r.inside && r.d < bd) { bd = r.d; best = p; } });
+      if (!best || bd > 6 * t.h || best[kind]) return;
+      var v;
+      if (kind === 'spec') v = specNorm(t.n);
+      else if (kind === 'len') { var lm = t.n.match(RE.len); v = parseFloat(lm[1]); best.lenStr = lm[1]; }
+      else { var sm = t.n.match(RE.slope); v = parseFloat(sm[1]) * (sm[2] === '%' ? 10 : 1); best.slopeDec = decimals(sm[1]); }
+      best[kind] = { v: v, src: t.id };
+      used[t.id] = 'pipe-' + kind + ':' + best.a + '-' + best.b;
+    });
+    f.texts.forEach(function (t) {
+      if (used[t.id]) return;
+      var mn = t.n.match(RE.noteNo), kw = t.n.match(RE.noteKw);
+      if (mn && kw && mhs[parseInt(mn[1], 10)]) { notes.push({ n: parseInt(mn[1], 10), kw: kw[1], src: t.id, text: t.s }); used[t.id] = 'note:' + mn[1]; }
+    });
+    return { mhs: mhs, pipes: pipes, notes: notes, used: used };
+  }
+
+  // ---------- 縦断図（表を見出しで読み分ける） ----------
+  function readProfile(f) {
+    var labels = {};
+    f.texts.forEach(function (t) {
+      if (/[=:]\s*-?\d/.test(t.n)) return; // 「GH=15.82」のような値つきの文字は、表の見出しではない
+      for (var i = 0; i < ROWS.length; i++) {
+        if (ROWS[i].re.test(t.n)) {
+          var k = ROWS[i].key;
+          if (!labels[k] || t.cx < labels[k].t.cx) labels[k] = { t: t, row: ROWS[i] };
+          break;
+        }
+      }
+    });
+    var keys = Object.keys(labels);
+    if (!labels.no || keys.length < 3 || !(labels.gh || labels.inv || labels.len)) return null;
+    // 並びの向き：見出しが縦に並ぶ（ふつう）か、横に並ぶか
+    var lx = keys.map(function (k) { return labels[k].t.cx; }), ly = keys.map(function (k) { return labels[k].t.cy; });
+    var spanX = Math.max.apply(null, lx) - Math.min.apply(null, lx), spanY = Math.max.apply(null, ly) - Math.min.apply(null, ly);
+    var transposed = spanX > spanY;
+    function T(x, y) { return transposed ? [-y, -x] : [x, y]; }
+    var tt = f.texts.map(function (t) {
+      var c = T(t.cx, t.cy), xs = t.corners.map(function (p) { return T(p[0], p[1])[0]; });
+      return { t: t, x: c[0], y: c[1], xmax: Math.max.apply(null, xs) };
+    });
+    var byId = {}; tt.forEach(function (o) { byId[o.t.id] = o; });
+    var labelRight = Math.max.apply(null, keys.map(function (k) { return byId[labels[k].t.id].xmax; }));
+    var labelX = Math.min.apply(null, keys.map(function (k) { return byId[labels[k].t.id].x; }));
+    var hMed = median(keys.map(function (k) { return labels[k].t.h; }));
+    var hl = [];
+    f.items.forEach(function (it) {
+      if (it.t !== 'L') return;
+      var a = T(it.x1, it.y1), b = T(it.x2, it.y2);
+      if (Math.abs(a[1] - b[1]) < 0.05 * hMed && Math.min(a[0], b[0]) <= labelX && Math.max(a[0], b[0]) >= labelRight + 3 * hMed) hl.push((a[1] + b[1]) / 2);
+    });
+    var order = keys.map(function (k) { return { k: k, y: byId[labels[k].t.id].y }; }).sort(function (a, b) { return b.y - a.y; });
+    var bands = {};
+    order.forEach(function (o, i) {
+      var below = hl.filter(function (y) { return y < o.y; }), above = hl.filter(function (y) { return y > o.y; });
+      var lo = below.length ? Math.max.apply(null, below) : null, hi = above.length ? Math.min.apply(null, above) : null;
+      var prev = order[i - 1], next = order[i + 1];
+      var mLo = next ? (o.y + next.y) / 2 : o.y - (prev ? (prev.y - o.y) / 2 : 2 * hMed);
+      var mHi = prev ? (o.y + prev.y) / 2 : o.y + (next ? (o.y - next.y) / 2 : 2 * hMed);
+      bands[o.k] = { lo: (lo !== null && lo > mLo - 0.5 * hMed) ? lo : mLo, hi: (hi !== null && hi < mHi + 0.5 * hMed) ? hi : mHi };
+    });
+    var labelIds = {}; keys.forEach(function (k) { labelIds[labels[k].t.id] = 1; });
+    function inBand(k) {
+      var b = bands[k];
+      return tt.filter(function (o) { return !labelIds[o.t.id] && o.y > b.lo && o.y < b.hi && o.x > labelRight - 0.2 * hMed; });
+    }
+    var used = {}; keys.forEach(function (k) { used[labels[k].t.id] = 'label:' + k; });
+    var stations = inBand('no').filter(function (o) { return RE.no.test(o.t.n); })
+      .map(function (o) { return { n: parseInt(o.t.n.match(RE.no)[1], 10), x: o.x, src: o.t.id }; })
+      .sort(function (a, b) { return a.x - b.x; });
+    if (stations.length < 2) return null;
+    stations.forEach(function (s) { used[s.src] = 'pf-no:' + s.n; });
+    var minGap = Infinity;
+    for (var i = 1; i < stations.length; i++) minGap = Math.min(minGap, stations[i].x - stations[i - 1].x);
+    var tol = 0.45 * minGap;
+    var sections = [];
+    for (var j = 0; j + 1 < stations.length; j++) sections.push({ a: stations[j].n, b: stations[j + 1].n, x1: stations[j].x, x2: stations[j + 1].x });
+    ROWS.forEach(function (row) {
+      if (!labels[row.key] || row.key === 'no') return;
+      inBand(row.key).forEach(function (o) {
+        var sNum = o.t.n.replace(/[‰%m]/g, '').trim();
+        var val;
+        if (row.key === 'spec') val = specNorm(o.t.n);
+        else { if (!RE.numOnly.test(sNum)) return; val = parseFloat(sNum); }
+        if (row.kind === 'pt') {
+          var best = null, bd = Infinity;
+          stations.forEach(function (s) { var d = Math.abs(o.x - s.x); if (d < bd) { bd = d; best = s; } });
+          if (!best || bd > tol || best[row.key]) return;
+          best[row.key] = { v: val, src: o.t.id, str: sNum };
+          used[o.t.id] = 'pf-' + row.key + ':' + best.n;
+        } else {
+          var sec = null;
+          sections.forEach(function (s) { if (o.x > s.x1 && o.x < s.x2) sec = s; });
+          if (!sec || sec[row.key]) return;
+          sec[row.key] = { v: val, src: o.t.id, str: sNum };
+          used[o.t.id] = 'pf-' + row.key + ':' + sec.a + '-' + sec.b;
+        }
+      });
+    });
+    return {
+      stations: stations, sections: sections, used: used, transposed: transposed,
+      order: order.map(function (o) { return { key: o.k, label: labels[o.k].t.s, src: labels[o.k].t.id }; })
+    };
+  }
+
+  function classify(f) {
+    var prof = readProfile(f);
+    if (prof) { f.kind = 'profile'; f.profile = prof; return f; }
+    var plan = readPlan(f);
+    if (Object.keys(plan.mhs).length >= 2 && Object.keys(plan.pipes).length >= 1) { f.kind = 'plan'; f.plan = plan; return f; }
+    f.kind = 'unknown'; return f;
+  }
+
+  // ---------- 突き合わせ ----------
+  var FILE_NAME = { plan: '平面図', profile: '縦断図', unknown: '図面' };
+  function analyze(files, decisions) {
+    decisions = decisions || {};
+    var fp = -1, ff = -1;
+    files.forEach(function (f, i) { if (f.kind === 'plan' && fp < 0) fp = i; if (f.kind === 'profile' && ff < 0) ff = i; });
+    var plan = fp >= 0 ? files[fp].plan : null, prof = ff >= 0 ? files[ff].profile : null;
+    function S(fi, id) { return { f: fi, id: id }; }
+    var checks = [], flags = [], usage = {};
+    function use(fi, id, label) { if (id !== undefined && id !== null) usage[fi + ':' + id] = label; }
+    var secs = [];
+    if (prof) prof.sections.forEach(function (s) { secs.push({ a: s.a, b: s.b, pf: s }); });
+    else if (plan) Object.keys(plan.pipes).map(function (k) { return plan.pipes[k]; }).sort(function (x, y) { return x.a - y.a; })
+      .forEach(function (p) { secs.push({ a: p.a, b: p.b }); });
+    // 人孔ごとの高さ（縦断図の表が正、無ければ平面図の GH=・DL= の文字）。値ごとに、どの図面の文字かを持つ
+    var KN = { add: '追加距離', gh: '地盤高', inv: '管底高', dep: '深さ' };
+    function tag(v, fi) { return v ? { v: v.v, str: v.str, src: v.src, fi: fi } : null; }
+    var st = {}, stList = [];
+    if (prof) prof.stations.forEach(function (s) {
+      var o = { n: s.n, src: s.src, fi: ff, add: tag(s.add, ff), gh: tag(s.gh, ff), inv: tag(s.inv, ff), dep: tag(s.dep, ff) };
+      var pm = plan && plan.mhs[s.n];
+      ['gh', 'inv'].forEach(function (k) {
+        var pv = pm && pm[k];
+        if (!pv) return;
+        use(fp, pv.src, 'No.' + s.n + ' の' + KN[k] + '（平面図）');
+        if (!o[k]) { o[k] = tag(pv, fp); return; }
+        var ok = Math.abs(pv.v - o[k].v) < 1e-9;
+        checks.push({ kind: KN[k], sec: 'No.' + s.n, ok: ok });
+        if (ok) return;
+        var id = k + ':' + s.n, dec = decisions[id];
+        flags.push({ id: id, type: k, sec: 'No.' + s.n, title: 'No.' + s.n + ' の' + KN[k] + 'が、平面図と縦断図で違います',
+          options: [{ value: 'profile', label: o[k].str + ' m（縦断図）', from: ['縦断図'] }, { value: 'plan', label: pv.str + ' m（平面図）', from: ['平面図'] }],
+          recommended: null, decided: dec || null,
+          ev: [{ src: S(ff, o[k].src), label: '縦断図の' + KN[k], value: o[k].str }, { src: S(fp, pv.src), label: '平面図の' + KN[k], value: pv.str }] });
+        if (dec === 'plan') o[k] = tag(pv, fp);
+        o[k].status = dec ? 'done' : 'warn';
+      });
+      st[s.n] = o; stList.push(o);
+    });
+    else if (plan) Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return a.n - b.n; }).forEach(function (m) {
+      if (!m.gh && !m.inv) return;
+      var o = { n: m.n, src: m.noSrc, fi: fp, gh: tag(m.gh, fp), inv: tag(m.inv, fp) };
+      st[m.n] = o; stList.push(o);
+    });
+    secs.forEach(function (s) {
+      var key = s.a + '-' + s.b, name = 'No.' + s.a + '→No.' + s.b;
+      s.key = key; s.name = name;
+      var pp = plan ? plan.pipes[key] : null, pf = s.pf || null;
+      // 延長の候補
+      var cands = [];
+      if (pp && pp.len) { cands.push({ v: round(pp.len.v, 2), from: '平面図', src: S(fp, pp.len.src) }); use(fp, pp.len.src, name + ' の延長'); }
+      if (pf && pf.len) { cands.push({ v: round(pf.len.v, 2), from: '縦断図', src: S(ff, pf.len.src) }); use(ff, pf.len.src, name + ' の延長'); }
+      if (st[s.a] && st[s.b] && st[s.a].add && st[s.b].add) {
+        cands.push({ v: round(st[s.b].add.v - st[s.a].add.v, 2), from: '追加距離から計算', src: S(st[s.b].add.fi, st[s.b].add.src), src2: S(st[s.a].add.fi, st[s.a].add.src),
+          calc: 'No.' + s.b + ' の ' + st[s.b].add.str + ' − No.' + s.a + ' の ' + st[s.a].add.str });
+      }
+      var groups = {};
+      cands.forEach(function (c) { var k = c.v.toFixed(2); (groups[k] = groups[k] || []).push(c); });
+      var gk = Object.keys(groups);
+      var invA = st[s.a] && st[s.a].inv, invB = st[s.b] && st[s.b].inv;
+      function slopeAt(L) { return (invA && invB && L) ? (invA.v - invB.v) / L * 1000 : null; }
+      var statedSlopes = [];
+      if (pp && pp.slope) { statedSlopes.push({ v: pp.slope.v, dec: pp.slopeDec || 1, from: '平面図', src: S(fp, pp.slope.src) }); use(fp, pp.slope.src, name + ' の勾配'); }
+      if (pf && pf.slope) { statedSlopes.push({ v: pf.slope.v, dec: decimals(pf.slope.str) || 1, from: '縦断図', src: S(ff, pf.slope.src) }); use(ff, pf.slope.src, name + ' の勾配'); }
+      function slopeOk(L) {
+        var c = slopeAt(L); if (c === null || !statedSlopes.length) return null;
+        return statedSlopes.every(function (q) { return Math.abs(round(c, q.dec) - q.v) < 1e-9; });
+      }
+      s.lenCands = cands;
+      if (cands.length >= 2) checks.push({ kind: '延長', sec: key, ok: gk.length === 1 });
+      if (gk.length > 1) {
+        var opts = gk.map(function (k) {
+          var g = groups[k];
+          return { value: k, label: k + ' m', from: g.map(function (c) { return c.from; }), srcs: g.map(function (c) { return c.src; }), slopeOk: slopeOk(parseFloat(k)) };
+        }).sort(function (x, y) { return y.from.length - x.from.length; });
+        var rec = opts[0].from.length > opts[1].from.length ? opts[0].value : null;
+        var id = 'len:' + key, dec = decisions[id];
+        flags.push({ id: id, type: 'len', sec: key, title: name + ' の延長が、図面によって違います', options: opts, recommended: rec, decided: dec || null,
+          note: '選んだ値を数量に使います。違っていた方の図面は、設計した方に書き違いがないか確かめてもらってください。',
+          ev: cands.map(function (c) { return { src: c.src, label: c.from === '追加距離から計算' ? '縦断図の追加距離から計算' : c.from, value: c.v.toFixed(2), calc: c.calc }; }) });
+        s.L = parseFloat(dec || rec || opts[0].value); s.Lsrc = (opts.filter(function (o) { return o.value === (dec || rec || opts[0].value); })[0] || opts[0]).srcs[0];
+        s.Lstatus = dec ? 'done' : 'warn';
+      } else if (gk.length === 1) {
+        s.L = parseFloat(gk[0]); s.Lsrc = cands[0].src; s.Lstatus = 'ok';
+      } else { s.L = null; s.Lstatus = 'none'; }
+      // 勾配
+      s.slopeCalc = slopeAt(s.L);
+      s.slopes = statedSlopes;
+      statedSlopes.forEach(function (q) {
+        if (s.slopeCalc === null) return;
+        var ok = Math.abs(round(s.slopeCalc, q.dec) - q.v) < 1e-9;
+        checks.push({ kind: '勾配', sec: key, ok: ok });
+        if (!ok) {
+          var fid = 'slope:' + key + ':' + q.from;
+          flags.push({ id: fid, type: 'slope', sec: key, title: name + ' の勾配が、管底高と延長から計算した値と合いません（' + q.from + '）',
+            note: '数量には延長を使うので、集計の数字は変わりません。図面の書き違いの可能性があるので、設計した方への確認をおすすめします。',
+            options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: decisions[fid] || null,
+            ev: [{ src: q.src, label: q.from + 'の勾配', value: q.v.toFixed(q.dec) + ' ‰' }],
+            extra: '計算：（' + invA.str + ' − ' + invB.str + '）÷ ' + s.L.toFixed(2) + ' × 1000 ＝ ' + s.slopeCalc.toFixed(2) + ' ‰' });
+        }
+      });
+      // 管径・管種
+      var spP = pp && pp.spec ? pp.spec.v : null, spF = pf && pf.spec ? pf.spec.v : null;
+      if (pp && pp.spec) use(fp, pp.spec.src, name + ' の管径・管種');
+      if (pf && pf.spec) use(ff, pf.spec.src, name + ' の管径・管種');
+      if (spP && spF) {
+        var same = spP.replace(/\s/g, '') === spF.replace(/\s/g, '');
+        checks.push({ kind: '管径・管種', sec: key, ok: same });
+        if (!same) {
+          var sid = 'spec:' + key;
+          flags.push({ id: sid, type: 'spec', sec: key, title: name + ' の管径・管種が、平面図と縦断図で違います',
+            options: [{ value: spP, label: spP, from: ['平面図'] }, { value: spF, label: spF, from: ['縦断図'] }], recommended: null, decided: decisions[sid] || null,
+            ev: [{ src: S(fp, pp.spec.src), label: '平面図', value: spP }, { src: S(ff, pf.spec.src), label: '縦断図', value: spF }] });
+          s.spec = decisions[sid] || spP; s.specStatus = decisions[sid] ? 'done' : 'warn';
+        } else { s.spec = spP; s.specStatus = 'ok'; }
+        s.specSrc = S(fp, pp.spec.src);
+      } else if (spP || spF) { s.spec = spP || spF; s.specStatus = 'ok'; s.specSrc = spP ? S(fp, pp.spec.src) : S(ff, pf.spec.src); }
+      else { s.spec = null; s.specStatus = 'none'; }
+      s.invA = invA ? { v: invA.v, str: invA.str, src: S(invA.fi, invA.src) } : null;
+      s.invB = invB ? { v: invB.v, str: invB.str, src: S(invB.fi, invB.src) } : null;
+    });
+    // 深さ
+    var depth = {};
+    function SV(v) { return S(v.fi, v.src); }
+    stList.forEach(function (sn) {
+      if (prof) use(ff, sn.src, 'No.' + sn.n + '（縦断図の測点）');
+      ['add', 'gh', 'inv', 'dep'].forEach(function (k) { if (sn[k] && !usage[sn[k].fi + ':' + sn[k].src]) use(sn[k].fi, sn[k].src, 'No.' + sn.n + ' の' + KN[k]); });
+      var calc = (sn.gh && sn.inv) ? round(sn.gh.v - sn.inv.v, 3) : null;
+      var hWarn = (sn.gh && sn.gh.status === 'warn') || (sn.inv && sn.inv.status === 'warn') ? 'warn' : ((sn.gh && sn.gh.status === 'done') || (sn.inv && sn.inv.status === 'done') ? 'done' : 'ok');
+      if (sn.dep && calc !== null) {
+        var ok = Math.abs(sn.dep.v - calc) < 0.0015;
+        checks.push({ kind: '深さ', sec: 'No.' + sn.n, ok: ok });
+        if (!ok) {
+          var did = 'dep:' + sn.n;
+          flags.push({ id: did, type: 'dep', sec: 'No.' + sn.n, title: 'No.' + sn.n + ' の深さが、地盤高 − 管底高と合いません',
+            options: [{ value: 'calc', label: '計算した ' + calc.toFixed(3) + ' m を使う', from: ['地盤高 − 管底高'] }, { value: 'drawn', label: '図面の ' + sn.dep.str + ' m を使う', from: ['縦断図'] }],
+            recommended: null, decided: decisions[did] || null,
+            ev: [{ src: SV(sn.dep), label: '縦断図の深さ', value: sn.dep.str }, { src: SV(sn.gh), label: '地盤高', value: sn.gh.str }, { src: SV(sn.inv), label: '管底高', value: sn.inv.str }] });
+          depth[sn.n] = { v: decisions[did] === 'drawn' ? sn.dep.v : calc, status: decisions[did] ? 'done' : 'warn', src: SV(sn.dep) };
+        } else depth[sn.n] = { v: sn.dep.v, status: hWarn, src: SV(sn.dep), str: sn.dep.str };
+      } else if (sn.dep) depth[sn.n] = { v: sn.dep.v, status: 'ok', src: SV(sn.dep), str: sn.dep.str };
+      else if (calc !== null) depth[sn.n] = { v: calc, status: hWarn, src: SV(sn.inv) };
+    });
+    secs.forEach(function (s) {
+      var da = depth[s.a], db = depth[s.b];
+      s.depA = da || null; s.depB = db || null;
+      s.depAvg = (da && db) ? Math.round((Math.round(da.v * 1000) + Math.round(db.v * 1000)) / 2) / 1000 : null; // mm で足して、半分は切り上げ
+    });
+    // 人孔
+    var mhList = [];
+    if (plan) {
+      Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return a.n - b.n; }).forEach(function (m) {
+        use(fp, m.noSrc, 'No.' + m.n + '（平面図の人孔）');
+        if (m.kind) use(fp, m.kind.src, 'No.' + m.n + ' の種類');
+        mhList.push({ n: m.n, kind: m.kind ? m.kind.v : '人孔（種類の文字なし）', src: S(fp, m.kind ? m.kind.src : m.noSrc), include: true, status: 'ok' });
+      });
+      plan.notes.forEach(function (nt) {
+        use(fp, nt.src, 'No.' + nt.n + ' の注記');
+        var nid = 'note:' + nt.n, dec = decisions[nid];
+        var mh = mhList.filter(function (m) { return m.n === nt.n; })[0];
+        flags.push({ id: nid, type: 'note', sec: 'No.' + nt.n, title: 'No.' + nt.n + ' に「' + nt.kw + '」の注記があります',
+          question: 'No.' + nt.n + ' を、新しく作る人孔の数に入れますか？',
+          options: [{ value: 'exclude', label: '入れない', sub: '新しく作る人孔の数から外す', from: [] },
+            { value: 'include', label: '入れる', sub: '新しく作る人孔として数える', from: [] }],
+          recommended: null, decided: dec || null,
+          ev: [{ src: S(fp, nt.src), label: '平面図の注記', value: nt.text }].concat(mh ? [{ src: mh.src, label: '平面図の No.' + nt.n, value: mh.kind }] : []) });
+        if (mh) { mh.include = dec !== 'exclude'; mh.status = dec ? 'done' : 'warn'; mh.note = nt.text; }
+      });
+      // 種類の文字そのものが「既設人孔」の時も、同じように聞く
+      mhList.forEach(function (mh) {
+        if (mh.note || !/既設|既存/.test(mh.kind)) return;
+        var nid = 'note:' + mh.n, dec = decisions[nid];
+        flags.push({ id: nid, type: 'note', sec: 'No.' + mh.n, title: 'No.' + mh.n + ' は「' + mh.kind + '」と書かれています',
+          question: 'No.' + mh.n + ' を、新しく作る人孔の数に入れますか？',
+          options: [{ value: 'exclude', label: '入れない', sub: '新しく作る人孔の数から外す', from: [] },
+            { value: 'include', label: '入れる', sub: '新しく作る人孔として数える', from: [] }],
+          recommended: null, decided: dec || null, ev: [{ src: mh.src, label: '平面図の No.' + mh.n, value: mh.kind }] });
+        mh.include = dec !== 'exclude'; mh.status = dec ? 'done' : 'warn'; mh.note = mh.kind;
+      });
+      if (prof) {
+        var a1 = mhList.map(function (m) { return m.n; }).join(','), a2 = prof.stations.map(function (s) { return s.n; }).join(',');
+        checks.push({ kind: '人孔の数', sec: 'all', ok: a1 === a2 });
+      }
+    }
+    // 集計
+    var qty = [], byspec = {};
+    secs.forEach(function (s) {
+      if (!s.spec || s.L === null) return;
+      var k = s.spec; (byspec[k] = byspec[k] || { L: 0, parts: [], warn: false }).L += s.L;
+      byspec[k].parts.push(s.name + ' ' + s.L.toFixed(2)); if (s.Lstatus === 'warn' || s.specStatus === 'warn') byspec[k].warn = true;
+    });
+    Object.keys(byspec).sort(function (a, b) { return (parseInt(a.replace(/\D+/g, ''), 10) || 0) - (parseInt(b.replace(/\D+/g, ''), 10) || 0); }).forEach(function (k) {
+      var m = k.match(/^φ(\d+)\s*(.*)$/), mat = m && m[2] ? (MATERIAL[m[2].toUpperCase()] || m[2]) : '';
+      qty.push({ work: '管きょ工', spec: k + (mat ? '（' + mat + '）' : ''), v: round(byspec[k].L, 2).toFixed(2), unit: 'm', basis: byspec[k].parts.join(' ＋ '), check: byspec[k].warn ? '要確認' : '' });
+    });
+    var bykind = {};
+    mhList.forEach(function (m) {
+      var e = (bykind[m.kind] = bykind[m.kind] || { n: 0, list: [], ex: [], warn: false });
+      if (m.include) { e.n++; e.list.push('No.' + m.n); } else e.ex.push('No.' + m.n + (/既設|既存|利用/.test(m.note || '') ? ' は既設を使うため' : ' は確かめて'));
+      if (m.status === 'warn') e.warn = true;
+    });
+    Object.keys(bykind).sort().forEach(function (k) {
+      var e = bykind[k];
+      qty.push({ work: '人孔工', spec: k, v: String(e.n), unit: '箇所', basis: (e.list.join('、') || '—') + (e.ex.length ? '（' + e.ex.join('、') + '除く）' : ''), check: e.warn ? '要確認' : '' });
+    });
+    var open = flags.filter(function (f) { return !f.decided; }).length;
+    var totalL = 0, hasL = false; secs.forEach(function (s) { if (s.L !== null) { totalL += s.L; hasL = true; } });
+    var texts = 0; files.forEach(function (f) { texts += f.texts.length; });
+    return {
+      planIdx: fp, profIdx: ff, sections: secs, flags: flags, checks: checks, qty: qty, mhs: mhList, usage: usage,
+      order: prof ? prof.order : [], transposed: prof ? prof.transposed : false,
+      stats: { texts: texts, sections: secs.length, totalL: hasL ? round(totalL, 2) : null, checksOk: checks.filter(function (c) { return c.ok; }).length, checksAll: checks.length, open: open }
+    };
+  }
+
+  // ---------- CSV ----------
+  function csvCell(v) { var s = v === null || v === undefined ? '' : String(v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+  function toCsv(rows) { return '﻿' + rows.map(function (r) { return r.map(csvCell).join(','); }).join('\r\n') + '\r\n'; }
+  function csvSummary(res) {
+    var rows = [['工種', '規格', '数量', '単位', '内訳', '確認']];
+    res.qty.forEach(function (q) { rows.push([q.work, q.spec, q.v, q.unit, q.basis, q.check]); });
+    return toCsv(rows);
+  }
+  function csvSections(res) {
+    var rows = [['区間', '管径・管種', '延長(m)', '上流 管底高(m)', '下流 管底高(m)', '上流 深さ(m)', '下流 深さ(m)', '平均深さ(m)', '勾配 図面(‰)', '勾配 計算(‰)', '確認']];
+    res.sections.forEach(function (s) {
+      var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
+      rows.push([s.name, s.spec || '', s.L !== null ? s.L.toFixed(2) : '', s.invA ? s.invA.str : '', s.invB ? s.invB.str : '',
+        s.depA ? s.depA.v.toFixed(3) : '', s.depB ? s.depB.v.toFixed(3) : '', s.depAvg !== null ? s.depAvg.toFixed(3) : '',
+        s.slopes.map(function (q) { return q.v.toFixed(q.dec); }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(' / '),
+        s.slopeCalc !== null ? s.slopeCalc.toFixed(2) : '', warn ? '要確認' : '']);
+    });
+    return toCsv(rows);
+  }
+
+  root.SuryoCore = { loadDxf: loadDxf, classify: classify, analyze: analyze, csvSummary: csvSummary, csvSections: csvSections, FILE_NAME: FILE_NAME, nk: nk, textWidth: textWidth };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var C = window.SuryoCore;
+  // view：1＝図面を読み込む、2＝要確認の所を1か所ずつ、3＝数量を書き出す
+  // pick：一度選んだ値（戻った時・選び直す時に、その値を選んだ状態で見せる）
+  var state = { files: [], decisions: {}, pick: {}, res: null, view: 1, tab: 0, sel: null, vb: null, full: [] };
+  var $ = function (id) { return document.getElementById(id); };
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, html) {
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) { if (attrs[k] !== null && attrs[k] !== undefined) e.setAttribute(k, attrs[k]); });
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function svgEl(tag, attrs) { var e = document.createElementNS(SVGNS, tag); Object.keys(attrs || {}).forEach(function (k) { if (attrs[k] !== null && attrs[k] !== undefined) e.setAttribute(k, attrs[k]); }); return e; }
+  function domId(id) { return String(id).replace(/[^\w-]/g, '_'); }
+
+  var ICON = {
+    caution: '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20z" fill="#b78f00"/><rect x="11" y="9" width="2" height="6" fill="#fff"/><rect x="11" y="16.5" width="2" height="2" fill="#fff"/></svg>',
+    success: '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#197a4b"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4"/></svg>',
+    error: '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#ec0000"/><rect x="11" y="6" width="2" height="8" fill="#fff"/><rect x="11" y="16" width="2" height="2" fill="#fff"/></svg>'
+  };
+
+  // ---------- 読み込み ----------
+  function readFiles(list) {
+    var arr = Array.prototype.slice.call(list);
+    var jww = arr.filter(function (f) { return /\.jww$/i.test(f.name); });
+    var dxf = arr.filter(function (f) { return /\.dxf$/i.test(f.name); });
+    if (!dxf.length) {
+      showMsg('error', jww.length ? 'Jw_cad の図面（.jww）は、この試作品ではまだ読めません' : 'DXF の図面を選んでください',
+        jww.length ? 'Jw_cad で［ファイル］→［DXF形式で保存］を選び、DXF にしてから読み込んでください。実証では .jww を直接読む形も確かめます。' : '拡張子が .dxf のファイルを選んでください。平面図と縦断図をまとめて選べます。');
+      return;
+    }
+    Promise.all(dxf.map(function (f) { return f.arrayBuffer().then(function (b) { return { name: f.name, bytes: b }; }); })).then(load);
+  }
+  function load(raw) {
+    var files = [], bad = [];
+    raw.forEach(function (r) {
+      try { files.push(C.classify(C.loadDxf(r.bytes, r.name))); } catch (e) { bad.push(r.name); }
+    });
+    if (!files.length) { showMsg('error', 'DXF として読めませんでした', esc(bad.join('、')) + ' は、DXF の形になっていないようです。CAD で DXF（文字の形式）として保存した物を選んでください。'); return; }
+    files.sort(function (a, b) { return ({ plan: 0, profile: 1, unknown: 2 })[a.kind] - ({ plan: 0, profile: 1, unknown: 2 })[b.kind]; });
+    state.files = files; state.decisions = {}; state.pick = {}; state.tab = 0; state.sel = null;
+    $('msg').innerHTML = bad.length ? banner('error', '読めなかったファイルがあります', esc(bad.join('、')) + ' は DXF として読めませんでした。ほかの図面だけで結果を出しています。') : '';
+    $('files-line').textContent = '読み込んだ図面：' + files.map(function (f) { return C.FILE_NAME[f.kind] + '（' + f.name + '）'; }).join('・');
+    buildDrawings();
+    recompute();
+    renderTabs(); showTab(0, true);
+    $('basis').open = false; $('texts-details').open = false;
+    var r = state.res, v = nextView();
+    go(v);
+    announce('図面を読み込みました。' + (v === 2 ? '確かめが要る所は ' + r.stats.open + ' か所です。' : '数量を書き出せます。'));
+  }
+  function showMsg(kind, title, body) { $('msg').innerHTML = banner(kind, title, body); $('msg').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  function banner(kind, title, body, extra) { return '<div class="banner ' + kind + '" role="' + (kind === 'error' ? 'alert' : 'status') + '">' + ICON[kind] + '<div><h3>' + title + '</h3><p>' + body + '</p>' + (extra || '') + '</div></div>'; }
+  function announce(t) { var a = $('sr'); a.textContent = ''; setTimeout(function () { a.textContent = t; }, 50); }
+
+  function recompute() { state.res = C.analyze(state.files, state.decisions); }
+  function open() { return state.res.flags.filter(function (f) { return !f.decided; }); }
+  function nextView() { return open().length ? 2 : 3; }
+
+  // ---------- 画面の切り替え（1画面に1つのこと） ----------
+  function go(v) {
+    state.view = v;
+    $('start').hidden = v !== 1; $('review').hidden = v !== 2; $('result').hidden = v !== 3;
+    $('lead').hidden = v !== 1; $('files-line').hidden = v === 1;
+    renderSteps();
+    if (v === 2) renderReview();
+    if (v === 3) renderResult();
+    window.scrollTo(0, 0);
+    var target = v === 1 ? $('btn-sample') : $(v === 2 ? 'review-h' : 'result-h');
+    target.focus({ preventScroll: true });
+  }
+  function renderSteps() {
+    Array.prototype.forEach.call(document.querySelectorAll('#steps li'), function (li) {
+      var n = +li.getAttribute('data-step');
+      if (n === state.view) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+      li.classList.toggle('done', n < state.view);
+    });
+  }
+
+  // ---------- ② 要確認の所（1か所ずつ） ----------
+  function renderReview() {
+    var r = state.res, rest = open(), f = rest[0];
+    if (!f) return;
+    var pos = r.flags.indexOf(f), prev = pos > 0 ? r.flags[pos - 1] : null;
+    $('review-count').textContent = (pos + 1) + ' / ' + r.flags.length;
+    $('review-lead').textContent = 'ほかの数字は、図面どうしの突き合わせと計算で合っていました。確かめが要るのは ' + r.flags.length + ' か所です。';
+    var name = 'opt-' + domId(f.id);
+    var html = '<article class="flag" id="flag-' + domId(f.id) + '" aria-labelledby="flag-h">';
+    html += '<div class="flag-head"><span class="chip warn">要確認</span><h3 id="flag-h">' + esc(f.title) + '</h3></div>';
+    html += '<div class="evid">' + f.ev.map(function (e) {
+      return '<figure><svg data-crop="' + e.src.f + ':' + e.src.id + '" role="img" aria-label="' + esc(e.label) + 'の元の文字"></svg><figcaption>' + esc(e.label) + '「<b>' + esc(e.value) + '</b>」' + (e.calc ? '<br><span class="muted">' + esc(e.calc) + '</span>' : '') + '</figcaption></figure>';
+    }).join('') + '</div>';
+    if (f.extra) html += '<p>' + esc(f.extra) + '</p>';
+    if (f.note) html += '<p class="muted">' + esc(f.note) + '</p>';
+    // 最初は何も選ばない（確かめずに確定できないように）。戻った時・選び直す時は、前に選んだ値を見せる
+    var chosen = state.pick[f.id];
+    if (f.options.length > 1) {
+      html += '<fieldset><legend>' + esc(f.question || 'どの値を使いますか？') + '</legend>' + f.options.map(function (o) {
+        var FROM = { '平面図': '平面図の値', '縦断図': '縦断図の値', '追加距離から計算': '縦断図の追加距離から計算した値' };
+        var sub = o.sub ? o.sub : (o.from.length ? o.from.map(function (x) { return FROM[x] || x; }).join('、') + 'と同じ' + (o.slopeOk === true ? '。管底高から計算した勾配も、図面の勾配と合う' : (o.slopeOk === false ? '。管底高から計算した勾配は、図面の勾配と合わない' : '')) : '');
+        return '<label class="radio"><input type="radio" name="' + name + '" value="' + esc(o.value) + '"' + (chosen === o.value ? ' checked' : '') + '><span>' + esc(o.label) + (sub ? '<span class="sub">' + esc(sub) + '</span>' : '') + '</span></label>';
+      }).join('') + '</fieldset>';
+    }
+    var verb = f.options.length > 1 ? '確定して' : '確かめて';
+    html += '<div class="actions">'
+      + (prev && prev.decided ? '<button type="button" class="btn btn-text" data-back="' + esc(prev.id) + '">1つ前に戻る</button>' : '')
+      + '<button type="button" class="btn btn-fill btn-lg push" data-decide="' + esc(f.id) + '" data-name="' + name + '">' + verb + (rest.length > 1 ? '次へ' : '数量を見る') + '</button></div>';
+    html += '</article>';
+    var box = $('flag-box'); box.innerHTML = html;
+    Array.prototype.forEach.call(box.querySelectorAll('svg[data-crop]'), drawCrop);
+  }
+  $('flag-box').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-back')) { undo(b.getAttribute('data-back')); return; }
+    if (!b.dataset.decide) return;
+    var f = state.res.flags.filter(function (x) { return x.id === b.dataset.decide; })[0];
+    var v = 'seen';
+    if (f.options.length > 1) {
+      var chk = document.querySelector('input[name="' + b.dataset.name + '"]:checked');
+      if (!chk) {
+        var fs = b.closest('.flag').querySelector('fieldset');
+        if (!fs.querySelector('.need')) fs.querySelector('legend').insertAdjacentHTML('afterend', '<p class="need" role="alert">どれか1つを選んでください。</p>');
+        fs.querySelector('input').focus();
+        return;
+      }
+      v = chk.value;
+    }
+    state.decisions[f.id] = v; state.pick[f.id] = v;
+    recompute();
+    var n = nextView(), left = open().length;
+    go(n);
+    announce(n === 2 ? '確定しました。残りは ' + left + ' か所です。' : 'すべて確かめました。数量を CSV で書き出せます。');
+  });
+  function undo(id) {
+    state.pick[id] = state.decisions[id];
+    delete state.decisions[id];
+    recompute(); go(2);
+  }
+
+  // ---------- ③ 数量を書き出す ----------
+  function renderResult() {
+    var r = state.res, decided = r.flags.filter(function (f) { return f.decided; });
+    var b;
+    if (r.planIdx < 0 && r.profIdx < 0) {
+      b = banner('caution', '人孔と区間を組み立てられませんでした', 'この図面は、見本と書き方が違うようです（人孔の円と「No.」の文字、または「地盤高」「管底高」などの見出しのある表が見つかりませんでした）。読み取った文字は、下の「読み取った文字の一覧」で確かめられます。');
+    } else if (decided.length) {
+      b = banner('success', '数量がそろいました', '確かめた ' + decided.length + ' か所の値を、数量に反映しています。',
+        '<ul class="decided">' + decided.map(function (f) {
+          var o = f.options.filter(function (x) { return x.value === f.decided; })[0];
+          // 見出しは短く：「No.3→No.4 の延長が、図面によって違います」→「No.3→No.4 の延長」
+          var what = f.type === 'note' ? f.sec + ' を新しく作る人孔の数に' : f.title.replace(/が、.*$/, '');
+          return '<li><span>' + esc(what) + ' → <b>' + esc(f.type === 'slope' ? '確かめた' : (o ? o.label : f.decided)) + '</b></span><button type="button" class="btn btn-text btn-sm" data-redo="' + esc(f.id) + '">選び直す</button></li>';
+        }).join('') + '</ul>');
+    } else {
+      b = banner('success', '数量がそろいました', '突き合わせた数字は、すべて合っていました。');
+    }
+    $('result-banner').innerHTML = b;
+    renderQty(); renderSections(); renderTexts(); drawOverlay();
+    var none = !r.qty.length;
+    $('qty-table').parentNode.hidden = none; $('csv-actions').hidden = none; $('sec-actions').hidden = !r.sections.length;
+    if (r.planIdx < 0 && r.profIdx < 0) { $('basis').open = true; $('texts-details').open = true; }
+  }
+  $('result-banner').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-redo]'); if (b) undo(b.getAttribute('data-redo'));
+  });
+
+  // ---------- 図面 ----------
+  function bbox(f) {
+    var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    function P(x, y) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    f.items.forEach(function (it) {
+      if (it.t === 'L') { P(it.x1, it.y1); P(it.x2, it.y2); }
+      else if (it.t === 'C' || it.t === 'A') { P(it.x - it.r, it.y - it.r); P(it.x + it.r, it.y + it.r); }
+      else if (it.t === 'P') it.pts.forEach(function (p) { P(p[0], p[1]); });
+      else if (it.t === 'T') it.corners.forEach(function (p) { P(p[0], p[1]); });
+    });
+    if (!isFinite(x0)) { x0 = 0; y0 = 0; x1 = 100; y1 = 100; }
+    var pad = Math.max(x1 - x0, y1 - y0) * 0.03 || 1;
+    return [x0 - pad, -(y1 + pad), (x1 - x0) + 2 * pad, (y1 - y0) + 2 * pad];
+  }
+  function buildDrawings() {
+    var defs = $('dwg-defs');
+    if (!defs) { var holder = svgEl('svg', { width: 0, height: 0, style: 'position:absolute;width:0;height:0', 'aria-hidden': 'true' }); defs = svgEl('defs', { id: 'dwg-defs' }); holder.appendChild(defs); document.body.appendChild(holder); }
+    defs.innerHTML = ''; state.full = [];
+    state.files.forEach(function (f, fi) {
+      var g = svgEl('g', { id: 'dwg-' + fi, 'font-family': 'Noto Sans JP, Hiragino Sans, Yu Gothic UI, Meiryo, sans-serif' });
+      var lines = svgEl('g', { stroke: '#4d4d4d', fill: 'none', 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke' });
+      var d = '';
+      f.items.forEach(function (it) {
+        if (it.t === 'L') d += 'M' + it.x1.toFixed(3) + ' ' + (-it.y1).toFixed(3) + 'L' + it.x2.toFixed(3) + ' ' + (-it.y2).toFixed(3);
+        else if (it.t === 'P' && it.pts.length) { d += 'M' + it.pts.map(function (p) { return p[0].toFixed(3) + ' ' + (-p[1]).toFixed(3); }).join('L') + (it.closed ? 'Z' : ''); }
+        else if (it.t === 'C') lines.appendChild(svgEl('circle', { cx: it.x, cy: -it.y, r: it.r, 'vector-effect': 'non-scaling-stroke' }));
+        else if (it.t === 'A') {
+          var a1 = it.a1 * Math.PI / 180, a2 = it.a2 * Math.PI / 180; var sweep = ((it.a2 - it.a1) % 360 + 360) % 360;
+          lines.appendChild(svgEl('path', { d: 'M' + (it.x + it.r * Math.cos(a1)) + ' ' + (-(it.y + it.r * Math.sin(a1))) + 'A' + it.r + ' ' + it.r + ' 0 ' + (sweep > 180 ? 1 : 0) + ' 0 ' + (it.x + it.r * Math.cos(a2)) + ' ' + (-(it.y + it.r * Math.sin(a2))), 'vector-effect': 'non-scaling-stroke' }));
+        }
+      });
+      lines.appendChild(svgEl('path', { d: d, 'vector-effect': 'non-scaling-stroke' }));
+      g.appendChild(lines);
+      var tg = svgEl('g', { fill: '#1a1a1a' });
+      f.texts.forEach(function (t) {
+        var parts = t.lines || [t.s];
+        parts.forEach(function (line, li) {
+          var ox = t.ox, oy = t.oy;
+          if (t.lines) { // 複数行の文字：li 行目の下端は、全体の左下から上へ (行数−1−li)×1.6×高さ
+            var a = t.rot * Math.PI / 180, off = (parts.length - 1 - li) * t.h * 1.6;
+            ox -= Math.sin(a) * off; oy += Math.cos(a) * off;
+          }
+          // 幅は CAD の文字と同じ見積もりに合わせる（印の箱から文字がはみ出さないように）
+          var tx = svgEl('text', { x: ox.toFixed(3), y: (-oy).toFixed(3), 'font-size': t.h.toFixed(3), textLength: (C.textWidth(line) * t.h).toFixed(3), lengthAdjust: 'spacingAndGlyphs',
+            transform: t.rot ? 'rotate(' + (-t.rot).toFixed(3) + ' ' + ox.toFixed(3) + ' ' + (-oy).toFixed(3) + ')' : null });
+          tx.textContent = line; tg.appendChild(tx);
+        });
+      });
+      g.appendChild(tg);
+      defs.appendChild(g);
+      state.full.push(bbox(f));
+    });
+  }
+  function textOf(fi, id) { var f = state.files[fi]; return f ? f.texts[id] : null; }
+  function polyPts(t, grow) {
+    var cx = t.cx, cy = t.cy, k = 1 + (grow || 0);
+    return t.corners.map(function (p) { var x = cx + (p[0] - cx) * k + Math.sign(p[0] - cx) * t.h * 0.25, y = cy + (p[1] - cy) * k + Math.sign(p[1] - cy) * t.h * 0.25; return x.toFixed(3) + ',' + (-y).toFixed(3); }).join(' ');
+  }
+  function drawCrop(svg) {
+    var p = svg.getAttribute('data-crop').split(':'), fi = +p[0], t = textOf(fi, +p[1]);
+    if (!t) return;
+    var xs = t.corners.map(function (q) { return q[0]; }), ys = t.corners.map(function (q) { return q[1]; });
+    var w = Math.max.apply(null, xs) - Math.min.apply(null, xs), h = Math.max.apply(null, ys) - Math.min.apply(null, ys);
+    // 文字の箱がちょうど収まり、まわりに少し余白が見える大きさ（横:縦 = 2:1 の枠に合わせる）
+    var vw = Math.max(w + t.h * 6, t.h * 14), vh = Math.max(h + t.h * 4, vw / 2);
+    vw = Math.max(vw, vh * 2);
+    svg.setAttribute('viewBox', (t.cx - vw / 2) + ' ' + (-t.cy - vh / 2) + ' ' + vw + ' ' + vh);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.appendChild(svgEl('polygon', { points: polyPts(t), fill: '#fbf5e0', stroke: '#b78f00', 'stroke-width': 2, 'vector-effect': 'non-scaling-stroke' }));
+    var u = svgEl('use', {}); u.setAttribute('href', '#dwg-' + fi); svg.appendChild(u);
+  }
+  function renderTabs() {
+    var tabs = $('tabs'); tabs.innerHTML = '';
+    state.files.forEach(function (f, i) {
+      var b = el('button', { type: 'button', class: 'tab', role: 'tab', id: 'tab-' + i, 'aria-selected': 'false', 'aria-controls': 'viewer' }, esc(C.FILE_NAME[f.kind] + (state.files.filter(function (x) { return x.kind === f.kind; }).length > 1 ? '（' + f.name + '）' : '')));
+      b.addEventListener('click', function () { showTab(i, true); });
+      tabs.appendChild(b);
+    });
+  }
+  function showTab(i, fit) {
+    state.tab = i;
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    var v = $('viewer'); v.innerHTML = '';
+    v.appendChild(svgEl('g', { id: 'ov' })); // 印は図面の下に敷く（文字が隠れないように）
+    var u = svgEl('use', {}); u.setAttribute('href', '#dwg-' + i); v.appendChild(u);
+    v.setAttribute('aria-label', C.FILE_NAME[state.files[i].kind] + 'の図面');
+    if (fit) setVB(state.full[i].slice());
+    drawOverlay();
+  }
+  function setVB(vb) { state.vb = vb; $('viewer').setAttribute('viewBox', vb.map(function (n) { return n.toFixed(3); }).join(' ')); }
+  function drawOverlay() {
+    var ov = $('ov'); if (!ov || !state.res) return;
+    ov.innerHTML = '';
+    var fi = state.tab, f = state.files[fi], r = state.res;
+    if (f.kind === 'plan') {
+      Object.keys(f.plan.pipes).forEach(function (k) { var p = f.plan.pipes[k]; ov.appendChild(svgEl('line', { x1: p.x1, y1: -p.y1, x2: p.x2, y2: -p.y2, stroke: '#259d63', 'stroke-opacity': .45, 'stroke-width': 7, 'stroke-linecap': 'round', 'vector-effect': 'non-scaling-stroke' })); });
+      Object.keys(f.plan.mhs).forEach(function (k) { var m = f.plan.mhs[k]; ov.appendChild(svgEl('circle', { cx: m.x, cy: -m.y, r: m.r * 1.9, fill: 'none', stroke: '#259d63', 'stroke-width': 3, 'vector-effect': 'non-scaling-stroke' })); });
+    }
+    r.flags.forEach(function (fl) {
+      if (fl.decided) return;
+      fl.ev.forEach(function (e) {
+        if (e.src.f !== fi) return; var t = textOf(fi, e.src.id); if (!t) return;
+        ov.appendChild(svgEl('polygon', { points: polyPts(t), fill: '#fbf5e0', stroke: '#b78f00', 'stroke-width': 3, 'vector-effect': 'non-scaling-stroke' }));
+      });
+    });
+    if (state.sel && state.sel.f === fi) {
+      var t = textOf(fi, state.sel.id);
+      if (t) ov.appendChild(svgEl('polygon', { points: polyPts(t), fill: '#c5d7fb', stroke: '#0017c1', 'stroke-width': 3, 'vector-effect': 'non-scaling-stroke' }));
+    }
+  }
+  function selectSrc(f, id) {
+    state.sel = { f: f, id: id };
+    Array.prototype.forEach.call(document.querySelectorAll('button.val'), function (b) { b.classList.toggle('sel', b.dataset.src === f + ':' + id); });
+    if (state.tab !== f) showTab(f, false);
+    var t = textOf(f, id);
+    var size = Math.max(t.h * 26, 1);
+    var full = state.full[f], ar = full[2] / full[3];
+    var w = size * Math.max(1, ar), h = w / ar;
+    setVB([t.cx - w / 2, -t.cy - h / 2, w, h]);
+    drawOverlay();
+    var deg = Math.round(t.rot);
+    var use = state.res.usage[f + ':' + id];
+    $('caption').innerHTML = '<b>' + esc(C.FILE_NAME[state.files[f].kind]) + '</b> の元の文字「<b>' + esc(t.s) + '</b>」' + (deg ? '（' + deg + '° 回して書かれた文字）' : '') + (use ? '。' + esc(use) + 'に使いました。' : '。数量と検算には使っていません。');
+    $('dwg-sec').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button.val'); if (!b) return;
+    var p = b.dataset.src.split(':'); selectSrc(+p[0], +p[1]);
+  });
+  function zoom(k) { var vb = state.vb; if (!vb) return; var cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2; setVB([cx - vb[2] * k / 2, cy - vb[3] * k / 2, vb[2] * k, vb[3] * k]); }
+  $('zin').addEventListener('click', function () { zoom(0.6); });
+  $('zout').addEventListener('click', function () { zoom(1 / 0.6); });
+  $('zall').addEventListener('click', function () { setVB(state.full[state.tab].slice()); });
+  (function () {
+    var v = $('viewer'), drag = null;
+    v.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY, vb: state.vb.slice() }; v.setPointerCapture(e.pointerId); v.classList.add('drag'); });
+    v.addEventListener('pointermove', function (e) {
+      if (!drag) return; var r = v.getBoundingClientRect(); var s = Math.max(drag.vb[2] / r.width, drag.vb[3] / r.height);
+      setVB([drag.vb[0] - (e.clientX - drag.x) * s, drag.vb[1] - (e.clientY - drag.y) * s, drag.vb[2], drag.vb[3]]);
+    });
+    function end() { drag = null; v.classList.remove('drag'); }
+    v.addEventListener('pointerup', end); v.addEventListener('pointercancel', end);
+  })();
+
+  // ---------- 表 ----------
+  function val(src, text) { if (!src) return esc(text); return '<button type="button" class="val" data-src="' + src.f + ':' + src.id + '" title="図面で元の文字を見る">' + esc(text) + '</button>'; }
+  function chip(st) { return st === 'warn' ? '<span class="chip warn">要確認</span>' : (st === 'done' ? '<span class="chip done">確定</span>' : (st === 'ok' ? '<span class="chip ok">一致</span>' : '')); }
+  function renderSections() {
+    var r = state.res;
+    var head = '<thead><tr><th>区間</th><th>管径・管種</th><th class="n">延長 (m)</th><th class="n">管底高 (m)<br>上流 → 下流</th><th class="n">平均深さ<br>(m)</th><th class="n">勾配 (‰)<br>図面 / 計算</th><th>検算</th></tr></thead>';
+    var body = r.sections.map(function (s) {
+      var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
+      var done = !warn && (s.Lstatus === 'done' || s.specStatus === 'done' || (s.depA && s.depA.status === 'done') || (s.depB && s.depB.status === 'done'));
+      var slopeOk = s.slopeCalc !== null && s.slopes.every(function (q) { return Math.abs(Math.round(s.slopeCalc * Math.pow(10, q.dec)) / Math.pow(10, q.dec) - q.v) < 1e-9; });
+      var stated = s.slopes.length ? val(s.slopes[0].src, s.slopes[0].v.toFixed(s.slopes[0].dec)) : '—';
+      return '<tr class="' + (warn ? 'warn' : '') + '"><th scope="row">' + esc(s.name) + '</th><td>' + (s.spec ? val(s.specSrc, s.spec) : '—') + '</td>'
+        + '<td class="n">' + (s.L !== null ? val(s.Lsrc, s.L.toFixed(2)) : '—') + '</td>'
+        + '<td class="n">' + (s.invA ? val(s.invA.src, s.invA.str) : '—') + ' → ' + (s.invB ? val(s.invB.src, s.invB.str) : '—') + '</td>'
+        + '<td class="n">' + (s.depAvg !== null ? s.depAvg.toFixed(3) : '—') + '</td>'
+        + '<td class="n">' + stated + ' / ' + (s.slopeCalc !== null ? s.slopeCalc.toFixed(2) : '—') + '</td>'
+        + '<td>' + chip(warn ? 'warn' : (done ? 'done' : (slopeOk || s.Lstatus === 'ok' ? 'ok' : ''))) + '</td></tr>';
+    }).join('');
+    var tl = r.stats.totalL;
+    $('sec-table').innerHTML = head + '<tbody>' + (body || '<tr><td colspan="7">区間はありません</td></tr>') + '</tbody>' + (tl !== null ? '<tfoot><tr><th scope="row">合計</th><td></td><td class="n"><b>' + tl.toFixed(2) + '</b></td><td colspan="4"></td></tr></tfoot>' : '');
+  }
+  function renderQty() {
+    var r = state.res, anyCheck = r.qty.some(function (q) { return q.check; });
+    $('qty-table').innerHTML = '<thead><tr><th>工種</th><th>規格</th><th class="n">数量</th><th>単位</th><th>内訳</th>' + (anyCheck ? '<th>確認</th>' : '') + '</tr></thead><tbody>'
+      + r.qty.map(function (q) { return '<tr class="' + (q.check ? 'warn' : '') + '"><td>' + esc(q.work) + '</td><td>' + esc(q.spec) + '</td><td class="n"><b>' + esc(q.v) + '</b></td><td>' + esc(q.unit) + '</td><td class="wide">' + esc(q.basis) + '</td>' + (anyCheck ? '<td>' + (q.check ? '<span class="chip warn">要確認</span>' : '') + '</td>' : '') + '</tr>'; }).join('')
+      + '</tbody>';
+  }
+  function renderTexts() {
+    var r = state.res, rows = [], used = 0;
+    state.files.forEach(function (f, fi) {
+      f.texts.forEach(function (t) {
+        var u = r.usage[fi + ':' + t.id]; if (u) used++;
+        rows.push('<tr><td>' + esc(C.FILE_NAME[f.kind]) + '</td><td>' + val({ f: fi, id: t.id }, t.s) + '</td><td class="n">' + Math.round(t.rot) + '°</td><td>' + esc(t.layer) + '</td><td style="white-space:normal">' + (u ? esc(u) : '<span class="muted">数量には使っていない</span>') + '</td></tr>');
+      });
+    });
+    $('texts-sum').textContent = '読み取った文字をすべて見る（' + r.stats.texts + ' 件）';
+    $('texts-table').innerHTML = '<thead><tr><th>図面</th><th>文字</th><th class="n">向き</th><th>画層</th><th>使った所</th></tr></thead><tbody>' + rows.join('') + '</tbody>';
+  }
+
+  // ---------- 書き出し ----------
+  function download(name, text) {
+    var blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+    var a = el('a', { href: URL.createObjectURL(blob), download: name }); document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function openNote() { var n = state.res.stats.open; return n ? '（要確認の所が ' + n + ' か所残っているので、その行の「確認」の列に「要確認」と入れました）' : ''; }
+  $('csv-sum').addEventListener('click', function () { download('数量の集計.csv', C.csvSummary(state.res)); announce('「数量の集計.csv」を書き出しました' + openNote()); });
+  $('csv-sec').addEventListener('click', function () { download('区間の明細.csv', C.csvSections(state.res)); announce('「区間の明細.csv」を書き出しました' + openNote()); });
+
+  // ---------- 入口 ----------
+  $('btn-sample').addEventListener('click', function () {
+    var b = this; b.disabled = true; b.textContent = '読み込んでいます…';
+    Promise.all(['sample-heimen.dxf', 'sample-judan.dxf'].map(function (n) { return fetch(n).then(function (r) { if (!r.ok) throw new Error(n); return r.arrayBuffer(); }).then(function (buf) { return { name: n, bytes: buf }; }); }))
+      .then(load)
+      .catch(function () { showMsg('error', '見本の図面を読み込めませんでした', 'ページを読み込み直してから、もう一度お試しください。'); })
+      .then(function () { b.disabled = false; b.textContent = '見本の図面で試す'; });
+  });
+  $('file').addEventListener('change', function () { if (this.files.length) readFiles(this.files); this.value = ''; });
+  // ファイルを画面に落とすと読み込む（落とす間だけ案内を出す）
+  var drop = $('drop'), depth = 0;
+  function hasFiles(e) { return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], 'Files') >= 0; }
+  document.addEventListener('dragenter', function (e) { if (!hasFiles(e)) return; e.preventDefault(); depth++; drop.hidden = false; });
+  document.addEventListener('dragover', function (e) { if (!hasFiles(e)) return; e.preventDefault(); });
+  document.addEventListener('dragleave', function (e) { if (!hasFiles(e)) return; depth = Math.max(0, depth - 1); if (!depth) drop.hidden = true; });
+  document.addEventListener('drop', function (e) { e.preventDefault(); depth = 0; drop.hidden = true; if (e.dataTransfer && e.dataTransfer.files.length) readFiles(e.dataTransfer.files); });
+  $('btn-again').addEventListener('click', function () {
+    state.files = []; state.res = null; state.decisions = {}; state.pick = {}; $('msg').innerHTML = '';
+    go(1);
+  });
+})();
+</script>
+</body>
+</html>
