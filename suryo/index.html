@@ -105,6 +105,16 @@ ul.decided b{white-space:nowrap}
 .chip.ok{background:var(--green-50);border-color:var(--green-800);color:var(--green-900)}
 .chip.warn{background:var(--yellow-50);border-color:var(--yellow-900);color:var(--yellow-1000)}
 .chip.done{background:var(--blue-50);border-color:var(--blue-900);color:var(--blue-1000)}
+.chip.none{background:var(--gray-50);border-color:var(--gray-600);color:var(--gray-800)}
+dl.legend-chips{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 0;color:var(--gray-700)}
+dl.legend-chips div{display:flex;align-items:center;gap:6px}
+dl.legend-chips dt,dl.legend-chips dd{margin:0}
+.done-note{display:flex;align-items:center;gap:8px;margin:8px 0 0;color:var(--green-900);font-weight:700}
+.done-note[hidden]{display:none}
+.cause{background:var(--yellow-50);border-radius:8px;padding:12px 16px;margin:12px 0 0}
+.scroll-hint{display:none;align-items:center;gap:6px;margin:8px 0;color:var(--gray-700)}
+.scroll-hint.on{display:flex}
+.scroll-hint svg{flex:none}
 /* 要確認の所（1画面に1か所） */
 .count{font-weight:400;color:var(--gray-700);margin-left:8px;font-variant-numeric:tabular-nums}
 .flag{border:1px solid var(--gray-300);border-left:8px solid var(--yellow-700);border-radius:8px;padding:20px 24px;margin-top:20px}
@@ -195,7 +205,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
 
 <main id="main" class="wrap">
   <h1>図面から、数量を拾う</h1>
-  <p class="lead" id="lead">平面図と縦断図（DXF）から、管きょの延長と人孔の数を拾います。<br>図面どうしで数字が合わない所だけを、人が確かめます。</p>
+  <p class="lead" id="lead">平面図と縦断図（DXF）から、管きょ（下水道の管）の延長と人孔（マンホール）の数を拾います。<br>図面どうしで数字が合わない所だけを、人が確かめます。</p>
 
   <ol class="steps" id="steps" aria-label="進み具合">
     <li data-step="1" aria-current="step"><span class="num"><span>1</span></span>図面を読み込む</li>
@@ -206,12 +216,13 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
 
   <div id="msg" aria-live="polite"></div>
   <div id="sr" class="sr-only" aria-live="polite"></div>
+  <input type="file" id="file-add" accept=".dxf" hidden>
 
   <!-- ① 図面を読み込む -->
   <section id="start" class="screen" aria-labelledby="start-h">
     <h2 id="start-h" class="sr-only">図面を読み込む</h2>
     <div class="actions" style="margin-top:0">
-      <label class="btn btn-line btn-lg">自分の図面（DXF）を選ぶ<input type="file" id="file" accept=".dxf,.jww" multiple></label>
+      <label class="btn btn-line btn-lg">自分の図面（DXF）を選ぶ<input type="file" id="file" accept=".dxf,.jww,.pdf" multiple></label>
       <button type="button" class="btn btn-fill btn-lg" id="btn-sample">見本の図面で試す</button>
     </div>
     <p class="note"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -235,14 +246,18 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     <div class="actions" id="csv-actions">
       <button type="button" class="btn btn-fill btn-lg" id="csv-sum">数量の集計を CSV で書き出す</button>
     </div>
+    <p class="done-note" id="csv-sum-done" role="status" hidden></p>
     <p class="muted">この試作品の CSV は見本の形です。列の並びと文字コードは、実証で市の積算システムの取り込み形式に合わせます。</p>
 
     <details id="basis">
       <summary>根拠を見る（区間ごとの数字と図面）</summary>
       <div class="inner">
-        <p class="muted">数字を押すと、図面の上の元の文字を示します。平均深さは、上流と下流の深さの平均です。</p>
+        <p class="muted">数字を押すと、図面の上の元の文字を示します。深さは地盤高 − 管底高で、平均深さは上流と下流の深さの平均です。</p>
+        <p class="scroll-hint" aria-hidden="true">表は横に動かせます。右に、管底高・平均深さ・勾配・検算が続きます。<svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 10h13m-5-5 5 5-5 5" fill="none" stroke="#333" stroke-width="2"/></svg></p>
         <div class="table-wrap"><table id="sec-table"></table></div>
+        <dl class="legend-chips" id="chip-legend"></dl>
         <div class="actions" id="sec-actions" style="margin:12px 0 0"><button type="button" class="btn btn-line" id="csv-sec">区間ごとの明細を CSV で書き出す</button></div>
+        <p class="done-note" id="csv-sec-done" role="status" hidden></p>
         <div id="dwg-sec">
           <div class="tabs" role="tablist" id="tabs"></div>
           <div class="viewer-wrap">
@@ -252,8 +267,8 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
               <button type="button" class="btn btn-line btn-sm" id="zall">全体を表示</button>
               <span class="legend" aria-hidden="true"><span><i style="background:#c5d7fb;border:2px solid #0017c1"></i>選んだ文字</span><span><i style="background:#e6f5ec;border:2px solid #259d63"></i>拾った管きょ・人孔</span></span>
             </div>
-            <svg id="viewer" role="img" aria-label="図面"></svg>
-            <div class="caption" id="caption" aria-live="polite">ドラッグで動かせます。上の表の数字を押すと、その元の文字をここに示します。</div>
+            <svg id="viewer" role="img" aria-label="図面" tabindex="0"></svg>
+            <div class="caption" id="caption" aria-live="polite">ドラッグか矢印キーで動かせます（＋ と − のキーで拡大・縮小、0 で全体）。上の表の数字を押すと、その元の文字をここに示します。</div>
           </div>
         </div>
         <details id="texts-details"><summary id="texts-sum">読み取った文字をすべて見る</summary><div class="inner"><div class="table-wrap"><table id="texts-table"></table></div></div></details>
@@ -269,7 +284,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       <ul class="about">
         <li>図面を画像として読まず、DXF に入っている文字（値・位置・向き）をそのまま使います。推測をしないので、「3」と「8」の取り違えや、回して書かれた数字の読み誤りは起きません。</li>
         <li>表は、行の順番ではなく見出しの文字（「地盤高」「管底高」など）で読み分けます。見本の縦断図は「深さ」の行が「地盤高」より上にありますが、同じように読めます。</li>
-        <li>検算の決まり（見本）：延長は平面図・縦断図・縦断図の追加距離から計算した値が同じか。勾配は（上流の管底高 − 下流の管底高）÷ 延長。深さは地盤高 − 管底高。管径・管種は2枚の図面で同じか。実証では、市の数量計算書の決まりに合わせます。</li>
+        <li>検算の決まり（見本）：延長は平面図・縦断図・縦断図の追加距離から計算した値が同じか。勾配は（上流の管底高 − 下流の管底高）÷ 延長 × 1000 で、図面に書かれた桁にそろえて比べる（4.0‰ なら小数1桁）。深さは地盤高 − 管底高。管径・管種は2枚の図面で同じか。実証では、市の数量計算書の決まりに合わせます。</li>
         <li>工事として成り立つかの判断は、これまでどおり職員の方が行います。この道具が受け持つのは、拾う・計算する・根拠を付けて並べるところまでです。</li>
         <li>読める形式は DXF です（Shift_JIS と UTF-8）。Jw_cad の図面は［ファイル］→［DXF形式で保存］で DXF にできます。DXF のファイルは、この画面に落としても読み込めます。</li>
         <li>見本の図面と数字は、すべて架空です（<a href="sample-heimen.dxf" download>平面図</a>・<a href="sample-judan.dxf" download>縦断図</a>）。</li>
@@ -971,41 +986,94 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
   };
 
   // ---------- 読み込み ----------
-  function readFiles(list) {
+  var JWW_HOW = 'Jw_cad で［ファイル］→［DXF形式で保存］を選ぶと、DXF にできます。';
+  function readFiles(list, add) {
     var arr = Array.prototype.slice.call(list);
     var jww = arr.filter(function (f) { return /\.jww$/i.test(f.name); });
+    var pdf = arr.filter(function (f) { return /\.pdf$/i.test(f.name); });
     var dxf = arr.filter(function (f) { return /\.dxf$/i.test(f.name); });
+    var skipped = arr.filter(function (f) { return dxf.indexOf(f) < 0; }).map(function (f) { return f.name; });
     if (!dxf.length) {
-      showMsg('error', jww.length ? 'Jw_cad の図面（.jww）は、この試作品ではまだ読めません' : 'DXF の図面を選んでください',
-        jww.length ? 'Jw_cad で［ファイル］→［DXF形式で保存］を選び、DXF にしてから読み込んでください。実証では .jww を直接読む形も確かめます。' : '拡張子が .dxf のファイルを選んでください。平面図と縦断図をまとめて選べます。');
+      if (jww.length) showMsg('error', 'Jw_cad の図面（.jww）は、この試作品ではまだ読めません', 'Jw_cad で［ファイル］→［DXF形式で保存］を選び、DXF にしてから読み込んでください。実証では .jww を直接読む形も確かめます。');
+      else if (pdf.length) showMsg('error', 'PDF の図面は、この試作品では読めません', '図面を作った方（設計を頼んだ会社など）に、DXF か Jw_cad の .jww でもらってください。.jww は、' + JWW_HOW);
+      else showMsg('error', 'DXF の図面を選んでください', '拡張子が .dxf のファイルを選んでください。平面図と縦断図をまとめて選べます。');
       return;
     }
-    Promise.all(dxf.map(function (f) { return f.arrayBuffer().then(function (b) { return { name: f.name, bytes: b }; }); })).then(load);
+    Promise.all(dxf.map(function (f) { return f.arrayBuffer().then(function (b) { return { name: f.name, bytes: b }; }); }))
+      .then(function (raw) { load(add ? state.raw.concat(raw) : raw, { skipped: skipped, add: add }); });
   }
-  function load(raw) {
-    var files = [], bad = [];
+  function load(raw, opt) {
+    opt = opt || {};
+    var files = [], bad = [], ok = [];
     raw.forEach(function (r) {
-      try { files.push(C.classify(C.loadDxf(r.bytes, r.name))); } catch (e) { bad.push(r.name); }
+      try { files.push(C.classify(C.loadDxf(r.bytes, r.name))); ok.push(r); } catch (e) { bad.push(r.name); }
     });
     if (!files.length) { showMsg('error', 'DXF として読めませんでした', esc(bad.join('、')) + ' は、DXF の形になっていないようです。CAD で DXF（文字の形式）として保存した物を選んでください。'); return; }
-    files.sort(function (a, b) { return ({ plan: 0, profile: 1, unknown: 2 })[a.kind] - ({ plan: 0, profile: 1, unknown: 2 })[b.kind]; });
-    state.files = files; state.decisions = {}; state.pick = {}; state.tab = 0; state.sel = null;
-    $('msg').innerHTML = bad.length ? banner('error', '読めなかったファイルがあります', esc(bad.join('、')) + ' は DXF として読めませんでした。ほかの図面だけで結果を出しています。') : '';
+    // 足した時は、同じ種類の図面を新しい方に入れ替える（平面図を2枚にしない）
+    if (opt.add) {
+      var keep = files.map(function (f, i) { return f.kind === 'unknown' || !files.some(function (g, j) { return j > i && g.kind === f.kind; }); });
+      files = files.filter(function (f, i) { return keep[i]; }); ok = ok.filter(function (r, i) { return keep[i]; });
+    }
+    var order = { plan: 0, profile: 1, unknown: 2 };
+    var idx = files.map(function (f, i) { return i; }).sort(function (a, b) { return order[files[a].kind] - order[files[b].kind]; });
+    files = idx.map(function (i) { return files[i]; }); ok = idx.map(function (i) { return ok[i]; });
+    state.files = files; state.raw = ok; state.decisions = {}; state.pick = {}; state.tab = 0; state.sel = null;
+    var msgs = [];
+    if (bad.length) msgs.push(banner('error', '読めなかったファイルがあります', esc(bad.join('、')) + ' は DXF として読めませんでした。ほかの図面だけで結果を出しています。'));
+    if (opt.skipped && opt.skipped.length) msgs.push(banner('caution', 'DXF でないファイルは外しました', esc(opt.skipped.join('、')) + ' は読んでいません。DXF の図面だけで結果を出しています。'));
+    $('msg').innerHTML = msgs.join('');
     $('files-line').textContent = '読み込んだ図面：' + files.map(function (f) { return C.FILE_NAME[f.kind] + '（' + f.name + '）'; }).join('・');
     buildDrawings();
     recompute();
     renderTabs(); showTab(0, true);
     $('basis').open = false; $('texts-details').open = false;
-    var r = state.res, v = nextView();
+    var v = nextView();
     go(v);
-    announce('図面を読み込みました。' + (v === 2 ? '確かめが要る所は ' + r.stats.open + ' か所です。' : '数量を書き出せます。'));
+    announce('図面を読み込みました。' + (v === 2 ? '確かめが要る所は ' + open().length + ' か所です。' : '数量を書き出せます。'));
   }
+  // 片方の図面だけの時：足りない図面の名前と、足すと何が確かめられるか
+  function missing() {
+    var r = state.res; if (!r || (r.planIdx < 0) === (r.profIdx < 0)) return null;
+    return r.planIdx < 0
+      ? { name: '平面図', what: '延長は縦断図の値だけで、2枚の図面での突き合わせはしていません。平面図が無いので、人孔は数えていません。', gain: '平面図を足すと、延長を2枚の図面で突き合わせ、人孔も数えます。' }
+      : { name: '縦断図', what: '延長は平面図の値だけで、2枚の図面での突き合わせはしていません。勾配と深さも確かめていません。', gain: '縦断図を足すと、延長を2枚の図面で突き合わせ、勾配と深さも確かめます。' };
+  }
+  function addButton(m) { return '<button type="button" class="btn btn-line" data-add>' + m.name + 'を足す</button>'; }
+  document.addEventListener('click', function (e) { if (e.target.closest('button[data-add]')) $('file-add').click(); });
+  $('file-add').addEventListener('change', function () { if (this.files.length) readFiles(this.files, true); this.value = ''; });
   function showMsg(kind, title, body) { $('msg').innerHTML = banner(kind, title, body); $('msg').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
   function banner(kind, title, body, extra) { return '<div class="banner ' + kind + '" role="' + (kind === 'error' ? 'alert' : 'status') + '">' + ICON[kind] + '<div><h3>' + title + '</h3><p>' + body + '</p>' + (extra || '') + '</div></div>'; }
   function announce(t) { var a = $('sr'); a.textContent = ''; setTimeout(function () { a.textContent = t; }, 50); }
 
   function recompute() { state.res = C.analyze(state.files, state.decisions); }
-  function open() { return state.res.flags.filter(function (f) { return !f.decided; }); }
+  // 勾配の要確認は、その区間の延長（と管底高）を人が決めてから出す。
+  // 決める前の延長は仮の値なので、仮の値から出た「合わない」を数えない（縦断図だけの時に 1 / 2 が 1 か所で終わるずれを防ぐ）
+  function shown() {
+    var fl = state.res.flags;
+    return fl.filter(function (f) {
+      if (f.type !== 'slope') return true;
+      var ab = f.sec.split('-');
+      return !fl.some(function (g) { return !g.decided && (g.id === 'len:' + f.sec || g.id === 'inv:' + ab[0] || g.id === 'inv:' + ab[1]); });
+    });
+  }
+  function open() { return shown().filter(function (f) { return !f.decided; }); }
+  // 勾配が合わないのは、人が選んだ延長のせいか（ほかの延長なら合うか）
+  function slopeCause(f) {
+    if (f.type !== 'slope') return null;
+    var lf = state.res.flags.filter(function (g) { return g.id === 'len:' + f.sec && g.decided; })[0];
+    if (!lf) return null;
+    var cur = lf.options.filter(function (o) { return o.value === lf.decided; })[0];
+    var alt = lf.options.filter(function (o) { return o.value !== lf.decided && o.slopeOk === true; })[0];
+    return cur && cur.slopeOk === false && alt ? { len: lf, cur: cur, alt: alt } : null;
+  }
+  function slopeText(sec, L) {
+    var s = state.res.sections.filter(function (x) { return x.key === sec; })[0];
+    if (!s || !s.invA || !s.invB || !s.slopes.length || !L) return '';
+    var c = (s.invA.v - s.invB.v) / L * 1000, q = s.slopes[0], p = Math.pow(10, q.dec), r = Math.round(c * p) / p;
+    var ok = Math.abs(r - q.v) < 1e-9;
+    // 結論（合う・合わない）を先に、式は後ろに。合わない時は、図面の桁にそろえた値も添える（4.05 と 4.0 が「ほぼ同じ」に見えるため）
+    return '勾配が図面の ' + q.v.toFixed(q.dec) + ' ‰ と' + (ok ? '合う' : '合わない（' + r.toFixed(q.dec) + ' ‰ になる）') + '：（' + s.invA.str + ' − ' + s.invB.str + '）÷ ' + L.toFixed(2) + ' × 1000 ＝ ' + c.toFixed(2) + ' ‰';
+  }
   function nextView() { return open().length ? 2 : 3; }
 
   // ---------- 画面の切り替え（1画面に1つのこと） ----------
@@ -1032,30 +1100,48 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
   function renderReview() {
     var r = state.res, rest = open(), f = rest[0];
     if (!f) return;
-    var pos = r.flags.indexOf(f), prev = pos > 0 ? r.flags[pos - 1] : null;
-    $('review-count').textContent = (pos + 1) + ' / ' + r.flags.length;
-    $('review-lead').textContent = 'ほかの数字は、図面どうしの突き合わせと計算で合っていました。確かめが要るのは ' + r.flags.length + ' か所です。';
+    var list = shown(), pos = list.indexOf(f), prev = pos > 0 ? list[pos - 1] : null, m = missing();
+    $('review-count').textContent = (pos + 1) + ' / ' + list.length;
+    var lead = $('review-lead');
+    lead.className = m ? 'cause' : 'muted';
+    lead.innerHTML = m
+      ? esc(m.name + 'が無いので、図面どうしの突き合わせはしていません。確かめが要るのは ' + list.length + ' か所です。' + m.gain) + '<br>' + addButton(m)
+      : esc('ほかの数字は、図面どうしの突き合わせと計算で合っていました。確かめが要るのは ' + list.length + ' か所です。');
+    var cause = slopeCause(f);
     var name = 'opt-' + domId(f.id);
     var html = '<article class="flag" id="flag-' + domId(f.id) + '" aria-labelledby="flag-h">';
     html += '<div class="flag-head"><span class="chip warn">要確認</span><h3 id="flag-h">' + esc(f.title) + '</h3></div>';
     html += '<div class="evid">' + f.ev.map(function (e) {
       return '<figure><svg data-crop="' + e.src.f + ':' + e.src.id + '" role="img" aria-label="' + esc(e.label) + 'の元の文字"></svg><figcaption>' + esc(e.label) + '「<b>' + esc(e.value) + '</b>」' + (e.calc ? '<br><span class="muted">' + esc(e.calc) + '</span>' : '') + '</figcaption></figure>';
     }).join('') + '</div>';
+    if (cause) html += '<p class="cause">延長に <b>' + esc(cause.cur.label) + '</b> を選んだので、勾配が図面と合わなくなりました。<b>' + esc(cause.alt.label) + '</b> なら合います。</p>';
     if (f.extra) html += '<p>' + esc(f.extra) + '</p>';
-    if (f.note) html += '<p class="muted">' + esc(f.note) + '</p>';
+    if (f.note && !cause) html += '<p class="muted">' + esc(f.note) + '</p>';
+    var slopeShown = false;
     // 最初は何も選ばない（確かめずに確定できないように）。戻った時・選び直す時は、前に選んだ値を見せる
     var chosen = state.pick[f.id];
     if (f.options.length > 1) {
       html += '<fieldset><legend>' + esc(f.question || 'どの値を使いますか？') + '</legend>' + f.options.map(function (o) {
         var FROM = { '平面図': '平面図の値', '縦断図': '縦断図の値', '追加距離から計算': '縦断図の追加距離から計算した値' };
-        var sub = o.sub ? o.sub : (o.from.length ? o.from.map(function (x) { return FROM[x] || x; }).join('、') + 'と同じ' + (o.slopeOk === true ? '。管底高から計算した勾配も、図面の勾配と合う' : (o.slopeOk === false ? '。管底高から計算した勾配は、図面の勾配と合わない' : '')) : '');
-        return '<label class="radio"><input type="radio" name="' + name + '" value="' + esc(o.value) + '"' + (chosen === o.value ? ' checked' : '') + '><span>' + esc(o.label) + (sub ? '<span class="sub">' + esc(sub) + '</span>' : '') + '</span></label>';
+        // 延長の選択肢には、その延長で計算した勾配の式も出す（言葉だけでは根拠にならないため）
+        var st = f.type === 'len' ? slopeText(f.sec, parseFloat(o.value)) : '';
+        if (st) slopeShown = true;
+        var sub = o.sub ? o.sub : (o.from.length ? o.from.map(function (x) { return FROM[x] || x; }).join('、') + 'と同じ' + (st ? '' : (o.slopeOk === true ? '。管底高から計算した勾配も、図面の勾配と合う' : (o.slopeOk === false ? '。管底高から計算した勾配は、図面の勾配と合わない' : ''))) : '');
+        return '<label class="radio"><input type="radio" name="' + name + '" value="' + esc(o.value) + '"' + (chosen === o.value ? ' checked' : '') + '><span>' + esc(o.label) + (sub ? '<span class="sub">' + esc(sub) + '</span>' : '') + (st ? '<span class="sub">' + esc(st) + '</span>' : '') + '</span></label>';
       }).join('') + '</fieldset>';
+      if (slopeShown) html += '<p class="muted">勾配は、図面に書かれた桁にそろえて比べます（4.0 ‰ なら小数1桁）。</p>';
     }
-    var verb = f.options.length > 1 ? '確定して' : '確かめて';
-    html += '<div class="actions">'
-      + (prev && prev.decided ? '<button type="button" class="btn btn-text" data-back="' + esc(prev.id) + '">1つ前に戻る</button>' : '')
-      + '<button type="button" class="btn btn-fill btn-lg push" data-decide="' + esc(f.id) + '" data-name="' + name + '">' + verb + (rest.length > 1 ? '次へ' : '数量を見る') + '</button></div>';
+    var verb = f.options.length > 1 ? '確定して' : '確かめて', more = rest.length > 1;
+    html += '<div class="actions">';
+    if (cause) {
+      // 人が選んだ延長のせいで合わない時は、選び直すのをいちばん大事なボタンにする
+      html += '<button type="button" class="btn btn-line" data-decide="' + esc(f.id) + '" data-name="' + name + '">' + (more ? 'このまま次へ' : 'このまま数量を見る') + '</button>'
+        + '<button type="button" class="btn btn-fill btn-lg push" data-back="' + esc(cause.len.id) + '">延長を選び直す</button>';
+    } else {
+      html += (prev && prev.decided ? '<button type="button" class="btn btn-text" data-back="' + esc(prev.id) + '">1つ前に戻る</button>' : '')
+        + '<button type="button" class="btn btn-fill btn-lg push" data-decide="' + esc(f.id) + '" data-name="' + name + '">' + verb + (more ? '次へ' : '数量を見る') + '</button>';
+    }
+    html += '</div>';
     html += '</article>';
     var box = $('flag-box'); box.innerHTML = html;
     Array.prototype.forEach.call(box.querySelectorAll('svg[data-crop]'), drawCrop);
@@ -1076,12 +1162,15 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       }
       v = chk.value;
     }
+    var before = shown().length;
     state.decisions[f.id] = v; state.pick[f.id] = v;
     recompute();
-    var n = nextView(), left = open().length;
+    var n = nextView(), left = open().length, added = shown().length - before;
     go(n);
-    announce(n === 2 ? '確定しました。残りは ' + left + ' か所です。' : 'すべて確かめました。数量を CSV で書き出せます。');
+    announce(n === 2 ? '確定しました。' + (added > 0 ? '選んだ値だと勾配が合わない所が ' + added + ' か所あるので、確かめる所が増えました。' : '') + '残りは ' + left + ' か所です。' : resultSay());
   });
+  // 読み上げは、目で見る③の知らせの見出しと同じことを言う（黄色の時に「すべて確かめました」と言わない）
+  function resultSay() { var h = document.querySelector('#result-banner h3'); return (h ? h.textContent + '。' : '') + '数量を CSV で書き出せます。'; }
   function undo(id) {
     state.pick[id] = state.decisions[id];
     delete state.decisions[id];
@@ -1094,22 +1183,37 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var b;
     if (r.planIdx < 0 && r.profIdx < 0) {
       b = banner('caution', '人孔と区間を組み立てられませんでした', 'この図面は、見本と書き方が違うようです（人孔の円と「No.」の文字、または「地盤高」「管底高」などの見出しのある表が見つかりませんでした）。読み取った文字は、下の「読み取った文字の一覧」で確かめられます。');
-    } else if (decided.length) {
-      b = banner('success', '数量がそろいました', '確かめた ' + decided.length + ' か所の値を、数量に反映しています。',
-        '<ul class="decided">' + decided.map(function (f) {
-          var o = f.options.filter(function (x) { return x.value === f.decided; })[0];
-          // 見出しは短く：「No.3→No.4 の延長が、図面によって違います」→「No.3→No.4 の延長」
-          var what = f.type === 'note' ? f.sec + ' を新しく作る人孔の数に' : f.title.replace(/が、.*$/, '');
-          return '<li><span>' + esc(what) + ' → <b>' + esc(f.type === 'slope' ? '確かめた' : (o ? o.label : f.decided)) + '</b></span><button type="button" class="btn btn-text btn-sm" data-redo="' + esc(f.id) + '">選び直す</button></li>';
-        }).join('') + '</ul>');
     } else {
-      b = banner('success', '数量がそろいました', '突き合わせた数字は、すべて合っていました。');
+      // 片方の図面だけの時と、勾配が合わないまま進めた所がある時は、緑の「そろいました」にしない
+      var m = missing(), slopeLeft = decided.filter(function (f) { return f.type === 'slope'; }).length, gap = addGap();
+      var title = m ? '数量は出ましたが、' + m.name + 'との突き合わせはしていません' : (slopeLeft ? '数量は出ましたが、勾配が合わないまま進めた所があります' : (gap ? '数量は出ましたが、延長の合計が追加距離と合いません' : '数量がそろいました'));
+      var body = (m ? m.what : '') + (gap ? '区間の延長の合計 ' + gap.total.toFixed(2) + ' m は、縦断図の追加距離から出した ' + gap.add.toFixed(2) + ' m と ' + Math.abs(gap.total - gap.add).toFixed(2) + ' m 違います。' : '')
+        + (decided.length ? '確かめた ' + decided.length + ' か所の値を、数量に反映しています。' : (m || gap ? '' : '突き合わせた数字は、すべて合っていました。'));
+      var list = decided.length ? '<ul class="decided">' + decided.map(function (f) {
+        var o = f.options.filter(function (x) { return x.value === f.decided; })[0];
+        // 見出しは短く：「No.3→No.4 の延長が、図面によって違います」→「No.3→No.4 の延長」
+        // 勾配は平面図と縦断図で2つあるので、どちらの図面かを残す：「…合いません（平面図）」→「No.3→No.4 の勾配（平面図）」
+        var what = f.type === 'note' ? f.sec + ' を新しく作る人孔の数に' : (f.type === 'slope' ? f.title.replace(/が、.*（(.+?)）$/, '（$1）') : f.title.replace(/が、.*$/, ''));
+        return '<li><span>' + esc(what) + ' → <b>' + esc(f.type === 'slope' ? '合わないまま進めた' : (o ? o.label : f.decided)) + '</b></span><button type="button" class="btn btn-text btn-sm" data-redo="' + esc(f.id) + '">選び直す</button></li>';
+      }).join('') + '</ul>' : '';
+      b = banner(m || slopeLeft || gap ? 'caution' : 'success', title, body, list + (m ? '<p>' + esc(m.gain) + '</p>' + addButton(m) : ''));
     }
     $('result-banner').innerHTML = b;
+    $('csv-sum-done').hidden = true; $('csv-sec-done').hidden = true;
     renderQty(); renderSections(); renderTexts(); drawOverlay();
     var none = !r.qty.length;
     $('qty-table').parentNode.hidden = none; $('csv-actions').hidden = none; $('sec-actions').hidden = !r.sections.length;
     if (r.planIdx < 0 && r.profIdx < 0) { $('basis').open = true; $('texts-details').open = true; }
+  }
+  // 区間の延長の合計と、縦断図の追加距離から出した長さ（全区間の和）が合うか。全区間に追加距離がある時だけ比べる
+  function addGap() {
+    var r = state.res, sum = 0, n = 0;
+    if (!r.sections.length || r.stats.totalL === null) return null;
+    for (var i = 0; i < r.sections.length; i++) {
+      var c = (r.sections[i].lenCands || []).filter(function (x) { return x.from === '追加距離から計算'; })[0];
+      if (!c) return null; sum += c.v; n++;
+    }
+    return Math.abs(sum - r.stats.totalL) > 0.005 ? { add: sum, total: r.stats.totalL } : null;
   }
   $('result-banner').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-redo]'); if (b) undo(b.getAttribute('data-redo'));
@@ -1190,13 +1294,32 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var tabs = $('tabs'); tabs.innerHTML = '';
     state.files.forEach(function (f, i) {
       var b = el('button', { type: 'button', class: 'tab', role: 'tab', id: 'tab-' + i, 'aria-selected': 'false', 'aria-controls': 'viewer' }, esc(C.FILE_NAME[f.kind] + (state.files.filter(function (x) { return x.kind === f.kind; }).length > 1 ? '（' + f.name + '）' : '')));
-      b.addEventListener('click', function () { showTab(i, true); });
+      b.addEventListener('click', function () {
+        showTab(i, true);
+        // 選んだ文字が別の図面の物なら、下の説明を元に戻す（出ている図面と説明がずれないように）
+        if (!state.sel || state.sel.f !== i) $('caption').textContent = CAPTION0;
+      });
+      // 矢印キーでも、となりの図面に切り替える
+      b.addEventListener('keydown', function (e) {
+        var n = state.files.length, k = e.key === 'ArrowRight' ? 1 : (e.key === 'ArrowLeft' ? -1 : 0);
+        if (!k || n < 2) return;
+        e.preventDefault(); var j = (i + k + n) % n; $('tab-' + j).click(); $('tab-' + j).focus();
+      });
       tabs.appendChild(b);
     });
   }
+  var CAPTION0 = $('caption').textContent;
+  // 区間の表が画面の幅に収まらない時だけ、横に動かせることを表の上に出す（スマホで右の列に気づかれなかったため）
+  function scrollHint() {
+    var w = $('sec-table').parentNode, h = document.querySelector('.scroll-hint');
+    if (w.clientWidth) h.classList.toggle('on', w.scrollWidth > w.clientWidth + 1);
+  }
+  $('basis').addEventListener('toggle', scrollHint);
+  window.addEventListener('resize', scrollHint);
   function showTab(i, fit) {
     state.tab = i;
-    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+    // 選んだタブだけを Tab キーで止まる所にする（となりの図面へは矢印キーで移る）
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (b, k) { b.setAttribute('aria-selected', k === i ? 'true' : 'false'); b.tabIndex = k === i ? 0 : -1; });
     var v = $('viewer'); v.innerHTML = '';
     v.appendChild(svgEl('g', { id: 'ov' })); // 印は図面の下に敷く（文字が隠れないように）
     var u = svgEl('use', {}); u.setAttribute('href', '#dwg-' + i); v.appendChild(u);
@@ -1213,7 +1336,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       Object.keys(f.plan.pipes).forEach(function (k) { var p = f.plan.pipes[k]; ov.appendChild(svgEl('line', { x1: p.x1, y1: -p.y1, x2: p.x2, y2: -p.y2, stroke: '#259d63', 'stroke-opacity': .45, 'stroke-width': 7, 'stroke-linecap': 'round', 'vector-effect': 'non-scaling-stroke' })); });
       Object.keys(f.plan.mhs).forEach(function (k) { var m = f.plan.mhs[k]; ov.appendChild(svgEl('circle', { cx: m.x, cy: -m.y, r: m.r * 1.9, fill: 'none', stroke: '#259d63', 'stroke-width': 3, 'vector-effect': 'non-scaling-stroke' })); });
     }
-    r.flags.forEach(function (fl) {
+    shown().forEach(function (fl) {
       if (fl.decided) return;
       fl.ev.forEach(function (e) {
         if (e.src.f !== fi) return; var t = textOf(fi, e.src.id); if (!t) return;
@@ -1257,28 +1380,57 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     });
     function end() { drag = null; v.classList.remove('drag'); }
     v.addEventListener('pointerup', end); v.addEventListener('pointercancel', end);
+    // キーボードで図面に入った時は、図面と下の案内が両方見えるところまで動かす
+    v.addEventListener('focus', function () { if (v.matches(':focus-visible')) v.parentNode.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
+    // キーボード：矢印で動かす、＋ と − で拡大・縮小、0 で全体
+    v.addEventListener('keydown', function (e) {
+      var vb = state.vb; if (!vb) return;
+      var mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+      if (mv) setVB([vb[0] + mv[0] * vb[2] * 0.15, vb[1] + mv[1] * vb[3] * 0.15, vb[2], vb[3]]);
+      else if (e.key === '+' || e.key === '=' || e.key === ';') zoom(0.6);
+      else if (e.key === '-' || e.key === '_') zoom(1 / 0.6);
+      else if (e.key === '0') setVB(state.full[state.tab].slice());
+      else return;
+      e.preventDefault();
+    });
   })();
 
   // ---------- 表 ----------
   function val(src, text) { if (!src) return esc(text); return '<button type="button" class="val" data-src="' + src.f + ':' + src.id + '" title="図面で元の文字を見る">' + esc(text) + '</button>'; }
-  function chip(st) { return st === 'warn' ? '<span class="chip warn">要確認</span>' : (st === 'done' ? '<span class="chip done">確定</span>' : (st === 'ok' ? '<span class="chip ok">一致</span>' : '')); }
+  // 検算の札。言葉の意味は表の下に並べる（CHIPS の順に）
+  var CHIPS = {
+    warn: ['warn', '要確認', '図面どうしで数字が合わず、まだ選んでいない'],
+    slope: ['warn', '勾配が合わない', '管底高と延長から計算した勾配が、図面の勾配と合わない'],
+    done: ['done', '人が選んだ', '合わなかった所で、人が選んだ値を使う'],
+    ok: ['ok', '一致', '2枚の図面と計算で、数字が合う'],
+    none: ['none', '照合なし', '比べる図面が無く、確かめていない']
+  };
+  function chip(st) { var c = CHIPS[st]; return c ? '<span class="chip ' + c[0] + '">' + c[1] + '</span>' : ''; }
   function renderSections() {
-    var r = state.res;
+    var r = state.res, used = {};
     var head = '<thead><tr><th>区間</th><th>管径・管種</th><th class="n">延長 (m)</th><th class="n">管底高 (m)<br>上流 → 下流</th><th class="n">平均深さ<br>(m)</th><th class="n">勾配 (‰)<br>図面 / 計算</th><th>検算</th></tr></thead>';
     var body = r.sections.map(function (s) {
       var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
       var done = !warn && (s.Lstatus === 'done' || s.specStatus === 'done' || (s.depA && s.depA.status === 'done') || (s.depB && s.depB.status === 'done'));
       var slopeOk = s.slopeCalc !== null && s.slopes.every(function (q) { return Math.abs(Math.round(s.slopeCalc * Math.pow(10, q.dec)) / Math.pow(10, q.dec) - q.v) < 1e-9; });
+      // 比べた物があるか（延長が2つ以上の所から取れた、または勾配を計算して図面と比べた）。1枚の図面だけなら「一致」と言わない
+      var compared = (s.lenCands && s.lenCands.length >= 2) || (s.slopeCalc !== null && s.slopes.length > 0);
+      var slopeBad = s.slopeCalc !== null && s.slopes.length > 0 && !slopeOk;
+      var st = warn ? 'warn' : (slopeBad ? 'slope' : (done ? 'done' : (compared && (slopeOk || s.Lstatus === 'ok') ? 'ok' : 'none')));
+      used[st] = true;
       var stated = s.slopes.length ? val(s.slopes[0].src, s.slopes[0].v.toFixed(s.slopes[0].dec)) : '—';
       return '<tr class="' + (warn ? 'warn' : '') + '"><th scope="row">' + esc(s.name) + '</th><td>' + (s.spec ? val(s.specSrc, s.spec) : '—') + '</td>'
         + '<td class="n">' + (s.L !== null ? val(s.Lsrc, s.L.toFixed(2)) : '—') + '</td>'
         + '<td class="n">' + (s.invA ? val(s.invA.src, s.invA.str) : '—') + ' → ' + (s.invB ? val(s.invB.src, s.invB.str) : '—') + '</td>'
         + '<td class="n">' + (s.depAvg !== null ? s.depAvg.toFixed(3) : '—') + '</td>'
         + '<td class="n">' + stated + ' / ' + (s.slopeCalc !== null ? s.slopeCalc.toFixed(2) : '—') + '</td>'
-        + '<td>' + chip(warn ? 'warn' : (done ? 'done' : (slopeOk || s.Lstatus === 'ok' ? 'ok' : ''))) + '</td></tr>';
+        + '<td>' + chip(st) + '</td></tr>';
     }).join('');
+    // 表に出た札だけ、意味を表の下に並べる
+    $('chip-legend').innerHTML = Object.keys(CHIPS).filter(function (k) { return used[k]; }).map(function (k) { return '<div><dt>' + chip(k) + '</dt><dd>' + esc(CHIPS[k][2]) + '</dd></div>'; }).join('');
     var tl = r.stats.totalL;
     $('sec-table').innerHTML = head + '<tbody>' + (body || '<tr><td colspan="7">区間はありません</td></tr>') + '</tbody>' + (tl !== null ? '<tfoot><tr><th scope="row">合計</th><td></td><td class="n"><b>' + tl.toFixed(2) + '</b></td><td colspan="4"></td></tr></tfoot>' : '');
+    scrollHint();
   }
   function renderQty() {
     var r = state.res, anyCheck = r.qty.some(function (q) { return q.check; });
@@ -1304,9 +1456,12 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var a = el('a', { href: URL.createObjectURL(blob), download: name }); document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
-  function openNote() { var n = state.res.stats.open; return n ? '（要確認の所が ' + n + ' か所残っているので、その行の「確認」の列に「要確認」と入れました）' : ''; }
-  $('csv-sum').addEventListener('click', function () { download('数量の集計.csv', C.csvSummary(state.res)); announce('「数量の集計.csv」を書き出しました' + openNote()); });
-  $('csv-sec').addEventListener('click', function () { download('区間の明細.csv', C.csvSections(state.res)); announce('「区間の明細.csv」を書き出しました' + openNote()); });
+  function openNote() { var n = open().length; return n ? '（要確認の所が ' + n + ' か所残っているので、その行の「確認」の列に「要確認」と入れました）' : ''; }
+  // 書き出したことを、ボタンのすぐ下にも出す（画面の外の読み上げだけだと、目で見て分からないため）
+  var DONE_ICON = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#197a4b"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4"/></svg>';
+  function showDone(id, name) { var p = $(id); p.innerHTML = DONE_ICON + '<span>「' + esc(name) + '」を書き出しました。ブラウザのダウンロードの中にあります。' + esc(openNote()) + '</span>'; p.hidden = false; }
+  $('csv-sum').addEventListener('click', function () { download('数量の集計.csv', C.csvSummary(state.res)); showDone('csv-sum-done', '数量の集計.csv'); });
+  $('csv-sec').addEventListener('click', function () { download('区間の明細.csv', C.csvSections(state.res)); showDone('csv-sec-done', '区間の明細.csv'); });
 
   // ---------- 入口 ----------
   $('btn-sample').addEventListener('click', function () {
