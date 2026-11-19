@@ -1,0 +1,2042 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!-- takenokonoko/sales-demo/build_lp_renrakucho.cjs で renrakucho-demo.html から作る。ここは直接直さない -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff">
+<title>声で入れる連絡帳の見本｜タケノコ</title>
+<meta name="description" content="架空の利用者で動く、声で入れるデイサービスの連絡帳の見本です。">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
+<style>
+:root{
+  --white:#ffffff; --black:#000000;
+  --g50:#f2f2f2; --g100:#e6e6e6; --g200:#cccccc; --g300:#b3b3b3; --g420:#949494; --g536:#767676; --g600:#666666; --g700:#4d4d4d; --g800:#333333; --g900:#1a1a1a;
+  --key-50:#e8f1fe; --key-100:#d9e6ff; --key-200:#c5d7fb; --key-300:#9db7f9; --key-900:#0017c1; --key-1000:#00118f; --key-1200:#000060;
+  --ok-1:#259d63; --ok-2:#197a4b; --ok-ink:#115a36; --ok-bg:#e6f5ec;
+  --err-1:#ec0000; --err-bg:#fdeeee;
+  --warn-line:#b78f00; --warn-ink:#806300; --warn-bg:#fbf5e0;
+  --c-vital:#0066be; --b-vital:#e8f1fe;
+  --c-water:#006f83; --b-water:#e9f7f9;
+  --c-meal:#ac3e00;  --b-meal:#ffeee2;
+  --c-toilet:#6f23d0;--b-toilet:#f1eafa;
+  --c-bath:#115a36;  --b-bath:#e6f5ec;
+  --c-note:#333333;  --b-note:#f2f2f2;
+  --c-hand:#8b008b;  --b-hand:#f3e5f4;
+  --focus:#ffd43d;
+  --elev-2:0 2px 12px 2px rgba(0,0,0,.1),0 1px 6px 0 rgba(0,0,0,.3);
+  --elev-3:0 4px 16px 3px rgba(0,0,0,.1),0 1px 6px 0 rgba(0,0,0,.3);
+  --scrim:rgba(0,0,0,.6);
+  --font:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%}
+html.lock{overflow:hidden}
+body{margin:0;background:var(--white);color:var(--g800);font-family:var(--font);font-size:16px;line-height:1.7;letter-spacing:.02em;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+button{cursor:pointer;touch-action:manipulation}
+h1,h2,h3,h4,p{margin:0}
+h2,h3{text-wrap:balance}
+:focus-visible{outline:4px solid var(--black);outline-offset:2px;border-radius:4px;box-shadow:0 0 0 2px var(--focus)}
+.num{font-variant-numeric:tabular-nums}
+svg.i{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vh{clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}
+.nb{display:inline-block}
+.top{position:sticky;top:0;z-index:5;background:var(--white);border-bottom:1px solid var(--g420);padding-top:env(safe-area-inset-top,0px)}
+.top-in,.tabs,.view{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top-in{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;padding-block:10px 4px;max-width:1280px;margin:0 auto}
+.facility{display:flex;align-items:center;gap:8px;min-width:0;margin-right:auto}
+.facility b{font-size:18px;line-height:1.3;white-space:nowrap}
+.today{font-weight:700;font-size:18px;line-height:1.3}
+.me{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:4px 12px;border:1px solid var(--g536);border-radius:8px;background:var(--white);color:var(--g800);font:inherit;font-size:16px;font-weight:700;line-height:1.2;cursor:pointer}
+@media (hover:hover){.me:hover{background:var(--key-50)}}
+.me svg.i{width:20px;height:20px}
+.me .mk{font-size:14px;font-weight:400;color:var(--g600);white-space:pre}
+.me svg.pen{margin-left:6px;color:var(--key-900)}
+.ibtn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--g800)}
+@media (hover:hover){.ibtn:hover{background:var(--g50)}}
+.ibtn:focus-visible{border-radius:50%}
+.tabs{display:flex;gap:4px;max-width:1280px;margin:0 auto}
+.tab{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:8px 20px;border:0;background:transparent;color:var(--g800);font-size:17px;line-height:1.2}
+.tab[aria-current="page"]{color:var(--key-1000);font-weight:700;box-shadow:inset 0 -4px 0 var(--key-900)}
+@media (hover:hover){.tab:not([aria-current="page"]):hover{background:var(--g50);text-decoration:underline;text-underline-offset:3px}}
+.dot{min-width:24px;height:24px;padding:0 7px;border-radius:12px;background:var(--key-900);color:var(--white);font-size:14px;line-height:24px;font-weight:700;letter-spacing:0;text-align:center}
+.view{display:flex;flex-direction:column;gap:24px;width:100%;max-width:1280px;margin:0 auto;padding-block:24px 48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:96px;min-height:48px;max-width:100%;padding:8px 16px;border:1px solid currentColor;border-radius:8px;background:var(--white);color:var(--key-900);font-weight:700;font-size:16px;line-height:1.3;text-align:center;text-decoration:none;text-underline-offset:3px}
+.btn.lg{min-width:136px;min-height:56px;padding:12px 20px;font-size:17px}
+.btn.sm{position:relative;min-width:80px;min-height:36px;padding:2px 12px;border-radius:6px}
+.btn.sm::after{content:"";position:absolute;inset:0;margin:auto;height:44px}
+.btn.solid{border:4px double transparent;background:var(--key-900);color:var(--white)}
+.btn.text{min-width:0;border:0;background:transparent;text-decoration:underline;text-decoration-thickness:1px}
+.btn svg.i{width:22px;height:22px}
+@media (hover:hover){
+  .btn:hover{background:var(--key-200);color:var(--key-1000);text-decoration:underline;text-decoration-thickness:1px}
+  .btn.solid:hover{background:var(--key-1000);color:var(--white)}
+  .btn.text:hover{background:var(--key-50);text-decoration-thickness:3px}
+}
+.btn:active{background:var(--key-300);color:var(--key-1200)}
+.btn.solid:active{background:var(--key-1200);color:var(--white)}
+.btn.text:active{background:var(--key-100)}
+.btn.text:focus-visible{background:var(--focus)}
+.seg{display:inline-flex}
+.seg button{min-width:72px;min-height:44px;margin-left:-1px;padding:0 16px;border:1px solid var(--g420);background:var(--white);color:var(--g800)}
+.seg button:first-child{margin-left:0;border-radius:8px 0 0 8px}
+.seg button:last-child{border-radius:0 8px 8px 0}
+.seg button[aria-pressed="true"]{position:relative;background:var(--key-50);color:var(--key-1000);font-weight:700;box-shadow:inset 0 -4px 0 var(--key-900)}
+@media (hover:hover){.seg button:not([aria-pressed="true"]):hover{background:var(--g50);text-decoration:underline}}
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:3px 8px;border:1px solid var(--g700);border-radius:8px;background:var(--g50);color:var(--g800);font-size:16px;line-height:1.2;white-space:nowrap}
+.chip svg.i{width:20px;height:20px}
+.chip.plain{background:var(--white)}
+.chip.ok{border-color:var(--ok-2);background:var(--ok-bg);color:var(--ok-ink)}
+.chip.key{border-color:var(--key-900);background:var(--key-50);color:var(--key-1000)}
+.chip.hand{border-color:var(--c-hand);background:var(--b-hand);color:var(--c-hand)}
+.field{display:block;width:100%;border:1px solid var(--g600);border-radius:8px;background:var(--white);color:var(--g900);padding:12px 16px}
+textarea.field{min-height:120px;line-height:1.7;resize:vertical;font-size:18px}
+@media (hover:hover){.field:hover{border-color:var(--black)}}
+.field::placeholder{color:var(--g600)}
+.lbl{display:block;margin-bottom:8px;font-size:17px;font-weight:700;color:var(--g800)}
+.lbl .opt{margin-left:8px;font-size:14px;font-weight:400;color:var(--g600)}
+.lbl .opt.blk{display:block;margin:2px 0 0;font-size:16px}
+.lbl .opt[data-about-now]{display:inline-block;white-space:nowrap}
+.tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{display:inline-flex;align-items:center;gap:12px;min-width:0;min-height:56px;padding:8px 16px 8px 12px;border:1px solid var(--g420);border-radius:8px;background:var(--white);color:var(--g800);text-align:left;line-height:1.4;font-size:17px}
+.tile[aria-checked="true"]{padding:7px 15px 7px 11px;border:2px solid var(--key-900);background:var(--key-50);font-weight:700}
+@media (hover:hover){.tile:hover{border-color:var(--black)}}
+.radio{flex:none;display:grid;place-items:center;width:28px;height:28px;border:2px solid var(--g600);border-radius:50%;background:var(--white)}
+.tile[aria-checked="true"] .radio{border-color:var(--key-900)}
+.tile[aria-checked="true"] .radio::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--key-900)}
+.stepper{display:flex;align-items:center;gap:8px}
+.stepper .btn{flex:none;width:56px;min-width:56px;padding:0;font-size:26px}
+.stepper .sv{flex:1;min-width:0;display:flex;align-items:center;height:56px;border:1px solid var(--g600);border-radius:8px;background:var(--white);color:var(--g900)}
+.stepper .sv:focus-within{border-color:var(--black)}
+.stepper input{flex:1;min-width:0;width:100%;height:100%;padding:0 4px 0 12px;border:0;border-radius:8px;background:transparent;color:inherit;font:inherit;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;text-align:center}
+.stepper .su{flex:none;padding-right:12px;font-size:18px;color:var(--g700)}
+.serr{color:var(--err-1);font-weight:700}
+.notice{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px 16px;align-items:center;padding:12px 16px 12px 32px;border:2px solid var(--_c);box-shadow:inset 8px 0 0 0 var(--_c);background:var(--white)}
+.notice.ok{--_c:var(--ok-2)}
+.notice.warn{--_c:var(--warn-line)}
+.notice > svg.i{color:var(--_c)}
+.notice.warn > svg.i{color:var(--warn-ink)}
+.notice b{color:var(--g900);font-size:17px;line-height:1.5}
+.banner{display:grid;grid-template-columns:36px minmax(0,1fr);gap:16px;align-items:center;padding:20px 24px;border:3px solid var(--ok-2);border-radius:12px;background:var(--white)}
+.banner > svg.i{width:36px;height:36px;color:var(--ok-2)}
+.banner b{display:block;color:var(--g900);font-size:20px;line-height:1.5}
+.banner .bn-hand{display:flex;gap:6px;align-items:flex-start;margin-top:8px;padding-top:8px;border-top:1px solid var(--g200);color:var(--g800)}
+.banner .bn-hand .em{font-weight:700;color:var(--g900)}
+.banner .bn-hand svg.i{flex:none;width:20px;height:20px;margin-top:3px}
+.xbtn{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:4px 12px 6px;border:0;border-radius:8px;background:transparent;color:var(--g900);font-size:16px;line-height:1}
+@media (hover:hover){.xbtn:hover{background:var(--g50);text-decoration:underline;text-underline-offset:3px}}
+.xbtn:focus-visible{background:var(--focus)}
+.panel{background:var(--white);border:1px solid var(--g420);border-radius:12px}
+.h{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.h h2{font-size:28px;line-height:1.4}
+.h .sub{color:var(--g600)}
+.push{margin-left:auto}
+.empty{padding:32px 16px;text-align:center;color:var(--g600)}
+.av{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;color:var(--white);font-weight:700;font-size:24px;line-height:1}
+.av.sm{width:40px;height:40px;font-size:18px}
+.av.c0{background:#0066be}.av.c1{background:#006f83}.av.c2{background:#6f23d0}.av.c3{background:#c74700}.av.c4{background:#197a4b}.av.c5{background:#8b008b}
+.prog{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.prog b{font-size:20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{display:flex;align-items:center;gap:16px;min-width:0;min-height:96px;padding:16px;border:1px solid var(--g420);border-radius:12px;background:var(--white);color:var(--g800);text-align:left}
+.card:focus-visible{border-radius:12px}
+.card.done{background:var(--g50)}
+@media (hover:hover){.card:hover{border-color:var(--black)}.card:hover .nm{text-decoration:underline}}
+.card .who{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.card .nm{font-size:20px;font-weight:700;line-height:1.4}
+.card .kn{color:var(--g600);font-size:14px;line-height:1.3}
+.card .row{display:flex;flex-wrap:wrap;gap:6px}
+.listfoot{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.rhead{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap}
+.rhead h2{font-size:28px;line-height:1.4}
+.rhead .who{display:flex;align-items:center;gap:12px;min-width:0}
+.rgrid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:start}
+.talk{display:flex;flex-direction:column;align-items:center;gap:16px;padding:28px 24px}
+.talk > .notice{align-self:stretch;margin:0}
+.mic{position:relative;display:grid;place-items:center;width:136px;height:136px;padding:0;border:4px double transparent;border-radius:50%;background:var(--key-900);color:var(--white)}
+.mic svg.i{width:60px;height:60px;stroke-width:1.8}
+.mic:focus-visible{border-radius:50%}
+@media (hover:hover){.mic:hover{background:var(--key-1000)}}
+.mic:active{background:var(--key-1200)}
+.mic.small{width:88px;height:88px;border:1px solid var(--key-900);background:var(--white);color:var(--key-900)}
+.mic.small svg.i{width:40px;height:40px}
+@media (hover:hover){.mic.small:hover{background:var(--key-200);color:var(--key-1000)}}
+.mic.on{background:var(--key-1000);color:var(--white);border:4px double transparent}
+.mic.on::before,.mic.on::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:4px solid var(--key-300);animation:ring 1.6s ease-out infinite;pointer-events:none}
+.mic.on::after{animation-delay:.8s}
+.mic.on{align-content:center;gap:2px}
+.mic .mt{font-size:20px;font-weight:700;line-height:1.1}
+@keyframes ring{0%{transform:scale(1);opacity:1}100%{transform:scale(1.45);opacity:0}}
+.miclbl{font-size:22px;font-weight:700;line-height:1.4;text-align:center}
+.miclbl small{display:block;font-size:16px;font-weight:400;color:var(--g600)}
+.nw{white-space:nowrap}
+.example{width:100%;padding:12px 16px;border-radius:8px;background:var(--g50);color:var(--g700);line-height:1.7}
+.example b{display:block;font-size:14px;color:var(--g600)}
+.example b small{margin-left:8px;font-size:14px;font-weight:400}
+.said{width:100%;min-height:96px;padding:16px;border:1px solid var(--g420);border-radius:12px;font-size:20px;line-height:1.9;word-break:normal;overflow-wrap:anywhere}
+.said .live{color:var(--g900)}
+.said .caret{display:inline-block;width:3px;height:1.1em;margin-left:2px;vertical-align:-.15em;background:var(--key-900);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.said .rest{color:var(--g536)}
+.mk{padding:1px 2px;border-radius:3px;background:var(--_b);box-shadow:inset 0 -3px 0 var(--_c);color:var(--g900);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.f-vital{--_c:var(--c-vital);--_b:var(--b-vital)}
+.f-water{--_c:var(--c-water);--_b:var(--b-water)}
+.f-meal{--_c:var(--c-meal);--_b:var(--b-meal)}
+.f-toilet{--_c:var(--c-toilet);--_b:var(--b-toilet)}
+.f-bath{--_c:var(--c-bath);--_b:var(--b-bath)}
+.f-note{--_c:var(--c-note);--_b:var(--b-note)}
+.f-hand{--_c:var(--c-hand);--_b:var(--b-hand)}
+.tryex{color:var(--key-900)}
+.fields{display:flex;flex-direction:column;gap:16px;padding:24px}
+.fields h3{font-size:22px;line-height:1.4}
+.fields .sub{color:var(--g600)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.fcard{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;min-height:112px;padding:12px 14px 12px 16px;border:1px solid var(--g420);border-radius:12px;background:var(--white);color:var(--g800);text-align:left;box-shadow:inset 6px 0 0 var(--_c)}
+.fcard.wide{grid-column:1/-1;min-height:0}
+.fcard .fl{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--_c)}
+.fcard .fl svg.i{width:22px;height:22px}
+.fcard .fv{font-size:28px;font-weight:700;line-height:1.3;color:var(--g900)}
+.fcard .fv small{margin-left:2px;font-size:16px;font-weight:700}
+.fcard .fv.txt{font-size:20px;line-height:1.6;font-weight:400}
+.fcard .fx{color:var(--g700);font-size:16px;line-height:1.4}
+.fcard .pen{position:absolute;top:10px;right:10px;color:var(--g600)}
+.fcard .pen svg.i{width:20px;height:20px}
+.fcard.empty{border-style:dashed;box-shadow:none;background:var(--white)}
+.fcard.empty .fl{color:var(--g600)}
+.fcard.empty .fv{color:var(--g420)}
+.fcard.warn{border:2px solid var(--warn-line);background:var(--warn-bg);padding:11px 13px 11px 15px}
+.fcard .fw{display:block;color:var(--warn-ink);font-size:14px;font-weight:700;line-height:1.5}
+.fcard .fw svg.i{display:inline-block;width:18px;height:18px;margin-right:4px;vertical-align:-4px}
+.fcard.flash{animation:fill .9s ease-out both}
+@keyframes fill{0%{background:var(--_b);transform:scale(.97)}60%{background:var(--_b);transform:scale(1)}100%{transform:none}}
+@media (hover:hover){.fcard:hover{border-color:var(--black)}}
+.fcard:focus-visible{border-radius:12px}
+.lrow{display:flex;flex-direction:column;align-items:center;gap:16px}
+.pvbox{display:flex;flex-direction:column;gap:8px;width:100%}
+.pvh{font-size:16px;font-weight:700;color:var(--g700)}
+.fields .pvh{font-size:20px;color:var(--g800)}
+.fields .pv{grid-template-columns:repeat(auto-fill,minmax(112px,1fr))}
+.talk > .makebar{order:1;width:100%}
+.talk > .pvbox{order:2}
+.talk > .said,.talk > .shint{order:3}
+.pv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.pvi{display:flex;flex-direction:column;gap:2px;min-width:0;min-height:64px;padding:8px 8px 8px 14px;border:1px solid var(--g420);border-radius:8px;background:var(--white);box-shadow:inset 5px 0 0 var(--_c)}
+.pvi .pl{display:flex;align-items:center;gap:4px;font-size:16px;font-weight:700;line-height:1.4;color:var(--_c);white-space:nowrap}
+.pvi .pl svg.i{flex:none;width:18px;height:18px}
+.pvi .pvv{font-size:20px;font-weight:700;line-height:1.3;color:var(--g900);overflow-wrap:anywhere}
+.pvi .pvv small{margin-left:1px;font-size:14px}
+.pvi .pvv.txt{font-size:16px;line-height:1.4}
+.pvi.tx .pvv{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400}
+.pv.full .pvi.tx{grid-column:1/-1}
+.pv.full .pvi.tx .pvv{-webkit-line-clamp:3}
+.pvh small{display:block;font-size:16px;font-weight:400;color:var(--g600)}
+.pvi.empty{border-style:dashed;box-shadow:none;padding-left:10px}
+.pvi.empty .pl{color:var(--g600)}
+.pvi.empty .pvv{color:var(--g420);font-weight:400}
+.pvi.flash{animation:fill .9s ease-out both}
+.bar{position:sticky;bottom:0;z-index:4;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--g420);background:var(--white)}
+.bar .hint{color:var(--g800);font-weight:700}
+.bar .me{padding:4px 10px}
+.paperwrap{display:flex;justify-content:center;padding:24px 12px;border-radius:12px;background:var(--g100)}
+.paper{width:100%;max-width:760px;aspect-ratio:210/297;display:flex;flex-direction:column;gap:18px;padding:5.5% 6.5%;background:var(--white);color:var(--g900);box-shadow:var(--elev-2);overflow:hidden;font-size:17px;line-height:1.7}
+.pp-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:3px solid var(--g900)}
+.pp-t{font-size:32px;font-weight:700;line-height:1.2;letter-spacing:.2em}
+.pp-d{display:block;margin-top:4px;font-size:18px;font-weight:700}
+.pp-f{font-size:16px;text-align:right}
+.pp-name{font-size:28px;font-weight:700;line-height:1.3}
+.pp-name small{margin-left:8px;font-size:20px}
+.pp-sec h3{margin-bottom:6px;padding-left:10px;border-left:6px solid var(--g800);font-size:18px;line-height:1.4}
+.pp-note{font-size:22px;line-height:1.8;min-height:3.6em}
+.paper.long .pp-note{font-size:18px}
+.pp-vit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--g800);border-radius:6px}
+.pp-vit.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pp-vit > div{padding:8px 10px;border-left:1px solid var(--g800)}
+.pp-vit > div:first-child{border-left:0}
+.pp-vit span{display:block;font-size:14px;color:var(--g700)}
+.pp-vit b{font-size:24px;line-height:1.3}
+.pp-vit b small{font-size:15px;margin-left:2px}
+.pp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px}
+.pp-grid > div{padding-bottom:6px;border-bottom:1px dashed var(--g420)}
+.pp-grid span{display:block;font-size:14px;color:var(--g700)}
+.pp-grid b{font-size:19px;line-height:1.5}
+.hist{display:flex;flex-direction:column;gap:8px;padding:16px 20px}
+.hist h3{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;line-height:1.5}
+.hist h3 svg.i{width:20px;height:20px}
+.hist ol{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.hist li{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:16px;line-height:1.6}
+.hist .tm{min-width:3.2em;color:var(--g700)}
+.pp-foot{margin-top:auto;display:flex;justify-content:space-between;gap:12px;padding-top:8px;border-top:1px solid var(--g800);font-size:15px}
+.hlist{display:flex;flex-direction:column;gap:12px}
+.hcard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start;padding:16px;box-shadow:inset 6px 0 0 var(--c-hand)}
+.hcard .nm{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:19px;font-weight:700;line-height:1.4}
+.hcard .meta{color:var(--g600);font-size:14px}
+.hcard p{margin-top:6px;font-size:18px}
+.hcard .act{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.readbtn[aria-pressed="true"]{border-color:var(--ok-2);background:var(--ok-bg);color:var(--ok-ink)}
+@media (hover:hover){.readbtn[aria-pressed="true"]:hover{background:var(--ok-bg);color:var(--ok-ink)}}
+.readers{color:var(--g600);font-size:14px}
+.readers .rn{display:block;max-width:16em;color:var(--g700)}
+.av.all{background:var(--g100);color:var(--g800)}
+.scrim{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));background:var(--scrim)}
+.dlg{display:flex;flex-direction:column;width:min(760px,100%);max-height:100%;border:1px solid var(--black);border-radius:8px;background:var(--white);box-shadow:var(--elev-3);color:var(--g800)}
+.dlg-h{display:flex;align-items:center;gap:16px;padding:12px 16px 0 24px}
+.dlg-h h2{flex:1;min-width:0;font-size:24px;line-height:1.5}
+.dlg-b{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:20px;padding:16px 24px 24px}
+.dlg-f{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:16px 24px;border-top:1px solid var(--g420)}
+.dlg .talk{padding:8px 0 0;border:0}
+.row2{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center}
+.row2 > b{font-size:17px}
+.toast{max-width:440px;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--g420);border-radius:16px;background:var(--white);box-shadow:var(--elev-3);animation:drop .45s ease-out both}
+@keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.tn-cap{display:flex;align-items:center;gap:6px;color:var(--g700);font-size:14px;font-weight:700}
+.tn-cap svg.i{width:18px;height:18px}
+.tn-card{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--g50)}
+.tn-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--key-900);color:var(--white)}
+.tn-ic svg.i{width:24px;height:24px}
+.tn-card .tn-app{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--g700)}
+.tn-card p{font-size:17px;font-weight:700;color:var(--g900)}
+.tn-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tn-foot span{color:var(--g600);font-size:14px}
+.tn-foot .xbtn{flex:none;white-space:nowrap}
+[hidden]{display:none!important}
+.pop{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:calc(100% + 4px);z-index:20;display:flex;flex-direction:column;gap:12px;width:min(400px,calc(100vw - 32px));padding:16px;border:1px solid var(--g420);border-radius:8px;background:var(--white);box-shadow:var(--elev-2)}
+.pop .row{display:flex;flex-wrap:wrap;gap:8px}
+.pop a{color:var(--key-900);text-decoration:underline;text-underline-offset:3px}
+@media (hover:hover){.pop a:hover{color:var(--key-1000);text-decoration-thickness:3px}}
+.pop a:focus-visible{background:var(--focus)}
+#print{display:none}
+.shint{display:flex;align-items:flex-start;gap:8px;width:100%;padding:12px 14px 12px 18px;border:1px solid var(--g420);border-radius:8px;box-shadow:inset 6px 0 0 var(--c-hand);color:var(--g800);line-height:1.6}
+.shint svg.i{flex:none;width:24px;height:24px;margin-top:2px;color:var(--g700)}
+.wsum{display:flex;align-items:flex-start;gap:8px;padding:10px 14px;border:1px solid var(--warn-line);border-radius:8px;background:var(--warn-bg);color:var(--warn-ink);font-weight:700;line-height:1.6}
+.wsum svg.i{flex:none;width:24px;height:24px;margin-top:2px}
+.raws{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.rawbox{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px 12px 12px 18px;border:1px solid var(--g420);border-radius:12px;box-shadow:inset 6px 0 0 var(--_c)}
+.rawbox.r-book{--_c:var(--c-note)}
+.rawbox.r-hand{--_c:var(--c-hand)}
+.rawh{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-weight:700;color:var(--_c);font-size:17px}
+.rawh svg.i{width:22px;height:22px}
+.rawh small{display:inline-flex;align-items:center;gap:2px;font-weight:400;color:var(--g700);font-size:16px}
+.rawh small svg.i{width:16px;height:16px}
+.rawlist{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.rawlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px;align-items:center;font-size:18px;line-height:1.7;overflow-wrap:anywhere;color:var(--g900)}
+.rawlist li + li{padding-top:6px;border-top:1px dashed var(--g420)}
+.rawlist li.fix{color:var(--g700)}
+.rawempty{color:var(--g600)}
+.makebar{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.busy{display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;border:2px solid var(--key-300);border-radius:12px;background:var(--key-50);color:var(--key-1000);font-size:18px;font-weight:700;line-height:1.5}
+.spin{flex:none;width:32px;height:32px;border-radius:50%;border:4px solid var(--key-200);border-top-color:var(--key-900);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rawfold{border:1px solid var(--g420);border-radius:12px}
+.rawfold > summary{display:flex;align-items:center;gap:8px;min-height:52px;padding:8px 16px;cursor:pointer;font-weight:700;color:var(--g800);list-style:none}
+.rawfold > summary::-webkit-details-marker{display:none}
+.rawfold > summary::after{content:"";margin-left:auto;width:10px;height:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-4px}
+.rawfold[open] > summary::after{transform:rotate(-135deg);margin-top:4px}
+.rawfold > summary:focus-visible{border-radius:12px}
+.rawfold .in{display:flex;flex-direction:column;gap:12px;padding:0 16px 16px}
+.ask{display:flex;flex-direction:column;gap:8px;padding:12px 16px;border-radius:8px;background:var(--warn-bg)}
+.ask .row,.dlg .row{display:flex;flex-wrap:wrap;gap:8px}
+.rawfold .sub{color:var(--g600)}
+.fcard.unsure .fw{color:var(--warn-ink)}
+.readbox{padding:12px 16px;border:1px solid var(--g420);border-radius:8px;font-size:20px;line-height:1.7;color:var(--g900);white-space:pre-wrap}
+button.readbox{display:block;width:100%;text-align:left;font:inherit;font-size:20px;background:#fff;cursor:text;min-height:44px}
+button.readbox:hover{border-color:var(--g900)}
+.pgrid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:24px;align-items:start}
+.chat{display:flex;flex-direction:column;gap:16px;padding:20px}
+.log{display:flex;flex-direction:column;gap:10px}
+.bub{max-width:min(560px,94%);padding:10px 14px;border-radius:12px;font-size:18px;line-height:1.7;overflow-wrap:anywhere}
+.bub.sys{align-self:flex-start;display:flex;gap:8px;background:var(--g50);border:1px solid var(--g420);color:var(--g900)}
+.bub.sys svg.i{margin-top:3px;color:var(--key-900)}
+.bub.me{align-self:flex-end;background:var(--key-50);border:1px solid var(--key-300);color:var(--g900)}
+.draft{display:flex;flex-direction:column;gap:8px;padding:16px 18px;border:2px solid var(--key-900);border-radius:12px;background:var(--white)}
+.draft.rm{border-color:var(--warn-line);background:var(--warn-bg)}
+.draft .cap{font-size:14px;font-weight:700;color:var(--g700)}
+.draft .dn{font-size:32px;font-weight:700;line-height:1.3;color:var(--g900)}
+.draft .dk{font-size:18px;color:var(--g700)}
+.days{display:flex;flex-wrap:wrap;gap:6px}
+.day{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--g420);background:var(--white);color:var(--g600);font-weight:700;line-height:1}
+.day.on{border:2px solid var(--key-900);background:var(--key-900);color:var(--white)}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choices .tile{font-size:24px;font-weight:700;min-width:96px;justify-content:center}
+.pfoot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.plist .card{min-height:88px}
+.plist .days{gap:4px}
+.plist .day{width:32px;height:32px;font-size:14px}
+@media (max-width:899px){
+  .rgrid,.pgrid{grid-template-columns:minmax(0,1fr)}
+  .talk{padding:20px 16px}
+}
+@media (max-width:560px){
+  .h h2,.rhead h2{font-size:24px}
+  .facility b,.today{font-size:16px}
+  .tabs{gap:0;padding-left:0;padding-right:0}
+  .tab{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:2px;min-height:60px;padding:6px 2px;font-size:16px;white-space:nowrap}
+  .tab .dot{position:absolute;top:2px;left:calc(50% + 4px);padding:0 5px}
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fcard .fv{font-size:24px}
+  .pvi .pl svg.i{display:none}
+  .pv.full > .pvi[data-pv="bath"]:nth-child(7){grid-column:1/-1}
+  .lrow{flex-direction:row;justify-content:center}
+  .lrow .mic{width:80px;height:80px}
+  .lrow .mic svg.i{width:30px;height:30px}
+  .lrow .mic .mt{font-size:16px}
+  .lrow .miclbl{text-align:left;font-size:20px}
+  .rhead > .chip{display:none}
+  .raws{grid-template-columns:minmax(0,1fr)}
+  .rawlist li{grid-template-columns:minmax(0,1fr);gap:0}
+  .rawlist li > .xbtn{justify-self:end}
+  .rawlist{gap:12px}.rawlist li + li{padding-top:12px}
+  .chat{padding:16px}
+  .draft .dn{font-size:28px}
+  .draft .days{gap:5px}.draft .day{width:34px;height:34px}
+  .fields h3{font-size:20px}
+  .notice{grid-template-columns:24px minmax(0,1fr);padding:12px 12px 8px 24px}
+  .notice > .xbtn{grid-column:2;justify-self:end}
+  .hcard{grid-template-columns:auto minmax(0,1fr)}
+  .hcard .act{grid-column:1/-1;flex-direction:row;align-items:center;gap:12px}
+  .bar .btn{flex:1}
+  .bar [data-act="save"]{flex:1 1 100%;white-space:nowrap}
+  .paperwrap{padding:12px 6px}
+  .paper{font-size:11px;gap:10px}
+  .pp-t{font-size:20px}.pp-d,.pp-f{font-size:12px}.pp-name{font-size:18px}.pp-name small{font-size:13px}
+  .pp-sec h3{font-size:12px;border-left-width:4px;margin-bottom:3px}
+  .pp-note{font-size:14px}.paper.long .pp-note{font-size:12px}
+  .pp-vit span,.pp-grid span{font-size:10px}.pp-vit b{font-size:15px}.pp-vit b small{font-size:10px}
+  .pp-grid b{font-size:12px}.pp-foot{font-size:10px}
+  .dlg-f{flex-direction:column-reverse;align-items:stretch}
+  .dlg-f .push{display:none}
+  .scrim{padding:0}
+  .dlg{width:100%;height:100%;border:0;border-radius:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@page{size:A4 portrait;margin:0}
+@media print{
+  html,body{background:#fff!important}
+  body > *:not(#print){display:none!important}
+  #print{display:block!important}
+  #print .paper{width:210mm;height:296.5mm;max-width:none;aspect-ratio:auto;padding:14mm 16mm 12mm;gap:5mm;box-shadow:none;break-after:page;page-break-after:always;font-size:12pt;line-height:1.65;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #print .paper:last-child{break-after:auto;page-break-after:auto}
+  #print .pp-h{padding-bottom:3mm;border-bottom-width:0.8mm}
+  #print .pp-t{font-size:24pt}
+  #print .pp-d{font-size:13pt}
+  #print .pp-f{font-size:11pt}
+  #print .pp-name{font-size:20pt}
+  #print .pp-name small{font-size:14pt}
+  #print .pp-sec h3{font-size:13pt;margin-bottom:2mm;border-left-width:1.6mm}
+  #print .pp-note{font-size:16pt}
+  #print .paper.long .pp-note{font-size:13pt}
+  #print .pp-vit span,#print .pp-grid span{font-size:10.5pt}
+  #print .pp-vit b{font-size:18pt}
+  #print .pp-vit b small{font-size:11pt}
+  #print .pp-grid b{font-size:14pt}
+  #print .pp-foot{font-size:10.5pt}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.2V5a2 2 0 0 0-4 0v9.2a4.2 4.2 0 1 0 4 0z"/><path d="M12 9.5v7"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.3A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.4C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M2.5 12.5h4l2.2-5 4.3 10 2.3-5h6.2"/></symbol>
+  <symbol id="i-o2" viewBox="0 0 24 24"><circle cx="9.5" cy="12" r="5.5"/><path d="M16.5 14.5h3.5l-3.5 4h3.5"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M5.5 4h13l-1.6 15.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L5.5 4z"/><path d="M6.3 10h11.4"/></symbol>
+  <symbol id="i-bowl" viewBox="0 0 24 24"><path d="M3 11.5h18a9 9 0 0 1-18 0z"/><path d="M8 20.5h8"/><path d="M9 8c0-1.6 1.2-1.6 1.2-3.5M13.5 8c0-1.6 1.2-1.6 1.2-3.5"/></symbol>
+  <symbol id="i-toilet" viewBox="0 0 24 24"><path d="M5.5 3h5.5v8.5H5.5z"/><path d="M3.5 11.5h17a6.5 6.5 0 0 1-6.5 6.5h-.5l.8 3H9.7l.8-3H10a6.5 6.5 0 0 1-6.5-6.5z"/></symbol>
+  <symbol id="i-bath" viewBox="0 0 24 24"><path d="M2.5 12h19v1.8a5.2 5.2 0 0 1-5.2 5.2H7.7a5.2 5.2 0 0 1-5.2-5.2V12z"/><path d="M5.5 12V5.8A2.6 2.6 0 0 1 10.3 4.4"/><path d="M7 19l-1.2 2.5M17 19l1.2 2.5"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.3 14.3a4.6 4.6 0 0 0 7.4 0"/><path d="M9 9.6v.6M15 9.6v.6"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7.5h6M9 10.5h4"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-okc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><path d="m7.4 12.3 3.1 3.1 6.1-6.3" stroke="#ffffff" stroke-width="2.2" fill="none"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 2.5 20h19L12 3.5z"/><path d="M12 10v4.5M12 17.2v.3"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15L6 16z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4.5h-4.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M15.5 4.8a3.3 3.3 0 0 1 0 6.4M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></symbol>
+  <symbol id="i-make" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 12h6M9.5 15.5h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+</svg>
+<header class="top">
+  <div class="top-in" style="position:relative">
+    <div class="facility"><b>見本のデイサービス</b></div>
+    <span class="today num" id="today"></span>
+    <button class="me" type="button" data-act="me" data-fk="me" aria-haspopup="dialog"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg><span class="mk">書く人 </span><span class="t" id="mename">森下さん</span><svg class="i pen" aria-hidden="true"><use href="#i-pen"/></svg></button>
+    <button class="ibtn" type="button" data-act="about" aria-expanded="false" aria-controls="about" aria-label="この見本について"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg></button>
+    <div class="pop" id="about" hidden>
+      <p><b>この画面は見本です。</b>名前は、すべて架空です。</p>
+      <p>声を文字にするのは、この端末のブラウザの仕組みです。<span id="aiwho"></span>入れた内容は、この端末の中だけに残ります。日付が変わると、最初の状態に戻ります。</p>
+      <div id="resetarea"></div>
+      <p>施設のやり方に合わせたアプリを作っています。<a href="https://takenokonoko.com/" target="_blank" rel="noopener">タケノコのサイトへ</a></p>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="画面">
+    <button class="tab" type="button" data-view="list" data-fk="tab-list"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>記録と連絡帳</button>
+    <button class="tab" type="button" data-view="hand" data-fk="tab-hand"><svg class="i" aria-hidden="true"><use href="#i-msg"/></svg>申し送り<span class="dot num" id="hdot" hidden></span></button>
+    <button class="tab" type="button" data-view="people" data-fk="tab-people"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg>利用者</button>
+  </nav>
+</header>
+<main class="view" id="view"></main>
+<div id="sheet"></div>
+<div id="print" aria-hidden="true"></div>
+<script>window.RENRAKUCHO_AI_URL="https://renrakucho-ai.takenokonoko.com/ask";</script>
+<script>
+(function(){
+'use strict';
+document.documentElement.lang = 'ja';
+
+const STORE = 'takenoko-renrakucho-demo-v2';
+const WD = '日月火水木金土';
+const WEEK = ['月','火','水','木','金','土','日'];
+const MODEL = 'claude-haiku-5-5';
+const STAFF = [
+  {id:'s1', name:'佐野'}, {id:'s2', name:'片桐'}, {id:'s3', name:'森下'}, {id:'s4', name:'今井'}, {id:'s5', name:'宮内'}
+];
+const ME = () => (st && st.me) || 's3';
+const SEED_PEOPLE = [
+  ['青柳 澄子','あおやぎ すみこ'],['石倉 正雄','いしくら まさお'],['上野 トミ','うえの とみ'],['江藤 和子','えとう かずこ'],
+  ['大川 茂','おおかわ しげる'],['金子 フミ','かねこ ふみ'],['木下 清','きのした きよし'],['栗田 喜代子','くりた きよこ'],
+  ['小松 昭','こまつ あきら'],['坂口 ハル','さかぐち はる'],['篠原 節子','しのはら せつこ'],['須藤 勝','すどう まさる']
+];
+const EXAMPLES = [
+  '体温36.5、血圧128の76、脈72、お茶200、昼は全部、排便あり、今日は歌の時間によく笑っていました',
+  '体温は36.8度 血圧は上が142 下が84 脈拍68 お茶150とポカリ100 昼食は8割 おしっこ3回 お風呂に入りました 体操のあと少し疲れた様子でしたが 午後はお元気でした',
+  '体温36.2 血圧118の70 脈76 お茶250 主食半分 副食全部 排便なし 入浴あり 塗り絵を最後まで仕上げて嬉しそうでした 申し送り 左足に少しむくみあり 次回も見てください'
+];
+const FIX_EXAMPLE = '体温は36.8に直して';
+const HAND_EXAMPLE = '申し送り、来週の火曜日は通院のため、お休みです';
+const PEOPLE_EXAMPLE = '新しい方です。山田花子さん、やまだはなこ。月曜と水曜と金曜に来ます';
+const ME_EXAMPLE = '鈴木です';
+const FIX_SHOW = '「体温は〇〇度に直して」のように、直したい所と正しい値を言います';
+const HAND_FIX_SHOW = '「〇〇」を「△△」に変えて';
+const END_RX = /(^|[。、,，！？!?\n\s]|(?<=ました|でした|です|ます|した|った|いた|ない))[\s、]*(?:おわり|終わり|おしまい|以上)(?:です|でした|ます|ね|よ)?[\s。！!、]*$/;
+const stripEnd = t => String(t||'').replace(END_RX, '$1').replace(/[\s、]+$/,'').trim();
+const saidEnd = t => END_RX.test(String(t||'').trim());
+
+function jstToday(){ const p = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()); const g = t => p.find(x=>x.type===t).value; return `${g('year')}-${g('month')}-${g('day')}`; }
+function jstDateOf(t){ const p = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(t)); const g = k => p.find(x=>x.type===k).value; return `${g('year')}-${g('month')}-${g('day')}`; }
+function jstHM(t){ return new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(t)); }
+function wdOf(iso){ const [y,m,d] = iso.split('-').map(Number); return WD[new Date(Date.UTC(y,m-1,d)).getUTCDay()]; }
+function mdLong(iso){ const [,m,d] = iso.split('-').map(Number); return `${m}月${d}日（${wdOf(iso)}）`; }
+function ymdLong(iso){ const [y,m,d] = iso.split('-').map(Number); return `${y}年${m}月${d}日（${wdOf(iso)}）`; }
+
+const KN = '〇一二三四五六七八九十百千';
+const NUM = `([0-9]+(?:\\.[0-9]+)?|[${KN}]+(?:点[〇一二三四五六七八九]+)?)(?![点.．0-9${KN}])`;
+function toNum(s){
+  if(s==null) return null;
+  if(/^[0-9.]+$/.test(s)) return parseFloat(s);
+  if(s.includes('点')){ const [a, b] = s.split('点'); const D1 = {'〇':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9}; return parseFloat(toNum(a) + '.' + [...b].map(c=>D1[c]).join('')); }
+  const D = {'〇':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9};
+  let total = 0, cur = 0;
+  for(const c of s){
+    if(c in D) cur = cur*10 + D[c];
+    else if(c==='十'){ total += (cur||1)*10; cur = 0; }
+    else if(c==='百'){ total += (cur||1)*100; cur = 0; }
+    else if(c==='千'){ total += (cur||1)*1000; cur = 0; }
+  }
+  return total + cur;
+}
+function norm(s){ return s.replace(/[！-～]/g, c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/　/g,' ').replace(/([0-9])点([0-9])/g,'$1.$2'); }
+const P = '(?:\\s|、|,|は|が|を|も|ね|ねぇ|よ|って|えーと|えっと|あの)*';
+const ML = '(?:cc|CC|cｃ|シーシー|ml|mL|ML|ミリリットル|ミリ)';
+const AFTER = '(?:\\s*(?:くらい|ぐらい|ほど|程度))?(?:\\s*(?:だった|でした|です|かな|だよ)(?:ね|よ)?)?';
+const DRANK = '(?:\\s*(?:くらい|ぐらい|ほど))?(?:\\s*(?:を)?\\s*(?:飲みました|飲まれました|飲んだ(?:っけ)?|飲んでいます|飲用))?(?:\\s*(?:かな|だった|でした|です)(?:ね|よ|かな)?)?';
+const DRINK = 'お味噌汁|味噌汁|みそ汁|とろみ茶|ほうじ茶|麦茶|緑茶|番茶|紅茶|お茶|水分|お水|白湯|ポカリスエット|ポカリ|スポーツドリンク|ジュース|牛乳|コーヒー|飲み物|水';
+const MEAL = 'お昼ご飯|お昼ごはん|昼ご飯|昼ごはん|お昼|昼食|昼|ランチ|食事|ご飯|ごはん|主食|副食|おかず|おやつ';
+const QTY = `全部|ぜんぶ|全量|完食|残さず|十割|${NUM}\\s*割|半分|半量|少し|すこし|ほとんど食べ(?:ませんでした|なかった|ず)|ほとんど|食べ(?:ませんでした|なかった|ず)|なし|無し`;
+const YES = 'ありました|あり|有り|あった|出ました|出た|でました';
+const NO = 'ありませんでした|ありません|なし|無し|なかった|出ませんでした|出なかった';
+const RULES = [
+  ['bp', `(?:血圧|けつあつ)\\s*${P}(?:上(?:が|は)?\\s*)?${NUM}\\s*(?:の|と|で|/|-|ー|〜|~|に|、|,|\\s)*\\s*(?:下(?:が|は)?\\s*)?${NUM}(?:\\s*(?:mmHg|ミリ))?${AFTER}`, m=>{ const s = toNum(m[1]), d = toNum(m[2]); return s>=60&&s<=260&&d>=30&&d<=160&&s>d ? {bp:{s,d}} : null; }],
+  ['bp', `(?:血圧|けつあつ)\\s*${P}([0-9]{5,6})`, m=>{ const x = m[1], s = +x.slice(0,3), d = +x.slice(3); return s>=60&&s<=260&&d>=30&&d<=160&&s>d ? {bp:{s,d}} : null; }],
+  ['bp', `上(?:が|は)?\\s*${NUM}\\s*(?:の|で|、|,|\\s)*下(?:が|は)?\\s*${NUM}${AFTER}`, m=>{ const s = toNum(m[1]), d = toNum(m[2]); return s>=60&&s<=260&&d>=30&&d<=160&&s>d ? {bp:{s,d}} : null; }],
+  ['t', `(?:体温|お熱|熱|検温)\\s*${P}(?:測って|計って)?\\s*${NUM}(?:\\s*(?:度|℃|°C|°))?(?:\\s*([0-9]|[一二三四五六七八九])\\s*分)?(?:\\s*(?:度|℃))?(?:\\s*ありました)?${AFTER}`, m=>temp(m[1],m[2])],
+  ['p', `(?:脈拍|脈|みゃく|心拍数|心拍|パルス)\\s*${P}${NUM}(?:\\s*(?:回|拍))?${AFTER}`, m=>{ const v = toNum(m[1]); return v>=30&&v<=200 ? {p:v} : null; }],
+  ['o', `(?:SpO2|SPO2|spo2|Spo2|サチュレーション|サチュ|サチ|酸素飽和度|酸素)\\s*${P}${NUM}(?:\\s*(?:%|パーセント))?`, m=>{ const v = toNum(m[1]); return v>=70&&v<=100 ? {o:v} : null; }],
+  ['t', `${NUM}\\s*(?:度|℃)(?:\\s*([0-9]|[一二三四五六七八九])\\s*分)?`, m=>temp(m[1],m[2])],
+  ['water', `(${DRINK})${P}${NUM}\\s*${ML}\\s*(?:ずつ|づつ)[、,\\s]*${NUM}\\s*(?:回|杯|はい|ぱい)${DRANK}`, m=>{ const v = toNum(m[2])*toNum(m[3]); return v>=10&&v<=3000 ? {water:{n:m[1], ml:v}} : null; }],
+  ['water', `(${DRINK})${P}${NUM}\\s*(?:杯|はい|ぱい)[^0-9]{0,10}?(?:1|一)\\s*(?:杯|はい|ぱい)(?:あたり|で)?${P}${NUM}\\s*${ML}?${DRANK}`, m=>{ const v = toNum(m[2])*toNum(m[3]); return toNum(m[3])>=10 && v>=10&&v<=3000 ? {water:{n:m[1], ml:v}} : null; }],
+  ['water', `(${DRINK})${P}(?:1|一)\\s*(?:杯|はい|ぱい)${P}${NUM}\\s*${ML}?${DRANK}`, m=>{ const v = toNum(m[2]); return v>=10&&v<=3000 ? {water:{n:m[1], ml:v}} : null; }],
+  ['water', `(${DRINK})${P}${NUM}\\s*${ML}?${DRANK}`, m=>{ const v = toNum(m[2]); return v>=10&&v<=3000 ? {water:{n:m[1], ml:v}} : null; }],
+  ['meal', `(${MEAL})${P}(${QTY})(?:\\s*(?:くらい|ぐらい|ほど))?(?:[、,\\s]*(?:食べました|食べられました|食べた(?:の)?|召し上がりました|でした|です))?`, m=>meal(m[1], m[2])],
+  ['meal', `完食(?:でした|しました)?`, ()=>({meal:{main:10, side:10}})],
+  ['toilet', `(?:排便|お通じ|うんち|大便|便)${P}(${YES}|${NO}|${NUM}\\s*回)`, m=>({toilet:{bm: yn(m[1], m[2])}})],
+  ['toilet', `(?:排尿|お小水|小便|おしっこ|尿|トイレ)${P}(?:に)?\\s*(${NUM}\\s*回(?:行きました|でした)?|${YES}|${NO})`, m=>({toilet:{ur: yn(m[1], m[2])}})],
+  ['bath', `(?:(?:お風呂|おふろ|風呂|入浴)(?:は|の)?[、,\\s]*(?:(?:代わり|かわり)に|やめて|なしで|お休みして|休んで)[、,\\s]*)?(?:体|からだ|身体)(?:を|は|も)?[、,\\s]*(?:ふ|拭)(?:いてもらいました|いてもらった|きました|いた|いて|きます)`, ()=>({bath:{done:true, kind:'清拭'}})],
+  ['bath', `(入浴|お風呂|おふろ|風呂|シャワー浴|シャワー|機械浴|個浴|清拭)(?:\\s|、|,|は|に|が|を|も|で|ね|よ)*(しました|した|済み|済|あり|有り|入りました|入った|入られました|入れました|(?:だけ)?(?:浴びました|浴びた|あびました|あびた)|(?:だけ|のみ)(?:でした|です|だった)?|なし|無し|しませんでした|しなかった|入りませんでした|入らなかった|お休み|休み|中止|見送り)?`, m=>bath(m[1], m[2])],
+  ['bp0', `(?<![0-9.])([0-9]{2,3})\\s*(?:の|/)\\s*([0-9]{2,3})(?![0-9])${AFTER}`, m=>{ const s = +m[1], d = +m[2]; return s>=80&&s<=230&&d>=40&&d<=140&&s>d+10 ? {bp:{s,d}} : null; }]
+];
+const RX = RULES.map(([f,src,fn])=>[f,new RegExp(src,'g'),fn]);
+function temp(a,b){
+  let v = toNum(a); if(v==null) return null;
+  if(b!=null && Number.isInteger(v)) v = v + toNum(b)/10;
+  if(Number.isInteger(v) && v>=340 && v<=429) v = v/10;
+  return v>=34 && v<=42 ? {t:Math.round(v*10)/10} : null;
+}
+function qtyOf(q){
+  if(/^(全部|ぜんぶ|全量|完食|残さず|十割)$/.test(q)) return 10;
+  const m = q.match(new RegExp(`^${NUM}\\s*割$`)); if(m){ const v = toNum(m[1]); return v>=0&&v<=10 ? v : null; }
+  if(/^(半分|半量)$/.test(q)) return 5;
+  if(/^(少し|すこし)$/.test(q)) return 2;
+  if(/^ほとんど食べ/.test(q)) return 1;
+  if(q==='ほとんど') return 9;
+  if(/^(食べ|なし|無し)/.test(q)) return 0;
+  return null;
+}
+function meal(k,q){
+  const v = qtyOf(q); if(v==null) return null;
+  if(k==='主食') return {meal:{main:v}};
+  if(k==='副食'||k==='おかず') return {meal:{side:v}};
+  if(k==='おやつ') return {meal:{snack:v}};
+  return {meal:{main:v, side:v}};
+}
+function yn(s,n){ if(n!=null) return toNum(n); return new RegExp(`^(?:${NO})`).test(s) ? 'なし' : 'あり'; }
+function bath(k,q){
+  const kind = /シャワー/.test(k) ? 'シャワー' : (k==='機械浴' ? '機械浴' : (k==='清拭' ? '清拭' : ''));
+  if(!q){ if(/^(入浴|シャワー浴|機械浴|個浴|清拭)$/.test(k)) return {bath:{done:true, kind}}; return null; }
+  if(/浴び/.test(q)) return /シャワー/.test(k) ? {bath:{done:true, kind:'シャワー'}} : null;
+  const no = /^(なし|無し|しません|しなかった|入りません|入らなかった|お休み|休み|中止|見送り)/.test(q);
+  return {bath:{done:!no, kind: no ? '' : kind}};
+}
+const FILLER = /^(?:えーっと|えーと|えっと|えー|ですね(?=[、,\s]|$)|あのね|あのー|あの|あとね|あと|それとね|それから|それと|そして|では|(?:はい|で|と)(?=[、,\s]|$)|今日の様子は|今日の様子|様子は|様子|(?:ね|ねぇ|よ|あ|あら|うん)(?=[、,\s]|$))\s*/;
+const DROP = /^(?:今日は|今日|です|でした|ました|以上です|以上|ありがとうございます|と|で|の|ね|よ|、)*$/;
+const DANGLE = /^(?:お昼ご飯|お昼|昼食|昼|食事|ご飯|ごはん|お風呂|風呂|入浴|血圧|体温|お熱|脈|お通じ|排便|おしっこ|お茶|水分|おやつ)(?:は|が|を|も|ね|よ|、|\s)*$/;
+function cleanPiece(s){ let t = s.replace(/^[\s、,]+|[\s、,]+$/g,''); if(DROP.test(t)) return ''; let prev; do{ prev = t; t = t.replace(FILLER,'').replace(/^[\s、,]+/,'').trim(); }while(t!==prev); t = t.replace(/(?:以上です|以上)$/,'').replace(/[\s、,]+$/,'').trim(); return DROP.test(t) || DANGLE.test(t) ? '' : t; }
+function joinSentences(arr){
+  let out = '';
+  arr.forEach((x,i)=>{ out += x; if(/[。！？!?]$/.test(x)) return; out += (i===arr.length-1) ? '。' : (/(が|て|で|し|けど|けれど|り|つつ|ながら|ため|ので|から|、)$/.test(x) ? '、' : '。'); });
+  return out.replace(/、。/g,'。');
+}
+function parse(raw){
+  const text = String(raw||'');
+  const n = norm(text);
+  const hm = n.match(/申し送り|申送り|もうしおくり/);
+  const cut = hm ? hm.index : n.length;
+  const found = {}; const segs = []; const used = new Uint8Array(cut); const at = {}; const meals = [];
+  const free = (s,e) => { for(let i=s;i<e;i++) if(used[i]) return false; return true; };
+  RX.forEach(([f,rx,fn])=>{
+    rx.lastIndex = 0; let m;
+    const part = n.slice(0,cut);
+    while((m = rx.exec(part))){
+      if(!m[0]){ rx.lastIndex++; continue; }
+      const s = m.index, e = s + m[0].length;
+      if(!free(s,e)) continue;
+      if(f==='bp0' && found.bp) continue;
+      const r = fn(m); if(!r) continue;
+      if(r.water){ found.water = found.water || {items:[]}; found.water.items.push(r.water); }
+      else if(r.meal){ meals.push({k:m[1]||'', s, v:r.meal}); }
+      else if(r.toilet){ found.toilet = Object.assign(found.toilet||{}, r.toilet); }
+      else if(r.bath){ found.bath = r.bath; }
+      else { const k = Object.keys(r)[0]; if(found[k]==null || s>at[k]){ found[k] = r[k]; at[k] = s; } }
+      for(let i=s;i<e;i++) used[i] = 1;
+      segs.push({s, e, f: f==='t'||f==='bp'||f==='bp0'||f==='p'||f==='o' ? 'vital' : f});
+    }
+  });
+  if(found.water) found.water.total = found.water.items.reduce((a,x)=>a+x.ml,0);
+  if(meals.length){
+    const sideSaid = meals.some(x=>/^(副食|おかず)$/.test(x.k));
+    meals.sort((a,b)=>a.s-b.s).forEach(x=>{ let v = x.v; if(sideSaid && /^(ご飯|ごはん)$/.test(x.k) && v.main!=null) v = {main:v.main}; found.meal = Object.assign(found.meal||{}, v); });
+  }
+  const pieces = []; let i = 0;
+  while(i<cut){
+    if(used[i]){ i++; continue; }
+    let j = i; while(j<cut && !used[j]) j++;
+    const chunk = text.slice(i,j);
+    chunk.split(/[。!！?？]+|\s+/).reduce((pos, part)=>{
+      const at = chunk.indexOf(part, pos);
+      const c = cleanPiece(part);
+      if(c){ const off = part.indexOf(c); pieces.push(c); segs.push({s:i+at+Math.max(0,off), e:i+at+Math.max(0,off)+c.length, f:'note'}); }
+      return at + part.length;
+    }, 0);
+    i = j;
+  }
+  if(pieces.length) found.note = joinSentences(pieces);
+  if(hm){
+    const after = text.slice(cut + hm[0].length).replace(/^[\s、,:：]*(?:は|で|として|です|を)?[\s、,:：]*/,'');
+    const hp = after.split(/[。!！?？]+|\s+/).map(cleanPiece).filter(Boolean);
+    if(hp.length){ found.hand = joinSentences(hp); }
+    segs.push({s:cut, e:text.length, f:'hand'});
+  }
+  segs.sort((a,b)=>a.s-b.s);
+  return {found, segs, text};
+}
+
+const KW_HAND = /申し送り|申送り|もうしおくり/;
+const KW_BOOK = /連絡帳|れんらくちょう/;
+const KW_STAFF = new RegExp([
+  '(?:職員|スタッフ|しょくいん)(?:さん)?(?:に|へ)?(?:だけ|のみ|向け|宛て?|あて)',
+  '(?:職員|スタッフ|しょくいん)(?:さん)?(?:に|へ)[、,\\s]*(?:伝え|つたえ|知らせ|しらせ)',
+  '(?:職員|スタッフ|しょくいん)(?:さん)?(?:の|どうし|同士)(?:中だけ|間だけ|あいだだけ)',
+  '(?:ご?家族|ご?かぞく|おうち)(?:さん|の方|のかた|の連絡帳|のれんらくちょう|の紙)?(?:には|へは|に|へ|は)?[、,\\s]*(?:書か|かか|言わ|いわ|伝え|つたえ|見せ|みせ|載せ|のせ|出さ|ださ|入れ|いれ)(?:ない|なく|ずに|たくない)',
+  '(?:ご?家族|ご?かぞく|おうち)(?:さん|の方)?(?:には|に|は)?[、,\\s]*(?:内緒|ないしょ|秘密)',
+  '(?:連絡帳|れんらくちょう)(?:には|へは|に|へ|は)?[、,\\s]*(?:書か|かか|載せ|のせ|出さ|ださ|入れ|いれ)(?:ない|なく|ずに|たくない)'
+].join('|'));
+const KW_STAFF_G = new RegExp(KW_STAFF.source, 'g');
+const INSTR_W = /なんだけど|なんですけど|なんですが|なんだけれど|なんだ|なんです|だけど|だよ|だね|と思います|と思う|思うけど|んですけど|んですが|けれど|けど|ので|から|いいです|いい|よい|良い|大丈夫|です|でした|ます|ください|下さい|ほしい|欲しい|お願いします|お願い|おねがい|よろしく|伝えたい|伝えて|伝える|知らせたい|知らせて|知らせる|見せたい|見せて|見せる|見せ|分かるように|わかるように|したい|しといて|しておいて|しておく|おいて|して|事|こと|話|これ|それ|今の|いまの|この|その|さっきの|上の|あと|それと|それから|えーと|えっと|あの|あ|ね|よ|て|は|に|で|を|の|も|が|と|へ|[\s、,。．.！!？?…・:：〜~ー-]/g;
+const instrOnly = s => norm(String(s||'')).replace(KW_STAFF_G,'').replace(/職員さん|職員|しょくいん|スタッフ|申し送り|もうしおくり|ご家族|家族|ごかぞく|かぞく|連絡帳|れんらくちょう|内緒|ないしょ|秘密/g,'').replace(INSTR_W,'').length < 2;
+const BACKREF = /^[\s、,]*(?:(?:あと|それと|それから|あ|えっと|えーと)[\s、,]*)?(?:それ|今の|いまの|その話|その事|そのこと|さっきの|上の)(?:は|を|も|が|、|,|\s|$)/;
+const BACKREF_WEAK = /^[\s、,]*(?:(?:あと|それと|それから|あ|えっと|えーと)[\s、,]*)?(?:これ|この話|この事|このこと)(?:は|を|も|が|、|,|\s|$)/;
+const FWD_LEAD = /^[\s、,]*(?:あと|それと|それから)[\s、,]*(?:ね|ですね)?[\s、,]*(?:これ|この話|この事|このこと)(?:は|を|も|が|、|,|\s|$)/;
+const MARKS_G = new RegExp(`${KW_HAND.source}|${KW_BOOK.source}|${KW_STAFF.source}`, 'g');
+const FILL_G = /えーっと|えーと|えっと|えー|あのね|あのー|あの|それとね|それと|それから|あとね|あと|これは|これ|それは|ここは|ですね|です|でした|だよ|だね|なんだけど|なんですけど|なんですが|ですが|だけど|けど|なので|として|お願いします|お願い|おねがい|よろしく|ください|には|ねぇ|ね|よ|に|へ|は|で|の|を|も|さん|あら|あ|はい|うん|[\s、,。．.！!？?…・:：〜~ー-]/g;
+const hasContent = s => norm(String(s||'')).replace(MARKS_G,'').replace(FILL_G,'').length >= 2;
+const hasFields = s => { const f = parse(s).found; return ['t','bp','p','o','water','meal','toilet','bath'].some(k=>f[k]!=null); };
+const joinRaw = arr => arr.reduce((a,x)=> !x ? a : !a ? x : a + (/[。！？!?、,\s]$/.test(a) || /^[。、,\s]/.test(x) ? '' : ' ') + x, '');
+const flatSaid = t => joinRaw(String(t||'').split(/\n+/).map(x=>x.trim()));
+function cutLoop(s, cur){
+  const parts = []; let rest = s;
+  for(let guard=0; rest && guard<20; guard++){
+    const m = rest.match(cur==='R' ? KW_HAND : KW_BOOK);
+    const cut = m ? m.index : rest.length;
+    parts.push({to:cur, text: rest.slice(0, cut)});
+    if(!m) break;
+    rest = rest.slice(cut + m[0].length).replace(/^[\s、,:：。]*(?:には|に|へ|は|で|として|です|を)?[\s、,:：。]*/,'');
+    cur = cur==='R' ? 'H' : 'R';
+  }
+  return {parts, cur};
+}
+function splitSaid(text){
+  const t = String(text||'').trim(); if(!t) return {R:'', H:''};
+  const units = [];
+  t.split(/\n+/).map(x=>x.trim()).filter(Boolean).forEach((f,fi)=> f.split(/(?<=[。！？!?])/).map(x=>x.trim()).filter(Boolean).forEach(s=>units.push({s, fi, parts:null, drop:false})));
+  let cur = 'R', scopeTill = -1;
+  const toOf = u => u.parts && u.parts.length===1 ? u.parts[0].to : null;
+  const isInstr = u => KW_STAFF.test(u.s) && instrOnly(u.s);
+  const backTo = (i, sameFinal) => {
+    for(let j=i-1;j>=0;j--){
+      const v = units[j];
+      if(sameFinal && v.fi!==units[i].fi) return false;
+      if(v.drop || isInstr(v) || !hasContent(v.s)) continue;
+      if(toOf(v)==='H') return true;
+      if(toOf(v)==='R'){ if(hasFields(v.s)) return false; v.parts = [{to:'H', text:v.s}]; return true; }
+      return false;
+    }
+    return false;
+  };
+  for(let i=0;i<units.length;i++){
+    const u = units[i], pv = units[i-1], nx = units[i+1];
+    const firstInFinal = !pv || pv.fi!==u.fi, lastInFinal = !nx || nx.fi!==u.fi;
+    const tail = (lastInFinal && !firstInFinal) || (firstInFinal && lastInFinal && !nx);
+    const tgt = () => u.fi<=scopeTill ? 'H' : cur;
+    const toH = () => { if(pv && toOf(pv)==='R' && !hasFields(pv.s)) pv.parts = [{to:'H', text:pv.s}]; };
+    if(KW_STAFF.test(u.s)){
+      if(!instrOnly(u.s)){ u.parts = [{to:'H', text:u.s}]; continue; }
+      u.drop = true;
+      const later = units.slice(i+1).some(v=>v.fi===u.fi && !isInstr(v) && hasContent(v.s));
+      if(BACKREF.test(norm(u.s)) && backTo(i, false)) continue;
+      if(!firstInFinal && backTo(i, true)) continue;
+      const fwd = firstInFinal && lastInFinal && nx && FWD_LEAD.test(norm(u.s)) && hasContent(nx.s);
+      if(BACKREF_WEAK.test(norm(u.s)) && !later && !fwd && backTo(i, false)) continue;
+      if(later){ scopeTill = Math.max(scopeTill, u.fi); continue; }
+      if(firstInFinal && lastInFinal && nx){ scopeTill = Math.max(scopeTill, u.fi + 1); continue; }
+      backTo(i, false);
+      continue;
+    }
+    if(cur==='R' && KW_HAND.test(u.s)){
+      const m = u.s.match(KW_HAND); const pre = u.s.slice(0, m.index), post = u.s.slice(m.index + m[0].length);
+      if(!hasContent(post)){
+        if(hasContent(pre)){ u.parts = [{to: hasFields(pre) ? tgt() : 'H', text: hasFields(pre) ? pre : u.s}]; continue; }
+        u.drop = true;
+        if(tail) toH(); else cur = 'H';
+        continue;
+      }
+    }
+    if((cur==='R' && KW_HAND.test(u.s)) || (cur==='H' && KW_BOOK.test(u.s))){
+      const c = cutLoop(u.s, cur); u.parts = c.parts.map(p=>({to: p.to==='R' && u.fi<=scopeTill ? 'H' : p.to, text:p.text})); cur = c.cur; continue;
+    }
+    u.parts = [{to:tgt(), text:u.s}];
+  }
+  const R = [], H = [];
+  units.forEach(u=>{ if(u.drop) return; u.parts.forEach(p=>{ const x = p.text.trim(); if(x) (p.to==='H' ? H : R).push(x); }); });
+  const tidy = s => s.replace(/^[\s、,。]+|[\s、,]+$/g,'').replace(/\s{2,}/g,' ').trim();
+  return {R: tidy(joinRaw(R)), H: tidy(joinRaw(H))};
+}
+function cleanText(t){ return joinSentences(String(t||'').split(/[。!！?？]+|\s+/).map(cleanPiece).filter(Boolean)); }
+
+function blank(){ return {t:null, bp:null, p:null, o:null, water:null, meal:null, toilet:null, bath:null, note:'', hand:''}; }
+function seedDays(i, today){
+  const w = WEEK.indexOf(wdOf(today)); const out = new Set([w<0 ? 0 : w]);
+  [[0,2],[1,3],[2,4],[0,3],[1,4],[2,5]][i%6].forEach(x=>out.add(x));
+  return WEEK.filter((_,k)=>out.has(k));
+}
+function seed(today){
+  const st = {seedDate:today, master:[], records:{}, hands:[], seq:1, pseq:SEED_PEOPLE.length+1, mode:'split'};
+  st.master = SEED_PEOPLE.map(([name,kana],i)=>({id:'m'+String(i+1).padStart(2,'0'), name, kana, days:seedDays(i, today), c:'c'+(i%6)}));
+  const base = Date.now();
+  const pre = [
+    ['m03','体温36.4、血圧132の80、脈70、お茶200、昼は全部、排便あり、入浴しました、体操に最後まで参加されました'],
+    ['m06','体温36.6 血圧126の74 脈74 お茶150 麦茶100 昼は8割 おしっこ2回 入浴なし 書道で年賀状を書かれました'],
+    ['m09','体温36.3 血圧138の82 脈66 お茶250 主食全部 副食半分 排便なし お風呂に入りました 将棋で3勝してご機嫌でした']
+  ];
+  pre.forEach(([id,said],ix)=>{
+    const at = base - (90-ix*20)*60000; const r = parse(said);
+    st.records[id] = Object.assign(blank(), r.found, {rawR:[{at, text:said}], rawH:[], fixes:[], mode:'split', made:true, madeBy:'rules', unsure:[], by: ix===1?'s1':'s2', at, printed:false});
+  });
+  st.hands.push({id:'h'+(st.seq++), at: base - 26*60*60000, by:'s1', about:'m06', text:'来週から、迎えの時間を10分遅くしてほしいとご家族より。', reads:['s1','s2','s3','s5']});
+  st.hands.push({id:'h'+(st.seq++), at: base - 50*60000, by:'s2', about:'m09', text:'血圧の薬が変わったとのこと。測った値に注意してください。', reads:['s2']});
+  return st;
+}
+const TODAY = jstToday();
+let st = null;
+try{ const raw = localStorage.getItem(STORE); if(raw){ const s = JSON.parse(raw); if(s && s.seedDate===TODAY && Array.isArray(s.master)) st = s; } }catch(_){}
+if(!st) st = seed(TODAY);
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(st)); }catch(_){} }
+save();
+const people = () => st.master.filter(m=>!m.gone);
+const todays = () => people().filter(m=>m.days.includes(wdOf(TODAY)));
+const byId = id => st.master.find(m=>m.id===id) || null;
+const surname = m => m.name.split(/\s+/)[0];
+
+const ui = { view:'list', who:null, draft:null, justSaved:false, hf:'すべて', sheet:null, toast:null, notice:null, listening:false, live:'', target:null, flash:[], busy:null, backAsk:false,
+  pchat:{log:[], draft:null, choices:null, action:null},
+  drafts:{},
+  meOk:0 };
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ic = n => `<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const av = (m,cls) => `<span class="av ${cls||''} ${m.c}" aria-hidden="true">${esc(m.name[0])}</span>`;
+const staffAll = () => STAFF.concat(st.staffAdd || []);
+const staffName = id => (staffAll().find(s=>s.id===id)||{}).name || '';
+const fmt1 = v => (Math.round(v*10)/10).toFixed(1);
+const toKata = s => String(s).replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
+const toHira = s => String(s).replace(/[ァ-ヶ]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+const escRx = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function mealWord(v){ return v===10 ? '全部' : v===5 ? '半分' : v===2 ? '少し' : v===0 ? 'なし' : v + '割'; }
+function mealText(m){
+  if(!m) return '';
+  const a = [];
+  if(m.main!=null && m.side!=null && m.main===m.side) a.push('昼 ' + mealWord(m.main));
+  else { if(m.main!=null) a.push('主食 ' + mealWord(m.main)); if(m.side!=null) a.push('副食 ' + mealWord(m.side)); }
+  if(m.snack!=null) a.push('おやつ ' + mealWord(m.snack));
+  return a.join('・');
+}
+function toiletText(t){ if(!t) return ''; const a = []; if(t.bm!=null) a.push('お通じ ' + (typeof t.bm==='number' ? t.bm+'回' : t.bm)); if(t.ur!=null) a.push('お小水 ' + (typeof t.ur==='number' ? t.ur+'回' : t.ur)); return a.join('・'); }
+function bathText(b){ if(!b) return ''; return b.done ? (b.kind==='清拭' ? '体をふいた（清拭）' : b.kind ? b.kind + 'で入った' : '入った') : '入っていない'; }
+const USUAL_BASE = {
+  m01:[36.4,124,72,70], m02:[36.2,134,80,68], m03:[36.5,128,76,72], m04:[36.3,120,70,74], m05:[36.6,138,84,66], m06:[36.4,122,72,76],
+  m07:[36.1,130,78,64], m08:[36.5,116,68,78], m09:[36.3,118,70,66], m10:[36.2,126,74,72], m11:[36.4,132,78,70], m12:[36.0,140,86,62]
+};
+const PAST_OFF = [[-0.2,-4,-2,-3],[0.1,6,4,2],[0,0,0,0],[0.2,-6,-4,4],[-0.1,4,2,-2],[0.1,-2,0,1],[-0.1,2,-2,-1]];
+function pastOf(id){ const b = USUAL_BASE[id]; return b ? PAST_OFF.map(o=>({t:Math.round((b[0]+o[0])*10)/10, s:b[1]+o[1], d:b[2]+o[2], p:b[3]+o[3]})) : []; }
+const midOf = a => { const x = a.slice().sort((p,q)=>p-q); return x[x.length>>1]; };
+function usualOf(id){ const a = pastOf(id); if(a.length<3) return null; return {t:midOf(a.map(x=>x.t)), s:midOf(a.map(x=>x.s)), d:midOf(a.map(x=>x.d)), p:midOf(a.map(x=>x.p))}; }
+const DEV = {t:1.0, s:20, p:20};
+function devOf(f, r, u){
+  if(!u || !r) return '';
+  if(f==='t' && r.t!=null){ const x = Math.round((r.t-u.t)*10)/10; if(Math.abs(x) >= DEV.t - 1e-9) return `いつもより ${fmt1(Math.abs(x))}℃ ${x>0?'高い':'低い'}`; }
+  if(f==='bp' && r.bp && r.bp.s!=null){ const x = r.bp.s-u.s; if(Math.abs(x) >= DEV.s) return `いつもより 上が ${Math.abs(x)} ${x>0?'高い':'低い'}`; }
+  if(f==='p' && r.p!=null){ const x = r.p-u.p; if(Math.abs(x) >= DEV.p) return `いつもより ${Math.abs(x)} ${x>0?'多い':'少ない'}`; }
+  return '';
+}
+function devHtml(dev){ const a = String(dev).split(/(?<=より) /); return a.map((x,i)=>`<span class="nw">${esc(x)}${i===a.length-1?'。':''}</span>`).join(' '); }
+function usualText(f, u){ if(!u) return ''; return f==='t' ? `いつも ${fmt1(u.t)}℃` : f==='bp' ? `いつも ${u.s}/${u.d}` : f==='p' ? `いつも ${u.p}回` : ''; }
+const REC_KEYS = ['t','bp','p','o','water','meal','toilet','bath','note','hand'];
+function histOf(r){ return r ? (Array.isArray(r.log) && r.log.length ? r.log : [{at:r.at, by:r.by, kind:'書いた', ch:[]}]) : []; }
+function writersOf(r){ const a = []; histOf(r).forEach(x=>{ if((x.kind!=='直した' || (x.ch && x.ch.length)) && x.by && !a.includes(x.by)) a.push(x.by); }); return a.length ? a : (r && r.by ? [r.by] : []); }
+function changedKeys(a, b){ return REC_KEYS.filter(k=>JSON.stringify(a[k]==null||a[k]===''?null:a[k]) !== JSON.stringify(b[k]==null||b[k]===''?null:b[k])); }
+function warnOf(f,r){
+  if(f==='t') return r.t!=null && (r.t>=37.5 || r.t<35);
+  if(f==='bp') return !!r.bp && (r.bp.s>=160 || r.bp.s<90 || r.bp.d>=100);
+  if(f==='p') return r.p!=null && (r.p>=100 || r.p<50);
+  if(f==='o') return r.o!=null && r.o<93;
+  if(f==='water') return !!r.water && r.water.total==null;
+  return false;
+}
+function hasAny(r){ return r && (r.t!=null || r.bp || r.p!=null || r.o!=null || r.water || r.meal || r.toilet || r.bath || r.note || r.hand); }
+function unread(){ return st.hands.filter(h=>!h.reads.includes(ME())).length; }
+function nextUnsaved(after){ const list = todays(); const ix = list.findIndex(m=>m.id===after); const order = list.slice(ix+1).concat(list.slice(0,ix+1)); const m = order.find(x=>!st.records[x.id]); return m ? m.id : null; }
+function noticeHtml(at){ const n = ui.notice; if(!n || (n.at||'') !== (at||'')) return ''; return `<div class="notice ${n.kind||'ok'}" role="status">${ic(n.kind==='warn'?'alert':'okc')}<b>${esc(n.text)}</b><button class="xbtn" type="button" data-act="notice-close">${ic('x')}閉じる</button></div>`; }
+
+function nameRx(m){
+  const [sk] = m.kana.split(/\s+/); const sn = surname(m);
+  const forms = [m.name, m.name.replace(/\s+/g,''), m.kana, m.kana.replace(/\s+/g,''), toKata(m.kana), toKata(m.kana).replace(/\s+/g,''), sn, sk, toKata(sk)]
+    .filter((x,i,a)=>x && x.length>=2 && a.indexOf(x)===i).sort((a,b)=>b.length-a.length);
+  return new RegExp(`(?:${forms.map(escRx).join('|')})(?:さん|様|さま|ちゃん)?`, 'g');
+}
+function fixNames(text, opt){
+  if(!text) return text;
+  let out = text;
+  people().forEach(m=>{ out = out.replace(nameRx(m), ()=> opt.family ? (m.id===opt.self ? surname(m) + 'さん' : 'ほかの方') : surname(m) + 'さん'); });
+  return out;
+}
+function whoIn(text){ if(!text) return null; let best = null, at = Infinity; people().forEach(m=>{ const rx = nameRx(m); const x = rx.exec(text); if(x && x.index<at){ at = x.index; best = m.id; } }); return best; }
+
+const ai = { fn:null, off:false, last:null, calls:0, fails:0, relay:false };
+const aiOn = () => !!ai.fn && !ai.off;
+const AI_URL = typeof window.RENRAKUCHO_AI_URL==='string' ? window.RENRAKUCHO_AI_URL : '';
+async function askRelay(prompt){
+  const ctl = new AbortController(); const tm = setTimeout(()=>ctl.abort(), 30000);
+  try{
+    const r = await fetch(AI_URL, {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({prompt}), signal: ctl.signal});
+    let j = null; try{ j = await r.json(); }catch(_){}
+    if(!r.ok || !j || typeof j.text!=='string') throw {code: (j && j.code) || 'upstream_error'};
+    return {text: j.text, modelApplied: j.model || null, modelTierApplied: null};
+  }catch(e){ throw (e && e.code) ? e : {code: e && e.name==='AbortError' ? 'timeout' : 'network'}; }
+  finally{ clearTimeout(tm); }
+}
+function parseJsonLoose(t){
+  t = String(t||'').trim();
+  try{ return JSON.parse(t); }catch(_){}
+  const f = t.match(/```(?:json)?\s*([\s\S]*?)```/); if(f){ try{ return JSON.parse(f[1]); }catch(_){} }
+  const a = t.indexOf('{'), b = t.lastIndexOf('}'); if(a>=0 && b>a){ try{ return JSON.parse(t.slice(a,b+1)); }catch(_){} }
+  return null;
+}
+async function askAI(prompt, opt){
+  const t0 = performance.now();
+  const res = await ai.fn(prompt, Object.assign({model:MODEL, modelTier:'quick'}, opt||{}));
+  const v = parseJsonLoose(res && res.text);
+  ai.calls++; ai.last = {ms: Math.round(performance.now()-t0), model: res && res.modelApplied || null, tier: res && res.modelTierApplied || null};
+  if(!v || typeof v!=='object') throw {code:'invalid_json'};
+  return v;
+}
+function aiFail(e){
+  const c = (e && e.code) || 'upstream_error'; ai.fails++;
+  if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(c)) ai.off = true;
+  return c;
+}
+const LIST = () => people().map(m=>({id:m.id, 名前:m.name, ふりがな:m.kana}));
+const FIELD_RULES = `- 話していない欄は null。推測で埋めない。言い直した時や「〜に直して」「〜じゃなくて」と言った時は、後の値を使う。
+- 体温 t は ℃（36度8分→36.8、三十六度五分→36.5、365→36.5）。血圧 bp は上 s と下 d（128の76→128/76、12876→128/76）。脈 p は回/分。酸素 o（SpO2・サチュレーション）は %。
+- 水分 water は mL。飲み物ごとに items（n は飲み物の名前、ml は量）、合計を total。量を言っていない飲み物（「2杯」だけ など）は ml を null にし、total も null。ただし「1杯150ミリを2杯」「2杯。1杯が150くらい」「100ミリずつ3回」のように1回の量と回数を言った時は、「ミリ」を言っていなくても掛けた量にする（150×2→300）。
+- 食事 meal は割（全部=10、8割=8、半分=5、少し=2、ほとんど食べない=1、食べない=0）。主食 main と副食 side を分けて言わなければ両方に同じ値。おやつは snack。
+- 排便 toilet.bm は "あり" か "なし"（回数を言えば bmCount）。排尿 toilet.ur は回数。
+- 入浴 bath は done（入った true・入っていない false）と kind（シャワー浴・機械浴など。無ければ ""）。お風呂の代わりに体をふいた（清拭）時は done を true、kind を "清拭" にする（入浴なしにしない）。
+- note はご家族に渡す連絡帳の「きょうの様子」。話した事実だけを、です・ます調で1〜3文。つなぎ言葉と言い直しは除く。話した言葉をなるべく残し、言い回しを盛らない。尊敬語を重ねない（「〜していらっしゃいました」は使わない）。体温〜入浴の数や有無は欄にあるので note に繰り返さない。言っていない事（「お元気でした」など）を足さない。
+- 「ご家族には書かないで・言わないで・見せないで・書かなくていい」「職員だけ」「職員さんへ」「内緒」と言った事は、note に入れず hand に入れる。「これは家族には書かないで」のように、その言葉が指す話も note に入れず hand に入れる。その言い方そのもの（「ご家族には書かないで」など）は、note にも hand にも書かない。
+- hand は職員どうしの申し送り。です・ます調で、話した事だけを1〜3文。話していない頼み事・やる事・判断（「上長に報告してください」「様子を見てください」「確認をお願いします」「注意してください」など）を足さない。頼み事は、話した時だけ、話した言葉のまま書く。
+- 名前は「利用者の一覧」の漢字に合わせる。ひらがな・カタカナ・違う漢字で聞こえても、読みが一覧のふりがなと合えば、一覧の漢字に直す。
+- note には、相手の方以外の利用者の名前を書かない（「隣の席の方」「お友達」など、自然な言い方にする。「利用者」という言葉も使わない）。
+- hand では、利用者を一覧の漢字の姓に「さん」を付けて書く。`;
+const REC_SHAPE = `{"t":数か null,"bp":{"s":整数,"d":整数}か null,"p":整数か null,"o":整数か null,"water":{"items":[{"n":"飲み物","ml":整数か null}],"total":整数か null}か null,"meal":{"main":整数か null,"side":整数か null,"snack":整数か null}か null,"toilet":{"bm":"あり"か"なし"か null,"bmCount":整数か null,"ur":整数か null}か null,"bath":{"done":真偽,"kind":"文字"}か null,"note":"文"か null,"hand":"文"か null}`;
+const who = m => m ? {id:m.id, 名前:m.name, ふりがな:m.kana} : null;
+function promptMake(o){
+  const data = {相手: who(o.person), 連絡帳の原文: o.rawR.map(x=>x.text).join('\n'), 申し送りの原文: o.rawH.map(x=>x.text).join('\n'), 利用者の一覧: LIST()};
+  if(o.prevHand) data.いまの申し送り = o.prevHand;
+  const prevRule = o.prevHand ? `\n- 「いまの申し送り」がある時は、それに「申し送りの原文」（あとから話した言葉）を合わせて、1つの hand にする。同じ話は1回だけ書く。食い違う所は、あとから話した言葉に合わせる。いまの申し送りの文は、合わせるのに要る所のほかは変えない。` : '';
+  return `デイサービスの記録係として、職員が声で話した「原文」から、ご家族に渡す連絡帳の記録と、職員どうしの申し送りを作ってください。
+原文は声の文字起こしなので、聞き違い・言い直し・つなぎ言葉（えーと・あの・うん）・句読点の抜けがあります。
+
+# データ
+${JSON.stringify(data)}
+
+# 作り方
+- 記録の欄と note は「連絡帳の原文」から作る。相手が null の時は、記録の欄と note は全部 null。
+- hand は「申し送りの原文」から作る。申し送りの原文が空で、連絡帳の原文から移す事も無ければ null。${prevRule}
+- 一つの話は、note か hand のどちらか片方にだけ入れる（同じ話を両方に書かない）。
+- hand_about は、申し送りが主にだれの事かを、一覧の id で。相手の方の事なら相手の id、事業所全体の事なら null。hand が null なら null。
+- unsure は、聞き違いを読み替えた欄・言い直しがあった欄・値が決まらず空にした欄の名前（t, bp, p, o, water, meal, toilet, bath, note, hand）。はっきり言った欄は入れない。
+
+# 欄の決まり
+${FIELD_RULES}
+
+# 答え
+次の形の JSON だけを返す（説明は書かない）。
+${REC_SHAPE.replace(/\}$/, ',"hand_about":"id"か null,"unsure":["欄の名前"]}')}`;
+}
+function promptFix(o){
+  const data = {相手: who(o.person), 今の記録: o.record, 直しの言葉: o.said, 利用者の一覧: LIST()};
+  return `デイサービスの記録係として、職員が声で言った「直しの言葉」のとおりに、今の記録と申し送りを直してください。
+直しの言葉は声の文字起こしなので、聞き違いやつなぎ言葉があります。
+
+# データ
+${JSON.stringify(data)}
+
+# 直し方
+- 言われた所だけを変える。ほかの欄・ほかの文は一字も変えない。
+- 「〜に直して」「〜じゃなくて〜」「〜を消して」「〜はいらない」「〜を足して」「申し送りに〜と入れて」などに従う。
+- 直しの言葉が新しい事実だけの時（「おやつも全部食べました」「お風呂に入りました」など）は、その欄に入れる。様子の事なら note の終わりに足す。
+- 何を直すのか決められない時は、何も変えず、ask に聞き返す短い一言を入れる。決められた時、ask は null。
+- changed は変えた欄の名前（t, bp, p, o, water, meal, toilet, bath, note, hand）の一覧。
+- said は職員に返す短い一言。です・ます調で、ふだんの言葉で、何をどう変えたかだけを言う（例：「体温を36.8℃に直しました」「おやつを全部にしました」）。
+- 相手が null の時は申し送りだけの直し。記録の欄と note は null のまま。
+
+# 欄の決まり
+${FIELD_RULES}
+
+# 答え
+次の形の JSON だけを返す（説明は書かない）。
+{"record":${REC_SHAPE},"changed":["欄の名前"],"said":"文","ask":"文"か null}`;
+}
+function promptPeople(o){
+  const data = {利用者の一覧: people().map(m=>({id:m.id, name:m.name, kana:m.kana, days:m.days})), 下書き: o.draft || null,
+    これまでの話: o.log.map(x=>({だれ: x.who==='me' ? '職員' : '係', 言葉: x.text})), 職員の今の言葉: o.said};
+  return `デイサービスの「利用者の一覧」を、職員と声で話しながら登録したり直したりする係です。職員は70代の方も多いので、やさしく短く話します。
+職員の言葉は声の文字起こしなので、聞き違いやつなぎ言葉があります。
+
+# データ
+${JSON.stringify(data)}
+
+# 決まり
+- 一覧に入れるのは、名前（漢字）・ふりがな・来る曜日の3つだけ。病名・薬・体の事・家族の事は入れない。言われたら「ここには入れません」と短く返す。
+- 名前は姓と名の間に空白1つ（例：「山田 花子」）。ふりがなはひらがなで、姓と名の間に空白1つ（例：「やまだ はなこ」）。
+- 曜日は 月 火 水 木 金 土 日 の字の一覧で、月曜から順に並べる。「平日」「平日は毎日」は月〜金。
+- 名前の漢字が声だけでは決まらない時（さいとう＝斉藤・斎藤・齋藤、わたなべ＝渡辺・渡部・渡邊 など）は、choices に候補を2〜3つと、最後に「ひらがなのまま」を入れて、どれかを聞く。下の名前（名）を聞く時は、「ひらがなのまま」の後に「カタカナのまま」も入れる（キヨ・トシ のように、名前がカタカナの方もいる）。「花子の花は、お花の花」「美しいの美」「カタカナのキヨ」のような説明があれば、それに従う。
+- 職員が候補の1つを言ったか押したら、それに決める。決めた漢字を、もう一度聞かない（「斉藤」を選んだのに「斉藤 茂」でよいかを聞き直さない）。「ひらがなのまま」ならその所をひらがなに、「カタカナのまま」ならその所をカタカナにする。
+- 声に漢字で入っていた名前は、そのまま使う。漢字でよいかを別に聞かない（確かめは、そろった時の読み上げで1回だけ）。
+- 一度に聞くのは1つだけ。reply は1〜2文、です・ます調。
+- 新しく登録する時：名前・ふりがな・曜日がそろうまで聞く。下書きの id は null。
+- 今ある方を直す時：下書きにその方の id を入れ、言われた所だけを変える。だれの事か決められない時は聞く。
+- 新しい方の名前やふりがなが、一覧の方と同じ時は、新しい方か、今の方を直すのかを聞く。
+- 一覧から外す（やめた・来なくなった）と言われた時は、下書きにその方の id と "remove": true を入れて、外してよいかを聞く。
+- そろったら action を "confirm" にして、reply で中身を短く読み上げ、「これで登録しますか」（今ある方を直す時は「これで直しますか」、外す時は「一覧から外しますか」）と聞く。
+- 下書きがそろっていて、職員が「はい」「お願い」「登録して」「それで」など、よいと言ったら action を "save"。「やめて」「いらない」なら "cancel"。
+- それ以外は action を "ask"。登録や直しの話でない時は draft を null。
+
+# 答え
+次の形の JSON だけを返す（説明は書かない）。
+{"reply":"文","draft":{"id":"id か null","name":"姓 名","kana":"せい めい","days":["月"],"remove":false}か null,"choices":["候補"]か null,"action":"ask"か"confirm"か"save"か"cancel"}`;
+}
+
+const FK = ['t','bp','p','o','water','meal','toilet','bath','note','hand'];
+const numOr = (v, int) => { const n = typeof v==='number' ? v : (typeof v==='string' && v.trim()!=='' ? Number(v) : NaN); return Number.isFinite(n) ? (int ? Math.round(n) : Math.round(n*10)/10) : null; };
+function normRec(v){
+  const r = blank(); if(!v || typeof v!=='object') return r;
+  r.t = numOr(v.t); if(r.t!=null && (r.t<34 || r.t>42)) r.t = null;
+  if(v.bp && typeof v.bp==='object'){ const s = numOr(v.bp.s,1), d = numOr(v.bp.d,1); r.bp = s && d ? {s,d} : null; }
+  r.p = numOr(v.p,1); r.o = numOr(v.o,1);
+  if(v.water && typeof v.water==='object'){
+    const items = Array.isArray(v.water.items) ? v.water.items.filter(x=>x && x.n).map(x=>({n:String(x.n), ml:numOr(x.ml,1)})) : [];
+    const total = numOr(v.water.total,1);
+    r.water = items.length || total!=null ? {items, total: total!=null ? total : (items.length && items.every(x=>x.ml!=null) ? items.reduce((a,x)=>a+x.ml,0) : null)} : null;
+  }
+  if(v.meal && typeof v.meal==='object'){ const m = {}; ['main','side','snack'].forEach(k=>{ const x = numOr(v.meal[k],1); if(x!=null && x>=0 && x<=10) m[k] = x; }); r.meal = Object.keys(m).length ? m : null; }
+  if(v.toilet && typeof v.toilet==='object'){ const t = {}; const c = numOr(v.toilet.bmCount,1);
+    if(c!=null) t.bm = c; else if(v.toilet.bm==='あり' || v.toilet.bm==='なし') t.bm = v.toilet.bm;
+    const u = numOr(v.toilet.ur,1); if(u!=null) t.ur = u; r.toilet = Object.keys(t).length ? t : null; }
+  if(v.bath && typeof v.bath==='object' && typeof v.bath.done==='boolean'){ const k = String(v.bath.kind||'').trim(); r.bath = {done:v.bath.done, kind: !v.bath.done ? '' : /^シャワー/.test(k) ? 'シャワー' : /^機械/.test(k) ? '機械浴' : k}; }
+  r.note = typeof v.note==='string' ? v.note.trim() : '';
+  r.hand = typeof v.hand==='string' ? v.hand.trim() : '';
+  return r;
+}
+const recOf = d => { const o = {}; FK.forEach(k=>{ o[k] = d[k]==='' ? null : (d[k]==null ? null : d[k]); }); return o; };
+const validId = id => id && byId(id) ? id : null;
+
+function makeRules(m, raw){
+  const tR = raw.rawR.map(x=>x.text).join(' ');
+  const tH = raw.rawH.map(x=>x.text.replace(/^\s*(?:申し送り|申送り|もうしおくり)[\s、,:：。]*(?:は|です|として)?[\s、,]*/,'')).join(' ');
+  const rec = blank();
+  if(m){ const f = parse(tR).found; Object.assign(rec, f); rec.note = f.note || ''; rec.hand = f.hand || ''; }
+  if(m && rec.note){ const rx = nameRx(m); const ss = rec.note.split(/(?<=。)/).map(x=>x.replace(/。$/,'')).filter(x=>x.replace(rx,'').replace(/^(?:さん|様)?(?:ね|ねぇ|よ|です|の記録です|の記録|の今日の記録です|の今日の記録|の今日の様子です|の今日の様子|の分|は|、|\s)*$/,'')!==''); rec.note = ss.length ? joinSentences(ss) : ''; }
+  const tH2 = raw.prevHand ? tH.replace(/(?:って|と)?[、\s]*(?:足して|たして|入れて|いれて|書いて|かいて|追加して)(?:ください|おいて|ね|ちょうだい)?[。\s]*$/, '') : tH;
+  const h = tH2 ? cleanText(tH2.replace(STAFF_PHRASE, '')) : '';
+  rec.hand = [rec.hand, h].filter(Boolean).join('');
+  if(raw.prevHand){ const ss = t => String(t||'').split(/(?<=[。！？!?])/).map(x=>x.trim()).filter(Boolean); const key = x => x.replace(/（\d+月\d+日）/g,'').replace(/[、,\s]/g,''); const prev = ss(raw.prevHand); rec.hand = prev.concat(ss(rec.hand).filter(x=>!prev.some(y=>key(y)===key(x)))).join(''); }
+  keepStaffOut(rec);
+  rec.note = fixNames(rec.note, {family:true, self: m && m.id});
+  rec.hand = fixNames(rec.hand, {});
+  const about = rec.hand ? (whoIn(tH) || (m ? m.id : null)) : null;
+  return {rec, about, unsure:[], by:'rules'};
+}
+const ADDED_WORDS = ['報告','上長','上司','管理者','看護','主治医','医師','受診','相談','共有','連絡','検討','対応','観察','注意','確認','見守','気をつけ','気を付け','様子を見','様子をみ','フォロー','お願い'];
+const SAID_AS = {お願い:['お願い','おねがい','よろしく','頼','たの','ください'], 連絡:['連絡','電話','伝え','知らせ'], 確認:['確認','確かめ','見て','みて'], 注意:['注意','気をつけ','気を付け','見て','みて'],
+  観察:['観察','見て','みて'], 見守:['見守','見て','みて'], 様子を見:['様子を見','見て','みて'], 様子をみ:['様子をみ','見て','みて'], 気をつけ:['気をつけ','気を付け','注意'], 気を付け:['気をつけ','気を付け','注意']};
+const SAID_KANA = {報告:['ほうこく'], 上長:['じょうちょう'], 上司:['じょうし'], 管理者:['かんりしゃ'], 看護:['かんご'], 主治医:['しゅじい'], 受診:['じゅしん'], 相談:['そうだん'], 共有:['きょうゆう'], 連絡:['れんらく','でんわ','つたえ','しらせ'], 検討:['けんとう'], 対応:['たいおう'],
+  観察:['かんさつ'], 注意:['ちゅうい','きをつけ'], 確認:['かくにん','たしかめ'], 見守:['みまも'], 気をつけ:['きをつけ'], 気を付け:['きをつけ'], 様子を見:['ようすをみ'], 様子をみ:['ようすをみ'], お願い:['おねがい']};
+function addedWords(text, src){ const s = norm(String(src||'')), t = String(text||''); return ADDED_WORDS.filter(w=>t.includes(w) && !(SAID_AS[w]||[w]).concat(SAID_KANA[w]||[]).some(x=>s.includes(x))); }
+const STAFF_PHRASE = new RegExp(`[、,\\s]*(?:これは|これ|それは)?[、,\\s]*(?:${KW_STAFF.source})[^。！？!?、,]*`, 'g');
+function keepStaffOut(rec){
+  const ss = t => String(t||'').split(/(?<=[。！？!?])/).map(x=>x.trim()).filter(Boolean);
+  const strip = s => { const x = s.replace(STAFF_PHRASE,'').replace(/^[、,\s]+/,'').trim(); return !x ? '' : /[。！？!?]$/.test(x) ? x : x.replace(/[、,\s]+$/,'') + '。'; };
+  const moved = [];
+  const note = ss(rec.note).filter(s=>{ if(!KW_STAFF.test(s)) return true; if(!instrOnly(s)) moved.push(strip(s)); return false; });
+  const hand = ss(rec.hand).map(s=> !KW_STAFF.test(s) ? s : instrOnly(s) ? '' : strip(s)).filter(Boolean);
+  moved.filter(x=>x && !hand.includes(x)).forEach(x=>hand.push(x));
+  rec.note = note.join(''); rec.hand = hand.join('');
+  return rec;
+}
+function addDates(text, baseISO){
+  const [y,mo,d] = (baseISO || TODAY).split('-').map(Number); const b = Date.UTC(y,mo-1,d);
+  const wd = (new Date(b).getUTCDay() + 6) % 7;
+  const md = n => { const x = new Date(b + n*864e5); return `${x.getUTCMonth()+1}月${x.getUTCDate()}日`; };
+  const t0 = String(text||'').replace(/(明日|あした|明後日|あさって|(?:来週|今週|今度|次)の?[月火水木金土日]曜(?:日)?)[（(]\d{1,2}月\d{1,2}日[）)]/g, '$1');
+  return t0.replace(/(明日|あした|明後日|あさって|(来週|今週|今度|次)の?([月火水木金土日])曜(?:日)?)(?!日?\s*[（(])/g, (all, w, k, day)=>{
+    let n;
+    if(/^(明日|あした)$/.test(w)) n = 1;
+    else if(/^(明後日|あさって)$/.test(w)) n = 2;
+    else { const t = WEEK.indexOf(day); n = k==='来週' ? 7 - wd + t : k==='今週' ? t - wd : ((t - wd + 7) % 7 || 7); }
+    return `${all}（${md(n)}）`;
+  });
+}
+const rawText = (...lists) => lists.flat().filter(Boolean).map(x=>x.text).join(' ');
+async function makeFrom(m, raw){
+  let why = '';
+  if(aiOn()){
+    try{
+      const v = await askAI(promptMake({person:m, rawR:raw.rawR, rawH:raw.rawH, prevHand:raw.prevHand}));
+      const rec = normRec(v); if(!m) FK.forEach(k=>{ if(k!=='hand') rec[k] = k==='note' ? '' : null; });
+      const src = rawText(raw.rawR, raw.rawH) + (raw.prevHand ? ' ' + raw.prevHand : '');
+      const added = ['note','hand'].filter(k=>addedWords(rec[k], src).length);
+      if(added.length){ const rr = makeRules(m, raw).rec; added.forEach(k=>{ rec[k] = rr[k]; }); }
+      keepStaffOut(rec);
+      ai.last.added = added;
+      const about = rec.hand ? (v.hand_about===null ? null : (validId(v.hand_about) || (m ? m.id : null))) : null;
+      return {rec, about, unsure: Array.isArray(v.unsure) ? v.unsure.filter(x=>FK.includes(x)) : [], by:'haiku'};
+    }catch(e){ why = aiFail(e); }
+  }
+  const out = makeRules(m, raw); out.why = why; return out;
+}
+function fallbackNotice(why){ if(why && why!=='cancelled') ui.notice = {kind:'warn', text: why==='limit' ? '今日、文を整える係に頼める回数を使い切ったので、決まった言い方を読んで作りました。' : '文を整える係が使えなかったので、決まった言い方を読んで作りました。'}; }
+async function doMake(){
+  const m = byId(ui.who); const dr = ui.draft; if(!dr || ui.busy) return;
+  ui.busy = 'make'; ui.notice = null; render();
+  const out = await makeFrom(m, dr);
+  ui.busy = null;
+  if(ui.draft!==dr){ render(); return; }
+  FK.forEach(k=>{ dr[k] = out.rec[k]; });
+  dr.hand = addDates(dr.hand);
+  dr.handAbout = out.about; dr.unsure = out.unsure; dr.made = true; dr.madeBy = out.by; dr.fixes = []; dr.touched = true;
+  ui.flash = FK.filter(k=>hasVal(dr,k));
+  fallbackNotice(out.why);
+  render(); showMade();
+}
+function showMade(){
+  const h = $('#fh'), top = document.querySelector('.top');
+  if(isWide() || ui.notice || !h){ window.scrollTo(0,0); return; }
+  window.scrollTo(0, Math.max(0, h.getBoundingClientRect().top + window.scrollY - (top ? top.offsetHeight : 0) - 12));
+}
+const hasVal = (r,k) => k==='note'||k==='hand' ? !!r[k] : r[k]!=null;
+
+function fixRules(text, cur){
+  const t = norm(String(text||'')).trim(); const r = JSON.parse(JSON.stringify(cur)); const changed = [];
+  const inText = (x) => ['note','hand'].find(k=>r[k] && r[k].includes(x));
+  let m = t.match(/「?(.+?)」?(?:を|は)\s*「?(.+?)」?(?:に|へ)(?:直して|なおして|変えて|かえて|して)/);
+  if(m){ const k = inText(m[1]); if(k){ r[k] = r[k].split(m[1]).join(m[2]); changed.push(k); return {r, changed, said:'直しました'}; } }
+  if(/最後の文/.test(t) && /(いらない|消して|けして|取って|とって|削って)/.test(t)){
+    const k = /申し送り/.test(t) ? 'hand' : 'note';
+    if(r[k]){ const ss = r[k].match(/[^。！？]+[。！？]?/g) || []; ss.pop(); r[k] = ss.join(''); changed.push(k); return {r, changed, said: k==='hand' ? '申し送りの最後の文を消しました' : '様子の最後の文を消しました'}; }
+  }
+  m = t.match(/「?(.+?)」?(?:を|は)\s*(?:消して|けして|いらない|取って|とって)/);
+  if(m){ const k = inText(m[1]); if(k){ r[k] = r[k].split(m[1]).join('').replace(/^[、。]+|、(?=。)/g,''); changed.push(k); return {r, changed, said:'消しました'}; } }
+  m = t.match(/申し送り(?:に|へ)\s*[、,]?\s*(.+?)\s*(?:と|って)?\s*(?:入れて|いれて|足して|たして|書いて|かいて)?$/);
+  if(m && m[1]){ const add = cleanText(m[1]); if(add){ r.hand = (r.hand||'') + add; changed.push('hand'); return {r, changed, said:'申し送りに足しました'}; } }
+  const f = parse(t).found;
+  ['t','p','o'].forEach(k=>{ if(f[k]!=null){ r[k] = f[k]; changed.push(k); } });
+  if(f.bp){ r.bp = f.bp; changed.push('bp'); }
+  if(f.water){ r.water = {items:f.water.items, total:f.water.total}; changed.push('water'); }
+  if(f.meal){ r.meal = Object.assign({}, r.meal||{}, f.meal); changed.push('meal'); }
+  if(f.toilet){ r.toilet = Object.assign({}, r.toilet||{}, f.toilet); changed.push('toilet'); }
+  if(f.bath){ r.bath = f.bath; changed.push('bath'); }
+  if(f.hand){ r.hand = (r.hand||'') + f.hand; changed.push('hand'); }
+  if(!changed.length && f.note && !/(直して|なおして|変えて|かえて|消して|けして|違う|ちがう|間違|まちが|じゃない|そこ|ここ)/.test(t)){ r.note = (r.note||'') + fixNames(f.note, {family:true}); changed.push('note'); }
+  if(!changed.length) return {r:cur, changed:[], ask:'どこを直すか、分かりませんでした。欄を押しても直せます。'};
+  return {r, changed, said: changed.map(k=>LABEL[k]).join('・') + 'を直しました'};
+}
+async function fixFrom(m, cur, said, src){
+  let why = '';
+  if(aiOn()){
+    try{
+      const v = await askAI(promptFix({person:m, record:recOf(cur), said}));
+      if(v.ask) return {r:cur, changed:[], ask:String(v.ask), by:'haiku'};
+      const nr = normRec(v.record); const changed = Array.isArray(v.changed) ? v.changed.filter(k=>FK.includes(k)) : [];
+      const r = JSON.parse(JSON.stringify(cur)); changed.forEach(k=>{ r[k] = nr[k]; });
+      const added = changed.filter(k=>(k==='note'||k==='hand') && addedWords(r[k], [src, said, cur[k]].join(' ')).length);
+      ai.last.added = added;
+      if(added.length){ const out = fixRules(said, cur); out.by = 'rules'; return out; }
+      if(!changed.length) return v.said ? {r:cur, changed:[], said: String(v.said), by:'haiku'} : {r:cur, changed:[], ask:'どこを直すか、分かりませんでした。', by:'haiku'};
+      return {r, changed, said: String(v.said || '直しました'), by:'haiku'};
+    }catch(e){ why = aiFail(e); }
+  }
+  const out = fixRules(said, cur); out.why = why; out.by = 'rules'; return out;
+}
+function dropFromRaw(dr, said){
+  const m = norm(String(said||'')).match(/「?(.+?)」?\s*[、,]?\s*(?:を|は|って|、)\s*[、,]?\s*(?:(?:原文|話した文)から)?\s*(?:消して|けして|消す|いらない|取って|とって|削って)/);
+  if(!m) return '';
+  const core = m[1].replace(/^(?:原文の|原文から|話した文の|話した文から|えーと|えっと|あの)\s*/,'').replace(/[「」『』]/g,'');
+  if(/^(?:申し送り|連絡帳|様子|体温|血圧|脈|酸素|水分|食事|排泄|お手洗い|お通じ|入浴|最後の文|最初の文|今の文)(?:の欄|の文)?$/.test(core.trim())) return '';
+  const chars = [...core.replace(/[\s、,。．.！!？?]/g,'')]; if(chars.length<4) return '';
+  const rx = new RegExp(chars.map(escRx).join('[\\s、,。！？!?]*') + '[\\s、,。！？!?]*');
+  for(const k of ['rawR','rawH']) for(const x of dr[k]||[]){
+    const n = norm(x.text); const hit = n.match(rx); if(!hit) continue;
+    x.text = (x.text.slice(0, hit.index) + ' ' + x.text.slice(hit.index + hit[0].length)).replace(/^[\s、,。]+|[\s、,]+$/g,'').replace(/\s{2,}/g,' ').trim();
+    dr[k] = dr[k].filter(y=>y.text);
+    return core.replace(/[、,\s]+$/,'');
+  }
+  return '';
+}
+const YES_ONLY = /^(?:はい|うん|ええ|そう|そうそう|それ|それで|合って|あって|合ってる|あってる|いい|大丈夫|だいじょうぶ|正しい|ただしい|お願い|おねがい|オッケー|ok|です|ます|います|いる|よ|ね|します|して|ください)+$/i;
+function withAnswer(fixes, text){
+  const p = (fixes||[])[(fixes||[]).length-1];
+  if(!p || !p.asked || !aiOn() || !YES_ONLY.test(norm(String(text||'')).replace(/[\s、,。．.！!？?「」]/g,''))) return text;
+  return `${p.text}\n（画面の問い「${p.said}」に「${text}」と答えました）`;
+}
+async function doFix(text){
+  const m = byId(ui.who); const dr = ui.draft; if(!dr || ui.busy) return;
+  const said = withAnswer(dr.fixes, text);
+  const fx = {at:Date.now(), text}; dr.fixes = dr.fixes || []; dr.fixes.push(fx);
+  ui.busy = 'fix'; ui.notice = null; render();
+  const out = await fixFrom(m, recOf(dr), said, rawText(dr.rawR, dr.rawH, dr.fixes));
+  ui.busy = null;
+  if(ui.draft!==dr){ render(); return; }
+  out.changed.forEach(k=>{ dr[k] = k==='note'||k==='hand' ? (out.r[k]||'') : out.r[k]; });
+  if(out.changed.includes('hand')) dr.hand = addDates(dr.hand);
+  dr.unsure = (dr.unsure||[]).filter(k=>!out.changed.includes(k));
+  const gone = dropFromRaw(dr, text);
+  const msg = !gone ? '' : out.changed.length ? `「${gone}」を消しました。話した文からも消しました。` : `話した文から「${gone}」を消しました。連絡帳と申し送りには、もともと入っていません。`;
+  dr.touched = true; fx.said = msg || out.ask || out.said; fx.asked = !msg && !!out.ask;
+  ui.flash = out.changed;
+  ui.notice = Object.assign(msg ? {text:msg} : out.ask ? {kind:'warn', text:out.ask} : {text: out.said}, {at:'talk'});
+  fallbackNotice(out.why);
+  render();
+}
+
+function readyDraft(d){ return !!(d && d.name && d.kana && d.days && d.days.length) || !!(d && d.remove && validId(d.id)); }
+function normDraft(d, prev){
+  if(!d || typeof d!=='object') return null;
+  const days = Array.isArray(d.days) ? WEEK.filter(w=>d.days.map(String).some(x=>x.startsWith(w))) : [];
+  const out = {id: validId(d.id), name: String(d.name||'').replace(/[\s　]+/g,' ').trim(), kana: toHira(String(d.kana||'')).replace(/[\s　]+/g,' ').trim(), days, remove: !!d.remove};
+  if(out.id && out.remove){ const m = byId(out.id); out.name = out.name || m.name; out.kana = out.kana || m.kana; out.days = out.days.length ? out.days : m.days; }
+  const kp = out.kana.split(' ');
+  out.name = out.name.split(' ').map((x,i)=>/^(?:未定|不明|未確定|未入力|\?+|？+|[○〇◯×]+)$/.test(x) ? (kp[i] || '') : x).filter(Boolean).join(' ');
+  return out;
+}
+function peopleRules(text, d){
+  const t = norm(String(text||'')).trim();
+  const cur = d ? Object.assign({}, d) : {id:null, name:'', kana:'', days:[], remove:false};
+  if(d && /^(はい|お願い|おねがい|登録して|それで|いいです|大丈夫)/.test(t)) return {reply:'登録します。', draft:cur, choices:null, action: readyDraft(cur) ? 'save' : 'ask'};
+  if(/^(やめて|やめます|いらない|取り消し)/.test(t)) return {reply:'やめました。', draft:null, choices:null, action:'cancel'};
+  const nm = t.match(/(?:名前は|お名前は)\s*([一-龯々ヶ]{1,4}(?:\s+[一-龯々ヶァ-ヶー]{1,4})?)/) || t.match(/([一-龯々ヶ]{2,6}|[一-龯々ヶ]{1,4}\s+[一-龯々ヶァ-ヶー]{1,4})\s*(?:さん|様)/);
+  if(nm) cur.name = nm[1].replace(/\s+/g,' ');
+  const kn = t.match(/(?:ふりがなは|読みは|よみは)\s*([ぁ-ゖー]{2,}(?:\s+[ぁ-ゖー]{2,})?)/);
+  const runs = (t.match(/[ぁ-ゖー]{3,}(?:\s+[ぁ-ゖー]{2,})?/g) || []).filter(x=>!/(です|ます|ました|ください)$/.test(x)).sort((a,b)=>b.length-a.length);
+  if(kn) cur.kana = kn[1].replace(/\s+/g,' '); else if(runs.length && runs[0].replace(/\s/g,'').length>=4) cur.kana = runs[0].replace(/\s+/g,' ');
+  let days = [];
+  if(/平日/.test(t)) days = ['月','火','水','木','金'];
+  else { const x = t.match(/(?:曜日は|来る日は)\s*([月火水木金土日・、と\s]+)/); const src = x ? x[1] : (t.match(/[月火水木金土日]曜/g)||[]).join(''); days = WEEK.filter(w=>src.includes(w)); }
+  if(days.length) cur.days = days;
+  if(!cur.name) return {reply:'お名前を、漢字が分かるように話してください。例：「山田花子さん」', draft: cur.kana || cur.days.length ? cur : null, choices:null, action:'ask'};
+  if(!cur.kana) return {reply:`${cur.name}さんの、ふりがなを話してください。`, draft:cur, choices:null, action:'ask'};
+  if(!cur.days.length) return {reply:'来る曜日を話してください。例：「月曜と木曜」', draft:cur, choices:null, action:'ask'};
+  return {reply:`${cur.name}さん（${cur.kana}）、${cur.days.join('・')}。これで登録しますか。`, draft:cur, choices:null, action:'confirm'};
+}
+function applyChoice(d, prev, choices, said){
+  if(!d || !choices) return {d, from:'', to:''};
+  const s = String(said||'').trim(), m = s.match(/^「(.+)」にします$/);
+  const ch = m ? m[1] : choices.find(x=>s.replace(/[。、,\s]/g,'').replace(/(?:にします|でお願いします|です)$/,'')===x.replace(/\s/g,''));
+  if(!ch || !choices.includes(ch)) return {d, from:'', to:''};
+  const KANA = ['ひらがなのまま','カタカナのまま'];
+  const others = choices.filter(x=>x!==ch && !KANA.includes(x));
+  const name0 = d.name || (prev && prev.name) || '';
+  let name = name0, from = '', to = '';
+  if(KANA.includes(ch)){
+    const conv = ch==='カタカナのまま' ? (t => t.replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60))) : (t => t);
+    const kp = String(d.kana || (prev && prev.kana) || '').split(/\s+/).filter(Boolean);
+    if(!name) name = kp.map(conv).join(' ');
+    else{
+      const parts = name.split(/\s+/);
+      const hit = parts.map(x=>others.some(o=>x.includes(o)));
+      const pick = hit.some(Boolean) ? hit : parts.map(x=>/^[ぁ-ゖー]+$/.test(x));
+      name = parts.map((x,i)=>pick[i] && kp[i] ? conv(kp[i]) : x).join(' ');
+      if(name!==name0){ from = name0; to = name; }
+    }
+  }else if(!name.includes(ch)){
+    const o = others.find(o=>name.includes(o)); if(o){ name = name.replace(o, ch); from = o; to = ch; }
+  }
+  return {d: name===d.name ? d : Object.assign({}, d, {name}), from, to};
+}
+async function doPeople(text){
+  const c = ui.pchat; if(ui.busy) return;
+  c.log.push({who:'me', text}); ui.busy = 'people'; ui.notice = null; render();
+  const prevDraft = c.draft, prevChoices = c.choices;
+  let v = null, why = '';
+  if(aiOn()){ try{ v = await askAI(promptPeople({draft:c.draft, log:c.log.slice(-9,-1), said:text}), {cache:false}); }catch(e){ why = aiFail(e); } }
+  if(!v){ v = peopleRules(text, c.draft); fallbackNotice(why); }
+  ui.busy = null;
+  const act = ['ask','confirm','save','cancel'].includes(v.action) ? v.action : 'ask';
+  if(act==='cancel'){ c.draft = null; c.choices = null; c.action = null; c.log.push({who:'sys', text: String(v.reply || 'やめました。')}); render(); return; }
+  c.draft = v.draft ? normDraft(v.draft, c.draft) : (act==='save' ? c.draft : null);
+  const fixd = applyChoice(c.draft, prevDraft, prevChoices, text); c.draft = fixd.d;
+  let reply = String(v.reply || ''); if(fixd.from) reply = reply.split(fixd.from).join(fixd.to);
+  c.choices = Array.isArray(v.choices) && v.choices.length ? v.choices.slice(0,5).map(String) : null;
+  c.action = act;
+  if(act==='save'){ if(readyDraft(c.draft)){ commitDraft(reply); return; } c.action = 'ask'; }
+  c.log.push({who:'sys', text: reply});
+  render();
+}
+function commitDraft(reply){
+  const c = ui.pchat; const d = c.draft; if(!readyDraft(d)) return;
+  let text;
+  if(d.remove){ const m = byId(d.id); m.gone = true; text = `${m.name}さんを、一覧から外しました。`; }
+  else if(d.id){ const m = byId(d.id); m.name = d.name; m.kana = d.kana; m.days = d.days; text = `${m.name}さんを直しました。`; }
+  else { const id = 'm' + String(st.pseq++).padStart(2,'0'); st.master.push({id, name:d.name, kana:d.kana, days:d.days, c:'c'+(st.master.length%6)}); text = `${d.name}さんを登録しました。`; }
+  save();
+  c.log.push({who:'sys', text}); c.draft = null; c.choices = null; c.action = null; ui.notice = {text};
+  render();
+}
+
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const inFrame = (()=>{ try{ return window.self !== window.top; }catch(_){ return true; } })();
+const heard = () => { const p = String(voice.partial||'').trim(); return p ? (voice.base ? voice.base + '\n' : '') + p : voice.base; };
+const heardDone = () => { const m = String(voice.partial||'').match(/^[\s\S]*[、。,，！？!?\s]/); const p = m ? m[0].trim() : ''; return p ? (voice.base ? voice.base + '\n' : '') + p : voice.base; };
+const voice = { engine: SR && !inFrame ? 'web' : null, dict:null, rec:null, base:'', partial:'', timer:null, sim:false };
+if(window.claude && typeof window.claude.use==='function'){
+  window.claude.use('dictation').then(d=>{
+    if(!d){ if(!voice.engine && SR) voice.engine = 'web'; render(); return; }
+    voice.dict = d; voice.engine = 'claude';
+    d.onPartial(({text})=>{ voice.partial = text; showLive(); });
+    d.onFinal(({text})=>{ const x = String(text||'').trim(); if(x) voice.base = voice.base ? voice.base + '\n' + x : x; voice.partial = ''; showLive(); });
+    d.onState(({state, reason})=>{
+      if(state==='idle' && ui.listening && !voice.sim){
+        if(reason && !['stopped','viewer_stopped'].includes(reason) && !voice.base){ micFail(reason==='not_granted' ? 'not-allowed' : reason); return; }
+        finishListening(heard());
+      }
+    });
+    render();
+  }).catch(()=>{ if(!voice.engine && SR) voice.engine = 'web'; });
+  window.claude.use('sample').then(f=>{ ai.fn = typeof f==='function' ? f : null; render(); }).catch(()=>{ ai.fn = null; });
+}else if(SR && inFrame){ voice.engine = 'web'; }
+if(!(window.claude && typeof window.claude.use==='function') && AI_URL){ ai.fn = askRelay; ai.relay = true; }
+function startListening(target){
+  if(ui.busy) return;
+  if(voice.blocked){ simulate(target); return; }
+  ui.target = target; ui.listening = true; ui.live = ''; ui.liveDone = ''; voice.base = ''; voice.partial = ''; voice.sim = false; voice.ending = false;
+  if(voice.engine==='claude' && voice.dict){
+    voice.dict.start({language:'ja'}).catch(err=>{ if(ui.listening && !voice.base) micFail(err && err.code==='not_granted' ? 'not-allowed' : (err && err.code) || 'error'); });
+  }else if(voice.engine==='web' && SR){
+    try{
+      const rec = new SR(); voice.rec = rec;
+      rec.lang = 'ja-JP'; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
+      rec.onresult = e=>{
+        let f = '', inter = '';
+        for(let i=0;i<e.results.length;i++){
+          const t = e.results[i][0].transcript;
+          if(e.results[i].isFinal){ const flat = f.replace(/\n/g,''), x = t.trim(); if(!x) continue; f = flat && x.startsWith(flat) ? x : (flat.endsWith(x) ? f : (f ? f + '\n' + x : x)); } else inter += t;
+        }
+        voice.base = f; voice.partial = inter; showLive();
+      };
+      rec.onerror = e=>{ voice.err = e.error; };
+      rec.onend = ()=>{
+        voice.rec = null;
+        if(!ui.listening) return;
+        const said = heard();
+        if(!said && voice.err && voice.err!=='aborted'){ micFail(voice.err); return; }
+        finishListening(said);
+      };
+      voice.err = null; rec.start();
+    }catch(_){ simulate(target); return; }
+  }else{
+    simulate(target); return;
+  }
+  render();
+}
+function stopListening(){
+  if(voice.sim){ clearInterval(voice.timer); voice.sim = false; finishListening(voice.simText); return; }
+  if(voice.engine==='claude' && voice.dict){ voice.dict.stop().catch(()=>{}); return; }
+  if(voice.rec){ try{ voice.rec.stop(); }catch(_){ finishListening(heard()); } return; }
+  finishListening(heard());
+}
+function simulate(target, text){
+  const ex = text || exampleFor(target);
+  ui.target = target; ui.listening = true; voice.sim = true; voice.base = ''; voice.partial = ''; voice.simText = ex;
+  let k = 0; const step = Math.max(1, Math.round(ex.length/60));
+  clearInterval(voice.timer);
+  voice.timer = setInterval(()=>{
+    k = Math.min(ex.length, k + step); voice.partial = ex.slice(0,k); showLive();
+    if(k>=ex.length){ clearInterval(voice.timer); setTimeout(()=>{ if(voice.sim && ui.listening){ voice.sim = false; finishListening(ex); } }, 500); }
+  }, window.__simSpeed || 70);
+  render();
+}
+function exampleFor(target){
+  if(target==='hand') return ui.sheet && ui.sheet.made ? '「通院のため」を「歯医者のため」に変えて' : HAND_EXAMPLE;
+  if(target==='people') return ui.pchat.action==='confirm' ? 'はい、お願いします' : PEOPLE_EXAMPLE;
+  if(ui.draft && ui.draft.made) return FIX_EXAMPLE;
+  const ix = todays().findIndex(m=>m.id===ui.who);
+  return EXAMPLES[(ix<0?0:ix) % EXAMPLES.length];
+}
+function micFail(code){
+  ui.listening = false; voice.sim = false;
+  ui.notice = (code==='no-speech')
+    ? {kind:'warn', text:'声が聞き取れませんでした。もう一度押して、話してください'}
+    : {kind:'warn', text:'この端末ではマイクが使えませんでした。マイクを押すと、例の文で同じ流れを試せます'};
+  if(code!=='no-speech') voice.blocked = true;
+  render();
+}
+function showLive(){
+  if(ui.listening && !voice.sim && !voice.ending && !String(voice.partial||'').trim() && saidEnd(voice.base)){ voice.ending = true; stopListening(); return; }
+  ui.live = heard(); ui.liveDone = heardDone();
+  const el = document.querySelector('[data-live]');
+  if(el) el.innerHTML = `<span class="live">${esc(ui.live)}</span><span class="caret"></span>`;
+  const g = ui.target==='rec' && ui.view==='record' && ui.draft && !ui.draft.made ? document.querySelector('[data-pvbox]') : null;
+  if(g) updatePv(g, ui.live);
+}
+function finishListening(said){
+  const target = ui.target;
+  const raw0 = String(said||'').trim();
+  const text = stripEnd(raw0), flat = flatSaid(text);
+  ui.listening = false; voice.sim = false; voice.ending = false; ui.live = '';
+  if(!text){ ui.notice = raw0 ? null : {kind:'warn', text:'声が聞き取れませんでした。もう一度押して、話してください'}; render(); return; }
+  if(target==='me'){ addMe(flat); return; }
+  if(target==='people'){ if(ui.view==='people') doPeople(flat); return; }
+  if(target==='hand'){
+    const s = ui.sheet; if(!s || s.kind!=='hand') return;
+    if(!s.made){
+      const sp = splitFixCmd(text, s.raw.map(x=>x.text).join(' '));
+      if(sp.fix.length){ if(sp.body) s.raw.push({at:Date.now(), text:sp.body}); makeThenFixHand(sp.fix); return; }
+      const at = Date.now(); s.raw.push({at, text:flat}); render(); return;
+    }
+    doMoreHand(flat); return;
+  }
+  if(!ui.draft || ui.view!=='record') return;
+  if(ui.draft.made){ doFix(flat); return; }
+  addRaw(text); render();
+}
+function nameOf(text){
+  const pieces = norm(String(text||'')).split(/[。、,.!！?？\s]+|(?:です|でございます|と申します|といいます|と言います)/).map(t=>t
+    .replace(/^(?:えーっと|えーと|えっと|ええと|あの|はい|えー)+/,'').replace(/^(?:私の名前は|わたしの名前は|名前は|なまえは|私は|わたしは|僕は|ぼくは|私|わたし)/,'')
+    .replace(/(?:だよ|よ|ね|さん)+$/,'').trim()).filter(t=>t && t.length<=8 && !/^(?:ですね|です|ね|よ)$/.test(t));
+  return pieces.find(t=>staffAll().some(s=>s.name===t)) || pieces[0] || '';
+}
+function addMe(text){
+  const t = nameOf(text);
+  if(!t){ if(ui.sheet && ui.sheet.kind==='me') ui.sheet.err = `お名前が聞き取れませんでした。上の一覧にある方は、名前を押します。無い方は、もう一度マイクを押して「${ME_EXAMPLE}」のように名字だけ話してください`; else ui.notice = {kind:'warn', text:`お名前が聞き取れませんでした。「${ME_EXAMPLE}」のように話してください`}; render(); return; }
+  let x = staffAll().find(s=>s.name===t);
+  if(!x){ st.staffAdd = st.staffAdd || []; x = {id:'s' + (STAFF.length + st.staffAdd.length + 1), name:t}; st.staffAdd.push(x); }
+  setMe(x.id);
+}
+function setMe(id){
+  st.me = id; save(); ui.meOk = Date.now();
+  const then = ui.sheet && ui.sheet.then; ui.sheet = null;
+  const n = unread();
+  ui.notice = {text:`書く人を、${staffName(id)}さんにしました` + (n ? `。申し送りの「まだ ${n}」は、${staffName(id)}さんが「読んだ」をまだ押していない数です` : '')};
+  goThen(then);
+  render();
+}
+function addRaw(text){
+  const dr = ui.draft; const at = Date.now(); const sp = splitSaid(text);
+  if(sp.R) dr.rawR.push({at, text:sp.R});
+  if(sp.H) dr.rawH.push({at, text:sp.H});
+  dr.touched = true;
+}
+
+function render(){
+  const cur = ['list','record','paper'].includes(ui.view) ? 'list' : ui.view;
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-current', b.dataset.view===cur ? 'page' : 'false'));
+  $('#today').textContent = mdLong(TODAY);
+  $('#mename').textContent = staffName(ME()) + 'さん';
+  const u = unread(); const dot = $('#hdot'); dot.hidden = !u; dot.textContent = `まだ ${u}`; dot.setAttribute('aria-label', `まだ読んでいない申し送り ${u}件`);
+  const w = $('#aiwho'); if(w) w.textContent = aiOn() ? (ai.relay ? '文を作る・直す・利用者の登録は、Anthropic 社の Claude（Haiku）が受け持ちます。そのために、話した文を Anthropic 社へ送ります。' : '文を作る・直す・利用者の登録は、この画面を開いている方の Claude（Haiku）が受け持ちます。') : '文を作る・直すのは、決まった言い方を読む仕組みです。';
+  const body = ui.view==='list' ? viewList() : ui.view==='record' ? viewRecord() : ui.view==='paper' ? viewPaper() : ui.view==='people' ? viewPeople() : viewHand();
+  $('#view').innerHTML = noticeHtml() + (ui.view==='paper' ? '' : toastHtml()) + body;
+  renderSheet();
+  ui.flash = [];
+  const log = document.querySelector('.log'); if(log) log.lastElementChild && log.lastElementChild.scrollIntoView({block:'nearest'});
+}
+
+function viewList(){
+  const list = todays();
+  const done = list.filter(m=>st.records[m.id]).length;
+  const cards = list.map(m=>{
+    const r = st.records[m.id];
+    const kept = ui.drafts[m.id] ? `<span class="chip key">${ic('pen')}書きかけ</span>` : '';
+    const chip = kept && !r ? kept : (!r ? '<span class="chip plain">まだ</span>' : (r.printed ? `<span class="chip ok">${ic('print')}印刷した</span>` : `<span class="chip ok">${ic('check')}保存した</span>`) + kept);
+    const hand = r && r.hand ? `<span class="chip hand">${ic('msg')}申し送り</span>` : '';
+    return `<button class="card${r?' done':''}" type="button" data-act="open" data-id="${m.id}" data-fk="card-${m.id}">${av(m)}<span class="who"><span class="nm">${esc(m.name)}</span><span class="kn">${esc(m.kana)}</span><span class="row">${chip}${hand}</span></span></button>`;
+  }).join('');
+  return `<div class="h"><h2>だれの記録をしますか</h2></div>
+    <div class="prog"><b class="num">保存した人 ${done} / ${list.length}人</b></div>
+    <section aria-label="今日来ている人"><div class="cards">${cards || '<div class="panel empty">今日来る方がいません。利用者の画面で、来る曜日を直せます</div>'}</div></section>
+    ${done ? `<div class="listfoot"><button class="btn lg" type="button" data-act="print-all" data-fk="print-all">${ic('print')}保存した人の連絡帳を、まとめて印刷（${done}人分）</button></div>` : ''}`;
+}
+
+function busyHtml(){
+  const t = ui.busy==='make' ? '連絡帳と申し送りを作っています' : ui.busy==='fix' ? '直しています' : '考えています';
+  return `<div class="busy" role="status">${'<span class="spin" aria-hidden="true"></span>'}<span>${t}<br><small style="font-weight:400">数秒かかります</small></span></div>`;
+}
+function talkBlock(target, stage){
+  if(ui.busy) return busyHtml();
+  if(ui.listening && ui.target===target){
+    return `<div class="lrow"><button class="mic on" type="button" data-act="mic" data-t="${target}" data-fk="mic">${ic('stop')}<span class="mt">おわり</span></button>
+      <p class="miclbl">聞いています<small><span class="nw">「おわり」と言うか、</span><span class="nw">押すと止まります</span></small></p></div>
+      <div class="said" data-live aria-live="polite"><span class="live">${esc(ui.live)}</span><span class="caret"></span></div>`;
+  }
+  const noVoice = !voice.engine || voice.blocked;
+  const nv = noVoice ? '<small>この端末では、例の文が入ります</small>' : '';
+  if(stage==='fix'){
+    const ex = target==='hand' ? HAND_FIX_SHOW : FIX_SHOW;
+    if(target==='hand') return `<button class="mic small" type="button" data-act="mic" data-t="hand" data-fk="mic" aria-label="話して足す・直す">${ic('mic')}</button>
+      <p class="miclbl">話して足す・直す${noVoice ? nv : '<small><span class="nw">話した事は、</span><span class="nw">上の申し送りに入ります</span></small>'}</p>
+      <p class="example"><b>直し方の例</b>${esc(ex)}</p>`;
+    return `<button class="mic small" type="button" data-act="mic" data-t="${target}" data-fk="mic" aria-label="話して直す">${ic('mic')}</button>
+      <p class="miclbl">話して直す${noVoice ? nv : '<small>直したい所を言うと、そこだけ変わります</small>'}</p>
+      <p class="example"><b>直し方の例</b>${esc(ex)}</p>`;
+  }
+  if(stage==='more'){
+    return `<button class="mic" type="button" data-act="mic" data-t="${target}" data-fk="mic" aria-label="続けて話す">${ic('mic')}</button>
+      <p class="miclbl">続けて話す${nv || (target==='people' ? '<small>上の問いかけに、話して答えます</small>' : `<small>話した文は、${isWide() ? '右' : '下'}にたまります</small>`)}</p>`;
+  }
+  if(target==='me') return `<button class="mic small" type="button" data-act="mic" data-t="me" data-fk="mic" aria-label="名前を言って足す">${ic('mic')}</button>
+    <p class="miclbl">ほかの名前は、言って足す<small>例：「${esc(ME_EXAMPLE)}」</small></p>`;
+  const ex = target==='hand' ? HAND_EXAMPLE : target==='people' ? PEOPLE_EXAMPLE : EXAMPLES[0];
+  return `<button class="mic" type="button" data-act="mic" data-t="${target}" data-fk="mic" aria-label="押して話す">${ic('mic')}</button>
+    <p class="miclbl">押して話す${nv}</p>
+    <p class="example"><b>話し方の例<small>この通りでなくて大丈夫です</small></b>${esc(ex)}</p>
+    ${noVoice || target==='people' ? '' : `<button class="btn text" type="button" data-act="try" data-t="${target}" data-fk="try">話さずに、例の文で試す</button>`}`;
+}
+const staffHint = () => `<p class="shint">${ic('lock')}<span>職員だけの話は、<span class="nw">「申し送り」と言ってから</span>話します。<span class="nw">ご家族の紙には載りません。</span></span></p>`;
+function rawHtml(r, editable){
+  const box = (k, cls, icon, title, extra) => {
+    const list = r[k];
+    const items = list.map((x,i)=>`<li>${esc(x.text)}${editable ? `<button class="xbtn" type="button" data-act="raw-del" data-k="${k}" data-i="${i}" data-fk="del-${k}-${i}" aria-label="この文を消す">${ic('x')}消す</button>` : ''}</li>`).join('');
+    return `<div class="rawbox ${cls}"><p class="rawh">${ic(icon)}${title}${extra||''}</p>${items ? `<ol class="rawlist">${items}</ol>` : '<p class="rawempty">まだありません</p>'}</div>`;
+  };
+  return `<div class="raws">${box('rawR','r-book','book','連絡帳にする文')}${box('rawH','r-hand','msg','申し送りにする文', `<small>${ic('lock')}事業所の中だけ</small>`)}</div>`;
+}
+function fcard(key, label, icon, cls, valueHtml, extra){
+  const r = ui.draft; const empty = !valueHtml; const uns = (r.unsure||[]).includes(key);
+  const u = ['t','bp','p'].includes(key) ? usualOf(ui.who) : null; const dev = empty ? '' : devOf(key, r, u);
+  const warn = !empty && (warnOf(key, r) || !!dev);
+  if(!empty && u && !extra) extra = usualText(key, u);
+  const flash = ui.flash.includes(key) ? ' flash' : '';
+  return `<button class="fcard ${cls}${empty?' empty':''}${warn||uns?' warn':''}${uns?' unsure':''}${flash}${key==='note'||key==='hand'?' wide':''}" type="button" data-act="edit" data-f="${key}" data-fk="f-${key}" style="${flash?`animation-delay:${ui.flash.indexOf(key)*.12}s`:''}">
+    <span class="fl">${ic(icon)}${label}</span>
+    <span class="fv${key==='note'||key==='hand'?' txt':''}">${valueHtml || '—'}</span>
+    ${extra ? `<span class="fx">${extra}</span>` : ''}
+    ${warn||uns ? `<span class="fw"${dev && !uns ? ' data-dev' : ''}>${ic('alert')}${uns ? '聞き違いかもしれません。' : dev ? devHtml(dev) : ''}<span class="nw">確かめて</span><span class="nw">ください</span></span>` : ''}
+    <span class="pen" aria-hidden="true">${ic('pen')}</span><span class="vh">（押すと直せます）</span>
+  </button>`;
+}
+function waterHtml(r){ if(!r.water) return ''; return r.water.total!=null ? `${r.water.total}<small>mL</small>` : '<small>量を話していません</small>'; }
+const PV = [['t','体温','thermo','f-vital'],['bp','血圧','heart','f-vital'],['p','脈','pulse','f-vital'],['o','酸素','o2','f-vital'],['water','水分','cup','f-water'],['meal','食事','bowl','f-meal'],['toilet','お手洗い','toilet','f-toilet'],['bath','入浴','bath','f-bath'],['note','様子','smile','f-note'],['hand','申し送り','msg','f-hand']];
+function previewOf(dr, live){
+  const build = t => {
+    const raw = {rawR: dr.rawR.slice(), rawH: dr.rawH.slice()};
+    if(t){ const sp = splitSaid(stripEnd(t)); if(sp.R) raw.rawR.push({text:sp.R}); if(sp.H) raw.rawH.push({text:sp.H}); }
+    return makeRules(byId(ui.who), raw).rec;
+  };
+  const rec = build(live);
+  if(live && live===ui.live && ui.liveDone!=null && ui.liveDone!==live){ const d = build(ui.liveDone); rec.note = d.note; rec.hand = d.hand; }
+  return rec;
+}
+function nwDots(s){ if(!s) return ''; const a = s.split('・'); return a.map((x,i)=>{ const w = x.split(' '); return w.map((y,j)=>`<span class="nw">${y}${j===w.length-1 && i<a.length-1 ? '・' : ''}</span>`).join(' '); }).join(''); }
+function pvVal(k, r, full){
+  if(k==='t') return r.t!=null ? `${fmt1(r.t)}<small>℃</small>` : '';
+  if(k==='bp') return r.bp ? `${r.bp.s}<small>/</small>${r.bp.d}` : '';
+  if(k==='p') return r.p!=null ? `${r.p}<small>回</small>` : '';
+  if(k==='o') return r.o!=null ? `${r.o}<small>%</small>` : '';
+  if(k==='water') return r.water ? (r.water.total!=null ? `${r.water.total}<small>mL</small>` : '<small>量はまだ</small>') : '';
+  if(k==='meal') return nwDots(esc(mealText(r.meal)));
+  if(k==='toilet') return nwDots(esc(toiletText(r.toilet)));
+  if(k==='bath') return esc(bathText(r.bath));
+  const x = String(r[k]||'').replace(/[。、\s]+$/,''); if(x.replace(/[、。,.\s]/g,'').length < 3) return '';
+  const max = full ? 60 : 12;
+  return esc(x.length>max ? x.slice(0,max) + '…' : x);
+}
+function pvItems(live){
+  const dr = ui.draft; const r = previewOf(dr, live); const full = !ui.listening;
+  if(ui.pvFor!==dr){ ui.pvFor = dr; ui.pvSeen = new Set(PV.map(x=>x[0]).filter(k=>pvVal(k, previewOf(dr, '')))); }
+  return PV.filter(([k])=>k!=='o' || r.o!=null).map(([k,label,icon,cls])=>{
+    const v = pvVal(k, r, full); const fresh = !!v && !ui.pvSeen.has(k);
+    if(v) ui.pvSeen.add(k); else ui.pvSeen.delete(k);
+    return {k, label, icon, cls, v, fresh};
+  });
+}
+function previewHtml(live){
+  if(!ui.draft) return '';
+  const items = pvItems(live).map(x=>`<li class="pvi ${x.cls}${x.v?'':' empty'}${x.fresh?' flash':''}${x.k==='note'||x.k==='hand'?' tx':''}" data-pv="${x.k}"><span class="pl">${ic(x.icon)}${x.label}</span><span class="pvv${['meal','toilet','bath','note','hand'].includes(x.k)?' txt':''}">${x.v || '—'}</span></li>`).join('');
+  return `<ul class="pv${ui.listening ? '' : ' full'}" aria-label="話すと入る欄">${items}</ul>`;
+}
+function updatePv(box, live){
+  const els = [...box.querySelectorAll('.pvi')]; const items = pvItems(live);
+  if(els.length!==items.length || els.some((e,i)=>e.dataset.pv!==items[i].k)){ box.innerHTML = previewHtml(live); return; }
+  items.forEach((x,i)=>{
+    const e = els[i]; e.classList.toggle('empty', !x.v);
+    if(x.fresh){ e.classList.remove('flash'); void e.offsetWidth; e.classList.add('flash'); }
+    const vv = e.querySelector('.pvv'), html = x.v || '—'; if(vv.innerHTML!==html) vv.innerHTML = html;
+  });
+}
+document.addEventListener('animationend', e=>{ if(e.target.classList && e.target.classList.contains('pvi')) e.target.classList.remove('flash'); });
+const pvBox = () => `<div class="pvbox"><p class="pvh">話すと、ここに入ります<small>入らない所も、「作る」で整えます。${ui.listening ? '' : '<span class="nw">欄は「作る」の後に、</span><span class="nw">押して直せます</span>'}</small></p><div data-pvbox>${previewHtml(ui.listening && ui.target==='rec' ? ui.live : '')}</div></div>`;
+const WIDE = window.matchMedia ? window.matchMedia('(min-width:900px)') : null;
+const isWide = () => !!(WIDE && WIDE.matches);
+if(WIDE && WIDE.addEventListener) WIDE.addEventListener('change', ()=>{ if(ui.view==='record') render(); });
+function viewRecord(){
+  const m = byId(ui.who); const r = ui.draft;
+  const head = `<div class="rhead"><button class="btn" type="button" data-act="back" data-fk="back">${ic('left')}もどる</button><div class="who">${av(m)}<h2>${esc(m.name)}<span class="vh">さんの記録</span></h2></div><span class="chip plain num">${mdLong(TODAY)}</span></div>`;
+  if(!r.made){
+    const n = r.rawR.length + r.rawH.length;
+    const label = r.rawH.length ? '連絡帳と申し送りを作る' : '連絡帳を作る';
+    const makeBtn = n && !ui.busy && !ui.listening ? `<div class="makebar"><button class="btn solid lg" type="button" data-act="make" data-fk="make">${ic('make')}${label}</button></div>` : '';
+    return `${head}
+      <div class="rgrid">
+        <section class="panel talk" aria-label="話す">${talkBlock('rec', n ? 'more' : 'first')}${makeBtn}${isWide() ? '' : pvBox()}${ui.busy||ui.listening ? '' : staffHint()}</section>
+        <section class="panel fields" aria-labelledby="fh">${isWide() ? pvBox() : ''}<div><h3 id="fh">${n ? '話した文' : '話した文は、ここにたまります'}</h3>${n ? `<p class="sub">何回でも話せます。話し終えたら${isWide() ? '左の' : '上の'}<span class="nw">「作る」を押します。</span>話したままの文は、<span class="nw">ご家族の紙に載りません</span></p>` : ''}</div>${rawHtml(r, !ui.busy && !ui.listening)}</section>
+      </div>`;
+  }
+  const wi = r.water && r.water.items ? r.water.items : [];
+  const wx = wi.length === 1 ? esc(wi[0].n) : wi.map(x=>`${esc(x.n)}${x.ml!=null ? ' ' + x.ml + 'mL' : ''}`).join('・');
+  const cards = [
+    fcard('t','体温','thermo','f-vital', r.t!=null ? `${fmt1(r.t)}<small>℃</small>` : ''),
+    fcard('bp','血圧','heart','f-vital', r.bp ? `${r.bp.s}<small>/</small>${r.bp.d}` : ''),
+    fcard('p','脈','pulse','f-vital', r.p!=null ? `${r.p}<small>回</small>` : ''),
+    r.o!=null ? fcard('o','酸素','o2','f-vital', `${r.o}<small>%</small>`) : '',
+    fcard('water','水分','cup','f-water', waterHtml(r), wx),
+    fcard('meal','食事','bowl','f-meal', nwDots(esc(mealText(r.meal)))),
+    fcard('toilet','お手洗い','toilet','f-toilet', nwDots(esc(toiletText(r.toilet)))),
+    fcard('bath','入浴','bath','f-bath', esc(bathText(r.bath))),
+    fcard('note','様子','smile','f-note', esc(r.note), r.note ? 'ご家族の連絡帳に載ります' : ''),
+    r.hand ? fcard('hand','申し送り','msg','f-hand', esc(r.hand), `${ic('lock')}連絡帳には載りません。保存すると、職員のスマホに知らせます`) : ''
+  ].join('');
+  const fixes = (r.fixes||[]).map(x=>`<li class="fix">${esc(x.text)}</li>`).join('');
+  const fold = `<details class="rawfold"><summary>${ic('book')}話した文を見る</summary><div class="in"><p class="sub">話したままの文は、ご家族の紙には載りません。要らない言葉は「〇〇は消して」と話すと、話した文からも消えます</p>${rawHtml(r, false)}
+      ${fixes ? `<div class="rawbox r-book"><p class="rawh">${ic('pen')}直した言葉</p><ol class="rawlist">${fixes}</ol></div>` : ''}
+      ${ui.backAsk ? `<div class="ask"><b>できた文と直した所は消えて、話した文に戻ります。</b><div class="row"><button class="btn text" type="button" data-act="unmake-cancel">やめる</button><button class="btn" type="button" data-act="unmake" data-fk="unmake">話した文に戻る</button></div></div>`
+        : `<div><button class="btn" type="button" data-act="unmake-ask" data-fk="unmake-ask">${ic('left')}話した文に戻って話し足す</button></div>`}</div></details>`;
+  return `${head}
+    <div class="rgrid">
+      <section class="panel talk" aria-label="話して直す">${talkBlock('rec', 'fix')}${ui.busy || ui.listening ? '' : noticeHtml('talk')}</section>
+      <section class="panel fields" aria-labelledby="fh"><div><h3 id="fh">できた内容を、確かめてください</h3><p class="sub">違う所は、${isWide() ? '左' : '上'}のマイクで話して直せます。欄を押しても直せます</p></div>${/\bfcard [^"]*\bwarn\b/.test(cards) ? `<p class="wsum">${ic('alert')}<span>黄色の印の欄は、念のため見てください。<span class="nw">合っていれば、このまま</span><span class="nw">保存して大丈夫です。</span></span></p>` : ''}<div class="fgrid">${cards}</div>${fold}</section>
+    </div>
+    ${!ui.listening && !ui.busy ? `<div class="bar"><span class="hint">${st.records[m.id] ? '保存してある記録を直しています' : 'まだ保存していません'}</span><button class="me" type="button" data-act="me" data-fk="me-bar" aria-haspopup="dialog"><span class="mk">書く人 </span><span class="t">${esc(staffName(ME()))}さん</span><svg class="i pen" aria-hidden="true"><use href="#i-pen"/></svg></button><span class="push"></span><button class="btn solid lg" type="button" data-act="save" data-fk="save">${ic('check')}保存して、連絡帳を見る</button></div>` : ''}`;
+}
+
+function famMeal(m){
+  if(!m) return '';
+  const w = v => v===10 ? '全部' : v===5 ? '半分' : v===2 ? '少し' : v + '割';
+  const a = [];
+  if(m.main!=null && m.side!=null && m.main===m.side) a.push(m.main===0 ? '召し上がりませんでした' : w(m.main) + ' 召し上がりました');
+  else { const b = []; if(m.main!=null) b.push('主食 ' + (m.main===0?'なし':w(m.main))); if(m.side!=null) b.push('副食 ' + (m.side===0?'なし':w(m.side))); if(b.length) a.push(b.join('・')); }
+  if(m.snack!=null) a.push('おやつ ' + (m.snack===0?'なし':w(m.snack)));
+  return a.join('<br>');
+}
+function famToilet(t){ if(!t) return ''; const a = []; if(t.bm!=null) a.push('お通じ ' + (typeof t.bm==='number' ? t.bm+'回' : (t.bm==='あり'?'ありました':'ありませんでした'))); if(t.ur!=null) a.push('お小水 ' + (typeof t.ur==='number' ? t.ur+'回' : (t.ur==='あり'?'ありました':'ありませんでした'))); return a.join('<br>'); }
+function famBath(b){ if(!b) return ''; return b.done ? (b.kind==='清拭' ? '体をふきました' : b.kind ? b.kind + 'で入りました' : '入りました') : '今日は入りませんでした'; }
+function paperHtml(m, r){
+  const vit = [
+    ['体温', r.t!=null ? `${fmt1(r.t)}<small>℃</small>` : '—'],
+    ['血圧', r.bp ? `${r.bp.s}<small>/</small>${r.bp.d}` : '—'],
+    ['脈拍', r.p!=null ? `${r.p}<small>回/分</small>` : '—']
+  ];
+  if(r.o!=null) vit.push(['酸素', `${r.o}<small>%</small>`]);
+  const items = [
+    ['お食事（昼）', famMeal(r.meal)],
+    ['水分', r.water ? (r.water.total!=null ? `${r.water.total}mL` : '') + (r.water.items && r.water.items.length ? `（${r.water.items.map(x=>esc(x.n)).join('・')}）` : '') : ''],
+    ['お手洗い', famToilet(r.toilet)],
+    ['お風呂', famBath(r.bath)]
+  ].filter(x=>x[1]);
+  const note = r.note || '';
+  return `<article class="paper${note.length>90?' long':''}">
+    <header class="pp-h"><div><span class="pp-t">連絡帳</span><span class="pp-d num">${ymdLong(TODAY)}</span></div><div class="pp-f">見本のデイサービス</div></header>
+    <div class="pp-name">${esc(m.name)}<small>様</small></div>
+    <section class="pp-sec"><h3>きょうの様子</h3><p class="pp-note">${esc(note) || '　'}</p></section>
+    <section class="pp-sec"><h3>からだの様子</h3><div class="pp-vit${vit.length===4?' n4':''}">${vit.map(([k,v])=>`<div><span>${k}</span><b class="num">${v}</b></div>`).join('')}</div></section>
+    ${items.length ? `<section class="pp-sec"><div class="pp-grid">${items.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div></section>` : ''}
+    <footer class="pp-foot"><span>記入　${writersOf(r).map(id=>esc(staffName(id))).join('・')}</span><span>見本のデイサービス　電話 000-0000-0000</span></footer>
+  </article>`;
+}
+function histHtml(r){
+  const rows = histOf(r).map(x=>`<li><span class="tm num">${jstDateOf(x.at)===TODAY ? '' : 'きのう '}${jstHM(x.at)}</span><span><b>${esc(staffName(x.by))}さん</b>が${x.kind==='直した' ? (x.ch && x.ch.length ? `直した（${x.ch.map(k=>LABEL[k]).join('・')}）` : '変えずに保存した') : '書いた'}</span></li>`).join('');
+  return `<section class="panel hist" aria-labelledby="hist-h"><h3 id="hist-h">${ic('pen')}書いた人</h3><ol>${rows}</ol><p class="sub">この欄は印刷しません</p></section>`;
+}
+function viewPaper(){
+  const m = byId(ui.who); const r = m && st.records[m.id];
+  if(!r){ ui.view = 'list'; return viewList(); }
+  const next = nextUnsaved(m.id);
+  const banner = ui.justSaved ? `<div class="banner" role="status">${ic('okc')}<div><b>${esc(m.name)}さんの記録を保存しました</b><p>下の連絡帳は、印刷してご家族に渡せます。</p>${ui.justSaved==='hand' ? `<p class="bn-hand" data-saved-hand>${ic('bell')}<span>職員だけの話は、申し送りにして職員のスマホに知らせました。<span class="nw em">ご家族には届きません。</span></span></p>` : ''}</div></div>` : '';
+  return `${banner}${toastHtml()}<div class="rhead"><button class="btn" type="button" data-act="back" data-fk="back">${ic('left')}もどる</button><div class="who">${av(m)}<h2>${esc(m.name)}さんの連絡帳</h2></div></div>
+    <div class="paperwrap">${paperHtml(m, r)}</div>
+    ${histHtml(r)}
+    <div class="bar"><button class="btn lg" type="button" data-act="redo" data-fk="redo">${ic('pen')}記録を直す</button>${next?`<button class="btn lg" type="button" data-act="next" data-fk="next">次の人へ${ic('right')}</button>`:''}<span class="push"></span><button class="btn solid lg" type="button" data-act="print" data-fk="print">${ic('print')}印刷する</button></div>`;
+}
+
+function viewHand(){
+  const items = st.hands.slice().sort((a,b)=>b.at-a.at);
+  const shown = ui.hf==='まだ' ? items.filter(h=>!h.reads.includes(ME())) : items;
+  const rows = shown.map(h=>{
+    const m = h.about ? byId(h.about) : null; const read = h.reads.includes(ME());
+    const day = jstDateOf(h.at) === TODAY ? '今日' : 'きのう';
+    return `<article class="panel hcard">${m ? av(m,'sm') : `<span class="av sm all" aria-hidden="true">${ic('user')}</span>`}<div style="min-width:0"><div class="nm">${m ? esc(m.name) + 'さん' : ABOUT_NONE}${read?'':'<span class="chip key">まだ読んでいない</span>'}</div><div class="meta num">${day} ${jstHM(h.at)}・${esc(staffName(h.by))}さん${h.editBy && h.editBy!==h.by ? `（${esc(staffName(h.editBy))}さんが直した）` : ''}</div><p>${esc(h.text)}</p></div>
+      <div class="act"><button class="btn sm readbtn" type="button" data-act="read" data-id="${h.id}" data-fk="r-${h.id}" aria-pressed="${read}">${read?ic('check')+'読んだ':'読んだ'}</button><span class="readers num">読んだ人 ${h.reads.length} / ${staffAll().length}人<span class="rn">${h.reads.map(id=>esc(staffName(id))).filter(Boolean).join('・')}</span></span></div></article>`;
+  }).join('');
+  return `<div class="h"><h2>申し送り</h2><span class="chip plain">${ic('lock')}この事業所の職員だけが見ます</span><span class="push"></span><button class="btn solid lg" type="button" data-act="hand-new" data-fk="hand-new">${ic('mic')}話して申し送る</button></div>
+    <div class="seg" role="group" aria-label="絞り込み"><button type="button" data-hf="すべて" data-fk="hf-all" aria-pressed="${ui.hf==='すべて'}">すべて</button><button type="button" data-hf="まだ" data-fk="hf-yet" aria-pressed="${ui.hf==='まだ'}">まだ読んでいない</button></div>
+    <div class="hlist">${rows || '<div class="panel empty">読んでいない申し送りはありません</div>'}</div>`;
+}
+
+const daysHtml = (days, cls) => `<span class="days ${cls||''}" role="img" aria-label="来る曜日 ${days.join('・')}">${WEEK.map(w=>`<span class="day${days.includes(w)?' on':''}" aria-hidden="true">${w}</span>`).join('')}</span>`;
+function viewPeople(){
+  const c = ui.pchat;
+  if(!c.log.length) c.log.push({who:'sys', text:'利用者の登録や直しを、話してください。'});
+  const log = c.log.map(x=>`<p class="bub ${x.who==='me'?'me':'sys'}">${x.who==='me' ? '' : ic('msg')}<span>${esc(x.text)}</span></p>`).join('');
+  const d = c.draft;
+  const draft = d && (d.name || d.kana || d.days.length) ? `<div class="draft${d.remove?' rm':''}" aria-label="下書き"><p class="cap">${d.remove ? '一覧から外す方' : d.id ? '直す方' : '新しく登録する方'}</p>
+      <p class="dn">${esc(d.name || '（名前はまだ）')}</p><p class="dk">${esc(d.kana || '（ふりがなはまだ）')}</p>${daysHtml(d.days)}</div>` : '';
+  const choices = c.choices && !ui.busy && !ui.listening ? `<div><p class="lbl" id="chlbl">どれですか（押すか、話してください）</p><div class="choices" role="group" aria-labelledby="chlbl">${c.choices.map((x,i)=>`<button class="tile" type="button" data-choice="${esc(x)}" data-fk="ch-${i}">${esc(x)}</button>`).join('')}</div></div>` : '';
+  const foot = d && c.action==='confirm' && readyDraft(d) && !ui.busy && !ui.listening ? `<div class="pfoot"><button class="btn text lg" type="button" data-act="p-cancel" data-fk="p-cancel">やめる</button><span class="push"></span><button class="btn solid lg" type="button" data-act="p-save" data-fk="p-save">${ic('check')}${d.remove ? '一覧から外す' : d.id ? 'これで直す' : 'これで登録'}</button></div>` : '';
+  const stage = c.log.length > 1 ? 'more' : 'first';
+  const cards = people().map(m=>`<button class="card" type="button" data-act="person" data-id="${m.id}" data-fk="pc-${m.id}">${av(m)}<span class="who"><span class="nm">${esc(m.name)}</span><span class="kn">${esc(m.kana)}</span>${daysHtml(m.days)}</span></button>`).join('');
+  return `<div class="h"><h2>利用者</h2><span class="chip plain num">${people().length}人</span></div>
+    <div class="pgrid">
+      <section class="panel chat" aria-label="話して登録・直す"><div class="log" aria-live="polite">${log}</div>${draft}${choices}${foot}
+        <div class="talk" style="padding:0">${talkBlock('people', stage)}</div></section>
+      <section class="plist" aria-label="利用者の一覧"><div class="cards" style="grid-template-columns:minmax(0,1fr)">${cards}</div></section>
+    </div>`;
+}
+
+const radio = (attr,val,on,fk,inner) => `<button class="tile" type="button" role="radio" aria-checked="${on}" data-${attr}="${val}" data-fk="${fk}"><span class="radio" aria-hidden="true"></span>${inner}</button>`;
+function stepper(name, val, unit, label){
+  const v = ui.sheet && ui.sheet.v ? ui.sheet.v[name] : val; const shown = v==null || v==='' ? '' : String(name==='t' && typeof v==='number' ? fmt1(v) : v);
+  return `<div class="stepper"><button class="btn" type="button" data-step="${name}" data-d="-1" data-fk="st-${name}-m" aria-label="下げる">−</button><label class="sv"><span class="vh">${label||''}</span><input class="num" type="text" inputmode="decimal" autocomplete="off" data-field="${name}" data-fk="in-${name}" value="${esc(shown)}" placeholder="—">${unit?`<span class="su">${unit}</span>`:''}</label><button class="btn" type="button" data-step="${name}" data-d="1" data-fk="st-${name}-p" aria-label="上げる">＋</button></div>`;
+}
+const talkFixRow = () => (!voice.engine || voice.blocked) ? '' : `<div class="row"><button class="btn" type="button" data-act="talkfix" data-fk="talkfix">${ic('mic')}話して直す</button></div>`;
+const QTYS = [[10,'全部'],[8,'8割'],[5,'半分'],[2,'少し'],[0,'なし']];
+function textEdit(field, val, note){
+  const s = ui.sheet;
+  if(s.typing) return `<label class="lbl" for="tx-${field}">文字で直す</label><textarea id="tx-${field}" class="field" data-field="${field}">${esc(val||'')}</textarea><p style="color:var(--g600)">${note}</p>`;
+  const noVoice = !voice.engine || voice.blocked;
+  return `<button class="readbox" type="button" data-act="typing" data-fk="readbox" aria-label="押すと、文字で直せます">${esc(val||'') || '（まだありません）'}</button><p style="color:var(--g600)">${note}</p>
+    <div class="row">${noVoice ? '' : `<button class="btn" type="button" data-act="talkfix" data-fk="talkfix">${ic('mic')}話して直す</button>`}<button class="btn" type="button" data-act="typing" data-fk="typing">${ic('pen')}文字で直す</button></div>`;
+}
+function sheetBody(s){
+  const v = s.v;
+  if(s.kind==='me'){
+    const tiles = staffAll().map(x=>`<button class="tile" type="button" role="radio" aria-checked="${ME()===x.id}" data-act="me-pick" data-id="${x.id}" data-fk="me-${x.id}"><span class="radio" aria-hidden="true"></span>${esc(x.name)}さん</button>`).join('');
+    const noVoice = !voice.engine || voice.blocked;
+    const who = s.then && byId(s.then);
+    return `<p>${who ? `${esc(who.name)}さんの記録を書く前に、書く人を確かめます。` : ''}記録・申し送り・連絡帳の「記入」に、この名前が入ります。${who ? 'ほかの方なら、名前を押します。' : ''}</p>
+      <div class="tiles" role="radiogroup" aria-label="書く人">${tiles}</div>
+      ${s.err ? `<div class="notice warn" role="alert">${ic('alert')}<b>${esc(s.err)}</b></div>` : ''}
+      ${noVoice ? '' : `<div class="talk">${talkBlock('me', 'first')}</div>`}`;
+  }
+  if(s.kind==='hand'){
+    if(!s.made){
+      const n = s.raw.length;
+      return `<div class="talk">${talkBlock('hand', n ? 'more' : 'first')}</div>
+        ${n ? `<div class="rawbox r-hand"><p class="rawh">${ic('msg')}申し送りにする文</p><ol class="rawlist">${s.raw.map((x,i)=>`<li>${esc(x.text)}${ui.busy||ui.listening ? '' : `<button class="xbtn" type="button" data-act="hraw-del" data-i="${i}" aria-label="この文を消す">${ic('x')}消す</button>`}</li>`).join('')}</ol></div>` : ''}`;
+    }
+    const ab = todays().slice(); if(s.about && byId(s.about) && !ab.some(m=>m.id===s.about)) ab.unshift(byId(s.about));
+    const tiles = [radio('about','', s.about==='', 'ab-all', ABOUT_NONE)].concat(ab.map(m=>radio('about', m.id, s.about===m.id, 'ab-'+m.id, esc(m.name)))).join('');
+    const quiet = ui.listening || ui.busy;
+    const now = `<div><p class="lbl">いまの申し送り</p>${s.typing && !quiet ? `<textarea id="handtext" class="field" data-field="text">${esc(s.text)}</textarea>` : `<div class="readbox" data-handtext>${esc(s.text)}</div>${quiet ? '' : `<div style="margin-top:8px"><button class="btn" type="button" data-act="typing" data-fk="typing">${ic('pen')}文字で直す</button></div>`}`}</div>`;
+    return `${now}<div class="talk">${talkBlock('hand', 'fix')}</div>
+      ${quiet ? '' : `<div><p class="lbl" id="ablbl">だれについての申し送りですか<span class="opt" data-about-now>いま：${s.about ? esc(byId(s.about) ? byId(s.about).name : '') : ABOUT_NONE}</span><span class="opt blk"><span class="nw">申し送りは、</span><span class="nw">職員みんなに届きます。</span><span class="nw">ここは、</span><span class="nw">どなたの話かです。</span><span class="nw">話した中身から</span><span class="nw">選んであります</span></span></p><div class="tiles" role="radiogroup" aria-labelledby="ablbl">${tiles}</div></div>`}`;
+  }
+  const err = s.err ? `<p class="serr" role="alert">${esc(s.err)}</p>` : '';
+  const numHelp = '<p style="color:var(--g600)">数を押すと、打って直せます。＋・−でも直せます。</p>';
+  switch(s.f){
+    case 't': return stepper('t', v.t, '℃', '体温') + err + numHelp + talkFixRow();
+    case 'p': return stepper('p', v.p, '回', '脈') + err + numHelp + talkFixRow();
+    case 'o': return stepper('o', v.o, '%', '酸素') + err + numHelp + talkFixRow();
+    case 'bp': return `<div class="row2"><b>上</b>${stepper('s', v.s, '', '血圧の上')}</div><div class="row2"><b>下</b>${stepper('d', v.d, '', '血圧の下')}</div>` + err + numHelp + talkFixRow();
+    case 'water': return stepper('w', v.w, 'mL', '水分') + err + numHelp + talkFixRow();
+    case 'meal': return [['main','主食'],['side','副食'],['snack','おやつ']].map(([k,l])=>`<div><p class="lbl">${l}${k==='snack'?'<span class="opt">なくても大丈夫です</span>':''}</p><div class="tiles" role="radiogroup" aria-label="${l}">${QTYS.map(([q,t])=>radio('meal', k+':'+q, v[k]===q, `ml-${k}-${q}`, t)).join('')}</div></div>`).join('');
+    case 'toilet': return `<div><p class="lbl">お通じ</p><div class="tiles" role="radiogroup" aria-label="お通じ">${['あり','なし'].map(x=>radio('bm', x, v.bm===x, 'bm-'+x, x)).join('')}</div></div><div><p class="lbl">お小水の回数</p>${stepper('ur', v.ur, '回', 'お小水の回数')}</div>` + err;
+    case 'bath': return `<div class="tiles" role="radiogroup" aria-label="入浴">${radio('bath','1', v.done===true && v.kind!=='清拭', 'bt-1', '入った')}${radio('bath','w', v.done===true && v.kind==='清拭', 'bt-w', '体をふいた（清拭）')}${radio('bath','0', v.done===false, 'bt-0', '入っていない')}</div>`;
+    case 'note': return textEdit('note', v.note, 'ご家族の連絡帳に、この文が載ります。');
+    case 'hand': return textEdit('hand', v.hand, '事業所の中だけで回します。連絡帳には載りません。');
+  }
+  return '';
+}
+const ABOUT_NONE = '特定の方ではない';
+const LABEL = {t:'体温', bp:'血圧', p:'脈', o:'酸素', water:'水分', meal:'食事', toilet:'お手洗い', bath:'入浴', note:'様子', hand:'申し送り'};
+function renderSheet(){
+  const host = $('#sheet'); const s = ui.sheet;
+  document.documentElement.classList.toggle('lock', !!s);
+  if(!s){ host.innerHTML = ''; return; }
+  const oldB = host.querySelector('.dlg-b'); const keep = oldB ? oldB.scrollTop : 0;
+  const title = s.kind==='hand' ? '申し送りを話す' : s.kind==='me' ? (s.then ? 'だれが書きますか' : '書く人を選ぶ') : `${LABEL[s.f]}を直す`;
+  let foot;
+  if(s.kind==='me') foot = `<button class="btn text lg" type="button" data-act="close">やめる</button>${s.then ? `<span class="push"></span><button class="btn solid lg" type="button" data-act="me-go" data-fk="me-go">${esc(staffName(ME()))}さんで書く</button>` : ''}`;
+  else if(s.kind==='hand'){
+    const main = ui.busy || ui.listening ? '' : s.made ? `<button class="btn solid lg" type="button" data-act="hand-send" data-fk="hand-send">${ic('check')}これで申し送る</button>` : (s.raw.length ? `<button class="btn solid lg" type="button" data-act="hand-make" data-fk="hand-make">${ic('make')}申し送りを作る</button>` : '');
+    foot = `<button class="btn text lg" type="button" data-act="close">やめる</button><span class="push"></span>${main}`;
+  }else foot = `<button class="btn text lg" type="button" data-act="close">やめる</button><button class="btn lg" type="button" data-act="clear" data-fk="clear">この欄を空にする</button><span class="push"></span><button class="btn solid lg" type="button" data-act="decide" data-fk="decide">決める</button>`;
+  host.innerHTML = `<div class="scrim" data-act="close-bg"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="dlg-h"><h2 id="sheet-title">${title}</h2><button class="xbtn" type="button" data-act="close" data-fk="close">${ic('x')}閉じる</button></div>
+    <div class="dlg-b">${sheetBody(s)}</div><div class="dlg-f">${foot}</div></div></div>`;
+  const b = host.querySelector('.dlg-b'); if(b) b.scrollTop = s.top ? 0 : keep; s.top = false;
+}
+async function doMakeHand(){
+  const s = ui.sheet; if(!s || ui.busy) return;
+  ui.busy = 'make'; render();
+  const out = await makeFrom(null, {mode:'split', rawR:[], rawH:s.raw});
+  ui.busy = null;
+  if(ui.sheet!==s){ render(); return; }
+  s.text = addDates(out.rec.hand || cleanText(s.raw.map(x=>x.text).join(' '))); s.about = out.about || whoIn(s.raw.map(x=>x.text).join(' ')) || ''; s.made = true; s.top = true;
+  fallbackNotice(out.why); render();
+}
+const HAND_FIX_WORDS = /(?:直して|なおして|変えて|かえて|消して|けして|いらない|取って|とって|削って|じゃなくて|じゃなく|ではなくて|ではなく|でなくて|違う|ちがう|間違|まちが)/;
+const FIX_TO = /(?:に|へ)[\s、,]*(?:直して|なおして|変えて|かえて)(?:ください|下さい|くれる|ね|ちょうだい|おいて)?[\s。！!？?]*$/;
+const FIX_DEL = /(?:を|は)[\s、,]*(?:消して|けして|取って|削って)(?:ください|下さい|くれる|ね|ちょうだい|おいて)?[\s。！!？?]*$/;
+const SORRY_ONLY = /^[\s、,]*(?:あっ?|ああ|えっと|えーと)?[\s、,]*(?:ごめん(?:なさい)?|すみません|違う|ちがう|違った|ちがった|間違えた|まちがえた|間違い|まちがい)?[\s、,。！!]*$/;
+function isFixCmd(x, ctx){
+  const t = norm(String(x||''));
+  if(!FIX_TO.test(t) && !FIX_DEL.test(t)) return false;
+  const m = t.replace(/^[\s、,]*(?:あっ?|ああ|えっと|ごめん(?:なさい)?|すみません|違う|ちがう|間違えた|まちがえた)?[\s、,]*/, '').match(/^「?(.+?)」?[\s、,]*(?:を|は)/);
+  const a = m ? m[1].replace(/[「」『』\s、,]/g,'') : '';
+  return !!a && norm(String(ctx||'')).replace(/[\s、,]/g,'').includes(a.slice(-6));
+}
+function splitFixCmd(text, before){
+  const ss = String(text||'').split(/(?<=[。！？!?])|\n+/).map(x=>x.trim()).filter(Boolean);
+  const body = [], fix = [];
+  ss.forEach((x,i)=>{
+    const ctx = [before||''].concat(body).join(' ');
+    if(isFixCmd(x, ctx)) fix.push(x);
+    else if(SORRY_ONLY.test(x) && ss[i+1] && isFixCmd(ss[i+1], ctx)) {}
+    else body.push(x);
+  });
+  return {body: joinRaw(body), fix};
+}
+async function makeThenFixHand(fixes){
+  await doMakeHand();
+  for(const f of fixes){ const s = ui.sheet; if(!s || !s.made) return; await doFixHand(f, namedIn(f)); }
+}
+function namedIn(text){
+  const t = norm(String(text||''));
+  const m = t.match(/(?:を|は)[\s、,]*「?([^」]*?)」?[\s、,]*(?:に|へ)(?:直して|なおして|変えて|かえて|して)/) || t.match(/(?:じゃなくて|じゃなく|ではなくて|ではなく|でなくて)[\s、,]*(.+)$/);
+  return (m && whoIn(m[1])) || whoIn(t);
+}
+async function doMoreHand(text){
+  const s = ui.sheet; if(!s || ui.busy) return;
+  const named = namedIn(text);
+  if(HAND_FIX_WORDS.test(norm(text)) || withAnswer(s.fixes, text)!==text){ await doFixHand(text, named); return; }
+  s.raw.push({at:Date.now(), text});
+  ui.busy = 'make'; render();
+  const before = s.text;
+  const out = await makeFrom(null, {mode:'split', rawR:[], rawH:[{text}], prevHand:s.text});
+  ui.busy = null;
+  if(ui.sheet!==s){ render(); return; }
+  const t = addDates(out.rec.hand || '');
+  if(t) s.text = t;
+  if(named) s.about = named; else if(!s.about && out.about) s.about = out.about;
+  ui.notice = s.text!==before ? {text:'話した事を、いまの申し送りに入れました'} : {kind:'warn', text:'いまの申し送りは変わりませんでした。直す時は「〇〇を△△に変えて」のように話します'};
+  fallbackNotice(out.why); render();
+}
+async function doFixHand(text, named){
+  const s = ui.sheet; if(!s || ui.busy) return;
+  const said = withAnswer(s.fixes, text);
+  const fx = {at:Date.now(), text}; s.fixes.push(fx);
+  ui.busy = 'fix'; render();
+  const cur = Object.assign(recOf(blank()), {hand:s.text});
+  const out = await fixFrom(null, cur, said, rawText(s.raw, s.fixes));
+  fx.asked = !!out.ask; fx.said = out.ask || out.said;
+  ui.busy = null;
+  if(ui.sheet!==s){ render(); return; }
+  if(out.changed.includes('hand')) s.text = addDates(out.r.hand || '');
+  else if(out.changed.includes('note') && out.r.note){ s.text = s.text + out.r.note; out.said = '申し送りに足しました'; }
+  if(named) s.about = named;
+  ui.notice = out.ask ? {kind:'warn', text:out.ask} : {text: out.said};
+  fallbackNotice(out.why); render();
+}
+function toastHtml(){
+  if(!ui.toast) return '';
+  return `<div class="toast" role="status"><p class="tn-cap">${ic('bell')}申し送りを、職員のスマホに知らせました</p>
+    <div class="tn-card"><span class="tn-ic">${ic('book')}</span><div><div class="tn-app"><span>職員の申し送り</span><span>いま</span></div><p data-toast-text>新しい申し送りがあります</p></div></div>
+    <div class="tn-foot"><span>ご家族には届きません。名前や中身は、知らせに書きません</span><button class="xbtn" type="button" data-act="toast-close">${ic('x')}閉じる</button></div></div>`;
+}
+function showToast(){ ui.toast = {id: Date.now()}; }
+
+function printPapers(ids){
+  if(inFrame){ ui.notice = {kind:'warn', text:'この置き場所では、印刷の画面が開きません。タブレットのブラウザで開くと、そのまま印刷できます。'}; render(); return; }
+  const host = $('#print');
+  host.innerHTML = ids.map(id=>paperHtml(byId(id), st.records[id])).join('');
+  ids.forEach(id=>{ st.records[id].printed = true; }); save();
+  const done = ()=>{ window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  ui.notice = {text: ids.length>1 ? `${ids.length}人分の連絡帳の、印刷の画面を開きました。一覧に「印刷した」の印が付きます` : '連絡帳の、印刷の画面を開きました。一覧に「印刷した」の印が付きます'};
+  setTimeout(()=>{ try{ window.print(); }catch(_){ } render(); }, 60);
+}
+
+function keepDraft(){
+  if(ui.view!=='record' || !ui.draft || !ui.who) return;
+  const dr = ui.draft;
+  const m = byId(ui.who);
+  if(m && dr.touched && (dr.rawR.length || dr.rawH.length || dr.made)){ ui.drafts[ui.who] = dr; ui.notice = {text:`${surname(m)}さんの書きかけは、保存せずに残してあります。「記録と連絡帳」で名前を押すと、続きから書けます`}; }
+}
+const ME_TTL = 30*60*1000;
+function openWithMe(id){
+  if(!ui.meOk || Date.now() - ui.meOk > ME_TTL){ ui.sheet = {kind:'me', top:true, then:id}; return false; }
+  openRecord(id); return true;
+}
+function goThen(id){ if(id){ openRecord(id); window.scrollTo(0,0); } }
+function openRecord(id){
+  ui.who = id; ui.justSaved = false; ui.backAsk = false;
+  const saved = st.records[id];
+  const kept = ui.drafts[id];
+  ui.draft = kept ? kept : saved ? JSON.parse(JSON.stringify(saved)) : Object.assign(blank(), {rawR:[], rawH:[], fixes:[], mode:'split', made:false, unsure:[], by:ME()});
+  if(!ui.draft.rawR) ui.draft.rawR = []; if(!ui.draft.rawH) ui.draft.rawH = []; if(!ui.draft.fixes) ui.draft.fixes = [];
+  ui.view = 'record';
+}
+function readFields(){
+  if(!ui.sheet) return;
+  document.querySelectorAll('#sheet [data-field]').forEach(el=>{ if(ui.sheet.kind==='hand') ui.sheet.text = el.value; else ui.sheet.v[el.dataset.field] = el.value; });
+}
+function openEdit(f){
+  const r = ui.draft; const v = {};
+  if(f==='t') v.t = r.t!=null ? r.t : 36.5;
+  if(f==='p') v.p = r.p!=null ? r.p : 70;
+  if(f==='o') v.o = r.o!=null ? r.o : 97;
+  if(f==='bp'){ v.s = r.bp ? r.bp.s : 130; v.d = r.bp ? r.bp.d : 80; }
+  if(f==='water') v.w = r.water && r.water.total!=null ? r.water.total : 200;
+  if(f==='meal'){ const m = r.meal||{}; v.main = m.main; v.side = m.side; v.snack = m.snack; }
+  if(f==='toilet'){ const t = r.toilet||{}; v.bm = typeof t.bm==='number' ? (t.bm>0?'あり':'なし') : t.bm; v.ur = typeof t.ur==='number' ? t.ur : (t.ur==='あり'?1:(t.ur==='なし'?0:null)); }
+  if(f==='bath'){ v.done = r.bath ? r.bath.done : null; v.kind = r.bath && r.bath.done ? (r.bath.kind||'') : ''; }
+  if(f==='note') v.note = r.note;
+  if(f==='hand') v.hand = r.hand;
+  ui.sheet = {kind:'edit', f, v, top:true, typing:false};
+}
+const NUM_NAME = {t:'体温', p:'脈', o:'酸素', s:'血圧の上', d:'血圧の下', w:'水分', ur:'お小水の回数'};
+function numOf(name, x){
+  if(x==null) return null;
+  if(typeof x==='number') return x;
+  const s = String(x).replace(/[０-９．]/g, c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[、，,]/g,'.').replace(/[^\d.]/g,'');
+  if(!s) return null;
+  const n = Number(s); const [,min,max] = STEP[name];
+  if(!Number.isFinite(n) || n<min || n>max) return NaN;
+  return name==='t' ? Math.round(n*10)/10 : Math.round(n);
+}
+function decide(){
+  const s = ui.sheet; const r = ui.draft; const v = s.v;
+  const names = {t:['t'], p:['p'], o:['o'], bp:['s','d'], water:['w'], toilet:['ur']}[s.f] || [];
+  for(const k of names){ const n = numOf(k, v[k]); if(Number.isNaN(n)){ const [,min,max] = STEP[k]; s.err = `${NUM_NAME[k]}は、${min}から${max}までの数で入れてください`; return false; } v[k] = n; }
+  if(s.f==='bp' && (v.s==null) !== (v.d==null)){ s.err = '血圧は、上と下の両方を入れてください'; return false; }
+  s.err = '';
+  switch(s.f){
+    case 't': r.t = v.t; break;
+    case 'p': r.p = v.p; break;
+    case 'o': r.o = v.o; break;
+    case 'bp': r.bp = v.s==null ? null : {s:v.s, d:v.d}; break;
+    case 'water': r.water = v.w==null ? null : {items: r.water && r.water.items ? r.water.items.map(x=>({n:x.n, ml:r.water.items.length===1 ? v.w : x.ml})) : [], total:v.w}; break;
+    case 'meal': { const m = {}; ['main','side','snack'].forEach(k=>{ if(v[k]!=null) m[k] = v[k]; }); r.meal = Object.keys(m).length ? m : null; break; }
+    case 'toilet': { const t = {}; if(v.bm) t.bm = v.bm; if(v.ur!=null) t.ur = v.ur; r.toilet = Object.keys(t).length ? t : null; break; }
+    case 'bath': r.bath = v.done==null ? null : {done:v.done, kind: v.done ? (v.kind||'') : ''}; break;
+    case 'note': r.note = String(v.note||'').trim(); break;
+    case 'hand': r.hand = String(v.hand||'').trim(); break;
+  }
+  r.unsure = (r.unsure||[]).filter(k=>k!==s.f);
+  r.touched = true; ui.flash = [s.f]; ui.sheet = null;
+  return true;
+}
+function clearField(){ const f = ui.sheet.f; const r = ui.draft; if(f==='note'||f==='hand') r[f] = ''; else r[f] = null; r.unsure = (r.unsure||[]).filter(k=>k!==f); r.touched = true; ui.sheet = null; }
+const STEP = {t:[0.1,34,42], p:[1,30,200], o:[1,70,100], s:[1,60,260], d:[1,30,160], w:[50,0,3000], ur:[1,0,20]};
+function doStep(name, dir){
+  const v = ui.sheet.v; const [step,min,max] = STEP[name];
+  let x = numOf(name, v[name]); if(x==null || Number.isNaN(x)) x = name==='ur' ? 0 : min;
+  ui.sheet.err = '';
+  x = Math.min(max, Math.max(min, Math.round((x + dir*step)*10)/10));
+  v[name] = x;
+}
+function saveRecord(){
+  const m = byId(ui.who); const dr = ui.draft;
+  const prev = st.records[m.id];
+  const rec = {t:dr.t, bp:dr.bp, p:dr.p, o:dr.o, water:dr.water, meal:dr.meal, toilet:dr.toilet, bath:dr.bath, note:dr.note, hand:dr.hand,
+    rawR:dr.rawR, rawH:dr.rawH, fixes:dr.fixes||[], mode:'split', made:true, madeBy:dr.madeBy||'rules', unsure:dr.unsure||[], handAbout:dr.handAbout||null, by:ME(), at:Date.now(), printed:false};
+  rec.log = prev ? histOf(prev).concat([{at:rec.at, by:rec.by, kind:'直した', ch:changedKeys(prev, rec)}]) : [{at:rec.at, by:rec.by, kind:'書いた', ch:[]}];
+  st.records[m.id] = rec;
+  delete ui.drafts[m.id]; ui.meOk = Date.now();
+  let fresh = false;
+  const about = dr.handAbout===null ? '' : (validId(dr.handAbout) || m.id);
+  if(dr.hand){
+    const h = st.hands.find(x=>x.fromRec===m.id);
+    if(h){ if(h.text!==dr.hand || h.about!==about){ h.text = dr.hand; h.about = about; h.at = Date.now(); h.reads = [ME()]; if(h.by!==ME()) h.editBy = ME(); fresh = true; } }
+    else { st.hands.push({id:'h'+(st.seq++), at:Date.now(), by:ME(), about, text:dr.hand, reads:[ME()], fromRec:m.id}); fresh = true; }
+  }else if(prev && prev.hand){ st.hands = st.hands.filter(x=>x.fromRec!==m.id); }
+  save();
+  ui.view = 'paper'; ui.justSaved = fresh ? 'hand' : true; ui.draft = null;
+}
+
+function act(el){
+  const d = el.dataset;
+  if(d.view){ if(ui.listening) stopAll(); ui.notice = null; keepDraft(); ui.view = d.view; ui.sheet = null; ui.busy = null; render(); window.scrollTo(0,0); return; }
+  if(d.hf){ ui.hf = d.hf; render(); return; }
+  if(d.choice!==undefined){ doPeople(`「${d.choice}」にします`); return; }
+  if(d.step){ doStep(d.step, Number(d.d)); renderSheet(); return; }
+  if(d.meal){ const [k,q] = d.meal.split(':'); ui.sheet.v[k] = ui.sheet.v[k]===Number(q) && k==='snack' ? null : Number(q); renderSheet(); return; }
+  if(d.bm){ ui.sheet.v.bm = d.bm; renderSheet(); return; }
+  if(d.bath){ const v = ui.sheet.v; v.done = d.bath!=='0'; v.kind = d.bath==='w' ? '清拭' : d.bath==='1' && v.kind!=='清拭' ? (v.kind||'') : ''; renderSheet(); return; }
+  if(d.about!==undefined){ ui.sheet.about = d.about; renderSheet(); return; }
+  switch(d.act){
+    case 'open': { const id = d.id; if(st.records[id] && !ui.drafts[id]){ ui.who = id; ui.view = 'paper'; ui.justSaved = false; } else openWithMe(id); render(); window.scrollTo(0,0); break; }
+    case 'back': if(ui.listening) stopAll(); keepDraft(); ui.view = 'list'; ui.draft = null; ui.justSaved = false; ui.busy = null; render(); window.scrollTo(0,0); break;
+    case 'mic': if(ui.listening) stopListening(); else startListening(d.t); break;
+    case 'try': simulate(d.t); break;
+    case 'make': doMake(); break;
+    case 'raw-del': { const a = ui.draft[d.k]; a.splice(Number(d.i),1); render(); break; }
+    case 'unmake-ask': ui.backAsk = true; render(); { const f = document.querySelector('.rawfold'); if(f) f.open = true; } break;
+    case 'unmake-cancel': ui.backAsk = false; render(); { const f = document.querySelector('.rawfold'); if(f) f.open = true; } break;
+    case 'unmake': { const dr = ui.draft; FK.forEach(k=>{ dr[k] = k==='note'||k==='hand' ? '' : null; }); dr.made = false; dr.fixes = []; dr.unsure = []; ui.backAsk = false; render(); window.scrollTo(0,0); break; }
+    case 'edit': openEdit(d.f); renderSheet(); break;
+    case 'typing': ui.sheet.typing = true; renderSheet(); { const t = document.querySelector('#sheet textarea'); if(t){ t.focus(); try{ t.setSelectionRange(t.value.length, t.value.length); }catch(_){} } } break;
+    case 'talkfix': ui.sheet = null; window.scrollTo(0,0); startListening('rec'); break;
+    case 'me': ui.sheet = {kind:'me', top:true}; render(); break;
+    case 'me-pick': setMe(d.id); break;
+    case 'decide': if(decide()) render(); else renderSheet(); break;
+    case 'clear': clearField(); render(); break;
+    case 'close': case 'close-bg': if(ui.listening) stopAll(); ui.sheet = null; ui.busy = null; render(); break;
+    case 'save': saveRecord(); render(); window.scrollTo(0,0); break;
+    case 'redo': openWithMe(ui.who); render(); window.scrollTo(0,0); break;
+    case 'next': { const n = nextUnsaved(ui.who); if(n){ openWithMe(n); } else { ui.view = 'list'; } render(); window.scrollTo(0,0); break; }
+    case 'me-go': { const then = ui.sheet && ui.sheet.then; ui.meOk = Date.now(); ui.sheet = null; goThen(then); render(); break; }
+    case 'print': printPapers([ui.who]); break;
+    case 'print-all': printPapers(todays().filter(m=>st.records[m.id]).map(m=>m.id)); break;
+    case 'read': { const h = st.hands.find(x=>x.id===d.id); const i = h.reads.indexOf(ME()); i<0 ? h.reads.push(ME()) : h.reads.splice(i,1); save(); render(); break; }
+    case 'hand-new': ui.sheet = {kind:'hand', raw:[], fixes:[], text:'', about:'', made:false, typing:false, top:true}; render(); break;
+    case 'hraw-del': ui.sheet.raw.splice(Number(d.i),1); render(); break;
+    case 'hand-make': doMakeHand(); break;
+    case 'hand-send': {
+      const s = ui.sheet; const text = String(s.text||'').trim(); if(!text) break;
+      st.hands.push({id:'h'+(st.seq++), at:Date.now(), by:ME(), about:s.about||'', text, reads:[ME()], raw:s.raw, fixes:s.fixes}); save();
+      ui.sheet = null; ui.hf = 'すべて'; ui.notice = {text:'申し送りました'}; showToast(); render(); break;
+    }
+    case 'person': { const m = byId(d.id); const c = ui.pchat; c.draft = {id:m.id, name:m.name, kana:m.kana, days:m.days.slice(), remove:false}; c.choices = null; c.action = 'ask';
+      c.log.push({who:'sys', text:`${m.name}さんの、何を直しますか。例：「曜日を火曜と金曜に変えて」`}); render(); break; }
+    case 'p-save': commitDraft(); break;
+    case 'p-cancel': { const c = ui.pchat; c.draft = null; c.choices = null; c.action = null; c.log.push({who:'sys', text:'やめました。'}); render(); break; }
+    case 'toast-close': ui.toast = null; render(); break;
+    case 'notice-close': ui.notice = null; render(); break;
+    case 'about': { const p = $('#about'); p.hidden = !p.hidden; el.setAttribute('aria-expanded', String(!p.hidden)); resetIdle(); break; }
+    case 'reset-ask': $('#resetarea').innerHTML = `<p>入れた内容が消えて、最初の状態に戻ります。</p><div class="row" style="margin-top:8px"><button class="btn" type="button" data-act="reset-cancel">やめる</button><button class="btn solid" type="button" data-act="reset">戻す</button></div>`; break;
+    case 'reset-cancel': resetIdle(); break;
+    case 'reset': st = seed(TODAY); save(); ui.view = 'list'; ui.draft = null; ui.sheet = null; ui.pchat = {log:[], draft:null, choices:null, action:null}; $('#about').hidden = true; ui.notice = {text:'最初の状態に戻しました'}; render(); break;
+  }
+}
+function stopAll(){ clearInterval(voice.timer); voice.sim = false; ui.listening = false; try{ if(voice.rec) voice.rec.abort(); }catch(_){ } try{ if(voice.dict && voice.dict.active()) voice.dict.stop(); }catch(_){ } }
+function resetIdle(){ $('#resetarea').innerHTML = `<button class="btn" type="button" data-act="reset-ask">${ic('reset')}最初の状態に戻す</button>`; }
+function refocus(fk){ if(!fk) return; const el = document.querySelector(`[data-fk="${CSS.escape(fk)}"]`); if(el && document.activeElement!==el) el.focus({preventScroll:true}); }
+
+document.addEventListener('click', e=>{
+  if(e.target.closest('summary')) return;
+  const el = e.target.closest('button,[data-act="close-bg"]');
+  if(!el){ if(!e.target.closest('#about')){ $('#about').hidden = true; } return; }
+  if(el.dataset.act==='close-bg' && e.target!==el) return;
+  if(!e.target.closest('#about') && el.dataset.act!=='about'){ $('#about').hidden = true; document.querySelector('[data-act="about"]').setAttribute('aria-expanded','false'); }
+  readFields();
+  if(!el.closest('#about') && !['notice-close','toast-close'].includes(el.dataset.act) && el.dataset.act!=='mic') ui.notice = null;
+  if(!el.closest('#about') && !el.closest('.toast') && el.dataset.act!=='about') ui.toast = null;
+  const fk = el.dataset.fk;
+  act(el);
+  refocus(fk);
+});
+let numJust = null;
+const selNum = t => { try{ t.setSelectionRange(0, t.value.length); }catch(_){} };
+document.addEventListener('focusin', e=>{ const t = e.target; if(t && t.matches && t.matches('#sheet input.num')){ numJust = t; selNum(t); setTimeout(()=>{ if(document.activeElement===t) selNum(t); }, 0); } });
+document.addEventListener('mouseup', e=>{ const t = numJust; numJust = null; if(t && e.target===t){ e.preventDefault(); selNum(t); } }, true);
+document.addEventListener('input', e=>{ if(ui.sheet && e.target.closest('#sheet') && e.target.dataset.field){ if(ui.sheet.kind==='hand') ui.sheet.text = e.target.value; else ui.sheet.v[e.target.dataset.field] = e.target.value; } });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape' && ui.sheet){ if(ui.listening) stopAll(); ui.sheet = null; ui.busy = null; render(); return; }
+  if(e.key==='Enter' && !e.isComposing && ui.sheet && ui.sheet.kind==='edit' && e.target.matches && e.target.matches('#sheet .stepper input')){ e.preventDefault(); readFields(); if(decide()) render(); else { renderSheet(); refocus('in-' + e.target.dataset.field); } }
+});
+
+window.__renrakucho = { parse, splitSaid, splitFixCmd, stripEnd, saidEnd, famBath, keepStaffOut: r => keepStaffOut(Object.assign(blank(), r)), numOf, fixNames, fixRules, peopleRules, addedWords, addDates, flatSaid, addMe, applyChoice, makeRules: (id, raw) => makeRules(byId(id), raw),
+  prompts: { make: o => promptMake(Object.assign({}, o, {person: o.person ? byId(o.person) : null})), fix: o => promptFix(Object.assign({}, o, {person: o.person ? byId(o.person) : null})), people: promptPeople },
+  normRec, normDraft, say: (text, target) => simulate(target || (ui.view==='people' ? 'people' : ui.sheet && ui.sheet.kind==='hand' ? 'hand' : 'rec'), text),
+  state: () => st, ui: () => ui, voice: () => voice.engine, ai: () => ({on: aiOn(), calls: ai.calls, fails: ai.fails, last: ai.last}) };
+
+resetIdle();
+render();
+})();
+</script>
+</body>
+</html>

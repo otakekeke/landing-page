@@ -3,7 +3,7 @@
   "scripts": {
     "build": "node scripts/build_pages.mjs",
     "check:generated": "node scripts/build_pages.mjs --check",
-    "test": "node scripts/check_site.mjs && node scripts/check_suryo.mjs"
+    "test": "node scripts/check_site.mjs && node scripts/check_suryo.mjs && node scripts/check_renrakucho.mjs"
   },
   "dependencies": {
     "agent-browser": "^0.5.0"
