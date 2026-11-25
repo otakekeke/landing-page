@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>障害福祉サービスの空き状況（試作品）｜タケノコ</title>
+<!--
+  画面の手本：デジタル庁デザインシステム（https://design.digital.go.jp/dads/）
+  使った物：色（青900・灰800・成功＝緑・注意＝黄・青緑）、字 16px・行間 1.7、フォーカスの黒と黄、
+  ボタン（塗り＝1画面に1つ・枠・文字）、タブ、チップ、入力欄、知らせ、モーダルダイアログ。
+  一番上の濃い帯は「見本の操作」でアプリの外。白い所から下がアプリ（市が運営する画面）。
+  状態は色だけでなく形（○ △ ✕）と字の 3 つで見分ける。7 日以上前に確かめた所は、時計の印・黄色の札・左の黄色の帯。
+  空きの人数（1人・2人・3人以上）は任意。空きありの時だけ選べて、選ばなくても更新は済む。
+  事業所が状態を押した結果と「元に戻す」は、画面の下ではなく「今の空き状況」の枠の中に出す（状態のボタンを隠さない）。
+  画面の言葉は 言葉の一覧.md の物だけ。要素は 価値の対応_空き状況デモ.md の行と対になる。
+  外のファイル（字の形・ライブラリ）は読まない。見本のデータは、このブラウザの中だけで覚える（覚えられない時も動く）。
+-->
+<style>
+:root{
+  --blue-50:#e8f1fe; --blue-100:#d9e6ff; --blue-200:#c5d7fb; --blue-300:#9db7f9;
+  --blue-900:#0017c1; --blue-1000:#00118f; --blue-1200:#000060;
+  --gray-50:#f2f2f2; --gray-100:#e6e6e6; --gray-200:#cccccc; --gray-300:#b3b3b3; --gray-536:#767676;
+  --gray-600:#666666; --gray-700:#4d4d4d; --gray-800:#333333; --gray-900:#1a1a1a;
+  --green-50:#e6f5ec; --green-800:#197a4b; --green-900:#115a36;
+  --teal-50:#e6f3f5; --teal-900:#006f83;
+  --yellow-50:#fbf5e0; --yellow-700:#b78f00; --yellow-900:#927200; --yellow-1000:#806300;
+  --red-800:#ec0000;
+  --radius:8px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--gray-800);
+  font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  font-size:16px;line-height:1.7;letter-spacing:.02em;word-break:auto-phrase;overflow-wrap:break-word}
+body.has-toast{padding-bottom:128px}
+:focus-visible{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+h1[tabindex]:focus{outline:none}
+h1[tabindex]:focus-visible{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+[hidden]{display:none !important}
+svg{flex:none}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:16px;top:8px;background:#fff;padding:8px 12px;z-index:30}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+p{margin:0 0 12px}
+h1{font-size:28px;line-height:1.4;margin:20px 0 12px;color:var(--gray-900)}
+h2{font-size:20px;line-height:1.5;margin:0;color:var(--gray-900)}
+.hint{color:var(--gray-700);margin:0 0 8px}
+
+/* 見本の操作の帯（アプリの外） */
+.demo{background:var(--gray-900);color:#fff}
+.demo-in{max-width:1120px;margin:0 auto;padding:8px 16px 10px;display:grid;grid-template-columns:1fr auto;grid-template-areas:"name reset" "roles roles" "note note";gap:6px 12px;align-items:center}
+.demo-name{grid-area:name;font-weight:700;letter-spacing:.06em}
+.demo-roles{grid-area:roles;display:grid;grid-template-columns:1fr 1.5fr 1fr}
+.demo-reset{grid-area:reset;display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:4px 8px;border:0;background:none;color:#fff;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;border-radius:6px}
+.demo-reset:hover{background:#333;text-decoration-thickness:3px}
+.demo-note{grid-area:note;margin:0;font-size:14px;line-height:1.6;color:var(--gray-100)}
+.demo-note span{display:block}
+@media (min-width:900px){.demo-note span{display:inline}.demo-note span+span{margin-left:1em}}
+.role{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:52px;padding:4px 4px;background:transparent;color:#fff;
+  border:1px solid var(--gray-300);border-left-width:0;font:inherit;line-height:1.3;cursor:pointer;text-align:center}
+.role:first-child{border-left-width:1px;border-radius:8px 0 0 8px}
+.role:last-child{border-radius:0 8px 8px 0}
+.role:hover{background:#333}
+.role[aria-selected=true]{background:#fff;color:var(--gray-900);font-weight:700}
+
+/* アプリの頭 */
+.app-head{border-bottom:1px solid var(--gray-300)}
+.app-head .wrap{display:flex;flex-direction:column;padding-top:10px;padding-bottom:10px;line-height:1.45}
+.city{color:var(--gray-700)}
+.app-name{font-weight:700;font-size:18px;color:var(--gray-900)}
+
+/* 頭の行（自分のアカウント） */
+.acct{display:flex;align-items:center;gap:10px;padding:16px 0 0}
+.acct-name{display:flex;flex-direction:column;line-height:1.45;min-width:0;flex:1}
+.acct-name b{color:var(--gray-900)}
+.acct-name span{color:var(--gray-700)}
+.acct-off{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--gray-900)}
+
+/* ボタン（DADS：塗り・枠・文字） */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:700;border-radius:var(--radius);
+  cursor:pointer;text-decoration:none;min-height:48px;padding:8px 16px;letter-spacing:.02em;position:relative}
+.btn-lg{min-height:56px;padding:12px 20px;font-size:17px}
+.btn-sm{min-height:36px;padding:2px 12px;border-radius:6px}
+.btn-sm::after{content:"";position:absolute;inset:-4px 0}
+.btn-fill{background:var(--blue-900);color:#fff;border:4px double transparent}
+.btn-fill:hover{background:var(--blue-1000);text-decoration:underline;text-underline-offset:3px}
+.btn-fill:active{background:var(--blue-1200)}
+.btn-line{background:#fff;color:var(--blue-900);border:1px solid var(--blue-900)}
+.btn-line:hover{background:var(--blue-200);color:var(--blue-1000);text-decoration:underline;text-underline-offset:3px}
+.btn-line:active{background:var(--blue-300)}
+.btn-text{background:none;border:0;color:var(--blue-900);text-decoration:underline;text-underline-offset:3px;padding:8px;min-height:44px}
+.btn-text:hover{background:var(--blue-50);text-decoration-thickness:3px}
+.btn-text:focus-visible{background:#ffd43d}
+.wide{width:100%}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-end;margin:20px 0 0}
+.err{color:var(--red-800);font-weight:700;margin:4px 0}
+
+/* 状態の札（○ 空きあり・△ 相談可・✕ 満員） */
+.badge{display:inline-flex;align-items:center;gap:6px;border:2px solid;border-radius:8px;padding:1px 10px;font-weight:700;white-space:nowrap;line-height:1.5}
+.badge-aki{background:var(--green-50);border-color:var(--green-800);color:var(--green-900)}
+.badge-sodan{background:var(--teal-50);border-color:var(--teal-900);color:var(--teal-900)}
+.badge-manin{background:var(--gray-50);border-color:var(--gray-700);color:var(--gray-800)}
+.badge-lg{font-size:28px;padding:6px 18px;border-width:3px;gap:10px;justify-self:start}
+.old{display:inline-flex;align-items:center;gap:4px;background:var(--yellow-50);border:1px solid var(--yellow-900);color:var(--yellow-1000);border-radius:8px;padding:0 6px;font-weight:700;white-space:nowrap}
+.old-note{display:flex;gap:8px;align-items:flex-start;background:var(--yellow-50);border-left:8px solid var(--yellow-700);padding:8px 12px;margin:0;color:var(--gray-900)}
+.old-note svg{margin-top:4px;color:var(--yellow-1000)}
+/* 札の基準の 1 行（箱にしない） */
+.old-key{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:-2px 0 8px;color:var(--gray-900)}
+.old-key .old{padding:1px 6px}
+#c-old-key{margin:16px 0 8px}
+#c-old-key:not([hidden]) + .alist{margin-top:0}
+
+/* 事業所：今の空き状況 */
+.now{border:1px solid var(--gray-536);border-radius:12px;padding:20px;display:grid;gap:12px}
+.when{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:0;color:var(--gray-700)}
+.when time{color:var(--gray-900);font-weight:700}
+.same-hint{margin:-4px 0 0;color:var(--gray-700);text-align:center}
+#j-old{padding:4px 12px;border-left-width:6px;font-weight:700}
+/* 押した結果の 1 行（今の空き状況の枠の中。DADS の細い知らせ：左の帯） */
+.done{display:flex;align-items:center;gap:4px 8px;margin:0;min-height:44px;padding:0 0 0 10px;border-left:6px solid var(--green-800);background:var(--green-50);color:var(--gray-900)}
+.done > svg{color:var(--green-800)}
+.done-msg{flex:1 1 0;min-width:0;font-weight:700;line-height:1.45;padding:4px 0}
+.done .btn-text{flex:none;white-space:nowrap;padding:8px 10px}
+.st-txt{line-height:1.35}
+.now.flash{animation:flash .9s ease-out}
+@keyframes flash{0%{background:var(--blue-100)}100%{background:#fff}}
+@media (prefers-reduced-motion:reduce){.now.flash{animation:none}}
+.h-sub{font-size:18px;margin:28px 0 8px}
+.states{display:grid;gap:12px}
+.state{display:flex;align-items:center;gap:14px;width:100%;min-height:76px;padding:12px 16px;border:1px solid var(--gray-536);border-radius:12px;
+  background:#fff;font:inherit;color:var(--gray-800);text-align:left;cursor:pointer}
+.state:hover{background:var(--blue-50);border-color:var(--blue-900)}
+.state:active{background:var(--blue-100)}
+.state[aria-pressed=true]{border:3px solid var(--blue-900);padding:10px 14px;background:var(--blue-50)}
+.mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid}
+.mark-aki{color:var(--green-800);background:var(--green-50);border-color:var(--green-800)}
+.mark-sodan{color:var(--teal-900);background:var(--teal-50);border-color:var(--teal-900)}
+.mark-manin{color:var(--gray-800);background:var(--gray-50);border-color:var(--gray-700)}
+.st-txt{display:flex;flex-direction:column;line-height:1.45;flex:1;min-width:0}
+.st-txt b{font-size:20px;color:var(--gray-900)}
+.st-txt span{color:var(--gray-700)}
+.now-mark{color:var(--blue-900);visibility:hidden}
+.state[aria-pressed=true] .now-mark{visibility:visible}
+
+/* 事業所：空きの人数（任意・空きありの時だけ） */
+.ninzu{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:6px;align-items:center;padding:0 0 0 8px}
+.nz-l{display:flex;flex-direction:column;line-height:1.3;font-size:14px;font-weight:700;color:var(--gray-900);padding-right:2px}
+.nz-l span{font-weight:400;color:var(--gray-700)}
+.nz{display:inline-flex;align-items:center;justify-content:center;gap:2px;min-height:44px;padding:4px 2px;border:1px solid var(--gray-600);border-radius:22px;background:#fff;
+  font:inherit;font-weight:700;color:var(--gray-800);cursor:pointer;line-height:1.3;white-space:nowrap}
+.nz svg{display:none}
+.nz:hover{background:var(--blue-50);border-color:var(--blue-900)}
+.nz[aria-pressed=true]{background:var(--blue-900);border-color:var(--blue-900);color:#fff}
+.nz[aria-pressed=true] svg{display:inline}
+.nz[aria-pressed=true]:hover{background:var(--blue-1000)}
+@media (min-width:700px){.ninzu{grid-template-columns:auto repeat(3,128px);justify-content:start;gap:8px;padding-left:16px}.nz-l{flex-direction:row;padding-right:8px}}
+
+/* 事業所：受け入れ条件 */
+.cond{margin:28px 0 0;border:1px solid var(--gray-300);border-radius:12px;padding:16px 20px}
+.cond-head{display:flex;align-items:center;gap:12px}
+.cond-head h2{font-size:18px;flex:1}
+.cond-view{margin-top:8px}
+.cond-view p{margin:6px 0 0;color:var(--gray-900)}
+.cond-form{margin-top:12px}
+.kchip{display:inline-flex;align-items:center;min-height:32px;padding:3px 7px;border-radius:8px;border:1px solid var(--gray-600);background:var(--gray-50);margin:0 4px 4px 0;line-height:1.4;color:var(--gray-900)}
+
+/* 入力欄・選ぶ所 */
+fieldset{border:0;padding:0;margin:0 0 16px;min-width:0}
+legend{font-weight:700;padding:0;margin-bottom:4px;color:var(--gray-900)}
+.field-label{display:block;font-weight:700;color:var(--gray-900);margin:0 0 4px}
+input[type=text],input[type=tel],textarea,select{display:block;width:100%;font:inherit;color:var(--gray-900);background:#fff;
+  border:1px solid var(--gray-600);border-radius:8px;padding:10px 16px;min-height:48px;margin:0 0 16px}
+textarea{resize:vertical;min-height:88px}
+input[type=text]:hover,input[type=tel]:hover,textarea:hover,select:hover{border-color:#000}
+input[aria-invalid=true],select[aria-invalid=true],textarea[aria-invalid=true]{border:2px solid var(--red-800) !important}
+p{text-wrap:pretty}
+.res-h,dialog h2{text-wrap:balance}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.pick{position:relative;display:inline-flex;max-width:100%}
+.pick input{position:absolute;opacity:0;width:1px;height:1px;margin:0;left:12px;top:12px}
+.pick span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 16px;border:1px solid var(--gray-600);border-radius:22px;
+  background:#fff;cursor:pointer;font-weight:700;color:var(--gray-800);line-height:1.4}
+.pick span svg{display:none}
+.pick span:hover{background:var(--blue-50);border-color:var(--blue-900)}
+.pick input:checked + span{background:var(--blue-900);border-color:var(--blue-900);color:#fff}
+.pick input:checked + span svg{display:inline}
+.pick input:checked + span:hover{background:var(--blue-1000)}
+.pick input:focus-visible + span{outline:4px solid #000;outline-offset:2px;box-shadow:0 0 0 2px #ffd43d}
+fieldset[aria-invalid=true] .pick span{border-color:var(--red-800)}
+
+/* 相談支援専門員：候補 */
+.res-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0 12px;margin:4px 0 8px;scroll-margin-top:8px}
+.res-h{display:flex;align-items:baseline;gap:8px;margin:0;font-size:20px}
+.res-n{font-weight:400;color:var(--gray-700)}
+#view-s h1{scroll-margin-top:8px}
+.mean{color:var(--gray-800)}
+.card-call{padding:0 16px 14px}
+.card.stale .card-call{padding-left:12px}
+.empty{border:1px dashed var(--gray-536);border-radius:12px;padding:16px;color:var(--gray-800);margin:8px 0 0;display:flex;gap:10px;align-items:flex-start}
+.cards{list-style:none;margin:0;padding:0;display:grid;gap:12px;align-items:start}
+.card{border:1px solid var(--gray-536);border-radius:12px;background:#fff}
+.card.stale{border-left:8px solid var(--yellow-700)}
+.card-head{display:flex;gap:12px;align-items:flex-start;width:100%;padding:14px 16px;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;border-radius:12px;min-height:64px}
+.card.stale .card-head{border-radius:0 12px 12px 0;padding-left:12px}
+.card-head:hover{background:var(--blue-50)}
+.card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.card-name{font-size:18px;color:var(--gray-900);line-height:1.4;font-weight:700}
+.card-meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.when-s{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 6px;color:var(--gray-700)}
+.chev{margin-top:2px;color:var(--blue-900)}
+.card-head[aria-expanded=true] .chev{transform:rotate(180deg)}
+.card-detail{padding:12px 16px 16px;border-top:1px solid var(--gray-200)}
+.call{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.tel-big{display:inline-flex;align-items:center;gap:8px;font-size:24px;font-weight:700;color:var(--gray-900);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.call-note{flex-basis:100%;margin:0;color:var(--gray-900);font-weight:700}
+.call-note:empty{display:none}
+dl.facts{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;margin:12px 0 0}
+dl.facts dt{color:var(--gray-700)}
+dl.facts dd{margin:0;color:var(--gray-900);min-width:0}
+.card-detail .old-note{margin-top:12px}
+
+/* 停止中 */
+.stopped{border:2px solid var(--blue-900);border-radius:12px;padding:24px 20px;margin:16px 0 0;text-align:center;background:var(--blue-50)}
+.stopped h1{margin:8px 0;font-size:22px;text-wrap:balance}
+.stopped > p{margin:0;text-wrap:balance}
+.stopped svg{color:var(--blue-900)}
+.ask{margin:16px auto 0;padding:12px 16px;background:#fff;border-radius:8px;display:inline-block;text-align:left}
+.ask dt{color:var(--gray-700);margin:0}
+.ask dd{margin:0;color:var(--gray-900);font-weight:700}
+.tel-s{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 市の職員：アカウント */
+.lead-s{color:var(--gray-800)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--gray-300);margin:8px 0 0}
+.tab{font:inherit;background:none;border:0;border-bottom:4px solid transparent;padding:8px 14px;min-height:48px;cursor:pointer;color:var(--gray-700);display:inline-flex;align-items:center;gap:6px}
+.tab[aria-selected=true]{color:var(--gray-900);font-weight:700;border-bottom-color:var(--blue-900)}
+.tab:hover{background:var(--blue-50)}
+.tab .n{font-variant-numeric:tabular-nums;color:var(--gray-700);font-weight:400}
+.add{border:1px solid var(--gray-536);border-radius:12px;padding:16px 20px;margin:16px 0 0;max-width:640px}
+.add h2{font-size:18px;margin:0 0 12px}
+.add .actions{margin-top:4px}
+.alist{list-style:none;margin:16px 0 0;padding:0;border:1px solid var(--gray-300);border-radius:12px}
+.arow{display:flex;align-items:center;gap:6px 16px;padding:12px 16px;border-bottom:1px solid var(--gray-200);flex-wrap:wrap}
+.arow:first-child{border-radius:12px 12px 0 0}
+.arow:last-child{border-bottom:0;border-radius:0 0 12px 12px}
+.arow.new{box-shadow:inset 4px 0 0 var(--blue-900)}
+.a-main{flex:1 1 12em;min-width:0;display:flex;flex-direction:column;line-height:1.45}
+.a-main b{color:var(--gray-900)}
+.a-main span{color:var(--gray-700)}
+.a-when{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 6px;color:var(--gray-700);flex:1 1 100%}
+.a-side{display:flex;align-items:center;gap:12px;margin-left:auto}
+.st-on,.st-off{display:inline-flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap}
+.st-on{color:var(--green-900)}
+.st-off{color:var(--gray-900)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--green-800)}
+.a-side .btn-sm{min-width:72px}
+
+/* 結果の知らせ（画面の下） */
+.toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(560px,calc(100% - 32px));z-index:20}
+.toast-in{display:flex;align-items:center;gap:4px 8px;background:#fff;border:2px solid var(--green-800);border-left-width:8px;border-radius:0;
+  padding:8px 8px 8px 12px;box-shadow:0 2px 12px 2px rgba(0,0,0,.1),0 1px 6px 0 rgba(0,0,0,.3)}
+.toast-in > svg{color:var(--green-800)}
+.toast-msg{flex:1 1 0;min-width:0;font-weight:700;color:var(--gray-900);line-height:1.5}
+.toast-in .btn-text{flex:none;white-space:nowrap;padding:8px 6px}
+.toast-x{flex:none}
+.toast-x{width:44px;height:44px;border:0;background:none;border-radius:8px;display:grid;place-items:center;cursor:pointer;color:var(--gray-800)}
+.toast-x:hover{background:var(--gray-50)}
+
+/* ダイアログ（DADS：モーダルダイアログ） */
+dialog{border:1px solid #000;border-radius:8px;padding:24px;max-width:min(480px,calc(100% - 32px));box-shadow:0 4px 16px 3px rgba(0,0,0,.1),0 1px 6px 0 rgba(0,0,0,.3);color:var(--gray-800)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h2{font-size:24px;line-height:1.4;margin:0 0 12px;flex:1}
+.dlg-head{display:flex;align-items:flex-start;gap:8px}
+.dlg-head .toast-x{margin:-6px -10px 0 0}
+dialog p{margin:0}
+
+/* スマホ：帯と頭を詰め、開いた時に「変わりなし」と 3 つの状態のボタンまで 1 画面に収める */
+@media (max-width:699px){
+  .demo-in{padding:6px 16px 8px;gap:4px 12px}
+  .role{flex-direction:row;gap:5px;min-height:44px;padding:4px 6px}
+  .role svg{width:18px;height:18px}
+  .app-head .wrap{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:12px;padding-top:6px;padding-bottom:6px}
+  .city{font-size:14px}
+  .app-name{font-size:16px}
+  .acct{padding-top:10px}
+  .acct-name{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:10px}
+  .demo-note{line-height:1.5}
+  h1{font-size:24px;margin:8px 0 4px}
+  .badge-lg{font-size:22px;padding:2px 14px}
+  .now{padding:12px 16px;gap:6px}
+  .same-hint{font-size:14px;margin-top:-2px}
+  .h-sub{margin:12px 0 6px}
+  .states{gap:6px}
+  .state{min-height:60px;padding:8px 14px;gap:12px}
+  .state[aria-pressed=true]{padding:6px 12px}
+  .mark{width:40px;height:40px}
+  .st-txt b{font-size:18px}
+  .st-txt span{font-size:14px}
+  .cond{padding:16px}
+  .btn-sm{min-height:44px}
+  dl.facts{grid-template-columns:1fr;gap:0}
+  dl.facts dd{margin-bottom:10px}
+  .call .btn{width:100%}
+  /* 選ぶ所は列をそろえる（選んで ✓ が付いても並びが動かない） */
+  #f-kinds,#cond-kinds{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  #f-svc,#add-svc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  #f-svc .pick:last-child,#add-svc .pick:last-child{grid-column:span 2}
+  #f-kinds .pick span,#cond-kinds .pick span{padding:8px 2px;gap:2px}
+  #f-kinds .pick,#cond-kinds .pick,#f-svc .pick,#add-svc .pick{display:flex}
+  #f-kinds .pick span,#cond-kinds .pick span,#f-svc .pick span,#add-svc .pick span{flex:1;justify-content:center;text-align:center}
+  /* アカウントの行：名前と日時は左、状態と停止・再開は右（行を低くして、一度に多く見える） */
+  .arow{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"main side" "when side";align-items:center;gap:2px 12px;padding:8px 12px 8px 16px}
+  .a-main{grid-area:main}
+  .a-when{grid-area:when;font-size:14px}
+  .a-side{grid-area:side;flex-direction:column;align-items:flex-end;gap:4px;margin-left:0}
+}
+@media (min-width:900px){
+  .demo-in{grid-template-columns:auto minmax(0,560px) 1fr auto;grid-template-areas:"name roles . reset" "note note note note"}
+  .role{flex-direction:row;gap:6px;min-height:44px}
+}
+@media (min-width:1000px){
+  body[data-role=s] .wrap.app,body[data-role=c] .wrap.app{max-width:1120px}
+  .s-grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:32px;align-items:start}
+  .filters{position:sticky;top:16px}
+  .cards{grid-template-columns:1fr 1fr}
+  .arow{flex-wrap:nowrap}
+  .a-when{flex:0 0 260px}
+}
+</style>
+</head>
+<body data-role="j">
+<a class="skip" href="#main">本文へ移動</a>
+
+<!-- 見本の操作（アプリの外） -->
+<section class="demo" aria-label="見本の操作">
+  <div class="demo-in">
+    <span class="demo-name">タケノコの試作品</span>
+    <div class="demo-roles" role="tablist" aria-label="見本の立場" id="who-tabs">
+      <button type="button" class="role" role="tab" id="tab-j" data-role="j" aria-controls="view-j" aria-selected="true" tabindex="0" data-k="role-j">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2M2 21h20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>事業所</button>
+      <button type="button" class="role" role="tab" id="tab-s" data-role="s" aria-controls="view-s" aria-selected="false" tabindex="-1" data-k="role-s">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 21c0-4 3-7 7-7 1.4 0 2.6.3 3.6.9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="16" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.6 18.6 22 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>相談支援専門員</button>
+      <button type="button" class="role" role="tab" id="tab-c" data-role="c" aria-controls="view-c" aria-selected="false" tabindex="-1" data-k="role-c">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.5 12H22M18 12v3.5M21 12v2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>市の職員</button>
+    </div>
+    <button type="button" class="demo-reset" id="reset" data-k="reset">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v4h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>見本を最初に戻す</button>
+    <p class="demo-note"><span>本物は、各自のログインで自分の画面だけに入ります。</span><span>名前と数字は見本です。項目は使う方と決めます。</span></p>
+  </div>
+</section>
+
+<!-- ここから下がアプリ -->
+<header class="app-head"><div class="wrap app"><span class="city">○○市 障害福祉課</span><span class="app-name">障害福祉サービスの空き状況</span></div></header>
+
+<main id="main" class="wrap app">
+
+  <!-- 事業所：状態の更新 -->
+  <section id="view-j" class="view" role="tabpanel" aria-labelledby="tab-j">
+    <div class="acct">
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V6l8-3 8 3v15M9 21v-5h6v5M8 9h2M14 9h2M8 13h2M14 13h2M2 21h20" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="acct-name"><b id="j-name"></b><span id="j-sub"></span></span>
+      <span class="acct-off" id="j-off" hidden></span>
+    </div>
+
+    <div id="j-stop" class="stopped" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <h1 tabindex="-1">このアカウントは停止中です</h1>
+      <p>再開されると、また空き状況を更新できます。</p>
+      <dl class="ask"><dt>問い合わせ先</dt><dd class="ask-dd"></dd></dl>
+    </div>
+
+    <div id="j-main">
+      <h1 id="j-h" tabindex="-1">今の空き状況</h1>
+      <div class="now" id="j-now">
+        <span class="badge badge-lg" id="j-badge"></span>
+        <p class="when" id="j-when"></p>
+        <div class="done" id="j-done" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="done-msg" id="j-done-msg"></span>
+          <button type="button" class="btn btn-text" id="j-undo" data-k="undo" hidden>元に戻す</button>
+        </div>
+        <p class="old-note" id="j-old" hidden></p>
+        <button type="button" class="btn btn-line btn-lg wide" id="j-same" data-k="same" aria-describedby="j-same-hint">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>変わりなし</button>
+        <p class="same-hint" id="j-same-hint">状態はそのまま、確かめた日時が今になります</p>
+      </div>
+
+      <h2 class="h-sub" id="states-h">状態が変わった時</h2>
+      <div class="states" role="group" aria-labelledby="states-h">
+        <button type="button" class="state" data-state="aki" data-k="state-aki" aria-pressed="false">
+          <span class="mark mark-aki"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="3"/></svg></span>
+          <span class="st-txt"><b>空きあり</b><span>すぐ受け入れられる</span></span>
+          <svg class="now-mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ninzu" id="j-ninzu" role="group" aria-labelledby="nz-l" hidden>
+          <span class="nz-l" id="nz-l">空きの人数<span>（任意）</span></span>
+          <button type="button" class="nz" data-n="1" data-k="nz-1" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>1人</button>
+          <button type="button" class="nz" data-n="2" data-k="nz-2" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>2人</button>
+          <button type="button" class="nz" data-n="3" data-k="nz-3" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>3人以上</button>
+        </div>
+        <button type="button" class="state" data-state="sodan" data-k="state-sodan" aria-pressed="false">
+          <span class="mark mark-sodan"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5 20.5 19.5h-17z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg></span>
+          <span class="st-txt"><b>相談可</b><span>受けられるかは、相談して決めたい</span></span>
+          <svg class="now-mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="state" data-state="manin" data-k="state-manin" aria-pressed="false">
+          <span class="mark mark-manin"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>
+          <span class="st-txt"><b>満員</b><span>今は受けられない</span></span>
+          <svg class="now-mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <section class="cond" aria-labelledby="cond-h">
+        <div class="cond-head">
+          <h2 id="cond-h">受け入れ条件</h2>
+          <button type="button" class="btn btn-line btn-sm" id="cond-edit" data-k="cond-edit" aria-controls="cond-form" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19.5 8.5l-4-4L4 16z M13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>直す</button>
+        </div>
+        <div class="cond-view" id="cond-view">
+          <div id="cond-kinds-v"></div>
+          <p id="cond-memo-v"></p>
+        </div>
+        <div class="cond-form" id="cond-form" hidden>
+          <p class="hint">あまり変わらない物です。変わった時だけ直します。</p>
+          <fieldset id="cond-kinds-fs" aria-describedby="cond-err">
+            <legend>対応できる障害の種別</legend>
+            <p class="err" id="cond-err" hidden>1つ以上選んでください</p>
+            <div class="picks" id="cond-kinds"></div>
+          </fieldset>
+          <label class="field-label" for="cond-memo">受け入れの条件</label>
+          <p class="hint" id="cond-memo-hint">事業所の条件を書きます。利用する方個人のことは書きません。</p>
+          <textarea id="cond-memo" rows="3" aria-describedby="cond-memo-hint"></textarea>
+          <div class="actions">
+            <button type="button" class="btn btn-text" id="cond-cancel" data-k="cond-cancel">キャンセル</button>
+            <button type="button" class="btn btn-fill" id="cond-save" data-k="cond-save">保存</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- 相談支援専門員：探す -->
+  <section id="view-s" class="view" role="tabpanel" aria-labelledby="tab-s" hidden>
+    <div class="acct">
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="#333" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="acct-name"><b id="s-name"></b><span id="s-sub"></span></span>
+      <span class="acct-off" id="s-off" hidden></span>
+    </div>
+
+    <div id="s-stop" class="stopped" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <h1 tabindex="-1">このアカウントは停止中です</h1>
+      <p>再開されると、また空き状況を見られます。</p>
+      <dl class="ask"><dt>問い合わせ先</dt><dd class="ask-dd"></dd></dl>
+    </div>
+
+    <div id="s-main">
+      <h1 id="s-h" tabindex="-1">事業所を探す</h1>
+      <div class="s-grid">
+        <div class="filters">
+          <fieldset><legend>サービスの種類</legend><div class="picks" id="f-svc"></div></fieldset>
+          <fieldset aria-describedby="f-kinds-hint"><legend>障害の種別</legend><p class="hint" id="f-kinds-hint">選んだ種別を、すべて受けられる所だけ出ます</p><div class="picks" id="f-kinds"></div></fieldset>
+        </div>
+        <div id="s-res"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 市の職員：アカウント -->
+  <section id="view-c" class="view" role="tabpanel" aria-labelledby="tab-c" hidden>
+    <div class="acct">
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="4.5" fill="none" stroke="#333" stroke-width="2"/><path d="M12.5 12H22M18 12v3.5M21 12v2.5" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="acct-name"><b>福祉 太郎</b><span>障害福祉課</span></span>
+    </div>
+    <h1 id="c-h" tabindex="-1">アカウントの管理</h1>
+    <p class="lead-s">空き状況を見たり更新したりできるのは、ここで利用中のアカウントだけです。</p>
+    <div class="tabs" role="tablist" aria-label="アカウントの種類" id="c-tabs">
+      <button type="button" class="tab" role="tab" id="ctab-f" data-ctab="f" aria-selected="true" aria-controls="c-panel" tabindex="0" data-k="ctab-f">事業所<span class="n" id="cn-f"></span></button>
+      <button type="button" class="tab" role="tab" id="ctab-s" data-ctab="s" aria-selected="false" aria-controls="c-panel" tabindex="-1" data-k="ctab-s">相談支援専門員<span class="n" id="cn-s"></span></button>
+    </div>
+    <div id="c-panel" role="tabpanel" aria-labelledby="ctab-f">
+      <div class="actions" id="add-open-wrap" style="justify-content:flex-start">
+        <button type="button" class="btn btn-fill" id="add-open" data-k="add-open">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>アカウントを追加</button>
+      </div>
+      <form class="add" id="add-form" hidden novalidate>
+        <h2 id="add-h"></h2>
+        <label class="field-label" for="add-name" id="add-name-l"></label>
+        <p class="err" id="add-name-err" hidden>名前を入れてください</p>
+        <input id="add-name" type="text" autocomplete="off" aria-describedby="add-name-err">
+        <div id="add-f-wrap">
+          <fieldset id="add-svc-fs" aria-describedby="add-svc-err">
+            <legend>サービスの種類</legend>
+            <p class="err" id="add-svc-err" hidden>サービスの種類を選んでください</p>
+            <div class="picks" id="add-svc"></div>
+          </fieldset>
+          <label class="field-label" for="add-tel">電話番号</label>
+          <input id="add-tel" type="tel" inputmode="tel" autocomplete="off">
+        </div>
+        <div id="add-s-wrap">
+          <label class="field-label" for="add-org">所属する相談支援事業所</label>
+          <p class="err" id="add-org-err" hidden>所属する相談支援事業所を選んでください</p>
+          <select id="add-org" aria-describedby="add-org-err"></select>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-text" id="add-cancel" data-k="add-cancel">キャンセル</button>
+          <button type="submit" class="btn btn-fill" id="add-submit" data-k="add-submit">追加</button>
+        </div>
+      </form>
+      <p class="old-key" id="c-old-key" hidden></p>
+      <ul class="alist" id="alist"></ul>
+    </div>
+  </section>
+</main>
+
+<!-- 結果の知らせ -->
+<div class="toast" id="toast">
+  <div class="toast-in" id="toast-in" hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="toast-msg" id="toast-msg"></span>
+    <button type="button" class="toast-x" id="toast-close" data-k="toast-close" aria-label="閉じる">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- 停止の確かめ -->
+<dialog id="dlg" aria-labelledby="dlg-h" aria-describedby="dlg-p">
+  <div class="dlg-head">
+    <h2 id="dlg-h"></h2>
+    <button type="button" class="toast-x" id="dlg-x" data-k="dlg-x" aria-label="閉じる">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <p id="dlg-p"></p>
+  <div class="actions">
+    <button type="button" class="btn btn-text" id="dlg-cancel" data-k="dlg-cancel" autofocus>キャンセル</button>
+    <button type="button" class="btn btn-fill" id="dlg-ok" data-k="dlg-ok">停止する</button>
+  </div>
+</dialog>
+
+<div id="sr" class="sr-only" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------- 決まり ----------
+  var KEY = 'akijokyo-demo-v3'; // 3 回目の直しで、覚える形を変えた（人数を足し、得の数字を消した）
+  var DAY = 86400000;
+  var STALE_DAYS = 7;   // 7 日以上前に確かめた所に印を付ける（見本の決め方）
+  var NZ = { 1: '1人', 2: '2人', 3: '3人以上' }; // 空きの人数（任意）
+  var CITY = '○○市 障害福祉課';
+  var CITY_TEL = '0000-12-3400'; // 見本の番号（頭の 0000 は日本の市外局番に無い）
+  var WD = ['日', '月', '火', '水', '木', '金', '土'];
+  var SVC = {
+    gh: { label: 'グループホーム', full: '共同生活援助（グループホーム）' },
+    ss: { label: '短期入所', full: '短期入所（ショートステイ）' },
+    a: { label: '就労継続支援A型', full: '就労継続支援A型' },
+    b: { label: '就労継続支援B型', full: '就労継続支援B型' },
+    hd: { label: '放課後等デイサービス', full: '放課後等デイサービス（障害児通所支援）' }
+  };
+  var SVC_ORDER = ['gh', 'ss', 'a', 'b', 'hd'];
+  var KINDS = ['身体', '知的', '精神', '児童', '難病'];
+  var ST = {
+    aki: { label: '空きあり', rank: 0, mean: 'すぐ受け入れられる' },
+    sodan: { label: '相談可', rank: 1, mean: '受けられるかは、相談して決めたい' },
+    manin: { label: '満員', rank: 2, mean: '今は受けられない' }
+  };
+  var ME = { j: 'f1', s: 's1' }; // 見本でログインしている事業所と相談支援専門員
+  var ORGS = ['見本相談支援センター', '見本相談室 みなみ', '見本相談室 きた']; // 市が指定した相談支援事業所（見本）
+
+  var ICON = {
+    aki: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="3"/></svg>',
+    sodan: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5 20.5 19.5h-17z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>',
+    manin: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+    check: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    clock: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    chev: '<svg class="chev" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    phone: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+    pause: '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>',
+    search: '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="#4d4d4d" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="#4d4d4d" stroke-width="2" stroke-linecap="round"/></svg>'
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  // ---------- 日時 ----------
+  function startOf(t) { var d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
+  function dayKey(t) { var d = new Date(t); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function daysAgo(t) { return Math.round((startOf(Date.now()) - startOf(t)) / DAY); }
+  function hm(t) { var d = new Date(t); return d.getHours() + ':' + pad(d.getMinutes()); }
+  function md(t) { var d = new Date(t); return (d.getMonth() + 1) + '月' + d.getDate() + '日（' + WD[d.getDay()] + '）'; }
+  function whenLong(t) { var n = daysAgo(t); if (n <= 0) return '今日 ' + hm(t); if (n === 1) return '昨日 ' + hm(t); return md(t) + ' ' + hm(t) + '・' + n + '日前'; }
+  function whenShort(t) { var n = daysAgo(t); if (n <= 0) return '今日 ' + hm(t); if (n === 1) return '昨日 ' + hm(t); return n + '日前'; }
+  function isStale(t) { return daysAgo(t) >= STALE_DAYS; }
+  function iso(t) { var d = new Date(t); return dayKey(t) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  // 最後に確かめた（短い形）。7 日以上前は時計の印の黄色の札
+  function whenChip(t) {
+    if (isStale(t)) return '<span class="when-s"><span>最後に確かめた</span><span class="old">' + ICON.clock + daysAgo(t) + '日前</span></span>';
+    return '<span class="when-s">' + ICON.clock + '<span>最後に確かめた ' + whenShort(t) + '</span></span>';
+  }
+
+  // ---------- 見本のデータ（名前と番号は見本） ----------
+  function at(back, h, m) { var d = new Date(); d.setDate(d.getDate() - back); d.setHours(h, m, 0, 0); return Math.min(d.getTime(), Date.now() - 60000); }
+  function ago(min) { return Date.now() - min * 60000; }
+  function seed() {
+    var f = [
+      { id: 'f1', name: '見本ホーム あかね', svc: 'gh', kinds: ['知的', '精神'], memo: '女性の方の家です。日中に通う所がある方。', tel: '0000-12-3401', st: 'sodan', at: at(8, 10, 5) },
+      { id: 'f2', name: '見本ホーム そら', svc: 'gh', kinds: ['身体', '知的'], memo: '車いすの方は、1階の2部屋で受けられます。', tel: '0000-12-3402', st: 'manin', at: at(10, 17, 30) },
+      { id: 'f3', name: '見本ホーム みどり', svc: 'gh', kinds: ['精神'], memo: '男性の方の家です。', tel: '0000-12-3403', st: 'aki', n: 2, at: ago(50) },
+      { id: 'f4', name: '見本ホーム ひかり', svc: 'gh', kinds: ['知的', '精神', '難病'], memo: '体験の利用から相談できます。', tel: '0000-12-3404', st: 'sodan', at: at(12, 14, 20) },
+      { id: 'f10', name: '見本短期入所 つばさ', svc: 'ss', kinds: ['身体', '知的', '精神'], memo: '夜の受け入れも相談できます。', tel: '0000-12-3410', st: 'sodan', at: ago(30) },
+      { id: 'f11', name: '見本短期入所 はな', svc: 'ss', kinds: ['知的', '児童'], memo: '小学生から受けられます。', tel: '0000-12-3411', st: 'manin', at: at(2, 15, 0) },
+      { id: 'f5', name: '見本作業所 いずみ', svc: 'b', kinds: ['知的', '精神'], memo: '週3日から通えます。', tel: '0000-12-3405', st: 'aki', at: at(2, 9, 30) },
+      { id: 'f6', name: '見本作業所 もり', svc: 'b', kinds: ['身体', '知的', '精神', '難病'], memo: '送迎は相談できます。', tel: '0000-12-3406', st: 'manin', at: at(9, 11, 0) },
+      { id: 'f7', name: '見本の職場 かぜ', svc: 'a', kinds: ['身体', '精神', '難病'], memo: '1日4時間からの勤務です。', tel: '0000-12-3407', st: 'sodan', at: ago(170) },
+      { id: 'f8', name: '見本デイ ほし', svc: 'hd', kinds: ['児童', '身体', '知的'], memo: '小学生の方です。', tel: '0000-12-3408', st: 'manin', at: ago(95) },
+      { id: 'f9', name: '見本デイ にじ', svc: 'hd', kinds: ['児童', '精神'], memo: '中学生・高校生の方です。', tel: '0000-12-3409', st: 'sodan', at: at(8, 16, 0) }
+    ];
+    f.forEach(function (x) { x.on = true; });
+    var s = [
+      { id: 's1', name: '相談 花子', org: '見本相談支援センター', on: true },
+      { id: 's2', name: '相談 一郎', org: '見本相談支援センター', on: true },
+      { id: 's3', name: '支援 次郎', org: '見本相談室 みなみ', on: true },
+      { id: 's4', name: '支援 さくら', org: '見本相談室 みなみ', on: false }
+    ];
+    return { v: 3, f: f, s: s };
+  }
+
+  // ---------- 覚える（使えない時は、この画面を開いている間だけ覚える） ----------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (d && d.v === 3 && Array.isArray(d.f) && Array.isArray(d.s) &&
+        d.f.some(function (x) { return x.id === ME.j; }) && d.s.some(function (x) { return x.id === ME.s; })) return d;
+    } catch (e) { /* 覚えられない窓でも動く */ }
+    return null;
+  }
+  function save() { try { window.localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* 覚えられない時は、画面の中だけで続ける */ } }
+  function forget() { try { window.localStorage.removeItem(KEY); } catch (e) { /* 同上 */ } }
+
+  var data = load() || seed();
+  var ui;
+  function freshUi() { return { role: 'j', svc: null, kinds: [], open: {}, ctab: 'f', newId: null, undo: null, done: null, editing: false, stopId: null }; }
+  ui = freshUi();
+
+  function fac(id) { for (var i = 0; i < data.f.length; i++) if (data.f[i].id === id) return data.f[i]; return null; }
+  function sp(id) { for (var i = 0; i < data.s.length; i++) if (data.s[i].id === id) return data.s[i]; return null; }
+  function kindsSorted(arr) { return KINDS.filter(function (k) { return arr.indexOf(k) >= 0; }); }
+  function kchips(arr) { return kindsSorted(arr).map(function (k) { return '<span class="kchip">' + k + '</span>'; }).join(''); }
+
+  // ---------- 知らせ ----------
+  function say(text) { var sr = $('sr'); sr.textContent = ''; setTimeout(function () { sr.textContent = text; }, 30); }
+  // 画面の下の知らせ（保存・追加・停止・再開・見本を最初に戻す）。次に何か押すと閉じる
+  function toast(msg) {
+    $('toast-msg').textContent = msg;
+    $('toast-in').hidden = false;
+    document.body.classList.add('has-toast');
+  }
+  function hideToast() {
+    $('toast-in').hidden = true;
+    $('toast-msg').textContent = '';
+    document.body.classList.remove('has-toast');
+  }
+  // 状態の字（空きありで人数を選んだ時だけ「空きあり・2人」）
+  function stLabel(f) { return ST[f.st].label + (f.st === 'aki' && NZ[f.n] ? '・' + NZ[f.n] : ''); }
+  function badge(f) { return '<span class="badge badge-' + f.st + '">' + ICON[f.st] + '<span>' + stLabel(f) + '</span></span>'; }
+  // 札の基準の 1 行（札の付いた所がある時だけ出す）
+  var OLD_KEY = '<span class="old">' + ICON.clock + '<span class="sr-only">時計の札</span></span><span>は、' + STALE_DAYS + '日以上確かめていない所です</span>';
+  function askHtml() { return esc(CITY) + '<br><span class="tel-s">' + ICON.phone + CITY_TEL + '</span>'; }
+
+  // ---------- 事業所の画面 ----------
+  function renderJ() {
+    var me = fac(ME.j);
+    $('j-name').textContent = me.name;
+    $('j-sub').textContent = SVC[me.svc].label;
+    var off = !me.on;
+    $('j-off').hidden = !off;
+    $('j-off').innerHTML = off ? ICON.pause + '停止中' : '';
+    $('j-stop').hidden = !off;
+    $('j-main').hidden = off;
+    if (off) return;
+    var b = $('j-badge');
+    b.className = 'badge badge-lg badge-' + me.st;
+    b.innerHTML = ICON[me.st].replace('width="20" height="20"', 'width="28" height="28"') + '<span>' + stLabel(me) + '</span>';
+    var stale = isStale(me.at);
+    // 7 日以上前は、日時の横に時計の札「○日前」を付け、「変わりなし」を押すよう 1 行で頼む
+    $('j-when').innerHTML = (stale ? '' : ICON.clock) + '<span>最後に確かめた</span><time datetime="' + iso(me.at) + '">' + (stale ? md(me.at) + ' ' + hm(me.at) : whenLong(me.at)) + '</time>' +
+      (stale ? '<span class="old">' + ICON.clock + daysAgo(me.at) + '日前</span>' : '');
+    $('j-old').hidden = !stale;
+    $('j-old').textContent = stale ? '変わりがなければ「変わりなし」を押してください。' : '';
+    [].forEach.call(document.querySelectorAll('.state'), function (btn) { btn.setAttribute('aria-pressed', btn.getAttribute('data-state') === me.st ? 'true' : 'false'); });
+    // 空きの人数は、今の状態が空きありの時だけ出す
+    $('j-ninzu').hidden = me.st !== 'aki';
+    [].forEach.call(document.querySelectorAll('.nz'), function (btn) { btn.setAttribute('aria-pressed', me.st === 'aki' && String(me.n) === btn.getAttribute('data-n') ? 'true' : 'false'); });
+    // 押した結果の 1 行（次に状態か人数を押すか、立場を変えるまで出たまま）
+    $('j-done').hidden = !ui.done;
+    $('j-done-msg').textContent = ui.done || '';
+    $('j-undo').hidden = !ui.undo;
+    $('cond-kinds-v').innerHTML = kchips(me.kinds);
+    $('cond-memo-v').textContent = me.memo || '—';
+    $('cond-view').hidden = ui.editing;
+    $('cond-form').hidden = !ui.editing;
+    $('cond-edit').hidden = ui.editing;
+    $('cond-edit').setAttribute('aria-expanded', ui.editing ? 'true' : 'false');
+  }
+
+  function flash() { var card = $('j-now'); card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash'); }
+  function snap(me) { return { st: me.st, at: me.at, n: me.n || null }; }
+  // 押した後：結果の 1 行と「元に戻す」（押す前の状態・人数・日時を覚えておく）
+  function done(msg, before) {
+    ui.done = msg;
+    ui.undo = before;
+    save();
+    renderJ();
+    say(msg + '。');
+    flash();
+  }
+  function press(st) {
+    var me = fac(ME.j);
+    if (!me.on) return;
+    var before = snap(me);
+    if (st && st !== me.st) { me.st = st; me.n = null; } // 状態が変わると、人数は消える
+    me.at = Date.now();
+    done(!st ? '最後に確かめた日時を今にしました'
+      : (st === before.st ? '「' + stLabel(me) + '」のまま、最後に確かめた日時を今にしました' : '「' + ST[st].label + '」に更新しました'), before);
+  }
+  // 空きの人数（任意）。同じ人数をもう一度押すと外れる
+  function setN(n) {
+    var me = fac(ME.j);
+    if (!me.on || me.st !== 'aki') return;
+    var before = snap(me);
+    me.n = me.n === n ? null : n;
+    me.at = Date.now();
+    done(me.n ? '空きの人数を「' + NZ[me.n] + '」にしました' : '空きの人数を外しました', before);
+  }
+  function undo() {
+    var me = fac(ME.j);
+    if (!ui.undo || !me) return;
+    me.st = ui.undo.st; me.at = ui.undo.at; me.n = ui.undo.n;
+    ui.undo = null;
+    ui.done = '元に戻しました';
+    save();
+    renderJ();
+    say('元に戻しました。今の状態は' + stLabel(me) + 'です。');
+    $('j-same').focus();
+  }
+
+  function fillCond() {
+    var me = fac(ME.j);
+    [].forEach.call(document.querySelectorAll('#cond-kinds input'), function (i) { i.checked = me.kinds.indexOf(i.value) >= 0; });
+    $('cond-memo').value = me.memo || '';
+    $('cond-err').hidden = true;
+    $('cond-kinds-fs').removeAttribute('aria-invalid');
+  }
+  function editCond(on) {
+    ui.editing = on;
+    if (on) fillCond();
+    renderJ();
+    if (on) { reveal(document.querySelector('.cond')); document.querySelector('#cond-kinds input').focus({ preventScroll: true }); }
+    else $('cond-edit').focus();
+  }
+  function saveCond() {
+    var picked = [].filter.call(document.querySelectorAll('#cond-kinds input'), function (i) { return i.checked; }).map(function (i) { return i.value; });
+    if (!picked.length) {
+      $('cond-err').hidden = false;
+      $('cond-kinds-fs').setAttribute('aria-invalid', 'true');
+      document.querySelector('#cond-kinds input').focus();
+      return;
+    }
+    var me = fac(ME.j);
+    me.kinds = kindsSorted(picked);
+    me.memo = $('cond-memo').value.trim();
+    save();
+    editCond(false);
+    toast('受け入れ条件を保存しました');
+    say('受け入れ条件を保存しました。');
+  }
+
+  // ---------- 相談支援専門員の画面 ----------
+  function pick(type, name, value, label, k) {
+    return '<label class="pick" data-k="' + k + '"><input type="' + type + '" name="' + name + '" value="' + value + '"><span>' + ICON.check + esc(label) + '</span></label>';
+  }
+  function candidates() {
+    return data.f.filter(function (f) {
+      return f.on && f.st && f.svc === ui.svc && ui.kinds.every(function (k) { return f.kinds.indexOf(k) >= 0; });
+    }).sort(function (a, b) { return (ST[a.st].rank - ST[b.st].rank) || (b.at - a.at); });
+  }
+  function renderS() {
+    var me = sp(ME.s);
+    $('s-name').textContent = me.name;
+    $('s-sub').textContent = me.org;
+    var off = !me.on;
+    $('s-off').hidden = !off;
+    $('s-off').innerHTML = off ? ICON.pause + '停止中' : '';
+    $('s-stop').hidden = !off;
+    $('s-main').hidden = off;
+    if (off) return;
+    renderResults();
+  }
+  // 電話番号と「電話をかける」（見本なので発信しない）
+  function callRow(f, cls) {
+    if (!f.tel) return '';
+    return '<div class="call' + (cls ? ' ' + cls : '') + '"><span class="tel-big">' + ICON.phone + '<span>' + esc(f.tel) + '</span></span>' +
+      '<button type="button" class="btn btn-line" data-act="call" data-k="call" aria-label="' + esc(f.name) + 'に電話をかける">' + ICON.phone + '電話をかける</button>' +
+      '<p class="call-note" role="status"></p></div>';
+  }
+  var CLEAR_BTN = '<button type="button" class="btn btn-text" id="f-clear" data-act="clear" data-k="kind-clear">' +
+    '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>条件をすべて解除</button>';
+  function renderResults() {
+    var box = $('s-res');
+    if (!ui.svc) {
+      box.innerHTML = (ui.kinds.length ? '<div class="res-top">' + CLEAR_BTN + '</div>' : '') +
+        '<p class="empty">' + ICON.search + '<span>サービスの種類を選ぶと、候補が出ます。</span></p>';
+      return;
+    }
+    var list = candidates();
+    var h = '<div class="res-top" id="res-top"><h2 class="res-h">候補<span class="res-n">' + list.length + 'か所</span></h2>' + CLEAR_BTN + '</div>';
+    if (!list.length) {
+      box.innerHTML = h + '<p class="empty">' + ICON.search + '<span>選んだ種別をすべて受けられる事業所はありません。種別を減らすと、候補が増えます。</span></p>';
+      return;
+    }
+    if (list.some(function (f) { return isStale(f.at); })) h += '<p class="old-key" id="s-old-key">' + OLD_KEY + '</p>';
+    h += '<ul class="cards">';
+    list.forEach(function (f) {
+      var stale = isStale(f.at), open = !!ui.open[f.id], full = f.st === 'manin';
+      h += '<li class="card' + (stale ? ' stale' : '') + '" data-f="' + f.id + '">' +
+        '<button type="button" class="card-head" aria-expanded="' + open + '" aria-controls="d-' + f.id + '" data-k="card">' +
+        '<span class="card-body"><span class="card-name">' + esc(f.name) + '</span>' +
+        '<span class="card-meta">' + badge(f) + '<span class="mean">' + ST[f.st].mean + '</span></span>' +
+        whenChip(f.at) + '</span>' + ICON.chev + '</button>' +
+        (full ? '' : callRow(f, 'card-call')) +
+        '<div class="card-detail" id="d-' + f.id + '"' + (open ? '' : ' hidden') + '>' +
+        (full ? (f.tel ? callRow(f) : '<p class="call"><span class="tel-big">' + ICON.phone + '<span>—</span></span></p>') : '') +
+        '<dl class="facts">' +
+        '<dt>サービスの種類</dt><dd>' + SVC[f.svc].full + '</dd>' +
+        '<dt>対応できる障害の種別</dt><dd>' + kchips(f.kinds) + '</dd>' +
+        '<dt>受け入れの条件</dt><dd>' + (f.memo ? esc(f.memo) : '—') + '</dd>' +
+        '<dt>最後に確かめた</dt><dd>' + md(f.at) + ' ' + hm(f.at) + '</dd>' +
+        '</dl>' +
+        (stale ? '<p class="old-note">' + ICON.clock + '<span>前に確かめてから' + daysAgo(f.at) + '日たっています。状態が変わっているかもしれません。</span></p>' : '') +
+        '</div></li>';
+    });
+    box.innerHTML = h + '</ul>';
+  }
+  function clearFilters() {
+    [].forEach.call(document.querySelectorAll('#f-svc input, #f-kinds input'), function (i) { i.checked = false; });
+    ui.svc = null; ui.kinds = []; ui.open = {};
+    renderResults();
+    say('条件をすべて解除しました。');
+    if (narrow()) $('s-h').scrollIntoView({ block: 'start' }); // スマホ：選ぶ所へ戻る
+    document.querySelector('#f-svc input').focus({ preventScroll: true });
+  }
+  // スマホ（1 列の時）だけ、次に押す所まで画面を動かす
+  function narrow() { return !window.matchMedia('(min-width: 1000px)').matches; }
+  function reveal(el, startAt) {
+    if (!el || !narrow()) return;
+    var r = el.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > window.innerHeight || (startAt && r.top > window.innerHeight * startAt)) el.scrollIntoView({ block: 'start' });
+  }
+
+  // ---------- 市の職員の画面 ----------
+  function renderC() {
+    $('cn-f').textContent = data.f.length;
+    $('cn-s').textContent = data.s.length;
+    [].forEach.call(document.querySelectorAll('#c-tabs [role=tab]'), function (t) {
+      var on = t.getAttribute('data-ctab') === ui.ctab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    $('c-panel').setAttribute('aria-labelledby', ui.ctab === 'f' ? 'ctab-f' : 'ctab-s');
+    var isF = ui.ctab === 'f';
+    var rows = (isF ? data.f : data.s).map(function (a) {
+      var sub = isF ? SVC[a.svc].label : a.org;
+      var st = a.on ? '<span class="st-on"><span class="dot" aria-hidden="true"></span>利用中</span>' : '<span class="st-off">' + ICON.pause + '停止中</span>';
+      var nm = isF ? a.name : a.name + ' さん';
+      var btn = a.on
+        ? '<button type="button" class="btn btn-line btn-sm" data-act="stop" data-id="' + a.id + '" data-k="acct-stop" aria-label="' + esc(nm) + 'を停止">停止</button>'
+        : '<button type="button" class="btn btn-line btn-sm" data-act="resume" data-id="' + a.id + '" data-k="acct-resume" aria-label="' + esc(nm) + 'を再開">再開</button>';
+      var when = isF ? '<span class="a-when">' + (a.at ? whenChip(a.at) : '<span class="when-s">' + ICON.clock + '<span>まだ更新していません</span></span>') + '</span>' : '';
+      return '<li class="arow' + (a.id === ui.newId ? ' new' : '') + '" data-id="' + a.id + '">' +
+        '<span class="a-main"><b>' + esc(a.name) + '</b><span>' + esc(sub) + '</span></span>' + when +
+        '<span class="a-side">' + st + btn + '</span></li>';
+    });
+    $('alist').innerHTML = rows.join('');
+    var key = isF && data.f.some(function (a) { return a.at && isStale(a.at); });
+    $('c-old-key').hidden = !key;
+    $('c-old-key').innerHTML = key ? OLD_KEY : '';
+  }
+  function openAdd() {
+    var f = ui.ctab === 'f';
+    $('add-h').textContent = f ? '事業所のアカウントを追加' : '相談支援専門員のアカウントを追加';
+    $('add-name-l').textContent = f ? '事業所の名前' : '名前';
+    $('add-f-wrap').hidden = !f;
+    $('add-s-wrap').hidden = f;
+    $('add-name').value = ''; $('add-org').value = ''; $('add-tel').value = '';
+    [].forEach.call(document.querySelectorAll('#add-svc input'), function (i) { i.checked = false; });
+    clearAddErr();
+    $('add-form').hidden = false;
+    $('add-open-wrap').hidden = true;
+    reveal($('add-form'));
+    $('add-name').focus({ preventScroll: true });
+  }
+  function closeAdd(focusBack) {
+    $('add-form').hidden = true;
+    $('add-open-wrap').hidden = false;
+    clearAddErr();
+    if (focusBack) $('add-open').focus();
+  }
+  var ERR_EL = { name: 'add-name', org: 'add-org', svc: 'add-svc-fs' };
+  function clearAddErr(only) {
+    Object.keys(ERR_EL).forEach(function (n) { if (only && only !== n) return; $('add-' + n + '-err').hidden = true; $(ERR_EL[n]).removeAttribute('aria-invalid'); });
+  }
+  function addSvc() { var c = document.querySelector('#add-svc input:checked'); return c ? c.value : ''; }
+  function submitAdd(e) {
+    e.preventDefault();
+    clearAddErr();
+    var f = ui.ctab === 'f';
+    var name = $('add-name').value.trim(), org = $('add-org').value, svc = addSvc();
+    var bad = null;
+    function mark(n, focusEl) { $('add-' + n + '-err').hidden = false; $(ERR_EL[n]).setAttribute('aria-invalid', 'true'); bad = bad || focusEl; }
+    if (!name) mark('name', $('add-name'));
+    if (f && !svc) mark('svc', document.querySelector('#add-svc input'));
+    if (!f && !org) mark('org', $('add-org'));
+    if (bad) { bad.focus(); return; }
+    var id = (f ? 'nf' : 'ns') + Date.now().toString(36);
+    if (f) data.f.push({ id: id, name: name, svc: svc, kinds: [], memo: '', tel: $('add-tel').value.trim(), st: null, at: null, on: true });
+    else data.s.push({ id: id, name: name, org: org, on: true });
+    save();
+    ui.newId = id;
+    closeAdd(true);
+    renderC();
+    var msg = (f ? name : name + ' さん') + 'のアカウントを追加しました';
+    toast(msg);
+    say(msg + '。');
+  }
+  function askStop(id) {
+    var isF = ui.ctab === 'f';
+    var a = isF ? fac(id) : sp(id);
+    if (!a) return;
+    ui.stopId = id;
+    $('dlg-h').textContent = (isF ? a.name : a.name + ' さん') + 'を停止しますか'; // 名前と「さん」の間で改行しない
+    $('dlg-p').textContent = isF
+      ? '停止すると、この事業所は空き状況を更新できなくなり、探す画面にも出なくなります。再開すると、また使えます。'
+      : '停止すると、このアカウントでは空き状況を見られなくなります。再開すると、また使えます。';
+    var d = $('dlg');
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+  }
+  function closeDlg(doStop) {
+    var d = $('dlg'), id = ui.stopId;
+    if (d.open) { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); }
+    ui.stopId = null;
+    if (doStop && id) setOn(id, false);
+    else if (id) { var b = document.querySelector('#alist [data-id="' + id + '"] button'); if (b) b.focus(); }
+  }
+  function setOn(id, on) {
+    var isF = ui.ctab === 'f';
+    var a = isF ? fac(id) : sp(id);
+    if (!a) return;
+    a.on = on;
+    save();
+    ui.newId = null;
+    renderC();
+    var nm = isF ? a.name : a.name + ' さん';
+    var msg = nm + 'を' + (on ? '再開しました' : '停止しました') + (isF && !on ? '。探す画面にも出なくなります' : '');
+    toast(msg);
+    say(msg + '。');
+    var again = document.querySelector('#alist [data-id="' + id + '"] button');
+    if (again) again.focus();
+  }
+
+  // ---------- 切り替え ----------
+  var VIEWS = { j: 'view-j', s: 'view-s', c: 'view-c' };
+  function showRole(r) {
+    ui.role = r;
+    document.body.setAttribute('data-role', r);
+    [].forEach.call(document.querySelectorAll('#who-tabs [role=tab]'), function (t) {
+      var on = t.getAttribute('data-role') === r;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    Object.keys(VIEWS).forEach(function (k) { $(VIEWS[k]).hidden = k !== r; });
+    hideToast();
+    ui.done = null; ui.undo = null; // 立場を変えたら、事業所の結果の 1 行と「元に戻す」は消える
+    $('j-now').classList.remove('flash'); // 隠れて止まった動きを、戻った時にくり返さない
+    if (r === 'j') renderJ();
+    if (r === 's') renderS();
+    if (r === 'c') { closeAdd(false); ui.newId = null; renderC(); }
+  }
+  function tabKeys(list, onPick) {
+    list.addEventListener('keydown', function (e) {
+      var tabs = [].slice.call(list.querySelectorAll('[role=tab]'));
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      tabs[n].focus();
+      onPick(tabs[n]);
+    });
+  }
+
+  function resetAll() {
+    closeDlg(false);
+    forget();
+    data = seed();
+    ui = freshUi();
+    [].forEach.call(document.querySelectorAll('#f-svc input, #f-kinds input'), function (i) { i.checked = false; });
+    showRole('j');
+    toast('見本を最初の状態に戻しました');
+    say('見本を最初の状態に戻しました。');
+    window.scrollTo(0, 0);
+    $('tab-j').focus();
+  }
+
+  // ---------- つなぐ ----------
+  $('cond-kinds').innerHTML = KINDS.map(function (k) { return pick('checkbox', 'ck', k, k, 'ck-' + k); }).join('');
+  $('f-svc').innerHTML = SVC_ORDER.map(function (s) { return pick('radio', 'svc', s, SVC[s].label, 'svc-' + s); }).join('');
+  $('f-kinds').innerHTML = KINDS.map(function (k) { return pick('checkbox', 'kind', k, k, 'kind-' + k); }).join('');
+  $('add-svc').innerHTML = SVC_ORDER.map(function (s) { return pick('radio', 'asvc', s, SVC[s].label, 'asvc-' + s); }).join('');
+  $('add-org').innerHTML = '<option value="">選んでください</option>' + ORGS.map(function (o) { return '<option>' + esc(o) + '</option>'; }).join('');
+  [].forEach.call(document.querySelectorAll('.ask-dd'), function (dd) { dd.innerHTML = askHtml(); });
+
+  [].forEach.call(document.querySelectorAll('#who-tabs [role=tab]'), function (t) {
+    t.addEventListener('click', function () { showRole(t.getAttribute('data-role')); });
+  });
+  tabKeys($('who-tabs'), function (t) { showRole(t.getAttribute('data-role')); });
+
+  ['animationend', 'animationcancel'].forEach(function (ev) { $('j-now').addEventListener(ev, function () { $('j-now').classList.remove('flash'); }); });
+  $('j-same').addEventListener('click', function () { press(null); });
+  [].forEach.call(document.querySelectorAll('.state'), function (b) { b.addEventListener('click', function () { press(b.getAttribute('data-state')); }); });
+  [].forEach.call(document.querySelectorAll('.nz'), function (b) { b.addEventListener('click', function () { setN(Number(b.getAttribute('data-n'))); }); });
+  $('j-undo').addEventListener('click', undo);
+  // 画面の下の知らせは、次に何か押した時に閉じる（下の保存などを隠したままにしない）。「元に戻す」は枠の中の 1 行にあるので、閉じても戻せる
+  document.addEventListener('click', function (e) {
+    if (!$('toast-in').hidden && !e.target.closest('#toast') && e.target.closest('button, label, select, input, textarea, summary')) hideToast();
+  }, true);
+  $('cond-kinds').addEventListener('change', function () {
+    if (document.querySelector('#cond-kinds input:checked')) { $('cond-err').hidden = true; $('cond-kinds-fs').removeAttribute('aria-invalid'); }
+  });
+  $('toast-close').addEventListener('click', hideToast);
+  $('cond-edit').addEventListener('click', function () { editCond(true); });
+  $('cond-save').addEventListener('click', saveCond);
+  $('cond-cancel').addEventListener('click', function () { editCond(false); });
+
+  $('f-svc').addEventListener('change', function (e) { ui.svc = e.target.value; ui.open = {}; renderResults(); reveal($('res-top'), 0.4); say('候補 ' + candidates().length + 'か所'); });
+  $('f-kinds').addEventListener('change', function () {
+    ui.kinds = [].filter.call(document.querySelectorAll('#f-kinds input'), function (i) { return i.checked; }).map(function (i) { return i.value; });
+    renderResults();
+    if (ui.svc) say('候補 ' + candidates().length + 'か所');
+  });
+  $('s-res').addEventListener('click', function (e) {
+    if (e.target.closest('[data-act=clear]')) { clearFilters(); return; }
+    var call = e.target.closest('[data-act=call]');
+    if (call) {
+      var note = call.parentNode.querySelector('.call-note');
+      note.textContent = '見本なので電話はかかりません。';
+      return;
+    }
+    var head = e.target.closest('.card-head');
+    if (!head) return;
+    var li = head.closest('.card'), id = li.getAttribute('data-f');
+    var open = head.getAttribute('aria-expanded') !== 'true';
+    ui.open[id] = open;
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('d-' + id).hidden = !open;
+  });
+
+  [].forEach.call(document.querySelectorAll('#c-tabs [role=tab]'), function (t) {
+    t.addEventListener('click', function () { ui.ctab = t.getAttribute('data-ctab'); ui.newId = null; closeAdd(false); renderC(); });
+  });
+  tabKeys($('c-tabs'), function (t) { ui.ctab = t.getAttribute('data-ctab'); ui.newId = null; closeAdd(false); renderC(); });
+  $('add-open').addEventListener('click', openAdd);
+  $('add-cancel').addEventListener('click', function () { closeAdd(true); });
+  $('add-form').addEventListener('submit', submitAdd);
+  $('add-name').addEventListener('input', function () { if ($('add-name').value.trim()) clearAddErr('name'); });
+  $('add-org').addEventListener('change', function () { if ($('add-org').value) clearAddErr('org'); });
+  $('add-svc').addEventListener('change', function () { clearAddErr('svc'); });
+  $('alist').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-act]');
+    if (!b) return;
+    if (b.getAttribute('data-act') === 'stop') askStop(b.getAttribute('data-id'));
+    else setOn(b.getAttribute('data-id'), true);
+  });
+  $('dlg-ok').addEventListener('click', function () { closeDlg(true); });
+  $('dlg-cancel').addEventListener('click', function () { closeDlg(false); });
+  $('dlg-x').addEventListener('click', function () { closeDlg(false); });
+  $('dlg').addEventListener('cancel', function (e) { e.preventDefault(); closeDlg(false); });
+  $('reset').addEventListener('click', resetAll);
+
+  showRole('j');
+})();
+</script>
+</body>
+</html>

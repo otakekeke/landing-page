@@ -487,32 +487,81 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
 
   // ---------- 言葉の決まり ----------
   var RE = {
-    no: /^(?:No|NO|no)\s*\.?\s*(\d+)$/,
     kind: /^(\d+\s*号\s*(?:組立)?人孔|組立人孔|小型人孔|特殊人孔|既設人孔|マンホール)$/,
-    spec: /^[φΦøØ⌀]\s*(\d+)\s*(.*)$/,
+    spec: /^[φΦøØ⌀⊘]\s*(\d+)\s*(.*)$/,
     len: /^L\s*=\s*(\d+(?:\.\d+)?)\s*m?$/i,
     slope: /^i\s*=\s*(\d+(?:\.\d+)?)\s*(‰|%)?$/i,
     numOnly: /^-?\d+(?:\.\d+)?$/,
     noteNo: /No\s*\.?\s*(\d+)/,
+    noteM: /(M-?\d+(?:-\d+)*)/,
     noteKw: /(既設|既存|撤去|廃止|利用)/,
+    // 縦断図の絵の所に、この字だけで書かれた注記（「既設」「既設管」など）。その区間が工事の範囲の中かを人に聞く
+    scopeKw: /^(既設|既存|撤去|廃止)(管|管渠|管きょ)?$/,
+    // 区間の文字の画層の名前が、既設・撤去を表す時も、人に聞く
+    scopeLayer: /既設|既存|撤去|EXIST/i,
     pt: [
       { k: 'gh', re: /^(?:GH|FH|計画地盤高|地盤高)\s*[=:]?\s*(-?\d+(?:\.\d+)?)\s*m?$/i },
       { k: 'inv', re: /^(?:DL|IL|管底高|管底)\s*[=:]?\s*(-?\d+(?:\.\d+)?)\s*m?$/i }
     ]
   };
+  // 見出しは、字の間の空白を取ってから比べる（「区 間 距 離」も「区間距離」として読む）
   var ROWS = [
     { key: 'no', re: /^(測点|人孔番号|マンホール番号)/, kind: 'pt', name: '測点' },
     { key: 'add', re: /^(追加距離|累加距離|累積距離)/, kind: 'pt', name: '追加距離' },
     { key: 'dep', re: /^(人孔深さ|人孔深|深さ)/, kind: 'pt', name: '深さ' },
     { key: 'cov', re: /^(土被り|土かぶり)/, kind: 'pt', name: '土被り' },
+    { key: 'exc', re: /^(掘削深|掘さく深)/, kind: 'pt', name: '掘削深' }, // 読むだけ（掘削深の値が管底高の行に混ざらないように）
     { key: 'gh', re: /^(計画地盤高|現況地盤高|地盤高|GH)/, kind: 'pt', name: '地盤高' },
     { key: 'inv', re: /^(計画管底高|管底標高|管底高|IL)/, kind: 'pt', name: '管底高' },
     { key: 'slope', re: /^(管勾配|勾配)/, kind: 'sec', name: '勾配' },
-    { key: 'len', re: /^(区間延長|管きょ延長|管渠延長|延長|単距離)/, kind: 'sec', name: '延長' },
+    { key: 'len', re: /^(区間延長|区間距離|管きょ延長|管渠延長|延長|単距離)/, kind: 'sec', name: '延長' },
     { key: 'spec', re: /^(管径|管種)/, kind: 'sec', name: '管径・管種' }
   ];
-  function specNorm(s) { var m = nk(s).replace(/\s+/g, ' ').trim().match(RE.spec); return m ? ('φ' + m[1] + (m[2] ? ' ' + m[2].trim() : '')) : nk(s).trim(); }
-  var MATERIAL = { 'VU': '硬質塩化ビニル管', 'VP': '硬質塩化ビニル管', 'PRP': 'リブ付き硬質塩化ビニル管', 'HP': '鉄筋コンクリート管', 'RCP': '鉄筋コンクリート管', 'DIP': 'ダクタイル鋳鉄管' };
+  // 測点の名前は、図面の書き方のまま持つ（No.3・M12-1・501-2・NO,0）。id は突き合わせに使う形（No.3 → 3、M-5 → M5）
+  // row が true の時（縦断図の測点の行の中）だけ、501-2 のような番号・「+12.5」のような途中の点・数字だけの名前も読む
+  function parseName(s, row) {
+    var t = nk(s).replace(/\s+/g, '');
+    var m = t.match(/^(?:No|NO|no)[.,]?(\d+)$/);
+    if (m) { var k = String(parseInt(m[1], 10)); return { id: k, name: 'No.' + k, kind: 'no' }; }
+    if (/^M-?\d+(?:-\d+)*$/.test(t)) return { id: t.replace(/^M-/, 'M'), name: t, kind: 'm' };
+    if (!row) return null;
+    m = t.match(/^(.*?)\+(\d+(?:\.\d+)?)$/);
+    if (m && (m[1] === '' || parseName(m[1], true))) return { id: t, name: t, kind: 'plus' };
+    if (/^\d{1,5}'?(?:-\d{1,3}'?)+$/.test(t)) return { id: t, name: t, kind: 'hy' };
+    if (/^\d{1,5}$/.test(t)) return { id: t, name: t, kind: 'int' };
+    return null;
+  }
+  // 名前の並べ方（数字の所は数として比べる：M2 < M10、No.2 < No.10）
+  function natCmp(a, b) {
+    var x = String(a).match(/\d+|\D+/g) || [], y = String(b).match(/\d+|\D+/g) || [];
+    for (var i = 0; i < Math.max(x.length, y.length); i++) {
+      if (x[i] === undefined) return -1;
+      if (y[i] === undefined) return 1;
+      var dx = /^\d/.test(x[i]), dy = /^\d/.test(y[i]);
+      if (dx && dy) { var d = parseInt(x[i], 10) - parseInt(y[i], 10); if (d) return d; }
+      else if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1;
+    }
+    return 0;
+  }
+  // 管径・管種：φ と数字か、管種と数字の物だけを管径とみなす（「800」「12.00‰」は管径にしない）
+  var MAT = '(FRPM|FRP|PRP|SVU|VU|VP|HP|RCP|DIP|PVC|PE|K-1|K1)';
+  var RE_SPEC_MN = new RegExp('^(?:汚水|雨水)?' + MAT + '[φΦøØ⌀⊘]?(\\d{2,4})$', 'i');
+  var RE_SPEC_PF = new RegExp('^(?:汚水|雨水)[φΦøØ⌀⊘](\\d{2,4})' + MAT + '?$', 'i');
+  var RE_MAT_ONLY = new RegExp('^' + MAT + '$', 'i');
+  function specRead(s) {
+    var n1 = nk(s).replace(/\s+/g, ' ').trim(), d = n1.replace(/\s+/g, '');
+    var m = n1.match(RE.spec);
+    if (m) return { ok: 'φ' + m[1] + (m[2] ? ' ' + m[2].trim() : '') };
+    m = d.match(RE_SPEC_MN); if (m) return { ok: 'φ' + m[2] + ' ' + m[1].toUpperCase() };
+    m = d.match(RE_SPEC_PF); if (m) return { ok: 'φ' + m[1] + (m[2] ? ' ' + m[2].toUpperCase() : '') };
+    if (RE_MAT_ONLY.test(d)) return { mat: d.toUpperCase() };
+    if (/^\d{2,4}$/.test(d)) return { dia: d };
+    return {};
+  }
+  var MATERIAL = { 'VU': '硬質塩化ビニル管', 'VP': '硬質塩化ビニル管', 'PRP': 'リブ付き硬質塩化ビニル管', 'HP': '鉄筋コンクリート管', 'RCP': '鉄筋コンクリート管', 'DIP': 'ダクタイル鋳鉄管',
+    'FRP': '強化プラスチック複合管', 'FRPM': '強化プラスチック複合管', 'PE': 'ポリエチレン管', 'PVC': '硬質塩化ビニル管' };
+  // 測点の値を、区間の側（L＝測点の左・R＝右）で取る。人孔の中の段差で値が 2 つある時だけ、左右で違う
+  function sideOf(s, k, side) { return s ? ((s.side && s.side[k] && s.side[k][side]) ? s.side[k][side] : s[k]) : null; }
 
   function segDist(px, py, x1, y1, x2, y2) {
     var dx = x2 - x1, dy = y2 - y1, L2 = dx * dx + dy * dy;
@@ -527,23 +576,26 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var circles = f.items.filter(function (it) { return it.t === 'C'; });
     var hMed = median(f.texts.map(function (t) { return t.h; }));
     var used = {}, mhs = {}, notes = [];
-    var noTexts = f.texts.filter(function (t) { return RE.no.test(t.n); });
+    // 人孔の名前（No.3・M5・M12-1 など。平面図では、番号だけ・途中の点は人孔の名前にしない）
+    var noTexts = [];
+    f.texts.forEach(function (t) { var p = parseName(t.n, false); if (p) noTexts.push({ t: t, p: p }); });
     var pairs = [];
-    noTexts.forEach(function (t) {
+    noTexts.forEach(function (q) {
+      var t = q.t;
       circles.forEach(function (c, ci) {
         var d = Math.hypot(t.cx - c.x, t.cy - c.y);
-        if (d < Math.max(8 * t.h, 6 * c.r)) pairs.push({ d: d, t: t, ci: ci });
+        if (d < Math.max(8 * t.h, 6 * c.r)) pairs.push({ d: d, t: t, p: q.p, ci: ci });
       });
     });
     pairs.sort(function (a, b) { return a.d - b.d; });
     var takenC = {}, takenT = {};
     pairs.forEach(function (p) {
       if (takenC[p.ci] || takenT[p.t.id]) return;
-      var n = parseInt(p.t.n.match(RE.no)[1], 10);
+      var n = p.p.id;
       if (mhs[n]) return;
       takenC[p.ci] = 1; takenT[p.t.id] = 1; used[p.t.id] = 'mh-no:' + n;
       var c = circles[p.ci];
-      mhs[n] = { n: n, x: c.x, y: c.y, r: c.r, noSrc: p.t.id, kind: null };
+      mhs[n] = { n: n, name: p.p.name, x: c.x, y: c.y, r: c.r, noSrc: p.t.id, kind: null };
     });
     // 人孔を円で描かない図面：番号のいちばん近くにある線の端を人孔の位置とみなす
     var ends = [];
@@ -551,9 +603,10 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       if (it.t === 'L') { ends.push([it.x1, it.y1]); ends.push([it.x2, it.y2]); }
       else if (it.t === 'P') it.pts.forEach(function (q) { ends.push(q); });
     });
-    noTexts.forEach(function (t) {
+    noTexts.forEach(function (q) {
+      var t = q.t;
       if (takenT[t.id]) return;
-      var n = parseInt(t.n.match(RE.no)[1], 10);
+      var n = q.p.id;
       if (mhs[n]) return;
       var best = null, bd = Infinity;
       ends.forEach(function (q) {
@@ -564,7 +617,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       });
       if (!best || bd > 8 * t.h) return;
       takenT[t.id] = 1; used[t.id] = 'mh-no:' + n;
-      mhs[n] = { n: n, x: best[0], y: best[1], r: 0.4 * t.h, noSrc: t.id, kind: null, noSymbol: true };
+      mhs[n] = { n: n, name: q.p.name, x: best[0], y: best[1], r: 0.4 * t.h, noSrc: t.id, kind: null, noSymbol: true };
     });
     var list = Object.keys(mhs).map(function (k) { return mhs[k]; });
     f.texts.forEach(function (t) {
@@ -595,7 +648,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     function addSeg(x1, y1, x2, y2) {
       var a = nearMh(x1, y1), b = nearMh(x2, y2);
       if (!a || !b || a === b) return;
-      var lo = Math.min(a.n, b.n), hi = Math.max(a.n, b.n), key = lo + '-' + hi;
+      var lo = natCmp(a.n, b.n) <= 0 ? a.n : b.n, hi = lo === a.n ? b.n : a.n, key = lo + '-' + hi;
       if (!pipes[key]) pipes[key] = { a: lo, b: hi, x1: mhs[lo].x, y1: mhs[lo].y, x2: mhs[hi].x, y2: mhs[hi].y };
     }
     f.items.forEach(function (it) {
@@ -605,13 +658,14 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var plist = Object.keys(pipes).map(function (k) { return pipes[k]; });
     f.texts.forEach(function (t) {
       if (used[t.id]) return;
-      var kind = RE.spec.test(t.n) ? 'spec' : (RE.len.test(t.n) ? 'len' : (RE.slope.test(t.n) ? 'slope' : null));
+      var sp = specRead(t.n);
+      var kind = sp.ok ? 'spec' : (RE.len.test(t.n) ? 'len' : (RE.slope.test(t.n) ? 'slope' : null));
       if (!kind) return;
       var best = null, bd = Infinity;
       plist.forEach(function (p) { var r = segDist(t.cx, t.cy, p.x1, p.y1, p.x2, p.y2); if (r.inside && r.d < bd) { bd = r.d; best = p; } });
       if (!best || bd > 6 * t.h || best[kind]) return;
       var v;
-      if (kind === 'spec') v = specNorm(t.n);
+      if (kind === 'spec') v = sp.ok;
       else if (kind === 'len') { var lm = t.n.match(RE.len); v = parseFloat(lm[1]); best.lenStr = lm[1]; }
       else { var sm = t.n.match(RE.slope); v = parseFloat(sm[1]) * (sm[2] === '%' ? 10 : 1); best.slopeDec = decimals(sm[1]); }
       best[kind] = { v: v, src: t.id };
@@ -619,8 +673,10 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     });
     f.texts.forEach(function (t) {
       if (used[t.id]) return;
-      var mn = t.n.match(RE.noteNo), kw = t.n.match(RE.noteKw);
-      if (mn && kw && mhs[parseInt(mn[1], 10)]) { notes.push({ n: parseInt(mn[1], 10), kw: kw[1], src: t.id, text: t.s }); used[t.id] = 'note:' + mn[1]; }
+      var kw = t.n.match(RE.noteKw); if (!kw) return;
+      var mn = t.n.match(RE.noteNo), id = mn ? String(parseInt(mn[1], 10)) : null;
+      if (!id || !mhs[id]) { var mm = t.n.replace(/\s+/g, '').match(RE.noteM); if (mm) id = mm[1].replace(/^M-/, 'M'); }
+      if (id && mhs[id]) { notes.push({ n: id, kw: kw[1], src: t.id, text: t.s }); used[t.id] = 'note:' + id; }
     });
     return { mhs: mhs, pipes: pipes, notes: notes, used: used };
   }
@@ -630,14 +686,17 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var labels = {};
     f.texts.forEach(function (t) {
       if (/[=:]\s*-?\d/.test(t.n)) return; // 「GH=15.82」のような値つきの文字は、表の見出しではない
+      var d = t.n.replace(/\s+/g, '');
       for (var i = 0; i < ROWS.length; i++) {
-        if (ROWS[i].re.test(t.n)) {
+        if (ROWS[i].re.test(d)) {
           var k = ROWS[i].key;
+          if (k === 'gh' && /^現況/.test(d)) k = 'ghx'; // 計画地盤高と現況地盤高が両方ある時は、計画の方を使う（現況の行は読まない）
           if (!labels[k] || t.cx < labels[k].t.cx) labels[k] = { t: t, row: ROWS[i] };
           break;
         }
       }
     });
+    if (labels.ghx && !labels.gh) { labels.gh = labels.ghx; delete labels.ghx; } // 現況地盤高だけの時は、それを地盤高とする（前の版と同じ）
     var keys = Object.keys(labels);
     if (!labels.no || keys.length < 3 || !(labels.gh || labels.inv || labels.len)) return null;
     // 並びの向き：見出しが縦に並ぶ（ふつう）か、横に並ぶか
@@ -675,40 +734,191 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       return tt.filter(function (o) { return !labelIds[o.t.id] && o.y > b.lo && o.y < b.hi && o.x > labelRight - 0.2 * hMed; });
     }
     var used = {}; keys.forEach(function (k) { used[labels[k].t.id] = 'label:' + k; });
-    var stations = inBand('no').filter(function (o) { return RE.no.test(o.t.n); })
-      .map(function (o) { return { n: parseInt(o.t.n.match(RE.no)[1], 10), x: o.x, src: o.t.id }; })
-      .sort(function (a, b) { return a.x - b.x; });
+    // 測点：図面の書き方のまま読む（No.3・M12-1・501-2・+12.5）。同じ名前の文字が同じ所に重なっている時は 1 つにする
+    var raw = [];
+    inBand('no').forEach(function (o) { var p = parseName(o.t.n, true); if (p) raw.push({ o: o, p: p }); });
+    raw.sort(function (a, b) { return a.o.x - b.o.x; });
+    var stations = [], seen = {};
+    raw.forEach(function (r) {
+      if (stations.some(function (s) { return s.key === r.p.id && Math.abs(s.x - r.o.x) < 0.5 * r.o.t.h; })) { used[r.o.t.id] = 'pf-no-dup'; return; }
+      var id = r.p.id, k = 1;
+      while (seen[id]) { k++; id = r.p.id + '#' + k; } // 同じ名前が 2 回出る時（別の路線の始まりなど）は、別の測点として持つ
+      seen[id] = 1;
+      stations.push({ n: id, key: r.p.id, name: r.p.name, plus: r.p.kind === 'plus', x: r.o.x, src: r.o.t.id, h: r.o.t.h });
+    });
     if (stations.length < 2) return null;
     stations.forEach(function (s) { used[s.src] = 'pf-no:' + s.n; });
+    // 値を測点に付ける幅：名前のある測点どうしの間のいちばん狭い所の半分弱（途中の点は数えない）
+    var named = stations.filter(function (s) { return !s.plus; }), gs = named.length >= 2 ? named : stations;
     var minGap = Infinity;
-    for (var i = 1; i < stations.length; i++) minGap = Math.min(minGap, stations[i].x - stations[i - 1].x);
+    for (var i = 1; i < gs.length; i++) minGap = Math.min(minGap, gs[i].x - gs[i - 1].x);
     var tol = 0.45 * minGap;
-    var sections = [];
-    for (var j = 0; j + 1 < stations.length; j++) sections.push({ a: stations[j].n, b: stations[j + 1].n, x1: stations[j].x, x2: stations[j + 1].x });
+    function gapAt(i, dx) { return dx < 0 ? (i > 0 ? stations[i].x - stations[i - 1].x : Infinity) : (i + 1 < stations.length ? stations[i + 1].x - stations[i].x : Infinity); }
     ROWS.forEach(function (row) {
-      if (!labels[row.key] || row.key === 'no') return;
+      if (!labels[row.key] || row.key === 'no' || row.kind !== 'pt') return;
       inBand(row.key).forEach(function (o) {
         var sNum = o.t.n.replace(/[‰%m]/g, '').trim();
-        var val;
-        if (row.key === 'spec') val = specNorm(o.t.n);
-        else { if (!RE.numOnly.test(sNum)) return; val = parseFloat(sNum); }
-        if (row.kind === 'pt') {
-          var best = null, bd = Infinity;
-          stations.forEach(function (s) { var d = Math.abs(o.x - s.x); if (d < bd) { bd = d; best = s; } });
-          if (!best || bd > tol || best[row.key]) return;
-          best[row.key] = { v: val, src: o.t.id, str: sNum };
-          used[o.t.id] = 'pf-' + row.key + ':' + best.n;
-        } else {
-          var sec = null;
-          sections.forEach(function (s) { if (o.x > s.x1 && o.x < s.x2) sec = s; });
-          if (!sec || sec[row.key]) return;
-          sec[row.key] = { v: val, src: o.t.id, str: sNum };
-          used[o.t.id] = 'pf-' + row.key + ':' + sec.a + '-' + sec.b;
-        }
+        if (!RE.numOnly.test(sNum)) return;
+        var bi = -1, bd = Infinity;
+        stations.forEach(function (s, si) { var d = Math.abs(o.x - s.x); if (d < bd) { bd = d; bi = si; } });
+        if (bi < 0) return;
+        var best = stations[bi], dx = o.x - best.x, inTol = bd <= tol;
+        // 測点の線のすぐ左右（文字の高さの 1.5 倍まで・その側の隣の測点までの半分弱まで）の値も読む（人孔の中の段差で 2 つ書く時）
+        if (!inTol && !(bd <= 1.5 * o.t.h && bd <= 0.45 * gapAt(bi, dx))) return;
+        var all = best.all || (best.all = {});
+        (all[row.key] = all[row.key] || []).push({ v: parseFloat(sNum), src: o.t.id, str: sNum, dx: dx, h: o.t.h, inTol: inTol });
+        used[o.t.id] = 'pf-' + row.key + ':' + best.n;
       });
     });
+    stations.forEach(function (s) {
+      if (!s.all) return;
+      Object.keys(s.all).forEach(function (k) {
+        var vs = s.all[k];
+        s[k] = vs.filter(function (v) { return v.inTol; })[0] || vs[0]; // ふだんの値：前の版と同じく、幅の中で最初の値
+        // 測点の線の左と右に違う値がある時は、左の区間には左の値、右の区間には右の値を使う
+        var Ls = vs.filter(function (v) { return v.dx < -0.25 * v.h; }), Rs = vs.filter(function (v) { return v.dx > 0.25 * v.h; });
+        if (!Ls.length || !Rs.length) return;
+        var l = Ls.reduce(function (a, b) { return b.dx > a.dx ? b : a; }), r = Rs.reduce(function (a, b) { return b.dx < a.dx ? b : a; });
+        if (l.str !== r.str) (s.side || (s.side = {}))[k] = { L: l, R: r };
+      });
+    });
+    // 路線：追加距離が 0 に戻る所（増え方の向きが変わり、片方が 0）と、0 が 2 つ続く所で、別の路線に分ける
+    function addv(s) { return s.add ? s.add.v : null; }
+    var routes = [], cur = [];
+    stations.forEach(function (s) {
+      if (cur.length) {
+        var a0 = addv(cur[cur.length - 1]), a1 = addv(s), brk = false;
+        if (a0 !== null && a1 !== null) {
+          if (a0 === 0 && a1 === 0) brk = true;
+          else if (a0 === 0 || a1 === 0) {
+            var prev = null;
+            for (var j = cur.length - 1; j > 0 && prev === null; j--) { var p0 = addv(cur[j - 1]), p1 = addv(cur[j]); if (p0 !== null && p1 !== null && p1 !== p0) prev = p1 - p0; }
+            if (prev !== null && a1 !== a0 && (a1 - a0 > 0) !== (prev > 0)) brk = true;
+          }
+        }
+        if (brk) { routes.push(cur); cur = []; }
+      }
+      cur.push(s);
+    });
+    routes.push(cur);
+    // 区間：路線の中で、名前のある測点から次の名前のある測点まで。途中の点（+12.5 など）は区間を分けず、区間の中の点として持つ
+    var sections = [];
+    routes.forEach(function (r, ri) {
+      r.forEach(function (s) { s.route = ri; });
+      var bi = [];
+      r.forEach(function (s, i) { if (i === 0 || i === r.length - 1 || !s.plus) bi.push(i); });
+      // 流れの向き：管底高が下がる向き（区間ごとの下がりの合計）。管底高が無い時は、左から右（前の版と同じ）
+      var drop = 0, nDrop = 0, j;
+      for (j = 0; j + 1 < bi.length; j++) {
+        var ip = sideOf(r[bi[j]], 'inv', 'R'), iq = sideOf(r[bi[j + 1]], 'inv', 'L');
+        if (ip && iq) { drop += ip.v - iq.v; nDrop++; }
+      }
+      var flow = (nDrop && drop < 0) ? -1 : 1;
+      // 追加距離の増える向き（右へ減っていく図面もある）
+      var fa = null, la = null;
+      r.forEach(function (s) { if (s.add) { if (fa === null) fa = s.add.v; la = s.add.v; } });
+      var addDir = (fa !== null && la < fa) ? -1 : 1;
+      r.forEach(function (s) { s.flow = flow; });
+      for (j = 0; j + 1 < bi.length; j++) {
+        var P = r[bi[j]], Q = r[bi[j + 1]];
+        sections.push({ a: flow > 0 ? P.n : Q.n, b: flow > 0 ? Q.n : P.n, x1: P.x, x2: Q.x, P: P, Q: Q, mids: r.slice(bi[j] + 1, bi[j + 1]),
+          flow: flow, addDir: addDir, route: ri });
+      }
+    });
+    // 区間の行の文字（勾配・延長・管径）を、まず区間ごとに集める
+    sections.forEach(function (s) { s.hits = []; });
+    ROWS.forEach(function (row) {
+      if (!labels[row.key] || row.kind !== 'sec') return;
+      inBand(row.key).forEach(function (o) {
+        var sec = null;
+        sections.forEach(function (s) { if (o.x > s.x1 && o.x < s.x2) sec = s; });
+        if (!sec) return;
+        var sNum = o.t.n.replace(/[‰%m]/g, '').trim();
+        sec.hits.push({ key: row.key, o: o, str: sNum, num: RE.numOnly.test(sNum) });
+      });
+    });
+    // 延長の欄に値の無い区間が、隣の区間の延長の値の届く範囲の中にある時は、1 つの区間にまとめる（間の測点は途中の点にする）
+    // 決め方：隣の延長の値が、まとめた区間の追加距離の差の方に近い時だけ（例：「38.00」が 0.00→38.00 の 38.00 に近く、8.00→38.00 の 30.00 から遠い）
+    function addAt(s, side) { var v = sideOf(s, 'add', side); return v ? v.v : null; }
+    function spanA(P, Q, dir) { var p = addAt(P, 'R'), q = addAt(Q, 'L'); return (p === null || q === null) ? null : (dir > 0 ? q - p : p - q); }
+    // 延長の値の並び（x の順。同じ文字が同じ所に重なっている物は 1 つに）
+    function lenVals(vs) {
+      var a = vs.slice().sort(function (u, v) { return u.x - v.x; }), out = [];
+      a.forEach(function (v) { var p = out[out.length - 1]; if (!(p && p.str === v.str && Math.abs(p.x - v.x) < 0.5 * v.h)) out.push(v); });
+      return out;
+    }
+    // 区間の延長（値が 2 つ以上ある時は足した値。下の「分けて書かれている時」と同じ決まり）
+    function lenOf(s) {
+      var first = null, vs = [];
+      s.hits.forEach(function (h) { if (h.key === 'len' && h.num) { var v = { v: parseFloat(h.str), str: h.str, x: h.o.x, h: h.o.t.h }; if (!first) first = v; vs.push(v); } });
+      if (!first) return null;
+      vs = lenVals(vs);
+      return vs.length < 2 ? first.v : round(vs.reduce(function (a, v) { return a + v.v; }, 0), 2);
+    }
+    var merged = true;
+    while (merged) {
+      merged = false;
+      for (var si = 0; si < sections.length && !merged; si++) {
+        var s0 = sections[si];
+        if (lenOf(s0) !== null) continue;
+        var nbL = si > 0 && sections[si - 1].route === s0.route ? sections[si - 1] : null;
+        var nbR = si + 1 < sections.length && sections[si + 1].route === s0.route ? sections[si + 1] : null;
+        var fits = [nbL, nbR].filter(function (nb) {
+          if (!nb) return false;
+          var ln = lenOf(nb); if (ln === null) return false;
+          var aM = nb === nbL ? spanA(nbL.P, s0.Q, s0.addDir) : spanA(s0.P, nbR.Q, s0.addDir), aN = spanA(nb.P, nb.Q, s0.addDir);
+          return aM !== null && aN !== null && Math.abs(ln - aM) < Math.abs(ln - aN) - 0.005;
+        });
+        if (fits.length !== 1) continue;
+        var A1 = fits[0] === nbL ? nbL : s0, B1 = fits[0] === nbL ? s0 : nbR;
+        var mg = { x1: A1.x1, x2: B1.x2, P: A1.P, Q: B1.Q, mids: A1.mids.concat([A1.Q], B1.mids), flow: A1.flow, addDir: A1.addDir, route: A1.route,
+          hits: A1.hits.concat(B1.hits).sort(function (u, v) { return u.o.x - v.o.x; }) };
+        mg.a = mg.flow > 0 ? mg.P.n : mg.Q.n; mg.b = mg.flow > 0 ? mg.Q.n : mg.P.n;
+        sections.splice(sections.indexOf(A1), 2, mg);
+        merged = true;
+      }
+    }
+    sections.forEach(function (sec) {
+      sec.hits.forEach(function (h) {
+        used[h.o.t.id] = 'pf-' + h.key + ':' + sec.a + '-' + sec.b;
+        if (h.key === 'spec') { (sec.specTexts = sec.specTexts || []).push(h.o); return; }
+        if (!h.num) return;
+        var v = { v: parseFloat(h.str), src: h.o.t.id, str: h.str, x: h.o.x, h: h.o.t.h };
+        (sec['all_' + h.key] = sec['all_' + h.key] || []).push(v);
+        if (!sec[h.key]) sec[h.key] = v;
+      });
+      delete sec.hits;
+    });
+    sections.forEach(function (s) {
+      // 管径・管種：φ か管種のある文字の最初の物。無ければ、管種だけの文字と数字だけの文字が 1 つずつある時に組み合わせる
+      var ok = null, mats = [], dias = [], other = [];
+      (s.specTexts || []).forEach(function (o) {
+        var r = specRead(o.t.n);
+        if (r.ok) { if (!ok) ok = { v: r.ok, src: o.t.id, str: o.t.n.replace(/[‰%m]/g, '').trim() }; }
+        else if (r.mat) mats.push(r.mat); else if (r.dia) dias.push({ d: r.dia, src: o.t.id }); else other.push(o.t.id);
+      });
+      if (ok && !/\s/.test(ok.v) && mats.length === 1) ok.v += ' ' + mats[0];
+      if (!ok && mats.length === 1 && dias.length === 1) ok = { v: 'φ' + dias[0].d + ' ' + mats[0], src: dias[0].src };
+      s.spec = ok;
+      if (!ok && s.specTexts) s.specBad = s.specTexts.map(function (o) { return o.t.id; });
+      // 延長の行に、1 つの区間の値が 2 つ以上書かれている時（途中の点で分けて書く・折れる所で分けて書く。新設と既設の境目のことがある）：
+      // 足した値を図面の延長とし、分け方を残す（どこまでを工事の延長にするかは、人に聞く）。間に途中の点があれば、その点を境目の名前にする
+      var lv = lenVals(s.all_len || []);
+      if (lv.length < 2) return;
+      s.parts = lv.map(function (v, k) {
+        var nx = lv[k + 1], mid = nx ? s.mids.filter(function (m) { return m.x > v.x && m.x < nx.x; })[0] || null : null;
+        return { k: k, v: v.v, str: v.str, src: v.src, x: v.x, mid: mid };
+      });
+      var dec = Math.max.apply(null, s.parts.map(function (p) { return decimals(p.str); }));
+      var sum = round(s.parts.reduce(function (a, p) { return a + p.v; }, 0), 2);
+      s.len = { v: sum, str: sum.toFixed(dec), src: s.parts[0].src };
+    });
+    // 表の上（縦断図の絵の所）にある「既設」「撤去」だけの注記
+    var top = -Infinity; keys.forEach(function (k) { top = Math.max(top, bands[k].hi); });
+    var kw = tt.filter(function (o) { return o.y > top && RE.scopeKw.test(o.t.n.replace(/\s+/g, '')); })
+      .map(function (o) { return { x: o.x, src: o.t.id, text: o.t.s }; });
     return {
-      stations: stations, sections: sections, used: used, transposed: transposed,
+      stations: stations, sections: sections, kw: kw, used: used, transposed: transposed,
       order: order.map(function (o) { return { key: o.k, label: labels[o.k].t.s, src: labels[o.k].t.id }; })
     };
   }
@@ -723,6 +933,59 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
 
   // ---------- 突き合わせ ----------
   var FILE_NAME = { plan: '平面図', profile: '縦断図', unknown: '図面' };
+  // 表の区間の名前と縦断図の測点の名前を比べる形（空白を取る・大文字・M-5 → M5・NO,3 → NO.3）
+  function normName(x) {
+    var d = nk(x).replace(/\s+/g, '').toUpperCase().replace(/^M-/, 'M');
+    var m = d.match(/^NO[.,]?(\d+)$/);
+    return m ? 'NO.' + parseInt(m[1], 10) : d;
+  }
+  // 図面の表：区間の一覧（「M1~M2」のような文字が縦に 2 つ以上並ぶか、「マンホール番号」などの見出しの下にある）と、「延長」の列の「計」
+  function findTables(files) {
+    var pairs = [], totals = [];
+    files.forEach(function (f, fi) {
+      function D(t) { return t.n.replace(/\s+/g, ''); }
+      var cand = [];
+      f.texts.forEach(function (t) {
+        var m = D(t).match(/^(.+?)[~～〜](.+)$/); if (!m) return;
+        var A = parseName(m[1], true), B = parseName(m[2], true);
+        if (A && B && A.kind !== 'int' && B.kind !== 'int' && A.kind !== 'plus' && B.kind !== 'plus') cand.push({ A: m[1], B: m[2], t: t, fi: fi });
+      });
+      cand.forEach(function (c) {
+        var h = c.t.h;
+        var ok = cand.some(function (c2) { return c2 !== c && Math.abs(c2.t.cx - c.t.cx) < 3 * h && Math.abs(c2.t.cy - c.t.cy) < 10 * h; })
+          || f.texts.some(function (t) { var dy = t.cy - c.t.cy; return /^(マンホール番号|人孔番号|区間|測点|路線)/.test(D(t)) && dy > 0 && dy < 8 * h && Math.abs(t.cx - c.t.cx) < 6 * h; });
+        if (ok) pairs.push(c);
+      });
+      var heads = f.texts.filter(function (t) { return /^延長(\(m\)|m)?$/.test(D(t)); }), seenT = {};
+      f.texts.forEach(function (k) {
+        if (!/^(計|合計|総計)$/.test(D(k))) return;
+        heads.forEach(function (hd) {
+          var dy = hd.cy - k.cy; if (dy <= 0 || dy > 40 * k.h) return;
+          var wx = Math.max(3 * hd.h, textWidth(hd.s) * hd.h);
+          f.texts.forEach(function (t) {
+            var d = D(t).replace(/m$/, '');
+            if (seenT[t.id] || !/^\d+(?:\.\d+)?$/.test(d) || Math.abs(t.cy - k.cy) > 0.6 * k.h || Math.abs(t.cx - hd.cx) > wx) return;
+            seenT[t.id] = 1; totals.push({ v: parseFloat(d), str: d, fi: fi, id: t.id });
+          });
+        });
+      });
+    });
+    return { pairs: pairs, totals: totals };
+  }
+  // 表の「A~B」に当たる、縦断図の同じ路線の区間（A から B までに入る区間の番号）。無ければ null
+  function chainOf(prof, A, B) {
+    var nr = 0; prof.stations.forEach(function (s) { nr = Math.max(nr, s.route + 1); });
+    for (var ri = 0; ri < nr; ri++) {
+      var sa = prof.stations.filter(function (s) { return s.route === ri && normName(s.name) === A; })[0];
+      var sb = prof.stations.filter(function (s) { return s.route === ri && normName(s.name) === B; })[0];
+      if (!sa || !sb || sa === sb) continue;
+      var x0 = Math.min(sa.x, sb.x), x1 = Math.max(sa.x, sb.x), out = [];
+      prof.sections.forEach(function (s, i) { if (s.route === ri && s.x1 >= x0 - 1e-6 && s.x2 <= x1 + 1e-6) out.push(i); });
+      if (out.length) return out;
+    }
+    return null;
+  }
+  function pkey(a, b) { return natCmp(a, b) <= 0 ? a + '-' + b : b + '-' + a; }
   function analyze(files, decisions) {
     decisions = decisions || {};
     var fp = -1, ff = -1;
@@ -731,56 +994,129 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     function S(fi, id) { return { f: fi, id: id }; }
     var checks = [], flags = [], usage = {};
     function use(fi, id, label) { if (id !== undefined && id !== null) usage[fi + ':' + id] = label; }
+    var NAME = {};
+    if (plan) Object.keys(plan.mhs).forEach(function (k) { NAME[k] = plan.mhs[k].name; });
+    var stKey = {};
+    if (prof) prof.stations.forEach(function (s) { NAME[s.n] = s.name; stKey[s.n] = s.key; });
+    function NM(id) { return NAME[id] || String(id); }
     var secs = [];
     if (prof) prof.sections.forEach(function (s) { secs.push({ a: s.a, b: s.b, pf: s }); });
-    else if (plan) Object.keys(plan.pipes).map(function (k) { return plan.pipes[k]; }).sort(function (x, y) { return x.a - y.a; })
+    else if (plan) Object.keys(plan.pipes).map(function (k) { return plan.pipes[k]; }).sort(function (x, y) { return natCmp(x.a, y.a); })
       .forEach(function (p) { secs.push({ a: p.a, b: p.b }); });
+    secs.forEach(function (s) {
+      s.pp = plan ? plan.pipes[pkey(stKey[s.a] || s.a, stKey[s.b] || s.b)] || null : null;
+      // 区間の端の値は、その区間の側の値（左の測点は右側、右の測点は左側）
+      s.sideA = s.pf ? (s.pf.P.n === s.a ? 'R' : 'L') : 'C'; s.sideB = s.pf ? (s.pf.P.n === s.a ? 'L' : 'R') : 'C';
+    });
+    // 工事の範囲（1）：図面の表に区間の一覧があり、縦断図の区間と 1 つ以上合う時は、表に無い区間を範囲の外として数量に入れない
+    var tables = findTables(files), missingPairs = [];
+    if (prof && tables.pairs.length) {
+      var covered = {}, hit = 0;
+      tables.pairs.forEach(function (p) {
+        var c = chainOf(prof, normName(p.A), normName(p.B));
+        if (c) { hit++; c.forEach(function (i) { covered[i] = 1; }); } else missingPairs.push(p);
+      });
+      if (hit) secs.forEach(function (s, i) { if (!covered[i]) { s.scope = 'out'; s.scopeWhy = 'table'; } });
+      else missingPairs = []; // 表のどの区間も縦断図に無い時は、表を使わない（別の図面の表かもしれない）
+    }
+    // 工事の範囲（2）：区間の中に「既設」だけの注記がある・区間の文字の画層が既設を表す時は、範囲の中かを人に聞く
+    secs.forEach(function (s) {
+      if (s.scope === 'out') return;
+      var pf = s.pf, q = null;
+      if (pf && !pf.parts) prof.kw.forEach(function (k) { if (!q && k.x > pf.x1 && k.x < pf.x2) q = { title: 'に「' + k.text + '」と書かれています', label: '縦断図の注記', value: k.text, src: S(ff, k.src) }; });
+      [[ff, pf && pf.len], [ff, pf && pf.spec], [ff, pf && pf.slope], [fp, s.pp && s.pp.len], [fp, s.pp && s.pp.spec]].forEach(function (x) {
+        if (q || !x[1] || x[0] < 0) return;
+        var t = files[x[0]].texts[x[1].src];
+        if (t && RE.scopeLayer.test(t.layer)) q = { title: 'の文字が、画層「' + t.layer + '」に描かれています', label: '画層「' + t.layer + '」の文字', value: t.s, src: S(x[0], t.id) };
+      });
+      if (!q) return;
+      s.scopeQ = q;
+      if (decisions['scope:' + s.a + '-' + s.b] === 'exclude') { s.scope = 'out'; s.scopeWhy = 'person'; }
+    });
+    var inSt = {};
+    secs.forEach(function (s) { if (s.scope !== 'out') { inSt[s.a] = 1; inSt[s.b] = 1; } });
     // 人孔ごとの高さ（縦断図の表が正、無ければ平面図の GH=・DL= の文字）。値ごとに、どの図面の文字かを持つ
     var KN = { add: '追加距離', gh: '地盤高', inv: '管底高', dep: '深さ' };
     function tag(v, fi) { return v ? { v: v.v, str: v.str, src: v.src, fi: fi } : null; }
     var st = {}, stList = [];
     if (prof) prof.stations.forEach(function (s) {
-      var o = { n: s.n, src: s.src, fi: ff, add: tag(s.add, ff), gh: tag(s.gh, ff), inv: tag(s.inv, ff), dep: tag(s.dep, ff) };
-      var pm = plan && plan.mhs[s.n];
+      var o = { n: s.n, name: s.name, src: s.src, fi: ff, flow: s.flow, add: tag(s.add, ff), gh: tag(s.gh, ff), inv: tag(s.inv, ff), dep: tag(s.dep, ff), side: {} };
+      if (s.side) Object.keys(s.side).forEach(function (k) { if (KN[k]) o.side[k] = { L: tag(s.side[k].L, ff), R: tag(s.side[k].R, ff) }; });
+      var pm = plan && plan.mhs[s.key], quiet = !inSt[s.n];
       ['gh', 'inv'].forEach(function (k) {
         var pv = pm && pm[k];
         if (!pv) return;
-        use(fp, pv.src, 'No.' + s.n + ' の' + KN[k] + '（平面図）');
+        use(fp, pv.src, o.name + ' の' + KN[k] + '（平面図）');
         if (!o[k]) { o[k] = tag(pv, fp); return; }
-        var ok = Math.abs(pv.v - o[k].v) < 1e-9;
-        checks.push({ kind: KN[k], sec: 'No.' + s.n, ok: ok });
+        var sd = o.side[k], same = function (x) { return Math.abs(pv.v - x.v) < 1e-9; };
+        var ok = same(o[k]) || !!(sd && (same(sd.L) || same(sd.R)));
+        if (quiet) return; // 工事の範囲の外の区間だけの測点は、確かめない
+        checks.push({ kind: KN[k], sec: o.name, ok: ok });
         if (ok) return;
         var id = k + ':' + s.n, dec = decisions[id];
-        flags.push({ id: id, type: k, sec: 'No.' + s.n, title: 'No.' + s.n + ' の' + KN[k] + 'が、平面図と縦断図で違います',
+        flags.push({ id: id, type: k, sec: o.name, title: o.name + ' の' + KN[k] + 'が、平面図と縦断図で違います',
           options: [{ value: 'profile', label: o[k].str + ' m（縦断図）', from: ['縦断図'] }, { value: 'plan', label: pv.str + ' m（平面図）', from: ['平面図'] }],
           recommended: null, decided: dec || null,
           ev: [{ src: S(ff, o[k].src), label: '縦断図の' + KN[k], value: o[k].str }, { src: S(fp, pv.src), label: '平面図の' + KN[k], value: pv.str }] });
-        if (dec === 'plan') o[k] = tag(pv, fp);
+        if (dec === 'plan') { o[k] = tag(pv, fp); delete o.side[k]; }
         o[k].status = dec ? 'done' : 'warn';
+        if (o.side[k]) { o.side[k].L.status = o[k].status; o.side[k].R.status = o[k].status; }
       });
       st[s.n] = o; stList.push(o);
     });
-    else if (plan) Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return a.n - b.n; }).forEach(function (m) {
+    else if (plan) Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return natCmp(a.n, b.n); }).forEach(function (m) {
       if (!m.gh && !m.inv) return;
-      var o = { n: m.n, src: m.noSrc, fi: fp, gh: tag(m.gh, fp), inv: tag(m.inv, fp) };
+      var o = { n: m.n, name: m.name, src: m.noSrc, fi: fp, gh: tag(m.gh, fp), inv: tag(m.inv, fp), side: {} };
       st[m.n] = o; stList.push(o);
     });
+    // 区間の確かめの印（新しく足した要確認の札）。決めていない物が 1 つでもあれば warn
+    function mark(s, dec) { if (!dec) s.chk = 'warn'; else if (s.chk !== 'warn') s.chk = 'done'; }
+    function sideWord(o, sd) { if (sd === 'C' || !o) return ''; return sd === ((o.flow || 1) > 0 ? 'L' : 'R') ? '（入る管の側）' : '（出る管の側）'; }
+    var specMissing = [];
     secs.forEach(function (s) {
-      var key = s.a + '-' + s.b, name = 'No.' + s.a + '→No.' + s.b;
+      var key = s.a + '-' + s.b, name = NM(s.a) + '→' + NM(s.b);
       s.key = key; s.name = name;
-      var pp = plan ? plan.pipes[key] : null, pf = s.pf || null;
-      // 延長の候補
-      var cands = [];
-      if (pp && pp.len) { cands.push({ v: round(pp.len.v, 2), from: '平面図', src: S(fp, pp.len.src) }); use(fp, pp.len.src, name + ' の延長'); }
-      if (pf && pf.len) { cands.push({ v: round(pf.len.v, 2), from: '縦断図', src: S(ff, pf.len.src) }); use(ff, pf.len.src, name + ' の延長'); }
-      if (st[s.a] && st[s.b] && st[s.a].add && st[s.b].add) {
-        cands.push({ v: round(st[s.b].add.v - st[s.a].add.v, 2), from: '追加距離から計算', src: S(st[s.b].add.fi, st[s.b].add.src), src2: S(st[s.a].add.fi, st[s.a].add.src),
-          calc: 'No.' + s.b + ' の ' + st[s.b].add.str + ' − No.' + s.a + ' の ' + st[s.a].add.str });
+      var pp = s.pp, pf = s.pf || null, out = s.scope === 'out', ends = [s.a, s.b];
+      // 工事の範囲の外の区間は、確かめを出さない（数量にも入れない）
+      function fl(f) { if (!out) flags.push(f); }
+      function ck(c) { if (!out) checks.push(c); }
+      if (s.scopeQ) {
+        var qid = 'scope:' + key, qdec = decisions[qid];
+        flags.push({ id: qid, type: 'scope', sec: key, ends: ends, title: name + ' ' + s.scopeQ.title, short: name + ' を工事の延長に',
+          question: name + ' を、この工事の延長に入れますか？',
+          options: [{ value: 'exclude', label: '入れない', sub: '工事の範囲の外として、数量から外す', from: [] },
+            { value: 'include', label: '入れる', sub: 'この工事の区間として数える', from: [] }],
+          recommended: null, decided: qdec || null,
+          note: '既設の管や別の工事の管は、数量に入れません。図面の表や注記で、工事の範囲を確かめてください。',
+          ev: [{ src: s.scopeQ.src, label: s.scopeQ.label, value: s.scopeQ.value }] });
+        mark(s, qdec);
+      }
+      var A = st[s.a], B = st[s.b];
+      // 延長の候補（0 以下の値は延長にしない）
+      var cands = [], negs = [];
+      function cand(c) { (c.v > 0 ? cands : negs).push(c); }
+      if (pp && pp.len) { cand({ v: round(pp.len.v, 2), from: '平面図', src: S(fp, pp.len.src) }); use(fp, pp.len.src, name + ' の延長'); }
+      if (pf && pf.parts) pf.parts.forEach(function (p) { use(ff, p.src, name + ' の延長（分けて書かれた所）'); });
+      if (pf && pf.len) { cand({ v: round(pf.len.v, 2), from: '縦断図', src: S(ff, pf.len.src) }); if (!pf.parts) use(ff, pf.len.src, name + ' の延長'); }
+      var aP = pf ? sideOf(st[pf.P.n], 'add', 'R') : null, aQ = pf ? sideOf(st[pf.Q.n], 'add', 'L') : null;
+      if (aP && aQ) {
+        // 追加距離の差は、追加距離の増える向きで引く（右へ減っていく図面もある）
+        var up = pf.addDir > 0, hiS = up ? pf.Q : pf.P, loS = up ? pf.P : pf.Q, hiV = up ? aQ : aP, loV = up ? aP : aQ;
+        cand({ v: round(hiV.v - loV.v, 2), from: '追加距離から計算', src: S(hiV.fi, hiV.src), src2: S(loV.fi, loV.src),
+          calc: NM(hiS.n) + ' の ' + hiV.str + ' − ' + NM(loS.n) + ' の ' + loV.str });
+      }
+      if (negs.length) {
+        var nid = 'neg:' + key, ndec = decisions[nid];
+        fl({ id: nid, type: 'neg', sec: key, ends: ends, title: name + ' の延長が、0 か負の値になります', short: name + ' の延長',
+          note: 'この値は数量に使いません。追加距離の向き・測点の並び・延長の書き違いを、図面で確かめてください。',
+          options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: ndec || null,
+          ev: negs.map(function (c) { return { src: c.src, label: c.from === '追加距離から計算' ? '縦断図の追加距離から計算' : c.from, value: c.v.toFixed(2), calc: c.calc }; }) });
+        if (!out) s.chk = 'warn'; // 確かめただけでは数字は直らないので、区間は要確認のまま
       }
       var groups = {};
       cands.forEach(function (c) { var k = c.v.toFixed(2); (groups[k] = groups[k] || []).push(c); });
       var gk = Object.keys(groups);
-      var invA = st[s.a] && st[s.a].inv, invB = st[s.b] && st[s.b].inv;
+      var invA = sideOf(A, 'inv', s.sideA), invB = sideOf(B, 'inv', s.sideB);
       function slopeAt(L) { return (invA && invB && L) ? (invA.v - invB.v) / L * 1000 : null; }
       var statedSlopes = [];
       if (pp && pp.slope) { statedSlopes.push({ v: pp.slope.v, dec: pp.slopeDec || 1, from: '平面図', src: S(fp, pp.slope.src) }); use(fp, pp.slope.src, name + ' の勾配'); }
@@ -790,7 +1126,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
         return statedSlopes.every(function (q) { return Math.abs(round(c, q.dec) - q.v) < 1e-9; });
       }
       s.lenCands = cands;
-      if (cands.length >= 2) checks.push({ kind: '延長', sec: key, ok: gk.length === 1 });
+      if (cands.length >= 2) ck({ kind: '延長', sec: key, ok: gk.length === 1 });
       if (gk.length > 1) {
         var opts = gk.map(function (k) {
           var g = groups[k];
@@ -798,7 +1134,7 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
         }).sort(function (x, y) { return y.from.length - x.from.length; });
         var rec = opts[0].from.length > opts[1].from.length ? opts[0].value : null;
         var id = 'len:' + key, dec = decisions[id];
-        flags.push({ id: id, type: 'len', sec: key, title: name + ' の延長が、図面によって違います', options: opts, recommended: rec, decided: dec || null,
+        fl({ id: id, type: 'len', sec: key, ends: ends, title: name + ' の延長が、図面によって違います', options: opts, recommended: rec, decided: dec || null,
           note: '選んだ値を数量に使います。違っていた方の図面は、設計した方に書き違いがないか確かめてもらってください。',
           ev: cands.map(function (c) { return { src: c.src, label: c.from === '追加距離から計算' ? '縦断図の追加距離から計算' : c.from, value: c.v.toFixed(2), calc: c.calc }; }) });
         s.L = parseFloat(dec || rec || opts[0].value); s.Lsrc = (opts.filter(function (o) { return o.value === (dec || rec || opts[0].value); })[0] || opts[0]).srcs[0];
@@ -806,20 +1142,53 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       } else if (gk.length === 1) {
         s.L = parseFloat(gk[0]); s.Lsrc = cands[0].src; s.Lstatus = 'ok';
       } else { s.L = null; s.Lstatus = 'none'; }
+      s.Lgeom = s.L; // 区間の全部の長さ（勾配の計算に使う）
+      // 延長の行が途中の点で分けて書かれている時：どこまでを工事の延長にするかを人に聞く（決めるまでは全部を仮に使い、要確認にする）
+      if (pf && pf.parts && s.L !== null) {
+        var pid = 'part:' + key, pdec = decisions[pid], parts = pf.parts;
+        var popts = [{ value: 'all', v: s.L, label: s.L.toFixed(2) + ' m（' + name + ' の全部）', sub: '分けて書かれた延長を足す', from: [] }];
+        for (var pi = 0; pi + 1 < parts.length; pi++) {
+          var mid = parts[pi].mid, lsum = 0, rsum = 0;
+          parts.forEach(function (p, k) { if (k <= pi) lsum += p.v; else rsum += p.v; });
+          var upV = round(pf.flow > 0 ? lsum : rsum, 2), dnV = round(pf.flow > 0 ? rsum : lsum, 2);
+          if (mid) {
+            popts.push({ value: 'up:' + pi, v: upV, label: upV.toFixed(2) + ' m（' + NM(s.a) + '→' + mid.name + '）', sub: mid.name + ' から先は入れない', from: [] });
+            popts.push({ value: 'down:' + pi, v: dnV, label: dnV.toFixed(2) + ' m（' + mid.name + '→' + NM(s.b) + '）', sub: mid.name + ' より手前は入れない', from: [] });
+          } else {
+            // 値の間に途中の点が無い時（測点の行に点の名前が読めない・折れる所）は、どちらの端の側の値かで示す
+            var nUp = pf.flow > 0 ? pi + 1 : parts.length - pi - 1, nDn = parts.length - nUp;
+            popts.push({ value: 'up:' + pi, v: upV, label: upV.toFixed(2) + ' m（' + NM(s.a) + ' の側の値' + (nUp > 1 ? ' ' + nUp + ' つ' : '') + '）', sub: NM(s.b) + ' の側の ' + dnV.toFixed(2) + ' m は入れない', from: [] });
+            popts.push({ value: 'down:' + pi, v: dnV, label: dnV.toFixed(2) + ' m（' + NM(s.b) + ' の側の値' + (nDn > 1 ? ' ' + nDn + ' つ' : '') + '）', sub: NM(s.a) + ' の側の ' + upV.toFixed(2) + ' m は入れない', from: [] });
+          }
+        }
+        var anyMid = parts.some(function (p) { return p.mid; });
+        var pev = parts.map(function (p) { return { src: S(ff, p.src), label: '縦断図の延長（分けて書かれた所）', value: p.str }; });
+        parts.forEach(function (p) { if (p.mid) pev.push({ src: S(ff, p.mid.src), label: '途中の点', value: p.mid.name }); });
+        prof.kw.forEach(function (k) { if (k.x > pf.x1 && k.x < pf.x2) pev.push({ src: S(ff, k.src), label: '縦断図の注記', value: k.text }); });
+        fl({ id: pid, type: 'part', sec: key, ends: ends, title: name + ' の延長が、' + (anyMid ? '途中の点で' : parts.length + ' つに') + '分けて書かれています', question: 'どこまでを、この工事の延長に入れますか？',
+          options: popts, recommended: null, decided: pdec || null,
+          note: anyMid ? '途中の点は、新しく作る管と既設の管の境目のことがあります。図面の表や注記で、工事の範囲を確かめてください。'
+            : '管が折れる所で分けて書くことも、新しく作る管と既設の管の境目で分けて書くこともあります。図面の表や注記で、工事の範囲を確かめてください。', ev: pev });
+        if (!out) {
+          var chosen = popts.filter(function (o) { return o.value === pdec; })[0];
+          if (chosen) s.L = chosen.v;
+          s.Lstatus = pdec ? (s.Lstatus === 'warn' ? 'warn' : 'done') : 'warn';
+        }
+      }
       // 勾配
-      s.slopeCalc = slopeAt(s.L);
+      s.slopeCalc = slopeAt(s.Lgeom);
       s.slopes = statedSlopes;
       statedSlopes.forEach(function (q) {
         if (s.slopeCalc === null) return;
         var ok = Math.abs(round(s.slopeCalc, q.dec) - q.v) < 1e-9;
-        checks.push({ kind: '勾配', sec: key, ok: ok });
+        ck({ kind: '勾配', sec: key, ok: ok });
         if (!ok) {
           var fid = 'slope:' + key + ':' + q.from;
-          flags.push({ id: fid, type: 'slope', sec: key, title: name + ' の勾配が、管底高と延長から計算した値と合いません（' + q.from + '）',
+          fl({ id: fid, type: 'slope', sec: key, ends: ends, title: name + ' の勾配が、管底高と延長から計算した値と合いません（' + q.from + '）',
             note: '数量には延長を使うので、集計の数字は変わりません。図面の書き違いの可能性があるので、設計した方への確認をおすすめします。',
             options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: decisions[fid] || null,
             ev: [{ src: q.src, label: q.from + 'の勾配', value: q.v.toFixed(q.dec) + ' ‰' }],
-            extra: '計算：（' + invA.str + ' − ' + invB.str + '）÷ ' + s.L.toFixed(2) + ' × 1000 ＝ ' + s.slopeCalc.toFixed(2) + ' ‰' });
+            extra: '計算：（' + invA.str + ' − ' + invB.str + '）÷ ' + s.Lgeom.toFixed(2) + ' × 1000 ＝ ' + s.slopeCalc.toFixed(2) + ' ‰' });
         }
       });
       // 管径・管種
@@ -828,89 +1197,137 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       if (pf && pf.spec) use(ff, pf.spec.src, name + ' の管径・管種');
       if (spP && spF) {
         var same = spP.replace(/\s/g, '') === spF.replace(/\s/g, '');
-        checks.push({ kind: '管径・管種', sec: key, ok: same });
+        ck({ kind: '管径・管種', sec: key, ok: same });
         if (!same) {
           var sid = 'spec:' + key;
-          flags.push({ id: sid, type: 'spec', sec: key, title: name + ' の管径・管種が、平面図と縦断図で違います',
+          fl({ id: sid, type: 'spec', sec: key, ends: ends, title: name + ' の管径・管種が、平面図と縦断図で違います',
             options: [{ value: spP, label: spP, from: ['平面図'] }, { value: spF, label: spF, from: ['縦断図'] }], recommended: null, decided: decisions[sid] || null,
             ev: [{ src: S(fp, pp.spec.src), label: '平面図', value: spP }, { src: S(ff, pf.spec.src), label: '縦断図', value: spF }] });
           s.spec = decisions[sid] || spP; s.specStatus = decisions[sid] ? 'done' : 'warn';
         } else { s.spec = spP; s.specStatus = 'ok'; }
         s.specSrc = S(fp, pp.spec.src);
       } else if (spP || spF) { s.spec = spP || spF; s.specStatus = 'ok'; s.specSrc = spP ? S(fp, pp.spec.src) : S(ff, pf.spec.src); }
-      else { s.spec = null; s.specStatus = 'none'; }
+      else { s.spec = null; s.specStatus = 'none'; if (!out && s.L !== null) specMissing.push(s); }
       s.invA = invA ? { v: invA.v, str: invA.str, src: S(invA.fi, invA.src) } : null;
       s.invB = invB ? { v: invB.v, str: invB.str, src: S(invB.fi, invB.src) } : null;
     });
+    // 管径・管種が読めない区間（その延長は数量の表に入らない）を、1 か所にまとめて人に知らせる
+    if (specMissing.length) {
+      var sdec0 = decisions['spec-none'], bad = [];
+      specMissing.forEach(function (s) { ((s.pf && s.pf.specBad) || []).forEach(function (id) { bad.push(id); }); });
+      var sev = bad.slice(0, 3).map(function (id) { return { src: S(ff, id), label: '管径・管種の欄の文字', value: files[ff].texts[id].s }; });
+      if (!sev.length) sev = specMissing.slice(0, 3).filter(function (s) { return s.Lsrc; }).map(function (s) { return { src: s.Lsrc, label: s.name + ' の延長', value: s.L.toFixed(2) }; });
+      flags.push({ id: 'spec-none', type: 'specnone', sec: 'all', ends: [], title: '区間の管径・管種が、読み取れません（' + specMissing.length + ' 区間）', short: '管径・管種が読み取れない区間',
+        note: 'この区間の延長は、数量の表に入りません。図面で管径・管種を確かめてください。',
+        extra: '区間：' + specMissing.map(function (s) { return s.name + ' ' + s.L.toFixed(2) + ' m'; }).join('、'),
+        options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: sdec0 || null, ev: sev });
+      specMissing.forEach(function (s) { s.chk = 'warn'; }); // 確かめても管径は読めていないので、区間は要確認のまま
+    }
+    // 延長が読めない区間（数量の表に入らない）を、1 か所にまとめて人に知らせる
+    var lenMissing = secs.filter(function (s) { return s.scope !== 'out' && s.L === null; });
+    if (lenMissing.length) {
+      var lev = [];
+      lenMissing.slice(0, 3).forEach(function (s) {
+        var src = s.specSrc || (s.pf ? S(ff, s.pf.P.src) : (plan && plan.mhs[s.a] ? S(fp, plan.mhs[s.a].noSrc) : null));
+        if (src) lev.push({ src: src, label: s.name, value: s.spec || s.name });
+      });
+      flags.push({ id: 'len-none', type: 'lennone', sec: 'all', ends: [], title: '区間の延長が、読み取れません（' + lenMissing.length + ' 区間）', short: '延長が読み取れない区間',
+        note: 'この区間は、数量の表に入りません。図面で延長を確かめてください。',
+        extra: '区間：' + lenMissing.map(function (s) { return s.name + (s.spec ? '（' + s.spec + '）' : ''); }).join('、'),
+        options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: decisions['len-none'] || null, ev: lev });
+      lenMissing.forEach(function (s) { s.chk = 'warn'; }); // 確かめても延長は読めていないので、区間は要確認のまま
+    }
     // 深さ
     var depth = {};
     function SV(v) { return S(v.fi, v.src); }
     stList.forEach(function (sn) {
-      if (prof) use(ff, sn.src, 'No.' + sn.n + '（縦断図の測点）');
-      ['add', 'gh', 'inv', 'dep'].forEach(function (k) { if (sn[k] && !usage[sn[k].fi + ':' + sn[k].src]) use(sn[k].fi, sn[k].src, 'No.' + sn.n + ' の' + KN[k]); });
-      var calc = (sn.gh && sn.inv) ? round(sn.gh.v - sn.inv.v, 3) : null;
-      var hWarn = (sn.gh && sn.gh.status === 'warn') || (sn.inv && sn.inv.status === 'warn') ? 'warn' : ((sn.gh && sn.gh.status === 'done') || (sn.inv && sn.inv.status === 'done') ? 'done' : 'ok');
-      if (sn.dep && calc !== null) {
-        var ok = Math.abs(sn.dep.v - calc) < 0.0015;
-        checks.push({ kind: '深さ', sec: 'No.' + sn.n, ok: ok });
-        if (!ok) {
-          var did = 'dep:' + sn.n;
-          flags.push({ id: did, type: 'dep', sec: 'No.' + sn.n, title: 'No.' + sn.n + ' の深さが、地盤高 − 管底高と合いません',
-            options: [{ value: 'calc', label: '計算した ' + calc.toFixed(3) + ' m を使う', from: ['地盤高 − 管底高'] }, { value: 'drawn', label: '図面の ' + sn.dep.str + ' m を使う', from: ['縦断図'] }],
-            recommended: null, decided: decisions[did] || null,
-            ev: [{ src: SV(sn.dep), label: '縦断図の深さ', value: sn.dep.str }, { src: SV(sn.gh), label: '地盤高', value: sn.gh.str }, { src: SV(sn.inv), label: '管底高', value: sn.inv.str }] });
-          depth[sn.n] = { v: decisions[did] === 'drawn' ? sn.dep.v : calc, status: decisions[did] ? 'done' : 'warn', src: SV(sn.dep) };
-        } else depth[sn.n] = { v: sn.dep.v, status: hWarn, src: SV(sn.dep), str: sn.dep.str };
-      } else if (sn.dep) depth[sn.n] = { v: sn.dep.v, status: 'ok', src: SV(sn.dep), str: sn.dep.str };
-      else if (calc !== null) depth[sn.n] = { v: calc, status: hWarn, src: SV(sn.inv) };
+      if (prof) use(ff, sn.src, sn.name + '（縦断図の測点）');
+      ['add', 'gh', 'inv', 'dep'].forEach(function (k) { if (sn[k] && !usage[sn[k].fi + ':' + sn[k].src]) use(sn[k].fi, sn[k].src, sn.name + ' の' + KN[k]); });
+      Object.keys(sn.side).forEach(function (k) {
+        ['L', 'R'].forEach(function (sd) { var v = sn.side[k][sd]; if (v && !usage[v.fi + ':' + v.src]) use(v.fi, v.src, sn.name + ' の' + KN[k] + sideWord(sn, sd)); });
+      });
+      var quiet = prof && !inSt[sn.n];
+      // 人孔の中の段差で値が 2 つある時は、入る管の側と出る管の側で、別々に確かめる
+      var two = sn.side.gh || sn.side.inv || sn.side.dep;
+      depth[sn.n] = {};
+      (two ? ['L', 'R'] : ['C']).forEach(function (sd) {
+        var gh = sideOf(sn, 'gh', sd), inv = sideOf(sn, 'inv', sd), dep = sideOf(sn, 'dep', sd), sw = sideWord(sn, sd);
+        var calc = (gh && inv) ? round(gh.v - inv.v, 3) : null;
+        var hWarn = (gh && gh.status === 'warn') || (inv && inv.status === 'warn') ? 'warn' : ((gh && gh.status === 'done') || (inv && inv.status === 'done') ? 'done' : 'ok');
+        if (dep && calc !== null) {
+          var ok = Math.abs(dep.v - calc) < 0.0015;
+          if (!quiet) checks.push({ kind: '深さ', sec: sn.name + sw, ok: ok });
+          if (!ok) {
+            var did = 'dep:' + sn.n + (sd === 'C' ? '' : ':' + sd);
+            if (!quiet) flags.push({ id: did, type: 'dep', sec: sn.name, ends: [sn.n], title: sn.name + ' の深さ' + sw + 'が、地盤高 − 管底高と合いません',
+              options: [{ value: 'calc', label: '計算した ' + calc.toFixed(3) + ' m を使う', from: ['地盤高 − 管底高'] }, { value: 'drawn', label: '図面の ' + dep.str + ' m を使う', from: ['縦断図'] }],
+              recommended: null, decided: decisions[did] || null,
+              ev: [{ src: SV(dep), label: '縦断図の深さ', value: dep.str }, { src: SV(gh), label: '地盤高', value: gh.str }, { src: SV(inv), label: '管底高', value: inv.str }] });
+            depth[sn.n][sd] = { v: decisions[did] === 'drawn' ? dep.v : calc, status: decisions[did] ? 'done' : 'warn', src: SV(dep) };
+          } else depth[sn.n][sd] = { v: dep.v, status: hWarn, src: SV(dep), str: dep.str };
+        } else if (dep) depth[sn.n][sd] = { v: dep.v, status: 'ok', src: SV(dep), str: dep.str };
+        else if (calc !== null) depth[sn.n][sd] = { v: calc, status: hWarn, src: SV(inv) };
+      });
     });
+    function depOf(id, sd) { var d = depth[id]; return d ? (d.C || d[sd] || null) : null; }
     secs.forEach(function (s) {
-      var da = depth[s.a], db = depth[s.b];
+      var da = depOf(s.a, s.sideA), db = depOf(s.b, s.sideB);
       s.depA = da || null; s.depB = db || null;
       s.depAvg = (da && db) ? Math.round((Math.round(da.v * 1000) + Math.round(db.v * 1000)) / 2) / 1000 : null; // mm で足して、半分は切り上げ
     });
     // 人孔
     var mhList = [];
     if (plan) {
-      Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return a.n - b.n; }).forEach(function (m) {
-        use(fp, m.noSrc, 'No.' + m.n + '（平面図の人孔）');
-        if (m.kind) use(fp, m.kind.src, 'No.' + m.n + ' の種類');
-        mhList.push({ n: m.n, kind: m.kind ? m.kind.v : '人孔（種類の文字なし）', src: S(fp, m.kind ? m.kind.src : m.noSrc), include: true, status: 'ok' });
+      Object.keys(plan.mhs).map(function (k) { return plan.mhs[k]; }).sort(function (a, b) { return natCmp(a.n, b.n); }).forEach(function (m) {
+        use(fp, m.noSrc, m.name + '（平面図の人孔）');
+        if (m.kind) use(fp, m.kind.src, m.name + ' の種類');
+        mhList.push({ n: m.n, name: m.name, kind: m.kind ? m.kind.v : '人孔（種類の文字なし）', src: S(fp, m.kind ? m.kind.src : m.noSrc), include: true, status: 'ok' });
       });
       plan.notes.forEach(function (nt) {
-        use(fp, nt.src, 'No.' + nt.n + ' の注記');
+        var nm = NM(nt.n);
+        use(fp, nt.src, nm + ' の注記');
         var nid = 'note:' + nt.n, dec = decisions[nid];
         var mh = mhList.filter(function (m) { return m.n === nt.n; })[0];
-        flags.push({ id: nid, type: 'note', sec: 'No.' + nt.n, title: 'No.' + nt.n + ' に「' + nt.kw + '」の注記があります',
-          question: 'No.' + nt.n + ' を、新しく作る人孔の数に入れますか？',
+        flags.push({ id: nid, type: 'note', sec: nm, title: nm + ' に「' + nt.kw + '」の注記があります',
+          question: nm + ' を、新しく作る人孔の数に入れますか？',
           options: [{ value: 'exclude', label: '入れない', sub: '新しく作る人孔の数から外す', from: [] },
             { value: 'include', label: '入れる', sub: '新しく作る人孔として数える', from: [] }],
           recommended: null, decided: dec || null,
-          ev: [{ src: S(fp, nt.src), label: '平面図の注記', value: nt.text }].concat(mh ? [{ src: mh.src, label: '平面図の No.' + nt.n, value: mh.kind }] : []) });
+          ev: [{ src: S(fp, nt.src), label: '平面図の注記', value: nt.text }].concat(mh ? [{ src: mh.src, label: '平面図の ' + nm, value: mh.kind }] : []) });
         if (mh) { mh.include = dec !== 'exclude'; mh.status = dec ? 'done' : 'warn'; mh.note = nt.text; }
       });
       // 種類の文字そのものが「既設人孔」の時も、同じように聞く
       mhList.forEach(function (mh) {
         if (mh.note || !/既設|既存/.test(mh.kind)) return;
         var nid = 'note:' + mh.n, dec = decisions[nid];
-        flags.push({ id: nid, type: 'note', sec: 'No.' + mh.n, title: 'No.' + mh.n + ' は「' + mh.kind + '」と書かれています',
-          question: 'No.' + mh.n + ' を、新しく作る人孔の数に入れますか？',
+        flags.push({ id: nid, type: 'note', sec: mh.name, title: mh.name + ' は「' + mh.kind + '」と書かれています',
+          question: mh.name + ' を、新しく作る人孔の数に入れますか？',
           options: [{ value: 'exclude', label: '入れない', sub: '新しく作る人孔の数から外す', from: [] },
             { value: 'include', label: '入れる', sub: '新しく作る人孔として数える', from: [] }],
-          recommended: null, decided: dec || null, ev: [{ src: mh.src, label: '平面図の No.' + mh.n, value: mh.kind }] });
+          recommended: null, decided: dec || null, ev: [{ src: mh.src, label: '平面図の ' + mh.name, value: mh.kind }] });
         mh.include = dec !== 'exclude'; mh.status = dec ? 'done' : 'warn'; mh.note = mh.kind;
       });
       if (prof) {
-        var a1 = mhList.map(function (m) { return m.n; }).join(','), a2 = prof.stations.map(function (s) { return s.n; }).join(',');
+        // 縦断図の測点の名前（途中の点を除き、同じ名前は 1 つ）と、平面図の人孔の名前が、同じ組か
+        var ks = []; prof.stations.forEach(function (s) { if (!s.plus && ks.indexOf(s.key) < 0) ks.push(s.key); });
+        var a1 = mhList.map(function (m) { return m.n; }).join(','), a2 = ks.sort(natCmp).join(',');
         checks.push({ kind: '人孔の数', sec: 'all', ok: a1 === a2 });
       }
     }
-    // 集計
+    // 表の区間が縦断図に見つからない時（範囲の中なのに数えていない区間がある）
+    if (missingPairs.length) {
+      var tdec = decisions.tbl, tnames = missingPairs.map(function (p) { return p.t.s; }).join('、');
+      flags.push({ id: 'tbl', type: 'tbl', sec: 'all', ends: [], title: '図面の表の区間が、縦断図に見つかりません（' + tnames + '）', short: '図面の表の区間（' + tnames + '）',
+        note: '表にある区間は、工事の範囲の中の区間です。この区間の延長は、数量に入っていません。縦断図で、測点の名前が読めていない所がないか確かめてください。',
+        options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: tdec || null,
+        ev: missingPairs.slice(0, 3).map(function (p) { return { src: S(p.fi, p.t.id), label: '図面の表', value: p.t.s }; }) });
+    }
+    // 集計（工事の範囲の外の区間は入れない）
     var qty = [], byspec = {};
     secs.forEach(function (s) {
-      if (!s.spec || s.L === null) return;
+      if (s.scope === 'out' || !s.spec || s.L === null) return;
       var k = s.spec; (byspec[k] = byspec[k] || { L: 0, parts: [], warn: false }).L += s.L;
-      byspec[k].parts.push(s.name + ' ' + s.L.toFixed(2)); if (s.Lstatus === 'warn' || s.specStatus === 'warn') byspec[k].warn = true;
+      byspec[k].parts.push(s.name + ' ' + s.L.toFixed(2)); if (s.Lstatus === 'warn' || s.specStatus === 'warn' || s.chk === 'warn') byspec[k].warn = true;
     });
     Object.keys(byspec).sort(function (a, b) { return (parseInt(a.replace(/\D+/g, ''), 10) || 0) - (parseInt(b.replace(/\D+/g, ''), 10) || 0); }).forEach(function (k) {
       var m = k.match(/^φ(\d+)\s*(.*)$/), mat = m && m[2] ? (MATERIAL[m[2].toUpperCase()] || m[2]) : '';
@@ -919,20 +1336,35 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     var bykind = {};
     mhList.forEach(function (m) {
       var e = (bykind[m.kind] = bykind[m.kind] || { n: 0, list: [], ex: [], warn: false });
-      if (m.include) { e.n++; e.list.push('No.' + m.n); } else e.ex.push('No.' + m.n + (/既設|既存|利用/.test(m.note || '') ? ' は既設を使うため' : ' は確かめて'));
+      if (m.include) { e.n++; e.list.push(m.name); } else e.ex.push(m.name + (/既設|既存|利用/.test(m.note || '') ? ' は既設を使うため' : ' は確かめて'));
       if (m.status === 'warn') e.warn = true;
     });
     Object.keys(bykind).sort().forEach(function (k) {
       var e = bykind[k];
       qty.push({ work: '人孔工', spec: k, v: String(e.n), unit: '箇所', basis: (e.list.join('、') || '—') + (e.ex.length ? '（' + e.ex.join('、') + '除く）' : ''), check: e.warn ? '要確認' : '' });
     });
+    var totalL = 0, hasL = false; secs.forEach(function (s) { if (s.scope !== 'out' && s.L !== null) { totalL += s.L; hasL = true; } });
+    // 図面の表の「計」と、数量に入れた区間の延長の合計を比べる（範囲の外の管が入った・範囲の中の管が抜けた、を見つける）
+    if (hasL && tables.totals.length) {
+      var tot = round(totalL, 2);
+      if (!tables.totals.some(function (t) { return Math.abs(t.v - tot) < 0.005; })) {
+        var t0 = tables.totals[0], xdec = decisions.total;
+        flags.push({ id: 'total', type: 'total', sec: 'all', ends: [], title: '区間の延長の合計が、図面の表の計と合いません', short: '区間の延長の合計',
+          note: '工事の範囲の外の管が入っている、範囲の中の管が抜けている、延長の書き違い、のどれかの可能性があります。図面の表と区間の一覧を見比べてください。',
+          extra: '数量に入れた区間の延長の合計 ' + tot.toFixed(2) + ' m と、図面の表の計 ' + t0.str + ' m は、' + Math.abs(tot - t0.v).toFixed(2) + ' m 違います。',
+          options: [{ value: 'seen', label: '確かめた', from: [] }], recommended: null, decided: xdec || null,
+          ev: tables.totals.slice(0, 2).map(function (t) { return { src: S(t.fi, t.id), label: '図面の表の計', value: t.str }; }) });
+      }
+    }
     var open = flags.filter(function (f) { return !f.decided; }).length;
-    var totalL = 0, hasL = false; secs.forEach(function (s) { if (s.L !== null) { totalL += s.L; hasL = true; } });
     var texts = 0; files.forEach(function (f) { texts += f.texts.length; });
+    var outs = secs.filter(function (s) { return s.scope === 'out'; });
     return {
       planIdx: fp, profIdx: ff, sections: secs, flags: flags, checks: checks, qty: qty, mhs: mhList, usage: usage,
       order: prof ? prof.order : [], transposed: prof ? prof.transposed : false,
-      stats: { texts: texts, sections: secs.length, totalL: hasL ? round(totalL, 2) : null, checksOk: checks.filter(function (c) { return c.ok; }).length, checksAll: checks.length, open: open }
+      stats: { texts: texts, sections: secs.length, totalL: hasL ? round(totalL, 2) : null, checksOk: checks.filter(function (c) { return c.ok; }).length, checksAll: checks.length, open: open },
+      scope: { out: outs.map(function (s) { return { name: s.name, L: s.L, why: s.scopeWhy }; }),
+        outL: round(outs.reduce(function (a, s) { return a + (s.L || 0); }, 0), 2), table: !!(tables.pairs.length && outs.some(function (s) { return s.scopeWhy === 'table'; })) }
     };
   }
 
@@ -947,16 +1379,16 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
   function csvSections(res) {
     var rows = [['区間', '管径・管種', '延長(m)', '上流 管底高(m)', '下流 管底高(m)', '上流 深さ(m)', '下流 深さ(m)', '平均深さ(m)', '勾配 図面(‰)', '勾配 計算(‰)', '確認']];
     res.sections.forEach(function (s) {
-      var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
+      var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || s.chk === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
       rows.push([s.name, s.spec || '', s.L !== null ? s.L.toFixed(2) : '', s.invA ? s.invA.str : '', s.invB ? s.invB.str : '',
         s.depA ? s.depA.v.toFixed(3) : '', s.depB ? s.depB.v.toFixed(3) : '', s.depAvg !== null ? s.depAvg.toFixed(3) : '',
         s.slopes.map(function (q) { return q.v.toFixed(q.dec); }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(' / '),
-        s.slopeCalc !== null ? s.slopeCalc.toFixed(2) : '', warn ? '要確認' : '']);
+        s.slopeCalc !== null ? s.slopeCalc.toFixed(2) : '', s.scope === 'out' ? '範囲の外' : (warn ? '要確認' : '')]);
     });
     return toCsv(rows);
   }
 
-  root.SuryoCore = { loadDxf: loadDxf, classify: classify, analyze: analyze, csvSummary: csvSummary, csvSections: csvSections, FILE_NAME: FILE_NAME, nk: nk, textWidth: textWidth };
+  root.SuryoCore = { loadDxf: loadDxf, classify: classify, analyze: analyze, csvSummary: csvSummary, csvSections: csvSections, FILE_NAME: FILE_NAME, nk: nk, textWidth: textWidth, parseName: parseName };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
 
@@ -1048,12 +1480,15 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
   function recompute() { state.res = C.analyze(state.files, state.decisions); }
   // 勾配の要確認は、その区間の延長（と管底高）を人が決めてから出す。
   // 決める前の延長は仮の値なので、仮の値から出た「合わない」を数えない（縦断図だけの時に 1 / 2 が 1 か所で終わるずれを防ぐ）
+  // 図面の表の計との比べも、延長を人が決めてから出す（決める前の仮の延長で「合わない」と言わない）
   function shown() {
     var fl = state.res.flags;
+    var lenOpen = fl.some(function (g) { return !g.decided && (g.type === 'len' || g.type === 'part'); });
     return fl.filter(function (f) {
+      if (f.type === 'total') return !lenOpen;
       if (f.type !== 'slope') return true;
-      var ab = f.sec.split('-');
-      return !fl.some(function (g) { return !g.decided && (g.id === 'len:' + f.sec || g.id === 'inv:' + ab[0] || g.id === 'inv:' + ab[1]); });
+      var ab = f.ends || f.sec.split('-');
+      return !fl.some(function (g) { return !g.decided && (g.id === 'len:' + f.sec || g.id === 'part:' + f.sec || g.id === 'inv:' + ab[0] || g.id === 'inv:' + ab[1]); });
     });
   }
   function open() { return shown().filter(function (f) { return !f.decided; }); }
@@ -1162,10 +1597,11 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
       }
       v = chk.value;
     }
-    var before = shown().length;
+    function nSlope() { return shown().filter(function (x) { return x.type === 'slope'; }).length; }
+    var before = nSlope();
     state.decisions[f.id] = v; state.pick[f.id] = v;
     recompute();
-    var n = nextView(), left = open().length, added = shown().length - before;
+    var n = nextView(), left = open().length, added = nSlope() - before;
     go(n);
     announce(n === 2 ? '確定しました。' + (added > 0 ? '選んだ値だと勾配が合わない所が ' + added + ' か所あるので、確かめる所が増えました。' : '') + '残りは ' + left + ' か所です。' : resultSay());
   });
@@ -1186,17 +1622,21 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     } else {
       // 片方の図面だけの時と、勾配が合わないまま進めた所がある時は、緑の「そろいました」にしない
       var m = missing(), slopeLeft = decided.filter(function (f) { return f.type === 'slope'; }).length, gap = addGap();
-      var title = m ? '数量は出ましたが、' + m.name + 'との突き合わせはしていません' : (slopeLeft ? '数量は出ましたが、勾配が合わないまま進めた所があります' : (gap ? '数量は出ましたが、延長の合計が追加距離と合いません' : '数量がそろいました'));
+      // 確かめただけで数字は直していない所（負の延長・読めない管径・表に無い区間・表の計と合わない）が残る時も、緑にしない
+      var keepLeft = decided.filter(function (f) { return KEEP[f.type]; }).length;
+      var title = m ? '数量は出ましたが、' + m.name + 'との突き合わせはしていません' : (slopeLeft ? '数量は出ましたが、勾配が合わないまま進めた所があります' : (keepLeft ? '数量は出ましたが、確かめが要るまま進めた所があります' : (gap ? '数量は出ましたが、延長の合計が追加距離と合いません' : '数量がそろいました')));
+      var outs = (r.scope && r.scope.out || []).filter(function (o) { return o.why === 'table'; });
       var body = (m ? m.what : '') + (gap ? '区間の延長の合計 ' + gap.total.toFixed(2) + ' m は、縦断図の追加距離から出した ' + gap.add.toFixed(2) + ' m と ' + Math.abs(gap.total - gap.add).toFixed(2) + ' m 違います。' : '')
-        + (decided.length ? '確かめた ' + decided.length + ' か所の値を、数量に反映しています。' : (m || gap ? '' : '突き合わせた数字は、すべて合っていました。'));
+        + (decided.length - keepLeft ? '確かめた ' + (decided.length - keepLeft) + ' か所の値を、数量に反映しています。' : (decided.length || m || gap ? '' : '突き合わせた数字は、すべて合っていました。'))
+        + (outs.length ? '図面の表に無い区間（' + outs.map(function (o) { return o.name; }).join('、') + '）は、工事の範囲の外として数量に入れていません。' : '');
       var list = decided.length ? '<ul class="decided">' + decided.map(function (f) {
         var o = f.options.filter(function (x) { return x.value === f.decided; })[0];
         // 見出しは短く：「No.3→No.4 の延長が、図面によって違います」→「No.3→No.4 の延長」
         // 勾配は平面図と縦断図で2つあるので、どちらの図面かを残す：「…合いません（平面図）」→「No.3→No.4 の勾配（平面図）」
-        var what = f.type === 'note' ? f.sec + ' を新しく作る人孔の数に' : (f.type === 'slope' ? f.title.replace(/が、.*（(.+?)）$/, '（$1）') : f.title.replace(/が、.*$/, ''));
-        return '<li><span>' + esc(what) + ' → <b>' + esc(f.type === 'slope' ? '合わないまま進めた' : (o ? o.label : f.decided)) + '</b></span><button type="button" class="btn btn-text btn-sm" data-redo="' + esc(f.id) + '">選び直す</button></li>';
+        var what = f.short || (f.type === 'note' ? f.sec + ' を新しく作る人孔の数に' : (f.type === 'slope' ? f.title.replace(/が、.*（(.+?)）$/, '（$1）') : f.title.replace(/が、.*$/, '')));
+        return '<li><span>' + esc(what) + ' → <b>' + esc(f.type === 'slope' ? '合わないまま進めた' : (KEEP[f.type] || (o ? o.label : f.decided))) + '</b></span><button type="button" class="btn btn-text btn-sm" data-redo="' + esc(f.id) + '">選び直す</button></li>';
       }).join('') + '</ul>' : '';
-      b = banner(m || slopeLeft || gap ? 'caution' : 'success', title, body, list + (m ? '<p>' + esc(m.gain) + '</p>' + addButton(m) : ''));
+      b = banner(m || slopeLeft || keepLeft || gap ? 'caution' : 'success', title, body, list + (m ? '<p>' + esc(m.gain) + '</p>' + addButton(m) : ''));
     }
     $('result-banner').innerHTML = b;
     $('csv-sum-done').hidden = true; $('csv-sec-done').hidden = true;
@@ -1206,10 +1646,13 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     if (r.planIdx < 0 && r.profIdx < 0) { $('basis').open = true; $('texts-details').open = true; }
   }
   // 区間の延長の合計と、縦断図の追加距離から出した長さ（全区間の和）が合うか。全区間に追加距離がある時だけ比べる
+  // 確かめただけで、数字は直していない要確認（③の知らせを黄色にし、選んだ値の代わりにこの言葉を出す）
+  var KEEP = { neg: '数量に入れずに進めた', specnone: '数量に入れずに進めた', lennone: '数量に入れずに進めた', tbl: '見つからないまま進めた', total: '合わないまま進めた' };
   function addGap() {
     var r = state.res, sum = 0, n = 0;
     if (!r.sections.length || r.stats.totalL === null) return null;
     for (var i = 0; i < r.sections.length; i++) {
+      if (r.sections[i].scope === 'out') continue; // 工事の範囲の外の区間は、合計に入れていない
       var c = (r.sections[i].lenCands || []).filter(function (x) { return x.from === '追加距離から計算'; })[0];
       if (!c) return null; sum += c.v; n++;
     }
@@ -1403,20 +1846,22 @@ footer{border-top:1px solid var(--gray-200);margin-top:40px;padding:20px 0 40px;
     slope: ['warn', '勾配が合わない', '管底高と延長から計算した勾配が、図面の勾配と合わない'],
     done: ['done', '人が選んだ', '合わなかった所で、人が選んだ値を使う'],
     ok: ['ok', '一致', '2枚の図面と計算で、数字が合う'],
-    none: ['none', '照合なし', '比べる図面が無く、確かめていない']
+    none: ['none', '照合なし', '比べる図面が無く、確かめていない'],
+    out: ['none', '範囲の外', '工事の範囲の外の区間で、数量に入れていない']
   };
   function chip(st) { var c = CHIPS[st]; return c ? '<span class="chip ' + c[0] + '">' + c[1] + '</span>' : ''; }
   function renderSections() {
     var r = state.res, used = {};
     var head = '<thead><tr><th>区間</th><th>管径・管種</th><th class="n">延長 (m)</th><th class="n">管底高 (m)<br>上流 → 下流</th><th class="n">平均深さ<br>(m)</th><th class="n">勾配 (‰)<br>図面 / 計算</th><th>検算</th></tr></thead>';
     var body = r.sections.map(function (s) {
-      var warn = s.Lstatus === 'warn' || s.specStatus === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn');
-      var done = !warn && (s.Lstatus === 'done' || s.specStatus === 'done' || (s.depA && s.depA.status === 'done') || (s.depB && s.depB.status === 'done'));
+      var out = s.scope === 'out';
+      var warn = !out && (s.Lstatus === 'warn' || s.specStatus === 'warn' || s.chk === 'warn' || (s.depA && s.depA.status === 'warn') || (s.depB && s.depB.status === 'warn'));
+      var done = !warn && (s.Lstatus === 'done' || s.specStatus === 'done' || s.chk === 'done' || (s.depA && s.depA.status === 'done') || (s.depB && s.depB.status === 'done'));
       var slopeOk = s.slopeCalc !== null && s.slopes.every(function (q) { return Math.abs(Math.round(s.slopeCalc * Math.pow(10, q.dec)) / Math.pow(10, q.dec) - q.v) < 1e-9; });
       // 比べた物があるか（延長が2つ以上の所から取れた、または勾配を計算して図面と比べた）。1枚の図面だけなら「一致」と言わない
       var compared = (s.lenCands && s.lenCands.length >= 2) || (s.slopeCalc !== null && s.slopes.length > 0);
       var slopeBad = s.slopeCalc !== null && s.slopes.length > 0 && !slopeOk;
-      var st = warn ? 'warn' : (slopeBad ? 'slope' : (done ? 'done' : (compared && (slopeOk || s.Lstatus === 'ok') ? 'ok' : 'none')));
+      var st = out ? 'out' : (warn ? 'warn' : (slopeBad ? 'slope' : (done ? 'done' : (compared && (slopeOk || s.Lstatus === 'ok') ? 'ok' : 'none'))));
       used[st] = true;
       var stated = s.slopes.length ? val(s.slopes[0].src, s.slopes[0].v.toFixed(s.slopes[0].dec)) : '—';
       return '<tr class="' + (warn ? 'warn' : '') + '"><th scope="row">' + esc(s.name) + '</th><td>' + (s.spec ? val(s.specSrc, s.spec) : '—') + '</td>'
