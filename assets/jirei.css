@@ -1,0 +1,99 @@
+/* 事例：リハビリアスレチック（jirei.html）だけで使う。2026-11-18
+   デジタル庁デザインシステム（画面づくりの手本_デジタル庁デザインシステム.md）に沿った所：
+   - 本文 16px・小さい札や見出しの添え字も 14px より小さくしない
+   - 字と背景 4.5:1 以上、枠 3:1 以上。色だけで違いを伝えない（入れる所＝塗りの札、並ぶ表＝枠の札。どちらも字で書く）
+   - キーボードで選んだ時の印は、黒 4px＋外側に黄 #ffd43d（このページの中の押せる所）
+   - 押せる所（画像を大きく開く）は 44px より大きい
+   色・書体・角丸はサイトの物（home.css の --ink・--sage・--serif）を使う。 */
+.jr-page main { font-weight:500; }
+.jr-page main p, .jr-page main li { letter-spacing:.02em; }
+.jr-page main a:focus-visible { outline:4px solid #000; outline-offset:2px; box-shadow:0 0 0 6px #ffd43d; }
+/* パンくずと見出しの添え字も 14px・押せる所は 44px（houmon.css と同じ扱い） */
+.jr-page .breadcrumb { align-items:center; font-size:14px; }
+.jr-page .breadcrumb a { display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:4px; }
+.jr-page .eyebrow { font-size:14px; letter-spacing:.06em; margin-bottom:16px; }
+.jr-page .text-link { font-size:15px; min-height:44px; }
+.jr-page .mihon-cta p, .jr-page .sub-cta p:not(.eyebrow) { font-size:15px; }
+.jr-page .sub-hero h1 { font-size:clamp(34px,5vw,58px); }
+.jr-page .sub-hero .sub-lead { max-width:760px; font-size:17px; line-height:2; color:var(--ink); }
+.jr-page .sub-section h2 { line-height:1.6; }
+
+/* 要点の 3 つ（見出しのすぐ下・2026-11-19） */
+.jr-points-sec { padding:0 0 64px; }
+.jr-points { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:0; padding:0; }
+.jr-points li { padding:26px 26px 24px; border-radius:14px; background:var(--white); border:1px solid var(--line); border-top:4px solid var(--ink); }
+.jr-page .jr-point-k { display:flex; align-items:center; gap:12px; margin-bottom:10px; font-family:var(--serif); font-size:clamp(20px,1.9vw,23px); font-weight:600; line-height:1.5; color:var(--ink); }
+.jr-point-n { flex:none; display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--white); font-family:var(--sans); font-size:16px; font-weight:700; }
+.jr-points li > p:not(.jr-point-k) { font-size:16px; line-height:1.9; color:var(--ink); }
+.jr-page .jr-try-intro { margin:-16px 0 24px; font-size:16px; }
+
+/* 01 ご感想 */
+.jr-voice-grid { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:28px; align-items:stretch; }
+.jr-voice { position:relative; display:flex; flex-direction:column; justify-content:center; padding:56px 48px 44px; border-radius:14px; background:var(--ink); color:var(--white); overflow:hidden; }
+.jr-voice::before { content:'“'; position:absolute; left:28px; top:-14px; font-family:Georgia,var(--serif); font-size:150px; line-height:1; color:var(--lime); opacity:.45; }
+.jr-voice blockquote { position:relative; margin:0; }
+.jr-voice blockquote p { font-family:var(--serif); font-size:clamp(21px,2.3vw,29px); font-weight:600; line-height:1.95; color:var(--white); letter-spacing:.03em; }
+.jr-voice figcaption { margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,254,250,.32); font-size:16px; font-weight:700; line-height:1.7; }
+.jr-voice figcaption small { display:block; margin-top:2px; font-size:14px; font-weight:500; color:#dfe6d6; }
+.jr-before-after { display:grid; gap:16px; }
+.jr-ba { padding:26px 28px; border-radius:14px; background:var(--white); border:1px solid #9aa98a; }
+.jr-after { border:2px solid var(--ink); }
+.jr-page .jr-ba-h { margin-bottom:8px; font-size:14px; font-weight:700; letter-spacing:.1em; color:var(--muted); }
+.jr-page .jr-after .jr-ba-h { color:var(--ink); }
+.jr-ba p:not(.jr-ba-h) { font-size:16px; line-height:1.95; color:var(--ink); }
+
+/* 03 使っている画面（画像と説明を交互に） */
+.jr-page .jr-remade { margin:-20px 0 40px; font-size:14px; }
+.jr-tap { display:none; }
+.jr-shots { list-style:none; display:grid; gap:80px; }
+.jr-shot { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:52px; align-items:center; scroll-margin-top:104px; }
+.jr-shot:nth-child(even) { grid-template-columns:minmax(0,1fr) minmax(0,1.55fr); }
+.jr-shot:nth-child(even) .jr-shot-img { order:2; }
+.jr-shot-img { display:block; border-radius:10px; overflow:hidden; background:#eceff1; box-shadow:0 1px 2px rgba(38,62,48,.14),0 14px 36px rgba(38,62,48,.14); transition:transform .18s ease,box-shadow .18s ease; }
+.jr-shot-img:hover { transform:translateY(-3px); box-shadow:0 1px 2px rgba(38,62,48,.14),0 20px 44px rgba(38,62,48,.18); }
+.jr-shot-img img { display:block; width:100%; height:auto; }
+.jr-page .jr-tag { display:inline-block; padding:2px 12px; border:1px solid var(--ink); border-radius:6px; background:var(--white); font-size:14px; font-weight:700; line-height:1.8; color:var(--ink); }
+.jr-page .jr-tag-in { background:var(--ink); color:var(--white); }
+.jr-shot-text h3 { margin:14px 0 10px; font-family:var(--serif); font-size:clamp(22px,2.2vw,27px); font-weight:600; line-height:1.55; }
+.jr-shot-text>p:not(.jr-tag) { font-size:16px; line-height:1.95; color:var(--ink); }
+.jr-link { margin-top:20px; padding:16px 20px; border-left:3px solid #6c8253; border-radius:0 10px 10px 0; background:var(--sage); }
+.jr-page .jr-link-h { font-size:14px; font-weight:700; color:var(--ink); }
+.jr-link p:not(.jr-link-h) { margin-top:4px; font-size:16px; line-height:1.9; color:var(--ink); }
+
+/* 04 つながっている画面 */
+.jr-screens { list-style:none; display:flex; flex-wrap:wrap; gap:10px; }
+.jr-screens li { padding:8px 18px; border:1px solid #9aa98a; border-radius:999px; background:var(--white); font-size:16px; font-weight:700; line-height:1.6; }
+.jr-page .jr-consent { margin-top:28px; font-size:14px; line-height:1.9; }
+.jr-next { padding:64px 0 72px; }
+.jr-next .mihon-cta { margin-top:0; }
+
+@media(max-width:900px) {
+  .jr-voice-grid { grid-template-columns:1fr; }
+  .jr-points { grid-template-columns:1fr; gap:12px; }
+  .jr-points-sec { padding-bottom:48px; }
+  .jr-voice { padding:48px 32px 36px; }
+  .jr-shot, .jr-shot:nth-child(even) { grid-template-columns:1fr; gap:22px; }
+  .jr-shot:nth-child(even) .jr-shot-img { order:0; }
+  .jr-shots { gap:60px; }
+}
+@media(max-width:760px) {
+  .jr-tap { display:block; margin-top:4px; }
+}
+@media(max-width:650px) {
+  .jr-page .sub-hero .sub-lead { font-size:16px; }
+  .jr-voice { padding:44px 22px 30px; border-radius:12px; }
+  .jr-voice::before { left:14px; font-size:120px; }
+  .jr-voice blockquote p { font-size:20px; line-height:1.9; }
+  .jr-ba { padding:20px; }
+  .jr-page .jr-remade { margin:-12px 0 28px; }
+  .jr-screens li { font-size:15px; padding:8px 14px; }
+  .jr-next { padding:44px 0 52px; }
+}
+@media print {
+  .jr-voice { break-inside:avoid; }
+  .jr-points li { break-inside:avoid; }
+  .jr-shot { break-inside:avoid; grid-template-columns:1fr 1fr; gap:24px; }
+  .jr-shot:nth-child(even) .jr-shot-img { order:0; }
+  .jr-shot-img { box-shadow:none; border:1px solid #c9d1bf; }
+  .jr-tap, .jr-next { display:none; }
+}

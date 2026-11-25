@@ -1,0 +1,102 @@
+/* 押して確かめる（リハビリアスレチックの事例）。トップの「実例」と jirei.html の両方で使う。2026-11-19
+   本人「凄さがめっちゃわかるようにして」：一つ入れると、ほかの表がそろって変わる所を、押して見られるようにした。
+   動きは本物のアプリと同じ（お休み＝バイタル表と実施記録で名前に線・送迎表の候補から外れる／振替＝バイタル表と送迎表に（振替）付きで並ぶ・実施記録はふつうの行／申し送りの印＝申し送りの画面に並ぶ）。
+   デジタル庁デザインシステム（画面づくりの手本_デジタル庁デザインシステム.md）に沿った所：
+   - 字は 14px より小さくしない（14px は札・添え字・場所の足りないスマホの表だけ）。押せる所は 44px より大きい
+   - 字と背景 4.5:1 以上、枠や印 3:1 以上。色だけで違いを伝えない（お休み＝線と読み上げの字、変わった所＝黄色の塗りに加えて「変わりました」の札と「→ 何が変わったか」の字、押した所＝✓ と「入れました」の字）
+   - キーボードで選んだ時の印は、黒 4px＋黄 #ffd43d の二重（jirei.css と同じ書き方）
+   - ボタンは「入れる」3 つ（枠の形・押すと塗りに変わる＝aria-pressed）と、取り消しの「最初に戻す」1 つ（文字に近い形）。見た目の順と読み上げの順は同じ
+   - 動きを減らす設定の時は、塗りが瞬かない
+   表の見た目（灰の地・白い板・枠の線・印の青）は、冊子の画面（本物のアプリを写した物）に合わせた。 */
+.jr-try { display:grid; grid-template-columns:minmax(0,350px) minmax(0,1fr); gap:28px; padding:28px; border-radius:16px; background:var(--white); border:1px solid var(--line); text-align:left; }
+.jr-try button { font:inherit; letter-spacing:.02em; }
+.jr-try-day { font-size:14px; font-weight:700; letter-spacing:.08em; color:var(--muted); }
+.jr-try-lead { margin-top:6px; font-size:17px; font-weight:700; line-height:1.7; color:var(--ink); }
+.jr-acts { list-style:none; display:grid; gap:12px; margin:16px 0 0; padding:0; }
+.jr-act { width:100%; min-height:72px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:2px 14px; padding:12px 14px 12px 18px; text-align:left; border:2px solid var(--ink); border-radius:12px; background:var(--white); color:var(--ink); cursor:pointer; transition:background .15s ease,color .15s ease; }
+.jr-act:hover { background:var(--sage); }
+.jr-act-where { grid-column:1; font-size:14px; font-weight:700; line-height:1.6; color:var(--muted); }
+.jr-act-what { grid-column:1; font-size:17px; font-weight:700; line-height:1.55; word-break:auto-phrase; }
+.jr-act-short { display:none; }
+.jr-act-icon { grid-column:2; grid-row:1 / span 3; display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:var(--ink); color:var(--white); font-size:22px; font-weight:700; line-height:1; }
+.jr-act-icon::before { content:'＋'; }
+.jr-act-done { display:none; grid-column:1; font-size:14px; font-weight:700; line-height:1.6; }
+.jr-act[aria-pressed="true"] { background:var(--ink); color:var(--white); }
+.jr-act[aria-pressed="true"] .jr-act-where { color:#dfe6d6; }
+.jr-act[aria-pressed="true"] .jr-act-icon { background:var(--lime); color:var(--ink); }
+.jr-act[aria-pressed="true"] .jr-act-icon::before { content:'✓'; }
+.jr-act[aria-pressed="true"] .jr-act-done { display:block; color:var(--lime); }
+.jr-reset { margin-top:14px; min-height:44px; padding:0 20px; border:1px solid var(--ink); border-radius:999px; background:transparent; font-size:15px; font-weight:700; color:var(--ink); cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.jr-reset:hover { background:var(--sage); }
+.jr-act:focus-visible, .jr-reset:focus-visible { outline:4px solid #000; outline-offset:2px; box-shadow:0 0 0 6px #ffd43d; }
+.jr-try-status { margin-top:16px; padding:14px 16px; border-left:4px solid var(--ink); border-radius:0 10px 10px 0; background:var(--sage); font-size:16px; font-weight:700; line-height:1.8; color:var(--ink); }
+.jr-try-fine { grid-column:1 / -1; font-size:14px; line-height:1.8; color:var(--muted); }
+
+/* 4 つの表（本物のアプリの見た目に寄せる） */
+.jr-tps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-content:start; padding:16px; border-radius:12px; background:#eceff1; }
+.jr-tp { display:flex; flex-direction:column; min-width:0; padding:12px 14px; border-radius:4px; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.2); color:#212121; transition:box-shadow .2s ease; }
+.jr-tp.jr-hit { box-shadow:0 0 0 3px var(--ink),0 1px 3px rgba(0,0,0,.2); }
+.jr-tp-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:6px 8px; min-height:30px; }
+.jr-tp h3 { margin:0; font-family:var(--sans); font-size:16px; font-weight:700; line-height:1.5; letter-spacing:0; color:#212121; }
+.jr-tp-badge { padding:1px 10px; border-radius:999px; background:var(--ink); color:var(--white); font-size:14px; font-weight:700; line-height:1.7; white-space:nowrap; }
+.jr-tp-badge[hidden] { display:none; }
+.jr-tp-sub { margin-top:6px; font-size:14px; line-height:1.6; color:#616161; }
+.jr-tp table { width:100%; margin-top:8px; border-collapse:collapse; font-size:15px; line-height:1.5; }
+.jr-tp th { padding:5px 8px; border:1px solid #bdbdbd; background:#f5f5f5; text-align:left; font-size:14px; font-weight:700; white-space:nowrap; }
+.jr-tp td { height:38px; padding:5px 8px; border:1px solid #bdbdbd; vertical-align:middle; }
+.jr-tp td.jr-c { width:5.2em; text-align:center; }
+.jr-tp td.jr-y { font-size:14px; }
+.jr-off .jr-name { color:#616161; text-decoration:line-through; text-decoration-thickness:2px; }
+.jr-box { display:inline-block; width:20px; height:20px; border:2px solid #616161; border-radius:3px; vertical-align:middle; }
+.jr-box.on { border-color:#1565c0; background:#1565c0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4 10.5l4 4 8-9' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat; }
+.jr-cands { list-style:none; display:grid; margin:8px 0 0; padding:0; border:1px solid #bdbdbd; border-radius:2px; box-shadow:0 2px 6px rgba(0,0,0,.18); }
+.jr-cands li { display:flex; align-items:center; min-height:38px; padding:5px 12px; font-size:15px; line-height:1.5; }
+.jr-cands li + li { border-top:1px solid #e0e0e0; }
+.jr-cands li[hidden], .jr-tp tr[hidden] { display:none; }
+.jr-tp-note { margin:auto 0 0; padding-top:10px; min-height:2.2em; font-size:14px; font-weight:700; line-height:1.6; color:var(--ink); }
+.jr-tp-note:not(:empty)::before { content:'→ '; }
+/* 変わった行：黄色の塗り（色だけにしないよう、札と「→」の字も出す） */
+.jr-tp .jr-changed > td, .jr-cands li.jr-changed { background:#fff3b0; }
+.jr-tp .jr-changed > td:first-child, .jr-cands li.jr-changed { box-shadow:inset 4px 0 0 #806300; }
+@media (prefers-reduced-motion:no-preference) {
+  .jr-tp .jr-changed > td, .jr-cands li.jr-changed { animation:jr-flash 1.1s ease-out; }
+  @keyframes jr-flash { 0% { background:#ffd43d; } 100% { background:#fff3b0; } }
+}
+.jr-vh { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+@media(max-width:1080px) {
+  .jr-try { grid-template-columns:1fr; }
+  .jr-acts { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .jr-act { grid-template-columns:1fr; align-content:start; padding:14px; }
+  .jr-act-icon { grid-column:1; grid-row:auto; order:-1; width:36px; height:36px; margin-bottom:6px; font-size:20px; }
+}
+@media(max-width:760px) {
+  .jr-try { gap:16px; padding:0; border:0; background:transparent; }
+  .jr-try-lead { font-size:16px; }
+  /* スマホ：押した後の表が同じ画面に入るよう、ボタンは短い言葉の横一列 */
+  .jr-acts { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:12px; }
+  .jr-act { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:6px; min-height:96px; padding:10px 6px; text-align:center; }
+  .jr-act-icon { order:0; width:30px; height:30px; margin:0; font-size:17px; }
+  .jr-act-where, .jr-act-what, .jr-act-done { display:none; }
+  .jr-act[aria-pressed="true"] .jr-act-done { display:none; }
+  .jr-act-short { display:block; font-size:14px; font-weight:700; line-height:1.5; }
+  .jr-reset { margin-top:10px; }
+  .jr-try-status { margin-top:12px; font-size:15px; }
+  .jr-tps { gap:8px; padding:8px; }
+  .jr-tp { padding:10px 8px; }
+  .jr-tp h3 { font-size:15px; }
+  .jr-tp table, .jr-cands li { font-size:14px; }
+  .jr-tp th, .jr-tp td { padding:4px 5px; }
+  .jr-tp td { height:34px; }
+  .jr-tp .jr-wide { display:none; }
+  .jr-cands li { min-height:34px; padding:4px 8px; }
+  /* 申し送りは狭いので、名前の下に様子を出す */
+  .jr-tp[data-panel="handover"] thead { display:none; }
+  .jr-tp[data-panel="handover"] td { display:block; height:auto; border:0; padding:3px 5px; }
+  .jr-tp[data-panel="handover"] tr { display:block; border:1px solid #bdbdbd; }
+  .jr-tp[data-panel="handover"] tr[hidden] { display:none; }
+  .jr-tp[data-panel="handover"] td:first-child { font-weight:700; }
+}
+@media print {
+  .jr-try { display:none; }
+}

@@ -92,6 +92,32 @@ assert.equal((z.match(/<!--/g)||[]).length,1,'zaiko.html: comments left in the s
 assert.doesNotMatch(z,/claude|Artifact/i,'zaiko.html: preview-only code left');
 assert.ok(!z.includes('\r'),'zaiko.html: CRLF');
 for (const [name,html] of documents) assert.ok(!html.includes('zaiko.html'),`${name}: links to zaiko.html`);}
+// 2026-11-18: the case of Rehabilitation Athletic (jirei.html + the top page's #case). Allowed by the facility: its name, screens with fictional names, and its words.
+// The words must stay exactly as given, no numbers may be added to the case (the facility gave none), and the consent and "remade with fictional people" notes must be shown.
+{const {VOICE,CONSENT,REMADE,SHOTS}=await import('../site/jirei.mjs');const j=documents.get('jirei.html'),home=documents.get('index.html');
+const main=j.slice(j.indexOf('<main'),j.indexOf('</main>'));const text=main.replace(/<[^>]+>/g,' ');
+for(const t of [VOICE,CONSENT,REMADE,'いただいた言葉のまま']) assert.ok(text.includes(t),`jirei.html: ${t.slice(0,20)}`);
+for(const t of [VOICE,'リハビリアスレチックの了承をいただいて','架空の利用者・職員で作り直したもの','href="jirei.html"','毎日使われています','14の画面']) assert.ok(home.includes(t),`index.html case: ${t.slice(0,20)}`);
+assert.ok(!home.includes('施設名は伏せています'),'index.html: the facility is named now');
+const caseText=text.replace(VOICE,'');assert.doesNotMatch(caseText,/[0-9０-９]+\s*(分|時間|％|%|円|人|件|割|倍|か月|ヶ月|年|日間|回)/,'jirei.html: a number was added to the case');
+assert.equal(SHOTS.length,6,'jirei.html: six screens');
+for(const s of SHOTS){assert.ok(j.includes(`src="assets/jirei/${s.id}.png" width="760" height="${s.h}" alt="${s.alt}"`),`jirei.html: image ${s.id}`);await fs.access(path.join(root,'assets/jirei',s.id+'.png'));}
+assert.ok(j.includes('assets/jirei.css'),'jirei.html: page stylesheet');
+// 2026-11-19: "押して確かめる" (the same block on both pages, written once in site/jirei.mjs). The claim is the page's h1 and the top's case.
+const {CLAIM,TRY}=await import('../site/jirei.mjs');
+const h1=(j.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1]||'';assert.equal(h1.replace(/<br>/g,''),CLAIM,'jirei.html: the claim is the h1');
+assert.ok(home.replace(/<br>/g,'').includes(CLAIM),'index.html case: the claim');
+for(const [name,html] of [['jirei.html',j],['index.html',home]]){
+  assert.equal(html.split(TRY).length-1,1,`${name}: the "押して確かめる" block, once and unchanged`);
+  assert.ok(html.includes('<link rel="stylesheet" href="assets/jirei-try.css">')&&html.includes('<script src="assets/jirei-try.js" defer></script>'),`${name}: the block's style and script`);}
+for(const t of ['架空の名前で再現した見本','本物のアプリとデータは使っていません','どこにも送られず、残りません']) assert.ok(TRY.includes(t),`the block: ${t}`);
+for(const a of ['off','furikae','mark']) assert.ok(TRY.includes(`data-act="${a}" aria-pressed="false"`),`the block: button ${a}`);
+assert.doesNotMatch(TRY.replace(/<[^>]+>/g,' '),/[0-9０-９]+\s*(分|時間|％|%|円|人|件|割|倍|か月|ヶ月|年|日間|回)/,'the block: a number was added');
+// 2026-11-19: "できるようになった事" (from the owner's words, not the facility's). Kept apart from the facility's words and before the screens.
+const {GAIN}=await import('../site/jirei.mjs');assert.equal(GAIN.length,3,'jirei.html: three gains');
+for(const [k,p] of GAIN) assert.ok(text.includes(k)&&text.includes(p),`jirei.html: gain ${k}`);
+assert.ok(j.indexOf('id="voice"')<j.indexOf('id="gain"')&&j.indexOf('id="gain"')<j.indexOf('id="screens"'),'jirei.html: gains sit between the words and the screens');
+const js=await fs.readFile(path.join(root,'assets/jirei-try.js'),'utf8');assert.doesNotMatch(js,/fetch\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon|document\.cookie/,'jirei-try.js: must not send or keep anything');}
 // 2026-11-14: internal files (docs/, scripts/, site/, README, package.json) were readable at takenokonoko.com. _config.yml tells GitHub Pages not to serve them.
 // Every tracked file must be either a public file (top-level page, assets/) or hidden by the exclude list, and no public file may be caught by it.
 const serving = audit();

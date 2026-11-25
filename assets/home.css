@@ -444,6 +444,27 @@ details[open]>summary .disclosure-sign:after{transform:rotate(0deg)}
 .case-screens{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
 .case-screens li{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:18px 12px;font-size:14px;font-weight:700;text-align:center;line-height:1.5;display:grid;place-items:center;min-height:84px}
 @media(max-width:1100px){.case-screens{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* 実例：施設のお名前・ご感想・画面（2026-11-18・リハビリアスレチックの了承の範囲で） */
+.case-feature{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px;align-items:center;margin:0 0 40px}
+.case-shot{display:block;border-radius:10px;overflow:hidden;background:#eceff1;box-shadow:0 1px 2px rgba(38,62,48,.14),0 14px 36px rgba(38,62,48,.14);transition:transform .18s ease}
+.case-shot:hover{transform:translateY(-3px)}
+.case-shot img{display:block;width:100%;height:auto}
+.case-voice{position:relative;padding:46px 40px 34px;border-radius:14px;background:var(--ink);color:var(--white);overflow:hidden}
+.case-voice::before{content:'“';position:absolute;left:24px;top:-12px;font-family:Georgia,var(--serif);font-size:120px;line-height:1;color:var(--lime);opacity:.45}
+.case-voice blockquote{position:relative;margin:0}
+.case-voice blockquote p{font-family:var(--serif);font-size:clamp(19px,1.9vw,24px);font-weight:600;line-height:1.95;color:var(--white);letter-spacing:.03em}
+.case-voice figcaption{margin-top:20px;font-size:15px;font-weight:700;line-height:1.7}
+.case-voice figcaption small{display:block;font-size:14px;font-weight:500;color:#dfe6d6}
+.case-voice .case-more{margin-top:24px;font-size:15px}
+@media(max-width:900px){.case-feature{grid-template-columns:1fr;gap:20px}}
+@media(max-width:600px){.case-voice{padding:40px 22px 26px}.case-voice blockquote p{font-size:18px}}
+/* 実例の芯の一言と「押して確かめる」（2026-11-19 本人「凄さがめっちゃわかるようにして」。押す部品は assets/jirei-try.css） */
+.case-claim{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px 48px;align-items:end;margin:0 0 28px;padding:36px 0 32px;border-top:2px solid var(--ink)}
+.case-claim-big{font-family:var(--serif);font-size:clamp(28px,3.6vw,46px);font-weight:600;line-height:1.5;letter-spacing:.01em;color:var(--ink)}
+.case-claim-sub{font-size:16px;font-weight:500;line-height:1.95;color:var(--ink)}
+.case-try{margin:0 0 48px}
+@media(max-width:900px){.case-claim{grid-template-columns:1fr;padding:28px 0 24px}}
+@media(max-width:600px){.case-claim-big{font-size:clamp(26px,7.4vw,34px)}.case-claim-sub{font-size:15px}}
 @media(max-width:600px){.case-screens{grid-template-columns:repeat(2,minmax(0,1fr))}.diff-table{font-size:13px}.diff-table th,.diff-table td{padding:14px 12px}}
 .hero-map{height:540px!important;padding:0!important;margin-top:0!important}
 @media(max-width:900px){.hero-map{height:480px!important;margin:32px auto 0!important;max-width:560px}}

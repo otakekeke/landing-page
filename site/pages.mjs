@@ -1,6 +1,7 @@
 import {section, cards, pricePanel, cta} from './shared.mjs';
 import {terms, privacy} from './policies.mjs';
 import {houmon, houmonKawasaki} from './houmon.mjs';
+import {jirei} from './jirei.mjs';
 
 // Audience pages merged into the top page on 2026-09-27. Old URLs redirect so shared links keep working.
 export const moved = [
@@ -31,6 +32,8 @@ export const pages = [
     description:'タケノコ（屋号：嶽ノ子）は、神奈川県相模原市を拠点に、介護現場向け業務アプリの設計・開発・運用支援を行う個人事業です。',
     body:section('01 / 大切にしていること','今の運用を見るところから始めます。',`<div class="reading"><p>介護の現場には、言葉にしにくい判断や、帳票の中に残る工夫があります。まず実物と仕事の流れを見せていただき、その現場で続けられる形を考えます。</p><p>代表は、介護の現場で介護ソフトを使い、本部で基幹システムを作ってきました。相談から設計・制作・運用支援まで一人で担当します。新しい道具が、別の負担にならないことを大切にしています。</p><p>目指すのは、毎日さわる画面で手が止まらないことです。二度書きや探す手間、特定の人に仕事が集まることを減らします。料金は、相手によって変えません。</p></div>`)+section('02 / 事業者概要','運営者',`<dl class="sub-definitions"><div><dt>サービス名・屋号</dt><dd>タケノコ ／ 嶽ノ子（たけのこ）</dd></div><div><dt>代表者</dt><dd>大嶽 耕太郎</dd></div><div><dt>事業形態・設立日</dt><dd>個人事業 ／ 2025年4月19日</dd></div><div><dt>所在地</dt><dd>神奈川県相模原市中央区千代田7-10-7</dd></div><div><dt>事業内容</dt><dd>介護事業所向け業務アプリの設計・制作・導入・運用支援</dd></div><div><dt>請求・支払</dt><dd>請求書を発行します。適格請求書発行事業者（インボイス）の登録はしていません。銀行振込／Stripe決済（契約で合意した方法）。</dd></div><div><dt>秘密保持</dt><dd>秘密保持契約に対応します。</dd></div><div><dt>連絡先</dt><dd><a href="mailto:kotaro.otake@takenokonoko.com">kotaro.otake@takenokonoko.com</a><br><a href="tel:07013834420">070-1383-4420</a></dd></div><div><dt>受付時間</dt><dd>平日・土曜 9:00〜18:00（日本時間）。対応中は折り返しになる場合があります。</dd></div></dl>`,true)+section('03 / 情報の取り扱い','データの扱いは、案件ごとに先に決めます。',`<div class="reading"><p>保存先・所有者・アクセス権限・バックアップ・契約終了時のデータの返し方を、案件ごとに確認します。相談とデモは、利用者の情報を伏せたまま進めます。</p><p>IPAのSECURITY ACTION 一つ星を自己宣言しています（自己宣言ID：50000228580）。第三者による認証や、安全性の保証ではありません。</p><p><a href="privacy.html">個人情報保護方針</a> ／ <a href="terms.html">利用規約・事業継続時の取り決め</a></p></div>`)+cta
   },
+  // 事例（2026-11-18・リハビリアスレチックの了承の範囲で。文と画面は site/jirei.mjs）
+  jirei,
   {file:'terms.html',title:'利用規約',eyebrow:'',heading:'利用規約',description:'タケノコの業務アプリに関する料金・支払・運用支援・データ・契約条件と個人情報取扱い契約。',policy:true,body:terms},
   {file:'privacy.html',title:'個人情報保護方針',eyebrow:'',heading:'個人情報保護方針',description:'タケノコの個人情報の取得・利用・委託・安全管理措置・問い合わせ窓口について。',policy:true,body:privacy},
   // 訪問介護の事業所向けのご案内（説明しながら見せる・トップからはつなげない・検索に出さない）。地域ごとに1ページ

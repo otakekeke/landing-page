@@ -14,7 +14,9 @@
   <link rel="canonical" href="https://takenokonoko.com/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/home.css">
+  <link rel="stylesheet" href="assets/jirei-try.css">
   <script src="assets/home.js" defer></script>
+  <script src="assets/jirei-try.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -65,11 +67,34 @@
 
     <section class="section case-section" id="case" aria-labelledby="case-title">
       <div class="container">
-        <div class="section-heading heading-split"><div><p class="eyebrow">02 / 実例</p><h2 id="case-title">通所の施設で、<br>毎日使われています。</h2></div><p>利用者、曜日ごとの予定、お休み、振替、送迎、バイタル、記録、申し送り。<br>14の画面が1つにつながった、その施設専用のアプリです。<br>お休みや振替を入れると、送迎表にも反映されます。</p></div>
+        <div class="section-heading heading-split"><div><p class="eyebrow">02 / 実例</p><h2 id="case-title">通所の施設で、<br>毎日使われています。</h2></div><p>神奈川県相模原市のデイサービス、リハビリアスレチックのアプリです。<br>利用者、曜日ごとの予定、お休み、振替、送迎、バイタル、記録、申し送り。<br>14の画面が1つにつながった、その施設専用のアプリです。<br>お休みや振替を入れると、送迎表にも反映されます。</p></div>
+        <div class="case-claim">
+          <p class="case-claim-big">お休みも振替も、<br>入れるのは一度だけ。</p>
+          <p class="case-claim-sub">一度入れると、バイタル表・送迎表・実施記録に、その日来る方がそろって出ます。下のボタンで、押して確かめられます。</p>
+        </div>
+        <div class="case-try"><!-- jirei-try --><div class="jr-try" data-try>
+  <div class="jr-try-controls">
+    <p class="jr-try-day">ある水曜日の午前（見本）</p>
+    <p class="jr-try-lead">入れるのは一か所だけ。<br>押すと、表がそろって変わります。</p>
+    <ul class="jr-acts"><li><button type="button" class="jr-act" data-act="off" aria-pressed="false"><span class="jr-act-icon" aria-hidden="true"></span><span class="jr-act-where">お休みカレンダーに</span><span class="jr-act-what">上野 和子さんのお休みを入れる</span><span class="jr-act-short">上野さんの<br>お休み</span><span class="jr-act-done">入れました・押すと取り消し</span></button></li><li><button type="button" class="jr-act" data-act="furikae" aria-pressed="false"><span class="jr-act-icon" aria-hidden="true"></span><span class="jr-act-where">振替・臨時に</span><span class="jr-act-what">大川 幸子さんの振替を入れる</span><span class="jr-act-short">大川さんの<br>振替</span><span class="jr-act-done">入れました・押すと取り消し</span></button></li><li><button type="button" class="jr-act" data-act="mark" aria-pressed="false"><span class="jr-act-icon" aria-hidden="true"></span><span class="jr-act-where">実施記録で</span><span class="jr-act-what">石田 正さんの行に申し送りの印を付ける</span><span class="jr-act-short">石田さんに<br>申し送りの印</span><span class="jr-act-done">入れました・押すと取り消し</span></button></li></ul>
+    <button type="button" class="jr-reset">最初に戻す</button>
+    <p class="jr-try-status" role="status">ボタンを押すと、表が変わります。</p>
+  </div>
+  <div class="jr-tps"><section class="jr-tp" data-panel="vitals" aria-label="バイタル表"><div class="jr-tp-head"><h3>バイタル表</h3><span class="jr-tp-badge" hidden></span></div><table><thead><tr><th scope="col">利用者氏名</th><th scope="col" class="jr-wide">体温</th><th scope="col" class="jr-wide">血圧</th></tr></thead><tbody><tr data-row="aoki"><td><span class="jr-name">青木 花子</span></td><td class="jr-wide"></td><td class="jr-wide"></td></tr><tr data-row="ishida"><td><span class="jr-name">石田 正</span></td><td class="jr-wide"></td><td class="jr-wide"></td></tr><tr data-row="ueno"><td><span class="jr-name">上野 和子</span><span class="jr-vh jr-offtxt" hidden>（お休み）</span></td><td class="jr-wide"></td><td class="jr-wide"></td></tr><tr data-row="okawa" hidden><td><span class="jr-name">大川 幸子（振替）</span></td><td class="jr-wide"></td><td class="jr-wide"></td></tr></tbody></table><p class="jr-tp-note" aria-hidden="true"></p></section><section class="jr-tp" data-panel="route" aria-label="送迎表"><div class="jr-tp-head"><h3>送迎表</h3><span class="jr-tp-badge" hidden></span></div><p class="jr-tp-sub">1号車の迎え：名前の候補</p><ul class="jr-cands" aria-label="迎えに行く方の名前の候補"><li data-row="aoki">青木 花子</li><li data-row="ishida">石田 正</li><li data-row="ueno">上野 和子</li><li data-row="okawa" hidden>大川 幸子（振替）</li></ul><p class="jr-tp-note" aria-hidden="true"></p></section><section class="jr-tp" data-panel="record" aria-label="実施記録"><div class="jr-tp-head"><h3>実施記録</h3><span class="jr-tp-badge" hidden></span></div><table><thead><tr><th scope="col">利用者氏名</th><th scope="col">申し送り</th><th scope="col" class="jr-wide">様子</th></tr></thead><tbody><tr data-row="aoki"><td><span class="jr-name">青木 花子</span></td><td class="jr-c"></td><td class="jr-wide jr-y"></td></tr><tr data-row="ishida"><td><span class="jr-name">石田 正</span></td><td class="jr-c"><span class="jr-box" role="img" aria-label="申し送りの印なし"></span></td><td class="jr-wide jr-y">帰る前に血圧を測り直した。ご家族へ</td></tr><tr data-row="ueno"><td><span class="jr-name">上野 和子</span><span class="jr-vh jr-offtxt" hidden>（お休み）</span></td><td class="jr-c"></td><td class="jr-wide jr-y"></td></tr><tr data-row="okawa" hidden><td><span class="jr-name">大川 幸子</span></td><td class="jr-c"></td><td class="jr-wide jr-y"></td></tr></tbody></table><p class="jr-tp-note" aria-hidden="true"></p></section><section class="jr-tp" data-panel="handover" aria-label="申し送り"><div class="jr-tp-head"><h3>申し送り</h3><span class="jr-tp-badge" hidden></span></div><table><thead><tr><th scope="col">利用者氏名</th><th scope="col">様子</th></tr></thead><tbody><tr data-row="empty"><td colspan="2" class="jr-y">印を付けた行は、まだありません。</td></tr><tr data-row="ishida" hidden><td>石田 正</td><td class="jr-y">帰る前に血圧を測り直した。ご家族へ</td></tr></tbody></table><p class="jr-tp-note" aria-hidden="true"></p></section></div>
+  <p class="jr-try-fine">本物のアプリの動きを、架空の名前で再現した見本です。本物のアプリとデータは使っていません。押した内容は、どこにも送られず、残りません。</p>
+</div><!-- /jirei-try --></div>
+        <figure class="case-feature">
+          <a class="case-shot" href="jirei.html#screen-vitals" aria-label="バイタル表の画面を、事例のページで見る"><img src="assets/jirei/vitals.png" width="760" height="446" alt="バイタル表の画面。その日来る方が並び、体温・血圧・脈拍・酸素・注意事項を入れる。お休みの方の名前は線で消え、振替の方は（振替）と付く。"></a>
+          <div class="case-voice">
+            <blockquote><p>バイタル表や送迎表が利用されている方と連携されているので、とても使いやすいです。時間短縮にもなっています。</p></blockquote>
+            <figcaption>リハビリアスレチックの方<small>いただいた言葉のまま載せています。</small></figcaption>
+            <a class="button button-light case-more" href="jirei.html">事例と画面を見る <span aria-hidden="true">→</span></a>
+          </div>
+        </figure>
         <ul class="case-screens" aria-label="実際に使われている14の画面">
           <li>利用者の一覧</li><li>曜日ごとの利用者</li><li>お休み</li><li>振替・臨時</li><li>送迎表</li><li>送迎カレンダー</li><li>バイタル</li><li>通所介護の実施記録</li><li>施術・運動シート</li><li>申し送り</li><li>お誕生日</li><li>車両</li><li>使う人の管理</li><li>使い方の説明</li>
         </ul>
-        <p class="section-footnote">施設名は伏せています。画面の構成は、その施設の業務に合わせたものです。</p>
+        <p class="section-footnote">施設のお名前とご感想は、リハビリアスレチックの了承をいただいて載せています。画面は、実際の画面を、架空の利用者・職員で作り直したものです。画面の構成は、その施設の業務に合わせたものです。</p>
       </div>
     </section>
 
