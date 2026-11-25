@@ -1,5 +1,5 @@
 // 2026-11-19: suryo/ は「下水道の数量拾い」の試作品（架空の図面で動く見本）。住所を知っている人だけが開く。
-// 元は takenokonoko/豊川市_下水道数量拾い/demo にある（ここでは直さない）。直す時は元で
+// 元は試作品の作業フォルダの demo にある（ここでは直さない）。直す時は元で
 // node tools/test_core.cjs・node tools/compare_ui.cjs <前の版>・node tools/check_flow.cjs を通してから、3つのファイルをそのまま写す。
 // ここで見ること：検索に出さない・ほかのページからつながない・外のファイルを読まない・内部のメモが残っていない・見本の図面が2つある。
 import fs from 'node:fs/promises';
