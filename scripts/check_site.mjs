@@ -142,7 +142,16 @@ assert.equal((a.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1],'AI とデータの取り�
 assert.ok(documents.get('privacy.html').includes('min-height:44px">AIとデータの取り扱い</a>'),'privacy.html: the link names the page for all apps');
 // 2026-11-28 night: the wording was made formal, at the privacy policy's level (the owner: "ことばがやさしすぎて信ぴょう性に欠ける"). Same facts, same checks, in the new words.
 for(const t of ['暗号鍵の控えの用紙を1枚お渡しします','マスター端末','事務所内の施錠できる場所','タケノコが施設の方と一緒に行います','この用紙だけでは、記録を復号できません','どなたも復号できなくなります','端末の一覧','「停止」','タケノコへのご連絡によっても、停止できます']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
-for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にのみ保管される暗号鍵','24時間以内','問題は生じていません','東京にある Google Cloud のサーバー','30日前','ISO/IEC 27001・27017・27018、SOC 2']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にのみ保管される暗号鍵','24時間以内','問題は生じていません','東京にある Google Cloud のサーバー','30日前','ISO/IEC 27001・27017・27018']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+// 2026-11-28 night: from two judging roles' notes, facts unchanged. The certificates are checked as two words now ("…27018" above, "SOC 2 の報告書" below).
+// The notebook part opens with a table of the main points (項目｜内容), which took over the one-line "processed in the US" paragraph.
+for(const t of ['タケノコは暗号鍵を持たないため','要配慮個人情報として取り扱います','Cloud Data Processing Addendum','SOC 2 の報告書','記録の管理主体である施設と連携']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+{const h3=a.indexOf('<h3 id="koe">');const top=a.slice(h3,a.indexOf('<ul>',h3));const table=(top.match(/<table>[\s\S]*?<\/table>/)||[])[0];
+assert.ok(table,'ai-data.html: the notebook part opens with the table of main points (between the h3 and the list)');
+assert.ok(table.includes('<thead><tr><th scope="col">項目</th><th scope="col">内容</th></tr></thead>'),'ai-data.html: the table head is 項目｜内容');
+const rows=[...table.matchAll(/<tr><th scope="row">([^<]+)<\/th><td>([^<]+)<\/td><\/tr>/g)].map(m=>[m[1],m[2]]);
+assert.deepEqual(rows.map(r=>r[0]),['送信する情報','送信先','処理を行う国','記録の保存先','音声データ'],'ai-data.html: the table rows');
+assert.equal((rows.find(r=>r[0]==='処理を行う国')||[])[1],'米国','ai-data.html: the table says the processing country is the US');}
 assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');
 assert.doesNotMatch(text,/送る物|送り先|下請け|困った事|鍵をかけ|タケノコの者|処理する国/,'ai-data.html: the soft wording came back');
 assert.ok(!a.includes('noindex'),'ai-data.html: findable');

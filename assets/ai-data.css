@@ -12,4 +12,8 @@
 .ad-page .policy-copy .ad-links { list-style:none; padding-left:0; }
 .ad-page .policy-copy .ad-links li { margin:4px 0; }
 .ad-page .policy-copy .ad-links a { display:inline-flex; align-items:center; min-height:44px; overflow-wrap:anywhere; }
+.ad-page .policy-copy .ad-table { margin:16px 0 24px; }   /* 声で入れる連絡帳の要点の表（11/28 夜）。サイトの表の形（site.css の .table-scroll・横に送れる箱）のまま、本文と同じ大きさにして、320 の幅でも横に送らずに読める形にする */
+.ad-page .policy-copy .ad-table table { min-width:0; font-size:inherit; line-height:1.7; }
+.ad-page .policy-copy .ad-table th,.ad-page .policy-copy .ad-table td { padding:12px 10px; }
+.ad-page .policy-copy .ad-table tbody th { min-width:0; white-space:nowrap; font-weight:700; }
 @media print { .ad-page .policy-copy { font-size:12px; } }
