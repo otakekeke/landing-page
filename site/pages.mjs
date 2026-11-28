@@ -2,6 +2,7 @@ import {section, cards, pricePanel, cta} from './shared.mjs';
 import {terms, privacy} from './policies.mjs';
 import {houmon, houmonKawasaki} from './houmon.mjs';
 import {jirei} from './jirei.mjs';
+import {aiData, aiDataTitle, aiDataLead} from './aidata.mjs';
 
 // Audience pages merged into the top page on 2026-09-27. Old URLs redirect so shared links keep working.
 export const moved = [
@@ -36,6 +37,8 @@ export const pages = [
   jirei,
   {file:'terms.html',title:'利用規約',eyebrow:'',heading:'利用規約',description:'タケノコの業務アプリに関する料金・支払・運用支援・データ・契約条件と個人情報取扱い契約。',policy:true,body:terms},
   {file:'privacy.html',title:'個人情報保護方針',eyebrow:'',heading:'個人情報保護方針',description:'タケノコの個人情報の取得・利用・委託・安全管理措置・問い合わせ窓口について。',policy:true,body:privacy},
+  // 声で入れる連絡帳の AI とデータの取り扱い（2026-11-28・個人情報保護方針の 5 からつなぐ。文は site/aidata.mjs）
+  {file:'ai-data.html',title:aiDataTitle,eyebrow:'',heading:'<span style="display:inline-block">声で入れる連絡帳の</span><span style="display:inline-block">AI とデータの取り扱い</span>',description:aiDataLead,policy:true,styles:['assets/ai-data.css'],bodyClass:'ad-page',body:aiData},
   // 訪問介護の事業所向けのご案内（説明しながら見せる・トップからはつなげない・検索に出さない）。地域ごとに1ページ
   houmon,
   houmonKawasaki

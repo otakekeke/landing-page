@@ -118,6 +118,17 @@ const {GAIN}=await import('../site/jirei.mjs');assert.equal(GAIN.length,3,'jirei
 for(const [k,p] of GAIN) assert.ok(text.includes(k)&&text.includes(p),`jirei.html: gain ${k}`);
 assert.ok(j.indexOf('id="voice"')<j.indexOf('id="gain"')&&j.indexOf('id="gain"')<j.indexOf('id="screens"'),'jirei.html: gains sit between the words and the screens');
 const js=await fs.readFile(path.join(root,'assets/jirei-try.js'),'utf8');assert.doesNotMatch(js,/fetch\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon|document\.cookie/,'jirei-try.js: must not send or keep anything');}
+// 2026-11-28: ai-data.html (the voice notebook's AI and data handling). The seven items of rule 18(3) of the PPC enforcement rules must stay,
+// with the same facts as the trial consent wording (processed in the US, contract with the Singapore company, up to 90 days, the key only on the facility's devices).
+// No revision date and no "生成AI" on it (the owner's rules). Findable, and linked once from privacy.html.
+{const {AI_DATA_HEADINGS}=await import('../site/aidata.mjs');const a=documents.get('ai-data.html');
+const text=a.slice(a.indexOf('<main'),a.indexOf('</main>')).replace(/<[^>]+>/g,' ');
+assert.equal(AI_DATA_HEADINGS.length,7,'ai-data.html: seven headings');
+for(const h of AI_DATA_HEADINGS) assert.ok(a.includes(`<h2>${h}</h2>`),`ai-data.html: heading ${h}`);
+for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にだけある鍵','24時間以内','困った事は起きていません']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');
+assert.ok(!a.includes('noindex'),'ai-data.html: findable');
+assert.equal(documents.get('privacy.html').split('href="ai-data.html"').length-1,1,'privacy.html: one link to ai-data.html');}
 // 2026-11-14: internal files (docs/, scripts/, site/, README, package.json) were readable at takenokonoko.com. _config.yml tells GitHub Pages not to serve them.
 // Every tracked file must be either a public file (top-level page, assets/) or hidden by the exclude list, and no public file may be caught by it.
 const serving = audit();
