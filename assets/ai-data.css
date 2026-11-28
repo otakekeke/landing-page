@@ -7,6 +7,7 @@
 @media(max-width:650px) { .ad-page .sub-hero .sub-lead { font-size:16px; } }
 .ad-page .breadcrumb { align-items:center; font-size:14px; }
 .ad-page .breadcrumb a { display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:4px; }
+.ad-page .policy-copy h3 { font-size:18px; line-height:1.5; margin:32px 0 14px; padding-left:12px; border-left:4px solid var(--ink); }   /* アプリの名前の見出し。スマホで h4（16px）と見分けがつかなかったので、h2（スマホ 20px）と h4 の間の 18px にして左に線（11/28 夜） */
 .ad-page .policy-copy h4 { font-size:16px; line-height:1.7; margin:24px 0 8px; }   /* アプリの段の中の小見出し（.policy-copy に h4 の形が無いので足す） */
 .ad-page .policy-copy .ad-links { list-style:none; padding-left:0; }
 .ad-page .policy-copy .ad-links li { margin:4px 0; }
