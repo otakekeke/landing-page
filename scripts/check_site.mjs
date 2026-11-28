@@ -140,9 +140,11 @@ assert.equal((main.match(/<h4[ >]/g)||[]).length,AI_DATA_APPS.reduce((n,p)=>n+p.
 assert.ok(a.includes(`<title>${aiDataTitle}｜タケノコ</title>`)&&aiDataTitle==='AIとデータの取り扱い','ai-data.html: the title is for all apps');
 assert.equal((a.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1],'AI とデータの取り扱い','ai-data.html: the h1 is for all apps');
 assert.ok(documents.get('privacy.html').includes('min-height:44px">AIとデータの取り扱い</a>'),'privacy.html: the link names the page for all apps');
-for(const t of ['鍵の控えの紙を1枚お渡しします','マスター端末','事務所の鍵のかかる所','タケノコが一緒に行います','紙だけでは、記録は開けません','どなたにも開けなくなります','端末の一覧','「停止」','タケノコにご連絡いただいても、止められます']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
-for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にだけある鍵','24時間以内','困った事は起きていません']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+// 2026-11-28 night: the wording was made formal, at the privacy policy's level (the owner: "ことばがやさしすぎて信ぴょう性に欠ける"). Same facts, same checks, in the new words.
+for(const t of ['暗号鍵の控えの用紙を1枚お渡しします','マスター端末','事務所内の施錠できる場所','タケノコが施設の方と一緒に行います','この用紙だけでは、記録を復号できません','どなたも復号できなくなります','端末の一覧','「停止」','タケノコへのご連絡によっても、停止できます']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にのみ保管される暗号鍵','24時間以内','問題は生じていません','東京にある Google Cloud のサーバー','30日前','ISO/IEC 27001・27017・27018、SOC 2']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');
+assert.doesNotMatch(text,/送る物|送り先|下請け|困った事|鍵をかけ|タケノコの者|処理する国/,'ai-data.html: the soft wording came back');
 assert.ok(!a.includes('noindex'),'ai-data.html: findable');
 assert.equal(documents.get('privacy.html').split('href="ai-data.html"').length-1,1,'privacy.html: one link to ai-data.html');}
 // 2026-11-14: internal files (docs/, scripts/, site/, README, package.json) were readable at takenokonoko.com. _config.yml tells GitHub Pages not to serve them.
