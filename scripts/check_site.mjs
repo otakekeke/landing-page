@@ -123,11 +123,23 @@ const js=await fs.readFile(path.join(root,'assets/jirei-try.js'),'utf8');assert.
 // No revision date and no "生成AI" on it (the owner's rules). Findable, and linked once from privacy.html.
 // 2026-11-28 later: sections 7 and 8 (the record key and the paper copy, stopping a device) were put before the contact, which became 9.
 // They carry the same facts as the consent form's key and lost-device parts, fitted to the notebook's README (kagi v2) and the app's "停止" button.
-{const {AI_DATA_HEADINGS}=await import('../site/aidata.mjs');const a=documents.get('ai-data.html');
-const text=a.slice(a.indexOf('<main'),a.indexOf('</main>')).replace(/<[^>]+>/g,' ');
-assert.equal(AI_DATA_HEADINGS.length,9,'ai-data.html: nine headings (1-6 rule 18(3), 7-8 key and devices, 9 contact)');
+// 2026-11-28 night: a page for all of Takenoko's apps that send to an AI, not only the voice notebook (the owner: "これも汎用的にしてよ"). Same URL, same facts.
+// 1 holds one h3 per app (now only the notebook, id="koe"; not "renrakucho", which check_renrakucho.mjs keeps off every other page), with the key/paper and the lost-device parts as its h4s; 2 is the AI company and the contract;
+// 3-7 are common to the apps that use Google's AI; 8 is the contact. The title, h1 and the link from privacy.html no longer name the notebook.
+{const {AI_DATA_HEADINGS,AI_DATA_APPS,aiDataTitle}=await import('../site/aidata.mjs');const a=documents.get('ai-data.html');
+const main=a.slice(a.indexOf('<main'),a.indexOf('</main>'));const text=main.replace(/<[^>]+>/g,' ');
+assert.equal(AI_DATA_HEADINGS.length,8,'ai-data.html: eight headings (1 per app, 2 AI company and contract, 3-7 common, 8 contact)');
 for(const h of AI_DATA_HEADINGS) assert.ok(a.includes(`<h2>${h}</h2>`),`ai-data.html: heading ${h}`);
 const at=AI_DATA_HEADINGS.map(h=>a.indexOf(`<h2>${h}</h2>`));assert.ok(at.every((v,i)=>i===0||v>at[i-1]),'ai-data.html: headings in order');
+assert.equal((main.match(/<h2[ >]/g)||[]).length,AI_DATA_HEADINGS.length,'ai-data.html: no other h2');
+assert.ok(AI_DATA_APPS.some(p=>p.id==='koe'&&p.name==='声で入れる連絡帳'),'ai-data.html: the voice notebook part (its consent form links here)');
+for(const p of AI_DATA_APPS){const h3=a.indexOf(`<h3 id="${p.id}">${p.name}</h3>`);assert.ok(h3>at[0]&&h3<at[1],`ai-data.html: app ${p.name} sits in 1`);
+  let prev=h3;for(const s of p.sub){const i=a.indexOf(`<h4>${s}</h4>`,prev);assert.ok(i>prev&&i<at[1],`ai-data.html: ${p.name} / ${s.replace(/<[^>]+>/g,'')} in order inside 1`);prev=i;}}
+assert.equal((main.match(/<h3[ >]/g)||[]).length,AI_DATA_APPS.length,'ai-data.html: one h3 per app');
+assert.equal((main.match(/<h4[ >]/g)||[]).length,AI_DATA_APPS.reduce((n,p)=>n+p.sub.length,0),'ai-data.html: h4 only inside the apps');
+assert.ok(a.includes(`<title>${aiDataTitle}｜タケノコ</title>`)&&aiDataTitle==='AIとデータの取り扱い','ai-data.html: the title is for all apps');
+assert.equal((a.match(/<h1>([\s\S]*?)<\/h1>/)||[])[1],'AI とデータの取り扱い','ai-data.html: the h1 is for all apps');
+assert.ok(documents.get('privacy.html').includes('min-height:44px">AIとデータの取り扱い</a>'),'privacy.html: the link names the page for all apps');
 for(const t of ['鍵の控えの紙を1枚お渡しします','マスター端末','事務所の鍵のかかる所','タケノコが一緒に行います','紙だけでは、記録は開けません','どなたにも開けなくなります','端末の一覧','「停止」','タケノコにご連絡いただいても、止められます']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にだけある鍵','24時間以内','困った事は起きていません']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');

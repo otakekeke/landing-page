@@ -1,4 +1,4 @@
-/* 声で入れる連絡帳の AI とデータの取り扱い（ai-data.html・2026-11-28）。
+/* AI とデータの取り扱い（ai-data.html・2026-11-28。同じ日の夜にアプリ全般のページにした）。
    規約のページの形（site.css の .policy-copy）のまま、デジタル庁デザインシステムの決まりに合わせる所だけ足す：
    本文 16px（基準の大きさ）・パンくずとつなぎは押せる範囲 44px 以上で 14px 以上・刷った紙の字は 9pt 以上。
    訪問介護と事例のページ（houmon.css・jirei.css）と同じやり方。色・フォーカスの印はサイト共通のまま。 */
@@ -7,6 +7,7 @@
 @media(max-width:650px) { .ad-page .sub-hero .sub-lead { font-size:16px; } }
 .ad-page .breadcrumb { align-items:center; font-size:14px; }
 .ad-page .breadcrumb a { display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:4px; }
+.ad-page .policy-copy h4 { font-size:16px; line-height:1.7; margin:24px 0 8px; }   /* アプリの段の中の小見出し（.policy-copy に h4 の形が無いので足す） */
 .ad-page .policy-copy .ad-links { list-style:none; padding-left:0; }
 .ad-page .policy-copy .ad-links li { margin:4px 0; }
 .ad-page .policy-copy .ad-links a { display:inline-flex; align-items:center; min-height:44px; overflow-wrap:anywhere; }
