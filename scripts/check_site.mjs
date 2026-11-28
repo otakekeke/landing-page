@@ -121,10 +121,14 @@ const js=await fs.readFile(path.join(root,'assets/jirei-try.js'),'utf8');assert.
 // 2026-11-28: ai-data.html (the voice notebook's AI and data handling). The seven items of rule 18(3) of the PPC enforcement rules must stay,
 // with the same facts as the trial consent wording (processed in the US, contract with the Singapore company, up to 90 days, the key only on the facility's devices).
 // No revision date and no "生成AI" on it (the owner's rules). Findable, and linked once from privacy.html.
+// 2026-11-28 later: sections 7 and 8 (the record key and the paper copy, stopping a device) were put before the contact, which became 9.
+// They carry the same facts as the consent form's key and lost-device parts, fitted to the notebook's README (kagi v2) and the app's "停止" button.
 {const {AI_DATA_HEADINGS}=await import('../site/aidata.mjs');const a=documents.get('ai-data.html');
 const text=a.slice(a.indexOf('<main'),a.indexOf('</main>')).replace(/<[^>]+>/g,' ');
-assert.equal(AI_DATA_HEADINGS.length,7,'ai-data.html: seven headings');
+assert.equal(AI_DATA_HEADINGS.length,9,'ai-data.html: nine headings (1-6 rule 18(3), 7-8 key and devices, 9 contact)');
 for(const h of AI_DATA_HEADINGS) assert.ok(a.includes(`<h2>${h}</h2>`),`ai-data.html: heading ${h}`);
+const at=AI_DATA_HEADINGS.map(h=>a.indexOf(`<h2>${h}</h2>`));assert.ok(at.every((v,i)=>i===0||v>at[i-1]),'ai-data.html: headings in order');
+for(const t of ['鍵の控えの紙を1枚お渡しします','マスター端末','事務所の鍵のかかる所','タケノコが一緒に行います','紙だけでは、記録は開けません','どなたにも開けなくなります','端末の一覧','「停止」','タケノコにご連絡いただいても、止められます']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にだけある鍵','24時間以内','困った事は起きていません']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');
 assert.ok(!a.includes('noindex'),'ai-data.html: findable');
