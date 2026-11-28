@@ -145,7 +145,7 @@ for(const t of ['暗号鍵の控えの用紙を1枚お渡しします','マス�
 for(const t of ['米国','Google Asia Pacific Pte. Ltd.','再委託','データ処理の追加条項','施行規則 第16条第1号','年に1回','2021年10月時点','2022年2月時点','刑事訴訟法','最大90日','学習には使われません','施設の端末の中にのみ保管される暗号鍵','24時間以内','問題は生じていません','東京にある Google Cloud のサーバー','30日前','ISO/IEC 27001・27017・27018']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 // 2026-11-28 night: from two judging roles' notes, facts unchanged. The certificates are checked as two words now ("…27018" above, "SOC 2 の報告書" below).
 // The notebook part opens with a table of the main points (項目｜内容), which took over the one-line "processed in the US" paragraph.
-for(const t of ['タケノコは暗号鍵を持たないため','要配慮個人情報として取り扱います','職員の方のお名前を送信します','今の記録と申し送りの文章を送信します','暗号化した形で一時的に置き','最大14日','Cloud Data Processing Addendum','SOC 2 の報告書','記録の管理主体である施設と連携']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
+for(const t of ['タケノコは暗号鍵を持たないため','要配慮個人情報として取り扱います','職員の方のお名前を送信します','今の記録と申し送りの文章を送信します','暗号化した形で一時的に置き','作成から30日を過ぎると自動で削除','Cloud Data Processing Addendum','SOC 2 の報告書','記録の管理主体である施設と連携']) assert.ok(text.includes(t),`ai-data.html: ${t}`);
 {const h3=a.indexOf('<h3 id="koe">');const top=a.slice(h3,a.indexOf('<ul>',h3));const table=(top.match(/<table>[\s\S]*?<\/table>/)||[])[0];
 assert.ok(table,'ai-data.html: the notebook part opens with the table of main points (between the h3 and the list)');
 assert.ok(table.includes('<thead><tr><th scope="col">項目</th><th scope="col">内容</th></tr></thead>'),'ai-data.html: the table head is 項目｜内容');
@@ -153,6 +153,7 @@ const rows=[...table.matchAll(/<tr><th scope="row">([^<]+)<\/th><td>([^<]+)<\/td
 assert.deepEqual(rows.map(r=>r[0]),['送信する情報','送信先','処理を行う国','記録の保存先','音声データ'],'ai-data.html: the table rows');
 assert.equal((rows.find(r=>r[0]==='処理を行う国')||[])[1],'米国','ai-data.html: the table says the processing country is the US');}
 assert.doesNotMatch(text,/生成\s?AI|改定日|制定日|更新日/,'ai-data.html: words that must not appear');
+assert.doesNotMatch(text,/最大14日/,'ai-data.html: the daily copies (hikae) are kept 30 days, not 14 (11/29 owner: おすすめで進めて)');
 assert.doesNotMatch(text,/端末にも保存しません/,'ai-data.html: the draft voice is kept on the device (sealed) until saved, so do not say it is not stored there (11/28)');
 assert.doesNotMatch(text,/送る物|送り先|下請け|困った事|鍵をかけ|タケノコの者|処理する国/,'ai-data.html: the soft wording came back');
 assert.ok(!a.includes('noindex'),'ai-data.html: findable');
